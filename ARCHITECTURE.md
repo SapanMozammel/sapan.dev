@@ -1,266 +1,171 @@
 # Project Architecture
 
+## Overview
+
+This is a **Next.js 15** portfolio/marketing website built with **TypeScript**, **Tailwind CSS**, and **SCSS**. The project follows a simple, clean architecture focused on showcasing content through blog posts and portfolio items.
+
 ## Folder Structure
 
 ```
 src/
-├── app/                                # Next.js App Router (pages only)
-│   ├── layout.tsx
-│   ├── page.tsx                        # Root redirect logic
-│   ├── (auth)/                         # Authentication routes
-│   │   ├── login/
-│   │   ├── register/
-│   │   ├── forgot-password/
-│   │   ├── reset-password/
-│   │   └── layout.tsx
-│   ├── (marketing)/                    # Marketing/landing routes for row users
-│   │   ├── layout.tsx
-│   │   ├── (landing)/
-│   │   │   └── page.tsx
-│   │   ├── apps/
-│   │   │   └── [slug]/
-│   │   │       └── page.tsx
-│   │   ├── about/
-│   │   ├── blog/                       # Public blog view (read-only)
-│   │   │   ├── [slug]/
-│   │   │   └── page.tsx
-│   │   └── career/
-│   ├── founder/
-│   │   ├── layout.tsx
-│   │   ├── (landing)/
-│   │   │   └── page.tsx
-│   │   ├── about/
-│   │   ├── services/
-│   │   ├── blog/                       # founder's blog view (read-only)
-│   │   │   ├── [slug]/
-│   │   │   └── page.tsx
-│   │   ├── portfolio/                  # founder's portfolio view (read-only)
-│   │   │   ├── [slug]/
-│   │   │   └── page.tsx
-│   │   └── contact/
-│   ├── dashboard/
-│   │   ├── layout.tsx
-│   │   ├── page.tsx                    # Dashboard redirect logic (role-based)
-│   │   ├── profile/                    # Profile management
-│   │   ├── (admin)/                    # Admin dashboard routes (includes super-admin, admin, manager)
-│   │   │   ├── page.tsx                # Admin dashboard home
-│   │   │   ├── analytics/              # Analytics (full for super-admin, limited for admin/manager)
-│   │   │   ├── apps/                   # Apps management (create for super-admin, manage for admin/manager)
-│   │   │   ├── users/                  # User management (all users for super-admin, users/subscribers for admin/manager)
-│   │   │   ├── roles/                  # Role management (super-admin only)
-│   │   │   ├── orders/                 # Order management
-│   │   │   ├── content/                # Content moderation
-│   │   │   ├── settings/               # System settings (super-admin only)
-│   │   │   │   └── permissions/        # Permission management (super-admin only)
-│   │   │   ├── billing/                # Financial management (super-admin only)
-│   │   │   ├── blog/                   # General blog management (admin/manager)
-│   │   │   │   ├── create/
-│   │   │   │   ├── edit/[id]/
-│   │   │   │   └── page.tsx
-│   │   │   ├── marketing/              # Marketing mails management (admin/manager)
-│   │   │   │   ├── newsletters/
-│   │   │   │   ├── campaigns/
-│   │   │   │   └── page.tsx
-│   │   │   ├── founder/                # Founder-specific content (super-admin only)
-│   │   │   │   ├── blog/
-│   │   │   │   │   ├── create/
-│   │   │   │   │   ├── edit/[id]/
-│   │   │   │   │   └── page.tsx
-│   │   │   │   └── portfolio/
-│   │   │   │       ├── create/
-│   │   │   │       ├── edit/[id]/
-│   │   │   │       └── page.tsx
-│   │   │   ├── notifications/          # Notification management (admin/manager)
-│   │   │   ├── audit/                  # Audit trails (super-admin only)
-│   │   │   └── support/                # User support (admin/manager)
-│   │   └── (user)/                     # User dashboard routes
-│   │       ├── page.tsx                # User dashboard home
-│   │       ├── billing/                # Personal billing
-│   │       ├── notifications/          # Personal notifications
-│   │       └── orders/                 # App requests / Feature requests
-│   │           ├── request/
-│   │           ├── history/
-│   │           └── page.tsx
-│   └── api/                            # API routes
-│       ├── auth/
-│       ├── blog/
-│       ├── portfolio/
-│       ├── apps/                       # Apps management API
-│       ├── users/                      # User management API
-│       ├── roles/                      # Role management API (super-admin only)
-│       ├── permissions/                # Permission management API (super-admin only)
-│       ├── orders/                     # Orders API
-│       ├── analytics/                  # Analytics data API
-│       ├── notifications/              # Notification system API
-│       ├── audit/                      # Audit trails API (super-admin only)
-│       ├── webhooks/                   # External integrations API
-│       ├── marketing/                  # Marketing mails API (admin/manager)
-│       │   ├── newsletters/
-│       │   └── campaigns/
-│       ├── subscribers/                # Subscriber management API
-│       │   ├── newsletter/
-│       │   └── preferences/
-│       └── graphql/                    # GraphQL endpoint
-│           └── route.ts
+├── app/                                # Next.js App Router (pages)
+│   ├── layout.tsx                      # Root layout with fonts and metadata
+│   ├── fonts.ts                        # Font configurations (DM Sans, EB Garamond, Hanken Grotesk)
+│   ├── error.tsx                       # Global error boundary
+│   ├── (landing)/                      # Landing page route group
+│   │   └── page.tsx                    # Home/landing page
+│   ├── about/                          # About page
+│   │   └── page.tsx
+│   ├── services/                       # Services page
+│   │   └── page.tsx
+│   ├── blog/                           # Blog section
+│   │   ├── page.tsx                    # Blog listing page
+│   │   └── [slug]/                     # Dynamic blog post pages
+│   │       └── page.tsx
+│   ├── portfolio/                      # Portfolio section
+│   │   ├── page.tsx                    # Portfolio listing page
+│   │   └── [slug]/                     # Dynamic portfolio item pages
+│   │       └── page.tsx
+│   └── contact/                        # Contact page
+│       └── page.tsx
 ├── components/                         # React components
 │   ├── ui/                             # Base UI components (shadcn/ui)
-│   ├── icons/                          # Base Icon components
+│   │   ├── popover.tsx                 # Popover component
+│   │   └── sonner.tsx                  # Toast notifications
+│   ├── icons/                          # Custom icon components
+│   │   ├── Cloud.tsx                   # Cloud icon
+│   │   ├── Logo.tsx                    # Logo component
+│   │   ├── Pattern.tsx                 # Pattern/decoration icon
+│   │   └── WorldMap.tsx                # World map icon
 │   ├── forms/                          # Form-specific components
-│   │   ├── auth/                       # Authentication forms
-│   │   ├── user/                       # User management forms
-│   │   ├── blog/                       # Blog forms
 │   │   └── common/                     # Reusable form components
+│   │       └── FormFields.tsx          # Common form field components
 │   ├── layout/                         # Layout components
-│   │   ├── marketing/                  # Marketing layout components
-│   │   │   ├── common/
-│   │   │   ├── Header/
-│   │   │   ├── Footer/
-│   │   │   ├── app/
-│   │   │   └── blog/
-│   │   ├── founder/                    # Founder-specific layout components
-│   │   │   ├── common/
-│   │   │   ├── Header/
-│   │   │   ├── Footer/
-│   │   │   ├── blog/
-│   │   │   └── portfolio/
-│   │   └── dashboard/                  # Dashboard layout components
-│   │       ├── admin/                  # Admin dashboard layouts
-│   │       ├── user/                   # User dashboard layouts
-│   │       └── common/                 # Shared dashboard layouts
-│   ├── features/                       # Feature-specific components
-│   │   ├── auth/                       # Authentication components
-│   │   │   ├── login/
-│   │   │   ├── register/
-│   │   │   └── password-reset/
-│   │   ├── blog/                       # Blog management components
-│   │   │   ├── editor/
-│   │   │   ├── list/
-│   │   │   └── viewer/
-│   │   ├── portfolio/                  # Portfolio management components
-│   │   │   ├── editor/
-│   │   │   ├── gallery/
-│   │   │   └── viewer/
-│   │   ├── user-management/            # User management components
-│   │   │   ├── user-list/
-│   │   │   ├── user-profile/
-│   │   │   ├── role-management/        # Super-admin only
-│   │   │   └── permission-management/  # Super-admin only
-│   │   ├── analytics/                  # Analytics components
-│   │   │   ├── charts/
-│   │   │   ├── metrics/
-│   │   │   └── reports/
-│   │   ├── marketing/                  # Marketing components
-│   │   │   ├── newsletters/
-│   │   │   └── campaigns/
-│   │   ├── notifications/              # Notification components
-│   │   │   ├── toast/
-│   │   │   ├── inbox/
-│   │   │   └── settings/
-│   │   └── audit/                      # Audit trail components (super-admin only)
-│   │       ├── logs/
-│   │       └── reports/
+│   │   ├── Header/                     # Header components
+│   │   │   └── index.tsx               # Main header component
+│   │   ├── Footer/                     # Footer components
+│   │   │   └── FounderFooter.tsx       # Founder-specific footer
+│   │   ├── Hero/                       # Hero section components
+│   │   │   ├── index.tsx               # Main hero component
+│   │   │   ├── AdminScreen.tsx         # Admin screen showcase
+│   │   │   └── HeroBackground.tsx      # Hero background component
+│   │   └── common/                     # Common layout components
+│   │       ├── Button.tsx              # Custom button component
+│   │       ├── SectionSeparator.tsx    # Section separator component
+│   │       ├── TextUnderline.tsx       # Text underline decoration
+│   │       └── ThemeSwitcher.tsx       # Theme toggle component
 │   └── common/                         # Shared/common components
-│       ├── loading/                    # Loading states
-│       ├── error/                      # Error boundaries and states
-│       ├── modals/                     # Modal components
-│       ├── tables/                     # Data table components
-│       └── navigation/                 # Navigation components
+│       └── loading/                    # Loading states
+│           └── LoadingSpinner.tsx      # Loading spinner component
 ├── lib/                                # Utilities and configurations
-│   ├── validations/                    # Zod validation schemas (consolidated)
-│   │   ├── auth.ts                     # Authentication schemas
-│   │   ├── user.ts                     # User schemas
-│   │   ├── blog.ts                     # Blog schemas
-│   │   ├── portfolio.ts                # Portfolio schemas
-│   │   ├── forms.ts                    # Form validation schemas
-│   │   └── common.ts                   # Common validation schemas
-│   ├── constants/                      # Application constants (consolidated)
-│   │   ├── roles.ts                    # User roles and permissions
+│   ├── constants/                      # Application constants
+│   │   ├── api.ts                      # API-related constants
 │   │   ├── routes.ts                   # Application routes
-│   │   ├── api.ts                      # API constants
-│   │   ├── ui.ts                       # UI constants
-│   │   └── index.ts                    # Main constants export
-│   ├── hooks/                          # Custom React hooks
-│   │   ├── useAuth.ts                  # Authentication hooks
-│   │   ├── useApi.ts                   # API hooks
-│   │   ├── useLocalStorage.ts          # Local storage hooks
-│   │   ├── useDebounce.ts              # Debounce hooks
-│   │   └── usePermissions.ts           # Permission hooks
-│   ├── utils/                          # General utilities (consolidated)
-│   │   ├── format.ts                   # Formatting utilities
-│   │   ├── validation.ts               # Validation utilities
-│   │   ├── date.ts                     # Date utilities
-│   │   ├── string.ts                   # String utilities (includes generateId)
-│   │   ├── file.ts                     # File utilities
-│   │   ├── async.ts                    # Async utilities (sleep, promises)
-│   │   └── performance.ts              # Performance utilities (debounce, throttle)
-│   ├── utils.ts                        # shadcn/ui utilities (cn function)
+│   │   └── index.ts                    # Main constants export (APP_NAME, VERSION)
+│   ├── utils/                          # Utility functions
+│   │   ├── date.ts                     # Date formatting utilities
+│   │   ├── file.ts                     # File handling utilities
+│   │   └── string.ts                   # String manipulation utilities
+│   ├── validations/                    # Validation schemas (empty - planned)
+│   └── helper.ts                       # General helper functions
 
 ├── types/                              # TypeScript type definitions
-│   ├── api.ts                          # API response/request types
-│   ├── auth.ts                         # Authentication types
-│   ├── blog.ts                         # Blog-related types
-│   ├── portfolio.ts                    # Portfolio-related types
-│   ├── users.ts                        # User-specific types
-│   ├── role.ts                         # Role management types
-│   ├── permission.ts                   # Permission management types
-│   ├── analytics.ts                    # Analytics types
-│   ├── notifications.ts                # Notification types
-│   ├── database.ts                     # Database model types
-│   ├── forms.ts                        # Form-related types
-│   ├── ui.ts                           # UI component types
-│   └── global.ts                       # Global types and interfaces
-├── styles/                             # Styling (renamed from scss/)
-│   ├── globals.scss                    # Moved from app/globals.scss
-│   ├── themes.scss                     # Theme configurations
+│   ├── button.ts                       # Button component types
+│   ├── global.ts                       # Global types and interfaces
+│   ├── separator.ts                    # Separator component types
+│   └── ui.ts                           # UI component types
+├── styles/                             # SCSS styling
+│   ├── global.scss                     # Global styles and Tailwind imports
+│   ├── themes.scss                     # Theme configurations (light/dark mode)
 │   ├── utilities.scss                  # Utility classes
 │   ├── components.scss                 # Component-specific styles
 │   └── animations.scss                 # Animation styles
 ├── providers/                          # React context providers
-│   ├── AuthProvider.tsx                # Authentication context
 │   ├── ThemeProvider.tsx               # Theme context (light/dark mode)
-│   ├── QueryProvider.tsx               # React Query/Apollo provider
-│   ├── PermissionProvider.tsx          # Permission context
-│   ├── NotificationProvider.tsx        # Notification context
 │   └── index.tsx                       # Combined providers wrapper
-├── store/                              # Redux Toolkit state management
-│   ├── slices/                         # Redux slices
-│   │   ├── authSlice.ts                # Authentication state
-│   │   ├── userSlice.ts                # User management state (all user types)
-│   │   ├── roleSlice.ts                # Role management state (super-admin only)
-│   │   ├── permissionSlice.ts          # Permission management state (super-admin only)
-│   │   ├── analyticsSlice.ts           # Analytics state
-│   │   ├── dashboardSlice.ts           # Dashboard state
-│   │   ├── blogSlice.ts                # Blog management state
-│   │   ├── portfolioSlice.ts           # Portfolio management state
-│   │   ├── notificationSlice.ts        # Notification state
-│   │   ├── auditSlice.ts               # Audit trail state (super-admin only)
-│   │   └── uiSlice.ts                  # UI state (modals, loading, etc.)
-│   ├── api/                            # RTK Query API slices
-│   │   ├── baseApi.ts                  # Base API configuration
-│   │   ├── authApi.ts                  # Authentication APIs
-│   │   ├── userApi.ts                  # User management APIs
-│   │   ├── roleApi.ts                  # Role management APIs (super-admin only)
-│   │   ├── permissionApi.ts            # Permission management APIs (super-admin only)
-│   │   ├── blogApi.ts                  # Blog management APIs
-│   │   ├── portfolioApi.ts             # Portfolio management APIs
-│   │   ├── appsApi.ts                  # Apps management APIs
-│   │   ├── analyticsApi.ts             # Analytics APIs
-│   │   ├── notificationApi.ts          # Notification APIs
-│   │   ├── auditApi.ts                 # Audit trail APIs (super-admin only)
-│   │   └── marketingApi.ts             # Marketing APIs
-│   ├── middleware/                     # Custom middleware
-│   │   ├── authMiddleware.ts           # Authentication middleware
-│   │   ├── errorMiddleware.ts          # Error handling middleware
-│   │   ├── loggingMiddleware.ts        # Logging middleware
-│   │   └── cacheMiddleware.ts          # Cache middleware
-│   ├── selectors/                      # Reselect selectors
-│   │   ├── authSelectors.ts            # Authentication selectors
-│   │   ├── userSelectors.ts            # User selectors
-│   │   ├── dashboardSelectors.ts       # Dashboard selectors
-│   │   └── uiSelectors.ts              # UI selectors
-│   ├── hooks.ts                        # Typed Redux hooks
-│   └── index.ts                        # Store configuration
-├── graphql/                            # GraphQL setup
-│   └── schema.graphql                  # GraphQL schema definition
-└── middleware.ts                       # Next.js middleware
+└── store/                              # State management (planned structure)
+    ├── apis/                           # API layer (empty - planned)
+    ├── hooks/                          # Custom hooks (empty - planned)
+    ├── middleware/                     # Redux middleware (empty - planned)
+    ├── reducers/                       # Redux reducers (empty - planned)
+    ├── selectors/                      # State selectors (empty - planned)
+    └── index.ts                        # Store configuration
 ```
+
+## Key Technologies
+
+- **Next.js 15.4.4** - React framework with App Router
+- **TypeScript 5.8.3** - Type safety and development experience
+- **Tailwind CSS 4.1.11** - Utility-first CSS framework
+- **SCSS** - Enhanced CSS with variables and mixins
+- **shadcn/ui** - High-quality UI component library
+- **Lucide React** - Icon library
+- **pnpm** - Package manager
+
+## Architecture Principles
+
+### 1. **Simple and Clean Structure**
+- Focused on content presentation (blog, portfolio)
+- Minimal complexity for easy maintenance
+- Clear separation of concerns
+
+### 2. **Component Organization**
+- **UI Components**: Reusable base components from shadcn/ui
+- **Layout Components**: Page structure and navigation
+- **Common Components**: Shared functionality across pages
+- **Icons**: Custom SVG icon components
+
+### 3. **Styling Strategy**
+- **Tailwind CSS**: Primary styling approach
+- **SCSS**: Custom styles and theme management
+- **CSS Variables**: Theme switching support
+- **Component-scoped styles**: When needed
+
+### 4. **Type Safety**
+- Comprehensive TypeScript coverage
+- Typed component props and interfaces
+- Strict type checking enabled
+
+## Current State vs. Planned Features
+
+### ✅ **Currently Implemented**
+- Basic Next.js App Router structure
+- Simple page routing (landing, about, services, blog, portfolio, contact)
+- Basic component library with layout components
+- Theme switching functionality
+- SCSS styling system
+- TypeScript configuration
+
+### 🚧 **Planned/Empty Directories**
+- **Store management**: Redux/state management structure exists but is empty
+- **API integration**: Store APIs directory prepared but not implemented
+- **Validation schemas**: Directory exists but no schemas defined
+- **Advanced features**: Authentication, user management, analytics (not currently needed)
+
+## Development Workflow
+
+### **Code Quality**
+- ESLint with Next.js configuration
+- Prettier for code formatting
+- TypeScript strict mode
+- Automated formatting on save
+
+### **Build Process**
+- Next.js optimized builds
+- Automatic code splitting
+- Image optimization
+- Performance optimizations
+
+## Significant Changes from Previous Documentation
+
+The previous architecture documentation described a complex multi-user platform with:
+- Authentication and user management systems
+- Admin dashboards and role-based access control
+- Complex Redux store with multiple slices and API layers
+- GraphQL integration
+- Extensive validation schemas
+- Marketing and analytics features
+
+**Current Reality**: This is a **simple portfolio/marketing website** focused on content presentation. The complex features were planned but not implemented, making this a much simpler and more maintainable codebase.
+
+This architecture supports the current needs of a portfolio/marketing website while providing a foundation for future enhancements if needed.

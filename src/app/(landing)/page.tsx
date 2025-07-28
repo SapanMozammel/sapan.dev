@@ -1,4 +1,4 @@
-import Hero from '@/components/layout/founder/Hero';
+import Hero from '@/components/layout/Hero';
 
 const FounderLandingPage = () => {
 	return (

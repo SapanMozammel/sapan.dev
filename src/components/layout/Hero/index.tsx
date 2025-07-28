@@ -1,8 +1,8 @@
-import { LinkButton } from '@/components/layout/founder/common/Button';
-import SectionSeparator from '@/components/layout/founder/common/SectionSeparator';
-import TextUnderline from '@/components/layout/founder/common/TextUnderline';
-import AdminScreen from '@/components/layout/founder/Hero/AdminScreen';
-import HeroBackground from '@/components/layout/founder/Hero/HeroBackground';
+import { LinkButton } from '@/components/layout/common/Button';
+import SectionSeparator from '@/components/layout/common/SectionSeparator';
+import TextUnderline from '@/components/layout/common/TextUnderline';
+import AdminScreen from '@/components/layout/Hero/AdminScreen';
+import HeroBackground from '@/components/layout/Hero/HeroBackground';
 
 const Hero = () => {
 	return (
