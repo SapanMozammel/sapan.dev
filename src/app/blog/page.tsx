@@ -1,10 +1,10 @@
-const FounderBlogPage = () => {
+const page = () => {
 	return (
 		<div>
-			<h1>Founder Blog</h1>
-			<p>Founder blog page will be implemented here.</p>
+			<h1>Blog</h1>
+			<p>blog page will be implemented here.</p>
 		</div>
 	);
 };
 
-export default FounderBlogPage;
+export default page;

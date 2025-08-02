@@ -1,10 +1,10 @@
-const FounderServicesPage = () => {
+const page = () => {
 	return (
 		<div>
-			<h1>Founder Services</h1>
-			<p>Founder services page will be implemented here.</p>
+			<h1>Services</h1>
+			<p>services page will be implemented here.</p>
 		</div>
 	);
 };
 
-export default FounderServicesPage;
+export default page;

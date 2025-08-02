@@ -15,8 +15,8 @@
 	"editor.renderWhitespace": "boundary",
 	"editor.minimap.maxColumn": 220,
 	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": true,
-		"source.organizeImports": true
+		"source.fixAll.eslint": "explicit",
+		"source.organizeImports": "explicit"
 	},
 	"files.eol": "\n",
 	"files.insertFinalNewline": true,

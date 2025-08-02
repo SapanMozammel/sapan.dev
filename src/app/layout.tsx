@@ -1,5 +1,8 @@
 import { dmSans, ebGaramond, hankenGrotesk } from '@/app/fonts';
+import Footer from '@/components/layout/Footer';
+import Header from '@/components/layout/Header';
 import '@/styles/global.scss';
+import { ThemeProvider } from 'next-themes';
 
 import type { Metadata } from 'next';
 
@@ -81,7 +84,14 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<html lang='en' suppressHydrationWarning>
 			<body suppressHydrationWarning className={`${dmSans.variable} ${ebGaramond.variable} ${hankenGrotesk.variable} font-dm`}>
-				{children}
+				<div className='text-dark relative bg-white dark:bg-black dark:text-white'>
+					<ThemeProvider enableSystem={true} defaultTheme='system' enableColorScheme={false} themes={['light', 'dark', 'system']} attribute='class'>
+						<Header />
+						<main>{children}</main>
+						<Footer />
+					</ThemeProvider>
+					<div className="animate-noise pointer-events-none absolute inset-0 z-20 hidden bg-[url('/noise.png')] bg-repeat opacity-5 select-none lg:block dark:opacity-15"></div>
+				</div>
 			</body>
 		</html>
 	);

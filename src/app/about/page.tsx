@@ -1,10 +1,10 @@
-const FounderAboutPage = () => {
+const page = () => {
 	return (
 		<div>
-			<h1>About Founder</h1>
-			<p>Founder about page will be implemented here.</p>
+			<h1>About</h1>
+			<p>about page will be implemented here.</p>
 		</div>
 	);
 };
 
-export default FounderAboutPage;
+export default page;

@@ -44,7 +44,7 @@ src/
 │   │   ├── Header/                     # Header components
 │   │   │   └── index.tsx               # Main header component
 │   │   ├── Footer/                     # Footer components
-│   │   │   └── FounderFooter.tsx       # Founder-specific footer
+│   │   │   └── index.tsx               # Main footer component
 │   │   ├── Hero/                       # Hero section components
 │   │   │   ├── index.tsx               # Main hero component
 │   │   │   ├── AdminScreen.tsx         # Admin screen showcase
@@ -67,7 +67,7 @@ src/
 │   │   ├── file.ts                     # File handling utilities
 │   │   └── string.ts                   # String manipulation utilities
 │   ├── validations/                    # Validation schemas (empty - planned)
-│   └── helper.ts                       # General helper functions
+│   └── helper.ts                       # Utility functions (cn function, isMacOS helper)
 
 ├── types/                              # TypeScript type definitions
 │   ├── button.ts                       # Button component types
