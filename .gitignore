@@ -85,6 +85,3 @@ pnpm-lock.yaml
 # GraphQL codegen (if used)
 /generated/
 *.generated.*
-
-# Storybook (if used)
-/storybook-static/
