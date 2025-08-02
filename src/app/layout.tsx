@@ -90,7 +90,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 						<main>{children}</main>
 						<Footer />
 					</ThemeProvider>
-					<div className="animate-noise pointer-events-none absolute inset-0 z-20 hidden bg-[url('/noise.png')] bg-repeat opacity-5 select-none lg:block dark:opacity-15"></div>
+					<div className="animate-noise pointer-events-none absolute inset-0 z-20 hidden bg-[url('/noise.png')] bg-repeat opacity-5 select-none lg:block dark:opacity-15" />
 				</div>
 			</body>
 		</html>

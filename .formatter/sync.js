@@ -187,6 +187,8 @@ const generatePrettierConfig = (config) => {
 	const bracketSpacing = getConfigValue('BRACKET_SPACING', 'true') === 'true';
 	const bracketSameLine = getConfigValue('BRACKET_SAME_LINE', 'false') === 'true';
 	const jsxSingleQuote = getConfigValue('JSX_SINGLE_QUOTE', 'true') === 'true';
+	const jsxBracketSameLine = getConfigValue('JSX_BRACKET_SAME_LINE', 'false') === 'true';
+	const singleAttributePerLine = getConfigValue('SINGLE_ATTRIBUTE_PER_LINE', 'false') === 'true';
 	const arrowParens = getConfigValue('ARROW_PARENS', 'avoid');
 	const endOfLine = getConfigValue('END_OF_LINE', 'lf');
 	const proseWrap = getConfigValue('PROSE_WRAP', 'preserve');
@@ -210,6 +212,8 @@ const generatePrettierConfig = (config) => {
 
 	// JSX formatting
 	jsxSingleQuote: ${jsxSingleQuote},
+	jsxBracketSameLine: ${jsxBracketSameLine},
+	singleAttributePerLine: ${singleAttributePerLine},
 
 	// Plugins for modern development
 	plugins: ['prettier-plugin-tailwindcss'],
@@ -349,6 +353,8 @@ const generateESLintConfig = (config) => {
 
 			// JSX formatting
 			jsxSingleQuote: ${getConfigValue('JSX_SINGLE_QUOTE', 'true') === 'true'},
+			jsxBracketSameLine: ${getConfigValue('JSX_BRACKET_SAME_LINE', 'false') === 'true'},
+			singleAttributePerLine: ${getConfigValue('SINGLE_ATTRIBUTE_PER_LINE', 'false') === 'true'},
 		}],
 
 		// Code quality rules

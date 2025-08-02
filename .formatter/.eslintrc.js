@@ -41,6 +41,8 @@ module.exports = {
 
 			// JSX formatting
 			jsxSingleQuote: true,
+			jsxBracketSameLine: false,
+			singleAttributePerLine: false,
 		}],
 
 		// Code quality rules
