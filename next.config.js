@@ -15,7 +15,7 @@ const nextConfig = {
 
 	// Performance optimizations
 	experimental: {
-		optimizePackageImports: ['lucide-react'],
+		optimizePackageImports: ['@tabler/icons-react'],
 	},
 };
 

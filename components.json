@@ -16,5 +16,5 @@
 		"constants": "@/lib/constants",
 		"validations": "@/lib/validations"
 	},
-	"iconLibrary": "lucide"
+	"iconLibrary": "tabler"
 }

@@ -1,5 +1,5 @@
 import Logo from '@/components/icons/Logo';
-import { GithubIcon, LoaderCircleIcon } from 'lucide-react';
+import { IconBrandGithub, IconLoader } from '@tabler/icons-react';
 import Link from 'next/link';
 // const ThemeSwitcher = dynamic(
 //   () => import("@/components/layout/founder/common/ThemeSwitcher"),
@@ -12,7 +12,7 @@ import Link from 'next/link';
 const Loader = () => {
 	return (
 		<span className='text-secondary-500 dark:text-secondary-300 inline-flex aspect-square h-8 items-center justify-center'>
-			<LoaderCircleIcon className='w-5 animate-spin' />
+			<IconLoader className='w-5 animate-spin' />
 		</span>
 	);
 };
@@ -24,7 +24,7 @@ const Header = () => {
 				<div className='flex grow items-center justify-between'>
 					<Link href='/' className='flex cursor-pointer flex-row items-center gap-1.5 sm:gap-2 rtl:flex-row-reverse'>
 						<Logo className='h-8 sm:h-10' />
-						<h2 className='font-hg scale-y-110 pb-0.5 text-xl !leading-none font-normal tracking-tighter text-black italic sm:text-2xl dark:text-white'>sapan.dev</h2>
+						{/* <h2 className='font-hg scale-y-110 pb-0.5 text-xl !leading-none font-normal tracking-tighter text-black italic sm:text-2xl dark:text-white'>sapan.dev</h2> */}
 					</Link>
 					<div className='ms-auto flex items-center gap-x-2 gap-y-1'>
 						{/* <ThemeSwitcher /> */}
@@ -33,7 +33,7 @@ const Header = () => {
 							target='_blank'
 							className='hover:text-primary dark:hover:text-success inline-flex aspect-square h-8 cursor-pointer items-center justify-center text-black ease-in-out dark:text-white'
 						>
-							<GithubIcon className='w-5' />
+							<IconBrandGithub className='w-5' />
 						</Link>
 					</div>
 				</div>

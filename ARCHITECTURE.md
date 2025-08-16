@@ -99,7 +99,7 @@ src/
 - **Tailwind CSS 4.1.11** - Utility-first CSS framework
 - **SCSS** - Enhanced CSS with variables and mixins
 - **shadcn/ui** - High-quality UI component library
-- **Lucide React** - Icon library
+- **Tabler Icons React** - Icon library
 - **pnpm** - Package manager
 
 ## Architecture Principles

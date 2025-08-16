@@ -3,7 +3,7 @@
 // import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from '@/components/ui/popover';
 // import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { isMacOS } from '@/lib/helper';
-import { MoonStarIcon, SunIcon } from 'lucide-react';
+import { IconMoonStars, IconSun } from '@tabler/icons-react';
 import { useTheme } from 'next-themes';
 import { useCallback, useEffect } from 'react';
 
@@ -45,12 +45,12 @@ const ThemeSwitcher = () => {
 
 	const themeIcon = (value: string | undefined) => {
 		if (theme === 'light') {
-			return <SunIcon className='w-5' />;
+			return <IconSun className='w-5' />;
 		}
 		if (theme === 'dark') {
-			return <MoonStarIcon className='w-5' />;
+			return <IconMoonStars className='w-5' />;
 		}
-		return systemTheme === 'light' ? <SunIcon className='w-5' /> : <MoonStarIcon className='w-5' />;
+		return systemTheme === 'light' ? <IconSun className='w-5' /> : <IconMoonStars className='w-5' />;
 	};
 
 	return <></>;

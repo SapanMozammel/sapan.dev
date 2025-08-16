@@ -1,62 +1,62 @@
 import Cloud from '@/components/icons/Cloud';
 import {
-	ArchiveIcon,
-	ArchiveXIcon,
-	BoxIcon,
-	BugIcon,
-	ChevronDownIcon,
-	EllipsisVerticalIcon,
-	FileIcon,
-	InboxIcon,
-	ListFilterIcon,
-	LogOutIcon,
-	MessagesSquareIcon,
-	RedoIcon,
-	SlidersHorizontalIcon,
-	ToggleLeftIcon,
-	Trash2Icon,
-	TreePineIcon,
-	UndoDotIcon,
-	UndoIcon,
-	UsersIcon,
-} from 'lucide-react';
+	IconAdjustments,
+	IconArchive,
+	IconArchiveOff,
+	IconArrowBackUp,
+	IconBox,
+	IconBug,
+	IconChevronDown,
+	IconDots,
+	IconFile,
+	IconFilter,
+	IconInbox,
+	IconLogout,
+	IconMessages,
+	IconRotate2,
+	IconRotateClockwise,
+	IconToggleLeft,
+	IconTrash,
+	IconTree,
+	IconUsers,
+} from '@tabler/icons-react';
 
 const menuItems = [
 	{
 		title: 'Projects',
-		icon: <BoxIcon className='h-[1.1em] w-[1.1em]' />,
+		icon: <IconBox className='h-[1.1em] w-[1.1em]' />,
 	},
 	{
 		title: 'Index',
-		icon: <InboxIcon className='h-[1.1em] w-[1.1em]' />,
+		icon: <IconInbox className='h-[1.1em] w-[1.1em]' />,
 	},
 	{
 		title: 'Promotions',
-		icon: <MessagesSquareIcon className='h-[1.1em] w-[1.1em]' />,
+		icon: <IconMessages className='h-[1.1em] w-[1.1em]' />,
 	},
 	{
 		title: 'Teams',
-		icon: <UsersIcon className='h-[1.1em] w-[1.1em]' />,
+		icon: <IconUsers className='h-[1.1em] w-[1.1em]' />,
 	},
 	{
 		title: 'My Issues',
-		icon: <BugIcon className='h-[1.1em] w-[1.1em]' />,
+		icon: <IconBug className='h-[1.1em] w-[1.1em]' />,
 	},
 	{
 		title: 'Junk',
-		icon: <ArchiveXIcon className='h-[1.1em] w-[1.1em]' />,
+		icon: <IconArchiveOff className='h-[1.1em] w-[1.1em]' />,
 	},
 	{
 		title: 'Drafts',
-		icon: <FileIcon className='h-[1.1em] w-[1.1em]' />,
+		icon: <IconFile className='h-[1.1em] w-[1.1em]' />,
 	},
 	{
 		title: 'Archive',
-		icon: <ArchiveIcon className='h-[1.1em] w-[1.1em]' />,
+		icon: <IconArchive className='h-[1.1em] w-[1.1em]' />,
 	},
 	{
 		title: 'Logout',
-		icon: <LogOutIcon className='h-[1.1em] w-[1.1em]' />,
+		icon: <IconLogout className='h-[1.1em] w-[1.1em]' />,
 	},
 ];
 
@@ -124,9 +124,9 @@ const AdminScreen = () => {
 				<div className='flex h-full w-full overflow-hidden rounded-[0.6em] tracking-widest'>
 					<div className='border-info/30 flex w-1/4 shrink-0 flex-col gap-[1em] border-e-[0.025em] border-solid bg-white/50 p-[1.25em] dark:bg-black/50'>
 						<div className='border-info/30 flex items-center gap-[0.75em] rounded-[0.4em] border-[0.025em] border-solid py-[0.75em] ps-[1em] pe-[0.8em] uppercase'>
-							<TreePineIcon className='h-[1.5em] w-[1.5em]' />
+							<IconTree className='h-[1.5em] w-[1.5em]' />
 							<div className='text-[0.9em]'>Patrick Dean</div>
-							<ChevronDownIcon className='ms-auto h-[1em] w-[1em]' />
+							<IconChevronDown className='ms-auto h-[1em] w-[1em]' />
 						</div>
 						<div className='mt-[2em] flex grow flex-col gap-[1.25em]'>
 							{menuItems.map((item, index) => (
@@ -147,8 +147,8 @@ const AdminScreen = () => {
 							<div className='border-info/30 flex h-[3.5em] items-center border-b-[0.025em] border-solid p-[1em]'>
 								<div className='text-[1.1em] font-semibold'>Inbox</div>
 								<div className='ms-auto flex items-center gap-[1em]'>
-									<ListFilterIcon className='text-secondary-500 dark:text-secondary-400 h-[1.05em] w-[1.05em]' />
-									<SlidersHorizontalIcon className='text-secondary-500 dark:text-secondary-400 h-[0.9em] w-[0.9em]' />
+									<IconFilter className='text-secondary-500 dark:text-secondary-400 h-[1.05em] w-[1.05em]' />
+									<IconAdjustments className='text-secondary-500 dark:text-secondary-400 h-[0.9em] w-[0.9em]' />
 								</div>
 							</div>
 							<div className='flex flex-col gap-[0.5em] p-[1em]'>
@@ -189,15 +189,15 @@ const AdminScreen = () => {
 						<div className='border-info/30 flex w-5/12 shrink-0 flex-col border-e-[0.025em] border-solid'>
 							<div className='border-info/30 flex h-[3.5em] items-center border-b-[0.025em] border-solid p-[1em]'>
 								<div className='flex items-center gap-[1em]'>
-									<ArchiveIcon className='h-[0.9em] w-[0.9em]' />
-									<ArchiveXIcon className='h-[0.9em] w-[0.9em]' />
-									<Trash2Icon className='h-[0.9em] w-[0.9em]' />
+									<IconArchive className='h-[0.9em] w-[0.9em]' />
+									<IconArchiveOff className='h-[0.9em] w-[0.9em]' />
+									<IconTrash className='h-[0.9em] w-[0.9em]' />
 								</div>
 								<div className='ms-auto flex items-center gap-[1em]'>
-									<UndoIcon className='text-secondary-400 dark:text-secondary-400 h-[1.1em] w-[1.1em]' />
-									<UndoDotIcon className='text-secondary-400 dark:text-secondary-400 h-[1.1em] w-[1.1em]' />
-									<RedoIcon className='text-secondary-400 dark:text-secondary-400 h-[1.1em] w-[1.1em]' />
-									<EllipsisVerticalIcon className='text-secondary-400 dark:text-secondary-400 h-[1.1em] w-[1.1em]' />
+									<IconRotate2 className='text-secondary-400 dark:text-secondary-400 h-[1.1em] w-[1.1em]' />
+									<IconArrowBackUp className='text-secondary-400 dark:text-secondary-400 h-[1.1em] w-[1.1em]' />
+									<IconRotateClockwise className='text-secondary-400 dark:text-secondary-400 h-[1.1em] w-[1.1em]' />
+									<IconDots className='text-secondary-400 dark:text-secondary-400 h-[1.1em] w-[1.1em]' />
 								</div>
 							</div>
 							<div className='border-info/30 flex gap-[1em] border-b-[0.025em] border-solid p-[1em]'>
@@ -225,7 +225,7 @@ const AdminScreen = () => {
 								</div>
 								<div className='flex items-center justify-between'>
 									<div className='flex items-center gap-[0.5em] text-[0.8em]'>
-										<ToggleLeftIcon className='text-secondary-300 dark:text-secondary-600 h-[2em] w-[2em]' />
+										<IconToggleLeft className='text-secondary-300 dark:text-secondary-600 h-[2em] w-[2em]' />
 										<div className='text-secondary-500 dark:text-secondary-400'>Mute the thread</div>
 									</div>
 									<div className='bg-info/30 inline-flex h-[2.5em] items-center justify-center rounded-[0.4em] px-[1.25em] text-[0.8em] font-bold uppercase'>Send</div>
