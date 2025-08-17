@@ -193,6 +193,14 @@ const generatePrettierConfig = (config) => {
 	const endOfLine = getConfigValue('END_OF_LINE', 'lf');
 	const proseWrap = getConfigValue('PROSE_WRAP', 'preserve');
 	const trailingComma = getConfigValue('TRAILING_COMMA', 'es5');
+	const tailwindClassSorting = getConfigValue('TAILWIND_CLASS_SORTING', 'true') === 'true';
+
+	// Build plugins array based on configuration
+	const plugins = [];
+	if (tailwindClassSorting) {
+		plugins.push('prettier-plugin-tailwindcss');
+	}
+	const pluginsString = plugins.length > 0 ? `['${plugins.join("', '")}']` : '[]';
 
 	const prettierConfigContent = `module.exports = {
 	// Basic formatting
@@ -216,7 +224,7 @@ const generatePrettierConfig = (config) => {
 	singleAttributePerLine: ${singleAttributePerLine},
 
 	// Plugins for modern development
-	plugins: ['prettier-plugin-tailwindcss'],
+	plugins: ${pluginsString},
 
 	// File-specific overrides
 	overrides: [
@@ -263,7 +271,7 @@ const generatePrettierConfig = (config) => {
 	return prettierConfigContent;
 };
 
-// Generate .prettierignore for src only
+// Generate .prettierignore at project root
 const generatePrettierIgnore = () => {
 	return `# Generated from FORMATTER_CONFIG.md
 # Only format files in src folder
@@ -281,14 +289,13 @@ build/
 dist/
 *.min.js
 *.min.css
-wp-content/uploads/
-wp-config.php
 *.log
 coverage/
 .cache
 .next
 package-lock.json
 yarn.lock
+pnpm-lock.yaml
 composer.lock
 .DS_Store
 Thumbs.db
@@ -309,6 +316,7 @@ const generateESLintConfig = (config) => {
 	const eqeqeq = getConfigValue('EQEQEQ', 'error');
 	const reactHooksExhaustiveDeps = getConfigValue('REACT_HOOKS_EXHAUSTIVE_DEPS', 'warn');
 	const reactJsxNoTargetBlank = getConfigValue('REACT_JSX_NO_TARGET_BLANK', 'error');
+	const reactNoUnescapedEntities = getConfigValue('REACT_NO_UNESCAPED_ENTITIES', 'off');
 
 	return `module.exports = {
 	env: { browser: true, es2022: true, node: true, jest: true },
@@ -382,6 +390,7 @@ const generateESLintConfig = (config) => {
 		'react/jsx-no-target-blank': '${reactJsxNoTargetBlank}',
 		'react/no-unused-state': 'warn',
 		'react/self-closing-comp': 'error',
+		'react/no-unescaped-entities': '${reactNoUnescapedEntities}',
 
 		// React Hooks rules
 		'react-hooks/rules-of-hooks': 'error',
@@ -657,7 +666,7 @@ const sync = () => {
 		{ path: '.formatter/.prettierrc.js', content: prettierConfig },
 		{ path: '.formatter/.eslintrc.js', content: eslintConfig },
 		{ path: '.formatter/.editorconfig', content: editorConfig },
-		{ path: '.formatter/.prettierignore', content: prettierIgnore },
+		{ path: '.prettierignore', content: prettierIgnore },
 		{ path: '.gitattributes', content: gitAttributes },
 		{ path: '.vscode/settings.json', content: vscodeSettings },
 		{ path: '.cursor/settings.json', content: cursorSettings },

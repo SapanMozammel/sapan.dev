@@ -70,6 +70,7 @@ module.exports = {
 		'react/jsx-no-target-blank': 'error',
 		'react/no-unused-state': 'warn',
 		'react/self-closing-comp': 'error',
+		'react/no-unescaped-entities': 'off',
 
 		// React Hooks rules
 		'react-hooks/rules-of-hooks': 'error',
