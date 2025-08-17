@@ -1,4 +1,5 @@
 import Logo from '@/components/icons/Logo';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { IconBrandGithub, IconLoader } from '@tabler/icons-react';
 import Link from 'next/link';
 // const ThemeSwitcher = dynamic(
@@ -28,13 +29,20 @@ const Header = () => {
 					</Link>
 					<div className='ms-auto flex items-center gap-x-2 gap-y-1'>
 						{/* <ThemeSwitcher /> */}
-						<Link
-							href='https://github.com/SapanMozammel'
-							target='_blank'
-							className='hover:text-primary dark:hover:text-success inline-flex aspect-square h-8 cursor-pointer items-center justify-center text-black ease-in-out dark:text-white'
-						>
-							<IconBrandGithub className='w-5' />
-						</Link>
+						<Tooltip>
+							<TooltipTrigger asChild>
+								<Link
+									href='https://github.com/SapanMozammel'
+									target='_blank'
+									className='hover:text-primary dark:hover:text-success inline-flex aspect-square h-8 cursor-pointer items-center justify-center text-black ease-in-out dark:text-white'
+								>
+									<IconBrandGithub className='w-5' />
+								</Link>
+							</TooltipTrigger>
+							<TooltipContent side='right'>
+								<p>Visit my GitHub</p>
+							</TooltipContent>
+						</Tooltip>
 					</div>
 				</div>
 			</div>

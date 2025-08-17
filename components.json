@@ -4,17 +4,15 @@
 	"rsc": true,
 	"tsx": true,
 	"tailwind": {
-		"css": "src/styles/globals.scss",
+		"css": "src/styles/global.scss",
 		"baseColor": "slate",
 		"cssVariables": false,
 		"prefix": ""
 	},
 	"aliases": {
+		"components": "@/components",
 		"ui": "@/components/ui",
-		"utils": "@/lib/utils",
-		"hooks": "@/lib/hooks",
-		"constants": "@/lib/constants",
-		"validations": "@/lib/validations"
+		"utils": "@/lib/utils"
 	},
 	"iconLibrary": "tabler"
 }
