@@ -1,16 +1,8 @@
 import Logo from '@/components/icons/Logo';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { IconBrandGithub, IconLoader } from '@tabler/icons-react';
+import { IconBrandGithub } from '@tabler/icons-react';
 import Link from 'next/link';
 import ThemeSwitcher from '../common/ThemeSwitcher';
-
-const Loader = () => {
-	return (
-		<span className='text-secondary-500 dark:text-secondary-300 inline-flex aspect-square h-8 items-center justify-center'>
-			<IconLoader className='w-5 animate-spin' />
-		</span>
-	);
-};
 
 const Header = () => {
 	return (
@@ -32,7 +24,7 @@ const Header = () => {
 									target='_blank'
 									className='hover:text-primary dark:hover:text-success inline-flex aspect-square h-8 cursor-pointer items-center justify-center text-black ease-in-out dark:text-white'
 								>
-									<IconBrandGithub className='w-5' />
+									<IconBrandGithub className='h-5 w-5 outline-none' />
 								</Link>
 							</TooltipTrigger>
 							<TooltipContent side='right'>

@@ -5,23 +5,24 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { isMacOS } from '@/lib/helper';
 import { IconContrastFilled, IconLoader, IconMoonFilled, IconSunFilled } from '@tabler/icons-react';
 import { useTheme } from 'next-themes';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const ThemeSwitcher = () => {
 	const { theme, setTheme, systemTheme } = useTheme();
+	const [mounted, setMounted] = useState(false);
 
 	const themeOptions = [
 		{
 			name: 'light',
-			icon: <IconSunFilled className='h-5 w-5' />,
+			icon: <IconSunFilled className='h-5 w-5 outline-none' />,
 		},
 		{
 			name: 'dark',
-			icon: <IconMoonFilled className='h-4.5 w-4.5' />,
+			icon: <IconMoonFilled className='h-4.5 w-4.5 outline-none' />,
 		},
 		{
 			name: 'system',
-			icon: <IconContrastFilled className='h-4.5 w-4.5' />,
+			icon: <IconContrastFilled className='h-4.5 w-4.5 outline-none' />,
 		},
 	];
 
@@ -49,6 +50,11 @@ const ThemeSwitcher = () => {
 		[changeTheme]
 	);
 
+	// Prevent hydration mismatch by only rendering theme-dependent content after mount
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
 	useEffect(() => {
 		// Add keydown event listener on mount
 		window.addEventListener('keydown', handleKeyDown);
@@ -59,9 +65,14 @@ const ThemeSwitcher = () => {
 	}, [theme, handleKeyDown]);
 
 	const themeIcon = () => {
+		// Show loading icon during hydration to prevent mismatch
+		if (!mounted) {
+			return <IconLoader className='h-5 w-5 animate-spin outline-none' />;
+		}
+
 		const currentTheme = theme === 'system' ? systemTheme : theme;
 		const icon = themeOptions.find((option) => option.name === currentTheme)?.icon;
-		return icon ?? <IconLoader className='h-5 w-5 animate-spin' />;
+		return icon;
 	};
 
 	return (
@@ -75,7 +86,7 @@ const ThemeSwitcher = () => {
 					</PopoverTrigger>
 				</TooltipTrigger>
 				<TooltipContent side='right'>
-					<p className='capitalize'>{theme} Theme</p>
+					<p className='capitalize'>{mounted ? theme : 'Loading'} Theme</p>
 				</TooltipContent>
 			</Tooltip>
 			<PopoverContent className='border-secondary-400 dark:border-secondary-600 divide-secondary-400 dark:divide-secondary-600 w-44 divide-y' align='end'>
@@ -89,7 +100,9 @@ const ThemeSwitcher = () => {
 							key={option.name}
 							type='button'
 							className={`flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-md px-2 py-1.5 text-sm transition-colors ${
-								theme === option.name ? 'bg-primary/10 text-primary dark:bg-success/10 dark:text-success' : 'text-secondary-500 dark:text-secondary-400 hover:text-primary dark:hover:text-success'
+								mounted && theme === option.name
+									? 'bg-primary/10 text-primary dark:bg-success/10 dark:text-success'
+									: 'text-secondary-500 dark:text-secondary-400 hover:text-primary dark:hover:text-success'
 							}`}
 							onClick={() => {
 								changeTheme(option.name);
