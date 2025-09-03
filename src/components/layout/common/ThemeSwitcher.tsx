@@ -1,18 +1,33 @@
 'use client';
 
-// import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from '@/components/ui/popover';
-// import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { isMacOS } from '@/lib/helper';
-import { IconMoonStars, IconSun } from '@tabler/icons-react';
+import { IconContrastFilled, IconMoonFilled, IconSun, IconSunFilled } from '@tabler/icons-react';
 import { useTheme } from 'next-themes';
 import { useCallback, useEffect } from 'react';
 
 const ThemeSwitcher = () => {
 	const { theme, setTheme, systemTheme } = useTheme();
 
+	const themeOptions = [
+		{
+			name: 'light',
+			icon: <IconSunFilled className='h-5 w-5' />,
+		},
+		{
+			name: 'dark',
+			icon: <IconMoonFilled className='h-4.5 w-4.5' />,
+		},
+		{
+			name: 'system',
+			icon: <IconContrastFilled className='h-4.5 w-4.5' />,
+		},
+	];
+
 	const changeTheme = useCallback(
 		(value?: string) => {
-			const themes = ['system', 'light', 'dark'];
+			const themes = themeOptions.map((option) => option.name);
 			const themeString = theme as string;
 			if (value) {
 				return setTheme(themes[themes.indexOf(value.toLowerCase())]);
@@ -43,75 +58,53 @@ const ThemeSwitcher = () => {
 		};
 	}, [theme, handleKeyDown]);
 
-	const themeIcon = (value: string | undefined) => {
-		if (theme === 'light') {
-			return <IconSun className='w-5' />;
-		}
-		if (theme === 'dark') {
-			return <IconMoonStars className='w-5' />;
-		}
-		return systemTheme === 'light' ? <IconSun className='w-5' /> : <IconMoonStars className='w-5' />;
+	const themeIcon = () => {
+		const currentTheme = theme === 'system' ? systemTheme : theme;
+		const icon = themeOptions.find((option) => option.name === currentTheme)?.icon;
+		return icon ?? <IconSun className='h-5 w-5' />;
 	};
 
-	return <></>;
-
-	// return (
-	// 	<DropdownMenu>
-	// 		<TooltipProvider>
-	// 			<Tooltip>
-	// 				<TooltipTrigger asChild>
-	// 					<DropdownMenuTrigger asChild>
-	// 						<button
-	// 							type='button'
-	// 							className='text-secondary-500 hover:text-primary dark:text-secondary-300 dark:hover:text-success inline-flex aspect-square h-8 cursor-pointer items-center justify-center ease-in-out outline-none'
-	// 						>
-	// 							{themeIcon(theme)}
-	// 						</button>
-	// 					</DropdownMenuTrigger>
-	// 				</TooltipTrigger>
-	// 				<TooltipContent align='end' className='border-secondary-400 dark:border-secondary-600'>
-	// 					<p className='capitalize'>{theme} Theme</p>
-	// 				</TooltipContent>
-	// 			</Tooltip>
-	// 		</TooltipProvider>
-	// 		<DropdownMenuContent className='border-secondary-400 dark:border-secondary-600 w-56' align='end'>
-	// 			<DropdownMenuLabel className='flex items-center gap-1'>
-	// 				<span>Change Theme</span>
-	// 				<DropdownMenuShortcut>⌘⌥T</DropdownMenuShortcut>
-	// 			</DropdownMenuLabel>
-	// 			<DropdownMenuSeparator />
-	// 			<DropdownMenuGroup>
-	// 				<DropdownMenuItem
-	// 					className='cursor-pointer'
-	// 					onClick={() => {
-	// 						changeTheme('light');
-	// 					}}
-	// 				>
-	// 					<SunIcon />
-	// 					<span>Light Theme</span>
-	// 				</DropdownMenuItem>
-	// 				<DropdownMenuItem
-	// 					className='cursor-pointer'
-	// 					onClick={() => {
-	// 						changeTheme('dark');
-	// 					}}
-	// 				>
-	// 					<MoonStarIcon />
-	// 					<span>Dark Theme</span>
-	// 				</DropdownMenuItem>
-	// 				<DropdownMenuItem
-	// 					className='cursor-pointer'
-	// 					onClick={() => {
-	// 						changeTheme('system');
-	// 					}}
-	// 				>
-	// 					<MonitorIcon />
-	// 					<span>System Theme</span>
-	// 				</DropdownMenuItem>
-	// 			</DropdownMenuGroup>
-	// 		</DropdownMenuContent>
-	// 	</DropdownMenu>
-	// );
+	return (
+		<Popover>
+			<Tooltip>
+				<TooltipTrigger asChild>
+					<PopoverTrigger asChild>
+						<button type='button' className='hover:text-primary dark:hover:text-success inline-flex aspect-square h-8 cursor-pointer items-center justify-center text-black ease-in-out dark:text-white'>
+							{themeIcon()}
+						</button>
+					</PopoverTrigger>
+				</TooltipTrigger>
+				<TooltipContent side='right'>
+					<p className='capitalize'>{theme} Theme</p>
+				</TooltipContent>
+			</Tooltip>
+			<PopoverContent className='border-secondary-400 dark:border-secondary-600 divide-secondary-400 dark:divide-secondary-600 w-44 divide-y' align='end'>
+				<div className='flex items-center gap-1 px-3 py-2 text-sm font-medium text-black dark:text-white'>
+					<span>Change Theme</span>
+					<span className='text-primary dark:text-success ml-auto text-xs'>⌘⌥T</span>
+				</div>
+				<div className='flex flex-col gap-0.5 p-1'>
+					{themeOptions.map((option) => (
+						<button
+							key={option.name}
+							type='button'
+							className={`flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-md px-2 py-1.5 text-sm transition-colors ${
+								theme === option.name
+									? 'bg-primary/10 text-primary dark:bg-success/10 dark:text-success'
+									: 'text-secondary-500 dark:text-secondary-400 hover:text-primary dark:hover:text-success'
+							}`}
+							onClick={() => {
+								changeTheme(option.name);
+							}}
+						>
+							<span className='capitalize'>{option.name} Theme</span>
+							<span className='inline-flex aspect-square w-5 items-center justify-center scale-85'>{option.icon}</span>
+						</button>
+					))}
+				</div>
+			</PopoverContent>
+		</Popover>
+	);
 };
 
 export default ThemeSwitcher;

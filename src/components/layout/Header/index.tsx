@@ -2,13 +2,7 @@ import Logo from '@/components/icons/Logo';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { IconBrandGithub, IconLoader } from '@tabler/icons-react';
 import Link from 'next/link';
-// const ThemeSwitcher = dynamic(
-//   () => import("@/components/layout/founder/common/ThemeSwitcher"),
-//   {
-//     ssr: false,
-//     loading: () => <Loader />,
-//   },
-// );
+import ThemeSwitcher from '../common/ThemeSwitcher';
 
 const Loader = () => {
 	return (
@@ -30,7 +24,7 @@ const Header = () => {
 						</h2>
 					</Link>
 					<div className='ms-auto flex items-center gap-x-2 gap-y-1'>
-						{/* <ThemeSwitcher /> */}
+						<ThemeSwitcher />
 						<Tooltip>
 							<TooltipTrigger asChild>
 								<Link
