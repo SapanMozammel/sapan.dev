@@ -1,6 +1,7 @@
 import Cloud from '@/components/icons/Cloud';
 import {
 	IconAdjustments,
+	IconAlienFilled,
 	IconArchive,
 	IconArchiveOff,
 	IconArrowBackUp,
@@ -17,8 +18,7 @@ import {
 	IconRotateClockwise,
 	IconToggleLeft,
 	IconTrash,
-	IconTree,
-	IconUsers,
+	IconUsers
 } from '@tabler/icons-react';
 
 const menuItems = [
@@ -119,12 +119,12 @@ const inboxList = [
 
 const AdminScreen = () => {
 	return (
-		<div className='group/admin-dashboard relative aspect-[16/10] w-full text-left text-[0.75vw] !font-light text-black dark:text-white'>
+		<div className='group/admin-dashboard relative aspect-[16/10] w-full text-left text-[0.75vw] !font-light font text-black dark:text-white'>
 			<div className='bg-light/20 dark:bg-dark/20 border-info/30 shadow-info/10 pointer-events-none flex h-full w-full rounded-[0.6em] border-[0.025em] border-solid shadow-lg backdrop-blur transition-transform delay-500 duration-1000 ease-in-out select-none group-hover/admin-dashboard:scale-105'>
 				<div className='flex h-full w-full overflow-hidden rounded-[0.6em] tracking-widest'>
 					<div className='border-info/30 flex w-1/4 shrink-0 flex-col gap-[1em] border-e-[0.025em] border-solid bg-white/50 p-[1.25em] dark:bg-black/50'>
 						<div className='border-info/30 flex items-center gap-[0.75em] rounded-[0.4em] border-[0.025em] border-solid py-[0.75em] ps-[1em] pe-[0.8em] uppercase'>
-							<IconTree className='h-[1.5em] w-[1.5em]' />
+							<IconAlienFilled className='h-[1.5em] w-[1.5em]' />
 							<div className='text-[0.9em]'>Patrick Dean</div>
 							<IconChevronDown className='ms-auto h-[1em] w-[1em]' />
 						</div>
@@ -262,7 +262,7 @@ const AdminScreen = () => {
 					<svg className='animate-spin-slow absolute inset-[0.1em]' viewBox='0 0 100 100'>
 						<path id='curve-text' fill='transparent' strokeWidth='none' d='M0 50a1 1 0 0 1 100 0A1 1 0 0 1 0 50' />
 						<text>
-							<textPath className='fill-info/80' dominantBaseline='Hanging' fontFamily='"Inter", sans-serif' fontSize='6' href='#curve-text' letterSpacing='0.1em'>
+							<textPath className='fill-info/80' dominantBaseline='Hanging' fontSize='0.435em' href='#curve-text' letterSpacing='0.1em'>
 								PERFORMANCE - PERFORMANCE - PERFORMANCE - PERFORMANCE - PERFORMANCE - PERFORMANCE -
 							</textPath>
 						</text>
@@ -313,7 +313,7 @@ const AdminScreen = () => {
 							</linearGradient>
 						</defs>
 					</svg>
-					<svg xmlns='http://www.w3.org/2000/svg' className='absolute bottom-[0.1em] left-1/2 aspect-square w-[4em] -translate-x-1/2 translate-y-1/2 fill-none' viewBox='-1 -1 51 51'>
+					<svg xmlns='http://www.w3.org/2000/svg' className='absolute rotate-25 bottom-[0.15em] left-1/2 aspect-square w-[4em] -translate-x-1/2 translate-y-1/2 fill-none' viewBox='-1 -1 51 51'>
 						<g filter='url(#triangle-wrapper)'>
 							<path
 								fill='url(#triangle-fill)'
@@ -323,11 +323,11 @@ const AdminScreen = () => {
 						</g>
 						<defs>
 							<radialGradient id='triangle-fill' cx='0' cy='0' r='1' gradientTransform='matrix(-19.23654 -10.39856 5.15443 -9.53531 24.295 24.342)' gradientUnits='userSpaceOnUse'>
-								<stop stopColor='#2E335A' />
-								<stop offset='1' stopColor='#1C1B33' stopOpacity='0.7' />
+								<stop stopColor='#1f8fff' />
+								<stop offset='1' stopColor='#1f8fff' />
 							</radialGradient>
 							<filter id='triangle-wrapper' width='45.127' height='43.537' x='1.854' y='0.743' colorInterpolationFilters='sRGB' filterUnits='userSpaceOnUse'>
-								<feFlood floodOpacity='0' result='BackgroundImageFix' />
+								<feFlood result='BackgroundImageFix' />
 								<feGaussianBlur in='BackgroundImageFix' stdDeviation='5' />
 								<feComposite in2='SourceAlpha' operator='in' result='effect1_backgroundBlur_23632_3869' />
 								<feBlend in='SourceGraphic' in2='effect1_backgroundBlur_23632_3869' result='shape' />
