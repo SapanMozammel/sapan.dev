@@ -5,26 +5,43 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { isMacOS } from '@/lib/helper';
 import { IconContrastFilled, IconLoader, IconMoonFilled, IconSunFilled } from '@tabler/icons-react';
 import { useTheme } from 'next-themes';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
+const themeOptions = [
+	{
+		name: 'light',
+		icon: <IconSunFilled className='h-5 w-5 outline-none' />,
+	},
+	{
+		name: 'dark',
+		icon: <IconMoonFilled className='h-4.5 w-4.5 outline-none' />,
+	},
+	{
+		name: 'system',
+		icon: <IconContrastFilled className='h-4.5 w-4.5 outline-none' />,
+	},
+];
 
 const ThemeSwitcher = () => {
 	const { theme, setTheme, systemTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
+	const [isHovering, setIsHovering] = useState(false);
+	const [keyboardTriggered, setKeyboardTriggered] = useState(false);
+	const tooltipTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-	const themeOptions = [
-		{
-			name: 'light',
-			icon: <IconSunFilled className='h-5 w-5 outline-none' />,
-		},
-		{
-			name: 'dark',
-			icon: <IconMoonFilled className='h-4.5 w-4.5 outline-none' />,
-		},
-		{
-			name: 'system',
-			icon: <IconContrastFilled className='h-4.5 w-4.5 outline-none' />,
-		},
-	];
+	// Computed tooltip visibility - more optimized than state + useEffect
+	const tooltipOpen = isHovering || keyboardTriggered;
+
+	const themeIcon = () => {
+		// Show loading icon during hydration to prevent mismatch
+		if (!mounted) {
+			return <IconLoader className='h-5 w-5 animate-spin outline-none' />;
+		}
+
+		const currentTheme = theme === 'system' ? systemTheme : theme;
+		const icon = themeOptions.find((option) => option.name === currentTheme)?.icon;
+		return icon;
+	};
 
 	const changeTheme = useCallback(
 		(value?: string) => {
@@ -45,15 +62,22 @@ const ThemeSwitcher = () => {
 			if (baseKey && event.altKey && event.code.toLowerCase() === 'KeyT'.toLowerCase()) {
 				event.preventDefault(); // Prevent default browser behavior if any
 				changeTheme();
+
+				// Clear any existing timeout to prevent stacking
+				if (tooltipTimeoutRef.current) {
+					clearTimeout(tooltipTimeoutRef.current);
+				}
+
+				// Show tooltip for 2 seconds when changing theme via keyboard (only if not hovering)
+				setKeyboardTriggered(true);
+				tooltipTimeoutRef.current = setTimeout(() => {
+					setKeyboardTriggered(false);
+					tooltipTimeoutRef.current = null;
+				}, 1000);
 			}
 		},
 		[changeTheme]
 	);
-
-	// Prevent hydration mismatch by only rendering theme-dependent content after mount
-	useEffect(() => {
-		setMounted(true);
-	}, []);
 
 	useEffect(() => {
 		// Add keydown event listener on mount
@@ -64,23 +88,27 @@ const ThemeSwitcher = () => {
 		};
 	}, [theme, handleKeyDown]);
 
-	const themeIcon = () => {
-		// Show loading icon during hydration to prevent mismatch
-		if (!mounted) {
-			return <IconLoader className='h-5 w-5 animate-spin outline-none' />;
-		}
-
-		const currentTheme = theme === 'system' ? systemTheme : theme;
-		const icon = themeOptions.find((option) => option.name === currentTheme)?.icon;
-		return icon;
-	};
+	// Prevent hydration mismatch by only rendering theme-dependent content after mount && Cleanup timeout on unmount
+	useEffect(() => {
+		setMounted(true);
+		return () => {
+			if (tooltipTimeoutRef.current) {
+				clearTimeout(tooltipTimeoutRef.current);
+			}
+		};
+	}, []);
 
 	return (
 		<Popover>
-			<Tooltip>
+			<Tooltip open={tooltipOpen}>
 				<TooltipTrigger asChild>
 					<PopoverTrigger asChild>
-						<button type='button' className='hover:text-primary dark:hover:text-success inline-flex aspect-square h-8 cursor-pointer items-center justify-center text-black ease-in-out dark:text-white'>
+						<button
+							type='button'
+							className='hover:text-primary dark:hover:text-success inline-flex aspect-square h-8 cursor-pointer items-center justify-center text-black ease-in-out dark:text-white'
+							onMouseEnter={() => setIsHovering(true)}
+							onMouseLeave={() => setIsHovering(false)}
+						>
 							{themeIcon()}
 						</button>
 					</PopoverTrigger>
