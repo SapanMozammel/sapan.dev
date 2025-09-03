@@ -18,7 +18,7 @@ import {
 	IconRotateClockwise,
 	IconToggleLeft,
 	IconTrash,
-	IconUsers
+	IconUsers,
 } from '@tabler/icons-react';
 
 const menuItems = [
@@ -119,7 +119,7 @@ const inboxList = [
 
 const AdminScreen = () => {
 	return (
-		<div className='group/admin-dashboard relative aspect-[16/10] w-full text-left text-[0.75vw] !font-light font text-black dark:text-white'>
+		<div className='group/admin-dashboard font-dm relative aspect-[16/10] w-full text-left text-[0.75vw] !font-light text-black dark:text-white'>
 			<div className='bg-light/20 dark:bg-dark/20 border-info/30 shadow-info/10 pointer-events-none flex h-full w-full rounded-[0.6em] border-[0.025em] border-solid shadow-lg backdrop-blur transition-transform delay-500 duration-1000 ease-in-out select-none group-hover/admin-dashboard:scale-105'>
 				<div className='flex h-full w-full overflow-hidden rounded-[0.6em] tracking-widest'>
 					<div className='border-info/30 flex w-1/4 shrink-0 flex-col gap-[1em] border-e-[0.025em] border-solid bg-white/50 p-[1.25em] dark:bg-black/50'>
@@ -313,7 +313,7 @@ const AdminScreen = () => {
 							</linearGradient>
 						</defs>
 					</svg>
-					<svg xmlns='http://www.w3.org/2000/svg' className='absolute rotate-25 bottom-[0.15em] left-1/2 aspect-square w-[4em] -translate-x-1/2 translate-y-1/2 fill-none' viewBox='-1 -1 51 51'>
+					<svg xmlns='http://www.w3.org/2000/svg' className='absolute bottom-[0.15em] left-1/2 aspect-square w-[4em] -translate-x-1/2 translate-y-1/2 rotate-25 fill-none' viewBox='-1 -1 51 51'>
 						<g filter='url(#triangle-wrapper)'>
 							<path
 								fill='url(#triangle-fill)'
