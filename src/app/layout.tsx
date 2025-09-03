@@ -1,4 +1,4 @@
-import { dmSans, ebGaramond, hankenGrotesk } from '@/app/fonts';
+import { cormorantGaramond, dmSans, ebGaramond, fira, hankenGrotesk, zondrone } from '@/app/fonts';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import '@/styles/global.scss';
@@ -80,10 +80,12 @@ export const metadata: Metadata = {
 	},
 };
 
+const fontList = `${dmSans.variable} ${ebGaramond.variable} ${hankenGrotesk.variable} ${fira.variable} ${cormorantGaramond.variable} ${zondrone.variable}`;
+
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<html lang='en' suppressHydrationWarning>
-			<body suppressHydrationWarning className={`${dmSans.variable} ${ebGaramond.variable} ${hankenGrotesk.variable} font-dm`}>
+			<body suppressHydrationWarning className={`${fontList} font-dm`}>
 				<div className='text-dark relative bg-white dark:bg-black dark:text-white'>
 					<ThemeProvider enableSystem={true} defaultTheme='system' enableColorScheme={false} themes={['light', 'dark', 'system']} attribute='class'>
 						<Header />

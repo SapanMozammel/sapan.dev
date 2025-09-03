@@ -21,7 +21,7 @@ export const Button = (props: React.DetailedHTMLProps<React.ButtonHTMLAttributes
 						/>
 					</svg>
 					<span className='relative h-full'>
-						<span className='font-eb dark:text-dark group-disabled/button:!text-secondary-500 relative z-1 inline-flex h-full items-center justify-center px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/button:text-white sm:text-sm'>
+						<span className='font-hg dark:text-dark group-disabled/button:!text-secondary-500 relative z-1 inline-flex h-full items-center justify-center px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/button:text-white sm:text-sm'>
 							{children}
 						</span>
 						<svg className='absolute top-0 h-full w-full' viewBox='0 0 100 44' preserveAspectRatio='none'>
@@ -54,7 +54,7 @@ export const Button = (props: React.DetailedHTMLProps<React.ButtonHTMLAttributes
 						/>
 					</svg>
 					<span className='relative h-full'>
-						<span className='font-eb text-dark group-disabled/button:!text-secondary-500 relative z-1 inline-flex h-full items-center justify-center px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
+						<span className='font-hg text-dark group-disabled/button:!text-secondary-500 relative z-1 inline-flex h-full items-center justify-center px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
 							{children}
 						</span>
 						<svg className='absolute top-0 h-full w-full' viewBox='0 0 100 44' preserveAspectRatio='none' fill='none'>
@@ -106,7 +106,7 @@ export const LinkButton = (props: React.AnchorHTMLAttributes<HTMLAnchorElement> 
 						/>
 					</svg>
 					<span className='relative h-full'>
-						<span className='font-eb dark:text-dark group-disabled/link-button:!text-secondary-500 relative z-1 inline-flex h-full items-center justify-center px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/link-button:text-white sm:text-sm'>
+						<span className='font-hg dark:text-dark group-disabled/link-button:!text-secondary-500 relative z-1 inline-flex h-full items-center justify-center px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/link-button:text-white sm:text-sm'>
 							{children}
 						</span>
 						<svg className='absolute top-0 h-full w-full' viewBox='0 0 100 44' preserveAspectRatio='none'>
@@ -139,7 +139,7 @@ export const LinkButton = (props: React.AnchorHTMLAttributes<HTMLAnchorElement> 
 						/>
 					</svg>
 					<span className='relative h-full'>
-						<span className='font-eb text-dark group-disabled/link-button:!text-secondary-500 relative z-1 inline-flex h-full items-center justify-center px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
+						<span className='font-hg text-dark group-disabled/link-button:!text-secondary-500 relative z-1 inline-flex h-full items-center justify-center px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
 							{children}
 						</span>
 						<svg className='absolute top-0 h-full w-full' viewBox='0 0 100 44' preserveAspectRatio='none' fill='none'>
