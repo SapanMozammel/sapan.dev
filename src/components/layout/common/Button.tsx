@@ -12,7 +12,7 @@ export const Button = (props: ButtonProps) => {
 		return (
 			<Link
 				href={to}
-				className={`group/button focus:ring-none relative inline-flex !h-9 cursor-pointer items-center justify-center !px-[calc(theme(height.9)*21/44)] focus:outline-none disabled:cursor-not-allowed sm:!h-11 sm:!px-[calc(theme(height.11)*21/44)] ${loading ? 'pointer-events-none' : ''} ${className ?? ''}`}
+				className={`group/button focus:ring-none relative inline-flex !h-9 cursor-pointer items-center justify-center !px-[calc(theme(height.9)*21/44)] focus:outline-none sm:!h-11 sm:!px-[calc(theme(height.11)*21/44)] ${loading ? 'pointer-events-none' : ''} ${className ?? ''}`}
 				{...linkProps}
 			>
 				{fill ? (
@@ -87,7 +87,7 @@ export const Button = (props: ButtonProps) => {
 							</span>
 							<svg className='absolute inset-y-0 right-0 aspect-21/44 h-full' viewBox='0 0 21 44'>
 								<path
-									className='fill-dark stroke-dark group-hover/button:fill-primary group-hover/button:stroke-primary dark:group-hover/button:fill-success dark:group-hover/button:stroke-success group-disabled/button:!fill-secondary-400 group-disabled/button:!stroke-secondary-400 duration-150 dark:fill-white dark:stroke-white'
+									className='fill-dark stroke-dark group-hover/button:fill-primary group-hover/button:stroke-primary dark:group-hover/button:fill-success dark:group-hover/button:stroke-success duration-150 dark:fill-white dark:stroke-white'
 									strokeWidth='2'
 									d='M0,43.00005 L5.028,43.00005 L12.24,43.00005 C16.526,43.00005 20,39.58105 20,35.36365 L20,16.85855 C20,14.59295 18.978,12.44425 17.209,10.99335 L7.187,2.77111 C5.792,1.62675 4.034,1 2.217,1 L0,1'
 								/>
@@ -179,29 +179,26 @@ export const Button = (props: ButtonProps) => {
 	const { disabled, ...buttonProps } = rest as any;
 	return (
 		<button
-			className={`group/button focus:ring-none relative inline-flex !h-9 cursor-pointer items-center justify-center !px-[calc(theme(height.9)*21/44)] focus:outline-none disabled:cursor-not-allowed sm:!h-11 sm:!px-[calc(theme(height.11)*21/44)] ${loading ? 'pointer-events-none' : ''} ${className ?? ''}`}
+			className={`group/button focus:ring-none relative inline-flex !h-9 cursor-pointer items-center justify-center !px-[calc(theme(height.9)*21/44)] focus:outline-none disabled:pointer-events-none disabled:brightness-85 sm:!h-11 sm:!px-[calc(theme(height.11)*21/44)] dark:disabled:brightness-90 ${loading ? 'pointer-events-none' : ''} ${className ?? ''}`}
 			disabled={disabled}
 			{...buttonProps}
 		>
 			{fill ? (
 				gradient ? (
 					<>
-						<svg
-							className='absolute inset-y-0 left-0 aspect-21/44 h-full group-hover/button:hue-rotate-15 group-disabled/button:group-hover/button:hue-rotate-0 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0 dark:group-disabled/button:group-hover/button:brightness-100'
-							viewBox='0 0 21 44'
-						>
+						<svg className='absolute inset-y-0 left-0 aspect-21/44 h-full group-hover/button:hue-rotate-15 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0' viewBox='0 0 21 44'>
 							<linearGradient id='btn-left-filled' x1='0%' x2='100%' y1='50%' y2='50%'>
 								<stop offset='0%' stopColor='var(--color-info)' />
 								<stop offset='100%' stopColor='var(--color-info)' />
 							</linearGradient>
 							<path
-								className='group-disabled/button:!fill-secondary-400 group-disabled/button:!stroke-secondary-400 fill-[url(#btn-left-filled)] stroke-[url(#btn-left-filled)] duration-150'
+								className='group-disabled/button:fill-secondary-300 group-disabled/button:stroke-secondary-300 fill-[url(#btn-left-filled)] stroke-[url(#btn-left-filled)] duration-150'
 								strokeWidth='2'
 								d='M22,43.00005 L8.11111,43.00005 C4.18375,43.00005 1,39.58105 1,35.36365 L1,8.63637 C1,4.41892 4.18375,1 8.11111,1 L21,1'
 							/>
 						</svg>
-						<span className='relative h-full group-hover/button:hue-rotate-15 group-disabled/button:group-hover/button:hue-rotate-0 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0 dark:group-disabled/button:group-hover/button:brightness-100'>
-							<span className='font-hg group-disabled/button:!text-secondary-500 group-disabled/button:group-hover/button:text-secondary-500 relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/button:text-white sm:text-sm dark:text-white'>
+						<span className='relative h-full group-hover/button:hue-rotate-15 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0'>
+							<span className='font-hg group-disabled/button:text-secondary-500 relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/button:text-white sm:text-sm dark:text-white'>
 								{loading ? (
 									<>
 										<IconLoader className='h-5 w-5 animate-spin' /> loading...
@@ -215,19 +212,16 @@ export const Button = (props: ButtonProps) => {
 									<stop offset='0%' stopColor='var(--color-info)' />
 									<stop offset='100%' stopColor='var(--color-primary)' />
 								</linearGradient>
-								<polygon className='group-disabled/button:!fill-secondary-400 fill-[url(#btn-center-filled)] duration-150' fillRule='nonzero' points='101 0 101 44 0 44 0 0' />
+								<polygon className='group-disabled/button:fill-secondary-300 fill-[url(#btn-center-filled)] duration-150' fillRule='nonzero' points='101 0 101 44 0 44 0 0' />
 							</svg>
 						</span>
-						<svg
-							className='absolute inset-y-0 right-0 aspect-21/44 h-full group-hover/button:hue-rotate-15 group-disabled/button:group-hover/button:hue-rotate-0 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0 dark:group-disabled/button:group-hover/button:brightness-100'
-							viewBox='0 0 21 44'
-						>
+						<svg className='absolute inset-y-0 right-0 aspect-21/44 h-full group-hover/button:hue-rotate-15 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0' viewBox='0 0 21 44'>
 							<linearGradient id='btn-right-filled' x1='0%' x2='100%' y1='50%' y2='50%'>
 								<stop offset='0%' stopColor='var(--color-primary)' />
 								<stop offset='100%' stopColor='var(--color-primary)' />
 							</linearGradient>
 							<path
-								className='group-disabled/button:!fill-secondary-400 group-disabled/button:!stroke-secondary-400 fill-[url(#btn-right-filled)] stroke-[url(#btn-right-filled)] duration-150'
+								className='group-disabled/button:fill-secondary-300 group-disabled/button:stroke-secondary-300 fill-[url(#btn-right-filled)] stroke-[url(#btn-right-filled)] duration-150'
 								strokeWidth='2'
 								d='M0,43.00005 L5.028,43.00005 L12.24,43.00005 C16.526,43.00005 20,39.58105 20,35.36365 L20,16.85855 C20,14.59295 18.978,12.44425 17.209,10.99335 L7.187,2.77111 C5.792,1.62675 4.034,1 2.217,1 L0,1'
 							/>
@@ -237,13 +231,13 @@ export const Button = (props: ButtonProps) => {
 					<>
 						<svg className='absolute inset-y-0 left-0 aspect-21/44 h-full' viewBox='0 0 21 44'>
 							<path
-								className='fill-dark stroke-dark group-hover/button:fill-primary group-hover/button:stroke-primary group-disabled/button:group-hover/button:fill-dark group-disabled/button:group-hover/button:stroke-dark dark:group-hover/button:fill-success dark:group-hover/button:stroke-success group-disabled/button:!fill-secondary-400 group-disabled/button:!stroke-secondary-400 duration-150 dark:fill-white dark:stroke-white'
+								className='fill-dark stroke-dark group-hover/button:fill-primary group-hover/button:stroke-primary dark:group-hover/button:fill-success dark:group-hover/button:stroke-success group-disabled/button:fill-secondary-300 group-disabled/button:stroke-secondary-300 duration-150 dark:fill-white dark:stroke-white'
 								strokeWidth='2'
 								d='M22,43.00005 L8.11111,43.00005 C4.18375,43.00005 1,39.58105 1,35.36365 L1,8.63637 C1,4.41892 4.18375,1 8.11111,1 L21,1'
 							/>
 						</svg>
 						<span className='relative h-full'>
-							<span className='font-hg dark:text-dark group-disabled/button:!text-secondary-500 dark:group-hover/button:text-dark group-disabled/button:dark:group-hover/button:text-secondary-500 relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/button:text-white group-disabled/button:group-hover/button:text-white sm:text-sm'>
+							<span className='font-hg dark:text-dark group-disabled/button:text-secondary-500 dark:group-hover/button:text-dark relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/button:text-white sm:text-sm'>
 								{loading ? (
 									<>
 										<IconLoader className='h-5 w-5 animate-spin' /> loading...
@@ -254,7 +248,7 @@ export const Button = (props: ButtonProps) => {
 							</span>
 							<svg className='absolute top-0 h-full w-full' viewBox='0 0 100 44' preserveAspectRatio='none'>
 								<polygon
-									className='fill-dark group-hover/button:fill-primary group-disabled/button:group-hover/button:fill-dark dark:group-hover/button:fill-success group-disabled/button:!fill-secondary-400 duration-150 dark:fill-white'
+									className='fill-dark group-hover/button:fill-primary dark:group-hover/button:fill-success group-disabled/button:fill-secondary-300 duration-150 dark:fill-white'
 									fillRule='nonzero'
 									points='101 0 101 44 0 44 0 0'
 								/>
@@ -262,7 +256,7 @@ export const Button = (props: ButtonProps) => {
 						</span>
 						<svg className='absolute inset-y-0 right-0 aspect-21/44 h-full' viewBox='0 0 21 44'>
 							<path
-								className='fill-dark stroke-dark group-hover/button:fill-primary group-hover/button:stroke-primary group-disabled/button:group-hover/button:fill-dark group-disabled/button:group-hover/button:stroke-dark dark:group-hover/button:fill-success dark:group-hover/button:stroke-success group-disabled/button:!fill-secondary-400 group-disabled/button:!stroke-secondary-400 duration-150 dark:fill-white dark:stroke-white'
+								className='fill-dark stroke-dark group-hover/button:fill-primary group-hover/button:stroke-primary dark:group-hover/button:fill-success dark:group-hover/button:stroke-success group-disabled/button:fill-secondary-300 group-disabled/button:stroke-secondary-300 duration-150 dark:fill-white dark:stroke-white'
 								strokeWidth='2'
 								d='M0,43.00005 L5.028,43.00005 L12.24,43.00005 C16.526,43.00005 20,39.58105 20,35.36365 L20,16.85855 C20,14.59295 18.978,12.44425 17.209,10.99335 L7.187,2.77111 C5.792,1.62675 4.034,1 2.217,1 L0,1'
 							/>
@@ -271,22 +265,19 @@ export const Button = (props: ButtonProps) => {
 				)
 			) : gradient ? (
 				<>
-					<svg
-						className='absolute inset-y-0 left-0 aspect-21/44 h-full group-hover/button:hue-rotate-15 group-disabled/button:group-hover/button:hue-rotate-0 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0 dark:group-disabled/button:group-hover/button:brightness-100'
-						viewBox='0 0 21 44'
-					>
+					<svg className='absolute inset-y-0 left-0 aspect-21/44 h-full group-hover/button:hue-rotate-15 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0' viewBox='0 0 21 44'>
 						<linearGradient id='btn-left' x1='0%' x2='100%' y1='50%' y2='50%'>
 							<stop offset='0%' stopColor='var(--color-info)' />
 							<stop offset='100%' stopColor='var(--color-info)' />
 						</linearGradient>
 						<path
-							className='group-disabled/button:!stroke-secondary-400 fill-none stroke-[url(#btn-left)]'
+							className='group-disabled/button:stroke-secondary-300 fill-none stroke-[url(#btn-left)]'
 							strokeWidth='2'
 							d='M22,43.00005 L8.11111,43.00005 C4.18375,43.00005 1,39.58105 1,35.36365 L1,8.63637 C1,4.41892 4.18375,1 8.11111,1 L21,1'
 						/>
 					</svg>
-					<span className='relative h-full group-hover/button:hue-rotate-15 group-disabled/button:group-hover/button:hue-rotate-0 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0 dark:group-disabled/button:group-hover/button:brightness-100'>
-						<span className='font-hg text-dark group-disabled/button:!text-secondary-500 relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
+					<span className='relative h-full group-hover/button:hue-rotate-15 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0'>
+						<span className='font-hg text-dark group-disabled/button:text-secondary-400 relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
 							{loading ? (
 								<>
 									<IconLoader className='h-5 w-5 animate-spin' /> loading...
@@ -300,20 +291,17 @@ export const Button = (props: ButtonProps) => {
 								<stop offset='0%' stopColor='var(--color-info)' />
 								<stop offset='100%' stopColor='var(--color-primary)' />
 							</linearGradient>
-							<polygon className='group-disabled/button:fill-secondary-400 fill-[url(#btn-center)]' fillRule='nonzero' points='101 0 101 2 0 2 0 0' />
-							<polygon className='group-disabled/button:fill-secondary-400 fill-[url(#btn-center)]' fillRule='nonzero' points='101 42 101 44 0 44 0 42' />
+							<polygon className='group-disabled/button:fill-secondary-300 fill-[url(#btn-center)]' fillRule='nonzero' points='101 0 101 2 0 2 0 0' />
+							<polygon className='group-disabled/button:fill-secondary-300 fill-[url(#btn-center)]' fillRule='nonzero' points='101 42 101 44 0 44 0 42' />
 						</svg>
 					</span>
-					<svg
-						className='absolute inset-y-0 right-0 aspect-21/44 h-full group-hover/button:hue-rotate-15 group-disabled/button:group-hover/button:hue-rotate-0 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0 dark:group-disabled/button:group-hover/button:brightness-100'
-						viewBox='0 0 21 44'
-					>
+					<svg className='absolute inset-y-0 right-0 aspect-21/44 h-full group-hover/button:hue-rotate-15 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0' viewBox='0 0 21 44'>
 						<linearGradient id='btn-right' x1='0%' x2='100%' y1='50%' y2='50%'>
 							<stop offset='0%' stopColor='var(--color-primary)' />
 							<stop offset='100%' stopColor='var(--color-primary)' />
 						</linearGradient>
 						<path
-							className='group-disabled/button:!stroke-secondary-400 fill-none stroke-[url(#btn-right)]'
+							className='group-disabled/button:stroke-secondary-300 fill-none stroke-[url(#btn-right)]'
 							strokeWidth='2'
 							d='M0,43.00005 L5.028,43.00005 L12.24,43.00005 C16.526,43.00005 20,39.58105 20,35.36365 L20,16.85855 C20,14.59295 18.978,12.44425 17.209,10.99335 L7.187,2.77111 C5.792,1.62675 4.034,1 2.217,1 L0,1'
 						/>
@@ -323,13 +311,13 @@ export const Button = (props: ButtonProps) => {
 				<>
 					<svg className='absolute inset-y-0 left-0 aspect-21/44 h-full' viewBox='0 0 21 44'>
 						<path
-							className='group-disabled/button:!stroke-secondary-400 stroke-dark group-hover/button:stroke-primary group-disabled/button:group-hover/button:stroke-dark dark:group-hover/button:stroke-success fill-none dark:stroke-white'
+							className='group-disabled/button:stroke-secondary-300 stroke-dark group-hover/button:stroke-primary dark:group-hover/button:stroke-success fill-none dark:stroke-white'
 							strokeWidth='2'
 							d='M22,43.00005 L8.11111,43.00005 C4.18375,43.00005 1,39.58105 1,35.36365 L1,8.63637 C1,4.41892 4.18375,1 8.11111,1 L21,1'
 						/>
 					</svg>
 					<span className='relative h-full'>
-						<span className='font-hg text-dark group-disabled/button:!text-secondary-500 group-hover/button:text-primary group-disabled/button:group-hover/button:text-secondary-500 dark:group-hover/button:text-success relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
+						<span className='font-hg text-dark group-disabled/button:text-secondary-400 group-hover/button:text-primary dark:group-hover/button:text-success relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
 							{loading ? (
 								<>
 									<IconLoader className='h-5 w-5 animate-spin' /> loading...
@@ -340,12 +328,12 @@ export const Button = (props: ButtonProps) => {
 						</span>
 						<svg className='absolute top-0 h-full w-full' viewBox='0 0 100 44' preserveAspectRatio='none' fill='none'>
 							<polygon
-								className='group-disabled/button:!fill-secondary-400 fill-dark group-hover/button:fill-primary group-disabled/button:group-hover/button:fill-dark dark:group-hover/button:fill-success dark:fill-white'
+								className='group-disabled/button:fill-secondary-300 fill-dark group-hover/button:fill-primary dark:group-hover/button:fill-success dark:fill-white'
 								fillRule='nonzero'
 								points='101 0 101 2 0 2 0 0'
 							/>
 							<polygon
-								className='group-disabled/button:!fill-secondary-400 fill-dark group-hover/button:fill-primary group-disabled/button:group-hover/button:fill-dark dark:group-hover/button:fill-success dark:fill-white'
+								className='group-disabled/button:fill-secondary-300 fill-dark group-hover/button:fill-primary dark:group-hover/button:fill-success dark:fill-white'
 								fillRule='nonzero'
 								points='101 42 101 44 0 44 0 42'
 							/>
@@ -353,7 +341,7 @@ export const Button = (props: ButtonProps) => {
 					</span>
 					<svg className='absolute inset-y-0 right-0 aspect-21/44 h-full' viewBox='0 0 21 44'>
 						<path
-							className='group-disabled/button:!stroke-secondary-400 stroke-dark group-hover/button:stroke-primary group-disabled/button:group-hover/button:stroke-dark dark:group-hover/button:stroke-success fill-none dark:stroke-white'
+							className='group-disabled/button:stroke-secondary-300 stroke-dark group-hover/button:stroke-primary dark:group-hover/button:stroke-success fill-none dark:stroke-white'
 							strokeWidth='2'
 							d='M0,43.00005 L5.028,43.00005 L12.24,43.00005 C16.526,43.00005 20,39.58105 20,35.36365 L20,16.85855 C20,14.59295 18.978,12.44425 17.209,10.99335 L7.187,2.77111 C5.792,1.62675 4.034,1 2.217,1 L0,1'
 						/>
