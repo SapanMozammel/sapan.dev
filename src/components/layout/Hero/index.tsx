@@ -1,4 +1,4 @@
-import { LinkButton } from '@/components/layout/common/Button';
+import { Button } from '@/components/layout/common/Button';
 import SectionSeparator from '@/components/layout/common/SectionSeparator';
 import TextUnderline from '@/components/layout/common/TextUnderline';
 import AdminScreen from '@/components/layout/Hero/AdminScreen';
@@ -22,9 +22,9 @@ const Hero = () => {
 								With 5+ years of dynamic experience building applications using React, Redux, GraphQL, Next.js, Three.js, Node.js and many more, I take pride in writing clean, maintainable code while
 								adhering to engineering best practices.
 							</p>
-							<LinkButton href='/' target='_blank' className='mt-0 sm:mt-4' fill>
+							<Button to='/' target='_blank' className='mt-0 sm:mt-4' fill>
 								Let&apos;s Talk
-							</LinkButton>
+							</Button>
 							<div className='mt-4 -mb-[20vw] w-3/4 sm:mt-10 lg:mt-14'>
 								<AdminScreen />
 							</div>
