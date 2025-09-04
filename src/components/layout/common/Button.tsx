@@ -1,5 +1,6 @@
 'use client';
 import { ButtonProps } from '@/types/button';
+import { IconLoader } from '@tabler/icons-react';
 import Link from 'next/link';
 
 export const Button = (props: ButtonProps) => {
@@ -11,7 +12,7 @@ export const Button = (props: ButtonProps) => {
 		return (
 			<Link
 				href={to}
-				className={`group/button focus:ring-none relative inline-flex !h-9 cursor-pointer items-center justify-center !px-[calc(theme(height.9)*21/44)] focus:outline-none disabled:cursor-not-allowed sm:!h-11 sm:!px-[calc(theme(height.11)*21/44)] ${className ?? ''}`}
+				className={`group/button focus:ring-none relative inline-flex !h-9 cursor-pointer items-center justify-center !px-[calc(theme(height.9)*21/44)] focus:outline-none disabled:cursor-not-allowed sm:!h-11 sm:!px-[calc(theme(height.11)*21/44)] ${loading ? 'pointer-events-none' : ''} ${className ?? ''}`}
 				{...linkProps}
 			>
 				{fill ? (
@@ -29,8 +30,14 @@ export const Button = (props: ButtonProps) => {
 								/>
 							</svg>
 							<span className='relative h-full group-hover/button:hue-rotate-15 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0'>
-								<span className='font-hg relative z-1 inline-flex h-full items-center justify-center px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/button:text-white sm:text-sm dark:text-white'>
-									{children}
+								<span className='font-hg relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/button:text-white sm:text-sm dark:text-white'>
+									{loading ? (
+										<>
+											<IconLoader className='h-5 w-5 animate-spin' /> loading...
+										</>
+									) : (
+										children
+									)}
 								</span>
 								<svg className='absolute top-0 h-full w-full' viewBox='0 0 100 44' preserveAspectRatio='none'>
 									<linearGradient id='btn-center-link-filled' x1='0%' x2='100%' y1='50%' y2='50%'>
@@ -65,8 +72,14 @@ export const Button = (props: ButtonProps) => {
 								/>
 							</svg>
 							<span className='relative h-full'>
-								<span className='font-hg dark:text-dark dark:group-hover/button:text-dark relative z-1 inline-flex h-full items-center justify-center px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/button:text-white sm:text-sm'>
-									{children}
+								<span className='font-hg dark:text-dark dark:group-hover/button:text-dark relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/button:text-white sm:text-sm'>
+									{loading ? (
+										<>
+											<IconLoader className='h-5 w-5 animate-spin' /> loading...
+										</>
+									) : (
+										children
+									)}
 								</span>
 								<svg className='absolute top-0 h-full w-full' viewBox='0 0 100 44' preserveAspectRatio='none'>
 									<polygon className='fill-dark group-hover/button:fill-primary dark:group-hover/button:fill-success duration-150 dark:fill-white' fillRule='nonzero' points='101 0 101 44 0 44 0 0' />
@@ -95,8 +108,14 @@ export const Button = (props: ButtonProps) => {
 							/>
 						</svg>
 						<span className='relative h-full group-hover/button:hue-rotate-15 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0'>
-							<span className='font-hg text-dark relative z-1 inline-flex h-full items-center justify-center px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
-								{children}
+							<span className='font-hg text-dark relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
+								{loading ? (
+									<>
+										<IconLoader className='h-5 w-5 animate-spin' /> loading...
+									</>
+								) : (
+									children
+								)}
 							</span>
 							<svg className='absolute top-0 h-full w-full' viewBox='0 0 100 44' preserveAspectRatio='none' fill='none'>
 								<linearGradient id='btn-center-link' x1='0%' x2='100%' y1='50%' y2='50%'>
@@ -129,8 +148,14 @@ export const Button = (props: ButtonProps) => {
 							/>
 						</svg>
 						<span className='relative h-full'>
-							<span className='font-hg text-dark group-hover/button:text-primary dark:group-hover/button:text-success relative z-1 inline-flex h-full items-center justify-center px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
-								{children}
+							<span className='font-hg text-dark group-hover/button:text-primary dark:group-hover/button:text-success relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
+								{loading ? (
+									<>
+										<IconLoader className='h-5 w-5 animate-spin' /> loading...
+									</>
+								) : (
+									children
+								)}
 							</span>
 							<svg className='absolute top-0 h-full w-full' viewBox='0 0 100 44' preserveAspectRatio='none' fill='none'>
 								<polygon className='fill-dark group-hover/button:fill-primary dark:group-hover/button:fill-success dark:fill-white' fillRule='nonzero' points='101 0 101 2 0 2 0 0' />
@@ -154,7 +179,7 @@ export const Button = (props: ButtonProps) => {
 	const { disabled, ...buttonProps } = rest as any;
 	return (
 		<button
-			className={`group/button focus:ring-none relative inline-flex !h-9 cursor-pointer items-center justify-center !px-[calc(theme(height.9)*21/44)] focus:outline-none disabled:cursor-not-allowed sm:!h-11 sm:!px-[calc(theme(height.11)*21/44)] ${className ?? ''}`}
+			className={`group/button focus:ring-none relative inline-flex !h-9 cursor-pointer items-center justify-center !px-[calc(theme(height.9)*21/44)] focus:outline-none disabled:cursor-not-allowed sm:!h-11 sm:!px-[calc(theme(height.11)*21/44)] ${loading ? 'pointer-events-none' : ''} ${className ?? ''}`}
 			disabled={disabled}
 			{...buttonProps}
 		>
@@ -176,8 +201,14 @@ export const Button = (props: ButtonProps) => {
 							/>
 						</svg>
 						<span className='relative h-full group-hover/button:hue-rotate-15 group-disabled/button:group-hover/button:hue-rotate-0 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0 dark:group-disabled/button:group-hover/button:brightness-100'>
-							<span className='font-hg group-disabled/button:!text-secondary-500 group-disabled/button:group-hover/button:text-secondary-500 relative z-1 inline-flex h-full items-center justify-center px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/button:text-white sm:text-sm dark:text-white'>
-								{children}
+							<span className='font-hg group-disabled/button:!text-secondary-500 group-disabled/button:group-hover/button:text-secondary-500 relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/button:text-white sm:text-sm dark:text-white'>
+								{loading ? (
+									<>
+										<IconLoader className='h-5 w-5 animate-spin' /> loading...
+									</>
+								) : (
+									children
+								)}
 							</span>
 							<svg className='absolute top-0 h-full w-full' viewBox='0 0 100 44' preserveAspectRatio='none'>
 								<linearGradient id='btn-center-filled' x1='0%' x2='100%' y1='50%' y2='50%'>
@@ -212,8 +243,14 @@ export const Button = (props: ButtonProps) => {
 							/>
 						</svg>
 						<span className='relative h-full'>
-							<span className='font-hg dark:text-dark group-disabled/button:!text-secondary-500 dark:group-hover/button:text-dark group-disabled/button:dark:group-hover/button:text-secondary-500 relative z-1 inline-flex h-full items-center justify-center px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/button:text-white group-disabled/button:group-hover/button:text-white sm:text-sm'>
-								{children}
+							<span className='font-hg dark:text-dark group-disabled/button:!text-secondary-500 dark:group-hover/button:text-dark group-disabled/button:dark:group-hover/button:text-secondary-500 relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/button:text-white group-disabled/button:group-hover/button:text-white sm:text-sm'>
+								{loading ? (
+									<>
+										<IconLoader className='h-5 w-5 animate-spin' /> loading...
+									</>
+								) : (
+									children
+								)}
 							</span>
 							<svg className='absolute top-0 h-full w-full' viewBox='0 0 100 44' preserveAspectRatio='none'>
 								<polygon
@@ -249,8 +286,14 @@ export const Button = (props: ButtonProps) => {
 						/>
 					</svg>
 					<span className='relative h-full group-hover/button:hue-rotate-15 group-disabled/button:group-hover/button:hue-rotate-0 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0 dark:group-disabled/button:group-hover/button:brightness-100'>
-						<span className='font-hg text-dark group-disabled/button:!text-secondary-500 relative z-1 inline-flex h-full items-center justify-center px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
-							{children}
+						<span className='font-hg text-dark group-disabled/button:!text-secondary-500 relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
+							{loading ? (
+								<>
+									<IconLoader className='h-5 w-5 animate-spin' /> loading...
+								</>
+							) : (
+								children
+							)}
 						</span>
 						<svg className='absolute top-0 h-full w-full' viewBox='0 0 100 44' preserveAspectRatio='none' fill='none'>
 							<linearGradient id='btn-center' x1='0%' x2='100%' y1='50%' y2='50%'>
@@ -286,8 +329,14 @@ export const Button = (props: ButtonProps) => {
 						/>
 					</svg>
 					<span className='relative h-full'>
-						<span className='font-hg text-dark group-disabled/button:!text-secondary-500 group-hover/button:text-primary group-disabled/button:group-hover/button:text-secondary-500 dark:group-hover/button:text-success relative z-1 inline-flex h-full items-center justify-center px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
-							{children}
+						<span className='font-hg text-dark group-disabled/button:!text-secondary-500 group-hover/button:text-primary group-disabled/button:group-hover/button:text-secondary-500 dark:group-hover/button:text-success relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
+							{loading ? (
+								<>
+									<IconLoader className='h-5 w-5 animate-spin' /> loading...
+								</>
+							) : (
+								children
+							)}
 						</span>
 						<svg className='absolute top-0 h-full w-full' viewBox='0 0 100 44' preserveAspectRatio='none' fill='none'>
 							<polygon
