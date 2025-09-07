@@ -3,8 +3,9 @@ import SectionSeparator from '@/components/layout/common/SectionSeparator';
 import TextUnderline from '@/components/layout/common/TextUnderline';
 import AdminScreen from '@/components/layout/Hero/AdminScreen';
 import HeroBackground from '@/components/layout/Hero/HeroBackground';
+import { memo } from 'react';
 
-const Hero = () => {
+const Hero = memo(() => {
 	return (
 		<section className='flex flex-col pt-20'>
 			<div className='relative z-2 flex grow flex-col'>
@@ -34,6 +35,8 @@ const Hero = () => {
 			</div>
 		</section>
 	);
-};
+});
+
+Hero.displayName = 'Hero';
 
 export default Hero;

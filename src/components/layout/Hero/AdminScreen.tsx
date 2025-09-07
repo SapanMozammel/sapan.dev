@@ -20,7 +20,9 @@ import {
 	IconTrash,
 	IconUsers,
 } from '@tabler/icons-react';
+import { memo } from 'react';
 
+// Move static data outside component to prevent recreation on every render
 const menuItems = [
 	{
 		title: 'Projects',
@@ -117,7 +119,7 @@ const inboxList = [
 	},
 ];
 
-const AdminScreen = () => {
+const AdminScreen = memo(() => {
 	return (
 		<div className='group/admin-dashboard font-dm relative aspect-[16/10] w-full text-left text-[0.75vw] !font-light text-black dark:text-white'>
 			<div className='bg-light/20 dark:bg-dark/20 border-info/30 shadow-info/10 pointer-events-none flex h-full w-full rounded-[0.6em] border-[0.025em] border-solid shadow-lg backdrop-blur transition-transform delay-500 duration-1000 ease-in-out select-none group-hover/admin-dashboard:scale-105'>
@@ -131,7 +133,7 @@ const AdminScreen = () => {
 						<div className='mt-[2em] flex grow flex-col gap-[1.25em]'>
 							{menuItems.map((item, index) => (
 								<div
-									key={Math.random()}
+									key={`menu-${index}-${item.title}`}
 									className={`flex items-center gap-[0.5em] border-s-[0.25em] border-solid py-[0.75em] ps-[1em] pe-[0.6em] ${
 										index === 1 ? 'from-info/30 rtl:to-info/30 border-info/50 bg-gradient-to-r to-transparent rtl:from-transparent' : 'border-transparent bg-transparent'
 									} uppercase ${index === menuItems?.length - 1 ? 'before:bg-info/20 relative mt-auto before:absolute before:-top-[1.25em] before:left-0 before:h-[0.05em] before:w-full' : ''}`}
@@ -154,7 +156,7 @@ const AdminScreen = () => {
 							<div className='flex flex-col gap-[0.5em] p-[1em]'>
 								{inboxList.map((inbox, index) => (
 									<div
-										key={Math.random()}
+										key={`inbox-${index}-${inbox.name}`}
 										className={`flex flex-col gap-[0.5em] rounded-[0.5em] border-[0.025em] border-solid p-[1em] ${index === 0 ? 'bg-info/30 border-transparent' : 'border-info/30'}`}
 									>
 										<div className='flex items-start gap-[1em]'>
@@ -173,9 +175,9 @@ const AdminScreen = () => {
 										</div>
 										<div className='text-secondary-500 dark:text-secondary-400 line-clamp-1 text-[0.7em]'>{inbox.message}</div>
 										<div className='mt-[0.1em] flex flex-wrap gap-[0.5em]'>
-											{inbox?.tags?.map((tags) => (
+											{inbox?.tags?.map((tags, tagIndex) => (
 												<div
-													key={Math.random()}
+													key={`tag-${index}-${tagIndex}-${tags}`}
 													className='border-info/30 text-secondary-500 dark:text-secondary-400 rounded-[0.25em] border-[0.025em] border-solid px-[0.7em] py-[0.5em] text-[0.6em] leading-none'
 												>
 													{tags}
@@ -345,6 +347,8 @@ const AdminScreen = () => {
 			</div>
 		</div>
 	);
-};
+});
+
+AdminScreen.displayName = 'AdminScreen';
 
 export default AdminScreen;

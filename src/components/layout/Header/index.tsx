@@ -2,9 +2,10 @@ import Logo from '@/components/icons/Logo';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { IconBrandGithub } from '@tabler/icons-react';
 import Link from 'next/link';
+import { memo } from 'react';
 import ThemeSwitcher from '../common/ThemeSwitcher';
 
-const Header = () => {
+const Header = memo(() => {
 	return (
 		<header className='border-secondary-400 dark:border-secondary-600 fixed inset-x-0 top-0 z-10 flex h-20 flex-col border-b border-solid backdrop-blur-xl'>
 			<div className='container-fluid flex w-full grow flex-col'>
@@ -36,6 +37,8 @@ const Header = () => {
 			</div>
 		</header>
 	);
-};
+});
+
+Header.displayName = 'Header';
 
 export default Header;

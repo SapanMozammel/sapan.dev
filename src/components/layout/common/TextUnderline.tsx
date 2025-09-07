@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { memo, useMemo } from 'react';
 
-const TextUnderline = (props: React.DetailedHTMLProps<React.AllHTMLAttributes<HTMLDivElement>, HTMLDivElement>) => {
+const TextUnderline = memo<React.DetailedHTMLProps<React.AllHTMLAttributes<HTMLDivElement>, HTMLDivElement>>((props) => {
 	const { children, className, ...rest } = props;
+
+	// Memoize computed className to prevent recalculation
+	const computedClassName = useMemo(() => `relative ${className ?? ''}`, [className]);
+
 	return (
-		<span className={`relative ${className ?? ''}`} {...rest}>
+		<span className={computedClassName} {...rest}>
 			{children}
 			<svg className='absolute inset-x-0 -bottom-[0.25em] aspect-[372/32]' viewBox='0 0 372 32'>
 				<g clipPath='url(#clip0_1682_152)'>
@@ -24,6 +28,8 @@ const TextUnderline = (props: React.DetailedHTMLProps<React.AllHTMLAttributes<HT
 			</svg>
 		</span>
 	);
-};
+});
+
+TextUnderline.displayName = 'TextUnderline';
 
 export default TextUnderline;

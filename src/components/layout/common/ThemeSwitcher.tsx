@@ -5,8 +5,9 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { isMacOS } from '@/lib/helper';
 import { IconContrastFilled, IconLoader, IconMoonFilled, IconSunFilled } from '@tabler/icons-react';
 import { useTheme } from 'next-themes';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+// Move outside component to prevent recreation on every render
 const themeOptions = [
 	{
 		name: 'light',
@@ -20,7 +21,7 @@ const themeOptions = [
 		name: 'system',
 		icon: <IconContrastFilled className='h-4.5 w-4.5 outline-none' />,
 	},
-];
+] as const;
 
 const ThemeSwitcher = () => {
 	const { theme, setTheme, systemTheme } = useTheme();
@@ -32,7 +33,7 @@ const ThemeSwitcher = () => {
 	// Computed tooltip visibility - more optimized than state + useEffect
 	const tooltipOpen = isHovering || keyboardTriggered;
 
-	const themeIcon = () => {
+	const themeIcon = useMemo(() => {
 		// Show loading icon during hydration to prevent mismatch
 		if (!mounted) {
 			return <IconLoader className='h-5 w-5 animate-spin outline-none' />;
@@ -41,16 +42,21 @@ const ThemeSwitcher = () => {
 		const currentTheme = theme === 'system' ? systemTheme : theme;
 		const icon = themeOptions.find((option) => option.name === currentTheme)?.icon;
 		return icon;
-	};
+	}, [mounted, theme, systemTheme]);
 
 	const changeTheme = useCallback(
 		(value?: string) => {
-			const themes = themeOptions.map((option) => option.name);
+			const themes = ['light', 'dark', 'system'] as const;
 			const themeString = theme as string;
 			if (value) {
-				return setTheme(themes[themes.indexOf(value.toLowerCase())]);
+				const targetTheme = themes.find((t) => t === value.toLowerCase());
+				if (targetTheme) {
+					return setTheme(targetTheme);
+				}
 			}
-			return setTheme(themes[(themes.indexOf(themeString) + 1) % themes.length]);
+			const currentIndex = themes.indexOf(themeString as any);
+			const nextTheme = themes[(currentIndex + 1) % themes.length];
+			return setTheme(nextTheme);
 			// eslint-disable-next-line react-hooks/exhaustive-deps
 		},
 		[theme, setTheme]
@@ -109,7 +115,7 @@ const ThemeSwitcher = () => {
 							onMouseEnter={() => setIsHovering(true)}
 							onMouseLeave={() => setIsHovering(false)}
 						>
-							{themeIcon()}
+							{themeIcon}
 						</button>
 					</PopoverTrigger>
 				</TooltipTrigger>

@@ -2,19 +2,26 @@
 import { ButtonProps } from '@/types/button';
 import { IconLoader } from '@tabler/icons-react';
 import Link from 'next/link';
+import { memo, useMemo } from 'react';
 
-export const Button = (props: ButtonProps) => {
+// Move static classes outside component to prevent recreation
+const BASE_CLASSES =
+	'group/button focus:ring-none relative inline-flex !h-9 cursor-pointer items-center justify-center !px-[calc(theme(height.9)*21/44)] focus:outline-none disabled:pointer-events-none disabled:brightness-85 sm:!h-11 sm:!px-[calc(theme(height.11)*21/44)] dark:disabled:brightness-90';
+
+export const Button = memo<ButtonProps>((props) => {
 	const { className, fill = false, gradient = false, children, loading, ...rest } = props;
+
+	// Memoize computed classes to prevent recalculation
+	const computedClasses = useMemo(() => {
+		const loadingClass = loading ? 'pointer-events-none' : '';
+		return `${BASE_CLASSES} ${loadingClass} ${className ?? ''}`;
+	}, [loading, className]);
 
 	// Check if this should render as a Link or button
 	if ('to' in props && props.to) {
 		const { to, ...linkProps } = rest as any;
 		return (
-			<Link
-				href={to}
-				className={`group/button focus:ring-none relative inline-flex !h-9 cursor-pointer items-center justify-center !px-[calc(theme(height.9)*21/44)] focus:outline-none sm:!h-11 sm:!px-[calc(theme(height.11)*21/44)] ${loading ? 'pointer-events-none' : ''} ${className ?? ''}`}
-				{...linkProps}
-			>
+			<Link href={to} className={computedClasses} {...linkProps}>
 				{fill ? (
 					gradient ? (
 						<>
@@ -178,11 +185,7 @@ export const Button = (props: ButtonProps) => {
 	// Render as button
 	const { disabled, ...buttonProps } = rest as any;
 	return (
-		<button
-			className={`group/button focus:ring-none relative inline-flex !h-9 cursor-pointer items-center justify-center !px-[calc(theme(height.9)*21/44)] focus:outline-none disabled:pointer-events-none disabled:brightness-85 sm:!h-11 sm:!px-[calc(theme(height.11)*21/44)] dark:disabled:brightness-90 ${loading ? 'pointer-events-none' : ''} ${className ?? ''}`}
-			disabled={disabled}
-			{...buttonProps}
-		>
+		<button className={computedClasses} disabled={disabled} {...buttonProps}>
 			{fill ? (
 				gradient ? (
 					<>
@@ -350,4 +353,6 @@ export const Button = (props: ButtonProps) => {
 			)}
 		</button>
 	);
-};
+});
+
+Button.displayName = 'Button';

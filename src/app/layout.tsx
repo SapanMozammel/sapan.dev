@@ -82,12 +82,21 @@ export const metadata: Metadata = {
 
 const fontList = `${dmSans.variable} ${ebGaramond.variable} ${hankenGrotesk.variable} ${fira.variable} ${cormorantGaramond.variable} ${zondrone.variable}`;
 
+// Move static theme provider props outside component to prevent recreation
+const THEME_PROVIDER_PROPS = {
+	enableSystem: true,
+	defaultTheme: 'system' as const,
+	enableColorScheme: false,
+	themes: ['light', 'dark', 'system'],
+	attribute: 'class' as const,
+};
+
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<html lang='en' suppressHydrationWarning>
 			<body suppressHydrationWarning className={`${fontList} font-dm`}>
 				<div className='text-dark relative bg-white dark:bg-black dark:text-white'>
-					<ThemeProvider enableSystem={true} defaultTheme='system' enableColorScheme={false} themes={['light', 'dark', 'system']} attribute='class'>
+					<ThemeProvider {...THEME_PROVIDER_PROPS}>
 						<Header />
 						<main>{children}</main>
 						<Footer />
