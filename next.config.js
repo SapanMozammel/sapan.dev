@@ -1,3 +1,7 @@
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+	enabled: process.env.ANALYZE === 'true',
+});
+
 /**
  * @type {import('next').NextConfig}
  */
@@ -25,6 +29,15 @@ const nextConfig = {
 		// Number of pages that should be kept simultaneously without being disposed
 		pagesBufferLength: 2,
 	},
+
+	// Additional performance optimizations
+	compress: true,
+
+	// Image optimization
+	images: {
+		formats: ['image/webp', 'image/avif'],
+		minimumCacheTTL: 60,
+	},
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);

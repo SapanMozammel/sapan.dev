@@ -5,23 +5,24 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
-function TooltipProvider({ delayDuration = 0, ...props }: React.ComponentProps<typeof TooltipPrimitive.Provider>) {
+// Memoize components to prevent unnecessary re-renders
+const TooltipProvider = React.memo<React.ComponentProps<typeof TooltipPrimitive.Provider>>(({ delayDuration = 0, ...props }) => {
 	return <TooltipPrimitive.Provider data-slot='tooltip-provider' delayDuration={delayDuration} {...props} />;
-}
+});
 
-function Tooltip({ ...props }: React.ComponentProps<typeof TooltipPrimitive.Root>) {
+const Tooltip = React.memo<React.ComponentProps<typeof TooltipPrimitive.Root>>(({ ...props }) => {
 	return (
 		<TooltipProvider>
 			<TooltipPrimitive.Root data-slot='tooltip' {...props} />
 		</TooltipProvider>
 	);
-}
+});
 
-function TooltipTrigger({ ...props }: React.ComponentProps<typeof TooltipPrimitive.Trigger>) {
+const TooltipTrigger = React.memo<React.ComponentProps<typeof TooltipPrimitive.Trigger>>(({ ...props }) => {
 	return <TooltipPrimitive.Trigger data-slot='tooltip-trigger' {...props} />;
-}
+});
 
-function TooltipContent({ className, sideOffset = 0, children, ...props }: React.ComponentProps<typeof TooltipPrimitive.Content>) {
+const TooltipContent = React.memo<React.ComponentProps<typeof TooltipPrimitive.Content>>(({ className, sideOffset = 0, children, ...props }) => {
 	return (
 		<TooltipPrimitive.Portal>
 			<TooltipPrimitive.Content
@@ -38,6 +39,12 @@ function TooltipContent({ className, sideOffset = 0, children, ...props }: React
 			</TooltipPrimitive.Content>
 		</TooltipPrimitive.Portal>
 	);
-}
+});
+
+// Add display names for better debugging
+TooltipProvider.displayName = 'TooltipProvider';
+Tooltip.displayName = 'Tooltip';
+TooltipTrigger.displayName = 'TooltipTrigger';
+TooltipContent.displayName = 'TooltipContent';
 
 export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger };

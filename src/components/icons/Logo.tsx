@@ -19,25 +19,25 @@ const Logo = (props: React.SVGProps<SVGSVGElement>) => (
 			d='M282.35 489.388c16.473 16.819 43.179 16.813 59.649 0l127.73-130.479c16.368-17.302 16.355-42.862-.001-59.748l-75.562-78.096c40.494 41.852-15.095 106.183-15.095 106.183L282.35 428.487c-16.464 16.819-16.469 44.086 0 60.901'
 		/>
 		<path
-			fill='#4B4DED'
+			fill='var(--color-primary)'
 			d='M147.846 423.551c-16.323 16.482-42.913 16.617-59.4.292-16.48-16.318-16.61-42.913-.291-59.394L364.147 88.448c16.326-16.481 42.924-16.614 59.407-.292 16.479 16.317 16.611 42.916.292 59.397z'
 		/>
 		<defs>
 			<linearGradient id='paint0_linear_1599_136' x1='29.645' x2='242.01' y1='-77.284' y2='-77.284' gradientUnits='userSpaceOnUse'>
-				<stop stopColor='#212A3E' />
-				<stop offset='0.833' stopColor='#41EAD4' />
+				<stop stopColor='var(--color-secondary-800)' />
+				<stop offset='0.833' stopColor='var(--color-success)' />
 			</linearGradient>
 			<linearGradient id='paint1_linear_1599_136' x1='29.578' x2='367.837' y1='152.208' y2='152.208' gradientUnits='userSpaceOnUse'>
-				<stop offset='0.115' stopColor='#41EAD4' />
-				<stop offset='1' stopColor='#212A3E' />
+				<stop offset='0.115' stopColor='var(--color-success)' />
+				<stop offset='1' stopColor='var(--color-secondary-800)' />
 			</linearGradient>
 			<linearGradient id='paint2_linear_1599_136' x1='482.355' x2='269.99' y1='589.284' y2='589.284' gradientUnits='userSpaceOnUse'>
-				<stop stopColor='#212A3E' />
-				<stop offset='0.833' stopColor='#41EAD4' />
+				<stop stopColor='var(--color-secondary-800)' />
+				<stop offset='0.833' stopColor='var(--color-success)' />
 			</linearGradient>
 			<linearGradient id='paint3_linear_1599_136' x1='482.422' x2='144.163' y1='359.792' y2='359.792' gradientUnits='userSpaceOnUse'>
-				<stop offset='0.115' stopColor='#41EAD4' />
-				<stop offset='1' stopColor='#212A3E' />
+				<stop offset='0.115' stopColor='var(--color-success)' />
+				<stop offset='1' stopColor='var(--color-secondary-800)' />
 			</linearGradient>
 		</defs>
 	</svg>

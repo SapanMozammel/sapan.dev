@@ -4,15 +4,16 @@ import { cn } from '@/lib/utils';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import * as React from 'react';
 
-function Popover({ ...props }: React.ComponentProps<typeof PopoverPrimitive.Root>) {
+// Memoize components to prevent unnecessary re-renders
+const Popover = React.memo<React.ComponentProps<typeof PopoverPrimitive.Root>>(({ ...props }) => {
 	return <PopoverPrimitive.Root data-slot='popover' {...props} />;
-}
+});
 
-function PopoverTrigger({ ...props }: React.ComponentProps<typeof PopoverPrimitive.Trigger>) {
+const PopoverTrigger = React.memo<React.ComponentProps<typeof PopoverPrimitive.Trigger>>(({ ...props }) => {
 	return <PopoverPrimitive.Trigger data-slot='popover-trigger' {...props} />;
-}
+});
 
-function PopoverContent({ className, align = 'center', sideOffset = 4, ...props }: React.ComponentProps<typeof PopoverPrimitive.Content>) {
+const PopoverContent = React.memo<React.ComponentProps<typeof PopoverPrimitive.Content>>(({ className, align = 'center', sideOffset = 4, ...props }) => {
 	return (
 		<PopoverPrimitive.Portal>
 			<PopoverPrimitive.Content
@@ -27,10 +28,16 @@ function PopoverContent({ className, align = 'center', sideOffset = 4, ...props 
 			/>
 		</PopoverPrimitive.Portal>
 	);
-}
+});
 
-function PopoverAnchor({ ...props }: React.ComponentProps<typeof PopoverPrimitive.Anchor>) {
+const PopoverAnchor = React.memo<React.ComponentProps<typeof PopoverPrimitive.Anchor>>(({ ...props }) => {
 	return <PopoverPrimitive.Anchor data-slot='popover-anchor' {...props} />;
-}
+});
+
+// Add display names for better debugging
+Popover.displayName = 'Popover';
+PopoverTrigger.displayName = 'PopoverTrigger';
+PopoverContent.displayName = 'PopoverContent';
+PopoverAnchor.displayName = 'PopoverAnchor';
 
 export { Popover, PopoverAnchor, PopoverContent, PopoverTrigger };

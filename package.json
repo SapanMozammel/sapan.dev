@@ -15,15 +15,18 @@
 		"lint:fix": "next lint --fix",
 		"format:check": "prettier --config .formatter/.prettierrc.js --check \"src/**/*.{js,jsx,ts,tsx,css,scss,json,md}\"",
 		"format": "prettier --config .formatter/.prettierrc.js --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json,md}\"",
-		"format:all": "pnpm run format && pnpm run lint:fix"
+		"format:all": "pnpm run format && pnpm run lint:fix",
+		"analyze": "cross-env ANALYZE=true next build",
+		"analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
+		"analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
 	},
 	"dependencies": {
 		"@radix-ui/react-popover": "^1.1.15",
 		"@radix-ui/react-slot": "^1.2.3",
 		"@radix-ui/react-tooltip": "^1.2.8",
-		"@reduxjs/toolkit": "^2.8.2",
+		"@reduxjs/toolkit": "^2.9.0",
 		"@tabler/icons-react": "^3.34.1",
-		"@tailwindcss/postcss": "^4.1.12",
+		"@tailwindcss/postcss": "^4.1.13",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"framer-motion": "^12.23.12",
@@ -34,15 +37,17 @@
 		"react-dom": "19.1.0",
 		"react-redux": "^9.2.0",
 		"tailwind-merge": "^3.3.1",
-		"tailwindcss": "^4.1.12"
+		"tailwindcss": "^4.1.13"
 	},
 	"devDependencies": {
+		"@next/bundle-analyzer": "^15.5.3",
 		"@types/node": "24.1.0",
 		"@types/react": "19.1.8",
 		"@types/react-dom": "19.1.6",
-		"@typescript-eslint/eslint-plugin": "^8.42.0",
-		"@typescript-eslint/parser": "^8.42.0",
+		"@typescript-eslint/eslint-plugin": "^8.43.0",
+		"@typescript-eslint/parser": "^8.43.0",
 		"autoprefixer": "^10.4.21",
+		"cross-env": "^7.0.3",
 		"eslint": "9.32.0",
 		"eslint-config-next": "15.4.4",
 		"eslint-config-prettier": "^10.1.8",
@@ -50,7 +55,7 @@
 		"eslint-plugin-react": "^7.37.5",
 		"prettier": "^3.6.2",
 		"prettier-plugin-tailwindcss": "^0.6.14",
-		"sass": "^1.91.0",
+		"sass": "^1.92.1",
 		"typescript": "5.8.3"
 	}
 }

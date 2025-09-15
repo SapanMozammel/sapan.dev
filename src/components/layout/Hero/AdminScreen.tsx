@@ -131,17 +131,21 @@ const AdminScreen = memo(() => {
 							<IconChevronDown className='ms-auto h-[1em] w-[1em]' />
 						</div>
 						<div className='mt-[2em] flex grow flex-col gap-[1.25em]'>
-							{menuItems.map((item, index) => (
-								<div
-									key={`menu-${index}-${item.title}`}
-									className={`flex items-center gap-[0.5em] border-s-[0.25em] border-solid py-[0.75em] ps-[1em] pe-[0.6em] ${
-										index === 1 ? 'from-info/30 rtl:to-info/30 border-info/50 bg-gradient-to-r to-transparent rtl:from-transparent' : 'border-transparent bg-transparent'
-									} uppercase ${index === menuItems?.length - 1 ? 'before:bg-info/20 relative mt-auto before:absolute before:-top-[1.25em] before:left-0 before:h-[0.05em] before:w-full' : ''}`}
-								>
-									{item?.icon}
-									<div className='text-[0.8em]'>{item?.title}</div>
-								</div>
-							))}
+							{menuItems.map((item, index) => {
+								// Optimize class computation to prevent recreation
+								const isActive = index === 1;
+								const isLast = index === menuItems.length - 1;
+								const itemClasses = `flex items-center gap-[0.5em] border-s-[0.25em] border-solid py-[0.75em] ps-[1em] pe-[0.6em] ${
+									isActive ? 'from-info/30 rtl:to-info/30 border-info/50 bg-gradient-to-r to-transparent rtl:from-transparent' : 'border-transparent bg-transparent'
+								} uppercase ${isLast ? 'before:bg-info/20 relative mt-auto before:absolute before:-top-[1.25em] before:left-0 before:h-[0.05em] before:w-full' : ''}`;
+
+								return (
+									<div key={item.title} className={itemClasses}>
+										{item.icon}
+										<div className='text-[0.8em]'>{item.title}</div>
+									</div>
+								);
+							})}
 						</div>
 					</div>
 					<div className='flex h-full grow'>
@@ -154,38 +158,37 @@ const AdminScreen = memo(() => {
 								</div>
 							</div>
 							<div className='flex flex-col gap-[0.5em] p-[1em]'>
-								{inboxList.map((inbox, index) => (
-									<div
-										key={`inbox-${index}-${inbox.name}`}
-										className={`flex flex-col gap-[0.5em] rounded-[0.5em] border-[0.025em] border-solid p-[1em] ${index === 0 ? 'bg-info/30 border-transparent' : 'border-info/30'}`}
-									>
-										<div className='flex items-start gap-[1em]'>
-											<div className='flex flex-col gap-[0.35em]'>
-												<div
-													className={`inline-flex items-center gap-[0.5em] text-[1em] leading-none font-bold ${
-														inbox.status === 'unread' ? 'after:bg-primary after:aspect-square after:h-[0.6em] after:rounded-full' : ''
-													}`}
-												>
-													{inbox.name}
-												</div>
-												<div className='text-[0.8em] leading-none'>{inbox.title}</div>
-											</div>
+								{inboxList.map((inbox, index) => {
+									// Optimize class computation and key generation
+									const isSelected = index === 0;
+									const inboxClasses = `flex flex-col gap-[0.5em] rounded-[0.5em] border-[0.025em] border-solid p-[1em] ${isSelected ? 'bg-info/30 border-transparent' : 'border-info/30'}`;
+									const nameClasses = `inline-flex items-center gap-[0.5em] text-[1em] leading-none font-bold ${
+										inbox.status === 'unread' ? 'after:bg-primary after:aspect-square after:h-[0.6em] after:rounded-full' : ''
+									}`;
 
-											<div className='text-secondary-500 dark:text-secondary-400 ms-auto text-[0.6em]'>{inbox.time}</div>
-										</div>
-										<div className='text-secondary-500 dark:text-secondary-400 line-clamp-1 text-[0.7em]'>{inbox.message}</div>
-										<div className='mt-[0.1em] flex flex-wrap gap-[0.5em]'>
-											{inbox?.tags?.map((tags, tagIndex) => (
-												<div
-													key={`tag-${index}-${tagIndex}-${tags}`}
-													className='border-info/30 text-secondary-500 dark:text-secondary-400 rounded-[0.25em] border-[0.025em] border-solid px-[0.7em] py-[0.5em] text-[0.6em] leading-none'
-												>
-													{tags}
+									return (
+										<div key={`${inbox.name}-${inbox.email}`} className={inboxClasses}>
+											<div className='flex items-start gap-[1em]'>
+												<div className='flex flex-col gap-[0.35em]'>
+													<div className={nameClasses}>{inbox.name}</div>
+													<div className='text-[0.8em] leading-none'>{inbox.title}</div>
 												</div>
-											))}
+												<div className='text-secondary-500 dark:text-secondary-400 ms-auto text-[0.6em]'>{inbox.time}</div>
+											</div>
+											<div className='text-secondary-500 dark:text-secondary-400 line-clamp-1 text-[0.7em]'>{inbox.message}</div>
+											<div className='mt-[0.1em] flex flex-wrap gap-[0.5em]'>
+												{inbox.tags.map((tag) => (
+													<div
+														key={`${inbox.name}-${tag}`}
+														className='border-info/30 text-secondary-500 dark:text-secondary-400 rounded-[0.25em] border-[0.025em] border-solid px-[0.7em] py-[0.5em] text-[0.6em] leading-none'
+													>
+														{tag}
+													</div>
+												))}
+											</div>
 										</div>
-									</div>
-								))}
+									);
+								})}
 							</div>
 						</div>
 						<div className='border-info/30 flex w-5/12 shrink-0 flex-col border-e-[0.025em] border-solid'>
@@ -293,8 +296,8 @@ const AdminScreen = memo(() => {
 								<feBlend mode='normal' in2='shape' result='effect1_innerShadow_23632_3864' />
 							</filter>
 							<linearGradient id='half-wave-stroke' x1='99.1609' y1='3.0511' x2='130.689' y2='119.502' gradientUnits='userSpaceOnUse'>
-								<stop stopColor='#FFD057' />
-								<stop offset='0.965972' stopColor='#41EAD4' />
+								<stop stopColor='var(--color-warning-light)' />
+								<stop offset='0.965972' stopColor='var(--color-success)' />
 							</linearGradient>
 						</defs>
 					</svg>
@@ -304,14 +307,14 @@ const AdminScreen = memo(() => {
 							d='M61 120.17c0 1.011.82 1.833 1.83 1.803a61.01 61.01 0 0 0 54.527-37.63 61 61 0 0 0 0-46.687A61 61 0 0 0 62.83.027C61.82-.003 61 .82 61 1.83s.82 1.827 1.83 1.86a57.34 57.34 0 0 1 0 114.621c-1.01.032-1.83.848-1.83 1.859'
 						/>
 						<path
-							stroke='#fff'
+							stroke='var(--color-white)'
 							strokeOpacity='0.1'
 							d='M61 120.17c0 1.011.82 1.833 1.83 1.803a61.01 61.01 0 0 0 54.527-37.63 61 61 0 0 0 0-46.687A61 61 0 0 0 62.83.027C61.82-.003 61 .82 61 1.83s.82 1.827 1.83 1.86a57.34 57.34 0 0 1 0 114.621c-1.01.032-1.83.848-1.83 1.859Z'
 						/>
 						<defs>
 							<linearGradient id='half-line-gradient' x1='19.409' x2='122' y1='0' y2='122' gradientUnits='userSpaceOnUse'>
-								<stop stopColor='#fff' />
-								<stop offset='0.75' stopColor='#1f8fff' />
+								<stop stopColor='var(--color-white)' />
+								<stop offset='0.75' stopColor='var(--color-info)' />
 							</linearGradient>
 						</defs>
 					</svg>
@@ -325,8 +328,8 @@ const AdminScreen = memo(() => {
 						</g>
 						<defs>
 							<radialGradient id='triangle-fill' cx='0' cy='0' r='1' gradientTransform='matrix(-19.23654 -10.39856 5.15443 -9.53531 24.295 24.342)' gradientUnits='userSpaceOnUse'>
-								<stop stopColor='#1f8fff' />
-								<stop offset='1' stopColor='#1f8fff' />
+								<stop stopColor='var(--color-info)' />
+								<stop offset='1' stopColor='var(--color-info)' />
 							</radialGradient>
 							<filter id='triangle-wrapper' width='45.127' height='43.537' x='1.854' y='0.743' colorInterpolationFilters='sRGB' filterUnits='userSpaceOnUse'>
 								<feFlood result='BackgroundImageFix' />

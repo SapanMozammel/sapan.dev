@@ -18,11 +18,11 @@ const TextUnderline = memo<React.DetailedHTMLProps<React.AllHTMLAttributes<HTMLD
 				</g>
 				<defs>
 					<linearGradient id='paint0_linear_1682_152' x1='0' x2='372' y1='16' y2='16' gradientUnits='userSpaceOnUse'>
-						<stop stopColor='#2670e9' />
-						<stop offset='1' stopColor='#41EAD4' />
+						<stop stopColor='var(--color-info)' />
+						<stop offset='1' stopColor='var(--color-success)' />
 					</linearGradient>
 					<clipPath id='clip0_1682_152'>
-						<path fill='#fff' d='M0 0h372v32H0z' />
+						<path fill='var(--color-white)' d='M0 0h372v32H0z' />
 					</clipPath>
 				</defs>
 			</svg>

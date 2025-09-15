@@ -129,23 +129,26 @@ const ThemeSwitcher = () => {
 					<span className='text-primary dark:text-success ml-auto text-xs'>⌘⌥T</span>
 				</div>
 				<div className='flex flex-col gap-0.5 p-1'>
-					{themeOptions.map((option) => (
-						<button
-							key={option.name}
-							type='button'
-							className={`flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-md px-2 py-1.5 text-sm transition-colors ${
-								mounted && theme === option.name
-									? 'bg-primary/10 text-primary dark:bg-success/10 dark:text-success'
-									: 'text-secondary-500 dark:text-secondary-400 hover:text-primary dark:hover:text-success'
-							}`}
-							onClick={() => {
-								changeTheme(option.name);
-							}}
-						>
-							<span className='capitalize'>{option.name} Theme</span>
-							<span className='inline-flex aspect-square w-5 scale-85 items-center justify-center'>{option.icon}</span>
-						</button>
-					))}
+					{themeOptions.map((option) => {
+						// Memoize click handler to prevent recreation on every render
+						const handleOptionClick = () => changeTheme(option.name);
+
+						return (
+							<button
+								key={option.name}
+								type='button'
+								className={`flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-md px-2 py-1.5 text-sm transition-colors ${
+									mounted && theme === option.name
+										? 'bg-primary/10 text-primary dark:bg-success/10 dark:text-success'
+										: 'text-secondary-500 dark:text-secondary-400 hover:text-primary dark:hover:text-success'
+								}`}
+								onClick={handleOptionClick}
+							>
+								<span className='capitalize'>{option.name} Theme</span>
+								<span className='inline-flex aspect-square w-5 scale-85 items-center justify-center'>{option.icon}</span>
+							</button>
+						);
+					})}
 				</div>
 			</PopoverContent>
 		</Popover>
