@@ -24,8 +24,8 @@ interface ColumnGroup {
 }
 
 const DiamondGrid = memo<DiamondGridProps>(({ items, children, className }) => {
-	// Memoize layout configuration to prevent recalculation
-	const layoutConfig = useMemo((): LayoutConfig => {
+	// Memoize layout configuration for diamond pattern (large screens only)
+	const diamondLayoutConfig = useMemo((): LayoutConfig => {
 		const totalItems = items.length;
 		if (totalItems >= 16) {
 			// Use 7-column diamond (1-2-3-4-3-2-1 = 16 items)
@@ -42,16 +42,17 @@ const DiamondGrid = memo<DiamondGridProps>(({ items, children, className }) => {
 		}
 	}, [items.length]);
 
-	const displayedItems = useMemo(() => items.slice(0, layoutConfig.maxItems), [items, layoutConfig.maxItems]);
+	// For large screens, use diamond layout; for smaller screens, use all items
+	const displayedItems = useMemo(() => items.slice(0, diamondLayoutConfig.maxItems), [items, diamondLayoutConfig.maxItems]);
 
-	// Generate column groups for diamond pattern
-	const columnGroups = useMemo((): ColumnGroup[][] => {
+	// Generate column groups for diamond pattern (large screens only)
+	const diamondColumnGroups = useMemo((): ColumnGroup[][] => {
 		const columns: ColumnGroup[][] = [];
 		let itemIndex = 0;
 
 		// Handle simple layout for fewer than 4 items
-		if (layoutConfig.pattern.length === 0) {
-			for (let col = 0; col < layoutConfig.columns; col++) {
+		if (diamondLayoutConfig.pattern.length === 0) {
+			for (let col = 0; col < diamondLayoutConfig.columns; col++) {
 				columns[col] = [];
 				if (itemIndex < displayedItems.length) {
 					columns[col].push({
@@ -66,7 +67,7 @@ const DiamondGrid = memo<DiamondGridProps>(({ items, children, className }) => {
 
 		// Handle diamond pattern positioning
 		try {
-			layoutConfig.pattern.forEach((itemsInColumn: number, columnIndex: number) => {
+			diamondLayoutConfig.pattern.forEach((itemsInColumn: number, columnIndex: number) => {
 				columns[columnIndex] = [];
 
 				for (let i = 0; i < itemsInColumn && itemIndex < displayedItems.length; i++) {
@@ -79,7 +80,7 @@ const DiamondGrid = memo<DiamondGridProps>(({ items, children, className }) => {
 			});
 		} catch (error) {
 			// Fallback to simple layout on error (removed console.error for production)
-			for (let col = 0; col < layoutConfig.columns; col++) {
+			for (let col = 0; col < diamondLayoutConfig.columns; col++) {
 				columns[col] = [];
 				if (itemIndex < displayedItems.length) {
 					columns[col].push({
@@ -92,7 +93,7 @@ const DiamondGrid = memo<DiamondGridProps>(({ items, children, className }) => {
 		}
 
 		return columns;
-	}, [layoutConfig, displayedItems]);
+	}, [diamondLayoutConfig, displayedItems]);
 
 	// Default render function if no children prop provided
 	const defaultRender = (item: DiamondGridItem & { index: number }) => (
@@ -104,25 +105,31 @@ const DiamondGrid = memo<DiamondGridProps>(({ items, children, className }) => {
 	const renderItem = children || defaultRender;
 
 	return (
-		<div
-			className={cn('grid w-full gap-4', className)}
-			style={{
-				gridTemplateColumns: `repeat(${layoutConfig.columns}, minmax(0, 1fr))`,
-				justifyContent: 'center',
-				alignContent: 'center',
-			}}
-		>
-			{columnGroups.map((columnItems, columnIndex) => (
-				<div
-					key={`column-${columnIndex}`}
-					className='flex flex-col items-center justify-center gap-4'
-					style={{
-						gridColumn: columnIndex + 1,
-					}}
-				>
-					{columnItems.map((item, itemIndex) => renderItem({ ...item, index: item.index }, itemIndex))}
-				</div>
-			))}
+		<div className={cn('w-full', className)}>
+			{/* Mobile layout: 4 items per row (< md) */}
+			<div className='grid grid-cols-4 gap-2 md:hidden'>{items.map((item, index) => renderItem({ ...item, index }, index))}</div>
+
+			{/* Large screens: Diamond pattern (>= md) */}
+			<div
+				className='hidden w-full gap-4 md:grid'
+				style={{
+					gridTemplateColumns: `repeat(${diamondLayoutConfig.columns}, minmax(0, 1fr))`,
+					justifyContent: 'center',
+					alignContent: 'center',
+				}}
+			>
+				{diamondColumnGroups.map((columnItems, columnIndex) => (
+					<div
+						key={`column-${columnIndex}`}
+						className='flex flex-col items-center justify-center gap-4'
+						style={{
+							gridColumn: columnIndex + 1,
+						}}
+					>
+						{columnItems.map((item, itemIndex) => renderItem({ ...item, index: item.index }, itemIndex))}
+					</div>
+				))}
+			</div>
 		</div>
 	);
 });
