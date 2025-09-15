@@ -5,7 +5,6 @@
 	"scripts": {
 		"dev": "next dev --port=8000 --turbo",
 		"dev:webpack": "next dev --port=8000",
-		"dev:monitor": "node scripts/dev-monitor.js",
 		"build": "next build",
 		"start": "next start",
 		"sync": "node .formatter/sync.js",
