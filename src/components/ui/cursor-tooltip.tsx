@@ -3,7 +3,7 @@
 import { cn } from '@/lib/utils';
 import type { CursorTooltipProps, Position } from '@/types/cursor-tooltip';
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 
 // Animation constants for better performance and consistency
 const ANIMATION_CONFIG = {
@@ -19,12 +19,7 @@ const ANIMATION_CONFIG = {
 	},
 } as const;
 
-const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({
-	children,
-	content,
-	className,
-	offset = { x: 0, y: 0 }
-}) => {
+const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, content, className, offset = { x: 0, y: 0 } }) => {
 	const [isVisible, setIsVisible] = useState(false);
 	const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
 	const [initialPosition, setInitialPosition] = useState<Position>({ x: 0, y: 0 });
@@ -40,10 +35,13 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({
 		};
 	}, []);
 
-	const calculateCursorPosition = useCallback((e: MouseEvent): Position => ({
-		x: e.clientX + offset.x,
-		y: e.clientY + offset.y,
-	}), [offset.x, offset.y]);
+	const calculateCursorPosition = useCallback(
+		(e: MouseEvent): Position => ({
+			x: e.clientX + offset.x,
+			y: e.clientY + offset.y,
+		}),
+		[offset.x, offset.y]
+	);
 
 	const updatePosition = useCallback(
 		(e: MouseEvent) => {
@@ -97,7 +95,7 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({
 
 	return (
 		<>
-			<div ref={containerRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} className={cn('w-full cursor-none', className)}>
+			<div ref={containerRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} className={cn('cursor-none', className)}>
 				{children}
 			</div>
 
@@ -106,18 +104,27 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({
 					<motion.div
 						initial={{
 							opacity: 1,
+							scale: 0,
 							x: initialPosition.x,
 							y: initialPosition.y,
+							translateX: '-50%',
+							translateY: '-50%',
 						}}
 						animate={{
 							opacity: 1,
+							scale: 1,
 							x: position.x,
 							y: position.y,
+							translateX: '-50%',
+							translateY: '-50%',
 						}}
 						exit={{
 							opacity: 0,
+							scale: 0,
 							x: initialPosition.x,
 							y: initialPosition.y,
+							translateX: '-50%',
+							translateY: '-50%',
 							transition: ANIMATION_CONFIG.exit,
 						}}
 						transition={ANIMATION_CONFIG.spring}
@@ -127,9 +134,7 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({
 							top: 0,
 						}}
 					>
-						<div className='relative -translate-x-1/2 -translate-y-1/2'>
-							<div className='bg-primary/80 border-1 border-solid border-primary dark:border-success dark:bg-success/80 rounded-2xl px-3 py-2 text-sm font-medium text-white dark:text-black'>{content}</div>
-						</div>
+						<div className='bg-primary/80 border-primary dark:border-success dark:bg-success/80 rounded-2xl border-1 border-solid px-3 py-2 text-sm font-medium text-white dark:text-black'>{content}</div>
 					</motion.div>
 				)}
 			</AnimatePresence>
@@ -137,9 +142,8 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({
 	);
 };
 
-// Memoized component for better performance
-const CursorTooltip = React.memo(CursorTooltipComponent);
+// Export the memoized component
+export const CursorTooltip = memo(CursorTooltipComponent);
 CursorTooltip.displayName = 'CursorTooltip';
 
-export { CursorTooltip };
 export default CursorTooltip;
