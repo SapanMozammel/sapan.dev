@@ -118,7 +118,7 @@ const DiamondGrid = memo<DiamondGridProps>((props) => {
 				// Legacy pattern with default render
 				const item = content as DiamondGridItem;
 				return (
-					<div key={`${item.name}-${item.index}`} className='relative flex aspect-video w-full items-center justify-center rounded-[1.5vw] bg-red-400 text-sm font-medium text-white md:rounded-[1.25vw]'>
+					<div key={key} className='relative flex aspect-video w-full items-center justify-center rounded-[1.5vw] bg-red-400 text-sm font-medium text-white md:rounded-[1.25vw]'>
 						{item.logo ? (
 							<span className='relative h-3/5 w-full'>
 								<Image src={item.logo} alt={`${item.name} logo`} fill />
@@ -171,4 +171,4 @@ DiamondGrid.displayName = 'DiamondGrid';
 export { DiamondGrid };
 
 // Re-export types for backward compatibility
-	export type { ColumnGroup, DiamondColumnProps, DiamondGridFlexibleProps, DiamondGridItem, DiamondGridLegacyProps, DiamondGridProps, LayoutConfig } from '@/types/diamond-grid';
+export type { ColumnGroup, DiamondColumnProps, DiamondGridFlexibleProps, DiamondGridItem, DiamondGridLegacyProps, DiamondGridProps, LayoutConfig } from '@/types/diamond-grid';

@@ -1,7 +1,7 @@
 'use client';
 
+import CursorTooltip from '@/components/ui/cursor-tooltip';
 import { DiamondGrid } from '@/components/ui/diamond-grid';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import Image from 'next/image';
 import { memo } from 'react';
 import SectionSeparator from '../common/SectionSeparator';
@@ -35,28 +35,23 @@ const Technologies = memo(() => {
 			<SectionSeparator lts rts lbs rbs bl ll rl>
 				<div className='container flex w-full grow flex-col items-center justify-start gap-4 pb-8 text-center sm:pb-12 lg:pb-16'>
 					<SectionTitle subtitle='Technologies' title={`I'm an Expertise In`} watermark='Technologies' />
-					<TooltipProvider>
-						<DiamondGrid items={techStack}>
-							{(item) => (
-								<Tooltip key={`${item.name}-${item.index}`}>
-									<TooltipTrigger asChild>
-										<div className={`flex aspect-video w-full items-center justify-center rounded-[2.25vw] bg-gradient-to-b from-secondary-100 dark:from-secondary-800 dark:to-secondary-900 to-secondary-300 text-sm font-medium text-white md:rounded-[1.25vw] shadow-xl transition-shadow duration-300`}>
-											{item.logo ? (
-												<span className='relative h-1/2 w-full'>
-													<Image src={item.logo} alt={`${item.name} logo`} fill className='brightness-5 dark:invert' />
-												</span>
-											) : (
-												<span>{item.name}</span>
-											)}
-										</div>
-									</TooltipTrigger>
-									<TooltipContent>
-										<p>{item.name}</p>
-									</TooltipContent>
-								</Tooltip>
-							)}
-						</DiamondGrid>
-					</TooltipProvider>
+					<DiamondGrid items={techStack}>
+						{(item) => (
+							<CursorTooltip key={`${item.name}-${item.index}`} content={item.name}>
+								<div
+									className={`from-secondary-100 dark:from-secondary-800 dark:to-secondary-900 to-secondary-300 flex aspect-video w-full items-center justify-center rounded-[2.25vw] bg-gradient-to-b text-sm font-medium text-white shadow-xl transition-shadow duration-300 md:rounded-[1.25vw]`}
+								>
+									{item.logo ? (
+										<span className='relative h-1/2 w-full'>
+											<Image src={item.logo} alt={`${item.name} logo`} fill className='brightness-5 dark:invert' />
+										</span>
+									) : (
+										<span>{item.name}</span>
+									)}
+								</div>
+							</CursorTooltip>
+						)}
+					</DiamondGrid>
 				</div>
 			</SectionSeparator>
 		</section>
