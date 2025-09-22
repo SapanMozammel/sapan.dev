@@ -1,4 +1,4 @@
-import { Cormorant_Garamond, DM_Sans, EB_Garamond, Fira_Code, Hanken_Grotesk } from 'next/font/google';
+import { Cormorant_Garamond, DM_Sans, EB_Garamond, Hanken_Grotesk, Sora } from 'next/font/google';
 import localFont from 'next/font/local';
 
 export const dmSans = DM_Sans({
@@ -25,14 +25,6 @@ export const hankenGrotesk = Hanken_Grotesk({
 	variable: '--font-hg',
 });
 
-export const fira = Fira_Code({
-	display: 'swap',
-	weight: ['300', '400', '500', '600', '700'],
-	subsets: ['greek'],
-	style: ['normal'],
-	variable: '--font-fira',
-});
-
 export const cormorantGaramond = Cormorant_Garamond({
 	display: 'swap',
 	weight: ['300', '400', '500', '600', '700'],
@@ -41,19 +33,37 @@ export const cormorantGaramond = Cormorant_Garamond({
 	variable: '--font-cg',
 });
 
-export const zondrone = localFont({
+export const sora = Sora({
+	display: 'swap',
+	weight: ['300', '400', '500', '600', '700'],
+	subsets: ['latin'],
+	style: ['normal'],
+	variable: '--font-sora',
+});
+
+export const severa = localFont({
 	src: [
 		{
-			path: '../../public/fonts/Zondrone.woff2',
+			path: '../../public/fonts/severa.woff2',
 			weight: '400',
 			style: 'normal',
 		},
 		{
-			path: '../../public/fonts/Zondrone.ttf',
+			path: '../../public/fonts/severa.woff',
+			weight: '400',
+			style: 'normal',
+		},
+		{
+			path: '../../public/fonts/severa.ttf',
+			weight: '400',
+			style: 'normal',
+		},
+		{
+			path: '../../public/fonts/severa.otf',
 			weight: '400',
 			style: 'normal',
 		},
 	],
 	display: 'swap',
-	variable: '--font-zondrone',
+	variable: '--font-severa',
 });

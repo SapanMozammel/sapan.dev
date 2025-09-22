@@ -1,4 +1,4 @@
-import { cormorantGaramond, dmSans, ebGaramond, fira, hankenGrotesk, zondrone } from '@/app/fonts';
+import { cormorantGaramond, dmSans, ebGaramond, hankenGrotesk, severa, sora } from '@/app/fonts';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import '@/styles/global.scss';
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
 	},
 };
 
-const fontList = `${dmSans.variable} ${ebGaramond.variable} ${hankenGrotesk.variable} ${fira.variable} ${cormorantGaramond.variable} ${zondrone.variable}`;
+const fontList = `${dmSans.variable} ${ebGaramond.variable} ${hankenGrotesk.variable} ${cormorantGaramond.variable} ${sora.variable} ${severa.variable}`;
 
 // Move static theme provider props outside component to prevent recreation
 const THEME_PROVIDER_PROPS = {
