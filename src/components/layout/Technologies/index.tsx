@@ -40,7 +40,7 @@ const Technologies = memo(() => {
 							<CursorTooltip
 								key={`${item.name}-${item.index}`}
 								content={item.name}
-								className={`from-secondary-100 dark:from-secondary-800 dark:to-secondary-900 to-secondary-300 flex aspect-video w-full items-center justify-center rounded-[2.25vw] bg-gradient-to-b text-sm font-medium text-white shadow-xl transition-shadow duration-300 md:rounded-[1.25vw]`}
+								className={`from-secondary-100 dark:from-secondary-800 dark:to-secondary-900 to-secondary-300 flex aspect-video w-full items-center justify-center rounded-[2.25vw] bg-gradient-to-b text-sm font-medium text-white shadow-xl shadow-secondary-300/10 dark:shadow-dark/10 transition-shadow duration-300 md:rounded-[1.25vw]`}
 							>
 								{item.logo ? (
 									<span className='relative h-1/2 w-full'>

@@ -12,7 +12,7 @@ const SectionTitle = memo<SectionTitleTypes>(({ title, subtitle, watermark }) =>
 					{watermark}
 				</span>
 			)}
-			{subtitle && <p className={`font-fira text-secondary-400 dark:text-secondary-500 ${watermark ? 'pt-[10vw]' : 'pt-[2vw]'} text-sm leading-none font-semibold tracking-widest uppercase`}>{subtitle}</p>}
+			{subtitle && <p className={`font-sora text-secondary-400 dark:text-secondary-500 ${watermark ? 'pt-[10vw]' : 'pt-[2vw]'} text-sm leading-none font-semibold tracking-widest uppercase`}>{subtitle}</p>}
 			<h2 className={`font-cg ${subtitle ? 'mt-1 sm:mt-3' : 'mt-5 mb-4 sm:mt-7'} mb-2 text-3xl leading-none font-medium tracking-wide text-black sm:text-5xl dark:text-white`}>{title}</h2>
 		</div>
 	);
