@@ -61,6 +61,10 @@ WORD_WRAP=off
 INSERT_FINAL_NEWLINE=true
 TRIM_TRAILING_WHITESPACE=true
 
+# Import Organization
+ORGANIZE_IMPORTS_ON_SAVE=false
+REMOVE_UNUSED_IMPORTS_ON_FORMAT=true
+
 # File Safety (DO NOT CHANGE - Prevents file deletion)
 SAFE_MODE=true
 PRESERVE_FILES=true

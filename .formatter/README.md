@@ -94,7 +94,8 @@ pnpm run lint           # Check linting issues
 pnpm run lint:fix       # Fix auto-fixable issues
 
 # Combined operations
-pnpm run format:all     # Format + lint fix in one command
+pnpm run format:all     # Format + organize imports + lint fix in one command
+pnpm run imports:organize # Organize imports and remove unused ones (uses sync.js)
 pnpm run check:all      # Type check + lint + format check
 ```
 
@@ -128,7 +129,8 @@ To use an example:
 ```bash
 pnpm run format          # Format all src files using Prettier
 pnpm run format:check    # Check formatting without making changes
-pnpm run format:all      # Format + lint fix in one command
+pnpm run format:all      # Format + organize imports + lint fix in one command
+pnpm run imports:organize # Organize imports and remove unused ones
 ```
 
 ### Linting Commands (Next.js Built-in ESLint)
@@ -148,8 +150,42 @@ pnpm run check:all      # Comprehensive validation (type + lint + format)
 
 ### IDE Shortcuts
 
-- **Option+Shift+F** (macOS) / **Alt+Shift+F** (Windows/Linux): Format current file
+- **Option+Shift+F** (macOS) / **Alt+Shift+F** (Windows/Linux): Format + organize imports (full cleanup)
 - **Command Palette**: "ESLint: Fix all auto-fixable Problems"
+
+## 📥 Import Organization Behavior
+
+The formatter system includes intelligent import organization that differentiates between automatic save actions and manual formatting operations:
+
+### 🔄 **On File Save (Automatic)**
+- ✅ **ESLint auto-fix** - Fixes linting issues automatically
+- ❌ **Does NOT organize imports** - Prevents disruption during active development
+
+### 🎯 **On Manual Format (`Alt+Shift+F`)**
+The system uses an optimized workflow that runs operations in the correct order:
+
+1. ✅ **Organize imports first** - Removes unused imports and sorts existing ones
+2. ✅ **Format with Prettier** - Applies code formatting to the cleaned imports
+3. ✅ **Final result** - Perfectly formatted code with clean imports
+
+### 🎮 **How to Use**
+
+**For automatic fixes (save):** Just save your file - ESLint will fix issues but imports remain untouched.
+
+**For full cleanup with import organization:** Use one of these methods:
+- **VSCode/Cursor:** `Alt+Shift+F` (organizes imports → formats → removes unused) ✨
+- **Command line:** `pnpm run format:all` (imports:organize → format → lint:fix)
+- **Import organization only:** `pnpm run imports:organize`
+- **Manual organize imports:** `Cmd+Shift+P` → "Organize Imports"
+
+### 🏗️ **Technical Implementation**
+
+Both VSCode and Cursor use identical embedded tasks that:
+- Run TypeScript language service for import organization
+- Apply Prettier formatting to ensure consistent spacing
+- Eliminate redundant formatting cycles for optimal performance
+
+This provides the best developer experience: non-disruptive automatic linting during development, with efficient full cleanup when explicitly requested.
 
 ## Troubleshooting
 
