@@ -97,47 +97,46 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, conten
 		<>
 			<div ref={containerRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} className={cn('cursor-none', className)}>
 				{children}
+				<AnimatePresence>
+					{isVisible && (
+						<motion.div
+							initial={{
+								opacity: 1,
+								scale: 0,
+								x: initialPosition.x,
+								y: initialPosition.y,
+								translateX: '-50%',
+								translateY: '-50%',
+							}}
+							animate={{
+								opacity: 1,
+								scale: 1,
+								x: position.x,
+								y: position.y,
+								translateX: '-50%',
+								translateY: '-50%',
+							}}
+							exit={{
+								opacity: 0,
+								scale: 0,
+								x: initialPosition.x,
+								y: initialPosition.y,
+								translateX: '-50%',
+								translateY: '-50%',
+								transition: ANIMATION_CONFIG.exit,
+							}}
+							transition={ANIMATION_CONFIG.spring}
+							className='pointer-events-none fixed z-50 select-none'
+							style={{
+								left: 0,
+								top: 0,
+							}}
+						>
+							<div className='bg-primary/80 border-primary dark:border-success dark:bg-success/80 rounded-2xl border-1 border-solid px-3 py-2 text-sm font-medium text-white dark:text-black'>{content}</div>
+						</motion.div>
+					)}
+				</AnimatePresence>
 			</div>
-
-			<AnimatePresence>
-				{isVisible && (
-					<motion.div
-						initial={{
-							opacity: 1,
-							scale: 0,
-							x: initialPosition.x,
-							y: initialPosition.y,
-							translateX: '-50%',
-							translateY: '-50%',
-						}}
-						animate={{
-							opacity: 1,
-							scale: 1,
-							x: position.x,
-							y: position.y,
-							translateX: '-50%',
-							translateY: '-50%',
-						}}
-						exit={{
-							opacity: 0,
-							scale: 0,
-							x: initialPosition.x,
-							y: initialPosition.y,
-							translateX: '-50%',
-							translateY: '-50%',
-							transition: ANIMATION_CONFIG.exit,
-						}}
-						transition={ANIMATION_CONFIG.spring}
-						className='pointer-events-none fixed z-50 select-none'
-						style={{
-							left: 0,
-							top: 0,
-						}}
-					>
-						<div className='bg-primary/80 border-primary dark:border-success dark:bg-success/80 rounded-2xl border-1 border-solid px-3 py-2 text-sm font-medium text-white dark:text-black'>{content}</div>
-					</motion.div>
-				)}
-			</AnimatePresence>
 		</>
 	);
 };
