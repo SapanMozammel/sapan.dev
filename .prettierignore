@@ -14,14 +14,13 @@ build/
 dist/
 *.min.js
 *.min.css
-wp-content/uploads/
-wp-config.php
 *.log
 coverage/
 .cache
 .next
 package-lock.json
 yarn.lock
+pnpm-lock.yaml
 composer.lock
 .DS_Store
 Thumbs.db

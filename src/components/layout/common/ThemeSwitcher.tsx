@@ -1,23 +1,62 @@
 'use client';
 
-// import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from '@/components/ui/popover';
-// import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { isMacOS } from '@/lib/helper';
-import { MoonStarIcon, SunIcon } from 'lucide-react';
+import { IconContrastFilled, IconLoader, IconMoonFilled, IconSunFilled } from '@tabler/icons-react';
 import { useTheme } from 'next-themes';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
+// Move outside component to prevent recreation on every render
+const themeOptions = [
+	{
+		name: 'light',
+		icon: <IconSunFilled className='h-5 w-5 outline-none' />,
+	},
+	{
+		name: 'dark',
+		icon: <IconMoonFilled className='h-4.5 w-4.5 outline-none' />,
+	},
+	{
+		name: 'system',
+		icon: <IconContrastFilled className='h-4.5 w-4.5 outline-none' />,
+	},
+] as const;
 
 const ThemeSwitcher = () => {
 	const { theme, setTheme, systemTheme } = useTheme();
+	const [mounted, setMounted] = useState(false);
+	const [isHovering, setIsHovering] = useState(false);
+	const [keyboardTriggered, setKeyboardTriggered] = useState(false);
+	const tooltipTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+	// Computed tooltip visibility - more optimized than state + useEffect
+	const tooltipOpen = isHovering || keyboardTriggered;
+
+	const themeIcon = useMemo(() => {
+		// Show loading icon during hydration to prevent mismatch
+		if (!mounted) {
+			return <IconLoader className='h-5 w-5 animate-spin outline-none' />;
+		}
+
+		const currentTheme = theme === 'system' ? systemTheme : theme;
+		const icon = themeOptions.find((option) => option.name === currentTheme)?.icon;
+		return icon;
+	}, [mounted, theme, systemTheme]);
 
 	const changeTheme = useCallback(
 		(value?: string) => {
-			const themes = ['system', 'light', 'dark'];
+			const themes = ['light', 'dark', 'system'] as const;
 			const themeString = theme as string;
 			if (value) {
-				return setTheme(themes[themes.indexOf(value.toLowerCase())]);
+				const targetTheme = themes.find((t) => t === value.toLowerCase());
+				if (targetTheme) {
+					return setTheme(targetTheme);
+				}
 			}
-			return setTheme(themes[(themes.indexOf(themeString) + 1) % themes.length]);
+			const currentIndex = themes.indexOf(themeString as any);
+			const nextTheme = themes[(currentIndex + 1) % themes.length];
+			return setTheme(nextTheme);
 			// eslint-disable-next-line react-hooks/exhaustive-deps
 		},
 		[theme, setTheme]
@@ -29,6 +68,18 @@ const ThemeSwitcher = () => {
 			if (baseKey && event.altKey && event.code.toLowerCase() === 'KeyT'.toLowerCase()) {
 				event.preventDefault(); // Prevent default browser behavior if any
 				changeTheme();
+
+				// Clear any existing timeout to prevent stacking
+				if (tooltipTimeoutRef.current) {
+					clearTimeout(tooltipTimeoutRef.current);
+				}
+
+				// Show tooltip for 2 seconds when changing theme via keyboard (only if not hovering)
+				setKeyboardTriggered(true);
+				tooltipTimeoutRef.current = setTimeout(() => {
+					setKeyboardTriggered(false);
+					tooltipTimeoutRef.current = null;
+				}, 1000);
 			}
 		},
 		[changeTheme]
@@ -43,75 +94,65 @@ const ThemeSwitcher = () => {
 		};
 	}, [theme, handleKeyDown]);
 
-	const themeIcon = (value: string | undefined) => {
-		if (theme === 'light') {
-			return <SunIcon className='w-5' />;
-		}
-		if (theme === 'dark') {
-			return <MoonStarIcon className='w-5' />;
-		}
-		return systemTheme === 'light' ? <SunIcon className='w-5' /> : <MoonStarIcon className='w-5' />;
-	};
+	// Prevent hydration mismatch by only rendering theme-dependent content after mount && Cleanup timeout on unmount
+	useEffect(() => {
+		setMounted(true);
+		return () => {
+			if (tooltipTimeoutRef.current) {
+				clearTimeout(tooltipTimeoutRef.current);
+			}
+		};
+	}, []);
 
-	return <></>;
+	return (
+		<Popover>
+			<Tooltip open={tooltipOpen}>
+				<TooltipTrigger asChild>
+					<PopoverTrigger asChild>
+						<button
+							type='button'
+							className='hover:text-primary dark:hover:text-success inline-flex aspect-square h-8 cursor-pointer items-center justify-center text-black ease-in-out dark:text-white'
+							onMouseEnter={() => setIsHovering(true)}
+							onMouseLeave={() => setIsHovering(false)}
+						>
+							{themeIcon}
+						</button>
+					</PopoverTrigger>
+				</TooltipTrigger>
+				<TooltipContent side='right'>
+					<p className='capitalize'>{mounted ? theme : 'Loading'} Theme</p>
+				</TooltipContent>
+			</Tooltip>
+			<PopoverContent className='border-secondary-400 dark:border-secondary-600 divide-secondary-400 dark:divide-secondary-600 w-44 divide-y' align='end'>
+				<div className='flex items-center gap-1 px-3 py-2 text-sm font-medium text-black dark:text-white'>
+					<span>Change Theme</span>
+					<span className='text-primary dark:text-success ml-auto text-xs'>⌘⌥T</span>
+				</div>
+				<div className='flex flex-col gap-0.5 p-1'>
+					{themeOptions.map((option) => {
+						// Memoize click handler to prevent recreation on every render
+						const handleOptionClick = () => changeTheme(option.name);
 
-	// return (
-	// 	<DropdownMenu>
-	// 		<TooltipProvider>
-	// 			<Tooltip>
-	// 				<TooltipTrigger asChild>
-	// 					<DropdownMenuTrigger asChild>
-	// 						<button
-	// 							type='button'
-	// 							className='text-secondary-500 hover:text-primary dark:text-secondary-300 dark:hover:text-success inline-flex aspect-square h-8 cursor-pointer items-center justify-center ease-in-out outline-none'
-	// 						>
-	// 							{themeIcon(theme)}
-	// 						</button>
-	// 					</DropdownMenuTrigger>
-	// 				</TooltipTrigger>
-	// 				<TooltipContent align='end' className='border-secondary-400 dark:border-secondary-600'>
-	// 					<p className='capitalize'>{theme} Theme</p>
-	// 				</TooltipContent>
-	// 			</Tooltip>
-	// 		</TooltipProvider>
-	// 		<DropdownMenuContent className='border-secondary-400 dark:border-secondary-600 w-56' align='end'>
-	// 			<DropdownMenuLabel className='flex items-center gap-1'>
-	// 				<span>Change Theme</span>
-	// 				<DropdownMenuShortcut>⌘⌥T</DropdownMenuShortcut>
-	// 			</DropdownMenuLabel>
-	// 			<DropdownMenuSeparator />
-	// 			<DropdownMenuGroup>
-	// 				<DropdownMenuItem
-	// 					className='cursor-pointer'
-	// 					onClick={() => {
-	// 						changeTheme('light');
-	// 					}}
-	// 				>
-	// 					<SunIcon />
-	// 					<span>Light Theme</span>
-	// 				</DropdownMenuItem>
-	// 				<DropdownMenuItem
-	// 					className='cursor-pointer'
-	// 					onClick={() => {
-	// 						changeTheme('dark');
-	// 					}}
-	// 				>
-	// 					<MoonStarIcon />
-	// 					<span>Dark Theme</span>
-	// 				</DropdownMenuItem>
-	// 				<DropdownMenuItem
-	// 					className='cursor-pointer'
-	// 					onClick={() => {
-	// 						changeTheme('system');
-	// 					}}
-	// 				>
-	// 					<MonitorIcon />
-	// 					<span>System Theme</span>
-	// 				</DropdownMenuItem>
-	// 			</DropdownMenuGroup>
-	// 		</DropdownMenuContent>
-	// 	</DropdownMenu>
-	// );
+						return (
+							<button
+								key={option.name}
+								type='button'
+								className={`flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-md px-2 py-1.5 text-sm transition-colors ${
+									mounted && theme === option.name
+										? 'bg-primary/10 text-primary dark:bg-success/10 dark:text-success'
+										: 'text-secondary-500 dark:text-secondary-400 hover:text-primary dark:hover:text-success'
+								}`}
+								onClick={handleOptionClick}
+							>
+								<span className='capitalize'>{option.name} Theme</span>
+								<span className='inline-flex aspect-square w-5 scale-85 items-center justify-center'>{option.icon}</span>
+							</button>
+						);
+					})}
+				</div>
+			</PopoverContent>
+		</Popover>
+	);
 };
 
 export default ThemeSwitcher;

@@ -1,3 +1,7 @@
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+	enabled: process.env.ANALYZE === 'true',
+});
+
 /**
  * @type {import('next').NextConfig}
  */
@@ -15,8 +19,36 @@ const nextConfig = {
 
 	// Performance optimizations
 	experimental: {
-		optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
+		optimizePackageImports: ['@tabler/icons-react'],
+	},
+
+	// Improve hot reload stability (works with both webpack and Turbopack)
+	onDemandEntries: {
+		// Period (in ms) where the server will keep pages in the buffer
+		maxInactiveAge: 25 * 1000,
+		// Number of pages that should be kept simultaneously without being disposed
+		pagesBufferLength: 2,
+	},
+
+	// Additional performance optimizations
+	compress: true,
+
+	// Image optimization
+	images: {
+		formats: ['image/webp', 'image/avif'],
+		minimumCacheTTL: 60,
+		dangerouslyAllowSVG: true,
+		contentDispositionType: 'attachment',
+		contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'cdn.simpleicons.org',
+				port: '',
+				pathname: '/**',
+			},
+		],
 	},
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);

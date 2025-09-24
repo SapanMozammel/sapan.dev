@@ -1,13 +1,16 @@
 import Pattern from '@/components/icons/Pattern';
 import WorldMap from '@/components/icons/WorldMap';
-import React from 'react';
+import React, { memo, useMemo } from 'react';
 
-const HeroBackground = (props: React.DetailedHTMLProps<React.AllHTMLAttributes<HTMLDivElement>, HTMLDivElement>) => {
+const HeroBackground = memo<React.DetailedHTMLProps<React.AllHTMLAttributes<HTMLDivElement>, HTMLDivElement>>((props) => {
 	const { children, className, ...rest } = props;
+
+	// Memoize computed className to prevent recalculation
+	const computedClassName = useMemo(() => `pointer-events-none absolute inset-0 -z-2 overflow-hidden select-none ${className ?? ''}`, [className]);
 	return (
 		<React.Fragment>
 			{children}
-			<div className={`pointer-events-none absolute inset-0 -z-2 overflow-hidden select-none ${className ?? ''}`} {...rest}>
+			<div className={computedClassName} {...rest}>
 				<div className='absolute inset-0 flex items-center justify-center'>
 					<WorldMap className='fill-secondary-100 h-full w-auto dark:fill-gray-500/25' />
 				</div>
@@ -18,6 +21,8 @@ const HeroBackground = (props: React.DetailedHTMLProps<React.AllHTMLAttributes<H
 			</div>
 		</React.Fragment>
 	);
-};
+});
+
+HeroBackground.displayName = 'HeroBackground';
 
 export default HeroBackground;

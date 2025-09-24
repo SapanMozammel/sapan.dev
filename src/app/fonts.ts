@@ -1,4 +1,5 @@
-import { DM_Sans, EB_Garamond, Hanken_Grotesk } from 'next/font/google';
+import { Cormorant_Garamond, DM_Sans, EB_Garamond, Hanken_Grotesk, Sora } from 'next/font/google';
+import localFont from 'next/font/local';
 
 export const dmSans = DM_Sans({
 	display: 'swap',
@@ -22,4 +23,47 @@ export const hankenGrotesk = Hanken_Grotesk({
 	subsets: ['latin'],
 	style: ['normal', 'italic'],
 	variable: '--font-hg',
+});
+
+export const cormorantGaramond = Cormorant_Garamond({
+	display: 'swap',
+	weight: ['300', '400', '500', '600', '700'],
+	subsets: ['latin'],
+	style: ['normal'],
+	variable: '--font-cg',
+});
+
+export const sora = Sora({
+	display: 'swap',
+	weight: ['300', '400', '500', '600', '700'],
+	subsets: ['latin'],
+	style: ['normal'],
+	variable: '--font-sora',
+});
+
+export const severa = localFont({
+	src: [
+		{
+			path: '../../public/fonts/severa.woff2',
+			weight: '400',
+			style: 'normal',
+		},
+		{
+			path: '../../public/fonts/severa.woff',
+			weight: '400',
+			style: 'normal',
+		},
+		{
+			path: '../../public/fonts/severa.ttf',
+			weight: '400',
+			style: 'normal',
+		},
+		{
+			path: '../../public/fonts/severa.otf',
+			weight: '400',
+			style: 'normal',
+		},
+	],
+	display: 'swap',
+	variable: '--font-severa',
 });

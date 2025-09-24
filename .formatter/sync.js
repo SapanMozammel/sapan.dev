@@ -193,6 +193,14 @@ const generatePrettierConfig = (config) => {
 	const endOfLine = getConfigValue('END_OF_LINE', 'lf');
 	const proseWrap = getConfigValue('PROSE_WRAP', 'preserve');
 	const trailingComma = getConfigValue('TRAILING_COMMA', 'es5');
+	const tailwindClassSorting = getConfigValue('TAILWIND_CLASS_SORTING', 'true') === 'true';
+
+	// Build plugins array based on configuration
+	const plugins = [];
+	if (tailwindClassSorting) {
+		plugins.push('prettier-plugin-tailwindcss');
+	}
+	const pluginsString = plugins.length > 0 ? `['${plugins.join("', '")}']` : '[]';
 
 	const prettierConfigContent = `module.exports = {
 	// Basic formatting
@@ -216,7 +224,7 @@ const generatePrettierConfig = (config) => {
 	singleAttributePerLine: ${singleAttributePerLine},
 
 	// Plugins for modern development
-	plugins: ['prettier-plugin-tailwindcss'],
+	plugins: ${pluginsString},
 
 	// File-specific overrides
 	overrides: [
@@ -263,7 +271,7 @@ const generatePrettierConfig = (config) => {
 	return prettierConfigContent;
 };
 
-// Generate .prettierignore for src only
+// Generate .prettierignore at project root
 const generatePrettierIgnore = () => {
 	return `# Generated from FORMATTER_CONFIG.md
 # Only format files in src folder
@@ -281,14 +289,13 @@ build/
 dist/
 *.min.js
 *.min.css
-wp-content/uploads/
-wp-config.php
 *.log
 coverage/
 .cache
 .next
 package-lock.json
 yarn.lock
+pnpm-lock.yaml
 composer.lock
 .DS_Store
 Thumbs.db
@@ -309,6 +316,7 @@ const generateESLintConfig = (config) => {
 	const eqeqeq = getConfigValue('EQEQEQ', 'error');
 	const reactHooksExhaustiveDeps = getConfigValue('REACT_HOOKS_EXHAUSTIVE_DEPS', 'warn');
 	const reactJsxNoTargetBlank = getConfigValue('REACT_JSX_NO_TARGET_BLANK', 'error');
+	const reactNoUnescapedEntities = getConfigValue('REACT_NO_UNESCAPED_ENTITIES', 'off');
 
 	return `module.exports = {
 	env: { browser: true, es2022: true, node: true, jest: true },
@@ -382,6 +390,7 @@ const generateESLintConfig = (config) => {
 		'react/jsx-no-target-blank': '${reactJsxNoTargetBlank}',
 		'react/no-unused-state': 'warn',
 		'react/self-closing-comp': 'error',
+		'react/no-unescaped-entities': '${reactNoUnescapedEntities}',
 
 		// React Hooks rules
 		'react-hooks/rules-of-hooks': 'error',
@@ -470,6 +479,10 @@ const generateVSCodeSettings = (config) => {
 	const trimTrailingWhitespace = getConfigValue('TRIM_TRAILING_WHITESPACE', 'true') === 'true';
 	const wordWrap = getConfigValue('WORD_WRAP', 'off');
 
+	// Import organization settings
+	const organizeImportsOnSave = getConfigValue('ORGANIZE_IMPORTS_ON_SAVE', 'false') === 'true';
+	const removeUnusedImportsOnFormat = getConfigValue('REMOVE_UNUSED_IMPORTS_ON_FORMAT', 'true') === 'true';
+
 	const settings = {
 		// Workbench
 		'workbench.activityBar.orientation': 'vertical',
@@ -491,7 +504,7 @@ const generateVSCodeSettings = (config) => {
 		// Code actions
 		'editor.codeActionsOnSave': {
 			'source.fixAll.eslint': eslintAutoFix,
-			'source.organizeImports': true,
+			'source.organizeImports': organizeImportsOnSave,
 		},
 
 		// Files
@@ -510,6 +523,19 @@ const generateVSCodeSettings = (config) => {
 		'eslint.enable': true,
 		'eslint.run': 'onSave',
 		'eslint.format.enable': true,
+
+		// TypeScript import organization
+		'typescript.preferences.organizeImports': {
+			'removeUnusedImports': removeUnusedImportsOnFormat,
+		},
+		'typescript.suggest.autoImports': 'on',
+		'typescript.updateImportsOnFileMove.enabled': 'always',
+
+		// Command palette actions for manual formatting with unused import removal
+		'typescript.preferences.includePackageJsonAutoImports': 'auto',
+
+		// Enable format and organize imports together
+		'editor.formatOnSaveMode': 'file',
 
 		// Language-specific formatters
 		'[javascript]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
@@ -552,6 +578,96 @@ const generateVSCodeSettings = (config) => {
 	return JSON.stringify(settings, null, '\t');
 };
 
+// Generate VSCode tasks for integrated formatting
+const generateVSCodeTasks = () => {
+	const tasks = {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Format and Organize",
+				"type": "shell",
+				"command": "node",
+				"args": ["-e", `
+					const { execSync } = require('child_process');
+					const fs = require('fs');
+					const path = require('path');
+					const ts = require('typescript');
+
+					const filePath = process.argv[1];
+					if (!filePath || !fs.existsSync(filePath)) process.exit(0);
+
+					// Step 1: Organize imports for TS/JS files FIRST
+					if (/\\.(ts|tsx|js|jsx)$/.test(filePath)) {
+						const sourceText = fs.readFileSync(filePath, 'utf8');
+						const configPath = ts.findConfigFile(process.cwd(), ts.sys.fileExists, 'tsconfig.json');
+						const configFile = ts.readConfigFile(configPath, ts.sys.readFile);
+						const compilerOptions = ts.parseJsonConfigFileContent(configFile.config, ts.sys, path.dirname(configPath));
+
+						const host = {
+							getScriptFileNames: () => [filePath],
+							getScriptVersion: () => '1',
+							getScriptSnapshot: (fileName) => fileName === filePath ? ts.ScriptSnapshot.fromString(sourceText) : undefined,
+							getCurrentDirectory: () => process.cwd(),
+							getCompilationSettings: () => compilerOptions.options,
+							getDefaultLibFileName: (options) => ts.getDefaultLibFilePath(options),
+							fileExists: ts.sys.fileExists,
+							readFile: ts.sys.readFile,
+							readDirectory: ts.sys.readDirectory,
+							getDirectories: ts.sys.getDirectories,
+						};
+
+						const service = ts.createLanguageService(host);
+						const changes = service.organizeImports({ type: 'file', fileName: filePath }, { removeUnusedImports: true, coalesceImports: true }, {});
+
+						if (changes && changes.length > 0) {
+							let newText = sourceText;
+							for (let i = changes.length - 1; i >= 0; i--) {
+								const change = changes[i];
+								for (let j = change.textChanges.length - 1; j >= 0; j--) {
+									const textChange = change.textChanges[j];
+									newText = newText.substring(0, textChange.span.start) + textChange.newText + newText.substring(textChange.span.start + textChange.span.length);
+								}
+							}
+							if (newText !== sourceText) fs.writeFileSync(filePath, newText);
+						}
+					}
+
+					// Step 2: Format with Prettier AFTER import organization
+					execSync(\`npx prettier --config .formatter/.prettierrc.js --write "\${filePath}"\`, { stdio: 'pipe' });
+				`, "${file}"],
+				"group": "build",
+				"presentation": {
+					"echo": false,
+					"reveal": "never",
+					"focus": false,
+					"panel": "shared",
+					"showReuseMessage": false,
+					"clear": false
+				},
+				"problemMatcher": []
+			}
+		]
+	};
+
+	return JSON.stringify(tasks, null, '\t');
+};
+
+// Generate VSCode keybindings that use the task
+const generateVSCodeKeybindings = () => {
+	const keybindings = [
+		{
+			"key": "shift+alt+f",
+			"command": "workbench.action.tasks.runTask",
+			"args": "Format and Organize",
+			"when": "editorTextFocus && !editorReadonly && resourceExtname =~ /\\.(ts|tsx|js|jsx)$/"
+		}
+	];
+
+	return JSON.stringify(keybindings, null, '\t');
+};
+
+
+
 // Generate Cursor settings
 const generateCursorSettings = (config) => {
 	// Helper function to get config value with fallback
@@ -564,6 +680,10 @@ const generateCursorSettings = (config) => {
 	const formatOnPaste = getConfigValue('FORMAT_ON_PASTE', 'false') === 'true';
 	const eslintAutoFix = getConfigValue('ESLINT_AUTO_FIX', 'true') === 'true';
 	const wordWrap = getConfigValue('WORD_WRAP', 'off');
+
+	// Import organization settings
+	const organizeImportsOnSave = getConfigValue('ORGANIZE_IMPORTS_ON_SAVE', 'false') === 'true';
+	const removeUnusedImportsOnFormat = getConfigValue('REMOVE_UNUSED_IMPORTS_ON_FORMAT', 'true') === 'true';
 
 	const settings = {
 		'editor.formatOnSave': formatOnSave,
@@ -580,8 +700,21 @@ const generateCursorSettings = (config) => {
 		'eslint.format.enable': true,
 		'editor.codeActionsOnSave': {
 			'source.fixAll.eslint': eslintAutoFix,
-			'source.organizeImports': true,
+			'source.organizeImports': organizeImportsOnSave,
 		},
+
+		// TypeScript import organization
+		'typescript.preferences.organizeImports': {
+			'removeUnusedImports': removeUnusedImportsOnFormat,
+		},
+		'typescript.suggest.autoImports': 'on',
+		'typescript.updateImportsOnFileMove.enabled': 'always',
+
+		// Command palette actions for manual formatting with unused import removal
+		'typescript.preferences.includePackageJsonAutoImports': 'auto',
+
+		// Enable format and organize imports together
+		'editor.formatOnSaveMode': 'file',
 		'[javascript]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
 		'[javascriptreact]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
 		'[typescript]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
@@ -594,6 +727,16 @@ const generateCursorSettings = (config) => {
 	};
 
 	return JSON.stringify(settings, null, '\t');
+};
+
+// Generate Cursor tasks (same as VSCode)
+const generateCursorTasks = () => {
+	return generateVSCodeTasks();
+};
+
+// Generate Cursor keybindings (same as VSCode)
+const generateCursorKeybindings = () => {
+	return generateVSCodeKeybindings();
 };
 
 // Generate .gitattributes for consistent line endings
@@ -650,17 +793,25 @@ const sync = () => {
 	const prettierIgnore = generatePrettierIgnore();
 	const gitAttributes = generateGitAttributes();
 	const vscodeSettings = generateVSCodeSettings(config);
+	const vscodeTasks = generateVSCodeTasks();
+	const vscodeKeybindings = generateVSCodeKeybindings();
 	const cursorSettings = generateCursorSettings(config);
+	const cursorTasks = generateCursorTasks();
+	const cursorKeybindings = generateCursorKeybindings();
 
 	// Write all files with error handling
 	const files = [
 		{ path: '.formatter/.prettierrc.js', content: prettierConfig },
 		{ path: '.formatter/.eslintrc.js', content: eslintConfig },
 		{ path: '.formatter/.editorconfig', content: editorConfig },
-		{ path: '.formatter/.prettierignore', content: prettierIgnore },
+		{ path: '.prettierignore', content: prettierIgnore },
 		{ path: '.gitattributes', content: gitAttributes },
 		{ path: '.vscode/settings.json', content: vscodeSettings },
+		{ path: '.vscode/tasks.json', content: vscodeTasks },
+		{ path: '.vscode/keybindings.json', content: vscodeKeybindings },
 		{ path: '.cursor/settings.json', content: cursorSettings },
+		{ path: '.cursor/tasks.json', content: cursorTasks },
+		{ path: '.cursor/keybindings.json', content: cursorKeybindings },
 	];
 
 	let successCount = 0;
@@ -683,5 +834,112 @@ const sync = () => {
 	}
 };
 
-if (require.main === module) sync();
-module.exports = { sync };
+// Organize imports functionality
+const organizeImports = () => {
+	console.log('🔄 Organizing imports and removing unused ones...');
+
+	const srcDir = path.join(process.cwd(), 'src');
+	if (!fs.existsSync(srcDir)) {
+		console.error('❌ src directory not found');
+		process.exit(1);
+	}
+
+	// Find all TypeScript files in src
+	const findTsFiles = (dir) => {
+		const files = [];
+		const items = fs.readdirSync(dir);
+		for (const item of items) {
+			const fullPath = path.join(dir, item);
+			const stat = fs.statSync(fullPath);
+			if (stat.isDirectory()) {
+				files.push(...findTsFiles(fullPath));
+			} else if (item.endsWith('.ts') || item.endsWith('.tsx')) {
+				files.push(fullPath);
+			}
+		}
+		return files;
+	};
+
+	const files = findTsFiles(srcDir);
+	console.log(`📄 Processing ${files.length} TypeScript files...`);
+
+	let processedCount = 0;
+
+	// Process each file
+	for (const filePath of files) {
+		try {
+			const ts = require('typescript');
+			const sourceText = fs.readFileSync(filePath, 'utf8');
+
+			// Read tsconfig.json
+			const configPath = ts.findConfigFile(process.cwd(), ts.sys.fileExists, 'tsconfig.json');
+			const configFile = ts.readConfigFile(configPath, ts.sys.readFile);
+			const compilerOptions = ts.parseJsonConfigFileContent(configFile.config, ts.sys, path.dirname(configPath));
+
+			// Create language service host
+			const host = {
+				getScriptFileNames: () => [filePath],
+				getScriptVersion: () => '1',
+				getScriptSnapshot: (fileName) => {
+					if (fileName === filePath) {
+						return ts.ScriptSnapshot.fromString(sourceText);
+					}
+					return undefined;
+				},
+				getCurrentDirectory: () => process.cwd(),
+				getCompilationSettings: () => compilerOptions.options,
+				getDefaultLibFileName: (options) => ts.getDefaultLibFilePath(options),
+				fileExists: ts.sys.fileExists,
+				readFile: ts.sys.readFile,
+				readDirectory: ts.sys.readDirectory,
+				getDirectories: ts.sys.getDirectories,
+			};
+
+			// Create language service
+			const service = ts.createLanguageService(host);
+
+			// Organize imports
+			const changes = service.organizeImports(
+				{ type: 'file', fileName: filePath },
+				{ removeUnusedImports: true, coalesceImports: true },
+				{}
+			);
+
+			if (changes && changes.length > 0) {
+				let newText = sourceText;
+				// Apply changes in reverse order to maintain positions
+				for (let i = changes.length - 1; i >= 0; i--) {
+					const change = changes[i];
+					for (let j = change.textChanges.length - 1; j >= 0; j--) {
+						const textChange = change.textChanges[j];
+						newText = newText.substring(0, textChange.span.start) +
+								 textChange.newText +
+								 newText.substring(textChange.span.start + textChange.span.length);
+					}
+				}
+
+				if (newText !== sourceText) {
+					fs.writeFileSync(filePath, newText);
+					console.log(`✅ ${filePath}`);
+					processedCount++;
+				}
+			}
+		} catch (error) {
+			console.warn(`⚠️  ${filePath}: ${error.message}`);
+		}
+	}
+
+	console.log(`🎯 Organized imports in ${processedCount} files`);
+};
+
+// Handle command line arguments
+if (require.main === module) {
+	const args = process.argv.slice(2);
+	if (args.includes('--organize-imports')) {
+		organizeImports();
+	} else {
+		sync();
+	}
+}
+
+module.exports = { sync, organizeImports };
