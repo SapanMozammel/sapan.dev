@@ -1,9 +1,17 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import type { CursorTooltipProps, Position } from '@/types/cursor-tooltip';
+import type { CursorTooltipProps, Position, TooltipContentProps } from '@/types/cursor-tooltip';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
+
+// Default tooltip content component for consistent styling
+export const TooltipContent = memo<TooltipContentProps>(({ children, className }) => (
+	<div className={cn('bg-primary/80 border-primary dark:border-success dark:bg-success/80 pointer-events-none rounded-2xl border-1 border-solid px-3 py-2 text-sm font-medium text-white dark:text-black', className)}>
+		{children}
+	</div>
+));
+TooltipContent.displayName = 'TooltipContent';
 
 // Animation constants for better performance and consistency
 const ANIMATION_CONFIG = {
@@ -19,7 +27,7 @@ const ANIMATION_CONFIG = {
 	},
 } as const;
 
-const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, content, className, offset = { x: 0, y: 0 } }) => {
+const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, content, className, offset = { x: 0, y: 0 }, contentClassName }) => {
 	const [isVisible, setIsVisible] = useState(false);
 	const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
 	const [initialPosition, setInitialPosition] = useState<Position>({ x: 0, y: 0 });
@@ -83,6 +91,18 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, conten
 		[isVisible, updatePosition]
 	);
 
+	// Memoized content rendering for performance
+	const renderedContent = React.useMemo(() => {
+		if (typeof content === 'string') {
+			const props: TooltipContentProps = { children: content };
+			if (contentClassName) {
+				props.className = contentClassName;
+			}
+			return <TooltipContent {...props} />;
+		}
+		return content;
+	}, [content, contentClassName]);
+
 	// Cleanup timeout on unmount to prevent memory leaks
 	useEffect(() => {
 		return () => {
@@ -126,13 +146,13 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, conten
 								transition: ANIMATION_CONFIG.exit,
 							}}
 							transition={ANIMATION_CONFIG.spring}
-							className='pointer-events-none fixed z-50 select-none'
+							className='fixed z-50'
 							style={{
 								left: 0,
 								top: 0,
 							}}
 						>
-							<div className='bg-primary/80 border-primary dark:border-success dark:bg-success/80 rounded-2xl border-1 border-solid px-3 py-2 text-sm font-medium text-white dark:text-black'>{content}</div>
+							{renderedContent}
 						</motion.div>
 					)}
 				</AnimatePresence>
