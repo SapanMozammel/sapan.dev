@@ -15,4 +15,6 @@ const TestimonialBackground = memo<React.DetailedHTMLProps<React.AllHTMLAttribut
 	);
 });
 
+TestimonialBackground.displayName = 'TestimonialBackground';
+
 export default TestimonialBackground;

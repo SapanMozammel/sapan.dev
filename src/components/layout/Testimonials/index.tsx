@@ -1,11 +1,10 @@
 'use client';
 
-import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import { memo } from 'react';
 import Marquee from 'react-fast-marquee';
 import SectionTitle from '../common/SectionTitle';
-import TestimonialBackground from '../Technologies/TestimonialBackground';
+import TestimonialBackground from './TestimonialBackground';
 const testimonialList = [
 	{
 		message: 'Working with Sapan was one of the best development experiences we’ve had. He understood our vision immediately and built the site exactly how we wanted — clean, fast, and modern.',
@@ -189,9 +188,6 @@ const TestimonialCard = memo(({ testimonial }: { testimonial: (typeof testimonia
 TestimonialCard.displayName = 'TestimonialCard';
 
 const Testimonials = memo(() => {
-	const { resolvedTheme } = useTheme();
-	const gradientColor = resolvedTheme === 'dark' ? 'var(--color-black)' : 'var(--color-white)';
-
 	return (
 		<section className='relative z-1 pb-12 sm:pb-16 lg:pb-20'>
 			<TestimonialBackground>
