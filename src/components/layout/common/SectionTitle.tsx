@@ -1,9 +1,10 @@
+import { cn } from '@/lib/utils';
 import { SectionTitleTypes } from '@/types/title';
 import { memo } from 'react';
 
-const SectionTitle = memo<SectionTitleTypes>(({ title, subtitle, watermark }) => {
+const SectionTitle = memo<SectionTitleTypes>(({ title, subtitle, watermark, className }) => {
 	return (
-		<div className='relative z-1 w-full py-6 sm:py-10'>
+		<div className={cn('relative z-1 w-full py-6 text-center sm:py-10', className)}>
 			{watermark && (
 				<span
 					aria-hidden='true'

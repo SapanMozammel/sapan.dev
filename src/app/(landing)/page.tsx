@@ -1,5 +1,6 @@
 import Hero from '@/components/layout/Hero';
 import Technologies from '@/components/layout/Technologies';
+import Testimonials from '@/components/layout/Testimonials';
 import { memo } from 'react';
 
 const LandingPage = memo(() => {
@@ -7,6 +8,7 @@ const LandingPage = memo(() => {
 		<>
 			<Hero />
 			<Technologies />
+			<Testimonials />
 		</>
 	);
 });
