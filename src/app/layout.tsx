@@ -98,7 +98,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 				<div className='text-dark relative bg-white dark:bg-black dark:text-white'>
 					<ThemeProvider {...THEME_PROVIDER_PROPS}>
 						<Header />
-						<main>{children}</main>
+						<main className='overflow-x-hidden'>{children}</main>
 						<Footer />
 					</ThemeProvider>
 					<div className="animate-noise pointer-events-none absolute inset-0 z-20 hidden bg-[url('/noise.png')] bg-repeat opacity-5 select-none lg:block dark:opacity-15" />
