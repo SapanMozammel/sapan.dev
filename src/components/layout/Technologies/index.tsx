@@ -11,22 +11,22 @@ import SectionTitle from '../common/SectionTitle';
 // Using Simple Icons CDN for reliable, transparent vector images
 // Gradients optimized for each logo's specific color and visibility
 const techStack = [
-	{ name: 'TypeScript', logo: 'https://cdn.simpleicons.org/typescript', gradient: 'from-slate-800 to-gray-900' },
-	{ name: 'React', logo: 'https://cdn.simpleicons.org/react', gradient: 'from-purple-600 to-indigo-700' },
-	{ name: 'Next.js', logo: 'https://cdn.simpleicons.org/nextdotjs', gradient: 'from-blue-600 to-purple-700' },
-	{ name: 'Node.js', logo: 'https://cdn.simpleicons.org/nodedotjs', gradient: 'from-slate-800 to-gray-900' },
-	{ name: 'Git', logo: 'https://cdn.simpleicons.org/git', gradient: 'from-slate-700 to-gray-800' },
-	{ name: 'Tailwind CSS', logo: 'https://cdn.simpleicons.org/tailwindcss', gradient: 'from-purple-600 to-pink-600' },
-	{ name: 'shadcn/ui', logo: 'https://cdn.simpleicons.org/shadcnui', gradient: 'from-blue-600 to-purple-700' },
-	{ name: 'Prisma', logo: 'https://cdn.simpleicons.org/prisma', gradient: 'from-emerald-600 to-teal-700' },
-	{ name: 'MongoDB', logo: 'https://cdn.simpleicons.org/mongodb', gradient: 'from-purple-600 to-indigo-700' },
-	{ name: 'GraphQL', logo: 'https://cdn.simpleicons.org/graphql', gradient: 'from-slate-700 to-gray-800' },
-	{ name: 'Docker', logo: 'https://cdn.simpleicons.org/docker', gradient: 'from-slate-800 to-gray-900' },
-	{ name: 'Vercel', logo: 'https://cdn.simpleicons.org/vercel', gradient: 'from-emerald-600 to-teal-700' },
-	{ name: 'Google Cloud', logo: 'https://cdn.simpleicons.org/googlecloud', gradient: 'from-slate-700 to-gray-800' },
-	{ name: 'Framer Motion', logo: 'https://cdn.simpleicons.org/framer', gradient: 'from-yellow-500 to-orange-600' },
-	{ name: 'Three.js', logo: 'https://cdn.simpleicons.org/threedotjs', gradient: 'from-blue-600 to-purple-700' },
-	{ name: 'WordPress', logo: 'https://cdn.simpleicons.org/wordpress', gradient: 'from-gray-700 to-slate-800' },
+	{ name: 'TypeScript', logo: 'https://cdn.simpleicons.org/typescript' },
+	{ name: 'React', logo: 'https://cdn.simpleicons.org/react' },
+	{ name: 'Next.js', logo: 'https://cdn.simpleicons.org/nextdotjs' },
+	{ name: 'Node.js', logo: 'https://cdn.simpleicons.org/nodedotjs' },
+	{ name: 'Git', logo: 'https://cdn.simpleicons.org/git' },
+	{ name: 'Tailwind CSS', logo: 'https://cdn.simpleicons.org/tailwindcss' },
+	{ name: 'shadcn/ui', logo: 'https://cdn.simpleicons.org/shadcnui' },
+	{ name: 'Prisma', logo: 'https://cdn.simpleicons.org/prisma' },
+	{ name: 'MongoDB', logo: 'https://cdn.simpleicons.org/mongodb' },
+	{ name: 'GraphQL', logo: 'https://cdn.simpleicons.org/graphql' },
+	{ name: 'Docker', logo: 'https://cdn.simpleicons.org/docker' },
+	{ name: 'Vercel', logo: 'https://cdn.simpleicons.org/vercel' },
+	{ name: 'Google Cloud', logo: 'https://cdn.simpleicons.org/googlecloud' },
+	{ name: 'Framer Motion', logo: 'https://cdn.simpleicons.org/framer' },
+	{ name: 'Three.js', logo: 'https://cdn.simpleicons.org/threedotjs' },
+	{ name: 'WordPress', logo: 'https://cdn.simpleicons.org/wordpress' },
 ];
 
 const Technologies = memo(() => {
@@ -40,14 +40,15 @@ const Technologies = memo(() => {
 							<CursorTooltip
 								key={`${item.name}-${item.index}`}
 								content={item.name}
-								className={`from-secondary-100 dark:from-secondary-800 dark:to-secondary-900 to-secondary-300 shadow-secondary-300/10 dark:shadow-dark/10 flex aspect-video w-full items-center justify-center rounded-[2.25vw] bg-gradient-to-b text-sm font-medium text-white shadow-xl transition-shadow duration-300 select-none md:rounded-[1.25vw]`}
+								className={`from-secondary-100/50 dark:from-secondary-800/50 dark:to-secondary-900/50 to-secondary-300/50 shadow-secondary-300/10 dark:shadow-dark/10 flex aspect-video w-full items-center justify-center rounded-[2.25vw] bg-gradient-to-b text-sm font-medium text-white shadow-xl transition-shadow duration-300 select-none md:rounded-[1.25vw]`}
 							>
 								{item.logo ? (
 									<span className='relative h-1/2 w-full'>
 										<Image src={item.logo} alt={`${item.name} logo`} fill className='brightness-5 dark:invert' />
+										<span className='sr-only'>{item.name}</span>
 									</span>
 								) : (
-									<span>{item.name}</span>
+									<span className='text-dark text-lg font-bold dark:text-white'>{item.name}</span>
 								)}
 							</CursorTooltip>
 						)}

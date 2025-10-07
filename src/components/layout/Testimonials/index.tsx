@@ -169,7 +169,7 @@ const testimonialList = [
 ];
 
 const TestimonialCard = memo(({ testimonial }: { testimonial: (typeof testimonialList)[0] }) => (
-	<div className='mx-2 flex aspect-[100/40] w-100 shrink-0 items-center gap-4 rounded-3xl bg-white px-6 py-2 sm:aspect-[100/45] sm:w-110 sm:gap-6 sm:px-8 md:mx-3 lg:mx-4 dark:bg-black'>
+	<div className='mx-2 flex aspect-[100/40] w-100 shrink-0 items-center gap-4 rounded-3xl bg-white/75 px-6 py-2 backdrop-blur-xl sm:aspect-[100/45] sm:w-110 sm:gap-6 sm:px-8 md:mx-3 lg:mx-4 dark:bg-black/50'>
 		<div className='relative aspect-square w-20 shrink-0 overflow-hidden rounded-full sm:w-24'>
 			<Image src={testimonial.avatar} alt={testimonial.name} fill className='rounded-full object-cover' />
 		</div>
