@@ -471,6 +471,7 @@ const generateVSCodeSettings = (config) => {
 	const useTabs = getConfigValue('INDENT_STYLE', 'space') === 'tab';
 	const tabWidth = parseInt(getConfigValue('INDENT_SIZE', '2')) || 2;
 	const printWidth = parseInt(getConfigValue('PRINT_WIDTH', '80')) || 80;
+	const wordWrapColumn = parseInt(getConfigValue('WORD_WRAP_COLUMN', printWidth.toString())) || printWidth;
 
 	const formatOnSave = getConfigValue('FORMAT_ON_SAVE', 'false') === 'true';
 	const formatOnPaste = getConfigValue('FORMAT_ON_PASTE', 'false') === 'true';
@@ -493,13 +494,13 @@ const generateVSCodeSettings = (config) => {
 		'editor.tabSize': tabWidth,
 		'editor.detectIndentation': false,
 		'editor.wordWrap': wordWrap,
-		'editor.wordWrapColumn': printWidth,
+		'editor.wordWrapColumn': wordWrapColumn,
 		'editor.rulers': [printWidth],
 		'editor.formatOnSave': formatOnSave,
 		'editor.formatOnPaste': formatOnPaste,
 		'editor.trimAutoWhitespace': true,
 		'editor.renderWhitespace': 'boundary',
-		'editor.minimap.maxColumn': printWidth,
+		'editor.minimap.maxColumn': wordWrapColumn,
 
 		// Code actions
 		'editor.codeActionsOnSave': {
@@ -676,6 +677,7 @@ const generateCursorSettings = (config) => {
 	const useTabs = getConfigValue('INDENT_STYLE', 'space') === 'tab';
 	const tabWidth = parseInt(getConfigValue('INDENT_SIZE', '2')) || 2;
 	const printWidth = parseInt(getConfigValue('PRINT_WIDTH', '80')) || 80;
+	const wordWrapColumn = parseInt(getConfigValue('WORD_WRAP_COLUMN', printWidth.toString())) || printWidth;
 	const formatOnSave = getConfigValue('FORMAT_ON_SAVE', 'false') === 'true';
 	const formatOnPaste = getConfigValue('FORMAT_ON_PASTE', 'false') === 'true';
 	const eslintAutoFix = getConfigValue('ESLINT_AUTO_FIX', 'true') === 'true';
@@ -692,7 +694,7 @@ const generateCursorSettings = (config) => {
 		'editor.insertSpaces': !useTabs,
 		'editor.detectIndentation': false,
 		'editor.wordWrap': wordWrap,
-		'editor.wordWrapColumn': printWidth,
+		'editor.wordWrapColumn': wordWrapColumn,
 		'editor.rulers': [printWidth],
 		'prettier.requireConfig': true,
 		'prettier.configPath': '.formatter/.prettierrc.js',
