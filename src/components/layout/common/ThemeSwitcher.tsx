@@ -126,7 +126,7 @@ const ThemeSwitcher = () => {
 			<PopoverContent className='border-secondary-400 dark:border-secondary-600 divide-secondary-400 dark:divide-secondary-600 w-44 divide-y' align='end'>
 				<div className='flex items-center gap-1 px-3 py-2 text-sm font-medium text-black dark:text-white'>
 					<span>Change Theme</span>
-					<span className='text-primary dark:text-success ml-auto text-xs'>⌘⌥T</span>
+					<span className='text-primary dark:text-success ms-auto text-xs'>⌘⌥T</span>
 				</div>
 				<div className='flex flex-col gap-0.5 p-1'>
 					{themeOptions.map((option) => {

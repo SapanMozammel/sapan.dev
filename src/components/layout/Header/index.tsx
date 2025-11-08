@@ -10,7 +10,7 @@ const Header = memo(() => {
 		<header className='border-secondary-400 dark:border-secondary-600 fixed inset-x-0 top-0 z-10 flex h-20 flex-col border-b border-solid backdrop-blur-xl'>
 			<div className='container-fluid flex w-full grow flex-col'>
 				<div className='flex grow items-center justify-between'>
-					<Link href='/' className='flex cursor-pointer flex-row items-center gap-1.5 sm:gap-2 rtl:flex-row-reverse'>
+					<Link href='/' className='flex cursor-pointer flex-row items-center gap-1.5 sm:gap-2'>
 						<Logo className='h-8 sm:h-10' />
 						<h2 className='font-severa text-primary dark:text-success text-xl !leading-none font-normal tracking-widest brightness-90 sm:text-3xl dark:brightness-110'>sapan.dev</h2>
 					</Link>
