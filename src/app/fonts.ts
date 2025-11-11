@@ -1,4 +1,4 @@
-import { Cormorant_Garamond, DM_Sans, EB_Garamond, Hanken_Grotesk, Sora } from 'next/font/google';
+import { Cormorant_Garamond, DM_Sans, EB_Garamond, Hanken_Grotesk, Sora, Tektur } from 'next/font/google';
 import localFont from 'next/font/local';
 
 export const dmSans = DM_Sans({
@@ -41,29 +41,10 @@ export const sora = Sora({
 	variable: '--font-sora',
 });
 
-export const severa = localFont({
-	src: [
-		{
-			path: '../../public/fonts/severa.woff2',
-			weight: '400',
-			style: 'normal',
-		},
-		{
-			path: '../../public/fonts/severa.woff',
-			weight: '400',
-			style: 'normal',
-		},
-		{
-			path: '../../public/fonts/severa.ttf',
-			weight: '400',
-			style: 'normal',
-		},
-		{
-			path: '../../public/fonts/severa.otf',
-			weight: '400',
-			style: 'normal',
-		},
-	],
+export const tektur = Tektur({
 	display: 'swap',
-	variable: '--font-severa',
+	weight: ['400', '500', '600', '700', '800', '900'],
+	subsets: ['latin'],
+	style: ['normal'],
+	variable: '--font-tektur',
 });
