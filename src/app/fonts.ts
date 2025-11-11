@@ -1,5 +1,4 @@
 import { Cormorant_Garamond, DM_Sans, EB_Garamond, Hanken_Grotesk, Sora, Tektur } from 'next/font/google';
-import localFont from 'next/font/local';
 
 export const dmSans = DM_Sans({
 	display: 'swap',
