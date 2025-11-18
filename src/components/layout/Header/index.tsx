@@ -12,7 +12,7 @@ const Header = memo(() => {
 				<div className='flex grow items-center justify-between'>
 					<Link href='/' className='flex cursor-pointer flex-row items-center gap-1.5 sm:gap-2'>
 						<Logo className='h-8 sm:h-10' />
-						<h2 className='font-tektur text-transparent bg-clip-text bg-gradient-to-r from-primary to-info dark:from-success text-2xl !leading-none font-semibold tracking-wide sm:text-3xl mb-1'>sapan.dev</h2>
+						<h2 className='font-tektur from-primary to-info dark:from-success mb-1 bg-gradient-to-r bg-clip-text text-2xl !leading-none font-semibold tracking-wide text-transparent sm:text-3xl'>sapan.dev</h2>
 					</Link>
 					<div className='ms-auto flex items-center gap-x-2 gap-y-1'>
 						<ThemeSwitcher />
