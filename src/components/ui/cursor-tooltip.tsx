@@ -3,7 +3,7 @@
 import { cn } from '@/lib/utils';
 import type { CursorTooltipProps, Position, TooltipContentProps } from '@/types/cursor-tooltip';
 import { gsap } from 'gsap';
-import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
+import React, { memo, useCallback, useEffect, useRef } from 'react';
 
 // Default tooltip content component for consistent styling
 export const TooltipContent = memo<TooltipContentProps>(({ children, className }) => (
@@ -14,29 +14,33 @@ export const TooltipContent = memo<TooltipContentProps>(({ children, className }
 TooltipContent.displayName = 'TooltipContent';
 
 const ANIMATION_CONFIG = {
-	spring: {
-		duration: 0.6,
-		ease: 'back.out(1.7)',
+	entrance: {
+		duration: 0.5,
+		ease: 'back.out(1.2)',
 	},
 	exit: {
-		duration: 0.2,
+		duration: 0.25,
 		ease: 'power2.inOut',
+	},
+	follow: {
+		duration: 0.3,
+		ease: 'power1.out',
 	},
 } as const;
 
+const calculateElementCenter = (element: Element): Position => {
+	const rect = element.getBoundingClientRect();
+	return {
+		x: rect.left + rect.width / 2,
+		y: rect.top + rect.height / 2,
+	};
+};
+
 const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, content, className, offset = { x: 0, y: 0 }, contentClassName }) => {
-	const [isVisible, setIsVisible] = useState(false);
 	const containerRef = useRef<HTMLDivElement>(null);
 	const tooltipRef = useRef<HTMLDivElement>(null);
-	const animationRef = useRef<gsap.core.Timeline | null>(null);
-
-	const calculateElementCenter = useCallback((element: Element): Position => {
-		const rect = element.getBoundingClientRect();
-		return {
-			x: rect.left + rect.width / 2,
-			y: rect.top + rect.height / 2,
-		};
-	}, []);
+	const entranceTweenRef = useRef<gsap.core.Tween | null>(null);
+	const followTweenRef = useRef<gsap.core.Tween | null>(null);
 
 	const calculateCursorPosition = useCallback(
 		(e: MouseEvent): Position => ({
@@ -48,74 +52,20 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, conten
 
 	const handleMouseEnter = useCallback(
 		(e: React.MouseEvent) => {
-			if (!isVisible) {
-				if (animationRef.current) {
-					animationRef.current.kill();
-				}
-				setIsVisible(true);
-				const cursorPos = calculateCursorPosition(e.nativeEvent);
-				animationRef.current = gsap.timeline();
-				animationRef.current.to(tooltipRef.current, {
-					opacity: 1,
-					scale: 1,
-					x: cursorPos.x,
-					y: cursorPos.y,
-					duration: ANIMATION_CONFIG.spring.duration,
-					ease: ANIMATION_CONFIG.spring.ease,
-				});
-			}
-		},
-		[isVisible, calculateCursorPosition]
-	);
-
-	const handleMouseLeave = useCallback(
-		(e: React.MouseEvent) => {
-			if (animationRef.current) {
-				animationRef.current.kill();
-			}
-			const elementCenter = calculateElementCenter(e.currentTarget);
-			animationRef.current = gsap.timeline();
-			animationRef.current.to(tooltipRef.current, {
-				opacity: 0,
-				scale: 0,
-				x: elementCenter.x,
-				y: elementCenter.y,
-				duration: ANIMATION_CONFIG.exit.duration,
-				ease: ANIMATION_CONFIG.exit.ease,
-				onComplete: () => {
-					animationRef.current?.kill();
-					setIsVisible(false);
-				},
-			});
-		},
-		[calculateElementCenter]
-	);
-
-	const handleMouseMove = useCallback(
-		(e: React.MouseEvent) => {
-			if (!isVisible) {
+			if (!tooltipRef.current) {
 				return;
 			}
-			if (animationRef.current) {
-				animationRef.current.kill();
-			}
-			const cursorPos = calculateCursorPosition(e.nativeEvent);
-			animationRef.current = gsap.timeline();
-			animationRef.current.to(tooltipRef.current, {
-				opacity: 1,
-				scale: 1,
-				x: cursorPos.x,
-				y: cursorPos.y,
-				duration: ANIMATION_CONFIG.spring.duration,
-				ease: ANIMATION_CONFIG.spring.ease,
-			});
-		},
-		[isVisible]
-	);
 
-	useEffect(() => {
-		if (containerRef.current && tooltipRef.current) {
-			const elementCenter = calculateElementCenter(containerRef.current);
+			if (entranceTweenRef.current) {
+				entranceTweenRef.current.kill();
+			}
+			if (followTweenRef.current) {
+				followTweenRef.current.kill();
+			}
+
+			const elementCenter = calculateElementCenter(e.currentTarget);
+			const cursorPos = calculateCursorPosition(e.nativeEvent);
+
 			gsap.set(tooltipRef.current, {
 				opacity: 1,
 				scale: 0,
@@ -124,14 +74,77 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, conten
 				xPercent: -50,
 				yPercent: -50,
 			});
+
+			entranceTweenRef.current = gsap.to(tooltipRef.current, {
+				opacity: 1,
+				scale: 1,
+				x: cursorPos.x,
+				y: cursorPos.y,
+				duration: ANIMATION_CONFIG.entrance.duration,
+				ease: ANIMATION_CONFIG.entrance.ease,
+				overwrite: 'auto',
+			});
+		},
+		[calculateCursorPosition]
+	);
+
+	const handleMouseLeave = useCallback((e: React.MouseEvent) => {
+		if (!tooltipRef.current) {
+			return;
 		}
-	}, [containerRef, tooltipRef]);
+
+		if (entranceTweenRef.current) {
+			entranceTweenRef.current.kill();
+		}
+		if (followTweenRef.current) {
+			followTweenRef.current.kill();
+		}
+
+		const elementCenter = calculateElementCenter(e.currentTarget);
+
+		entranceTweenRef.current = gsap.to(tooltipRef.current, {
+			opacity: 0,
+			scale: 0,
+			x: elementCenter.x,
+			y: elementCenter.y,
+			duration: ANIMATION_CONFIG.exit.duration,
+			ease: ANIMATION_CONFIG.exit.ease,
+			overwrite: 'auto',
+		});
+	}, []);
+
+	const handleMouseMove = useCallback(
+		(e: React.MouseEvent) => {
+			if (!tooltipRef.current) {
+				return;
+			}
+
+			const cursorPos = calculateCursorPosition(e.nativeEvent);
+
+			if (followTweenRef.current) {
+				followTweenRef.current.kill();
+			}
+
+			followTweenRef.current = gsap.to(tooltipRef.current, {
+				x: cursorPos.x,
+				y: cursorPos.y,
+				duration: ANIMATION_CONFIG.follow.duration,
+				ease: ANIMATION_CONFIG.follow.ease,
+				overwrite: 'auto',
+			});
+		},
+		[calculateCursorPosition]
+	);
 
 	useEffect(() => {
 		return () => {
-			if (animationRef.current) {
-				animationRef.current.kill();
-				animationRef.current = null;
+			if (entranceTweenRef.current) {
+				entranceTweenRef.current.kill();
+				entranceTweenRef.current = null;
+			}
+			if (followTweenRef.current) {
+				followTweenRef.current.kill();
+				followTweenRef.current = null;
 			}
 		};
 	}, []);
@@ -148,21 +161,20 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, conten
 	}, [content, contentClassName]);
 
 	return (
-		<>
-			<div ref={containerRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} className={cn('cursor-none', className)}>
-				{children}
-				<div
-					ref={tooltipRef}
-					className='pointer-events-none fixed z-50'
-					style={{
-						left: 0,
-						top: 0,
-					}}
-				>
-					{renderedContent}
-				</div>
+		<div ref={containerRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} className={cn('cursor-none', className)}>
+			{children}
+			<div
+				ref={tooltipRef}
+				className='pointer-events-none fixed z-50'
+				style={{
+					left: 0,
+					top: 0,
+					opacity: 0,
+				}}
+			>
+				{renderedContent}
 			</div>
-		</>
+		</div>
 	);
 };
 
