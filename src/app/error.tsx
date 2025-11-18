@@ -31,7 +31,7 @@ const Error = ({ error, reset }: ErrorProps) => {
 					</button>
 				</div>
 				{process.env.NODE_ENV === 'development' && (
-					<details className='mt-6 text-left'>
+					<details className='mt-6 text-start'>
 						<summary className='cursor-pointer text-sm text-gray-500'>Error details (development only)</summary>
 						<pre className='mt-2 overflow-auto rounded bg-gray-100 p-4 text-xs dark:bg-gray-800'>{error.stack}</pre>
 					</details>

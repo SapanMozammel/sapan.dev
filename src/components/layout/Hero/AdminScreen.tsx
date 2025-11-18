@@ -121,7 +121,7 @@ const inboxList = [
 
 const AdminScreen = memo(() => {
 	return (
-		<div className='group/admin-dashboard font-dm relative aspect-[16/10] w-full text-left text-[0.75vw] !font-light text-black dark:text-white'>
+		<div className='group/admin-dashboard font-dm relative aspect-[16/10] w-full text-start text-[0.75vw] !font-light text-black dark:text-white'>
 			<div className='bg-light/20 dark:bg-dark/20 border-info/30 shadow-info/10 pointer-events-none flex h-full w-full rounded-[0.6em] border-[0.025em] border-solid shadow-lg backdrop-blur transition-transform delay-500 duration-1000 ease-in-out select-none group-hover/admin-dashboard:scale-105'>
 				<div className='flex h-full w-full overflow-hidden rounded-[0.6em] tracking-widest'>
 					<div className='border-info/30 flex w-1/4 shrink-0 flex-col gap-[1em] border-e-[0.025em] border-solid bg-white/50 p-[1.25em] dark:bg-black/50'>

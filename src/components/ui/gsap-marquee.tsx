@@ -100,12 +100,12 @@ const GsapMarqueeComponent: React.FC<MarqueeProps> = ({ children, speed = 60, di
 	}, []);
 
 	return (
-		<div ref={containerRef} className={cn('relative w-full overflow-hidden', className)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-			<div className='flex w-fit'>
-				<div ref={contentRef} className='flex shrink-0'>
+		<div ref={containerRef} className={cn('relative flex w-full flex-row overflow-hidden rtl:flex-row-reverse', className)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+			<div className='flex w-fit flex-row rtl:flex-row-reverse'>
+				<div ref={contentRef} className='flex shrink-0 flex-row rtl:flex-row-reverse'>
 					{children}
 				</div>
-				<div ref={cloneRef} className='flex shrink-0' aria-hidden='true'>
+				<div ref={cloneRef} className='flex shrink-0 flex-row rtl:flex-row-reverse' aria-hidden='true'>
 					{children}
 				</div>
 			</div>
