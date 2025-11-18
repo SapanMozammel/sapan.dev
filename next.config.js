@@ -6,37 +6,31 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
-	// ESLint configuration
 	eslint: {
 		dirs: ['src'],
 		ignoreDuringBuilds: false,
 	},
 
-	// TypeScript configuration
 	typescript: {
 		ignoreBuildErrors: false,
 	},
 
-	// Performance optimizations
 	experimental: {
 		optimizePackageImports: ['@tabler/icons-react'],
 	},
 
-	// Improve hot reload stability (works with both webpack and Turbopack)
 	onDemandEntries: {
-		// Period (in ms) where the server will keep pages in the buffer
 		maxInactiveAge: 25 * 1000,
-		// Number of pages that should be kept simultaneously without being disposed
 		pagesBufferLength: 2,
 	},
 
-	// Additional performance optimizations
 	compress: true,
 
-	// Image optimization
 	images: {
 		formats: ['image/webp', 'image/avif'],
-		minimumCacheTTL: 60,
+		minimumCacheTTL: 31536000,
+		deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+		imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
 		dangerouslyAllowSVG: true,
 		contentDispositionType: 'attachment',
 		contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -51,9 +45,10 @@ const nextConfig = {
 				protocol: 'https',
 				hostname: 'randomuser.me',
 				port: '',
-				pathname: '/**',
+				pathname: '/api/portraits/**',
 			},
 		],
+		unoptimized: process.env.NODE_ENV === 'development',
 	},
 };
 

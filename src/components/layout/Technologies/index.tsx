@@ -2,32 +2,15 @@
 
 import CursorTooltip from '@/components/ui/cursor-tooltip';
 import { DiamondGrid } from '@/components/ui/diamond-grid';
+import { TECH_STACK } from '@/lib/constants/technologies';
+import { getBlurDataURL } from '@/lib/utils/image';
 import Image from 'next/image';
 import { memo } from 'react';
 import SectionSeparator from '../common/SectionSeparator';
 import SectionTitle from '../common/SectionTitle';
 
-// Move outside component to prevent recreation on every render
-// Using Simple Icons CDN for reliable, transparent vector images
-// Gradients optimized for each logo's specific color and visibility
-const techStack = [
-	{ name: 'TypeScript', logo: 'https://cdn.simpleicons.org/typescript' },
-	{ name: 'React', logo: 'https://cdn.simpleicons.org/react' },
-	{ name: 'Next.js', logo: 'https://cdn.simpleicons.org/nextdotjs' },
-	{ name: 'Node.js', logo: 'https://cdn.simpleicons.org/nodedotjs' },
-	{ name: 'Git', logo: 'https://cdn.simpleicons.org/git' },
-	{ name: 'Tailwind CSS', logo: 'https://cdn.simpleicons.org/tailwindcss' },
-	{ name: 'shadcn/ui', logo: 'https://cdn.simpleicons.org/shadcnui' },
-	{ name: 'Prisma', logo: 'https://cdn.simpleicons.org/prisma' },
-	{ name: 'MongoDB', logo: 'https://cdn.simpleicons.org/mongodb' },
-	{ name: 'GraphQL', logo: 'https://cdn.simpleicons.org/graphql' },
-	{ name: 'Docker', logo: 'https://cdn.simpleicons.org/docker' },
-	{ name: 'Vercel', logo: 'https://cdn.simpleicons.org/vercel' },
-	{ name: 'Google Cloud', logo: 'https://cdn.simpleicons.org/googlecloud' },
-	{ name: 'Framer Motion', logo: 'https://cdn.simpleicons.org/framer' },
-	{ name: 'Three.js', logo: 'https://cdn.simpleicons.org/threedotjs' },
-	{ name: 'WordPress', logo: 'https://cdn.simpleicons.org/wordpress' },
-];
+const LOGO_SIZE = 64;
+const BLUR_PLACEHOLDER = getBlurDataURL(LOGO_SIZE, LOGO_SIZE);
 
 const Technologies = memo(() => {
 	return (
@@ -35,7 +18,7 @@ const Technologies = memo(() => {
 			<SectionSeparator lts rts lbs rbs bl ll rl>
 				<div className='container flex w-full grow flex-col items-center justify-start gap-4 pb-8 text-center sm:pb-12 lg:pb-16'>
 					<SectionTitle subtitle='Technologies' title={`I'm an Expertise In`} watermark='Technologies' />
-					<DiamondGrid items={techStack}>
+					<DiamondGrid items={TECH_STACK}>
 						{(item) => (
 							<CursorTooltip
 								key={`${item.name}-${item.index}`}
@@ -44,7 +27,17 @@ const Technologies = memo(() => {
 							>
 								{item.logo ? (
 									<span className='relative h-1/2 w-full'>
-										<Image src={item.logo} alt={`${item.name} logo`} fill className='brightness-5 dark:invert' />
+										<Image
+											src={item.logo}
+											alt={`${item.name} logo`}
+											fill
+											sizes='(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw'
+											className='brightness-5 dark:invert'
+											placeholder='blur'
+											blurDataURL={BLUR_PLACEHOLDER}
+											loading='lazy'
+											quality={90}
+										/>
 										<span className='sr-only'>{item.name}</span>
 									</span>
 								) : (
