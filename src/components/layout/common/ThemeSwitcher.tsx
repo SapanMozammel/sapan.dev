@@ -86,13 +86,11 @@ const ThemeSwitcher = () => {
 	);
 
 	useEffect(() => {
-		// Add keydown event listener on mount
 		window.addEventListener('keydown', handleKeyDown);
 		return () => {
-			// Clean up event listener on unmount
 			window.removeEventListener('keydown', handleKeyDown);
 		};
-	}, [theme, handleKeyDown]);
+	}, [handleKeyDown]);
 
 	// Prevent hydration mismatch by only rendering theme-dependent content after mount && Cleanup timeout on unmount
 	useEffect(() => {
