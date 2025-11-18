@@ -8,8 +8,8 @@ const TestimonialBackground = memo<React.DetailedHTMLProps<React.AllHTMLAttribut
 			{children}
 			<div className={cn('pointer-events-none absolute top-3/5 left-1/2 -z-2', className)} {...rest}>
 				<div className='bg-primary absolute -top-20 -left-120 aspect-square h-70 rounded-full blur-[10em]' />
-				<div className='bg-info absolute top-10 left-0 aspect-video h-20 rounded-full blur-[6em]' />
-				<div className='bg-warning absolute top-0 -right-100 aspect-square h-30 rounded-full blur-[11em]' />
+				<div className='bg-info absolute top-10 -left-8 aspect-square h-28 rounded-full blur-[6em]' />
+				<div className='bg-danger dark:bg-success absolute top-0 -right-100 aspect-square h-40 rounded-full blur-[9em]' />
 			</div>
 		</React.Fragment>
 	);
