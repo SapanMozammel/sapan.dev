@@ -3,6 +3,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { IconBrandGithub } from '@tabler/icons-react';
 import Link from 'next/link';
 import { memo } from 'react';
+import LanguageSwitcher from '../common/LanguageSwitcher';
 import ThemeSwitcher from '../common/ThemeSwitcher';
 
 const Header = memo(() => {
@@ -15,6 +16,7 @@ const Header = memo(() => {
 						<h2 className='font-tektur from-primary to-info dark:from-success mb-1 bg-gradient-to-r bg-clip-text text-2xl !leading-none font-semibold tracking-wide text-transparent sm:text-3xl'>sapan.dev</h2>
 					</Link>
 					<div className='ms-auto flex items-center gap-x-2 gap-y-1'>
+						<LanguageSwitcher />
 						<ThemeSwitcher />
 						<Tooltip>
 							<TooltipTrigger asChild>
