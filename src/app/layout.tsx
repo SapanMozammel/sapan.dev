@@ -1,8 +1,8 @@
 import { cormorantGaramond, dmSans, ebGaramond, hankenGrotesk, sora, tektur } from '@/app/fonts';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
+import { Providers } from '@/providers';
 import '@/styles/global.scss';
-import { ThemeProvider } from 'next-themes';
 
 import type { Metadata } from 'next';
 
@@ -82,27 +82,18 @@ export const metadata: Metadata = {
 
 const fontList = `${dmSans.variable} ${ebGaramond.variable} ${hankenGrotesk.variable} ${cormorantGaramond.variable} ${sora.variable} ${tektur.variable}`;
 
-// Move static theme provider props outside component to prevent recreation
-const THEME_PROVIDER_PROPS = {
-	enableSystem: true,
-	defaultTheme: 'system' as const,
-	enableColorScheme: false,
-	themes: ['light', 'dark', 'system'],
-	attribute: 'class' as const,
-};
-
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<html lang='en' suppressHydrationWarning>
 			<body suppressHydrationWarning className={`${fontList} font-dm`}>
-				<div className='text-dark relative bg-white dark:bg-black dark:text-white'>
-					<ThemeProvider {...THEME_PROVIDER_PROPS}>
+				<Providers>
+					<div className='text-dark relative bg-white dark:bg-black dark:text-white'>
 						<Header />
 						<main className='overflow-x-hidden'>{children}</main>
 						<Footer />
-					</ThemeProvider>
-					<div className="animate-noise pointer-events-none absolute inset-0 z-20 hidden bg-[url('/noise.png')] bg-repeat opacity-5 select-none lg:block dark:opacity-15" />
-				</div>
+						<div className="animate-noise pointer-events-none absolute inset-0 z-20 hidden bg-[url('/noise.png')] bg-repeat opacity-5 select-none lg:block dark:opacity-15" />
+					</div>
+				</Providers>
 			</body>
 		</html>
 	);
