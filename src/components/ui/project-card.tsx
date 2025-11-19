@@ -29,7 +29,7 @@ const ProjectCard = memo<ProjectCardProps>(({ project }) => {
 	}, [project?.link]);
 
 	return (
-		<div className={cn('grid min-h-110 w-full grid-cols-1 overflow-hidden rounded-2xl border border-solid lg:grid-cols-2 lg:rounded-4xl backdrop-blur-xl z-2 shadow shadow-dark/5 dark:shadow-light/5 bg-indigo-100/30 dark:bg-cyan-950/30 border-indigo-200 dark:border-cyan-950', project?.className)}>
+		<div className={cn('grid min-h-110 w-full grid-cols-1 overflow-hidden rounded-2xl border border-solid lg:grid-cols-2 lg:rounded-4xl backdrop-blur-xl z-2 shadow shadow-dark/5 dark:shadow-light/5 bg-blue-100/30 dark:bg-cyan-950/30 border-blue-200/50 dark:border-cyan-950/50', project?.className)}>
 			<div className='flex flex-col items-start justify-center gap-2 p-4 sm:gap-4 sm:p-6 lg:p-8 xl:p-12'>
 				{project?.icon && <div className='h-9 w-auto'>{project.icon}</div>}
 				<p className='text-secondary-800 dark:text-secondary-200 text-sm leading-normal font-medium sm:text-base'>{project.description}</p>
