@@ -35,6 +35,8 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 
 	const containerRef = useRef<HTMLDivElement>(null);
 	const scrollTriggersRef = useRef<ScrollTrigger[]>([]);
+	const scalingStoppedRef = useRef<boolean>(false);
+	const finalScalesRef = useRef<number[]>([]);
 
 	useEffect(() => {
 		if (!enabled || !containerRef.current) {
@@ -48,6 +50,10 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 		scrollTriggersRef.current.forEach((trigger) => trigger.kill());
 		scrollTriggersRef.current = [];
 
+		// Reset scaling state
+		scalingStoppedRef.current = false;
+		finalScalesRef.current = [];
+
 		// Don't apply animation if there are no cards or only one card
 		if (cards.length <= 1) {
 			return;
@@ -55,6 +61,9 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 
 		// Generate scale values based on card count
 		const scaleValues = generateScaleValues(cards.length, defaultMinScale);
+
+		// Calculate when the second-to-last card reaches its position
+		const secondToLastIndex = cards.length - 2;
 
 		// Set up each card with pinning and scaling
 		cards.forEach((card, index) => {
@@ -92,15 +101,44 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 				onUpdate: (self) => {
 					const progress = self.progress;
 
-					// Normal scaling during stacking phase
-					const currentScale = 1 - (1 - targetScale) * progress;
-					gsap.set(card, {
-						scale: currentScale,
-					});
+					// Check if we've reached the second-to-last card's position
+					if (index === secondToLastIndex && progress > 0 && !scalingStoppedRef.current) {
+						// Lock all current scales
+						scalingStoppedRef.current = true;
+						cards.forEach((_card, i) => {
+							const currentTrigger = scrollTriggersRef.current[i];
+							if (currentTrigger && i < cards.length - 1) {
+								const currentProgress = currentTrigger.progress;
+								const currentTargetScale = scaleValues[i];
+								const lockedScale = 1 - (1 - currentTargetScale) * currentProgress;
+								finalScalesRef.current[i] = lockedScale;
+							} else {
+								finalScalesRef.current[i] = 1;
+							}
+						});
+					}
+
+					// Apply scaling based on whether we've stopped or not
+					if (scalingStoppedRef.current) {
+						// Use locked scale
+						gsap.set(card, {
+							scale: finalScalesRef.current[index] || 1,
+						});
+					} else {
+						// Normal scaling during stacking phase
+						const currentScale = 1 - (1 - targetScale) * progress;
+						gsap.set(card, {
+							scale: currentScale,
+						});
+					}
 				},
 				onLeave: () => {
-					// When card unpins and starts leaving, inherit scale from previous card
-					if (index > 0) {
+					// When card unpins and starts leaving, use final scale
+					if (scalingStoppedRef.current && finalScalesRef.current[index]) {
+						gsap.set(card, {
+							scale: finalScalesRef.current[index],
+						});
+					} else if (index > 0) {
 						const previousCardScale = scaleValues[index - 1];
 						gsap.set(card, {
 							scale: previousCardScale,
