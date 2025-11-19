@@ -11,6 +11,7 @@ const LandingPage = memo(() => {
 			<Technologies />
 			<Testimonials />
 			<Portfolio />
+			<div className='h-screen'>https://brixagency.com/</div>
 		</>
 	);
 });

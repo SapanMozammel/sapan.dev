@@ -13,6 +13,7 @@ const Portfolio = memo(() => {
 		topStart: 120,
 		topIncrement: 20,
 		defaultMinScale: 0.9,
+		gap: 32, // 2rem = 32px (gap-8 in Tailwind)
 		enabled: true,
 	});
 
@@ -21,7 +22,7 @@ const Portfolio = memo(() => {
 			<SectionSeparator lts rts lbs rbs tl bl ll rl>
 				<div className='container flex w-full grow flex-col items-center justify-start gap-4 pb-8 sm:pb-12 lg:pb-16'>
 					<SectionTitle subtitle='Projects' title={`My Recent Works`} watermark='Portfolio' />
-					<div ref={stackingCardsRef} className='relative z-2 grid w-full grid-cols-1 gap-8'>
+					<div ref={stackingCardsRef} className='relative z-2 grid w-full grid-cols-1'>
 						{PORTFOLIO_PROJECTS.map((project, index) => (
 							<ProjectCard key={index} project={project} />
 						))}

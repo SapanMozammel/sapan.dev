@@ -13,6 +13,7 @@ type UseStackingCardsOptions = {
 	topStart?: number;
 	topIncrement?: number;
 	defaultMinScale?: number;
+	gap?: number;
 	enabled?: boolean;
 };
 
@@ -24,12 +25,13 @@ type UseStackingCardsOptions = {
  * @param options.topStart - Starting top position in pixels (default: 120)
  * @param options.topIncrement - Increment for each card's top position (default: 20)
  * @param options.defaultMinScale - Minimum scale for cards (default: 0.9)
+ * @param options.gap - Gap between cards in pixels (default: 0)
  * @param options.enabled - Whether the animation is enabled (default: true)
  *
  * @returns A ref to attach to the container element
  */
 export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
-	const { topStart = 120, topIncrement = 20, defaultMinScale = 0.9, enabled = true } = options;
+	const { topStart = 120, topIncrement = 20, defaultMinScale = 0.9, gap = 0, enabled = true } = options;
 
 	const containerRef = useRef<HTMLDivElement>(null);
 	const scrollTriggersRef = useRef<ScrollTrigger[]>([]);
@@ -59,29 +61,14 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 			const topPosition = topStart + index * topIncrement;
 			const targetScale = scaleValues[index];
 
-			// Set initial state
+			// Set initial state with gap
 			gsap.set(card, {
 				zIndex: index + 1,
 				transformOrigin: 'center top',
+				marginBottom: index < cards.length - 1 ? gap : 0,
 			});
 
-			// Skip animation for the last card - it just pins
-			if (index === cards.length - 1) {
-				const trigger = ScrollTrigger.create({
-					trigger: card,
-					start: `top ${topPosition}px`,
-					end: 'bottom top',
-					pin: true,
-					pinSpacing: false,
-					invalidateOnRefresh: true,
-				});
-				scrollTriggersRef.current.push(trigger);
-				return;
-			}
-
-			// Create ScrollTrigger for this card
-			// Each card should remain pinned and scale until all subsequent cards have passed
-			// Calculate total stacking distance based on all remaining cards
+			// Calculate total stacking distance - all cards unpin when last card reaches its position
 			let totalStackingDistance = 0;
 
 			// Sum up the heights of all cards after this one
@@ -89,10 +76,9 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 				totalStackingDistance += cards[i].offsetHeight;
 			}
 
-			// Add spacing between cards (gap-8 = 2rem = 32px in Tailwind)
-			const cardGap = 32;
+			// Add spacing between cards
 			const remainingGaps = cards.length - index - 1;
-			totalStackingDistance += remainingGaps * cardGap;
+			totalStackingDistance += remainingGaps * gap;
 
 			const trigger = ScrollTrigger.create({
 				trigger: card,
@@ -100,17 +86,26 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 				end: `+=${totalStackingDistance}`,
 				pin: true,
 				pinSpacing: false,
-				scrub: 1, // Smooth scrubbing with 1 second delay
+				scrub: 1,
 				invalidateOnRefresh: true,
 				anticipatePin: 1,
 				onUpdate: (self) => {
-					// Calculate scale based on scroll progress
 					const progress = self.progress;
-					const currentScale = 1 - (1 - targetScale) * progress;
 
+					// Normal scaling during stacking phase
+					const currentScale = 1 - (1 - targetScale) * progress;
 					gsap.set(card, {
 						scale: currentScale,
 					});
+				},
+				onLeave: () => {
+					// When card unpins and starts leaving, inherit scale from previous card
+					if (index > 0) {
+						const previousCardScale = scaleValues[index - 1];
+						gsap.set(card, {
+							scale: previousCardScale,
+						});
+					}
 				},
 			});
 
@@ -133,7 +128,7 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 				});
 			});
 		};
-	}, [enabled, topStart, topIncrement, defaultMinScale]);
+	}, [enabled, topStart, topIncrement, defaultMinScale, gap]);
 
 	return containerRef;
 };
