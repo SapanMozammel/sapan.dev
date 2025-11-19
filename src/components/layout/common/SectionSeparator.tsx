@@ -3,7 +3,7 @@ import { IconPlus } from '@tabler/icons-react';
 import React, { memo, useMemo } from 'react';
 
 // Move static classes outside component to prevent recreation
-const STAR_CLASSES = 'w-3 md:w-4 text-primary dark:text-success z-1';
+const STAR_CLASSES = 'w-3 md:w-4 h-3 md:h-4 text-primary dark:text-success z-1';
 const LINE_CLASSES = 'border-solid border-secondary-400 dark:border-secondary-600';
 
 const SectionSeparator = memo<React.DetailedHTMLProps<React.AllHTMLAttributes<HTMLDivElement>, HTMLDivElement> & SeparatorTypes>((props) => {

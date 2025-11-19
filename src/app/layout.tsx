@@ -89,7 +89,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 				<Providers>
 					<div className='text-dark relative bg-white dark:bg-black dark:text-white'>
 						<Header />
-						<main className='overflow-x-hidden'>{children}</main>
+						<main className='overflow-x-hidden py-2.5 -my-2.5'>{children}</main>
 						<Footer />
 						<div className="animate-noise pointer-events-none absolute inset-0 z-20 hidden bg-[url('/noise.png')] bg-repeat opacity-5 select-none lg:block dark:opacity-15" />
 					</div>

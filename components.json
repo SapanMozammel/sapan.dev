@@ -12,7 +12,8 @@
 	"aliases": {
 		"components": "@/components",
 		"ui": "@/components/ui",
-		"utils": "@/lib/utils"
+		"utils": "@/lib/utils",
+		"icons": "@/components/icons"
 	},
 	"iconLibrary": "tabler"
 }

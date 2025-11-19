@@ -5,6 +5,7 @@ export type CursorTooltipProps = {
 	offset?: { x: number; y: number };
 	/** Custom class for tooltip content when content is a string */
 	contentClassName?: string;
+	onClick?: () => void;
 };
 
 export type Position = {

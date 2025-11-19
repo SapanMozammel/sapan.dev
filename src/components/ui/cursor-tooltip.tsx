@@ -36,7 +36,7 @@ const calculateElementCenter = (element: Element): Position => {
 	};
 };
 
-const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, content, className, offset = { x: 0, y: 0 }, contentClassName }) => {
+const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, content, className, offset = { x: 0, y: 0 }, contentClassName, onClick }) => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const tooltipRef = useRef<HTMLDivElement>(null);
 	const entranceTweenRef = useRef<gsap.core.Tween | null>(null);
@@ -161,7 +161,7 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, conten
 	}, [content, contentClassName]);
 
 	return (
-		<div ref={containerRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} className={cn('cursor-none', className)}>
+		<div ref={containerRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} onClick={onClick} className={cn('cursor-none', className)}>
 			{children}
 			<div
 				ref={tooltipRef}
