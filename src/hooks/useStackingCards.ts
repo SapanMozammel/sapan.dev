@@ -15,12 +15,6 @@ const DEFAULT_MIN_SCALE = 0.9;
 const DEFAULT_GAP = 0;
 const DEFAULT_ENABLED = true;
 
-/**
- * Custom hook for creating a stacking card animation effect using GSAP ScrollTrigger
- *
- * @param options - Configuration options for the stacking animation
- * @returns A ref to attach to the container element
- */
 export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 	const {
 		topStart = DEFAULT_TOP_START,
@@ -32,8 +26,6 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 
 	const containerRef = useRef<HTMLDivElement>(null);
 	const scrollTriggersRef = useRef<ScrollTrigger[]>([]);
-	const scalingStoppedRef = useRef<boolean>(false);
-	const finalScalesRef = useRef<number[]>([]);
 
 	useEffect(() => {
 		if (!enabled || !containerRef.current) {
@@ -45,19 +37,62 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 
 		scrollTriggersRef.current.forEach((trigger) => trigger.kill());
 		scrollTriggersRef.current = [];
-		scalingStoppedRef.current = false;
-		finalScalesRef.current = [];
 
 		if (cards.length <= 1) {
 			return;
 		}
 
 		const scaleValues = generateScaleValues(cards.length, defaultMinScale);
-		const secondToLastIndex = cards.length - 2;
+		const lastCardIndex = cards.length - 1;
+		const updateAllCardsScale = () => {
+			const lastCard = cards[lastCardIndex];
+			const lastCardTop = lastCard.getBoundingClientRect().top;
+
+			cards.forEach((cardToUpdate, cardIndex) => {
+				const cardTargetScale = scaleValues[cardIndex];
+				const cardStickyTop = topStart + cardIndex * topIncrement;
+				const cardTrigger = scrollTriggersRef.current[cardIndex];
+				const cardProgress = cardTrigger?.progress ?? 0;
+
+				const forwardScale = 1 - (1 - cardTargetScale) * cardProgress;
+
+				let shouldReverseScale = false;
+				let reverseScaleProgress = 0;
+
+				if (cardIndex === lastCardIndex) {
+					const secondToLastCardIndex = lastCardIndex - 1;
+					if (secondToLastCardIndex >= 0) {
+						const secondToLastCardTop = topStart + secondToLastCardIndex * topIncrement;
+
+						if (lastCardTop <= secondToLastCardTop) {
+							shouldReverseScale = true;
+							const animationRange = secondToLastCardTop - topStart;
+							if (animationRange > 0) {
+								reverseScaleProgress = Math.max(0, Math.min(1, (secondToLastCardTop - lastCardTop) / animationRange));
+							}
+						}
+					}
+				} else {
+					if (lastCardTop < cardStickyTop) {
+						shouldReverseScale = true;
+						const animationRange = cardStickyTop - topStart;
+						if (animationRange > 0) {
+							reverseScaleProgress = Math.max(0, Math.min(1, (cardStickyTop - lastCardTop) / animationRange));
+						}
+					}
+				}
+
+				if (shouldReverseScale) {
+					const reverseScale = cardTargetScale + reverseScaleProgress * (defaultMinScale - cardTargetScale);
+					gsap.set(cardToUpdate, { scale: reverseScale });
+				} else {
+					gsap.set(cardToUpdate, { scale: forwardScale });
+				}
+			});
+		};
 
 		cards.forEach((card, index) => {
 			const topPosition = topStart + index * topIncrement;
-			const targetScale = scaleValues[index];
 
 			gsap.set(card, {
 				zIndex: index + 1,
@@ -80,37 +115,10 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 				scrub: 1,
 				invalidateOnRefresh: true,
 				anticipatePin: 1,
-				onUpdate: (self) => {
-					const progress = self.progress;
-
-					if (index === secondToLastIndex && progress > 0 && !scalingStoppedRef.current) {
-						scalingStoppedRef.current = true;
-						cards.forEach((_card, i) => {
-							const currentTrigger = scrollTriggersRef.current[i];
-							if (currentTrigger && i < cards.length - 1) {
-								const currentProgress = currentTrigger.progress;
-								const currentTargetScale = scaleValues[i];
-								const lockedScale = 1 - (1 - currentTargetScale) * currentProgress;
-								finalScalesRef.current[i] = lockedScale;
-							} else {
-								finalScalesRef.current[i] = 1;
-							}
-						});
-					}
-
-					if (scalingStoppedRef.current) {
-						gsap.set(card, { scale: finalScalesRef.current[index] || 1 });
-					} else {
-						const currentScale = 1 - (1 - targetScale) * progress;
-						gsap.set(card, { scale: currentScale });
-					}
-				},
+				onUpdate: updateAllCardsScale,
 				onLeave: () => {
-					if (scalingStoppedRef.current && finalScalesRef.current[index]) {
-						gsap.set(card, { scale: finalScalesRef.current[index] });
-					} else if (index > 0) {
-						gsap.set(card, { scale: scaleValues[index - 1] });
-					}
+					const currentScale = gsap.getProperty(card, 'scale') as number;
+					gsap.set(card, { scale: currentScale });
 				},
 			});
 
@@ -122,7 +130,6 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 		return () => {
 			scrollTriggersRef.current.forEach((trigger) => trigger.kill());
 			scrollTriggersRef.current = [];
-			ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 			cards.forEach((card) => {
 				gsap.set(card, { clearProps: 'all' });
 			});
@@ -132,17 +139,9 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 	return containerRef;
 };
 
-/**
- * Generate scale values for cards based on count
- */
-function generateScaleValues(count: number, minScale: number): number[] {
-	if (count === 0) {
-		return [];
-	}
-
-	if (count <= 2) {
-		return Array(count).fill(1.0);
-	}
+const generateScaleValues = (count: number, minScale: number): number[] => {
+	if (count === 0) return [];
+	if (count <= 2) return Array(count).fill(1.0);
 
 	const values: number[] = [];
 	const scalingSectionCount = count - 1;
@@ -154,6 +153,5 @@ function generateScaleValues(count: number, minScale: number): number[] {
 	}
 
 	values.push(1.0);
-
 	return values;
-}
+};

@@ -12,13 +12,13 @@ const Portfolio = memo(() => {
 	const stackingCardsRef = useStackingCards({
 		topStart: 120,
 		topIncrement: 20,
-		defaultMinScale: 0.9,
-		gap: 32, // 2rem = 32px (gap-8 in Tailwind)
+		defaultMinScale: 0.925,
+		gap: 32,
 		enabled: true,
 	});
 
 	return (
-		<section className='relative z-1 pb-12 sm:pb-16 lg:pb-20'>
+		<section className='relative z-1 pb-8 sm:pb-12 lg:pb-16'>
 			<SectionSeparator lts rts lbs rbs tl bl ll rl>
 				<div className='container flex w-full grow flex-col items-center justify-start gap-4 pb-8 sm:pb-12 lg:pb-16'>
 					<SectionTitle subtitle='Projects' title={`My Recent Works`} watermark='Portfolio' />
