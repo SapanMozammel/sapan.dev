@@ -1,37 +1,34 @@
 'use client';
 
+import type { UseStackingCardsOptions } from '@/types/stacking-cards';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useEffect, useRef } from 'react';
 
-// Register ScrollTrigger plugin
 if (typeof window !== 'undefined') {
 	gsap.registerPlugin(ScrollTrigger);
 }
 
-type UseStackingCardsOptions = {
-	topStart?: number;
-	topIncrement?: number;
-	defaultMinScale?: number;
-	gap?: number;
-	enabled?: boolean;
-};
+const DEFAULT_TOP_START = 120;
+const DEFAULT_TOP_INCREMENT = 20;
+const DEFAULT_MIN_SCALE = 0.9;
+const DEFAULT_GAP = 0;
+const DEFAULT_ENABLED = true;
 
 /**
  * Custom hook for creating a stacking card animation effect using GSAP ScrollTrigger
- * Matches the exact behavior from brixagency.com
  *
  * @param options - Configuration options for the stacking animation
- * @param options.topStart - Starting top position in pixels (default: 120)
- * @param options.topIncrement - Increment for each card's top position (default: 20)
- * @param options.defaultMinScale - Minimum scale for cards (default: 0.9)
- * @param options.gap - Gap between cards in pixels (default: 0)
- * @param options.enabled - Whether the animation is enabled (default: true)
- *
  * @returns A ref to attach to the container element
  */
 export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
-	const { topStart = 120, topIncrement = 20, defaultMinScale = 0.9, gap = 0, enabled = true } = options;
+	const {
+		topStart = DEFAULT_TOP_START,
+		topIncrement = DEFAULT_TOP_INCREMENT,
+		defaultMinScale = DEFAULT_MIN_SCALE,
+		gap = DEFAULT_GAP,
+		enabled = DEFAULT_ENABLED,
+	} = options;
 
 	const containerRef = useRef<HTMLDivElement>(null);
 	const scrollTriggersRef = useRef<ScrollTrigger[]>([]);
@@ -46,48 +43,33 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 		const container = containerRef.current;
 		const cards = Array.from(container.children) as HTMLElement[];
 
-		// Clear any existing ScrollTriggers
 		scrollTriggersRef.current.forEach((trigger) => trigger.kill());
 		scrollTriggersRef.current = [];
-
-		// Reset scaling state
 		scalingStoppedRef.current = false;
 		finalScalesRef.current = [];
 
-		// Don't apply animation if there are no cards or only one card
 		if (cards.length <= 1) {
 			return;
 		}
 
-		// Generate scale values based on card count
 		const scaleValues = generateScaleValues(cards.length, defaultMinScale);
-
-		// Calculate when the second-to-last card reaches its position
 		const secondToLastIndex = cards.length - 2;
 
-		// Set up each card with pinning and scaling
 		cards.forEach((card, index) => {
 			const topPosition = topStart + index * topIncrement;
 			const targetScale = scaleValues[index];
 
-			// Set initial state with gap
 			gsap.set(card, {
 				zIndex: index + 1,
 				transformOrigin: 'center top',
 				marginBottom: index < cards.length - 1 ? gap : 0,
 			});
 
-			// Calculate total stacking distance - all cards unpin when last card reaches its position
 			let totalStackingDistance = 0;
-
-			// Sum up the heights of all cards after this one
 			for (let i = index + 1; i < cards.length; i++) {
 				totalStackingDistance += cards[i].offsetHeight;
 			}
-
-			// Add spacing between cards
-			const remainingGaps = cards.length - index - 1;
-			totalStackingDistance += remainingGaps * gap;
+			totalStackingDistance += (cards.length - index - 1) * gap;
 
 			const trigger = ScrollTrigger.create({
 				trigger: card,
@@ -101,9 +83,7 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 				onUpdate: (self) => {
 					const progress = self.progress;
 
-					// Check if we've reached the second-to-last card's position
 					if (index === secondToLastIndex && progress > 0 && !scalingStoppedRef.current) {
-						// Lock all current scales
 						scalingStoppedRef.current = true;
 						cards.forEach((_card, i) => {
 							const currentTrigger = scrollTriggersRef.current[i];
@@ -118,31 +98,18 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 						});
 					}
 
-					// Apply scaling based on whether we've stopped or not
 					if (scalingStoppedRef.current) {
-						// Use locked scale
-						gsap.set(card, {
-							scale: finalScalesRef.current[index] || 1,
-						});
+						gsap.set(card, { scale: finalScalesRef.current[index] || 1 });
 					} else {
-						// Normal scaling during stacking phase
 						const currentScale = 1 - (1 - targetScale) * progress;
-						gsap.set(card, {
-							scale: currentScale,
-						});
+						gsap.set(card, { scale: currentScale });
 					}
 				},
 				onLeave: () => {
-					// When card unpins and starts leaving, use final scale
 					if (scalingStoppedRef.current && finalScalesRef.current[index]) {
-						gsap.set(card, {
-							scale: finalScalesRef.current[index],
-						});
+						gsap.set(card, { scale: finalScalesRef.current[index] });
 					} else if (index > 0) {
-						const previousCardScale = scaleValues[index - 1];
-						gsap.set(card, {
-							scale: previousCardScale,
-						});
+						gsap.set(card, { scale: scaleValues[index - 1] });
 					}
 				},
 			});
@@ -150,20 +117,14 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 			scrollTriggersRef.current.push(trigger);
 		});
 
-		// Refresh ScrollTrigger after setup
 		ScrollTrigger.refresh();
 
-		// Cleanup function
 		return () => {
 			scrollTriggersRef.current.forEach((trigger) => trigger.kill());
 			scrollTriggersRef.current = [];
 			ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-
-			// Reset card styles
 			cards.forEach((card) => {
-				gsap.set(card, {
-					clearProps: 'all',
-				});
+				gsap.set(card, { clearProps: 'all' });
 			});
 		};
 	}, [enabled, topStart, topIncrement, defaultMinScale, gap]);
@@ -175,30 +136,23 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
  * Generate scale values for cards based on count
  */
 function generateScaleValues(count: number, minScale: number): number[] {
-	if (count === 0) return [];
-
-	const values: number[] = [];
-
-	// Handle edge cases
-	if (count <= 2) {
-		for (let i = 0; i < count; i++) {
-			values.push(1.0);
-		}
-		return values;
+	if (count === 0) {
+		return [];
 	}
 
-	// For count >= 3: Apply progressive scaling with last card at 1.0
-	const scalingSectionCount = count - 1;
-	const targetScale = 1.0;
+	if (count <= 2) {
+		return Array(count).fill(1.0);
+	}
 
-	// Generate scale values for scaling cards (all except last)
+	const values: number[] = [];
+	const scalingSectionCount = count - 1;
+
 	for (let i = 0; i < scalingSectionCount; i++) {
 		const progress = i / (scalingSectionCount - 1);
-		const scale = minScale + progress * (targetScale - minScale);
+		const scale = minScale + progress * (1.0 - minScale);
 		values.push(Number(scale.toPrecision(6)));
 	}
 
-	// Last card always has scale = 1.0
 	values.push(1.0);
 
 	return values;
