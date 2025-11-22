@@ -5,4 +5,3 @@ export type UseStackingCardsOptions = {
 	gap?: number;
 	enabled?: boolean;
 };
-

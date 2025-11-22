@@ -1,5 +1,6 @@
-import type { PortfolioProject } from '@/types/portfolio';
 import TubeOnAILogo from '@/lib/icons/projects/TubeOnAI/Logo';
+import type { PortfolioProject } from '@/types/portfolio';
+import TemplatelyLogo from '../icons/projects/Templately/Logo';
 
 export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 	{
@@ -13,7 +14,17 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: 'https://tubeonai.com/wp-content/uploads/2025/02/Summaries-scaled.webp',
 	},
 	{
-		title: 'TubeOnAI',
+		title: 'Templately',
+		description:
+			'A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance. A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance.',
+		role: 'Frontend Developer, Plugin Developer',
+		technologies: ['TypeScript', 'React.js', 'Next.js', 'React Query', 'React Hook Form', 'Zod'],
+		link: '#',
+		icon: <TemplatelyLogo />,
+		image: 'https://blog.templately.com/wp-content/uploads/2023/07/image.jpeg',
+	},
+	{
+		title: 'xCloud',
 		description:
 			'A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance. A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance.',
 		role: 'Frontend Developer',
@@ -23,7 +34,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: 'https://tubeonai.com/wp-content/uploads/2025/02/Summaries-scaled.webp',
 	},
 	{
-		title: 'TubeOnAI',
+		title: 'Betterdocs',
 		description:
 			'A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance. A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance.',
 		role: 'Frontend Developer',
@@ -33,7 +44,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: 'https://tubeonai.com/wp-content/uploads/2025/02/Summaries-scaled.webp',
 	},
 	{
-		title: 'TubeOnAI',
+		title: 'NotificationX',
 		description:
 			'A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance. A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance.',
 		role: 'Frontend Developer',
@@ -43,7 +54,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: 'https://tubeonai.com/wp-content/uploads/2025/02/Summaries-scaled.webp',
 	},
 	{
-		title: 'TubeOnAI',
+		title: 'SchedulePress',
 		description:
 			'A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance. A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance.',
 		role: 'Frontend Developer',
@@ -53,7 +64,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: 'https://tubeonai.com/wp-content/uploads/2025/02/Summaries-scaled.webp',
 	},
 	{
-		title: 'TubeOnAI',
+		title: 'BetterLinks',
 		description:
 			'A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance. A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance.',
 		role: 'Frontend Developer',
@@ -63,7 +74,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: 'https://tubeonai.com/wp-content/uploads/2025/02/Summaries-scaled.webp',
 	},
 	{
-		title: 'TubeOnAI',
+		title: 'WpDeveloper Store',
 		description:
 			'A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance. A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance.',
 		role: 'Frontend Developer',
@@ -73,7 +84,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: 'https://tubeonai.com/wp-content/uploads/2025/02/Summaries-scaled.webp',
 	},
 	{
-		title: 'TubeOnAI',
+		title: 'Easy.Jobs',
 		description:
 			'A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance. A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance.',
 		role: 'Frontend Developer',

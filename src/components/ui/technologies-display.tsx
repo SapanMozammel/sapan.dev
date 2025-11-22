@@ -12,12 +12,16 @@ const VISIBLE_TECHNOLOGIES_COUNT = 3;
 
 export const TechnologiesDisplay = memo<TechnologiesDisplayProps>(({ technologies, visibleCount = VISIBLE_TECHNOLOGIES_COUNT }) => {
 	const visibleTechnologies = useMemo(() => {
-		if (!technologies || technologies.length === 0) return [];
+		if (!technologies || technologies.length === 0) {
+			return [];
+		}
 		return technologies.slice(0, visibleCount);
 	}, [technologies, visibleCount]);
 
 	const remainingCount = useMemo(() => {
-		if (!technologies || technologies.length <= visibleCount) return 0;
+		if (!technologies || technologies.length <= visibleCount) {
+			return 0;
+		}
 		return technologies.length - visibleCount;
 	}, [technologies, visibleCount]);
 
@@ -44,10 +48,7 @@ export const TechnologiesDisplay = memo<TechnologiesDisplayProps>(({ technologie
 								+{remainingCount}
 							</button>
 						</TooltipTrigger>
-						<TooltipContent
-							className='bg-primary dark:bg-success max-w-xs rounded-2xl px-4 py-3 text-sm font-medium text-white dark:text-black text-center'
-							side='top'
-						>
+						<TooltipContent className='bg-primary dark:bg-success max-w-xs rounded-2xl px-4 py-3 text-center text-sm font-medium text-white dark:text-black' side='top'>
 							<div className='flex flex-wrap gap-1.5'>{technologies.join(', ')}</div>
 						</TooltipContent>
 					</Tooltip>

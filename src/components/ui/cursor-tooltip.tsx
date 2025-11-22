@@ -4,8 +4,8 @@ import { cn } from '@/lib/utils';
 import type { CursorTooltipProps, Position, TooltipContentProps } from '@/types/cursor-tooltip';
 import { gsap } from 'gsap';
 import React, { memo, useCallback, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
-// Default tooltip content component for consistent styling
 export const TooltipContent = memo<TooltipContentProps>(({ children, className }) => (
 	<div className={cn('bg-primary/80 border-primary dark:border-success dark:bg-success/80 pointer-events-none rounded-2xl border-1 border-solid px-3 py-2 text-sm font-medium text-white dark:text-black', className)}>
 		{children}
@@ -41,12 +41,19 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, conten
 	const tooltipRef = useRef<HTMLDivElement>(null);
 	const entranceTweenRef = useRef<gsap.core.Tween | null>(null);
 	const followTweenRef = useRef<gsap.core.Tween | null>(null);
+	const [mounted, setMounted] = React.useState(false);
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
 
 	const calculateCursorPosition = useCallback(
-		(e: MouseEvent): Position => ({
-			x: e.clientX + offset.x,
-			y: e.clientY + offset.y,
-		}),
+		(e: MouseEvent): Position => {
+			return {
+				x: e.clientX + offset.x,
+				y: e.clientY + offset.y,
+			};
+		},
 		[offset.x, offset.y]
 	);
 
@@ -161,24 +168,29 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, conten
 	}, [content, contentClassName]);
 
 	return (
-		<div ref={containerRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} onClick={onClick} className={cn('cursor-none', className)}>
-			{children}
-			<div
-				ref={tooltipRef}
-				className='pointer-events-none fixed z-50'
-				style={{
-					left: 0,
-					top: 0,
-					opacity: 0,
-				}}
-			>
-				{renderedContent}
+		<>
+			<div ref={containerRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} onClick={onClick} className={cn('cursor-none', className)}>
+				{children}
 			</div>
-		</div>
+			{mounted &&
+				createPortal(
+					<div
+						ref={tooltipRef}
+						className='pointer-events-none fixed z-50'
+						style={{
+							left: 0,
+							top: 0,
+							opacity: 0,
+						}}
+					>
+						{renderedContent}
+					</div>,
+					document.body
+				)}
+		</>
 	);
 };
 
-// Export the memoized component
 export const CursorTooltip = memo(CursorTooltipComponent);
 CursorTooltip.displayName = 'CursorTooltip';
 

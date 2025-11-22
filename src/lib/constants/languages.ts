@@ -19,4 +19,3 @@ export const LANGUAGES = [
 
 export type LanguageCode = (typeof LANGUAGES)[number]['code'];
 export type Language = (typeof LANGUAGES)[number];
-

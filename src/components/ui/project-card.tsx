@@ -2,18 +2,16 @@
 
 import CursorTooltip from '@/components/ui/cursor-tooltip';
 import { TechnologiesDisplay } from '@/components/ui/technologies-display';
-import { cn } from '@/lib/utils';
 import { getBlurDataURL } from '@/lib/utils/image';
 import type { ProjectCardProps } from '@/types/portfolio';
 import { IconArrowRight, IconArrowUpRight } from '@tabler/icons-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { memo, useCallback, useMemo } from 'react';
+import { memo, useCallback } from 'react';
 
 const IMAGE_SIZE = 600;
 const IMAGE_PLACEHOLDER = getBlurDataURL(IMAGE_SIZE, IMAGE_SIZE);
 
-// Static tooltip content to prevent recreation on every render
 const TOOLTIP_CONTENT = (
 	<span className='bg-primary/80 border-primary dark:border-success dark:bg-success/80 pointer-events-none inline-flex rounded-2xl border-1 border-solid px-3 py-2 text-sm font-medium text-white dark:text-black'>
 		<IconArrowUpRight className='h-6 w-6' stroke={2.5} />
@@ -21,7 +19,6 @@ const TOOLTIP_CONTENT = (
 );
 
 const ProjectCard = memo<ProjectCardProps>(({ project }) => {
-	// Memoize onClick handler to prevent recreation on every render
 	const handleClick = useCallback(() => {
 		if (project?.link) {
 			window.open(project.link, '_blank', 'noopener,noreferrer');
@@ -29,11 +26,11 @@ const ProjectCard = memo<ProjectCardProps>(({ project }) => {
 	}, [project?.link]);
 
 	return (
-		<div className={cn('grid min-h-110 w-full grid-cols-1 overflow-hidden rounded-2xl border border-solid lg:grid-cols-2 lg:rounded-4xl backdrop-blur-xl z-2 shadow shadow-dark/5 dark:shadow-light/5 bg-blue-100/30 dark:bg-cyan-950/30 border-blue-200/50 dark:border-cyan-950/50', project?.className)}>
+		<div className='shadow-dark/5 dark:shadow-light/5 z-2 grid min-h-110 w-full grid-cols-1 overflow-hidden rounded-2xl border border-solid border-blue-200/50 bg-blue-100/30 shadow backdrop-blur-xl lg:grid-cols-2 lg:rounded-4xl dark:border-cyan-950/50 dark:bg-cyan-950/30'>
 			<div className='flex flex-col items-start justify-center gap-2 p-4 sm:gap-4 sm:p-6 lg:p-8 xl:p-12'>
 				{project?.icon && <div className='h-9 w-auto'>{project.icon}</div>}
 				<p className='text-secondary-800 dark:text-secondary-200 text-sm leading-normal font-medium sm:text-base'>{project.description}</p>
-				<div className='mt-1.5 grid w-full grid-cols-1 gap-y-2.5 sm:grid-cols-3 gap-x-4 mb-1.5 sm:mb-0'>
+				<div className='mt-1.5 mb-1.5 grid w-full grid-cols-1 gap-x-4 gap-y-2.5 sm:mb-0 sm:grid-cols-3'>
 					{project.role && (
 						<div className='flex flex-col gap-0.5'>
 							<h4 className='font-sora text-base font-bold text-black sm:text-lg dark:text-white'>Role</h4>
@@ -56,7 +53,7 @@ const ProjectCard = memo<ProjectCardProps>(({ project }) => {
 				</Link>
 			</div>
 			<div className='h-52 w-full px-4 pb-4 sm:h-80 sm:px-6 sm:pb-6 lg:h-full lg:pt-6'>
-				<CursorTooltip content={TOOLTIP_CONTENT} className='shadow-dark/5 dark:shadow-white/5 relative h-full w-full cursor-pointer overflow-hidden rounded-xl shadow-lg' onClick={handleClick}>
+				<CursorTooltip content={TOOLTIP_CONTENT} className='shadow-dark/5 relative h-full w-full cursor-pointer overflow-hidden rounded-xl shadow-lg dark:shadow-white/5' onClick={handleClick}>
 					<Image
 						src={project.image}
 						alt={`${project.title?.replace(/ /g, '-') || 'project'}-image`}

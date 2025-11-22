@@ -16,13 +16,7 @@ const DEFAULT_GAP = 0;
 const DEFAULT_ENABLED = true;
 
 export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
-	const {
-		topStart = DEFAULT_TOP_START,
-		topIncrement = DEFAULT_TOP_INCREMENT,
-		defaultMinScale = DEFAULT_MIN_SCALE,
-		gap = DEFAULT_GAP,
-		enabled = DEFAULT_ENABLED,
-	} = options;
+	const { topStart = DEFAULT_TOP_START, topIncrement = DEFAULT_TOP_INCREMENT, defaultMinScale = DEFAULT_MIN_SCALE, gap = DEFAULT_GAP, enabled = DEFAULT_ENABLED } = options;
 
 	const containerRef = useRef<HTMLDivElement>(null);
 	const scrollTriggersRef = useRef<ScrollTrigger[]>([]);
@@ -44,50 +38,54 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 
 		const scaleValues = generateScaleValues(cards.length, defaultMinScale);
 		const lastCardIndex = cards.length - 1;
+		const secondToLastCardTop = topStart + (lastCardIndex - 1) * topIncrement;
+
+		let isUpdating = false;
 		const updateAllCardsScale = () => {
-			const lastCard = cards[lastCardIndex];
-			const lastCardTop = lastCard.getBoundingClientRect().top;
+			if (isUpdating) {
+				return;
+			}
+			isUpdating = true;
 
-			cards.forEach((cardToUpdate, cardIndex) => {
-				const cardTargetScale = scaleValues[cardIndex];
-				const cardStickyTop = topStart + cardIndex * topIncrement;
-				const cardTrigger = scrollTriggersRef.current[cardIndex];
-				const cardProgress = cardTrigger?.progress ?? 0;
+			requestAnimationFrame(() => {
+				const lastCard = cards[lastCardIndex];
+				const lastCardTop = lastCard.getBoundingClientRect().top;
 
-				const forwardScale = 1 - (1 - cardTargetScale) * cardProgress;
+				cards.forEach((cardToUpdate, cardIndex) => {
+					const cardTargetScale = scaleValues[cardIndex];
+					const cardStickyTop = topStart + cardIndex * topIncrement;
+					const cardTrigger = scrollTriggersRef.current[cardIndex];
+					const cardProgress = cardTrigger?.progress ?? 0;
 
-				let shouldReverseScale = false;
-				let reverseScaleProgress = 0;
+					const forwardScale = 1 - (1 - cardTargetScale) * cardProgress;
 
-				if (cardIndex === lastCardIndex) {
-					const secondToLastCardIndex = lastCardIndex - 1;
-					if (secondToLastCardIndex >= 0) {
-						const secondToLastCardTop = topStart + secondToLastCardIndex * topIncrement;
+					let shouldReverseScale = false;
+					let reverseScaleProgress = 0;
 
-						if (lastCardTop <= secondToLastCardTop) {
+					if (cardIndex === lastCardIndex) {
+						if (lastCardIndex > 0 && lastCardTop <= secondToLastCardTop) {
 							shouldReverseScale = true;
 							const animationRange = secondToLastCardTop - topStart;
 							if (animationRange > 0) {
 								reverseScaleProgress = Math.max(0, Math.min(1, (secondToLastCardTop - lastCardTop) / animationRange));
 							}
 						}
-					}
-				} else {
-					if (lastCardTop < cardStickyTop) {
-						shouldReverseScale = true;
-						const animationRange = cardStickyTop - topStart;
-						if (animationRange > 0) {
-							reverseScaleProgress = Math.max(0, Math.min(1, (cardStickyTop - lastCardTop) / animationRange));
+					} else {
+						if (lastCardTop < cardStickyTop) {
+							shouldReverseScale = true;
+							const animationRange = cardStickyTop - topStart;
+							if (animationRange > 0) {
+								reverseScaleProgress = Math.max(0, Math.min(1, (cardStickyTop - lastCardTop) / animationRange));
+							}
 						}
 					}
-				}
 
-				if (shouldReverseScale) {
-					const reverseScale = cardTargetScale + reverseScaleProgress * (defaultMinScale - cardTargetScale);
-					gsap.set(cardToUpdate, { scale: reverseScale });
-				} else {
-					gsap.set(cardToUpdate, { scale: forwardScale });
-				}
+					const finalScale = shouldReverseScale ? cardTargetScale + reverseScaleProgress * (defaultMinScale - cardTargetScale) : forwardScale;
+
+					gsap.set(cardToUpdate, { scale: finalScale });
+				});
+
+				isUpdating = false;
 			});
 		};
 
@@ -140,8 +138,12 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 };
 
 const generateScaleValues = (count: number, minScale: number): number[] => {
-	if (count === 0) return [];
-	if (count <= 2) return Array(count).fill(1.0);
+	if (count === 0) {
+		return [];
+	}
+	if (count <= 2) {
+		return Array(count).fill(1.0);
+	}
 
 	const values: number[] = [];
 	const scalingSectionCount = count - 1;

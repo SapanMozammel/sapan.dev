@@ -6,7 +6,6 @@ export type PortfolioProject = {
 	technologies: string[];
 	icon?: React.ReactElement;
 	link?: string;
-	className?: string;
 };
 
 export type ProjectCardProps = {

@@ -5,7 +5,6 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
-// Memoize components to prevent unnecessary re-renders
 const TooltipProvider = React.memo<React.ComponentProps<typeof TooltipPrimitive.Provider>>(({ delayDuration = 0, ...props }) => {
 	return <TooltipPrimitive.Provider data-slot='tooltip-provider' delayDuration={delayDuration} {...props} />;
 });
@@ -41,7 +40,6 @@ const TooltipContent = React.memo<React.ComponentProps<typeof TooltipPrimitive.C
 	);
 });
 
-// Add display names for better debugging
 TooltipProvider.displayName = 'TooltipProvider';
 Tooltip.displayName = 'Tooltip';
 TooltipTrigger.displayName = 'TooltipTrigger';
