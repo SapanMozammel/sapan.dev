@@ -47,7 +47,7 @@ const ProjectCard = memo<ProjectCardProps>(({ project }) => {
 				</div>
 				<Link
 					href='#'
-					className='font-sora text-primary dark:text-success decoration-none inline-flex items-center gap-1 text-sm font-semibold tracking-wider uppercase transition-all duration-150 ease-in hover:gap-2'
+					className='font-sora text-primary dark:text-success decoration-none inline-flex flex-row rtl:flex-row-reverse items-center gap-1 text-sm font-semibold tracking-wider uppercase transition-all duration-150 ease-in hover:gap-2'
 				>
 					<span>Learn More</span>
 					<IconArrowRight stroke={3} className='mb-0.5 h-4 w-4 transition-transform duration-300' />
