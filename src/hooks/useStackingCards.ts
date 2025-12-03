@@ -20,6 +20,14 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 
 	const containerRef = useRef<HTMLDivElement>(null);
 	const scrollTriggersRef = useRef<ScrollTrigger[]>([]);
+	const rafIdRef = useRef<number | null>(null);
+	const cachedValuesRef = useRef<{
+		scaleValues: number[];
+		lastCardIndex: number;
+		secondToLastCardTop: number;
+		cardStickyTops: number[];
+		cards: HTMLElement[];
+	} | null>(null);
 
 	useEffect(() => {
 		if (!enabled || !containerRef.current) {
@@ -29,31 +37,72 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 		const container = containerRef.current;
 		const cards = Array.from(container.children) as HTMLElement[];
 
+		// Clean up previous triggers
 		scrollTriggersRef.current.forEach((trigger) => trigger.kill());
 		scrollTriggersRef.current = [];
 
-		if (cards.length <= 1) {
-			return;
+		// Cancel any pending animation frame
+		if (rafIdRef.current !== null) {
+			cancelAnimationFrame(rafIdRef.current);
+			rafIdRef.current = null;
 		}
 
+		if (cards.length <= 1) {
+			// Return cleanup for early exit to handle any pending rAF
+			return () => {
+				if (rafIdRef.current !== null) {
+					cancelAnimationFrame(rafIdRef.current);
+					rafIdRef.current = null;
+				}
+			};
+		}
+
+		// Track if effect has been cleaned up to prevent stale updates
+		let isUnmounted = false;
+
+		// Pre-calculate and cache all values
 		const scaleValues = generateScaleValues(cards.length, defaultMinScale);
 		const lastCardIndex = cards.length - 1;
 		const secondToLastCardTop = topStart + (lastCardIndex - 1) * topIncrement;
+		const cardStickyTops = cards.map((_, index) => topStart + index * topIncrement);
 
+		cachedValuesRef.current = {
+			scaleValues,
+			lastCardIndex,
+			secondToLastCardTop,
+			cardStickyTops,
+			cards,
+		};
+
+		// Throttle flag to prevent excessive updates
 		let isUpdating = false;
+
+		// Scale update function - uses getBoundingClientRect for accurate position during leave phase
 		const updateAllCardsScale = () => {
-			if (isUpdating) {
-				return;
-			}
+			if (isUpdating || isUnmounted) return;
 			isUpdating = true;
 
-			requestAnimationFrame(() => {
-				const lastCard = cards[lastCardIndex];
+			rafIdRef.current = requestAnimationFrame(() => {
+				// Early exit if unmounted or no cached values
+				if (isUnmounted) {
+					isUpdating = false;
+					return;
+				}
+
+				const cached = cachedValuesRef.current;
+				if (!cached) {
+					isUpdating = false;
+					return;
+				}
+
+				// Use getBoundingClientRect to get actual DOM position
+				// This is essential for the reverse scale animation during the leaving phase
+				const lastCard = cached.cards[cached.lastCardIndex];
 				const lastCardTop = lastCard.getBoundingClientRect().top;
 
-				cards.forEach((cardToUpdate, cardIndex) => {
-					const cardTargetScale = scaleValues[cardIndex];
-					const cardStickyTop = topStart + cardIndex * topIncrement;
+				for (let cardIndex = 0; cardIndex < cached.cards.length; cardIndex++) {
+					const cardTargetScale = cached.scaleValues[cardIndex];
+					const cardStickyTop = cached.cardStickyTops[cardIndex];
 					const cardTrigger = scrollTriggersRef.current[cardIndex];
 					const cardProgress = cardTrigger?.progress ?? 0;
 
@@ -62,12 +111,12 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 					let shouldReverseScale = false;
 					let reverseScaleProgress = 0;
 
-					if (cardIndex === lastCardIndex) {
-						if (lastCardIndex > 0 && lastCardTop <= secondToLastCardTop) {
+					if (cardIndex === cached.lastCardIndex) {
+						if (cached.lastCardIndex > 0 && lastCardTop <= cached.secondToLastCardTop) {
 							shouldReverseScale = true;
-							const animationRange = secondToLastCardTop - topStart;
+							const animationRange = cached.secondToLastCardTop - topStart;
 							if (animationRange > 0) {
-								reverseScaleProgress = Math.max(0, Math.min(1, (secondToLastCardTop - lastCardTop) / animationRange));
+								reverseScaleProgress = Math.max(0, Math.min(1, (cached.secondToLastCardTop - lastCardTop) / animationRange));
 							}
 						}
 					} else {
@@ -82,25 +131,30 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 
 					const finalScale = shouldReverseScale ? cardTargetScale + reverseScaleProgress * (defaultMinScale - cardTargetScale) : forwardScale;
 
-					gsap.set(cardToUpdate, { scale: finalScale });
-				});
+					gsap.set(cached.cards[cardIndex], { scale: finalScale });
+				}
 
 				isUpdating = false;
 			});
 		};
 
+		// Calculate card heights for stacking distance
+		const cardHeights = cards.map((card) => card.offsetHeight);
+
 		cards.forEach((card, index) => {
-			const topPosition = topStart + index * topIncrement;
+			const topPosition = cardStickyTops[index];
 
 			gsap.set(card, {
 				zIndex: index + 1,
 				transformOrigin: 'center top',
 				marginBottom: index < cards.length - 1 ? gap : 0,
+				willChange: 'transform', // Hint to browser for GPU optimization
 			});
 
+			// Calculate stacking distance using cached heights
 			let totalStackingDistance = 0;
 			for (let i = index + 1; i < cards.length; i++) {
-				totalStackingDistance += cards[i].offsetHeight;
+				totalStackingDistance += cardHeights[i];
 			}
 			totalStackingDistance += (cards.length - index - 1) * gap;
 
@@ -113,10 +167,14 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 				scrub: 1,
 				invalidateOnRefresh: true,
 				anticipatePin: 1,
+				// Use only ScrollTrigger's onUpdate for scale updates (removed duplicate scroll listener)
 				onUpdate: updateAllCardsScale,
 				onLeave: () => {
-					const currentScale = gsap.getProperty(card, 'scale') as number;
-					gsap.set(card, { scale: currentScale });
+					// Lock the scale when card leaves (important for leaving behavior)
+					if (!isUnmounted) {
+						const currentScale = gsap.getProperty(card, 'scale') as number;
+						gsap.set(card, { scale: currentScale });
+					}
 				},
 			});
 
@@ -126,9 +184,27 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 		ScrollTrigger.refresh();
 
 		return () => {
+			// Mark as unmounted to prevent stale updates
+			isUnmounted = true;
+
+			// Cancel pending animation frame to prevent memory leaks
+			if (rafIdRef.current !== null) {
+				cancelAnimationFrame(rafIdRef.current);
+				rafIdRef.current = null;
+			}
+
+			// Kill all scroll triggers
 			scrollTriggersRef.current.forEach((trigger) => trigger.kill());
 			scrollTriggersRef.current = [];
+
+			// Clear cached values
+			cachedValuesRef.current = null;
+
+			// Properly clean up GPU-promoted layers and GSAP properties
 			cards.forEach((card) => {
+				// Reset willChange first to release GPU memory
+				gsap.set(card, { willChange: 'auto' });
+				// Then clear all GSAP properties
 				gsap.set(card, { clearProps: 'all' });
 			});
 		};
