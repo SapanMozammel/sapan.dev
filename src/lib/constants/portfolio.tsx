@@ -52,18 +52,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		technologies: ['TypeScript', 'React.js', 'Next.js', 'Astro.js', 'React Query', 'React Hook Form', 'Zod'],
 		link: 'https://betterdocs.co/',
 		icon: <BetterdocsLogo className='h-full w-auto' />,
-		image: 'https://lh7-rt.googleusercontent.com/docsz/AD_4nXeQXNhRQ_AWFnHBqXwsrqiCaamamYhlZ8FJOW1Oog86nk7q2-H6HrRQB_DyJCxVCzZyeztk4vaA85XhjX0bBMEGYtfb1LV5rGCdSf4_c7PwXd275LJjtpHQrDCmPpBby_xd0hW4fA?key=G-jPih2EsuijCx6LyJTqmULN',
-	},
-	{
-		className: 'border-fuchsia-200 bg-fuchsia-50/90 dark:border-fuchsia-900 dark:bg-fuchsia-950/70',
-		title: 'BetterLinks',
-		description:
-			'A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance. A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance.',
-		role: 'Frontend Developer',
-		technologies: ['TypeScript', 'React.js', 'Next.js', 'Astro.js', 'React Query', 'React Hook Form', 'Zod'],
-		link: 'https://betterlinks.io/',
-		icon: <BetterLinksLogo className='h-full w-auto' />,
-		image: 'https://betterlinks.io/wp-content/uploads/2025/11/image-22.png',
+		image: 'https://betterdocs.co/wp-content/uploads/2025/09/image-5.png',
 	},
 	{
 		className: 'border-cyan-200 bg-cyan-50/90 dark:border-cyan-900 dark:bg-cyan-950/70',
@@ -75,6 +64,17 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		link: 'https://store.wpdeveloper.com/',
 		icon: <WpDeveloperStoreLogo className='h-full w-auto' />,
 		image: 'https://assets.wpdeveloper.com/2023/10/image.png',
+	},
+	{
+		className: 'border-teal-200 bg-teal-50/90 dark:border-teal-900 dark:bg-teal-950/70',
+		title: 'NotificationX',
+		description:
+			'A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance. A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance.',
+		role: 'Frontend Developer',
+		technologies: ['TypeScript', 'React.js', 'Next.js', 'Astro.js', 'React Query', 'React Hook Form', 'Zod'],
+		link: 'https://notificationx.com/',
+		icon: <NotificationXLogo className='h-full w-auto' />,
+		image: 'https://notificationx.com/wp-content/uploads/2025/09/image-16.png',
 	},
 	{
 		className: 'border-violet-200 bg-violet-50/90 dark:border-violet-900 dark:bg-violet-950/70',
@@ -99,14 +99,14 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: 'https://schedulepress.com/wp-content/uploads/2025/07/image-6.png',
 	},
 	{
-		className: 'border-teal-200 bg-teal-50/90 dark:border-teal-900 dark:bg-teal-950/70',
-		title: 'NotificationX',
+		className: 'border-fuchsia-200 bg-fuchsia-50/90 dark:border-fuchsia-900 dark:bg-fuchsia-950/70',
+		title: 'BetterLinks',
 		description:
 			'A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance. A modern AI-powered YouTube content assistant with dynamic UI, fast data fetching, form workflows, and optimized client-side performance.',
 		role: 'Frontend Developer',
 		technologies: ['TypeScript', 'React.js', 'Next.js', 'Astro.js', 'React Query', 'React Hook Form', 'Zod'],
-		link: 'https://notificationx.com/',
-		icon: <NotificationXLogo className='h-full w-auto' />,
-		image: 'https://notificationx.com/wp-content/uploads/2025/09/image-16.png',
+		link: 'https://betterlinks.io/',
+		icon: <BetterLinksLogo className='h-full w-auto' />,
+		image: 'https://betterlinks.io/wp-content/uploads/2025/11/image-22.png',
 	},
 ];
