@@ -5,3 +5,7 @@ export type UseStackingCardsOptions = {
 	gap?: number;
 	enabled?: boolean;
 };
+
+export type ScaleCache = {
+	[key: number]: number;
+};

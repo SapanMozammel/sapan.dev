@@ -1,13 +1,13 @@
 import TubeOnAILogo from '@/lib/icons/projects/TubeOnAI/Logo';
 import type { PortfolioProject } from '@/types/portfolio';
-import TemplatelyLogo from '../icons/projects/Templately/Logo';
-import XCloudLogo from '../icons/projects/xCloud/Logo';
 import BetterdocsLogo from '../icons/projects/Betterdocs/Logo';
+import BetterLinksLogo from '../icons/projects/BetterLinks/Logo';
+import EasyJobsLogo from '../icons/projects/EasyJobs/Logo';
 import NotificationXLogo from '../icons/projects/NotificationX/Logo';
 import SchedulePressLogo from '../icons/projects/SchedulePress/Logo';
-import BetterLinksLogo from '../icons/projects/BetterLinks/Logo';
+import TemplatelyLogo from '../icons/projects/Templately/Logo';
 import WpDeveloperStoreLogo from '../icons/projects/WpDeveloperStore/Logo';
-import EasyJobsLogo from '../icons/projects/EasyJobs/Logo';
+import XCloudLogo from '../icons/projects/xCloud/Logo';
 
 export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 	{
