@@ -296,7 +296,7 @@ const AdminScreen = memo(() => {
 								<feBlend mode='normal' in2='shape' result='effect1_innerShadow_23632_3864' />
 							</filter>
 							<linearGradient id='half-wave-stroke' x1='99.1609' y1='3.0511' x2='130.689' y2='119.502' gradientUnits='userSpaceOnUse'>
-								<stop stopColor='var(--color-warning-light)' />
+								<stop stopColor='var(--color-amber-200)' />
 								<stop offset='0.965972' stopColor='var(--color-success)' />
 							</linearGradient>
 						</defs>
