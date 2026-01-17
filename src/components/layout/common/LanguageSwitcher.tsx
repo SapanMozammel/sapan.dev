@@ -4,12 +4,14 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { LANGUAGES } from '@/lib/constants/languages';
 import { IconLoader } from '@tabler/icons-react';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 const LanguageSwitcher = () => {
 	const [currentLanguage, setCurrentLanguage] = useState('en');
 	const [mounted, setMounted] = useState(false);
 	const [isHovering, setIsHovering] = useState(false);
+	const [popoverOpen, setPopoverOpen] = useState(false);
+	const popoverCloseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
 	const currentLanguageFlag = useMemo(() => {
 		return LANGUAGES.find((lang) => lang.code === currentLanguage)?.flag || '🇺🇸';
@@ -46,6 +48,11 @@ const LanguageSwitcher = () => {
 		if (savedLanguage && LANGUAGES.some((lang) => lang.code === savedLanguage)) {
 			setCurrentLanguage(savedLanguage);
 		}
+		return () => {
+			if (popoverCloseTimeoutRef.current) {
+				clearTimeout(popoverCloseTimeoutRef.current);
+			}
+		};
 	}, []);
 
 	useEffect(() => {
@@ -56,7 +63,7 @@ const LanguageSwitcher = () => {
 	}, [currentLanguage, mounted]);
 
 	return (
-		<Popover>
+		<Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
 			<Tooltip open={isHovering}>
 				<TooltipTrigger asChild>
 					<PopoverTrigger asChild>
@@ -81,7 +88,16 @@ const LanguageSwitcher = () => {
 				<div className='flex max-h-80 flex-col gap-0.5 overflow-y-auto p-1'>
 					{LANGUAGES.map((language) => {
 						// Memoize click handler to prevent recreation on every render
-						const handleOptionClick = () => changeLanguage(language.code);
+						const handleOptionClick = () => {
+							changeLanguage(language.code);
+							if (popoverCloseTimeoutRef.current) {
+								clearTimeout(popoverCloseTimeoutRef.current);
+							}
+							popoverCloseTimeoutRef.current = setTimeout(() => {
+								setPopoverOpen(false);
+								popoverCloseTimeoutRef.current = null;
+							}, 300);
+						};
 
 						return (
 							<button
