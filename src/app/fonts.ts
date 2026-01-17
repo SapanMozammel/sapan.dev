@@ -47,3 +47,5 @@ export const tektur = Tektur({
 	style: ['normal'],
 	variable: '--font-tektur',
 });
+
+export const fontList = `${dmSans.variable} ${ebGaramond.variable} ${hankenGrotesk.variable} ${cormorantGaramond.variable} ${sora.variable} ${tektur.variable}`;

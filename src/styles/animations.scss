@@ -6,10 +6,10 @@
 	@keyframes noise {
 		0%,
 		100% {
-			background-position: 0% 0%;
+			@apply bg-position-[0_0];
 		}
 		50% {
-			background-position: 400% 400%;
+			@apply bg-position-[400%_400%];
 		}
 	}
 }
