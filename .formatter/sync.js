@@ -517,7 +517,6 @@ const generateVSCodeSettings = (config) => {
 
 		// Prettier
 		'prettier.requireConfig': true,
-		'prettier.configPath': '.formatter/.prettierrc.js',
 		'prettier.useEditorConfig': false,
 
 		// ESLint
@@ -653,14 +652,13 @@ const generateVSCodeTasks = () => {
 	return JSON.stringify(tasks, null, '\t');
 };
 
-// Generate VSCode keybindings that use the task
+// Generate VSCode keybindings that use the built-in format command
 const generateVSCodeKeybindings = () => {
 	const keybindings = [
 		{
 			"key": "shift+alt+f",
-			"command": "workbench.action.tasks.runTask",
-			"args": "Format and Organize",
-			"when": "editorTextFocus && !editorReadonly && resourceExtname =~ /\\.(ts|tsx|js|jsx)$/"
+			"command": "editor.action.formatDocument",
+			"when": "editorTextFocus && !editorReadonly"
 		}
 	];
 
@@ -697,7 +695,6 @@ const generateCursorSettings = (config) => {
 		'editor.wordWrapColumn': wordWrapColumn,
 		'editor.rulers': [printWidth],
 		'prettier.requireConfig': true,
-		'prettier.configPath': '.formatter/.prettierrc.js',
 		'eslint.enable': true,
 		'eslint.format.enable': true,
 		'editor.codeActionsOnSave': {
@@ -806,6 +803,7 @@ const sync = () => {
 		{ path: '.formatter/.prettierrc.js', content: prettierConfig },
 		{ path: '.formatter/.eslintrc.js', content: eslintConfig },
 		{ path: '.formatter/.editorconfig', content: editorConfig },
+		{ path: '.prettierrc.js', content: `// Prettier configuration that extends .formatter/.prettierrc.js\n// This allows Prettier to work from the project root while keeping\n// the actual configuration in .formatter/ directory\n\nmodule.exports = require('./.formatter/.prettierrc.js');\n` },
 		{ path: '.prettierignore', content: prettierIgnore },
 		{ path: '.gitattributes', content: gitAttributes },
 		{ path: '.vscode/settings.json', content: vscodeSettings },
