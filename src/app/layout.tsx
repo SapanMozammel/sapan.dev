@@ -1,10 +1,10 @@
-import { cormorantGaramond, dmSans, ebGaramond, hankenGrotesk, sora, tektur } from '@/app/fonts';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import { Providers } from '@/providers';
 import '@/styles/global.scss';
 
 import type { Metadata } from 'next';
+import { fontList } from './fonts';
 
 export const metadata: Metadata = {
 	metadataBase: new URL('http://localhost:8000'),
@@ -79,8 +79,6 @@ export const metadata: Metadata = {
 		],
 	},
 };
-
-const fontList = `${dmSans.variable} ${ebGaramond.variable} ${hankenGrotesk.variable} ${cormorantGaramond.variable} ${sora.variable} ${tektur.variable}`;
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
 	return (

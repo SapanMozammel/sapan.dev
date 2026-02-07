@@ -28,7 +28,9 @@ const ThemeSwitcher = () => {
 	const [mounted, setMounted] = useState(false);
 	const [isHovering, setIsHovering] = useState(false);
 	const [keyboardTriggered, setKeyboardTriggered] = useState(false);
+	const [popoverOpen, setPopoverOpen] = useState(false);
 	const tooltipTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+	const popoverCloseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
 	// Computed tooltip visibility - more optimized than state + useEffect
 	const tooltipOpen = isHovering || keyboardTriggered;
@@ -99,11 +101,14 @@ const ThemeSwitcher = () => {
 			if (tooltipTimeoutRef.current) {
 				clearTimeout(tooltipTimeoutRef.current);
 			}
+			if (popoverCloseTimeoutRef.current) {
+				clearTimeout(popoverCloseTimeoutRef.current);
+			}
 		};
 	}, []);
 
 	return (
-		<Popover>
+		<Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
 			<Tooltip open={tooltipOpen}>
 				<TooltipTrigger asChild>
 					<PopoverTrigger asChild>
@@ -129,7 +134,16 @@ const ThemeSwitcher = () => {
 				<div className='flex flex-col gap-0.5 p-1'>
 					{themeOptions.map((option) => {
 						// Memoize click handler to prevent recreation on every render
-						const handleOptionClick = () => changeTheme(option.name);
+						const handleOptionClick = () => {
+							changeTheme(option.name);
+							if (popoverCloseTimeoutRef.current) {
+								clearTimeout(popoverCloseTimeoutRef.current);
+							}
+							popoverCloseTimeoutRef.current = setTimeout(() => {
+								setPopoverOpen(false);
+								popoverCloseTimeoutRef.current = null;
+							}, 300);
+						};
 
 						return (
 							<button
