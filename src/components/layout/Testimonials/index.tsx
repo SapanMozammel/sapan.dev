@@ -45,9 +45,9 @@ const Testimonials = memo(() => {
 	return (
 		<section className='relative z-1 pb-16 sm:pb-20 lg:pb-24'>
 			<TestimonialBackground>
-				<div className='flex w-full grow flex-col gap-8'>
+				<div className='container-fluid flex w-full grow flex-col gap-8'>
 					<SectionTitle className='container' subtitle='Testimonials' title={`What People Say About Me`} watermark='Testimonials' />
-					<div className='relative z-2 flex w-full flex-col gap-4 overflow-hidden md:gap-6 lg:gap-8'>
+					<div className='relative z-2 flex w-full flex-col gap-4 overflow-hidden p-px md:gap-6 lg:gap-8'>
 						<GsapMarquee pauseOnHover speed={60}>
 							{TESTIMONIAL_LIST.map((testimonial, index) => (
 								<TestimonialCard key={index} testimonial={testimonial} />
