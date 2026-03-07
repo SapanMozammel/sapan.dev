@@ -1,0 +1,57 @@
+import type { ExperienceItem } from '@/types/experience';
+
+export const EXPERIENCE_DATA: ExperienceItem[] = [
+	{
+		id: '1',
+		company: 'Startise',
+		position: 'Frontend Developer',
+		startDate: '2022-06',
+		location: 'Mirpur DOHS, Dhaka 1206, Bangladesh',
+		type: 'Full-time',
+		description: 'Leading frontend development for multiple SaaS products and WordPress plugins, focusing on modern web technologies and user experience.',
+		responsibilities: [
+			'Architected and developed frontend solutions for enterprise-level SaaS applications',
+			'Led the migration of legacy codebases to modern React and Next.js frameworks',
+			'Mentored junior developers and conducted code reviews',
+			'Collaborated with design and backend teams to deliver seamless user experiences',
+		],
+		technologies: ['TypeScript', 'React.js', 'Next.js', 'Vue.js', 'Tailwind CSS', 'Redux', 'GraphQL', 'WordPress'],
+		achievements: ['Improved application performance by 40% through code optimization', 'Successfully launched 5+ major product features', 'Reduced bug reports by 60% through comprehensive testing'],
+	},
+	{
+		id: '2',
+		company: 'Freelance',
+		position: 'Full Stack Developer',
+		startDate: '2019-01',
+		endDate: '2022-05',
+		location: 'Remote',
+		type: 'Part-time',
+		description: 'Delivered custom web solutions for clients worldwide, specializing in modern JavaScript frameworks and WordPress development.',
+		responsibilities: [
+			'Built custom websites and web applications from scratch',
+			'Developed WordPress themes and plugins for various clients',
+			'Managed client relationships and project timelines',
+			'Provided ongoing maintenance and support',
+		],
+		technologies: ['JavaScript', 'React.js', 'Vue.js', 'Node.js', 'WordPress', 'PHP', 'MySQL', 'Bootstrap'],
+		achievements: ['Completed 50+ successful projects', 'Maintained 95% client satisfaction rate', 'Built long-term relationships with repeat clients'],
+	},
+	{
+		id: '3',
+		company: 'Self-Learning & Projects',
+		position: 'Web Development Journey',
+		startDate: '2017-01',
+		endDate: '2018-12',
+		location: 'Bangladesh',
+		type: 'Learning',
+		description: 'Intensive self-study period focused on mastering web development fundamentals and modern frameworks.',
+		responsibilities: [
+			'Completed comprehensive online courses and tutorials',
+			'Built personal projects to practice new skills',
+			'Contributed to open-source projects',
+			'Participated in coding challenges and hackathons',
+		],
+		technologies: ['HTML', 'CSS', 'JavaScript', 'jQuery', 'Bootstrap', 'Git', 'Responsive Design'],
+		achievements: ['Built 20+ practice projects', 'Earned multiple certifications', 'Developed strong foundation in web development'],
+	},
+];

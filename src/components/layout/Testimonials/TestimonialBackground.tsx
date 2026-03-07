@@ -1,8 +1,7 @@
 import { cn } from '@/lib/utils';
-import React, { memo, useEffect, useRef } from 'react';
 import { IconPlus } from '@tabler/icons-react';
 import gsap from 'gsap';
-
+import React, { memo, useEffect, useRef } from 'react';
 
 const TestimonialBackground = memo<React.DetailedHTMLProps<React.AllHTMLAttributes<HTMLDivElement>, HTMLDivElement>>((props) => {
 	const { children, className, ...rest } = props;
@@ -13,16 +12,20 @@ const TestimonialBackground = memo<React.DetailedHTMLProps<React.AllHTMLAttribut
 	useEffect(() => {
 		const updateLayout = () => {
 			const container = containerRef.current;
-			if (!container) return;
+			if (!container) {
+				return;
+			}
 
 			const width = container.clientWidth;
 			const height = container.clientHeight;
 
 			const targetCount = Math.ceil(width / 4) + 1;
-			setLineCount(prev => prev !== targetCount ? targetCount : prev);
+			setLineCount((prev) => (prev !== targetCount ? targetCount : prev));
 
 			linesRef.current.forEach((line) => {
-				if (!line) return;
+				if (!line) {
+					return;
+				}
 				line.setAttribute('d', `M 0.5 0 L 0.5 ${height}`);
 			});
 		};
@@ -39,8 +42,12 @@ const TestimonialBackground = memo<React.DetailedHTMLProps<React.AllHTMLAttribut
 
 		const handleMouseMove = (e: MouseEvent) => {
 			linesRef.current.forEach((line, index) => {
-				if (!line) return;
-				if (index === 0 || index === linesRef.current.length - 1) return;
+				if (!line) {
+					return;
+				}
+				if (index === 0 || index === linesRef.current.length - 1) {
+					return;
+				}
 
 				const rect = line.getBoundingClientRect();
 				const centerX = rect.left + rect.width / 2;
@@ -48,21 +55,21 @@ const TestimonialBackground = memo<React.DetailedHTMLProps<React.AllHTMLAttribut
 				const mouseRadius = 300;
 
 				if (distanceX < mouseRadius) {
-					const proximity = 1 - (distanceX / mouseRadius);
+					const proximity = 1 - distanceX / mouseRadius;
 					const smoothProximity = proximity * proximity;
 
 					gsap.to(line, {
-						opacity: 0.05 + (0.2 * smoothProximity),
+						opacity: 0.05 + 0.2 * smoothProximity,
 						duration: 0.1,
 						ease: 'power2.out',
-						overwrite: 'auto'
+						overwrite: 'auto',
 					});
 				} else {
 					gsap.to(line, {
 						opacity: 0.05,
-						duration: 0.10,
+						duration: 0.1,
 						ease: 'power2.out',
-						overwrite: 'auto'
+						overwrite: 'auto',
 					});
 				}
 			});
@@ -78,11 +85,15 @@ const TestimonialBackground = memo<React.DetailedHTMLProps<React.AllHTMLAttribut
 
 	useEffect(() => {
 		const container = containerRef.current;
-		if (!container) return;
+		if (!container) {
+			return;
+		}
 		const height = container.clientHeight;
 
 		linesRef.current.forEach((line) => {
-			if (!line) return;
+			if (!line) {
+				return;
+			}
 			line.setAttribute('d', `M 0.5 0 L 0.5 ${height}`);
 		});
 	}, [lineCount]);
@@ -98,26 +109,17 @@ const TestimonialBackground = memo<React.DetailedHTMLProps<React.AllHTMLAttribut
 				<IconPlus stroke={6} className={`${STAR_CLASSES} absolute right-0 bottom-0 translate-x-1/2 translate-y-1/2`} />
 				<div className='flex h-full w-full justify-between'>
 					{Array.from({ length: lineCount }).map((_, i) => (
-						<div
-							key={i}
-							className={cn(
-								'relative h-full w-px first:-translate-x-1/2 last:translate-x-1/2 group/line',
-								'text-secondary-400 dark:text-secondary-600'
-							)}
-						>
-							<svg className="absolute top-0 left-0 h-full w-px overflow-visible pointer-events-none">
+						<div key={i} className={cn('group/line relative h-full w-px first:-translate-x-1/2 last:translate-x-1/2', 'text-secondary-400 dark:text-secondary-600')}>
+							<svg className='pointer-events-none absolute top-0 left-0 h-full w-px overflow-visible'>
 								<path
 									ref={(el) => {
 										linesRef.current[i] = el;
 									}}
-									d=""
-									stroke="currentColor"
-									strokeWidth="1"
-									fill="none"
-									className={cn(
-										'transition-opacity',
-										'opacity-5 group-first/line:opacity-100 group-last/line:opacity-100',
-									)}
+									d=''
+									stroke='currentColor'
+									strokeWidth='1'
+									fill='none'
+									className={cn('transition-opacity', 'opacity-5 group-first/line:opacity-100 group-last/line:opacity-100')}
 								/>
 							</svg>
 						</div>

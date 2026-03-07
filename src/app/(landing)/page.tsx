@@ -1,3 +1,4 @@
+import Experience from '@/components/layout/Experience';
 import Hero from '@/components/layout/Hero';
 import Portfolio from '@/components/layout/Portfolio';
 import Technologies from '@/components/layout/Technologies';
@@ -11,7 +12,7 @@ const LandingPage = memo(() => {
 			<Technologies />
 			<Testimonials />
 			<Portfolio />
-			<div className='h-screen'>https://brixagency.com/</div>
+			<Experience />
 		</>
 	);
 });
