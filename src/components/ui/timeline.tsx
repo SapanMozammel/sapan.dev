@@ -7,7 +7,7 @@ import { memo, useEffect, useMemo, useRef, useState } from 'react';
 
 const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item, index }) => {
 	const itemRef = useRef<HTMLDivElement>(null);
-	const isLeft = index % 2 === 0;
+	const isLeft = index % 2 !== 0;
 
 	const formattedDate = useMemo(() => {
 		const formatPart = (dateStr: string | undefined) => {
@@ -33,7 +33,7 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item, index 
 
 	return (
 		<div ref={itemRef} data-timeline-item className={cn('timeline-item relative mx-auto flex w-full max-w-6xl gap-4', isLeft ? 'flex-col md:flex-row-reverse' : 'flex-col md:flex-row')}>
-			<div className={cn('hidden w-1/2 shrink-0 flex-col pt-8 md:flex', isLeft ? 'items-start pl-4' : 'items-end pr-4')}>
+			<div className={cn('hidden w-1/2 shrink-0 flex-col pt-8 md:flex', isLeft ? 'items-start pl-8' : 'items-end pr-8')}>
 				<span className='text-secondary-600 dark:text-secondary-400 text-sm leading-snug font-medium'>{formattedDate}</span>
 				<span className='text-secondary-400 dark:text-secondary-500 font-regular text-xs leading-snug'>
 					{item.type}, {item.location}
