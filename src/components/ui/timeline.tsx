@@ -4,98 +4,116 @@ import { cn } from '@/lib/utils';
 import type { TimelineItemProps, TimelineProps } from '@/types/experience';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { memo, useEffect, useMemo, useRef, useState } from 'react';
+const checkTimelineDirection = (i: number) => i % 2 !== 0;
 
-const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item, index }) => {
+const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, index }) => {
 	const itemRef = useRef<HTMLDivElement>(null);
-	const isLeft = index % 2 !== 0;
+	const isLeft = checkTimelineDirection(index);
 
 	const formattedDate = useMemo(() => {
-		const formatPart = (dateStr: string | undefined) => {
-			if (!dateStr) {
+		const parseDateStr = (dateStr: string | undefined): Date | null => {
+			if (!dateStr || !dateStr.includes('-')) {
 				return null;
 			}
 			try {
 				const [year, month] = dateStr.split('-');
-				const date = new Date(parseInt(year), parseInt(month) - 1);
-				return new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' }).format(date);
+				const d = new Date(parseInt(year), parseInt(month) - 1);
+				return isNaN(d.getTime()) ? null : d;
 			} catch (e) {
 				return null;
 			}
 		};
 
-		if (!item.startDate) {
-			return '';
+		const startD = parseDateStr(job.startDate);
+		if (!startD) {
+			return job.startDate || '';
 		}
-		const start = formatPart(item.startDate);
-		const end = item.endDate ? formatPart(item.endDate) : 'Present';
-		return `${start} - ${end}`;
-	}, [item.startDate, item.endDate]);
+
+		const endD = job.endDate ? parseDateStr(job.endDate) || new Date() : new Date();
+
+		const startStr = new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' }).format(startD);
+		const endStr = job.endDate ? new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' }).format(endD) : 'Present';
+
+		// Calculate duration (inclusive)
+		const totalMonths = (endD.getFullYear() - startD.getFullYear()) * 12 + (endD.getMonth() - startD.getMonth()) + 1;
+		const yrs = Math.floor(totalMonths / 12);
+		const mos = totalMonths % 12;
+
+		const durationParts = [];
+		if (yrs > 0) {
+			durationParts.push(`${yrs} yr${yrs > 1 ? 's' : ''}`);
+		}
+		if (mos > 0) {
+			durationParts.push(`${mos} mo${mos > 1 ? 's' : ''}`);
+		}
+		const durationStr = durationParts.join(' ');
+
+		return `${startStr} - ${endStr}${durationStr ? ` ( ${durationStr} )` : ''}`;
+	}, [job.startDate, job.endDate, job.type]);
 
 	return (
-		<div ref={itemRef} data-timeline-item className={cn('timeline-item relative mx-auto flex w-full max-w-6xl gap-4', isLeft ? 'flex-col md:flex-row-reverse' : 'flex-col md:flex-row')}>
+		<div ref={itemRef} data-timeline-item className={cn('timeline-item relative mx-auto flex w-full gap-4', isLeft ? 'flex-col md:flex-row-reverse' : 'flex-col md:flex-row')}>
 			<div className={cn('hidden w-1/2 shrink-0 flex-col pt-8 md:flex', isLeft ? 'items-start pl-8' : 'items-end pr-8')}>
 				<span className='text-secondary-600 dark:text-secondary-400 text-sm leading-snug font-medium'>{formattedDate}</span>
 				<span className='text-secondary-400 dark:text-secondary-500 font-regular text-xs leading-snug'>
-					{item.type}, {item.location}
+					{job.type}, {job.location}
 				</span>
 			</div>
 			<div className={cn('timeline-dot absolute top-10.5 z-2 hidden -translate-y-1/2 md:block', isLeft ? 'left-1/2 -translate-x-1/2' : 'right-1/2 translate-x-1/2')}>
 				<div className='bg-secondary-200 dark:bg-secondary-700 dark:ring-secondary-900 border-secondary-300 dark:border-secondary-600 timeline-dot-inner h-3 w-3 rounded-full border ring-4 ring-white transition-all duration-300' />
 			</div>
-			<div className='timeline-dot absolute top-1 left-0 z-20 md:hidden'>
+			<div className='timeline-dot absolute top-1 left-0 z-20 md:hidden' aria-hidden='true'>
 				<div className='bg-secondary-200 dark:bg-secondary-700 dark:ring-secondary-900 border-secondary-300 dark:border-secondary-600 timeline-dot-inner h-3 w-3 rounded-full border ring-4 ring-white transition-all duration-300' />
 			</div>
-			<div className={cn('flex-1 pt-0 pb-6 md:w-1/2', isLeft ? 'ml-6 md:mr-4 md:ml-0' : 'ml-6 md:ml-4')}>
+			<div className={cn('flex-1 pt-0 md:w-1/2', isLeft ? 'ml-6 md:mr-4 md:ml-0' : 'ml-6 md:ml-4')}>
 				<div className='mb-4 flex flex-col pl-0 md:hidden'>
 					<span className='text-secondary-600 dark:text-secondary-400 text-sm leading-snug font-medium'>{formattedDate}</span>
 					<span className='text-secondary-400 dark:text-secondary-500 font-regular text-xs leading-snug'>
-						{item.type}, {item.location}
+						{job.type}, {job.location}
 					</span>
 				</div>
 				<div
 					className={cn(
-						'group from-secondary-100/50 dark:from-secondary-800/50 dark:to-secondary-900/50 to-secondary-300/50 shadow-secondary-300/10 dark:shadow-dark/10 relative rounded-2xl bg-gradient-to-b p-6 shadow-xl transition-shadow duration-300'
+						'group from-secondary-100/50 dark:from-secondary-800/50 dark:to-secondary-900/50 to-secondary-300/50 shadow-secondary-300/10 dark:shadow-dark/10 relative flex flex-col gap-2 rounded-2xl bg-gradient-to-b p-4 shadow-xl transition-shadow duration-300 md:gap-4 md:p-6'
 					)}
 				>
-					<h3 className='font-eb text-dark text-3xl leading-none font-medium sm:text-5xl dark:text-white'>{item.company}</h3>
-					<h5 className='font-cg text-secondary-600 dark:text-secondary-400 text-lg leading-snug font-medium sm:text-xl'>{item.position}</h5>
-
-					{item.technologies && item.technologies.length > 0 && (
-						<div className='mt-2.5 mb-4 flex flex-wrap space-x-2 gap-y-2'>
-							{item.technologies.slice(0, 4).map((tech, idx) => (
-								<span
-									key={idx}
-									className={cn(
-										'bg-secondary-200 text-secondary-700 dark:bg-secondary-800 dark:text-secondary-300 inline-flex items-center rounded-lg px-3 py-1 text-[11px] font-bold tracking-wider uppercase'
-									)}
-								>
+					<div className='flex flex-col gap-1'>
+						<h3 className='font-eb text-dark text-3xl leading-none font-medium sm:text-5xl dark:text-white'>{job.company}</h3>
+						<h5 className='font-cg text-secondary-600 dark:text-secondary-400 text-xl leading-snug font-medium sm:text-2xl'>{job.position}</h5>
+					</div>
+					{job.technologies && job.technologies.length > 0 && (
+						<div className='flex flex-wrap gap-1.5'>
+							{job.technologies.map((tech, idx) => (
+								<span key={idx} className={cn('bg-secondary-200 text-secondary-700 dark:bg-secondary-800 dark:text-secondary-300 inline-flex items-center rounded-lg px-3 py-1 text-xs font-bold')}>
 									{tech}
 								</span>
 							))}
 						</div>
 					)}
-					<p className='text-secondary-600 dark:text-secondary-300 leading-regular list-none space-y-3 text-sm'>{item.description}</p>
-					<h4 className='text-dark mt-3 mb-1.5 text-lg font-bold dark:text-white'>Responsibilities</h4>
-					<ul className='text-secondary-600 dark:text-secondary-300 leading-regular list-none space-y-2 text-sm'>
-						{item.responsibilities?.map((resp, idx) => (
-							<li key={idx} className='relative flex items-start pl-4'>
-								<span className='border-primary dark:border-success absolute left-0 mt-2 h-1.5 w-1.5 rounded-full border bg-transparent' />
-								{resp}
-							</li>
-						))}
-					</ul>
-					{item.achievements && item.achievements.length > 0 && (
-						<>
-							<h4 className='text-dark mt-3 mb-1.5 text-lg font-bold dark:text-white'>Impact & Achievements</h4>
-							<ul className='text-secondary-600 dark:text-secondary-300 leading-regular list-none space-y-2 text-sm'>
-								{item.achievements.map((achievement, idx) => (
+					<p className='text-secondary-600 dark:text-secondary-300 leading-regular text-sm'>{job.description}</p>
+					<div className='flex flex-col gap-1.5'>
+						<h4 className='text-dark text-lg font-bold dark:text-white'>Responsibilities</h4>
+						<ul className='text-secondary-600 dark:text-secondary-300 leading-regular flex list-none flex-col gap-1.5 text-sm'>
+							{job.responsibilities?.map((resp, idx) => (
+								<li key={idx} className='relative flex items-start pl-4'>
+									<span className='border-primary dark:border-success absolute left-0 mt-2 h-1.5 w-1.5 rounded-full border bg-transparent' />
+									{resp}
+								</li>
+							))}
+						</ul>
+					</div>
+					{job.achievements && job.achievements.length > 0 && (
+						<div className='flex flex-col gap-1.5'>
+							<h4 className='text-dark text-lg font-bold dark:text-white'>Impact & Achievements</h4>
+							<ul className='text-secondary-600 dark:text-secondary-300 leading-regular flex list-none flex-col gap-1.5 text-sm'>
+								{job.achievements.map((achievement, idx) => (
 									<li key={idx} className='relative flex items-start pl-4'>
 										<span className='border-primary dark:border-success absolute left-0 mt-2 h-1.5 w-1.5 rounded-full border bg-transparent' />
 										{achievement}
 									</li>
 								))}
 							</ul>
-						</>
+						</div>
 					)}
 				</div>
 			</div>
@@ -171,7 +189,7 @@ const Timeline = memo<TimelineProps>(({ items, className }) => {
 		for (let i = 0; i < heights.length - 1; i++) {
 			const currentY = heights[i] + startY;
 			const nextY = heights[i + 1] + startY;
-			const isLeft = i % 2 === 0;
+			const isLeft = checkTimelineDirection(i);
 
 			const side = isLeft ? -curveWidth : curveWidth;
 
@@ -197,6 +215,8 @@ const Timeline = memo<TimelineProps>(({ items, className }) => {
 		return result;
 	};
 
+	const itemRefs = useRef<HTMLElement[]>([]);
+
 	useEffect(() => {
 		let rafId: number;
 
@@ -209,8 +229,12 @@ const Timeline = memo<TimelineProps>(({ items, className }) => {
 			const isDesktop = window.innerWidth >= 768;
 			const startY = isDesktop ? 42 : 10;
 
-			const items = timelineRef.current.querySelectorAll('[data-timeline-item]');
-			items.forEach((itemEl, i) => {
+			// Optimization: use cached elements if available
+			if (itemRefs.current.length === 0) {
+				itemRefs.current = Array.from(timelineRef.current.querySelectorAll('[data-timeline-item]')) as HTMLElement[];
+			}
+
+			itemRefs.current.forEach((itemEl, i) => {
 				if (i >= heights.length) {
 					return;
 				}
@@ -227,14 +251,11 @@ const Timeline = memo<TimelineProps>(({ items, className }) => {
 						el.classList.add('bg-secondary-200', 'dark:bg-secondary-700', 'scale-100');
 					}
 				});
-			});
 
-			const itemElements = timelineRef.current.querySelectorAll('[data-timeline-item]');
-			itemElements.forEach((el) => {
-				const rect = el.getBoundingClientRect();
+				const rect = itemEl.getBoundingClientRect();
 				if (rect.top < window.innerHeight * 0.85) {
-					(el as HTMLElement).style.opacity = '1';
-					(el as HTMLElement).style.transform = 'translateY(0)';
+					itemEl.style.opacity = '1';
+					itemEl.style.transform = 'translateY(0)';
 				}
 			});
 		};
@@ -244,8 +265,8 @@ const Timeline = memo<TimelineProps>(({ items, className }) => {
 		};
 
 		if (timelineRef.current) {
-			const itemElements = timelineRef.current.querySelectorAll('[data-timeline-item]');
-			itemElements.forEach((el) => {
+			const itemsToAnimate = timelineRef.current.querySelectorAll('[data-timeline-item]');
+			itemsToAnimate.forEach((el) => {
 				(el as HTMLElement).style.opacity = '0';
 				(el as HTMLElement).style.transform = 'translateY(40px)';
 				(el as HTMLElement).style.transition = 'opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
@@ -257,6 +278,7 @@ const Timeline = memo<TimelineProps>(({ items, className }) => {
 		return () => {
 			window.removeEventListener('scroll', onScroll);
 			cancelAnimationFrame(rafId);
+			itemRefs.current = [];
 		};
 	}, [heights]);
 
@@ -280,7 +302,7 @@ const Timeline = memo<TimelineProps>(({ items, className }) => {
 				)}
 			</div>
 
-			<div ref={timelineRef} className='relative z-10 mx-auto w-full max-w-6xl py-20'>
+			<div ref={timelineRef} className='relative z-10 mx-auto w-full'>
 				{items.map((item, index) => (
 					<TimelineItem key={item.id} item={item} index={index} isLast={index === items.length - 1} />
 				))}
