@@ -10,9 +10,9 @@ const LandingPage = memo(() => {
 		<>
 			<Hero />
 			<Technologies />
-			<Testimonials />
 			<Portfolio />
 			<Experience />
+			<Testimonials />
 		</>
 	);
 });
