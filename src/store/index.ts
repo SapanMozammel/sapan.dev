@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userReducer } from './slices';
+import { localeReducer, userReducer } from './slices';
 
 // Create the store with reducers
 export const store = configureStore({
 	reducer: {
 		user: userReducer,
+		locale: localeReducer,
 	},
 	// Redux Thunk is included by default in Redux Toolkit
 	// Additional middleware can be added here if needed

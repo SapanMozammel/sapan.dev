@@ -3,64 +3,56 @@
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { LANGUAGES } from '@/lib/constants/languages';
+import { setLocale } from '@/store/slices/localeSlice';
+import type { Locale } from '@/types/i18n';
 import { IconLoader } from '@tabler/icons-react';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useLocale } from 'next-intl';
+import { usePathname, useRouter } from 'next/navigation';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 const LanguageSwitcher = () => {
-	const [currentLanguage, setCurrentLanguage] = useState('en');
+	const router = useRouter();
+	const pathname = usePathname();
+	const dispatch = useDispatch();
+	const currentLocale = useLocale();
+
 	const [mounted, setMounted] = useState(false);
 	const [isHovering, setIsHovering] = useState(false);
 	const [popoverOpen, setPopoverOpen] = useState(false);
-	const popoverCloseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-	const currentLanguageFlag = useMemo(() => {
-		return LANGUAGES.find((lang) => lang.code === currentLanguage)?.flag || '🇺🇸';
-	}, [currentLanguage]);
-
-	const languageIcon = useMemo(() => {
-		// Show loading icon during hydration to prevent mismatch
-		if (!mounted) {
-			return <IconLoader className='h-5 w-5 animate-spin outline-none' />;
-		}
-
-		return <span className='text-xl leading-none'>{currentLanguageFlag}</span>;
-	}, [mounted, currentLanguageFlag]);
-
-	const currentLanguageName = useMemo(() => {
-		return LANGUAGES.find((lang) => lang.code === currentLanguage)?.name || 'English';
-	}, [currentLanguage]);
-
-	const changeLanguage = useCallback((languageCode: string) => {
-		setCurrentLanguage(languageCode);
-		// TODO: Implement actual language switching logic here
-		// This could involve:
-		// - Updating i18n context
-		// - Storing preference in localStorage
-		// - Updating URL locale
-		console.log('Language changed to:', languageCode);
-	}, []);
 
 	useEffect(() => {
 		setMounted(true);
-
-		// Load saved language preference from localStorage
-		const savedLanguage = localStorage.getItem('language');
-		if (savedLanguage && LANGUAGES.some((lang) => lang.code === savedLanguage)) {
-			setCurrentLanguage(savedLanguage);
-		}
-		return () => {
-			if (popoverCloseTimeoutRef.current) {
-				clearTimeout(popoverCloseTimeoutRef.current);
-			}
-		};
 	}, []);
 
-	useEffect(() => {
-		// Save language preference to localStorage
-		if (mounted) {
-			localStorage.setItem('language', currentLanguage);
+	const currentLanguageFlag = useMemo(() => {
+		return LANGUAGES.find((lang) => lang.code === currentLocale)?.flag || '🇺🇸';
+	}, [currentLocale]);
+
+	const currentLanguageName = useMemo(() => {
+		return LANGUAGES.find((lang) => lang.code === currentLocale)?.name || 'English';
+	}, [currentLocale]);
+
+	const languageIcon = useMemo(() => {
+		if (!mounted) {
+			return <IconLoader className='h-5 w-5 animate-spin outline-none' />;
 		}
-	}, [currentLanguage, mounted]);
+		return <span className='text-xl leading-none'>{currentLanguageFlag}</span>;
+	}, [mounted, currentLanguageFlag]);
+
+	const changeLanguage = useCallback(
+		(languageCode: string) => {
+			setPopoverOpen(false);
+			dispatch(setLocale(languageCode as Locale));
+
+			const segments = pathname.split('/');
+			const isLocaleSegment = LANGUAGES.some((lang) => lang.code === segments[1]);
+			const pathWithoutLocale = isLocaleSegment ? `/${segments.slice(2).join('/')}` : pathname;
+			const newPath = languageCode === 'en' ? pathWithoutLocale || '/' : `/${languageCode}${pathWithoutLocale}`;
+			router.push(newPath);
+		},
+		[pathname, router, dispatch]
+	);
 
 	return (
 		<Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
@@ -86,38 +78,24 @@ const LanguageSwitcher = () => {
 					<span>Change Language</span>
 				</div>
 				<div className='flex max-h-80 flex-col gap-0.5 overflow-y-auto p-1'>
-					{LANGUAGES.map((language) => {
-						// Memoize click handler to prevent recreation on every render
-						const handleOptionClick = () => {
-							changeLanguage(language.code);
-							if (popoverCloseTimeoutRef.current) {
-								clearTimeout(popoverCloseTimeoutRef.current);
-							}
-							popoverCloseTimeoutRef.current = setTimeout(() => {
-								setPopoverOpen(false);
-								popoverCloseTimeoutRef.current = null;
-							}, 300);
-						};
-
-						return (
-							<button
-								key={language.code}
-								type='button'
-								className={`flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-md px-2 py-1.5 text-sm transition-colors ${
-									mounted && currentLanguage === language.code
-										? 'bg-primary/10 text-primary dark:bg-success/10 dark:text-success'
-										: 'text-secondary-500 dark:text-secondary-400 hover:text-primary dark:hover:text-success'
-								}`}
-								onClick={handleOptionClick}
-							>
-								<span className='flex items-center gap-2'>
-									<span className='text-base'>{language.flag}</span>
-									<span>{language.name}</span>
-								</span>
-								{mounted && currentLanguage === language.code && <span className='text-primary dark:text-success text-xs'>✓</span>}
-							</button>
-						);
-					})}
+					{LANGUAGES.map((language) => (
+						<button
+							key={language.code}
+							type='button'
+							className={`flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-md px-2 py-1.5 text-sm transition-colors ${
+								mounted && currentLocale === language.code
+									? 'bg-primary/10 text-primary dark:bg-success/10 dark:text-success'
+									: 'text-secondary-500 dark:text-secondary-400 hover:text-primary dark:hover:text-success'
+							}`}
+							onClick={() => changeLanguage(language.code)}
+						>
+							<span className='flex items-center gap-2'>
+								<span className='text-base'>{language.flag}</span>
+								<span>{language.name}</span>
+							</span>
+							{mounted && currentLocale === language.code && <span className='text-primary dark:text-success text-xs'>✓</span>}
+						</button>
+					))}
 				</div>
 			</PopoverContent>
 		</Popover>
