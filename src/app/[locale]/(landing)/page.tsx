@@ -3,6 +3,7 @@ import Hero from '@/components/layout/Hero';
 import Portfolio from '@/components/layout/Portfolio';
 import Technologies from '@/components/layout/Technologies';
 import Testimonials from '@/components/layout/Testimonials';
+import Workflow from '@/components/layout/Workflow';
 import { memo } from 'react';
 
 const LandingPage = memo(() => {
@@ -13,6 +14,7 @@ const LandingPage = memo(() => {
 			<Portfolio />
 			<Experience />
 			<Testimonials />
+			<Workflow />
 		</>
 	);
 });
