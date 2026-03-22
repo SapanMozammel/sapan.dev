@@ -1,10 +1,10 @@
 export type SeparatorTypes = {
-	lts?: Boolean;
-	rts?: Boolean;
-	lbs?: Boolean;
-	rbs?: Boolean;
-	tl?: Boolean;
-	bl?: Boolean;
-	ll?: Boolean;
-	rl?: Boolean;
+	lts?: boolean;
+	rts?: boolean;
+	lbs?: boolean;
+	rbs?: boolean;
+	tl?: boolean;
+	bl?: boolean;
+	ll?: boolean;
+	rl?: boolean;
 };

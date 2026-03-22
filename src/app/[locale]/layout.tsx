@@ -2,8 +2,8 @@ import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import { RTL_LOCALES } from '@/i18n/routing';
 import { Providers } from '@/providers';
-import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
 
 import type { Metadata } from 'next';
 

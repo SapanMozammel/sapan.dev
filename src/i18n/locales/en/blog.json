@@ -1,7 +1,7 @@
 {
-  "title": "Blog",
-  "subtitle": "Thoughts on development, design, and the web",
-  "noPosts": "No posts yet. Check back soon.",
-  "readingTime": "{minutes} min read",
-  "publishedOn": "Published on {date}"
+	"title": "Blog",
+	"subtitle": "Thoughts on development, design, and the web",
+	"noPosts": "No posts yet. Check back soon.",
+	"readingTime": "{minutes} min read",
+	"publishedOn": "Published on {date}"
 }

@@ -1,8 +1,8 @@
 {
-  "title": "About Me",
-  "subtitle": "A little about who I am and what I do",
-  "bio": {
-    "heading": "Hello, I'm a developer",
-    "description": "I build modern web applications with a focus on performance, accessibility, and great user experiences."
-  }
+	"title": "About Me",
+	"subtitle": "A little about who I am and what I do",
+	"bio": {
+		"heading": "Hello, I'm a developer",
+		"description": "I build modern web applications with a focus on performance, accessibility, and great user experiences."
+	}
 }

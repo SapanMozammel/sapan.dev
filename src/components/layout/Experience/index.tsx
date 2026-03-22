@@ -1,9 +1,10 @@
 import Timeline from '@/components/ui/timeline';
 import { EXPERIENCE_DATA } from '@/lib/constants/experience';
+import { memo } from 'react';
 import SectionSeparator from '../common/SectionSeparator';
 import SectionTitle from '../common/SectionTitle';
 
-const Experience = () => {
+const Experience = memo(() => {
 	return (
 		<section className='relative z-1 pb-8 sm:pb-12 lg:pb-16'>
 			<SectionSeparator lts rts lbs rbs tl bl ll rl>
@@ -14,6 +15,8 @@ const Experience = () => {
 			</SectionSeparator>
 		</section>
 	);
-};
+});
+
+Experience.displayName = 'Experience';
 
 export default Experience;

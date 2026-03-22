@@ -1,28 +1,25 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { localeReducer, userReducer } from './slices';
+import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit';
+import { LOCALE_STORAGE_KEY, localeReducer } from './slices';
+import { setLocale } from './slices/localeSlice';
 
-// Create the store with reducers
+const listenerMiddleware = createListenerMiddleware();
+
+listenerMiddleware.startListening({
+	actionCreator: setLocale,
+	effect: (action) => {
+		if (typeof window !== 'undefined') {
+			localStorage.setItem(LOCALE_STORAGE_KEY, action.payload);
+		}
+	},
+});
+
 export const store = configureStore({
 	reducer: {
-		user: userReducer,
 		locale: localeReducer,
 	},
-	// Redux Thunk is included by default in Redux Toolkit
-	// Additional middleware can be added here if needed
-	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware({
-			serializableCheck: {
-				// Ignore these action types for serializable check if needed
-				ignoredActions: [],
-				// Ignore these field paths in all actions
-				ignoredActionPaths: [],
-				// Ignore these paths in the state
-				ignoredPaths: [],
-			},
-		}),
+	middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(listenerMiddleware.middleware),
 	devTools: process.env.NODE_ENV !== 'production',
 });
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
