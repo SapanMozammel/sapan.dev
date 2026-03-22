@@ -8,7 +8,7 @@ const SectionTitle = memo<SectionTitleTypes>(({ title, subtitle, watermark, clas
 			{watermark && (
 				<span
 					aria-hidden='true'
-					className='font-eb text-secondary-100/75 dark:text-secondary-800/75 pointer-events-none absolute top-1/2 left-1/2 -z-1 -translate-x-1/2 -translate-y-1/2 text-[12vw] leading-none font-bold select-none sm:text-[10vw]'
+					className='font-eb text-secondary-100/75 dark:text-secondary-800/50 pointer-events-none absolute top-1/2 left-1/2 -z-1 -translate-x-1/2 -translate-y-1/2 text-[12vw] leading-none font-bold select-none sm:text-[10vw]'
 				>
 					{watermark}
 				</span>
