@@ -1,9 +1,9 @@
 import { getRequestConfig } from 'next-intl/server';
 import { routing } from './routing';
 
-type Namespace = 'common' | 'navigation' | 'home' | 'about' | 'services' | 'portfolio' | 'blog' | 'contact';
+type Namespace = 'common' | 'navigation' | 'home' | 'blog';
 
-const NAMESPACES: Namespace[] = ['common', 'navigation', 'home', 'about', 'services', 'portfolio', 'blog', 'contact'];
+const NAMESPACES: Namespace[] = ['common', 'navigation', 'home', 'blog'];
 
 async function loadNamespace(locale: string, namespace: Namespace): Promise<Record<string, unknown>> {
 	try {

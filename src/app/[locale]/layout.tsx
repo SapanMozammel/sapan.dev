@@ -1,3 +1,4 @@
+import { fontList } from '@/app/fonts';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import { RTL_LOCALES } from '@/i18n/routing';
@@ -43,16 +44,20 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
 	const isRTL = (RTL_LOCALES as readonly string[]).includes(locale);
 
 	return (
-		<NextIntlClientProvider messages={messages}>
-			<Providers>
-				<div dir={isRTL ? 'rtl' : 'ltr'} className='text-dark relative bg-white dark:bg-black dark:text-white'>
-					<Header />
-					<main className='-my-2.5 overflow-x-hidden py-2.5'>{children}</main>
-					<Footer />
-					<div className="animate-noise pointer-events-none absolute inset-0 z-20 hidden bg-[url('/noise.png')] bg-repeat opacity-5 select-none lg:block dark:opacity-15" />
-				</div>
-			</Providers>
-		</NextIntlClientProvider>
+		<html lang={locale} dir={isRTL ? 'rtl' : 'ltr'} suppressHydrationWarning>
+			<body className={`${fontList} ${isRTL ? 'font-arabic' : 'font-dm'}`} suppressHydrationWarning>
+				<NextIntlClientProvider messages={messages}>
+					<Providers>
+						<div className='text-dark relative bg-white dark:bg-black dark:text-white'>
+							<Header />
+							<main className='-my-2.5 overflow-x-hidden py-2.5'>{children}</main>
+							<Footer />
+							<div className="animate-noise pointer-events-none absolute inset-0 z-20 hidden bg-[url('/noise.png')] bg-repeat opacity-5 select-none lg:block dark:opacity-15" />
+						</div>
+					</Providers>
+				</NextIntlClientProvider>
+			</body>
+		</html>
 	);
 };
 

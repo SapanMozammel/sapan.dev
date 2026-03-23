@@ -1,4 +1,4 @@
-import { Cormorant_Garamond, DM_Sans, EB_Garamond, Hanken_Grotesk, Sora, Tektur } from 'next/font/google';
+import { Cormorant_Garamond, DM_Sans, EB_Garamond, Hanken_Grotesk, Noto_Sans_Arabic, Sora, Tektur } from 'next/font/google';
 
 export const dmSans = DM_Sans({
 	display: 'swap',
@@ -48,4 +48,11 @@ export const tektur = Tektur({
 	variable: '--font-tektur',
 });
 
-export const fontList = `${dmSans.variable} ${ebGaramond.variable} ${hankenGrotesk.variable} ${cormorantGaramond.variable} ${sora.variable} ${tektur.variable}`;
+export const notoSansArabic = Noto_Sans_Arabic({
+	display: 'swap',
+	weight: ['300', '400', '500', '600', '700'],
+	subsets: ['arabic'],
+	variable: '--font-arabic',
+});
+
+export const fontList = `${dmSans.variable} ${ebGaramond.variable} ${hankenGrotesk.variable} ${cormorantGaramond.variable} ${sora.variable} ${tektur.variable} ${notoSansArabic.variable}`;

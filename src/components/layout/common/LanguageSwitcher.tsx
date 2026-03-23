@@ -2,12 +2,12 @@
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { usePathname, useRouter } from '@/i18n/navigation';
 import { LANGUAGES } from '@/lib/constants/languages';
 import { setLocale } from '@/store/slices/localeSlice';
 import type { Locale } from '@/types/i18n';
 import { IconLoader } from '@tabler/icons-react';
 import { useLocale } from 'next-intl';
-import { usePathname, useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -44,12 +44,7 @@ const LanguageSwitcher = () => {
 		(languageCode: string) => {
 			setPopoverOpen(false);
 			dispatch(setLocale(languageCode as Locale));
-
-			const segments = pathname.split('/');
-			const isLocaleSegment = LANGUAGES.some((lang) => lang.code === segments[1]);
-			const pathWithoutLocale = isLocaleSegment ? `/${segments.slice(2).join('/')}` : pathname;
-			const newPath = languageCode === 'en' ? pathWithoutLocale || '/' : `/${languageCode}${pathWithoutLocale}`;
-			router.push(newPath);
+			router.replace(pathname, { locale: languageCode });
 		},
 		[pathname, router, dispatch]
 	);

@@ -84,7 +84,9 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 		});
 
 		const tickerCallback = (_time: number, deltaTime: number) => {
-			if (isUnmounted) return;
+			if (isUnmounted) {
+				return;
+			}
 			let anyActive = false;
 			for (let i = 0; i < triggers.length; i++) {
 				if (triggers[i].isActive) {
@@ -92,7 +94,9 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 					break;
 				}
 			}
-			if (!anyActive && !isConverging) return;
+			if (!anyActive && !isConverging) {
+				return;
+			}
 
 			const lastCardTop = cards[lastCardIndex].getBoundingClientRect().top;
 
