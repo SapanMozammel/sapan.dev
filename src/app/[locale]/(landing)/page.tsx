@@ -1,3 +1,4 @@
+import Blog from '@/components/layout/Blog';
 import Experience from '@/components/layout/Experience';
 import Hero from '@/components/layout/Hero';
 import Portfolio from '@/components/layout/Portfolio';
@@ -15,6 +16,7 @@ const LandingPage = memo(() => {
 			<Experience />
 			<Testimonials />
 			<Workflow />
+			<Blog />
 		</>
 	);
 });
