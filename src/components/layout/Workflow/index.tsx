@@ -84,13 +84,13 @@ const Workflow = memo(() => {
 					<div
 						onMouseEnter={() => setIsPaused(true)}
 						onMouseLeave={() => setIsPaused(false)}
-						className='from-secondary-100/50 dark:from-secondary-800/50 dark:to-secondary-900/50 to-secondary-300/50 shadow-secondary-300/10 dark:shadow-dark/10 relative flex w-full flex-col gap-8 overflow-hidden rounded-2xl bg-gradient-to-b p-4 shadow-xl transition-shadow duration-300 md:gap-12 md:p-6'
+						className='border-secondary-200/60 dark:border-secondary-700/40 relative flex w-full max-w-5xl flex-col gap-6 self-center overflow-hidden rounded-2xl border bg-white p-6 shadow-lg shadow-black/5 transition-all duration-300 md:p-8 dark:bg-black/20 dark:shadow-black/20'
 					>
 						<div className='pointer-events-none absolute inset-0 z-0 overflow-hidden'>
 							<div className='absolute -top-[20%] -left-[10%] h-[70%] w-[70%] rounded-full bg-blue-500/10 blur-[130px]' />
 							<div className='absolute -right-[10%] -bottom-[20%] h-[70%] w-[70%] rounded-full bg-purple-500/5 blur-[130px]' />
 						</div>
-						<div className='relative z-10 flex gap-2 p-4 md:gap-4 md:p-6'>
+						<div className='relative z-10 flex gap-8 pt-2 md:gap-12'>
 							<div className='flex grow flex-col justify-center'>
 								<AnimatePresence mode='wait'>
 									<motion.div
@@ -99,18 +99,18 @@ const Workflow = memo(() => {
 										animate={{ opacity: 1, y: 0 }}
 										exit={{ opacity: 0, y: -15 }}
 										transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-										className='space-y-6'
+										className='space-y-4 sm:space-y-6'
 									>
-										<h3 className='font-cg text-3xl font-bold tracking-wide text-black sm:text-5xl dark:text-white'>{currentStep.title}</h3>
-										<p className='text-secondary-600 dark:text-secondary-400 inline-flex max-w-[64ch] text-sm !leading-relaxed tracking-wider sm:text-base'>{currentStep.description}</p>
+										<h3 className='font-cg text-2xl font-bold tracking-wide text-black sm:text-4xl dark:text-white'>{currentStep.title}</h3>
+										<p className='text-secondary-600 dark:text-secondary-400 max-w-[64ch] text-sm !leading-relaxed tracking-wider sm:text-base'>{currentStep.description}</p>
 									</motion.div>
 								</AnimatePresence>
 							</div>
-							<div className='hidden w-full max-w-56 shrink-0 items-center justify-center md:flex lg:max-w-100 xl:max-w-120'>
+							<div className='hidden w-44 shrink-0 items-center justify-center md:flex lg:w-52 xl:w-60'>
 								<motion.div
 									animate={{ y: [0, -12, 0] }}
 									transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-									className='shadow-primary/10 dark:shadow-success/10 bg-primary/5 dark:bg-success/5 border-primary/10 dark:border-success/10 relative flex aspect-square w-full items-center justify-center rounded-2xl border-1 border-solid shadow-2xl'
+									className='shadow-primary/10 dark:shadow-success/10 bg-primary/5 dark:bg-success/5 border-primary/10 dark:border-success/10 relative flex aspect-square w-full items-center justify-center rounded-2xl border border-solid shadow-2xl'
 								>
 									<AnimatePresence mode='wait'>
 										<motion.div
@@ -119,17 +119,18 @@ const Workflow = memo(() => {
 											animate={{ opacity: 1, scale: 1, rotateY: 0 }}
 											exit={{ opacity: 0, scale: 0.6, rotateY: -30 }}
 											transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-											className='bg-primary/10 dark:bg-success/10 border-primary/50 dark:border-success/50 relative flex h-32 w-32 items-center justify-center rounded-2xl border-1 border-solid lg:h-44 lg:w-44'
+											className='bg-primary/10 dark:bg-success/10 border-primary/50 dark:border-success/50 relative flex h-24 w-24 items-center justify-center rounded-2xl border border-solid lg:h-32 lg:w-32'
 										>
-											<currentStep.icon size={72} stroke={1.2} className='text-primary dark:text-success' />
+											<currentStep.icon size={52} stroke={1.2} className='text-primary dark:text-success lg:hidden' />
+											<currentStep.icon size={64} stroke={1.2} className='text-primary dark:text-success hidden lg:block' />
 										</motion.div>
 									</AnimatePresence>
 								</motion.div>
 							</div>
 						</div>
-						<div className='relative z-30 px-4 pb-12 md:p-6 md:pb-16'>
+						<div className='relative z-30 mt-4 pb-10 md:mt-6 md:pb-12'>
 							<div className='relative h-0.5 w-full'>
-								<div className='bg-secondary-400 absolute inset-0 h-full w-full' />
+								<div className='bg-secondary-200/60 dark:bg-secondary-700/40 absolute inset-0 h-full w-full' />
 								<motion.div
 									initial={false}
 									animate={{ width: `${currentProgressPercent}%` }}
