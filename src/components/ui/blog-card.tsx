@@ -82,9 +82,9 @@ const BlogCard = memo<BlogCardProps>(({ post, className }) => {
 							<span className='font-sora font-medium'>{post.readTime} min</span>
 						</span>
 					</div>
-					<span className='font-hg text-primary dark:text-success transition-gap inline-flex items-center gap-1 text-xs font-bold tracking-wider uppercase duration-200 group-hover:gap-2'>
-						Read
-						<IconArrowRight size={13} stroke={2.5} className='transition-transform duration-200 group-hover:translate-x-0.5' />
+					<span className='font-sora text-primary dark:text-success transition-gap inline-flex items-center gap-1 text-sm font-semibold tracking-wider uppercase duration-200 group-hover:gap-2'>
+						<span>Read More</span>
+						<IconArrowRight stroke={3} className='mb-0.5 h-4 w-4 transition-transform duration-300' />
 					</span>
 				</div>
 			</div>

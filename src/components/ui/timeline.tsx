@@ -74,7 +74,7 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 				</div>
 				<div
 					className={cn(
-						'group from-secondary-100/50 dark:from-secondary-800/50 dark:to-secondary-900/50 to-secondary-300/50 shadow-secondary-300/10 dark:shadow-dark/10 relative flex flex-col gap-2 rounded-2xl bg-gradient-to-b p-4 shadow-xl transition-shadow duration-300 md:gap-4 md:p-6'
+						'group border-secondary-200/60 dark:border-secondary-700/40 shadow-black/5 dark:shadow-black/20 relative flex flex-col gap-2 rounded-2xl border bg-white p-4 shadow-lg transition-all duration-300 dark:bg-black/20 md:gap-4 md:p-6'
 					)}
 				>
 					<div className='flex flex-col gap-1'>
@@ -84,7 +84,7 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 					{job.technologies && job.technologies.length > 0 && (
 						<div className='flex flex-wrap gap-1.5'>
 							{job.technologies.map((tech, idx) => (
-								<span key={idx} className={cn('bg-secondary-200 text-secondary-700 dark:bg-secondary-800 dark:text-secondary-300 inline-flex items-center rounded-lg px-3 py-1 text-xs font-bold')}>
+								<span key={idx} className={cn('font-sora bg-secondary-100 text-secondary-500 dark:bg-secondary-800/60 dark:text-secondary-500 rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase')}>
 									{tech}
 								</span>
 							))}
@@ -92,7 +92,7 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 					)}
 					<p className='text-secondary-600 dark:text-secondary-300 leading-regular text-sm'>{job.description}</p>
 					<div className='flex flex-col gap-1.5'>
-						<h4 className='text-dark text-lg font-bold dark:text-white'>Responsibilities</h4>
+						<h4 className='font-sora text-dark text-lg font-bold dark:text-white'>Responsibilities</h4>
 						<ul className='text-secondary-600 dark:text-secondary-300 leading-regular flex list-none flex-col gap-1.5 text-sm'>
 							{job.responsibilities?.map((resp, idx) => (
 								<li key={idx} className='relative flex items-start pl-4'>
@@ -104,7 +104,7 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 					</div>
 					{job.achievements && job.achievements.length > 0 && (
 						<div className='flex flex-col gap-1.5'>
-							<h4 className='text-dark text-lg font-bold dark:text-white'>Impact & Achievements</h4>
+							<h4 className='font-sora text-dark text-lg font-bold dark:text-white'>Impact & Achievements</h4>
 							<ul className='text-secondary-600 dark:text-secondary-300 leading-regular flex list-none flex-col gap-1.5 text-sm'>
 								{job.achievements.map((achievement, idx) => (
 									<li key={idx} className='relative flex items-start pl-4'>
