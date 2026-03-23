@@ -29,7 +29,7 @@ const BlogPage = memo(() => {
 			<SectionSeparator lts rts lbs rbs tl bl ll rl>
 				<div className='container flex w-full grow flex-col items-center justify-start gap-4 pb-8 sm:pb-12 lg:pb-16'>
 					<SectionTitle subtitle='Dev Journal' title='Thoughts on Frontend' watermark='Articles' />
-					<div className='flex w-full flex-wrap justify-center gap-2'>
+					<div className='flex w-full flex-wrap justify-center gap-2 mb-4'>
 						{ALL_CATEGORIES.map((cat) => (
 							<button
 								key={cat}
