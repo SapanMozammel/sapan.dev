@@ -1,5 +1,5 @@
-import { IconBrush, IconBug, IconClipboardCheck, IconCode, IconRocket } from '@tabler/icons-react';
 import type { WorkflowStep } from '@/types/workflow';
+import { IconBrush, IconBug, IconClipboardCheck, IconCode, IconRocket } from '@tabler/icons-react';
 
 export const WORKFLOW_STEPS: WorkflowStep[] = [
 	{
@@ -38,8 +38,7 @@ export const WORKFLOW_STEPS: WorkflowStep[] = [
 		id: 5,
 		label: 'Launch',
 		title: 'Deployment',
-		description:
-			'Once the feature passes testing, I deploy the finalized code to the production environment. I also verify that everything runs smoothly after release and ensure the feature performs as expected.',
+		description: 'Once the feature passes testing, I deploy the finalized code to the production environment. I also verify that everything runs smoothly after release and ensure the feature performs as expected.',
 		icon: IconRocket,
 	},
 ];

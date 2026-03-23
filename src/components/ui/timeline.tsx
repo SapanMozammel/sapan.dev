@@ -52,7 +52,7 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 	}, [job.startDate, job.endDate, job.type]);
 
 	return (
-		<div ref={itemRef} data-timeline-item className={cn('timeline-item mb-4 md:mb-0 relative mx-auto flex w-full gap-4', isLeft ? 'flex-col md:flex-row-reverse' : 'flex-col md:flex-row')}>
+		<div ref={itemRef} data-timeline-item className={cn('timeline-item relative mx-auto mb-4 flex w-full gap-4 md:mb-0', isLeft ? 'flex-col md:flex-row-reverse' : 'flex-col md:flex-row')}>
 			<div className={cn('hidden w-1/2 shrink-0 flex-col pt-8 md:flex', isLeft ? 'items-start pl-8' : 'items-end pr-8')}>
 				<span className='text-secondary-600 dark:text-secondary-400 text-sm leading-snug font-medium'>{formattedDate}</span>
 				<span className='text-secondary-400 dark:text-secondary-500 font-regular text-xs leading-snug'>

@@ -504,8 +504,8 @@ const generateVSCodeSettings = (config) => {
 
 		// Code actions
 		'editor.codeActionsOnSave': {
-			'source.fixAll.eslint': eslintAutoFix,
-			'source.organizeImports': organizeImportsOnSave,
+			'source.fixAll.eslint': eslintAutoFix ? 'explicit' : 'never',
+			'source.organizeImports': organizeImportsOnSave ? 'explicit' : 'never',
 		},
 
 		// Files
@@ -667,76 +667,6 @@ const generateVSCodeKeybindings = () => {
 
 
 
-// Generate Cursor settings
-const generateCursorSettings = (config) => {
-	// Helper function to get config value with fallback
-	const getConfigValue = (key, fallback) => config[key] !== undefined ? config[key] : fallback;
-
-	const useTabs = getConfigValue('INDENT_STYLE', 'space') === 'tab';
-	const tabWidth = parseInt(getConfigValue('INDENT_SIZE', '2')) || 2;
-	const printWidth = parseInt(getConfigValue('PRINT_WIDTH', '80')) || 80;
-	const wordWrapColumn = parseInt(getConfigValue('WORD_WRAP_COLUMN', printWidth.toString())) || printWidth;
-	const formatOnSave = getConfigValue('FORMAT_ON_SAVE', 'false') === 'true';
-	const formatOnPaste = getConfigValue('FORMAT_ON_PASTE', 'false') === 'true';
-	const eslintAutoFix = getConfigValue('ESLINT_AUTO_FIX', 'true') === 'true';
-	const wordWrap = getConfigValue('WORD_WRAP', 'off');
-
-	// Import organization settings
-	const organizeImportsOnSave = getConfigValue('ORGANIZE_IMPORTS_ON_SAVE', 'false') === 'true';
-	const removeUnusedImportsOnFormat = getConfigValue('REMOVE_UNUSED_IMPORTS_ON_FORMAT', 'true') === 'true';
-
-	const settings = {
-		'editor.formatOnSave': formatOnSave,
-		'editor.formatOnPaste': formatOnPaste,
-		'editor.tabSize': tabWidth,
-		'editor.insertSpaces': !useTabs,
-		'editor.detectIndentation': false,
-		'editor.wordWrap': wordWrap,
-		'editor.wordWrapColumn': wordWrapColumn,
-		'editor.rulers': [printWidth],
-		'prettier.requireConfig': true,
-		'eslint.enable': true,
-		'eslint.format.enable': true,
-		'editor.codeActionsOnSave': {
-			'source.fixAll.eslint': eslintAutoFix,
-			'source.organizeImports': organizeImportsOnSave,
-		},
-
-		// TypeScript import organization
-		'typescript.preferences.organizeImports': {
-			'removeUnusedImports': removeUnusedImportsOnFormat,
-		},
-		'typescript.suggest.autoImports': 'on',
-		'typescript.updateImportsOnFileMove.enabled': 'always',
-
-		// Command palette actions for manual formatting with unused import removal
-		'typescript.preferences.includePackageJsonAutoImports': 'auto',
-
-		// Enable format and organize imports together
-		'editor.formatOnSaveMode': 'file',
-		'[javascript]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
-		'[javascriptreact]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
-		'[typescript]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
-		'[typescriptreact]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
-		'[css]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
-		'[scss]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
-		'[json]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
-		'[markdown]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
-		'[yaml]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
-	};
-
-	return JSON.stringify(settings, null, '\t');
-};
-
-// Generate Cursor tasks (same as VSCode)
-const generateCursorTasks = () => {
-	return generateVSCodeTasks();
-};
-
-// Generate Cursor keybindings (same as VSCode)
-const generateCursorKeybindings = () => {
-	return generateVSCodeKeybindings();
-};
 
 // Generate .gitattributes for consistent line endings
 const generateGitAttributes = () => {
@@ -794,9 +724,6 @@ const sync = () => {
 	const vscodeSettings = generateVSCodeSettings(config);
 	const vscodeTasks = generateVSCodeTasks();
 	const vscodeKeybindings = generateVSCodeKeybindings();
-	const cursorSettings = generateCursorSettings(config);
-	const cursorTasks = generateCursorTasks();
-	const cursorKeybindings = generateCursorKeybindings();
 
 	// Write all files with error handling
 	const files = [
@@ -809,9 +736,6 @@ const sync = () => {
 		{ path: '.vscode/settings.json', content: vscodeSettings },
 		{ path: '.vscode/tasks.json', content: vscodeTasks },
 		{ path: '.vscode/keybindings.json', content: vscodeKeybindings },
-		{ path: '.cursor/settings.json', content: cursorSettings },
-		{ path: '.cursor/tasks.json', content: cursorTasks },
-		{ path: '.cursor/keybindings.json', content: cursorKeybindings },
 	];
 
 	let successCount = 0;

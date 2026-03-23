@@ -1,10 +1,10 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import { WORKFLOW_STEPS } from '@/lib/constants/workflow';
+import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
-import { memo, useState, useEffect, useRef } from 'react';
 import { useTheme } from 'next-themes';
+import { memo, useEffect, useRef, useState } from 'react';
 import SectionSeparator from '../common/SectionSeparator';
 import SectionTitle from '../common/SectionTitle';
 
@@ -37,14 +37,18 @@ const Workflow = memo(() => {
 			currentProgressPercent = lastStarPercent + (stepProgress / 50) * (100 - lastStarPercent);
 		} else {
 			currentProgressPercent = ((stepProgress - 50) / 50) * startPadding;
-			if (stepProgress < 52) transitionDuration = 0;
+			if (stepProgress < 52) {
+				transitionDuration = 0;
+			}
 		}
 	} else {
 		currentProgressPercent = startPadding + activeStep * segmentWidth + (stepProgress / 100) * segmentWidth;
 	}
 
 	useEffect(() => {
-		if (isPaused) return;
+		if (isPaused) {
+			return;
+		}
 
 		const startTime = Date.now() - (stepProgress / 100) * AUTOPLAY_DURATION;
 
@@ -61,7 +65,9 @@ const Workflow = memo(() => {
 		}, 16);
 
 		return () => {
-			if (autoplayTimerRef.current) clearInterval(autoplayTimerRef.current);
+			if (autoplayTimerRef.current) {
+				clearInterval(autoplayTimerRef.current);
+			}
 		};
 	}, [isPaused, totalSteps, activeStep]);
 
@@ -173,7 +179,10 @@ const Workflow = memo(() => {
 													opacity: { duration: 0.5, ease: 'easeInOut' },
 													scale: { duration: 0.4, ease: [0.23, 1, 0.32, 1] },
 												}}
-												className={cn('absolute text-center whitespace-nowrap', !isResetting && activeStep === index ? 'text-primary dark:text-success' : 'text-secondary-600 dark:text-secondary-400')}
+												className={cn(
+													'absolute text-center whitespace-nowrap',
+													!isResetting && activeStep === index ? 'text-primary dark:text-success' : 'text-secondary-600 dark:text-secondary-400'
+												)}
 											>
 												<span className='font-sora block text-[10px] font-bold tracking-widest uppercase'>{step.label}</span>
 											</motion.div>
