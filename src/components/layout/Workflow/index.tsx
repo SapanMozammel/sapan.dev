@@ -84,14 +84,14 @@ const Workflow = memo(() => {
 					<div
 						onMouseEnter={() => setIsPaused(true)}
 						onMouseLeave={() => setIsPaused(false)}
-						className='from-secondary-100/50 dark:from-secondary-800/50 dark:to-secondary-900/50 to-secondary-300/50 shadow-secondary-300/10 dark:shadow-dark/10 relative flex flex-col gap-8 overflow-hidden rounded-2xl bg-gradient-to-b p-4 shadow-xl transition-shadow duration-300 md:gap-12 md:p-6'
+						className='from-secondary-100/50 dark:from-secondary-800/50 dark:to-secondary-900/50 to-secondary-300/50 shadow-secondary-300/10 dark:shadow-dark/10 relative flex w-full flex-col gap-8 overflow-hidden rounded-2xl bg-gradient-to-b p-4 shadow-xl transition-shadow duration-300 md:gap-12 md:p-6'
 					>
 						<div className='pointer-events-none absolute inset-0 z-0 overflow-hidden'>
 							<div className='absolute -top-[20%] -left-[10%] h-[70%] w-[70%] rounded-full bg-blue-500/10 blur-[130px]' />
 							<div className='absolute -right-[10%] -bottom-[20%] h-[70%] w-[70%] rounded-full bg-purple-500/5 blur-[130px]' />
 						</div>
 						<div className='relative z-10 flex gap-2 p-4 md:gap-4 md:p-6'>
-							<div className='flex flex-col justify-center'>
+							<div className='flex grow flex-col justify-center'>
 								<AnimatePresence mode='wait'>
 									<motion.div
 										key={activeStep}
@@ -102,7 +102,7 @@ const Workflow = memo(() => {
 										className='space-y-6'
 									>
 										<h3 className='font-cg text-3xl font-bold tracking-wide text-black sm:text-5xl dark:text-white'>{currentStep.title}</h3>
-										<p className='text-secondary-600 dark:text-secondary-400 inline-flex text-sm !leading-relaxed tracking-wider sm:text-base'>{currentStep.description}</p>
+										<p className='text-secondary-600 dark:text-secondary-400 inline-flex max-w-[64ch] text-sm !leading-relaxed tracking-wider sm:text-base'>{currentStep.description}</p>
 									</motion.div>
 								</AnimatePresence>
 							</div>
@@ -119,7 +119,7 @@ const Workflow = memo(() => {
 											animate={{ opacity: 1, scale: 1, rotateY: 0 }}
 											exit={{ opacity: 0, scale: 0.6, rotateY: -30 }}
 											transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-											className='bg-primary/10 dark:bg-success/10 border-primary/50 dark:border-success/50 shadow-primary/20 dark:shadow-success/20 relative flex h-32 w-32 items-center justify-center rounded-2xl border-1 border-solid shadow-2xl lg:h-44 lg:w-44'
+											className='bg-primary/10 dark:bg-success/10 border-primary/50 dark:border-success/50 relative flex h-32 w-32 items-center justify-center rounded-2xl border-1 border-solid lg:h-44 lg:w-44'
 										>
 											<currentStep.icon size={72} stroke={1.2} className='text-primary dark:text-success' />
 										</motion.div>
@@ -152,13 +152,11 @@ const Workflow = memo(() => {
 											<motion.div
 												animate={{
 													color: !isResetting && activeStep >= index ? activeColor : inactiveColor,
-													scale: !isResetting && activeStep === index ? 1.3 : 1,
-													opacity: !isResetting && activeStep >= index ? 1 : 0.4,
+													scale: !isResetting && activeStep === index ? 1.5 : 1,
 												}}
 												transition={{
 													color: { duration: 0.5, ease: 'easeInOut' },
 													scale: { duration: 0.4, ease: [0.23, 1, 0.32, 1] },
-													opacity: { duration: 0.5, ease: 'easeInOut' },
 												}}
 												className='z-40'
 											>
@@ -171,9 +169,9 @@ const Workflow = memo(() => {
 											</div>
 											<motion.div
 												animate={{
-													opacity: !isResetting && activeStep === index ? 1 : 0.4,
+													opacity: !isResetting && activeStep === index ? 1 : 0.5,
 													y: 28,
-													scale: !isResetting && activeStep === index ? 1 : 0.9,
+													scale: !isResetting && activeStep === index ? 1.1 : 0.9,
 												}}
 												transition={{
 													opacity: { duration: 0.5, ease: 'easeInOut' },
