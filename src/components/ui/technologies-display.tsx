@@ -1,12 +1,8 @@
 'use client';
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import type { TechnologiesDisplayProps } from '@/types/technology';
 import { memo, useMemo } from 'react';
-
-type TechnologiesDisplayProps = {
-	technologies: string[];
-	visibleCount?: number;
-};
 
 const VISIBLE_TECHNOLOGIES_COUNT = 3;
 

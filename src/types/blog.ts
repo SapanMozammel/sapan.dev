@@ -17,3 +17,8 @@ export type BlogPost = {
 	publishedAt: string;
 	featured?: boolean;
 };
+
+export type BlogCardProps = {
+	post: BlogPost;
+	className?: string;
+};

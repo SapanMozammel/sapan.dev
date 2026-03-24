@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import { getBlurDataURL } from '@/lib/utils/image';
-import type { BlogPost } from '@/types/blog';
+import type { BlogCardProps } from '@/types/blog';
 import { IconArrowRight, IconClock } from '@tabler/icons-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -25,11 +25,6 @@ function formatDate(dateString: string): string {
 		day: 'numeric',
 	});
 }
-
-type BlogCardProps = {
-	post: BlogPost;
-	className?: string;
-};
 
 const BlogCard = memo<BlogCardProps>(({ post, className }) => {
 	const categoryColor = CATEGORY_COLORS[post.category] ?? DEFAULT_CATEGORY_COLOR;

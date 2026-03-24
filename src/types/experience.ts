@@ -1,6 +1,6 @@
 export type ExperienceType = 'Full-time' | 'Part-time' | 'Freelance' | 'Internship' | 'Learning';
 
-export interface ExperienceItem {
+export type ExperienceItem = {
 	id: string;
 	company: string;
 	position: string;
@@ -12,14 +12,14 @@ export interface ExperienceItem {
 	responsibilities?: string[];
 	technologies?: string[];
 	achievements?: string[];
-}
+};
 
-export interface TimelineItemProps {
+export type TimelineItemProps = {
 	item: ExperienceItem;
 	isLast: boolean;
-}
+};
 
-export interface TimelineProps {
+export type TimelineProps = {
 	items: ExperienceItem[];
 	className?: string;
-}
+};
