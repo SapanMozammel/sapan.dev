@@ -20,3 +20,10 @@ type RegularButtonProps = BaseButtonProps & {
 
 // Union type for the unified button component
 export type ButtonProps = LinkButtonProps | RegularButtonProps;
+
+// Props for the ConnectButton wrapper
+export type ConnectButtonProps = {
+	className?: string;
+	gradient?: boolean;
+	fill?: boolean;
+};

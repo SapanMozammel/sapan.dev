@@ -1,4 +1,5 @@
 'use client';
+import { cn } from '@/lib/utils';
 import { ButtonProps } from '@/types/button';
 import { IconLoader } from '@tabler/icons-react';
 import Link from 'next/link';
@@ -14,7 +15,7 @@ export const Button = memo<ButtonProps>((props) => {
 	// Memoize computed classes to prevent recalculation
 	const computedClasses = useMemo(() => {
 		const loadingClass = loading ? 'pointer-events-none' : '';
-		return `${BASE_CLASSES} ${loadingClass} ${className ?? ''}`;
+		return cn(BASE_CLASSES, loadingClass, className);
 	}, [loading, className]);
 
 	// Check if this should render as a Link or button

@@ -3,6 +3,7 @@
 	--animate-noise: noise 1s linear infinite;
 	--animate-spin-slow: spin 10s linear infinite;
 	--animate-faq-border-shift: faq-border-shift 3s ease infinite;
+	--animate-cta-beam: cta-beam 8s ease-in-out infinite;
 
 	// keyframes
 	@keyframes noise {
@@ -22,5 +23,46 @@
 		50% {
 			background-position: 100% 50%;
 		}
+	}
+	@keyframes cta-beam {
+		0%,
+		100% {
+			background-position: 0% 0%;
+		}
+		50% {
+			background-position: 100% 100%;
+		}
+	}
+}
+
+// CTA light bar — grows down from top then retracts
+@keyframes cta-ray {
+	0% {
+		opacity: 0;
+		transform: scaleY(0.3);
+	}
+	50% {
+		opacity: 1;
+		transform: scaleY(1);
+	}
+	100% {
+		opacity: 0;
+		transform: scaleY(0.3);
+	}
+}
+
+// CTA particle dot — pops in with scale
+@keyframes cta-dot {
+	0% {
+		opacity: 0;
+		transform: scale(0);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	100% {
+		opacity: 0;
+		transform: scale(0);
 	}
 }
