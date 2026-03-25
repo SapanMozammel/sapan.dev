@@ -86,7 +86,7 @@ const Particles = memo<{ isDark: boolean }>(({ isDark }) => {
 		// Theme-adaptive colors & opacity
 		const c1 = isDark ? COLOR_DARK_1 : COLOR_LIGHT_1;
 		const c2 = isDark ? COLOR_DARK_2 : COLOR_LIGHT_2;
-		const opacity = isDark ? 1 : 0.75;
+		const opacity = isDark ? 1 : 0.5;
 
 		dofPointsMaterial.uniforms.uColor1.value.lerp(c1, delta * 3);
 		dofPointsMaterial.uniforms.uColor2.value.lerp(c2, delta * 3);
