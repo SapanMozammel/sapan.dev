@@ -19,7 +19,7 @@ const nextConfig = {
 	},
 
 	experimental: {
-		optimizePackageImports: ['@tabler/icons-react'],
+		optimizePackageImports: ['@tabler/icons-react', 'three'],
 	},
 
 	onDemandEntries: {

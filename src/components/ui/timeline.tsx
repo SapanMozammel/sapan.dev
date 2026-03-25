@@ -52,18 +52,24 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 	}, [job.startDate, job.endDate, job.type]);
 
 	return (
-		<div ref={itemRef} data-timeline-item className={cn('timeline-item relative mx-auto mb-4 flex w-full gap-4 md:mb-0', isLeft ? 'flex-col md:flex-row-reverse' : 'flex-col md:flex-row')}>
+		<div ref={itemRef} data-timeline-item className={cn('relative mx-auto mb-4 flex w-full gap-4 md:mb-0', isLeft ? 'flex-col md:flex-row-reverse' : 'flex-col md:flex-row')}>
 			<div className={cn('hidden w-1/2 shrink-0 flex-col pt-8 md:flex', isLeft ? 'items-start pl-8' : 'items-end pr-8')}>
 				<span className='text-secondary-600 dark:text-secondary-400 text-sm leading-snug font-medium'>{formattedDate}</span>
 				<span className='text-secondary-400 dark:text-secondary-500 font-regular text-xs leading-snug'>
 					{job.type}, {job.location}
 				</span>
 			</div>
-			<div className={cn('timeline-dot absolute top-10.5 z-2 hidden -translate-y-1/2 md:block', isLeft ? 'left-1/2 -translate-x-1/2' : 'right-1/2 translate-x-1/2')}>
-				<div className='bg-secondary-200 dark:bg-secondary-700 dark:ring-secondary-900 border-secondary-300 dark:border-secondary-600 timeline-dot-inner h-3 w-3 rounded-full border ring-4 ring-white transition-all duration-300' />
+			<div className={cn('absolute top-10.5 z-2 hidden -translate-y-1/2 md:block', isLeft ? 'left-1/2 -translate-x-1/2' : 'right-1/2 translate-x-1/2')}>
+				<div
+					data-timeline-dot
+					className='bg-secondary-200 dark:bg-secondary-700 dark:ring-secondary-900 border-secondary-300 dark:border-secondary-600 h-3 w-3 rounded-full border ring-4 ring-white transition-all duration-300'
+				/>
 			</div>
-			<div className='timeline-dot absolute top-1 left-0 z-20 md:hidden' aria-hidden='true'>
-				<div className='bg-secondary-200 dark:bg-secondary-700 dark:ring-secondary-900 border-secondary-300 dark:border-secondary-600 timeline-dot-inner h-3 w-3 rounded-full border ring-4 ring-white transition-all duration-300' />
+			<div className='absolute top-1 left-0 z-20 md:hidden' aria-hidden='true'>
+				<div
+					data-timeline-dot
+					className='bg-secondary-200 dark:bg-secondary-700 dark:ring-secondary-900 border-secondary-300 dark:border-secondary-600 h-3 w-3 rounded-full border ring-4 ring-white transition-all duration-300'
+				/>
 			</div>
 			<div className={cn('flex-1 pt-0 md:w-1/2', isLeft ? 'ml-6 md:mr-4 md:ml-0' : 'ml-6 md:ml-4')}>
 				<div className='mb-4 flex flex-col pl-0 md:hidden'>
@@ -74,7 +80,7 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 				</div>
 				<div
 					className={cn(
-						'group border-secondary-200/60 dark:border-secondary-700/40 relative flex flex-col gap-2 rounded-2xl border bg-white p-4 shadow-lg shadow-black/5 transition-all duration-300 md:gap-4 md:p-6 dark:bg-black/20 dark:shadow-black/20'
+						'group border-secondary-200/60 dark:border-secondary-700/40 relative flex flex-col gap-2 rounded-2xl border p-4 shadow-lg shadow-black/5 backdrop-blur-sm transition-all duration-300 md:gap-4 md:p-6 dark:shadow-black/20'
 					)}
 				>
 					<div className='flex flex-col gap-1'>
@@ -244,7 +250,7 @@ const Timeline = memo<TimelineProps>(({ items, className }) => {
 					return;
 				}
 				const dotAbsoluteY = containerTop + heights[i] + startY;
-				const itemDots = itemEl.querySelectorAll('.timeline-dot-inner');
+				const itemDots = itemEl.querySelectorAll('[data-timeline-dot]');
 
 				itemDots.forEach((innerDot) => {
 					const el = innerDot as HTMLElement;
