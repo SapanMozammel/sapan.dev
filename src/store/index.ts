@@ -1,5 +1,5 @@
 import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit';
-import { LOCALE_STORAGE_KEY, localeReducer } from './slices';
+import { LOCALE_STORAGE_KEY, localeReducer, uiReducer } from './slices';
 import { setLocale } from './slices/localeSlice';
 
 const listenerMiddleware = createListenerMiddleware();
@@ -16,6 +16,7 @@ listenerMiddleware.startListening({
 export const store = configureStore({
 	reducer: {
 		locale: localeReducer,
+		ui: uiReducer,
 	},
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(listenerMiddleware.middleware),
 	devTools: process.env.NODE_ENV !== 'production',

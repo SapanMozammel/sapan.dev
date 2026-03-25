@@ -15,7 +15,7 @@ const AccordionItem = memo<AccordionItemProps>(({ question, answer, isOpen, onTo
 			<div
 				aria-hidden
 				className={cn(
-					'animate-faq-border-shift pointer-events-none absolute -inset-px rounded-[calc(1rem+1px)] bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-success)_35%,var(--color-primary)_65%,var(--color-success)_100%)] [background-size:300%_300%] opacity-0 transition-opacity duration-500',
+					'animate-faq-border-shift pointer-events-none absolute -inset-px rounded-[calc(theme(borderRadius.2xl)+theme(spacing.px))] bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-success)_35%,var(--color-primary)_65%,var(--color-success)_100%)] [background-size:300%_300%] opacity-0 transition-opacity duration-500',
 					isOpen && 'opacity-100'
 				)}
 			/>

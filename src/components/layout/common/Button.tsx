@@ -37,7 +37,7 @@ export const Button = memo<ButtonProps>((props) => {
 									d='M22,43.00005 L8.11111,43.00005 C4.18375,43.00005 1,39.58105 1,35.36365 L1,8.63637 C1,4.41892 4.18375,1 8.11111,1 L21,1'
 								/>
 							</svg>
-							<span className='relative h-full group-hover/button:hue-rotate-15 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0'>
+							<span className='relative h-full grow group-hover/button:hue-rotate-15 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0'>
 								<span className='font-hg relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/button:text-white sm:text-sm dark:text-white'>
 									{loading ? (
 										<>
@@ -79,7 +79,7 @@ export const Button = memo<ButtonProps>((props) => {
 									d='M22,43.00005 L8.11111,43.00005 C4.18375,43.00005 1,39.58105 1,35.36365 L1,8.63637 C1,4.41892 4.18375,1 8.11111,1 L21,1'
 								/>
 							</svg>
-							<span className='relative h-full'>
+							<span className='relative h-full grow'>
 								<span className='font-hg dark:text-dark dark:group-hover/button:text-dark relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/button:text-white sm:text-sm'>
 									{loading ? (
 										<>
@@ -115,7 +115,7 @@ export const Button = memo<ButtonProps>((props) => {
 								d='M22,43.00005 L8.11111,43.00005 C4.18375,43.00005 1,39.58105 1,35.36365 L1,8.63637 C1,4.41892 4.18375,1 8.11111,1 L21,1'
 							/>
 						</svg>
-						<span className='relative h-full group-hover/button:hue-rotate-15 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0'>
+						<span className='relative h-full grow group-hover/button:hue-rotate-15 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0'>
 							<span className='font-hg text-dark relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
 								{loading ? (
 									<>
@@ -155,7 +155,7 @@ export const Button = memo<ButtonProps>((props) => {
 								d='M22,43.00005 L8.11111,43.00005 C4.18375,43.00005 1,39.58105 1,35.36365 L1,8.63637 C1,4.41892 4.18375,1 8.11111,1 L21,1'
 							/>
 						</svg>
-						<span className='relative h-full'>
+						<span className='relative h-full grow'>
 							<span className='font-hg text-dark group-hover/button:text-primary dark:group-hover/button:text-success relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
 								{loading ? (
 									<>
@@ -201,7 +201,7 @@ export const Button = memo<ButtonProps>((props) => {
 								d='M22,43.00005 L8.11111,43.00005 C4.18375,43.00005 1,39.58105 1,35.36365 L1,8.63637 C1,4.41892 4.18375,1 8.11111,1 L21,1'
 							/>
 						</svg>
-						<span className='relative h-full group-hover/button:hue-rotate-15 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0'>
+						<span className='relative h-full grow group-hover/button:hue-rotate-15 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0'>
 							<span className='font-hg group-disabled/button:text-secondary-500 relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/button:text-white sm:text-sm dark:text-white'>
 								{loading ? (
 									<>
@@ -240,7 +240,7 @@ export const Button = memo<ButtonProps>((props) => {
 								d='M22,43.00005 L8.11111,43.00005 C4.18375,43.00005 1,39.58105 1,35.36365 L1,8.63637 C1,4.41892 4.18375,1 8.11111,1 L21,1'
 							/>
 						</svg>
-						<span className='relative h-full'>
+						<span className='relative h-full grow'>
 							<span className='font-hg dark:text-dark group-disabled/button:text-secondary-500 dark:group-hover/button:text-dark relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider text-white uppercase group-hover/button:text-white sm:text-sm'>
 								{loading ? (
 									<>
@@ -280,7 +280,7 @@ export const Button = memo<ButtonProps>((props) => {
 							d='M22,43.00005 L8.11111,43.00005 C4.18375,43.00005 1,39.58105 1,35.36365 L1,8.63637 C1,4.41892 4.18375,1 8.11111,1 L21,1'
 						/>
 					</svg>
-					<span className='relative h-full group-hover/button:hue-rotate-15 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0'>
+					<span className='relative h-full grow group-hover/button:hue-rotate-15 dark:group-hover/button:brightness-120 dark:group-hover/button:hue-rotate-0'>
 						<span className='font-hg text-dark group-disabled/button:text-secondary-400 relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
 							{loading ? (
 								<>
@@ -320,7 +320,7 @@ export const Button = memo<ButtonProps>((props) => {
 							d='M22,43.00005 L8.11111,43.00005 C4.18375,43.00005 1,39.58105 1,35.36365 L1,8.63637 C1,4.41892 4.18375,1 8.11111,1 L21,1'
 						/>
 					</svg>
-					<span className='relative h-full'>
+					<span className='relative h-full grow'>
 						<span className='font-hg text-dark group-disabled/button:text-secondary-400 group-hover/button:text-primary dark:group-hover/button:text-success relative z-1 inline-flex h-full items-center justify-center gap-1 px-[0.5em] text-xs font-bold tracking-wider uppercase sm:text-sm dark:text-white'>
 							{loading ? (
 								<>

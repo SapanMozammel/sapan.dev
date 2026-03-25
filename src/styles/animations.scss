@@ -3,8 +3,6 @@
 	--animate-noise: noise 1s linear infinite;
 	--animate-spin-slow: spin 10s linear infinite;
 	--animate-faq-border-shift: faq-border-shift 3s ease infinite;
-	--animate-cta-beam: cta-beam 8s ease-in-out infinite;
-
 	// keyframes
 	@keyframes noise {
 		0%,
@@ -22,15 +20,6 @@
 		}
 		50% {
 			background-position: 100% 50%;
-		}
-	}
-	@keyframes cta-beam {
-		0%,
-		100% {
-			background-position: 0% 0%;
-		}
-		50% {
-			background-position: 100% 100%;
 		}
 	}
 }
