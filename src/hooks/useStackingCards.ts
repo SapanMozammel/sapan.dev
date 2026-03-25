@@ -15,7 +15,7 @@ const DEFAULT_MIN_SCALE = 0.9;
 const DEFAULT_GAP = 0;
 const DEFAULT_ENABLED = true;
 
-const SCALE_SMOOTHING = 12;
+const SCALE_SMOOTHING = 20;
 const SCALE_EPSILON = 0.0005;
 
 export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
@@ -61,6 +61,7 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 				transformOrigin: 'center top',
 				marginBottom: index < cards.length - 1 ? gap : 0,
 				willChange: 'transform',
+				force3d: true,
 			});
 
 			let totalStackingDistance = 0;
@@ -75,7 +76,7 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 				end: `+=${totalStackingDistance}`,
 				pin: true,
 				pinSpacing: false,
-				scrub: 1,
+				scrub: true,
 				invalidateOnRefresh: true,
 				anticipatePin: 1,
 			});
@@ -131,7 +132,7 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 				targetScales[cardIndex] = shouldReverseScale ? cardTargetScale + reverseScaleProgress * (defaultMinScale - cardTargetScale) : forwardScale;
 			}
 
-			const dt = Math.min(deltaTime / 1000, 0.1); // Cap at 100ms to prevent huge jumps after tab switch
+			const dt = Math.min(deltaTime / 1000, 0.1);
 			const lerpFactor = 1 - Math.exp(-SCALE_SMOOTHING * dt);
 
 			isConverging = false;
@@ -144,11 +145,11 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 				if (Math.abs(diff) > SCALE_EPSILON) {
 					const newScale = current + diff * lerpFactor;
 					currentScales[i] = newScale;
-					gsap.set(cards[i], { scale: newScale });
+					gsap.set(cards[i], { scale: newScale, force3d: true });
 					isConverging = true;
 				} else if (current !== target) {
 					currentScales[i] = target;
-					gsap.set(cards[i], { scale: target });
+					gsap.set(cards[i], { scale: target, force3d: true });
 				}
 			}
 		};
