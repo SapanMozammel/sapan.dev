@@ -55,7 +55,7 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 		<div ref={itemRef} data-timeline-item className={cn('relative mx-auto mb-4 flex w-full gap-4 md:mb-0', isLeft ? 'flex-col md:flex-row-reverse' : 'flex-col md:flex-row')}>
 			<div className={cn('hidden w-1/2 shrink-0 flex-col pt-8 md:flex', isLeft ? 'items-start pl-8' : 'items-end pr-8')}>
 				<span className='text-secondary-600 dark:text-secondary-400 text-sm leading-snug font-medium'>{formattedDate}</span>
-				<span className='text-secondary-400 dark:text-secondary-500 font-regular text-xs leading-snug'>
+				<span className='text-secondary-400 dark:text-secondary-500 font-normal text-xs leading-snug'>
 					{job.type}, {job.location}
 				</span>
 			</div>
@@ -74,7 +74,7 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 			<div className={cn('flex-1 pt-0 md:w-1/2', isLeft ? 'ml-6 md:mr-4 md:ml-0' : 'ml-6 md:ml-4')}>
 				<div className='mb-4 flex flex-col pl-0 md:hidden'>
 					<span className='text-secondary-600 dark:text-secondary-400 text-sm leading-snug font-medium'>{formattedDate}</span>
-					<span className='text-secondary-400 dark:text-secondary-500 font-regular text-xs leading-snug'>
+					<span className='text-secondary-400 dark:text-secondary-500 font-normal text-xs leading-snug'>
 						{job.type}, {job.location}
 					</span>
 				</div>

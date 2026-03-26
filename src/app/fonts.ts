@@ -1,4 +1,4 @@
-import { Cormorant_Garamond, DM_Sans, EB_Garamond, Hanken_Grotesk, Noto_Sans_Arabic, Sora, Tektur } from 'next/font/google';
+import { Bungee, Cormorant_Garamond, DM_Sans, EB_Garamond, Hanken_Grotesk, Noto_Sans_Arabic, Sora } from 'next/font/google';
 
 export const dmSans = DM_Sans({
 	display: 'swap',
@@ -40,12 +40,12 @@ export const sora = Sora({
 	variable: '--font-sora',
 });
 
-export const tektur = Tektur({
+export const bungee = Bungee({
 	display: 'swap',
-	weight: ['400', '500', '600', '700', '800', '900'],
+	weight: ['400'],
 	subsets: ['latin'],
 	style: ['normal'],
-	variable: '--font-tektur',
+	variable: '--font-bungee',
 });
 
 export const notoSansArabic = Noto_Sans_Arabic({
@@ -55,4 +55,4 @@ export const notoSansArabic = Noto_Sans_Arabic({
 	variable: '--font-arabic',
 });
 
-export const fontList = `${dmSans.variable} ${ebGaramond.variable} ${hankenGrotesk.variable} ${cormorantGaramond.variable} ${sora.variable} ${tektur.variable} ${notoSansArabic.variable}`;
+export const fontList = `${dmSans.variable} ${ebGaramond.variable} ${hankenGrotesk.variable} ${cormorantGaramond.variable} ${sora.variable} ${bungee.variable} ${notoSansArabic.variable}`;

@@ -35,9 +35,9 @@ const LanguageSwitcher = () => {
 
 	const languageIcon = useMemo(() => {
 		if (!mounted) {
-			return <IconLoader className='h-5 w-5 animate-spin outline-none' />;
+			return <IconLoader className='h-4 w-4 animate-spin outline-none sm:h-5 sm:w-5' />;
 		}
-		return <span className='text-xl leading-none'>{currentLanguageFlag}</span>;
+		return <span className='text-lg leading-none sm:text-xl'>{currentLanguageFlag}</span>;
 	}, [mounted, currentLanguageFlag]);
 
 	const changeLanguage = useCallback(
@@ -56,7 +56,7 @@ const LanguageSwitcher = () => {
 					<PopoverTrigger asChild>
 						<button
 							type='button'
-							className='hover:text-primary dark:hover:text-success inline-flex aspect-square h-8 cursor-pointer items-center justify-center text-black ease-in-out dark:text-white'
+							className='hover:text-primary dark:hover:text-success inline-flex aspect-square h-6 cursor-pointer items-center justify-center text-black ease-in-out sm:h-8 dark:text-white'
 							onMouseEnter={() => setIsHovering(true)}
 							onMouseLeave={() => setIsHovering(false)}
 						>
@@ -69,7 +69,7 @@ const LanguageSwitcher = () => {
 				</TooltipContent>
 			</Tooltip>
 			<PopoverContent className='border-secondary-400 dark:border-secondary-600 divide-secondary-400 dark:divide-secondary-600 w-52 divide-y' align='end'>
-				<div className='flex items-center gap-1 px-3 py-2 text-sm font-medium text-black dark:text-white'>
+				<div className='flex items-center gap-1 px-3 py-2 text-xs font-medium text-black sm:text-sm dark:text-white'>
 					<span>Change Language</span>
 				</div>
 				<div className='flex max-h-80 flex-col gap-0.5 overflow-y-auto p-1'>
@@ -77,7 +77,7 @@ const LanguageSwitcher = () => {
 						<button
 							key={language.code}
 							type='button'
-							className={`flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-md px-2 py-1.5 text-sm transition-colors ${
+							className={`flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-md px-2 py-1.5 text-xs transition-colors sm:text-sm ${
 								mounted && currentLocale === language.code
 									? 'bg-primary/10 text-primary dark:bg-success/10 dark:text-success'
 									: 'text-secondary-500 dark:text-secondary-400 hover:text-primary dark:hover:text-success'

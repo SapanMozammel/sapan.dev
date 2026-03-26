@@ -11,15 +11,15 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 const themeOptions = [
 	{
 		name: 'light',
-		icon: <IconSunFilled className='h-5 w-5 outline-none' />,
+		icon: <IconSunFilled className='h-4 w-4 outline-none sm:h-5 sm:w-5' />,
 	},
 	{
 		name: 'dark',
-		icon: <IconMoonFilled className='h-4.5 w-4.5 outline-none' />,
+		icon: <IconMoonFilled className='h-3.5 w-3.5 outline-none sm:h-4.5 sm:w-4.5' />,
 	},
 	{
 		name: 'system',
-		icon: <IconContrastFilled className='h-4.5 w-4.5 outline-none' />,
+		icon: <IconContrastFilled className='h-3.5 w-3.5 outline-none sm:h-4.5 sm:w-4.5' />,
 	},
 ] as const;
 
@@ -38,7 +38,7 @@ const ThemeSwitcher = () => {
 	const themeIcon = useMemo(() => {
 		// Show loading icon during hydration to prevent mismatch
 		if (!mounted) {
-			return <IconLoader className='h-5 w-5 animate-spin outline-none' />;
+			return <IconLoader className='h-4 w-4 animate-spin outline-none sm:h-5 sm:w-5' />;
 		}
 
 		const currentTheme = theme === 'system' ? systemTheme : theme;
@@ -114,7 +114,7 @@ const ThemeSwitcher = () => {
 					<PopoverTrigger asChild>
 						<button
 							type='button'
-							className='hover:text-primary dark:hover:text-success inline-flex aspect-square h-8 cursor-pointer items-center justify-center text-black ease-in-out dark:text-white'
+							className='hover:text-primary dark:hover:text-success inline-flex aspect-square h-6 cursor-pointer items-center justify-center text-black ease-in-out sm:h-8 dark:text-white'
 							onMouseEnter={() => setIsHovering(true)}
 							onMouseLeave={() => setIsHovering(false)}
 						>
@@ -127,7 +127,7 @@ const ThemeSwitcher = () => {
 				</TooltipContent>
 			</Tooltip>
 			<PopoverContent className='border-secondary-400 dark:border-secondary-600 divide-secondary-400 dark:divide-secondary-600 w-44 divide-y' align='end'>
-				<div className='flex items-center gap-1 px-3 py-2 text-sm font-medium text-black dark:text-white'>
+				<div className='flex items-center gap-1 px-3 py-2 text-xs font-medium text-black sm:text-sm dark:text-white'>
 					<span>Change Theme</span>
 					<span className='text-primary dark:text-success ms-auto text-xs'>⌘⌥T</span>
 				</div>
@@ -149,7 +149,7 @@ const ThemeSwitcher = () => {
 							<button
 								key={option.name}
 								type='button'
-								className={`flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-md px-2 py-1.5 text-sm transition-colors ${
+								className={`flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-md px-2 py-1.5 text-xs transition-colors sm:text-sm ${
 									mounted && theme === option.name
 										? 'bg-primary/10 text-primary dark:bg-success/10 dark:text-success'
 										: 'text-secondary-500 dark:text-secondary-400 hover:text-primary dark:hover:text-success'
