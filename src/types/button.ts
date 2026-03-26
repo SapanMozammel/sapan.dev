@@ -27,3 +27,50 @@ export type ConnectButtonProps = {
 	gradient?: boolean;
 	fill?: boolean;
 };
+
+// Button SVG shape sub-component props
+export type GradientStop = {
+	offset: string;
+	stopColor: string;
+};
+
+export type SvgShapeProps = {
+	className: string;
+	pathClassName: string;
+	gradientId?: string | undefined;
+	gradientStops?: GradientStop[] | undefined;
+};
+
+export type CenterSvgProps = {
+	className: string;
+	mode: 'fill' | 'stroke';
+	polygonClassName: string;
+	gradientId?: string | undefined;
+	gradientStops?: GradientStop[] | undefined;
+	svgFill?: string | undefined;
+};
+
+export type ButtonContentProps = {
+	children: React.ReactNode;
+	loading?: boolean | undefined;
+	textClassName: string;
+};
+
+export type ButtonVariantConfig = {
+	leftSvgClass: string;
+	leftPathClass: string;
+	leftGradientId?: string | undefined;
+	leftGradientStops?: GradientStop[] | undefined;
+	spanClass: string;
+	textClass: string;
+	centerMode: 'fill' | 'stroke';
+	centerSvgClass: string;
+	centerPolygonClass: string;
+	centerGradientId?: string | undefined;
+	centerGradientStops?: GradientStop[] | undefined;
+	centerSvgFill?: string | undefined;
+	rightSvgClass: string;
+	rightPathClass: string;
+	rightGradientId?: string | undefined;
+	rightGradientStops?: GradientStop[] | undefined;
+};

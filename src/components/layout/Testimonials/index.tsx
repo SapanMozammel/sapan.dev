@@ -1,7 +1,7 @@
 'use client';
 
 import GsapMarquee from '@/components/ui/gsap-marquee';
-import { TESTIMONIAL_LIST } from '@/lib/constants/testimonials';
+import { TESTIMONIAL_LIST } from '@/data/content/testimonials';
 import { getBlurDataURL } from '@/lib/utils/image';
 import type { TestimonialData } from '@/types/testimonial';
 import Image from 'next/image';

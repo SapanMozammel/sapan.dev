@@ -8,25 +8,20 @@ import Technologies from '@/components/layout/Technologies';
 import Testimonials from '@/components/layout/Testimonials';
 import Workflow from '@/components/layout/Workflow';
 import ContactModal from '@/components/ui/contact-modal';
-import { memo } from 'react';
 
-const LandingPage = memo(() => {
-	return (
-		<>
-			<Hero />
-			<Technologies />
-			<Portfolio />
-			<Experience />
-			<Testimonials />
-			<Workflow />
-			<Blog />
-			<Faq />
-			<Cta />
-			<ContactModal />
-		</>
-	);
-});
-
-LandingPage.displayName = 'LandingPage';
+const LandingPage = () => (
+	<>
+		<Hero />
+		<Technologies />
+		<Portfolio />
+		<Experience />
+		<Testimonials />
+		<Workflow />
+		<Blog />
+		<Faq />
+		<Cta />
+		<ContactModal />
+	</>
+);
 
 export default LandingPage;

@@ -2,8 +2,8 @@
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { LANGUAGES } from '@/data/config/languages';
 import { usePathname, useRouter } from '@/i18n/navigation';
-import { LANGUAGES } from '@/lib/constants/languages';
 import { setLocale } from '@/store/slices/localeSlice';
 import type { Locale } from '@/types/i18n';
 import { IconLoader } from '@tabler/icons-react';

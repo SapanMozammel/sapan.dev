@@ -4,7 +4,6 @@ import type { BlogCardProps } from '@/types/blog';
 import { IconArrowRight, IconClock } from '@tabler/icons-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { memo } from 'react';
 
 const CATEGORY_COLORS: Record<string, string> = {
 	'Next.js': 'bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-400',
@@ -18,15 +17,14 @@ const CATEGORY_COLORS: Record<string, string> = {
 const DEFAULT_CATEGORY_COLOR = 'bg-secondary-100 text-secondary-600 dark:bg-secondary-800 dark:text-secondary-400';
 const BLUR_PLACEHOLDER = getBlurDataURL(800, 450);
 
-function formatDate(dateString: string): string {
-	return new Date(dateString).toLocaleDateString('en-US', {
+const formatDate = (dateString: string): string =>
+	new Date(dateString).toLocaleDateString('en-US', {
 		year: 'numeric',
 		month: 'short',
 		day: 'numeric',
 	});
-}
 
-const BlogCard = memo<BlogCardProps>(({ post, className }) => {
+const BlogCard = ({ post, className }: BlogCardProps) => {
 	const categoryColor = CATEGORY_COLORS[post.category] ?? DEFAULT_CATEGORY_COLOR;
 
 	return (
@@ -85,8 +83,6 @@ const BlogCard = memo<BlogCardProps>(({ post, className }) => {
 			</div>
 		</Link>
 	);
-});
-
-BlogCard.displayName = 'BlogCard';
+};
 
 export default BlogCard;

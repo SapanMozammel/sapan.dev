@@ -11,6 +11,7 @@ async function loadNamespace(locale: string, namespace: Namespace): Promise<Reco
 		return mod.default;
 	} catch {
 		if (locale !== routing.defaultLocale && process.env.NODE_ENV === 'development') {
+			// eslint-disable-next-line no-console -- Intentional dev-only warning for missing translations
 			console.warn(`[i18n] Missing translation: ${locale}/${namespace}.json — falling back to English`);
 		}
 		// Always return the English baseline as fallback

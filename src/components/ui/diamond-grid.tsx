@@ -1,3 +1,5 @@
+'use client';
+
 import { cn } from '@/lib/utils/index';
 import type { ColumnGroup, DiamondColumnProps, DiamondGridItem, DiamondGridLegacyProps, DiamondGridProps, LayoutConfig } from '@/types/diamond-grid';
 import Image from 'next/image';

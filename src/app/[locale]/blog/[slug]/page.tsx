@@ -1,6 +1,6 @@
 import SectionSeparator from '@/components/layout/common/SectionSeparator';
 import BlogCard from '@/components/ui/blog-card';
-import { BLOG_POSTS } from '@/lib/constants/blogs';
+import { BLOG_POSTS } from '@/data/content/blogs';
 import { cn } from '@/lib/utils';
 import { getBlurDataURL } from '@/lib/utils/image';
 import type { ContentBlock } from '@/types/blog';

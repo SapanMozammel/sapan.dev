@@ -23,3 +23,10 @@ export type TimelineProps = {
 	items: ExperienceItem[];
 	className?: string;
 };
+
+export type TimelineProgressBarProps = {
+	heights: number[];
+	totalHeight: number;
+	containerRef: React.RefObject<HTMLDivElement | null>;
+	scrollYProgress: import('framer-motion').MotionValue<number>;
+};

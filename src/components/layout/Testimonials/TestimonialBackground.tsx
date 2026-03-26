@@ -1,3 +1,5 @@
+'use client';
+
 import { cn } from '@/lib/utils';
 import { IconPlus } from '@tabler/icons-react';
 import gsap from 'gsap';

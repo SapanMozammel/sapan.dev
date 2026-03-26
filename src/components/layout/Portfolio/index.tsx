@@ -1,8 +1,8 @@
 'use client';
 
 import ProjectCard from '@/components/ui/project-card';
+import { PORTFOLIO_PROJECTS } from '@/data/content/portfolio';
 import { useStackingCards } from '@/hooks/useStackingCards';
-import { PORTFOLIO_PROJECTS } from '@/lib/constants/portfolio';
 import { memo } from 'react';
 import SectionSeparator from '../common/SectionSeparator';
 import SectionTitle from '../common/SectionTitle';

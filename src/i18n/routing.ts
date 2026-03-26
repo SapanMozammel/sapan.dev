@@ -1,4 +1,4 @@
-import { LANGUAGES } from '@/lib/constants/languages';
+import { LANGUAGES } from '@/data/config/languages';
 import { defineRouting } from 'next-intl/routing';
 
 export const locales = LANGUAGES.map((lang) => lang.code) as [string, ...string[]];

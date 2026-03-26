@@ -3,7 +3,7 @@
 import SectionSeparator from '@/components/layout/common/SectionSeparator';
 import SectionTitle from '@/components/layout/common/SectionTitle';
 import BlogCard from '@/components/ui/blog-card';
-import { BLOG_POSTS, BLOGS_PER_PAGE } from '@/lib/constants/blogs';
+import { BLOG_POSTS, BLOGS_PER_PAGE } from '@/data/content/blogs';
 import { cn } from '@/lib/utils';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import { memo, useMemo, useState } from 'react';

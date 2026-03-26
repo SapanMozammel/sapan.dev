@@ -13,3 +13,10 @@ export type ContactFormErrors = {
 };
 
 export type ContactSubmitStatus = 'idle' | 'loading' | 'success' | 'error';
+
+export type ContactFormProps = {
+	form: ContactFormData;
+	errors: ContactFormErrors;
+	onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+	onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+};

@@ -2,7 +2,7 @@
 
 import CursorTooltip from '@/components/ui/cursor-tooltip';
 import { DiamondGrid } from '@/components/ui/diamond-grid';
-import { TECH_STACK } from '@/lib/constants/technologies';
+import { TECH_STACK } from '@/data/config/technologies';
 import { getBlurDataURL } from '@/lib/utils/image';
 import Image from 'next/image';
 import { memo } from 'react';

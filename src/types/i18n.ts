@@ -1,4 +1,4 @@
-import type { LanguageCode } from '@/lib/constants/languages';
+import type { LanguageCode } from '@/data/config/languages';
 
 export type Locale = LanguageCode;
 

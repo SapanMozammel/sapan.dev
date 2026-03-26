@@ -1,5 +1,5 @@
+import { LANGUAGES } from '@/data/config/languages';
 import { RTL_LOCALES } from '@/i18n/routing';
-import { LANGUAGES } from '@/lib/constants/languages';
 import type { Locale, LocaleState } from '@/types/i18n';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
