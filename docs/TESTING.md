@@ -45,8 +45,11 @@ src/
 │   │   ├── Experience.test.tsx
 │   │   ├── Faq.test.tsx
 │   │   ├── Footer.test.tsx
+│   │   ├── Header.test.tsx
 │   │   ├── Hero.test.tsx
 │   │   ├── HeroBackground.test.tsx
+│   │   ├── MobileNav.test.tsx
+│   │   ├── NavMenu.test.tsx
 │   │   ├── SectionSeparator.test.tsx
 │   │   ├── SectionTitle.test.tsx
 │   │   └── TextUnderline.test.tsx
@@ -84,6 +87,7 @@ The setup file runs before every test suite. It provides global mocks for:
 | `next/image` | Renders as plain `<img>` tag |
 | `next-themes` | Returns `dark` theme by default |
 | `next-intl` | Returns translation keys as-is |
+| `next/navigation` | Returns `/` pathname and no-op router |
 | `framer-motion` | Renders motion elements as plain HTML, strips animation props |
 | `gsap` / `ScrollTrigger` | No-op functions to prevent DOM measurement errors |
 | `@react-three/fiber` | Renders Canvas as a `<div>` |

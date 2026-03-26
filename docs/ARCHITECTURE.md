@@ -48,6 +48,9 @@ src/
 │   │   │   ├── index.tsx
 │   │   │   └── CtaBackground.tsx
 │   │   ├── Header/                   # Navigation header
+│   │   │   ├── index.tsx             # Server: logo, nav, theme/lang switchers
+│   │   │   ├── NavMenu.tsx           # Client: desktop nav with scroll-spy
+│   │   │   └── MobileNav.tsx         # Client: sheet-based mobile nav
 │   │   ├── Footer/                   # Site footer
 │   │   └── common/                   # Shared layout components
 │   │       ├── Button.tsx            # Custom shaped button
@@ -78,6 +81,7 @@ src/
 │   │   ├── project-card.tsx
 │   │   ├── technologies-display.tsx
 │   │   ├── cursor-tooltip.tsx
+│   │   ├── sheet.tsx                 # Radix Dialog sheet with slide animations
 │   │   ├── dialog.tsx
 │   │   ├── popover.tsx
 │   │   └── tooltip.tsx
@@ -151,7 +155,7 @@ src/
 
 Server Components: Hero, Experience, Blog, Faq, Cta, Footer, Header, SectionTitle, SectionSeparator, TextUnderline, HeroBackground, CtaBackground, AdminScreen
 
-Client Components: Technologies, Portfolio, Testimonials, Workflow, Button, ConnectButton, LanguageSwitcher, ThemeSwitcher, Accordion, Timeline, ContactModal
+Client Components: Technologies, Portfolio, Testimonials, Workflow, Button, ConnectButton, LanguageSwitcher, ThemeSwitcher, Accordion, Timeline, ContactModal, NavMenu, MobileNav
 
 ## Styling
 

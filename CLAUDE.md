@@ -34,7 +34,8 @@ This is a **Next.js 15 portfolio/marketing website** using the App Router, TypeS
 ### Routing
 
 - `src/app/[locale]/(landing)/page.tsx` — Home page (route group with i18n, no URL segment)
-- `src/app/[locale]/blog/[slug]/page.tsx` — Dynamic blog routes
+- `src/app/[locale]/articles/[slug]/page.tsx` — Dynamic article routes
+- `src/app/[locale]/articles/page.tsx` — Articles listing
 - `src/app/[locale]/layout.tsx` — Locale layout (Providers, Header, Footer, NextIntlClientProvider)
 - `src/app/layout.tsx` — Root layout (imports global SCSS)
 

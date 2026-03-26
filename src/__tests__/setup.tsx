@@ -38,6 +38,13 @@ vi.mock('@/i18n/navigation', () => ({
 	),
 }));
 
+// ── Next.js navigation mock ──
+
+vi.mock('next/navigation', () => ({
+	usePathname: () => '/',
+	useRouter: () => ({ push: vi.fn(), replace: vi.fn(), back: vi.fn(), prefetch: vi.fn() }),
+}));
+
 // ── Framer Motion mock ──
 
 vi.mock('framer-motion', () => {
