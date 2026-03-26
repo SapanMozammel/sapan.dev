@@ -15,7 +15,7 @@ const Blog = () => (
 					))}
 				</div>
 				<div className='mt-4'>
-					<Button to='/blog' fill>
+					<Button to='/articles' fill>
 						View all articles
 					</Button>
 				</div>

@@ -2,7 +2,7 @@ import { Bungee, Cormorant_Garamond, DM_Sans, EB_Garamond, Hanken_Grotesk, Noto_
 
 export const dmSans = DM_Sans({
 	display: 'swap',
-	weight: ['300', '400', '500', '600', '700', '800'],
+	weight: ['300', '400'],
 	subsets: ['latin'],
 	style: ['normal'],
 	variable: '--font-dm',
@@ -10,7 +10,7 @@ export const dmSans = DM_Sans({
 
 export const ebGaramond = EB_Garamond({
 	display: 'swap',
-	weight: ['400', '500', '600', '700', '800'],
+	weight: ['500', '700'],
 	subsets: ['latin'],
 	style: ['normal'],
 	variable: '--font-eb',
@@ -18,15 +18,15 @@ export const ebGaramond = EB_Garamond({
 
 export const hankenGrotesk = Hanken_Grotesk({
 	display: 'swap',
-	weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
+	weight: ['500', '700'],
 	subsets: ['latin'],
-	style: ['normal', 'italic'],
+	style: ['normal'],
 	variable: '--font-hg',
 });
 
 export const cormorantGaramond = Cormorant_Garamond({
 	display: 'swap',
-	weight: ['300', '400', '500', '600', '700'],
+	weight: ['500', '700'],
 	subsets: ['latin'],
 	style: ['normal'],
 	variable: '--font-cg',
@@ -34,7 +34,7 @@ export const cormorantGaramond = Cormorant_Garamond({
 
 export const sora = Sora({
 	display: 'swap',
-	weight: ['300', '400', '500', '600', '700'],
+	weight: ['400', '500', '600', '700'],
 	subsets: ['latin'],
 	style: ['normal'],
 	variable: '--font-sora',
@@ -50,7 +50,7 @@ export const bungee = Bungee({
 
 export const notoSansArabic = Noto_Sans_Arabic({
 	display: 'swap',
-	weight: ['300', '400', '500', '600', '700'],
+	weight: ['400'],
 	subsets: ['arabic'],
 	variable: '--font-arabic',
 });

@@ -14,7 +14,7 @@ const BLUR_PLACEHOLDER = getBlurDataURL(LOGO_SIZE, LOGO_SIZE);
 
 const Technologies = memo(() => {
 	return (
-		<section className='relative z-1 pt-[20vw]'>
+		<section id='technologies' className='relative z-1 pt-[20vw]'>
 			<SectionSeparator lts rts lbs rbs bl ll rl>
 				<div className='container flex w-full grow flex-col items-center justify-start gap-4 pb-8 text-center sm:pb-12 lg:pb-16'>
 					<SectionTitle subtitle='Technologies' title={`I'm an Expertise In`} watermark='Technologies' />

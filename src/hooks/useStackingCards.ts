@@ -61,7 +61,6 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 				transformOrigin: 'center top',
 				marginBottom: index < cards.length - 1 ? gap : 0,
 				willChange: 'transform',
-				force3d: true,
 			});
 
 			let totalStackingDistance = 0;
@@ -145,11 +144,11 @@ export const useStackingCards = (options: UseStackingCardsOptions = {}) => {
 				if (Math.abs(diff) > SCALE_EPSILON) {
 					const newScale = current + diff * lerpFactor;
 					currentScales[i] = newScale;
-					gsap.set(cards[i], { scale: newScale, force3d: true });
+					gsap.set(cards[i], { scale: newScale });
 					isConverging = true;
 				} else if (current !== target) {
 					currentScales[i] = target;
-					gsap.set(cards[i], { scale: target, force3d: true });
+					gsap.set(cards[i], { scale: target });
 				}
 			}
 		};

@@ -43,7 +43,7 @@ TestimonialCard.displayName = 'TestimonialCard';
 
 const Testimonials = memo(() => {
 	return (
-		<section className='relative z-1 pb-16 sm:pb-20 lg:pb-24'>
+		<section id='testimonials' className='relative z-1 pb-16 sm:pb-20 lg:pb-24'>
 			<TestimonialBackground>
 				<div className='container-fluid flex w-full grow flex-col gap-8'>
 					<SectionTitle className='container' subtitle='Testimonials' title={`What People Say About Me`} watermark='Testimonials' />

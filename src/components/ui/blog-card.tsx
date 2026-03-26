@@ -29,7 +29,7 @@ const BlogCard = ({ post, className }: BlogCardProps) => {
 
 	return (
 		<Link
-			href={`/blog/${post.slug}`}
+			href={`/articles/${post.slug}`}
 			className={cn(
 				'group border-secondary-200/60 dark:border-secondary-700/40 dark:hover:border-secondary-600/60 relative flex flex-col overflow-hidden rounded-2xl border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/5 dark:bg-black/20 dark:hover:shadow-black/20',
 				className

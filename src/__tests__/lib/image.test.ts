@@ -95,7 +95,7 @@ describe('getTechLogo', () => {
 	});
 
 	it('falls back to CDN for unknown tech key', () => {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		expect(getTechLogo('unknown-tech' as any)).toBe('https://cdn.simpleicons.org/unknown-tech');
+		// @ts-expect-error testing invalid key
+		expect(getTechLogo('unknown-tech')).toBe('https://cdn.simpleicons.org/unknown-tech');
 	});
 });

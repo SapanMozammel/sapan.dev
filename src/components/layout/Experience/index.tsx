@@ -5,7 +5,7 @@ import SectionTitle from '../common/SectionTitle';
 import ParticleBackground from './ParticleBackground';
 
 const Experience = () => (
-	<section className='relative z-1 pb-8 sm:pb-12 lg:pb-16'>
+	<section id='experience' className='relative z-1 pb-8 sm:pb-12 lg:pb-16'>
 		<ParticleBackground />
 		<SectionSeparator lts rts lbs rbs tl bl ll rl>
 			<div className='container flex w-full grow flex-col items-center justify-start gap-4 pb-8 sm:pb-12 lg:pb-16'>

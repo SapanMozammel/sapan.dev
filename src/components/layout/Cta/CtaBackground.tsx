@@ -2,7 +2,7 @@ const CtaBackground = () => (
 	<>
 		<div
 			aria-hidden
-			className='pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.025)_1px,transparent_1px)] bg-[size:56px_56px] bg-top select-none dark:bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)]'
+			className='pointer-events-none absolute inset-0 bg-[linear-gradient(color-mix(in_srgb,var(--color-success)_20%,transparent)_1px,transparent_1px),linear-gradient(90deg,color-mix(in_srgb,var(--color-success)_20%,transparent)_1px,transparent_1px)] bg-[size:56px_56px] bg-top select-none dark:bg-[linear-gradient(color-mix(in_srgb,var(--color-primary)_8%,transparent)_1px,transparent_1px),linear-gradient(90deg,color-mix(in_srgb,var(--color-primary)_8%,transparent)_1px,transparent_1px)]'
 		/>
 		<div aria-hidden className='from-success/10 dark:from-primary/10 pointer-events-none absolute top-0 right-0 left-0 h-[55%] w-full bg-gradient-to-b to-transparent select-none' />
 		<div
