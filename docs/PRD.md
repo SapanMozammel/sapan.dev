@@ -45,7 +45,7 @@ Implement a comprehensive internationalization (i18n) system for sapan.dev to su
 - ❌ `hreflang` tags and sitemap (Phase 4)
 
 ### Supported Languages
-The system supports 16 languages as defined in `src/lib/constants/languages.ts`:
+The system supports 16 languages as defined in `src/data/config/languages.ts`:
 1. English (US) - `en` ✅ translations complete
 2. Français - `fr` ⏳ falls back to English
 3. Deutsch - `de` ⏳ falls back to English
