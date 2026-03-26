@@ -46,7 +46,9 @@ const ProjectCard = memo<ProjectCardProps>(({ project }) => {
 					)}
 				</div>
 				<Link
-					href='#'
+					href={project?.link || '#'}
+					target='_blank'
+					rel='noopener noreferrer'
 					className='font-sora text-primary dark:text-success decoration-none inline-flex flex-row items-center gap-1 text-sm font-semibold tracking-wider uppercase transition-all duration-150 ease-in hover:gap-2 rtl:flex-row-reverse'
 				>
 					<span>Learn More</span>

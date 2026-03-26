@@ -5,7 +5,7 @@ import AdminScreen from '@/components/layout/Hero/AdminScreen';
 import HeroBackground from '@/components/layout/Hero/HeroBackground';
 
 const Hero = () => (
-	<section className='flex flex-col pt-20'>
+	<section className='flex flex-col pt-14 sm:pt-20'>
 		<div className='relative z-2 flex grow flex-col'>
 			<HeroBackground>
 				<SectionSeparator lts rts lbs rbs bl ll rl>

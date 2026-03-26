@@ -31,7 +31,7 @@ export const WORKFLOW_STEPS: WorkflowStep[] = [
 		label: 'Test',
 		title: 'QA Testing & Refinement',
 		description:
-			'After development, the QA team tests the features to identify issues related to functionality, responsiveness, or usability. I review their feedback carefully and resolve any problems to maintain product quality.',
+			'After development, I write unit tests to ensure the functionality works as expected and minimize potential issues. The QA team then performs thorough testing, and I resolve feedback to ensure overall product quality.',
 		icon: IconBug,
 	},
 	{
