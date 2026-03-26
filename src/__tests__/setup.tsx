@@ -1,6 +1,6 @@
 /// <reference types="vitest/globals" />
-import React, { type PropsWithChildren } from 'react';
 import '@testing-library/jest-dom/vitest';
+import React, { type PropsWithChildren } from 'react';
 
 // ── Next.js mocks ──
 

@@ -1,5 +1,4 @@
-import { LOCALE_STORAGE_KEY } from '@/store/slices/localeSlice';
-import localeReducer, { initializeLocale, setLocale } from '@/store/slices/localeSlice';
+import localeReducer, { initializeLocale, LOCALE_STORAGE_KEY, setLocale } from '@/store/slices/localeSlice';
 import { afterEach, describe, expect, it } from 'vitest';
 
 describe('localeSlice', () => {

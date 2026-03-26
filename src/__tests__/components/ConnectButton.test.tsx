@@ -1,7 +1,7 @@
 import ConnectButton from '@/components/layout/common/ConnectButton';
-import { render, screen } from '../test-utils';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
+import { render, screen } from '../test-utils';
 
 describe('ConnectButton', () => {
 	it('renders with "Let\'s Connect" text', () => {

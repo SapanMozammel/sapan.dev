@@ -1,6 +1,6 @@
 import Hero from '@/components/layout/Hero';
-import { render, screen } from '../test-utils';
 import { describe, expect, it } from 'vitest';
+import { render, screen } from '../test-utils';
 
 describe('Hero', () => {
 	it('renders the sr-only heading', () => {

@@ -11,7 +11,7 @@ const Header = () => (
 			<div className='flex grow items-center justify-between'>
 				<Link href='/' className='flex cursor-pointer flex-row items-center gap-1.5 sm:gap-2.5'>
 					<Logo className='h-6 sm:h-8' />
-					<h2 className='font-bungee from-primary to-info dark:from-success font-normal bg-gradient-to-r bg-clip-text text-base !leading-none text-transparent uppercase sm:text-2xl'>sapan.dev</h2>
+					<h2 className='font-bungee from-primary to-info dark:from-success bg-gradient-to-r bg-clip-text text-base !leading-none font-normal text-transparent uppercase sm:text-2xl'>sapan.dev</h2>
 				</Link>
 				<div className='ms-auto flex items-center gap-x-1 sm:gap-x-2'>
 					<LanguageSwitcher />
@@ -21,9 +21,9 @@ const Header = () => (
 							<Link
 								href='https://github.com/SapanMozammel'
 								target='_blank'
-								className='hover:text-primary dark:hover:text-success inline-flex aspect-square h-6 sm:h-8 cursor-pointer items-center justify-center text-black ease-in-out dark:text-white'
+								className='hover:text-primary dark:hover:text-success inline-flex aspect-square h-6 cursor-pointer items-center justify-center text-black ease-in-out sm:h-8 dark:text-white'
 							>
-								<IconBrandGithub className='h-4 sm:h-5 w-4 sm:w-5 outline-none' />
+								<IconBrandGithub className='h-4 w-4 outline-none sm:h-5 sm:w-5' />
 							</Link>
 						</TooltipTrigger>
 						<TooltipContent side='right'>
