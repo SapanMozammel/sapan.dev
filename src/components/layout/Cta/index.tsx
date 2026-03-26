@@ -7,7 +7,7 @@ const Cta = () => (
 	<section className='relative z-1 py-8 sm:py-12 lg:py-16'>
 		<SectionSeparator lts rts lbs rbs tl bl ll rl>
 			<div className='container'>
-				<div className='dark:bg-dark bg-secondary border-dark/5 relative z-10 mx-auto max-w-5xl overflow-hidden rounded-2xl border shadow-[0_8px_40px_-12px_color-mix(in_srgb,var(--color-dark)_25%,transparent)] dark:border-white/5 dark:shadow-[0_8px_40px_-12px_color-mix(in_srgb,var(--color-white)_30%,transparent)]'>
+				<div className='dark:bg-dark bg-secondary border-primary/10 relative z-10 mx-auto max-w-5xl overflow-hidden rounded-2xl border shadow-[0_8px_40px_-12px_color-mix(in_srgb,var(--color-primary)_20%,transparent),0_2px_12px_color-mix(in_srgb,var(--color-success)_10%,transparent)] dark:border-success/15 dark:shadow-[0_8px_40px_-12px_color-mix(in_srgb,var(--color-primary)_25%,transparent),0_2px_12px_color-mix(in_srgb,var(--color-success)_15%,transparent)]'>
 					<CtaBackground />
 					<div className='relative z-10 flex flex-col items-center gap-3 p-8 text-center sm:gap-4 sm:p-12 lg:p-16'>
 						<Logo className='h-10 w-10 sm:h-12 sm:w-12' />
