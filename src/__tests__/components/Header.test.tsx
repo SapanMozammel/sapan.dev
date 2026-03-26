@@ -1,7 +1,7 @@
 import Header from '@/components/layout/Header';
 import { screen } from '@testing-library/react';
-import { render } from '../test-utils';
 import { describe, expect, it } from 'vitest';
+import { render } from '../test-utils';
 
 describe('Header', () => {
 	it('renders a header element', () => {
