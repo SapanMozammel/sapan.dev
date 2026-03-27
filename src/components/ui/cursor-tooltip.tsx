@@ -2,8 +2,8 @@
 
 import { cn } from '@/lib/utils';
 import type { CursorTooltipProps, Position, TooltipContentProps } from '@/types/cursor-tooltip';
-import { gsap } from 'gsap';
-import React, { memo, useCallback, useEffect, useRef } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 export const TooltipContent = memo<TooltipContentProps>(({ children, className }) => (
@@ -14,147 +14,77 @@ export const TooltipContent = memo<TooltipContentProps>(({ children, className }
 TooltipContent.displayName = 'TooltipContent';
 
 const ANIMATION_CONFIG = {
-	entrance: {
-		duration: 0.5,
-		ease: 'back.out(1.2)',
+	spring: {
+		type: 'spring' as const,
+		stiffness: 200,
+		damping: 25,
+		mass: 0.6,
 	},
 	exit: {
-		duration: 0.25,
-		ease: 'power2.inOut',
-	},
-	follow: {
-		duration: 0.3,
-		ease: 'power1.out',
+		duration: 0.2,
+		ease: [0.4, 0.0, 1, 1] as const,
 	},
 } as const;
 
 const calculateElementCenter = (element: Element): Position => {
 	const rect = element.getBoundingClientRect();
-	return {
-		x: rect.left + rect.width / 2,
-		y: rect.top + rect.height / 2,
-	};
+	return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
 };
 
 const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, content, className, offset = { x: 0, y: 0 }, contentClassName, onClick }) => {
-	const containerRef = useRef<HTMLDivElement>(null);
-	const tooltipRef = useRef<HTMLDivElement>(null);
-	const entranceTweenRef = useRef<gsap.core.Tween | null>(null);
-	const followTweenRef = useRef<gsap.core.Tween | null>(null);
-	const [mounted, setMounted] = React.useState(false);
+	const [isVisible, setIsVisible] = useState(false);
+	const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
+	const [initialPosition, setInitialPosition] = useState<Position>({ x: 0, y: 0 });
+	const [mounted, setMounted] = useState(false);
+	const isVisibleRef = useRef(false);
+	const rafRef = useRef<number>(0);
 
 	useEffect(() => {
 		setMounted(true);
+		return () => {
+			if (rafRef.current) cancelAnimationFrame(rafRef.current);
+		};
 	}, []);
 
 	const calculateCursorPosition = useCallback(
-		(e: MouseEvent): Position => {
-			return {
-				x: e.clientX + offset.x,
-				y: e.clientY + offset.y,
-			};
-		},
+		(e: MouseEvent): Position => ({
+			x: e.clientX + offset.x,
+			y: e.clientY + offset.y,
+		}),
 		[offset.x, offset.y]
 	);
 
 	const handleMouseEnter = useCallback(
 		(e: React.MouseEvent) => {
-			if (!tooltipRef.current) {
-				return;
-			}
-
-			if (entranceTweenRef.current) {
-				entranceTweenRef.current.kill();
-			}
-			if (followTweenRef.current) {
-				followTweenRef.current.kill();
-			}
-
 			const elementCenter = calculateElementCenter(e.currentTarget);
 			const cursorPos = calculateCursorPosition(e.nativeEvent);
 
-			gsap.set(tooltipRef.current, {
-				opacity: 1,
-				scale: 0,
-				x: elementCenter.x,
-				y: elementCenter.y,
-				xPercent: -50,
-				yPercent: -50,
-			});
-
-			entranceTweenRef.current = gsap.to(tooltipRef.current, {
-				opacity: 1,
-				scale: 1,
-				x: cursorPos.x,
-				y: cursorPos.y,
-				duration: ANIMATION_CONFIG.entrance.duration,
-				ease: ANIMATION_CONFIG.entrance.ease,
-				overwrite: 'auto',
-			});
+			setInitialPosition(elementCenter);
+			setPosition(cursorPos);
+			setIsVisible(true);
+			isVisibleRef.current = true;
 		},
 		[calculateCursorPosition]
 	);
 
-	const handleMouseLeave = useCallback((e: React.MouseEvent) => {
-		if (!tooltipRef.current) {
-			return;
-		}
-
-		if (entranceTweenRef.current) {
-			entranceTweenRef.current.kill();
-		}
-		if (followTweenRef.current) {
-			followTweenRef.current.kill();
-		}
-
-		const elementCenter = calculateElementCenter(e.currentTarget);
-
-		entranceTweenRef.current = gsap.to(tooltipRef.current, {
-			opacity: 0,
-			scale: 0,
-			x: elementCenter.x,
-			y: elementCenter.y,
-			duration: ANIMATION_CONFIG.exit.duration,
-			ease: ANIMATION_CONFIG.exit.ease,
-			overwrite: 'auto',
-		});
+	const handleMouseLeave = useCallback(() => {
+		setIsVisible(false);
+		isVisibleRef.current = false;
 	}, []);
 
 	const handleMouseMove = useCallback(
 		(e: React.MouseEvent) => {
-			if (!tooltipRef.current) {
-				return;
-			}
+			if (!isVisibleRef.current) return;
 
 			const cursorPos = calculateCursorPosition(e.nativeEvent);
 
-			if (followTweenRef.current) {
-				followTweenRef.current.kill();
-			}
-
-			followTweenRef.current = gsap.to(tooltipRef.current, {
-				x: cursorPos.x,
-				y: cursorPos.y,
-				duration: ANIMATION_CONFIG.follow.duration,
-				ease: ANIMATION_CONFIG.follow.ease,
-				overwrite: 'auto',
+			if (rafRef.current) cancelAnimationFrame(rafRef.current);
+			rafRef.current = requestAnimationFrame(() => {
+				setPosition(cursorPos);
 			});
 		},
 		[calculateCursorPosition]
 	);
-
-	useEffect(() => {
-		return () => {
-			if (entranceTweenRef.current) {
-				entranceTweenRef.current.kill();
-				entranceTweenRef.current = null;
-			}
-			if (followTweenRef.current) {
-				followTweenRef.current.kill();
-				followTweenRef.current = null;
-			}
-		};
-	}, []);
 
 	const renderedContent = React.useMemo(() => {
 		if (typeof content === 'string') {
@@ -169,22 +99,47 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, conten
 
 	return (
 		<>
-			<div ref={containerRef} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} onClick={onClick} className={cn('cursor-none', className)}>
+			<div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} onClick={onClick} className={cn('cursor-none', className)}>
 				{children}
 			</div>
 			{mounted &&
 				createPortal(
-					<div
-						ref={tooltipRef}
-						className='pointer-events-none fixed z-50'
-						style={{
-							left: 0,
-							top: 0,
-							opacity: 0,
-						}}
-					>
-						{renderedContent}
-					</div>,
+					<AnimatePresence>
+						{isVisible && (
+							<motion.div
+								initial={{
+									opacity: 1,
+									scale: 0,
+									x: initialPosition.x,
+									y: initialPosition.y,
+									translateX: '-50%',
+									translateY: '-50%',
+								}}
+								animate={{
+									opacity: 1,
+									scale: 1,
+									x: position.x,
+									y: position.y,
+									translateX: '-50%',
+									translateY: '-50%',
+								}}
+								exit={{
+									opacity: 0,
+									scale: 0,
+									x: initialPosition.x,
+									y: initialPosition.y,
+									translateX: '-50%',
+									translateY: '-50%',
+									transition: ANIMATION_CONFIG.exit,
+								}}
+								transition={ANIMATION_CONFIG.spring}
+								className='pointer-events-none fixed z-50'
+								style={{ left: 0, top: 0 }}
+							>
+								{renderedContent}
+							</motion.div>
+						)}
+					</AnimatePresence>,
 					document.body
 				)}
 		</>
