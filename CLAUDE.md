@@ -53,6 +53,7 @@ This is a **Next.js 15 portfolio/marketing website** using the App Router, TypeS
 Large components are split into sub-components in their own files:
 - `Hero/admin/` — AdminSidebar, AdminEmailList, AdminEmailPreview, AdminDecorations, data.tsx
 - `Hero/` — AdminScreen, HeroBackground
+- `Footer/` — FooterNav (client, section scroll navigation), FooterConnect (client, availability/contact/social links with tooltips)
 - `Cta/` — CtaBackground
 - `Workflow/` — WorkflowContent, WorkflowProgress
 - `Testimonials/` — TestimonialBackground
