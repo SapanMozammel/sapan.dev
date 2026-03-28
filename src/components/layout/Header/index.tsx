@@ -8,7 +8,7 @@ import MobileNav from './MobileNav';
 import NavMenu from './NavMenu';
 
 const Header = () => (
-	<header className='border-secondary-400 dark:border-secondary-600 fixed inset-x-0 top-0 z-10 flex h-14 flex-col border-b border-solid backdrop-blur-xl sm:h-20'>
+	<header className='border-secondary-400 dark:border-secondary-600 fixed inset-x-0 top-0 z-10 flex h-14 max-w-screen flex-col border-b border-solid backdrop-blur-xl sm:h-20'>
 		<div className='container-fluid flex w-full grow flex-col'>
 			<div className='flex grow items-center justify-between gap-3'>
 				<div className='flex items-center lg:min-w-48'>

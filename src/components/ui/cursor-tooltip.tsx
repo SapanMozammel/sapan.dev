@@ -42,7 +42,9 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, conten
 	useEffect(() => {
 		setMounted(true);
 		return () => {
-			if (rafRef.current) cancelAnimationFrame(rafRef.current);
+			if (rafRef.current) {
+				cancelAnimationFrame(rafRef.current);
+			}
 		};
 	}, []);
 
@@ -74,11 +76,15 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, conten
 
 	const handleMouseMove = useCallback(
 		(e: React.MouseEvent) => {
-			if (!isVisibleRef.current) return;
+			if (!isVisibleRef.current) {
+				return;
+			}
 
 			const cursorPos = calculateCursorPosition(e.nativeEvent);
 
-			if (rafRef.current) cancelAnimationFrame(rafRef.current);
+			if (rafRef.current) {
+				cancelAnimationFrame(rafRef.current);
+			}
 			rafRef.current = requestAnimationFrame(() => {
 				setPosition(cursorPos);
 			});

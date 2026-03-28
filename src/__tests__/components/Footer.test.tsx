@@ -1,6 +1,6 @@
+import Footer from '@/components/layout/Footer';
 import FooterConnect from '@/components/layout/Footer/FooterConnect';
 import FooterNav from '@/components/layout/Footer/FooterNav';
-import Footer from '@/components/layout/Footer';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';

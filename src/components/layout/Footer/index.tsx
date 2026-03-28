@@ -42,13 +42,11 @@ const Footer = () => (
 						</div>
 						<div className='border-secondary-400 dark:border-secondary-600 col-span-1 border-b px-6 py-10 sm:border-r sm:border-b-0 lg:col-span-2'>
 							<div className='mx-auto flex max-w-75 flex-col justify-start gap-4 self-center'>
-								<span className='font-sora text-secondary-400 dark:text-secondary-500 text-xs font-semibold uppercase'>Navigate</span>
 								<FooterNav />
 							</div>
 						</div>
 						<div className='col-span-1 px-6 py-10 lg:col-span-2'>
 							<div className='flex flex-col justify-start gap-4'>
-								<span className='font-sora text-secondary-400 dark:text-secondary-500 text-xs font-semibold uppercase'>Connect</span>
 								<FooterConnect />
 							</div>
 						</div>
@@ -58,7 +56,7 @@ const Footer = () => (
 		</div>
 		<footer className='border-secondary-400 dark:border-secondary-600 border-t border-solid backdrop-blur-xl'>
 			<div className='container-fluid'>
-				<div className='flex flex-col items-center justify-between gap-1 px-0 py-4 sm:flex-row sm:py-6'>
+				<div className='flex flex-col items-center justify-between gap-1 px-0 py-4 text-center sm:flex-row sm:py-6 sm:text-[unset]'>
 					<p className='text-secondary-600 dark:text-secondary-400 text-sm tracking-wider'>&copy; {new Date().getFullYear()} All rights reserved.</p>
 					<p className='text-secondary-600 dark:text-secondary-400 text-sm tracking-wider'>Designed & Developed by SapanMozammel</p>
 				</div>
