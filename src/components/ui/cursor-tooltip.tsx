@@ -7,7 +7,7 @@ import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 export const TooltipContent = memo<TooltipContentProps>(({ children, className }) => (
-	<div className={cn('bg-primary/80 border-primary dark:border-success dark:bg-success/80 pointer-events-none rounded-2xl border-1 border-solid px-3 py-2 text-sm font-medium text-white dark:text-black', className)}>
+	<div className={cn('bg-primary/80 border-primary dark:border-success dark:bg-success/80 dark:text-dark pointer-events-none rounded-2xl border-1 border-solid px-3 py-2 text-sm font-medium text-white', className)}>
 		{children}
 	</div>
 ));

@@ -14,7 +14,7 @@ const IMAGE_SIZE = 600;
 const IMAGE_PLACEHOLDER = getBlurDataURL(IMAGE_SIZE, IMAGE_SIZE);
 
 const TOOLTIP_CONTENT = (
-	<span className='bg-primary/80 border-primary dark:border-success dark:bg-success/80 pointer-events-none inline-flex rounded-2xl border-1 border-solid px-3 py-2 text-sm font-medium text-white dark:text-black'>
+	<span className='bg-primary/80 border-primary dark:border-success dark:bg-success/80 dark:text-dark pointer-events-none inline-flex rounded-2xl border-1 border-solid px-3 py-2 text-sm font-medium text-white'>
 		<IconArrowUpRight className='h-6 w-6' stroke={2.5} />
 	</span>
 );
@@ -34,13 +34,13 @@ const ProjectCard = memo<ProjectCardProps>(({ project }) => {
 				<div className='mt-1.5 mb-1.5 grid w-full grid-cols-1 gap-x-4 gap-y-2.5 sm:mb-0 sm:grid-cols-3'>
 					{project.role && (
 						<div className='flex flex-col gap-0.5'>
-							<h4 className='font-sora text-base font-bold text-black sm:text-lg dark:text-white'>Role</h4>
+							<h4 className='font-sora text-dark text-base font-bold sm:text-lg dark:text-white'>Role</h4>
 							<span className='text-secondary-600 dark:text-secondary-400 text-sm !leading-tight'>{project.role}</span>
 						</div>
 					)}
 					{project.technologies && project.technologies.length > 0 && (
 						<div className='col-span-2 flex flex-col gap-0.5'>
-							<h4 className='font-sora text-base font-bold text-black sm:text-lg dark:text-white'>Technologies</h4>
+							<h4 className='font-sora text-dark text-base font-bold sm:text-lg dark:text-white'>Technologies</h4>
 							<TechnologiesDisplay technologies={project.technologies} />
 						</div>
 					)}

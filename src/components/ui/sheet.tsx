@@ -15,11 +15,15 @@ const SheetClose = SheetPrimitive.Close;
 const SheetPortal = SheetPrimitive.Portal;
 
 const SheetOverlay = React.forwardRef<React.ElementRef<typeof SheetPrimitive.Overlay>, React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>>(({ className, ...props }, ref) => (
-	<SheetPrimitive.Overlay className={cn('data-[state=closed]:animate-overlay-out data-[state=open]:animate-overlay-in fixed inset-0 z-50 bg-black/80', className)} {...props} ref={ref} />
+	<SheetPrimitive.Overlay
+		className={cn('data-[state=closed]:animate-overlay-out data-[state=open]:animate-overlay-in fixed inset-0 z-50 bg-white/50 backdrop-blur-xs dark:bg-black/50', className)}
+		{...props}
+		ref={ref}
+	/>
 ));
 SheetOverlay.displayName = SheetPrimitive.Overlay.displayName;
 
-const sheetVariants = cva('fixed z-50 gap-4 bg-white p-6 shadow-lg dark:bg-slate-950', {
+const sheetVariants = cva('fixed z-50 gap-4 bg-light p-6 shadow-lg dark:bg-slate-900', {
 	variants: {
 		side: {
 			top: 'inset-x-0 top-0 border-b data-[state=closed]:animate-slide-out-to-top data-[state=open]:animate-slide-in-from-top',
@@ -52,12 +56,12 @@ const SheetFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElemen
 SheetFooter.displayName = 'SheetFooter';
 
 const SheetTitle = React.forwardRef<React.ElementRef<typeof SheetPrimitive.Title>, React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title>>(({ className, ...props }, ref) => (
-	<SheetPrimitive.Title ref={ref} className={cn('text-lg font-semibold text-slate-950 dark:text-slate-50', className)} {...props} />
+	<SheetPrimitive.Title ref={ref} className={cn('text-dark text-lg font-semibold dark:text-white', className)} {...props} />
 ));
 SheetTitle.displayName = SheetPrimitive.Title.displayName;
 
 const SheetDescription = React.forwardRef<React.ElementRef<typeof SheetPrimitive.Description>, React.ComponentPropsWithoutRef<typeof SheetPrimitive.Description>>(({ className, ...props }, ref) => (
-	<SheetPrimitive.Description ref={ref} className={cn('text-sm text-slate-500 dark:text-slate-400', className)} {...props} />
+	<SheetPrimitive.Description ref={ref} className={cn('text-secondary-500 dark:text-secondary-500 text-sm', className)} {...props} />
 ));
 SheetDescription.displayName = SheetPrimitive.Description.displayName;
 

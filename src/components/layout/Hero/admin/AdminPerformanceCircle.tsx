@@ -1,6 +1,6 @@
 const AdminPerformanceCircle = () => {
 	return (
-		<div className='border-info/50 bg-light/70 dark:bg-dark/70 pointer-events-none absolute top-[20em] right-0 aspect-square h-[12em] translate-x-1/2 rounded-full border-[0.05em] border-solid backdrop-blur select-none'>
+		<div className='border-info/50 bg-light/70 pointer-events-none absolute top-[20em] right-0 aspect-square h-[12em] translate-x-1/2 rounded-full border-[0.05em] border-solid backdrop-blur select-none dark:bg-slate-900/70'>
 			<div className='absolute inset-[0.2em]'>
 				<svg className='absolute inset-[1.3em] fill-none' viewBox='-3.5 -3 112 112'>
 					<path
@@ -12,7 +12,7 @@ const AdminPerformanceCircle = () => {
 					/>
 				</svg>
 				<div className='border-info/50 absolute inset-[1em] rounded-full border-[0.25em] border-solid' />
-				<div className='absolute inset-[1em] flex items-center justify-center text-center text-[3.75em] font-extrabold text-black/70 dark:text-white/70'>98</div>
+				<div className='text-dark/70 absolute inset-[1em] flex items-center justify-center text-center text-[3.75em] font-extrabold dark:text-white/70'>98</div>
 				<svg className='animate-spin-slow absolute inset-[0.1em]' viewBox='0 0 100 100'>
 					<path id='curve-text' fill='transparent' strokeWidth='none' d='M0 50a1 1 0 0 1 100 0A1 1 0 0 1 0 50' />
 					<text>

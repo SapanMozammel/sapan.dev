@@ -114,7 +114,7 @@ const ThemeSwitcher = () => {
 					<PopoverTrigger asChild>
 						<button
 							type='button'
-							className='hover:text-primary dark:hover:text-success inline-flex aspect-square h-6 cursor-pointer items-center justify-center text-black ease-in-out sm:h-8 dark:text-white'
+							className='hover:text-primary dark:hover:text-success text-dark inline-flex aspect-square h-6 cursor-pointer items-center justify-center ease-in-out sm:h-8 dark:text-white'
 							onMouseEnter={() => setIsHovering(true)}
 							onMouseLeave={() => setIsHovering(false)}
 						>
@@ -127,7 +127,7 @@ const ThemeSwitcher = () => {
 				</TooltipContent>
 			</Tooltip>
 			<PopoverContent className='border-secondary-400 dark:border-secondary-600 divide-secondary-400 dark:divide-secondary-600 w-44 divide-y' align='end'>
-				<div className='flex items-center gap-1 px-3 py-2 text-xs font-medium text-black sm:text-sm dark:text-white'>
+				<div className='text-dark flex items-center gap-1 px-3 py-2 text-xs font-medium sm:text-sm dark:text-white'>
 					<span>Change Theme</span>
 					<span className='text-primary dark:text-success ms-auto text-xs'>⌘⌥T</span>
 				</div>
@@ -152,7 +152,7 @@ const ThemeSwitcher = () => {
 								className={`flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-md px-2 py-1.5 text-xs transition-colors sm:text-sm ${
 									mounted && theme === option.name
 										? 'bg-primary/10 text-primary dark:bg-success/10 dark:text-success'
-										: 'text-secondary-500 dark:text-secondary-400 hover:text-primary dark:hover:text-success'
+										: 'text-secondary-500 dark:text-secondary-500 hover:text-primary dark:hover:text-success'
 								}`}
 								onClick={handleOptionClick}
 							>

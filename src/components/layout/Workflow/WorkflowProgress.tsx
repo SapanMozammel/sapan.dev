@@ -33,7 +33,7 @@ const WorkflowProgress = memo(({ activeStep, stepProgress, isResetting, activeCo
 	return (
 		<div className='relative z-30 mt-4 pb-10 md:mt-6 md:pb-12'>
 			<div className='relative h-0.5 w-full'>
-				<div className='bg-secondary-200/60 dark:bg-secondary-700/40 absolute inset-0 h-full w-full' />
+				<div className='bg-secondary-200 dark:bg-secondary-700 absolute inset-0 h-full w-full' />
 				<motion.div
 					initial={false}
 					animate={{ width: `${currentProgressPercent}%` }}

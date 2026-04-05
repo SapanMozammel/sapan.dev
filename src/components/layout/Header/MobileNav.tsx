@@ -98,7 +98,9 @@ const MobileNav = memo(() => {
 	const itemClass = (active: boolean) =>
 		cn(
 			'font-sora group relative flex items-center gap-3.5 rounded-xl px-3.5 py-3 text-sm font-medium transition-all duration-200',
-			active ? 'bg-primary/6 text-primary dark:bg-success/6 dark:text-success' : 'text-secondary-500 hover:bg-light hover:text-dark dark:text-secondary-400 dark:hover:bg-white/5 dark:hover:text-white'
+			active
+				? 'bg-primary/5 text-primary dark:bg-success/5 dark:text-success'
+				: 'text-secondary-600 hover:bg-secondary/50 hover:text-dark dark:text-secondary-400 dark:hover:bg-secondary-900/50 dark:hover:text-white'
 		);
 
 	const iconWrap = (active: boolean) =>
@@ -106,34 +108,34 @@ const MobileNav = memo(() => {
 			'flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors duration-200',
 			active
 				? 'bg-primary/10 text-primary dark:bg-success/10 dark:text-success'
-				: 'bg-light text-secondary-400 group-hover:bg-secondary-200 dark:group-hover:bg-secondary-800 group-hover:text-primary dark:group-hover:text-success dark:bg-white/5 dark:text-secondary-500'
+				: 'bg-secondary-600/5 text-secondary-400 group-hover:bg-secondary-200 dark:group-hover:bg-secondary-700 group-hover:text-primary dark:group-hover:text-success dark:bg-secondary-400/5 dark:text-secondary-600'
 		);
 
 	return (
 		<Sheet open={open} onOpenChange={setOpen}>
 			<SheetTrigger asChild>
-				<button className='bg-light relative inline-flex h-8 w-8 cursor-pointer flex-col items-center justify-center rounded-lg sm:h-10 sm:w-10 md:hidden dark:bg-white/5' aria-label='Toggle menu'>
+				<button className='bg-light relative inline-flex h-8 w-8 cursor-pointer flex-col items-center justify-center rounded-lg sm:h-10 sm:w-10 md:hidden dark:bg-slate-900' aria-label='Toggle menu'>
 					<span
 						className={cn(
-							'bg-dark absolute left-1/2 h-px w-4 -translate-x-1/2 rounded-full transition-all duration-300 dark:bg-white',
+							'absolute left-1/2 h-px w-4 -translate-x-1/2 rounded-full bg-black transition-all duration-300 dark:bg-white',
 							open ? 'top-1/2 -translate-y-1/2 rotate-45' : 'top-2.75 rotate-0 sm:top-3.5'
 						)}
 					/>
 					<span
 						className={cn(
-							'bg-dark absolute top-1/2 left-1/2 h-px w-4 -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-300 dark:bg-white',
+							'absolute top-1/2 left-1/2 h-px w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black transition-all duration-300 dark:bg-white',
 							open ? 'invisible opacity-0' : 'visible opacity-100'
 						)}
 					/>
 					<span
 						className={cn(
-							'bg-dark absolute left-1/2 h-px w-4 -translate-x-1/2 rounded-full transition-all duration-300 dark:bg-white',
+							'absolute left-1/2 h-px w-4 -translate-x-1/2 rounded-full bg-black transition-all duration-300 dark:bg-white',
 							open ? 'bottom-1/2 translate-y-1/2 -rotate-45' : 'bottom-2.75 rotate-0 sm:bottom-3.5'
 						)}
 					/>
 				</button>
 			</SheetTrigger>
-			<SheetContent side='right' className='border-secondary-200 dark:border-secondary-800 flex w-80 max-w-[95%] flex-col gap-0 bg-white/95 p-0 backdrop-blur-xl sm:max-w-90 dark:bg-black/95'>
+			<SheetContent side='right' className='border-secondary-200 dark:border-secondary-700 flex w-80 max-w-[95%] flex-col gap-0 bg-white/95 p-0 backdrop-blur-xl sm:max-w-90 dark:bg-black/95'>
 				<VisuallyHidden>
 					<SheetTitle>Navigation Menu</SheetTitle>
 				</VisuallyHidden>
@@ -145,7 +147,7 @@ const MobileNav = memo(() => {
 					</Link>
 					<SheetClose asChild>
 						<button
-							className='hover:text-primary dark:hover:text-success inline-flex aspect-square h-8 cursor-pointer items-center justify-center rounded-lg text-black transition-colors dark:text-white'
+							className='hover:text-primary dark:hover:text-success text-dark inline-flex aspect-square h-8 cursor-pointer items-center justify-center rounded-lg transition-colors dark:text-white'
 							aria-label='Close menu'
 						>
 							<IconX className='h-5 w-5' />
@@ -164,7 +166,7 @@ const MobileNav = memo(() => {
 								</span>
 								<span className='flex-1'>{item.label}</span>
 								<span
-									className={cn('text-[10px] font-normal tracking-widest transition-colors duration-200', active ? 'text-primary/40 dark:text-success/40' : 'text-secondary-300 dark:text-secondary-600')}
+									className={cn('text-[10px] font-normal tracking-widest transition-colors duration-200', active ? 'text-primary/50 dark:text-success/50' : 'text-secondary-400 dark:text-secondary-600')}
 								>
 									{item.number}
 								</span>

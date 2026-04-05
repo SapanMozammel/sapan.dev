@@ -44,7 +44,7 @@ export const TechnologiesDisplay = memo<TechnologiesDisplayProps>(({ technologie
 								+{remainingCount}
 							</button>
 						</TooltipTrigger>
-						<TooltipContent className='bg-primary dark:bg-success max-w-xs rounded-2xl px-4 py-3 text-center text-sm font-medium text-white dark:text-black' side='top'>
+						<TooltipContent className='bg-primary dark:bg-success dark:text-dark max-w-xs rounded-2xl px-4 py-3 text-center text-sm font-medium text-white' side='top'>
 							<div className='flex flex-wrap gap-1.5'>{technologies.join(', ')}</div>
 						</TooltipContent>
 					</Tooltip>

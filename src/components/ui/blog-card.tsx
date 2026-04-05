@@ -1,20 +1,10 @@
+import { CATEGORY_COLORS, DEFAULT_CATEGORY_COLOR } from '@/data/content/blogs';
 import { cn } from '@/lib/utils';
 import { getBlurDataURL } from '@/lib/utils/image';
 import type { BlogCardProps } from '@/types/blog';
 import { IconArrowRight, IconClock } from '@tabler/icons-react';
 import Image from 'next/image';
 import Link from 'next/link';
-
-const CATEGORY_COLORS: Record<string, string> = {
-	'Next.js': 'bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-400',
-	TypeScript: 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-400',
-	CSS: 'bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-400',
-	Accessibility: 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400',
-	Performance: 'bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-400',
-	React: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-400',
-};
-
-const DEFAULT_CATEGORY_COLOR = 'bg-secondary-100 text-secondary-600 dark:bg-secondary-800 dark:text-secondary-400';
 const BLUR_PLACEHOLDER = getBlurDataURL(800, 450);
 
 const formatDate = (dateString: string): string =>
@@ -31,7 +21,7 @@ const BlogCard = ({ post, className }: BlogCardProps) => {
 		<Link
 			href={`/articles/${post.slug}`}
 			className={cn(
-				'group border-secondary-200/60 dark:border-secondary-700/40 dark:hover:border-secondary-600/60 relative flex flex-col overflow-hidden rounded-2xl border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/5 dark:bg-black/20 dark:hover:shadow-black/20',
+				'group border-secondary-200/50 dark:border-secondary-700/50 relative flex flex-col overflow-hidden rounded-2xl border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/5 dark:bg-black dark:hover:shadow-white/5',
 				className
 			)}
 		>
@@ -52,23 +42,20 @@ const BlogCard = ({ post, className }: BlogCardProps) => {
 			</div>
 			<div className='flex grow flex-col gap-3 p-5'>
 				<div className='flex grow flex-col gap-2'>
-					<h3 className='font-cg group-hover:text-primary dark:group-hover:text-success text-lg leading-snug font-medium tracking-wide text-black transition-colors duration-200 sm:text-xl dark:text-white'>
+					<h3 className='font-cg group-hover:text-primary dark:group-hover:text-success text-dark text-lg leading-snug font-medium tracking-wide transition-colors duration-200 sm:text-xl dark:text-white'>
 						{post.title}
 					</h3>
 					<p className='text-secondary-600 dark:text-secondary-400 line-clamp-2 text-sm leading-relaxed'>{post.excerpt}</p>
 				</div>
 				<div className='flex flex-wrap gap-1.5'>
 					{post.tags.slice(0, 3).map((tag) => (
-						<span
-							key={tag}
-							className='font-sora bg-secondary-100 text-secondary-500 dark:bg-secondary-800/60 dark:text-secondary-500 rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase'
-						>
+						<span key={tag} className='font-sora bg-secondary-100 text-secondary-500 dark:bg-secondary-800 dark:text-secondary-500 rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase'>
 							{tag}
 						</span>
 					))}
 				</div>
 				<div className='border-secondary-100 dark:border-secondary-800 flex items-center justify-between border-t pt-3'>
-					<div className='text-secondary-400 dark:text-secondary-500 flex items-center gap-3 text-xs'>
+					<div className='text-secondary-400 dark:text-secondary-600 flex items-center gap-3 text-xs'>
 						<span className='font-sora font-medium'>{formatDate(post.publishedAt)}</span>
 						<span className='flex items-center gap-1'>
 							<IconClock size={12} stroke={2} />

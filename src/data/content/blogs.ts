@@ -820,3 +820,14 @@ function Counter() {
 
 export const FEATURED_BLOGS = BLOG_POSTS.filter((post) => post.featured);
 export const BLOGS_PER_PAGE = 6;
+
+export const CATEGORY_COLORS: Record<string, string> = {
+	'Next.js': 'bg-sky-50 text-sky-700 dark:bg-sky-950 dark:text-sky-300',
+	TypeScript: 'bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300',
+	CSS: 'bg-violet-50 text-violet-700 dark:bg-violet-950 dark:text-violet-300',
+	Accessibility: 'bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-300',
+	Performance: 'bg-orange-50 text-orange-700 dark:bg-orange-950 dark:text-orange-300',
+	React: 'bg-cyan-50 text-cyan-700 dark:bg-cyan-950 dark:text-cyan-300',
+};
+
+export const DEFAULT_CATEGORY_COLOR = 'bg-secondary-100 text-secondary-600 dark:bg-secondary-800 dark:text-secondary-400';

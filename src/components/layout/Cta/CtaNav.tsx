@@ -17,7 +17,7 @@ const NAV_ITEMS = [
 
 const LINK_CLASS = 'text-secondary-600 hover:text-primary dark:text-secondary-400 dark:hover:text-success font-sora text-sm font-medium transition-colors';
 
-const FooterNav = memo(() => {
+const CtaNav = memo(() => {
 	const pathname = usePathname();
 	const router = useRouter();
 
@@ -61,6 +61,6 @@ const FooterNav = memo(() => {
 	);
 });
 
-FooterNav.displayName = 'FooterNav';
+CtaNav.displayName = 'CtaNav';
 
-export default FooterNav;
+export default CtaNav;

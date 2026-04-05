@@ -13,8 +13,8 @@ const Hero = () => (
 						<h1 className='sr-only'>
 							Hi, I am Sapan Mozammel, <br /> a fullstack frontend developer.
 						</h1>
-						<h2 className='font-hg dark:from-slat-600 dark:via-light inline-block bg-radial from-slate-500 via-black via-45% to-slate-500 to-75% bg-clip-text text-xl !leading-tight font-extrabold text-transparent sm:text-4xl lg:text-5xl dark:to-slate-400'>
-							With every line of <TextUnderline className='text-black dark:text-white'>JavaScript</TextUnderline>
+						<h2 className='font-hg dark:via-light inline-block bg-radial from-slate-400 via-slate-900 via-45% to-slate-600 to-75% bg-clip-text text-xl !leading-tight font-extrabold text-transparent sm:text-4xl lg:text-5xl dark:from-slate-600 dark:to-slate-400'>
+							With every line of <TextUnderline className='text-dark dark:text-white'>JavaScript</TextUnderline>
 							, <br /> shaping the future of web development.
 						</h2>
 						<p className='text-secondary-600 dark:text-secondary-400 inline-flex max-w-[90ch] text-sm !leading-relaxed tracking-wider sm:text-base'>

@@ -19,9 +19,9 @@ export const ContactSuccess = memo<{ onClose: () => void }>(({ onClose }) => {
 	return (
 		<div className='flex flex-col items-center gap-3 py-6 text-center'>
 			<div className='bg-success flex h-14 w-14 items-center justify-center rounded-xl'>
-				<IconSend className='h-6 w-6 text-black' />
+				<IconSend className='text-dark h-6 w-6' />
 			</div>
-			<h4 className='font-hg text-xl !leading-tight font-medium tracking-wide text-black dark:text-white'>Message sent!</h4>
+			<h4 className='font-hg text-dark text-xl !leading-tight font-medium tracking-wide dark:text-white'>Message sent!</h4>
 			<p className='text-secondary-600 dark:text-secondary-400 text-sm leading-relaxed tracking-wide'>Thanks for reaching out. I&apos;ll be in touch soon.</p>
 			<Button className='mt-4' onClick={onClose}>
 				Close
@@ -38,7 +38,7 @@ export const ContactError = memo<{ onRetry: () => void }>(({ onRetry }) => {
 			<div className='bg-danger/10 flex h-14 w-14 items-center justify-center rounded-xl'>
 				<IconAlertTriangle className='text-danger h-6 w-6' />
 			</div>
-			<h4 className='font-hg text-xl !leading-tight font-medium tracking-wide text-black dark:text-white'>Something went wrong</h4>
+			<h4 className='font-hg text-dark text-xl !leading-tight font-medium tracking-wide dark:text-white'>Something went wrong</h4>
 			<p className='text-secondary-600 dark:text-secondary-400 text-sm leading-relaxed tracking-wide'>Please try again or reach out via email.</p>
 			<Button className='mt-4' onClick={onRetry}>
 				Try Again

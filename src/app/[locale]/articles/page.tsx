@@ -38,8 +38,8 @@ const BlogPage = memo(() => {
 									className={cn(
 										'font-sora cursor-pointer rounded-full border px-4 py-1.5 text-xs font-bold tracking-widest uppercase transition-all duration-200',
 										activeCategory === cat
-											? 'border-primary bg-primary dark:border-success dark:bg-success text-white dark:text-black'
-											: 'border-secondary-300 text-secondary-500 hover:border-secondary-400 dark:border-secondary-600 dark:hover:border-secondary-500 hover:text-black dark:hover:text-white'
+											? 'border-primary bg-primary dark:border-success dark:bg-success dark:text-dark text-white'
+											: 'border-secondary-300 text-secondary-600 dark:text-secondary-400 hover:border-secondary-400 dark:border-secondary-700 dark:hover:border-secondary-600 hover:text-dark dark:hover:text-white'
 									)}
 								>
 									{cat}
@@ -56,7 +56,7 @@ const BlogPage = memo(() => {
 								<button
 									onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
 									disabled={currentPage === 1}
-									className='border-secondary-300 text-secondary-500 hover:border-primary hover:text-primary dark:border-secondary-600 dark:hover:border-success dark:hover:text-success flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border transition-all duration-200 disabled:pointer-events-none disabled:opacity-40'
+									className='border-secondary-300 text-secondary-600 dark:text-secondary-400 hover:border-primary hover:text-primary dark:border-secondary-700 dark:hover:border-success dark:hover:text-success flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border transition-all duration-200 disabled:pointer-events-none disabled:opacity-40'
 									aria-label='Previous page'
 								>
 									<IconChevronLeft size={16} stroke={2} />
@@ -68,8 +68,8 @@ const BlogPage = memo(() => {
 										className={cn(
 											'font-sora h-9 w-9 cursor-pointer rounded-lg border text-xs font-bold transition-all duration-200',
 											currentPage === page
-												? 'border-primary bg-primary dark:border-success dark:bg-success text-white dark:text-black'
-												: 'border-secondary-300 text-secondary-500 hover:border-primary hover:text-primary dark:border-secondary-600 dark:hover:border-success dark:hover:text-success'
+												? 'border-primary bg-primary dark:border-success dark:bg-success dark:text-dark text-white'
+												: 'border-secondary-300 text-secondary-600 dark:text-secondary-400 hover:border-primary hover:text-primary dark:border-secondary-700 dark:hover:border-success dark:hover:text-success'
 										)}
 										aria-label={`Page ${page}`}
 										aria-current={currentPage === page ? 'page' : undefined}
@@ -80,7 +80,7 @@ const BlogPage = memo(() => {
 								<button
 									onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
 									disabled={currentPage === totalPages}
-									className='border-secondary-300 text-secondary-500 hover:border-primary hover:text-primary dark:border-secondary-600 dark:hover:border-success dark:hover:text-success flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border transition-all duration-200 disabled:pointer-events-none disabled:opacity-40'
+									className='border-secondary-300 text-secondary-600 dark:text-secondary-400 hover:border-primary hover:text-primary dark:border-secondary-700 dark:hover:border-success dark:hover:text-success flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border transition-all duration-200 disabled:pointer-events-none disabled:opacity-40'
 									aria-label='Next page'
 								>
 									<IconChevronRight size={16} stroke={2} />

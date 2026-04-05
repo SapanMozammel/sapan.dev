@@ -55,14 +55,14 @@ const DialogTitle = React.forwardRef<React.ElementRef<typeof DialogPrimitive.Tit
 DialogTitle.displayName = DialogPrimitive.Title.displayName;
 
 const DialogDescription = React.forwardRef<React.ElementRef<typeof DialogPrimitive.Description>, React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>>(({ className, ...props }, ref) => (
-	<DialogPrimitive.Description ref={ref} className={cn('text-secondary-500 dark:text-secondary-400 text-sm', className)} {...props} />
+	<DialogPrimitive.Description ref={ref} className={cn('text-secondary-500 dark:text-secondary-500 text-sm', className)} {...props} />
 ));
 DialogDescription.displayName = DialogPrimitive.Description.displayName;
 
 const DialogCloseButton = React.forwardRef<React.ElementRef<typeof DialogPrimitive.Close>, React.ComponentPropsWithoutRef<typeof DialogPrimitive.Close>>(({ className, ...props }, ref) => (
 	<DialogPrimitive.Close
 		ref={ref}
-		className={cn('text-secondary-400 hover:text-dark dark:text-secondary-500 absolute top-4 right-4 cursor-pointer rounded-xl p-2 transition-colors duration-150 focus:outline-none dark:hover:text-white', className)}
+		className={cn('text-secondary-400 hover:text-dark dark:text-secondary-600 absolute top-4 right-4 cursor-pointer rounded-xl p-2 transition-colors duration-150 focus:outline-none dark:hover:text-white', className)}
 		{...props}
 	>
 		<IconX className='h-5 w-5' />

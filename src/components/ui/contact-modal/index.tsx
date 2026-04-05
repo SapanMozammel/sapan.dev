@@ -17,13 +17,13 @@ const ContactModal = memo(() => {
 					aria-hidden
 					className='animate-faq-border-shift pointer-events-none absolute -inset-px rounded-[calc(theme(borderRadius.2xl)+theme(spacing.px))] bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-success)_35%,var(--color-primary)_65%,var(--color-success)_100%)] [background-size:300%_300%] !outline-none select-none'
 				/>
-				<div className='dark:bg-dark bg-light relative z-10 overflow-hidden rounded-2xl shadow-[0_8px_32px_color-mix(in_srgb,var(--color-primary)_14%,transparent),0_2px_8px_color-mix(in_srgb,var(--color-success)_8%,transparent)]'>
+				<div className='dark:bg-dark bg-secondary relative z-10 overflow-hidden rounded-2xl shadow-[0_8px_32px_color-mix(in_srgb,var(--color-primary)_14%,transparent),0_2px_8px_color-mix(in_srgb,var(--color-success)_8%,transparent)]'>
 					<div className='p-6 sm:p-7'>
 						<DialogHeader className='mb-6 flex-row items-start justify-between gap-4 space-y-0 text-left'>
 							<div className='flex items-center gap-4'>
 								<Logo className='h-8 w-8 shrink-0 sm:h-9 sm:w-9' />
 								<div className='flex flex-col gap-1.5'>
-									<DialogTitle className='font-hg text-xl !leading-none font-medium tracking-wide text-black sm:text-2xl dark:text-white'>Let&apos;s connect</DialogTitle>
+									<DialogTitle className='font-hg text-dark text-xl !leading-none font-medium tracking-wide sm:text-2xl dark:text-white'>Let&apos;s connect</DialogTitle>
 									<DialogDescription className='text-secondary-600 dark:text-secondary-400 text-xs leading-none font-normal tracking-widest sm:text-sm'>
 										I&apos;ll get back to you within 24&nbsp;hours.
 									</DialogDescription>

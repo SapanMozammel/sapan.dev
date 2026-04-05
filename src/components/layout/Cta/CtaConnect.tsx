@@ -11,7 +11,7 @@ const SOCIAL_LINKS = [
 	{ label: 'WordPress', href: 'https://profiles.wordpress.org/sapanmozammel/', icon: IconBrandWordpress },
 ] as const;
 
-const FooterConnect = memo(() => (
+const CtaConnect = memo(() => (
 	<div className='flex flex-col gap-4'>
 		{/* Availability */}
 		<div className='flex items-center gap-3 pl-0.5'>
@@ -23,7 +23,7 @@ const FooterConnect = memo(() => (
 		</div>
 		{/* Location & Contact */}
 		<div className='font-sora flex flex-col gap-2.5'>
-			<p className='text-secondary-500 dark:text-secondary-400 flex items-center gap-2.5 text-sm'>
+			<p className='text-secondary-500 dark:text-secondary-500 flex items-center gap-2.5 text-sm'>
 				<IconMapPinFilled className='text-primary dark:text-success h-4 w-4 shrink-0' />
 				Based in Dhaka, Bangladesh. Shipping globally.
 			</p>
@@ -52,7 +52,7 @@ const FooterConnect = memo(() => (
 							aria-label={label}
 							className='group bg-light hover:bg-primary dark:hover:bg-success flex h-9 w-9 items-center justify-center rounded-lg transition-all duration-300 hover:scale-110 hover:shadow-lg dark:bg-slate-900'
 						>
-							<Icon className='text-secondary-600 dark:text-secondary-400 h-4.5 w-4.5 transition-colors duration-300 group-hover:text-white dark:group-hover:text-black' stroke={2} />
+							<Icon className='text-secondary-600 dark:text-secondary-400 dark:group-hover:text-dark h-4.5 w-4.5 transition-colors duration-300 group-hover:text-white' stroke={2} />
 						</Link>
 					</TooltipTrigger>
 					<TooltipContent side='bottom'>{label}</TooltipContent>
@@ -62,6 +62,6 @@ const FooterConnect = memo(() => (
 	</div>
 ));
 
-FooterConnect.displayName = 'FooterConnect';
+CtaConnect.displayName = 'CtaConnect';
 
-export default FooterConnect;
+export default CtaConnect;

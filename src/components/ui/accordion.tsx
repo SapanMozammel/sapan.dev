@@ -21,7 +21,7 @@ const AccordionItem = memo<AccordionItemProps>(({ question, answer, isOpen, onTo
 			/>
 			<div
 				className={cn(
-					'dark:bg-secondary-900 relative z-10 overflow-hidden rounded-2xl bg-white transition-shadow duration-500',
+					'dark:bg-secondary-900 bg-secondary relative z-10 overflow-hidden rounded-2xl transition-shadow duration-500',
 					isOpen && 'shadow-[0_8px_32px_color-mix(in_srgb,var(--color-primary)_14%,transparent),0_2px_8px_color-mix(in_srgb,var(--color-success)_8%,transparent)]'
 				)}
 			>

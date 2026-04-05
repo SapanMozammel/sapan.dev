@@ -1,6 +1,6 @@
 const AdminHalfWaveCircle = () => {
 	return (
-		<div className='border-info/50 bg-light/70 dark:bg-dark/70 pointer-events-none absolute top-[7em] -left-[2.5em] aspect-square h-[9em] -translate-x-1/2 -translate-y-1/2 rounded-full border-[0.05em] border-solid backdrop-blur select-none'>
+		<div className='border-info/50 bg-light/70 pointer-events-none absolute top-[7em] -left-[2.5em] aspect-square h-[9em] -translate-x-1/2 -translate-y-1/2 rounded-full border-[0.05em] border-solid backdrop-blur select-none dark:bg-slate-900/70'>
 			<div className='absolute inset-[0.2em]'>
 				<svg viewBox='-4 -4 148 148' xmlns='http://www.w3.org/2000/svg' className='absolute -inset-[1.1em] fill-none'>
 					<g filter='url(#half-wave-wrapper)'>
@@ -67,7 +67,7 @@ const AdminHalfWaveCircle = () => {
 						</filter>
 					</defs>
 				</svg>
-				<div className='absolute inset-0 inline-flex items-center justify-center text-[2.75em] font-extrabold tracking-tighter text-black/70 dark:text-white/70'>50%</div>
+				<div className='text-dark/70 absolute inset-0 inline-flex items-center justify-center text-[2.75em] font-extrabold tracking-tighter dark:text-white/70'>50%</div>
 			</div>
 		</div>
 	);
