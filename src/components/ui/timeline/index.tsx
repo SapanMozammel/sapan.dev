@@ -69,11 +69,11 @@ const Timeline = memo<TimelineProps>(({ items, className }) => {
 				itemDots.forEach((innerDot) => {
 					const el = innerDot as HTMLElement;
 					if (scrollPos >= dotAbsoluteY) {
-						el.classList.add('bg-primary', 'dark:bg-success', 'scale-125', 'ring-primary/90', 'dark:ring-success/20');
-						el.classList.remove('bg-secondary-200', 'dark:bg-secondary-700', 'scale-100');
+						el.classList.add('bg-primary', 'dark:bg-success', 'border-indigo-100', 'dark:border-teal-900');
+						el.classList.remove('bg-secondary-300', 'dark:bg-secondary-700', 'border-secondary-100', 'dark:border-secondary-800');
 					} else {
-						el.classList.remove('bg-primary', 'dark:bg-success', 'scale-125', 'ring-primary/90', 'dark:ring-success/20');
-						el.classList.add('bg-secondary-200', 'dark:bg-secondary-700', 'scale-100');
+						el.classList.remove('bg-primary', 'dark:bg-success', 'border-indigo-100', 'dark:border-teal-900');
+						el.classList.add('bg-secondary-300', 'dark:bg-secondary-700', 'border-secondary-100', 'dark:border-secondary-800');
 					}
 				});
 

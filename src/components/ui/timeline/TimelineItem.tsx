@@ -60,16 +60,10 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 				</span>
 			</div>
 			<div className={cn('absolute top-10.5 z-2 hidden -translate-y-1/2 md:block', isLeft ? 'left-1/2 -translate-x-1/2' : 'right-1/2 translate-x-1/2')}>
-				<div
-					data-timeline-dot
-					className='bg-secondary-200 dark:bg-secondary-700 dark:ring-secondary-900 border-secondary-300 dark:border-secondary-700 h-3 w-3 rounded-full border ring-4 ring-white transition-all duration-300'
-				/>
+				<div data-timeline-dot className='bg-secondary-300 dark:bg-secondary-700 border-secondary-100 dark:border-secondary-800 h-3.5 w-3.5 rounded-full border-2 ring-2 ring-white dark:ring-black' />
 			</div>
 			<div className='absolute top-1 left-0 z-20 md:hidden' aria-hidden='true'>
-				<div
-					data-timeline-dot
-					className='bg-secondary-200 dark:bg-secondary-700 dark:ring-secondary-900 border-secondary-300 dark:border-secondary-700 h-3 w-3 rounded-full border ring-4 ring-white transition-all duration-300'
-				/>
+				<div data-timeline-dot className='bg-secondary-300 dark:bg-secondary-700 border-secondary-100 dark:border-secondary-800 h-3.5 w-3.5 rounded-full border-2 ring-2 ring-white dark:ring-black' />
 			</div>
 			<div className={cn('flex-1 pt-0 md:w-1/2', isLeft ? 'ml-6 md:mr-4 md:ml-0' : 'ml-6 md:ml-4')}>
 				<div className='mb-4 flex flex-col pl-0 md:hidden'>
@@ -80,11 +74,11 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 				</div>
 				<div
 					className={cn(
-						'group border-secondary-200/50 dark:border-secondary-700/50 relative flex flex-col gap-2 rounded-2xl border p-4 shadow-lg shadow-black/5 backdrop-blur-sm transition-all duration-300 md:gap-4 md:p-6 dark:shadow-black/20'
+						'group border-secondary-200/50 dark:border-secondary-700/50 relative flex flex-col gap-2 rounded-2xl border p-4 shadow-lg shadow-black/5 backdrop-blur-sm transition-all duration-300 md:gap-4 md:p-6 dark:shadow-white/5'
 					)}
 				>
 					<div className='flex flex-col gap-1'>
-						<h3 className='font-eb text-dark text-3xl leading-none font-medium sm:text-5xl dark:text-white'>{job.company}</h3>
+						<h3 className='font-hg text-dark uppercase text-3xl leading-none font-bold sm:text-5xl dark:text-white'>{job.company}</h3>
 						<h5 className='font-cg text-secondary-600 dark:text-secondary-400 text-xl leading-snug font-medium sm:text-2xl'>{job.position}</h5>
 					</div>
 					{job.technologies && job.technologies.length > 0 && (
@@ -92,7 +86,7 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 							{job.technologies.map((tech, idx) => (
 								<span
 									key={idx}
-									className={cn('font-sora bg-secondary-100 text-secondary-500 dark:bg-secondary-800 dark:text-secondary-500 rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase')}
+									className={cn('font-hg bg-secondary-100 text-secondary-500 dark:bg-secondary-800 dark:text-secondary-500 rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase')}
 								>
 									{tech}
 								</span>
@@ -101,7 +95,7 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 					)}
 					<p className='text-secondary-600 dark:text-secondary-400 leading-regular text-sm'>{job.description}</p>
 					<div className='flex flex-col gap-1.5'>
-						<h4 className='font-sora text-dark text-lg font-bold dark:text-white'>Responsibilities</h4>
+						<h4 className='font-hg text-dark text-lg font-bold dark:text-white'>Responsibilities</h4>
 						<ul className='text-secondary-600 dark:text-secondary-400 leading-regular flex list-none flex-col gap-1.5 text-sm'>
 							{job.responsibilities?.map((resp, idx) => (
 								<li key={idx} className='relative flex items-start pl-4'>
@@ -113,7 +107,7 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 					</div>
 					{job.achievements && job.achievements.length > 0 && (
 						<div className='flex flex-col gap-1.5'>
-							<h4 className='font-sora text-dark text-lg font-bold dark:text-white'>Impact & Achievements</h4>
+							<h4 className='font-hg text-dark text-lg font-bold dark:text-white'>Impact & Achievements</h4>
 							<ul className='text-secondary-600 dark:text-secondary-400 leading-regular flex list-none flex-col gap-1.5 text-sm'>
 								{job.achievements.map((achievement, idx) => (
 									<li key={idx} className='relative flex items-start pl-4'>

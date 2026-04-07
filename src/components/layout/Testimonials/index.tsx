@@ -27,11 +27,11 @@ const TestimonialCard = memo(({ testimonial }: { testimonial: TestimonialData })
 				quality={85}
 			/>
 		</div>
-		<div className='font-sora flex grow flex-col justify-center gap-1.5 sm:gap-2.5'>
-			<p className='text-secondary-600 dark:text-secondary-400 line-clamp-4 text-xs leading-relaxed italic sm:text-sm'>"{testimonial.message}"</p>
-			<div className='flex flex-col'>
+		<div className='flex grow flex-col justify-center gap-1.5 sm:gap-2.5'>
+			<p className='text-secondary-600 font-dm dark:text-secondary-400 line-clamp-4 text-xs leading-relaxed italic sm:text-sm'>"{testimonial.message}"</p>
+			<div className='font-hg flex flex-col'>
 				<p className='text-dark text-base font-medium tracking-wide sm:text-lg dark:text-white'>{testimonial.name}</p>
-				<p className='text-secondary-600 dark:text-secondary-400 text-[0.6875em]'>
+				<p className='text-secondary-600 dark:text-secondary-400 text-xs'>
 					{testimonial.designation} @{testimonial.company}
 				</p>
 			</div>

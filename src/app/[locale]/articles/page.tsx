@@ -36,7 +36,7 @@ const BlogPage = memo(() => {
 									key={cat}
 									onClick={() => handleCategory(cat)}
 									className={cn(
-										'font-sora cursor-pointer rounded-full border px-4 py-1.5 text-xs font-bold tracking-widest uppercase transition-all duration-200',
+										'font-hg cursor-pointer rounded-full border px-4 py-1.5 text-xs font-bold tracking-widest uppercase transition-all duration-200',
 										activeCategory === cat
 											? 'border-primary bg-primary dark:border-success dark:bg-success dark:text-dark text-white'
 											: 'border-secondary-300 text-secondary-600 dark:text-secondary-400 hover:border-secondary-400 dark:border-secondary-700 dark:hover:border-secondary-600 hover:text-dark dark:hover:text-white'
@@ -66,7 +66,7 @@ const BlogPage = memo(() => {
 										key={page}
 										onClick={() => setCurrentPage(page)}
 										className={cn(
-											'font-sora h-9 w-9 cursor-pointer rounded-lg border text-xs font-bold transition-all duration-200',
+											'font-hg h-9 w-9 cursor-pointer rounded-lg border text-xs font-bold transition-all duration-200',
 											currentPage === page
 												? 'border-primary bg-primary dark:border-success dark:bg-success dark:text-dark text-white'
 												: 'border-secondary-300 text-secondary-600 dark:text-secondary-400 hover:border-primary hover:text-primary dark:border-secondary-700 dark:hover:border-success dark:hover:text-success'

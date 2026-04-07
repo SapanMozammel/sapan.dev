@@ -38,7 +38,7 @@ const BlogCard = ({ post, className }: BlogCardProps) => {
 					quality={85}
 				/>
 				<div className='absolute inset-0 bg-gradient-to-t from-black/30 to-transparent' />
-				<span className={cn('font-sora absolute bottom-3 left-3 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest uppercase backdrop-blur-sm', categoryColor)}>{post.category}</span>
+				<span className={cn('font-hg absolute bottom-3 left-3 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest uppercase backdrop-blur-sm', categoryColor)}>{post.category}</span>
 			</div>
 			<div className='flex grow flex-col gap-3 p-5'>
 				<div className='flex grow flex-col gap-2'>
@@ -49,20 +49,20 @@ const BlogCard = ({ post, className }: BlogCardProps) => {
 				</div>
 				<div className='flex flex-wrap gap-1.5'>
 					{post.tags.slice(0, 3).map((tag) => (
-						<span key={tag} className='font-sora bg-secondary-100 text-secondary-500 dark:bg-secondary-800 dark:text-secondary-500 rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase'>
+						<span key={tag} className='font-hg bg-secondary-100 text-secondary-500 dark:bg-secondary-800 dark:text-secondary-500 rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase'>
 							{tag}
 						</span>
 					))}
 				</div>
 				<div className='border-secondary-100 dark:border-secondary-800 flex items-center justify-between border-t pt-3'>
 					<div className='text-secondary-400 dark:text-secondary-600 flex items-center gap-3 text-xs'>
-						<span className='font-sora font-medium'>{formatDate(post.publishedAt)}</span>
+						<span className='font-hg font-medium'>{formatDate(post.publishedAt)}</span>
 						<span className='flex items-center gap-1'>
 							<IconClock size={12} stroke={2} />
-							<span className='font-sora font-medium'>{post.readTime} min</span>
+							<span className='font-hg font-medium'>{post.readTime} min</span>
 						</span>
 					</div>
-					<span className='font-sora text-primary dark:text-success transition-gap inline-flex items-center gap-1 text-sm font-semibold tracking-wider uppercase duration-200 group-hover:gap-2'>
+					<span className='font-hg text-primary dark:text-success transition-gap inline-flex items-center gap-1 text-sm font-semibold tracking-wider uppercase duration-200 group-hover:gap-2'>
 						<span>Read More</span>
 						<IconArrowRight stroke={3} className='mb-0.5 h-4 w-4 transition-transform duration-300' />
 					</span>

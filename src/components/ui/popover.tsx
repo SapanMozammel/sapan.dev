@@ -21,7 +21,7 @@ const PopoverContent = React.memo<React.ComponentProps<typeof PopoverPrimitive.C
 				align={align}
 				sideOffset={sideOffset}
 				className={cn(
-					'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 border-secondary-400 dark:border-secondary-600 text-dark z-15 w-72 origin-(--radix-popover-content-transform-origin) rounded-lg border bg-white p-0 shadow-md outline-hidden dark:bg-black dark:text-white',
+					'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 border-secondary-400 dark:border-secondary-600 text-dark z-15 w-72 origin-(--radix-popover-content-transform-origin) rounded-lg border bg-white p-0 shadow-lg shadow-black/5 dark:shadow-white/5 outline-hidden dark:bg-black dark:text-white',
 					className
 				)}
 				{...props}

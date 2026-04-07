@@ -8,8 +8,8 @@ const AccordionItem = memo<AccordionItemProps>(({ question, answer, isOpen, onTo
 	return (
 		<div
 			className={cn(
-				'relative rounded-2xl shadow-lg shadow-black/5 transition-shadow duration-500 dark:shadow-black/20',
-				isOpen ? 'ring-1 ring-transparent' : 'ring-secondary-200/60 dark:ring-secondary-700/40 ring-1'
+				'relative rounded-2xl shadow-lg shadow-black/5 transition-shadow duration-500 dark:shadow-white/5',
+				isOpen ? 'ring-1 ring-transparent' : 'ring-secondary-200/50 dark:ring-secondary-700/50 ring-1'
 			)}
 		>
 			<div
@@ -27,8 +27,8 @@ const AccordionItem = memo<AccordionItemProps>(({ question, answer, isOpen, onTo
 			>
 				<button type='button' onClick={onToggle} aria-expanded={isOpen} className='flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left lg:px-8 lg:py-5'>
 					<span className='flex items-center gap-3'>
-						<span className='font-sora text-primary dark:text-success w-5 shrink-0 text-sm font-semibold'>{String(index + 1).padStart(2, '0')}</span>
-						<span className='font-sora text-dark text-sm leading-snug font-semibold lg:text-base dark:text-white'>{question}</span>
+						<span className='font-hg text-primary dark:text-success w-5 shrink-0 text-base font-semibold'>{String(index + 1).padStart(2, '0')}</span>
+						<span className='font-hg text-dark text-base leading-snug font-semibold lg:text-xl dark:text-white'>{question}</span>
 					</span>
 					<span
 						className={cn(

@@ -15,7 +15,7 @@ const NAV_ITEMS = [
 	{ label: 'FAQ', section: 'faq' },
 ] as const;
 
-const LINK_CLASS = 'text-secondary-600 hover:text-primary dark:text-secondary-400 dark:hover:text-success font-sora text-sm font-medium transition-colors';
+const LINK_CLASS = 'text-secondary-600 hover:text-primary dark:text-secondary-400 dark:hover:text-success font-hg text-sm font-medium transition-colors';
 
 const CtaNav = memo(() => {
 	const pathname = usePathname();

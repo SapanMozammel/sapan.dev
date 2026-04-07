@@ -1,4 +1,4 @@
-import { Bungee, Cormorant_Garamond, DM_Sans, EB_Garamond, Hanken_Grotesk, Noto_Sans_Arabic, Sora } from 'next/font/google';
+import { Bungee, Cormorant_Garamond, DM_Sans, Hanken_Grotesk, Noto_Sans_Arabic } from 'next/font/google';
 
 export const dmSans = DM_Sans({
 	display: 'swap',
@@ -8,17 +8,9 @@ export const dmSans = DM_Sans({
 	variable: '--font-dm',
 });
 
-export const ebGaramond = EB_Garamond({
-	display: 'swap',
-	weight: ['500', '700'],
-	subsets: ['latin'],
-	style: ['normal'],
-	variable: '--font-eb',
-});
-
 export const hankenGrotesk = Hanken_Grotesk({
 	display: 'swap',
-	weight: ['500', '700'],
+	weight: ['500', '600', '700'],
 	subsets: ['latin'],
 	style: ['normal'],
 	variable: '--font-hg',
@@ -30,14 +22,6 @@ export const cormorantGaramond = Cormorant_Garamond({
 	subsets: ['latin'],
 	style: ['normal'],
 	variable: '--font-cg',
-});
-
-export const sora = Sora({
-	display: 'swap',
-	weight: ['400', '500', '600', '700'],
-	subsets: ['latin'],
-	style: ['normal'],
-	variable: '--font-sora',
 });
 
 export const bungee = Bungee({
@@ -55,4 +39,4 @@ export const notoSansArabic = Noto_Sans_Arabic({
 	variable: '--font-arabic',
 });
 
-export const fontList = `${dmSans.variable} ${ebGaramond.variable} ${hankenGrotesk.variable} ${cormorantGaramond.variable} ${sora.variable} ${bungee.variable} ${notoSansArabic.variable}`;
+export const fontList = `${dmSans.variable} ${hankenGrotesk.variable} ${cormorantGaramond.variable} ${bungee.variable} ${notoSansArabic.variable}`;

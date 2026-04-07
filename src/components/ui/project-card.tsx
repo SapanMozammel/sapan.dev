@@ -34,13 +34,13 @@ const ProjectCard = memo<ProjectCardProps>(({ project }) => {
 				<div className='mt-1.5 mb-1.5 grid w-full grid-cols-1 gap-x-4 gap-y-2.5 sm:mb-0 sm:grid-cols-3'>
 					{project.role && (
 						<div className='flex flex-col gap-0.5'>
-							<h4 className='font-sora text-dark text-base font-bold sm:text-lg dark:text-white'>Role</h4>
+							<h4 className='font-hg text-dark text-base font-bold sm:text-lg dark:text-white'>Role</h4>
 							<span className='text-secondary-600 dark:text-secondary-400 text-sm !leading-tight'>{project.role}</span>
 						</div>
 					)}
 					{project.technologies && project.technologies.length > 0 && (
 						<div className='col-span-2 flex flex-col gap-0.5'>
-							<h4 className='font-sora text-dark text-base font-bold sm:text-lg dark:text-white'>Technologies</h4>
+							<h4 className='font-hg text-dark text-base font-bold sm:text-lg dark:text-white'>Technologies</h4>
 							<TechnologiesDisplay technologies={project.technologies} />
 						</div>
 					)}
@@ -49,14 +49,14 @@ const ProjectCard = memo<ProjectCardProps>(({ project }) => {
 					href={project?.link || '#'}
 					target='_blank'
 					rel='noopener noreferrer'
-					className='font-sora text-primary dark:text-success decoration-none inline-flex flex-row items-center gap-1 text-sm font-semibold tracking-wider uppercase transition-all duration-150 ease-in hover:gap-2 rtl:flex-row-reverse'
+					className='font-hg text-primary dark:text-success decoration-none inline-flex flex-row items-center gap-1 text-sm font-semibold tracking-wider uppercase transition-all duration-150 ease-in hover:gap-2 rtl:flex-row-reverse'
 				>
 					<span>Learn More</span>
 					<IconArrowRight stroke={3} className='mb-0.5 h-4 w-4 transition-transform duration-300' />
 				</Link>
 			</div>
 			<div className='h-52 w-full px-4 pb-4 sm:h-80 sm:px-6 sm:pb-6 lg:h-full lg:pt-6'>
-				<CursorTooltip content={TOOLTIP_CONTENT} className='shadow-dark/5 relative h-full w-full cursor-pointer overflow-hidden rounded-xl shadow-lg dark:shadow-white/5' onClick={handleClick}>
+				<CursorTooltip content={TOOLTIP_CONTENT} className='shadow-black/5 relative h-full w-full cursor-pointer overflow-hidden rounded-xl shadow-lg dark:shadow-white/5' onClick={handleClick}>
 					<Image
 						src={project.image}
 						alt={`${project.title?.replace(/ /g, '-') || 'project'}-image`}

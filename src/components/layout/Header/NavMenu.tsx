@@ -76,7 +76,7 @@ const NavMenu = memo(() => {
 
 	const linkClass = (active: boolean) =>
 		cn(
-			'font-sora relative rounded-md px-2 lg:px-3 py-1.5 text-sm font-medium transition-colors',
+			'font-hg relative rounded-md px-2 lg:px-3 py-1.5 text-sm font-medium transition-colors',
 			active ? 'text-primary dark:text-success' : 'text-secondary-600 hover:text-primary dark:text-secondary-400 dark:hover:text-success'
 		);
 

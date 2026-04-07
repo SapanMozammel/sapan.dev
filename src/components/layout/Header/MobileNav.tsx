@@ -97,7 +97,7 @@ const MobileNav = memo(() => {
 
 	const itemClass = (active: boolean) =>
 		cn(
-			'font-sora group relative flex items-center gap-3.5 rounded-xl px-3.5 py-3 text-sm font-medium transition-all duration-200',
+			'font-hg group relative flex items-center gap-3.5 rounded-xl px-3.5 py-3 text-sm font-medium transition-all duration-200',
 			active
 				? 'bg-primary/5 text-primary dark:bg-success/5 dark:text-success'
 				: 'text-secondary-600 hover:bg-secondary/50 hover:text-dark dark:text-secondary-400 dark:hover:bg-secondary-900/50 dark:hover:text-white'

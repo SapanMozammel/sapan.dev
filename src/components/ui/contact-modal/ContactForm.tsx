@@ -6,7 +6,7 @@ import type { ContactFormProps } from '@/types/contact';
 import { memo } from 'react';
 
 const INPUT_BASE =
-	'font-sora text-dark dark:text-white w-full rounded-md border bg-transparent px-3 py-2.5 text-sm font-normal leading-tight outline-none transition-colors duration-150 placeholder:text-secondary-600/50 dark:placeholder:text-secondary-400/50 focus:ring-0';
+	'font-dm text-dark dark:text-white w-full rounded-md border bg-transparent px-3 py-2.5 text-sm font-normal leading-tight outline-none transition-colors duration-150 placeholder:text-secondary-600/50 dark:placeholder:text-secondary-400/50 focus:ring-0';
 const INPUT_BORDER = 'border-secondary-200 dark:border-secondary-700 focus:border-primary dark:focus:border-success';
 const INPUT_ERROR = 'border-danger dark:border-danger';
 

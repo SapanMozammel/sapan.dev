@@ -19,7 +19,7 @@ const Cta = () => (
 							<h2 className='font-cg text-3xl !leading-tight font-medium tracking-wider text-white sm:text-5xl'>
 								Have a project in mind?
 								<br />
-								<span className='font-eb text-success tracking-tight'>Let&apos;s build it together.</span>
+								<span className='font-cg text-success font-bold tracking-tight'>Let&apos;s build it together.</span>
 							</h2>
 							<p className='text-secondary-400 inline-flex max-w-[90ch] text-sm !leading-relaxed tracking-wider sm:text-base'>
 								Whether you need a full product, a landing page,

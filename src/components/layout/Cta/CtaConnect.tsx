@@ -19,10 +19,10 @@ const CtaConnect = memo(() => (
 				<span className='bg-primary dark:bg-success absolute inline-flex h-full w-full animate-ping rounded-full opacity-75' />
 				<span className='bg-primary dark:bg-success relative inline-flex h-2.5 w-2.5 rounded-full' />
 			</span>
-			<span className='font-sora text-primary dark:text-success text-sm font-medium'>Ready for your next project</span>
+			<span className='font-hg text-primary dark:text-success text-sm font-medium'>Ready for your next project</span>
 		</div>
 		{/* Location & Contact */}
-		<div className='font-sora flex flex-col gap-2.5'>
+		<div className='font-hg flex flex-col gap-2.5'>
 			<p className='text-secondary-500 dark:text-secondary-500 flex items-center gap-2.5 text-sm'>
 				<IconMapPinFilled className='text-primary dark:text-success h-4 w-4 shrink-0' />
 				Based in Dhaka, Bangladesh. Shipping globally.

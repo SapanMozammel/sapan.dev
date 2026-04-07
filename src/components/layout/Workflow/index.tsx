@@ -66,7 +66,7 @@ const Workflow = memo(() => {
 					<div
 						onMouseEnter={() => setIsPaused(true)}
 						onMouseLeave={() => setIsPaused(false)}
-						className='border-secondary-200/50 dark:border-secondary-700/50 relative flex w-full max-w-5xl flex-col gap-6 self-center overflow-hidden rounded-2xl border bg-white p-6 shadow-lg shadow-black/5 transition-all duration-300 md:p-8 dark:bg-black dark:shadow-black/20'
+						className='border-secondary-200/50 dark:border-secondary-700/50 relative flex w-full max-w-5xl flex-col gap-6 self-center overflow-hidden rounded-2xl border bg-white p-6 shadow-lg shadow-black/5 transition-all duration-300 md:p-8 dark:bg-black dark:shadow-white/5'
 					>
 						<div className='pointer-events-none absolute inset-0 z-0 overflow-hidden'>
 							<div className='absolute -top-[20%] -left-[10%] h-[70%] w-[70%] rounded-full bg-blue-500/10 blur-[130px]' />
