@@ -11,13 +11,14 @@
 ## Layout Hierarchy
 
 ```
-src/app/layout.tsx              # Root — html/body + fonts only
-src/app/[locale]/layout.tsx     # Locale — Providers, Header, Footer, RTL dir
+src/app/layout.tsx              # Root — bare fragment (<>{children}</>) + global.scss import
+src/app/[locale]/layout.tsx     # Locale — html, body, fonts, RTL dir, NextIntlClientProvider,
+                                #   Providers (Redux + Theme), Header, Footer, metadata
 src/app/[locale]/(landing)/page.tsx
 ```
 
-- Root layout sets `<html>` and `<body>` with font variables only
-- Locale layout handles: Redux + Theme providers, Header, Footer, `dir="rtl"` for Arabic
+- Root layout is a bare fragment — only imports `global.scss`, renders `<>{children}</>`
+- Locale layout handles everything: `<html lang>`, `<body>` with fonts, `dir="rtl"` for Arabic, `NextIntlClientProvider`, `Providers` (Redux + Theme), Header, Footer, noise overlay
 
 ## i18n — next-intl v4
 
