@@ -9,10 +9,10 @@ import { setLocale } from '@/store/slices/localeSlice';
 import type { Locale } from '@/types/i18n';
 import { IconLoader } from '@tabler/icons-react';
 import { useLocale } from 'next-intl';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-const LanguageSwitcher = () => {
+const LanguageSwitcher = memo(() => {
 	const router = useRouter();
 	const pathname = usePathname();
 	const dispatch = useDispatch();
@@ -97,6 +97,8 @@ const LanguageSwitcher = () => {
 			</PopoverContent>
 		</Popover>
 	);
-};
+});
+
+LanguageSwitcher.displayName = 'LanguageSwitcher';
 
 export default LanguageSwitcher;

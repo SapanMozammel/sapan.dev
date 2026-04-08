@@ -6,7 +6,7 @@ import { isMacOS } from '@/lib/helper';
 import { cn } from '@/lib/utils';
 import { IconContrastFilled, IconLoader, IconMoonFilled, IconSunFilled } from '@tabler/icons-react';
 import { useTheme } from 'next-themes';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 // Move outside component to prevent recreation on every render
 const themeOptions = [
@@ -24,7 +24,7 @@ const themeOptions = [
 	},
 ] as const;
 
-const ThemeSwitcher = () => {
+const ThemeSwitcher = memo(() => {
 	const { theme, setTheme, systemTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
 	const [isHovering, setIsHovering] = useState(false);
@@ -167,6 +167,8 @@ const ThemeSwitcher = () => {
 			</PopoverContent>
 		</Popover>
 	);
-};
+});
+
+ThemeSwitcher.displayName = 'ThemeSwitcher';
 
 export default ThemeSwitcher;
