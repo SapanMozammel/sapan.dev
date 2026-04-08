@@ -152,7 +152,7 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, conten
 	);
 };
 
-export const CursorTooltip = memo(CursorTooltipComponent);
+const CursorTooltip = memo(CursorTooltipComponent);
 CursorTooltip.displayName = 'CursorTooltip';
 
 export default CursorTooltip;

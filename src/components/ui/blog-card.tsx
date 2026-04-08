@@ -1,10 +1,10 @@
 import { CATEGORY_COLORS, DEFAULT_CATEGORY_COLOR } from '@/data/content/blogs';
+import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { getBlurDataURL } from '@/lib/utils/image';
 import type { BlogCardProps } from '@/types/blog';
 import { IconArrowRight, IconClock } from '@tabler/icons-react';
 import Image from 'next/image';
-import Link from 'next/link';
 const BLUR_PLACEHOLDER = getBlurDataURL(800, 450);
 
 const formatDate = (dateString: string): string =>

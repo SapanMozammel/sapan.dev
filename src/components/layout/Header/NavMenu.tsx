@@ -1,8 +1,7 @@
 'use client';
 
-import { usePathname, useRouter } from '@/i18n/navigation';
+import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
-import Link from 'next/link';
 import { memo, useCallback, useEffect, useState } from 'react';
 
 const SECTION_IDS = ['portfolio', 'experience', 'workflow'] as const;

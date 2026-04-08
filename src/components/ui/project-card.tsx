@@ -1,13 +1,13 @@
 'use client';
 
 import CursorTooltip from '@/components/ui/cursor-tooltip';
-import { TechnologiesDisplay } from '@/components/ui/technologies-display';
+import TechnologiesDisplay from '@/components/ui/technologies-display';
+import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { getBlurDataURL } from '@/lib/utils/image';
 import type { ProjectCardProps } from '@/types/portfolio';
 import { IconArrowRight, IconArrowUpRight } from '@tabler/icons-react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { memo, useCallback } from 'react';
 
 const IMAGE_SIZE = 600;

@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import { IconAdjustments, IconFilter } from '@tabler/icons-react';
 
 import { inboxList } from './data';
@@ -15,10 +16,11 @@ const AdminEmailList = () => {
 			<div className='flex flex-col gap-[0.5em] p-[1em]'>
 				{inboxList.map((inbox, index) => {
 					const isSelected = index === 0;
-					const inboxClasses = `flex flex-col gap-[0.5em] rounded-[0.5em] border-[0.025em] border-solid p-[1em] ${isSelected ? 'bg-info/30 border-transparent' : 'border-info/30'}`;
-					const nameClasses = `inline-flex items-center gap-[0.5em] text-[1em] leading-none font-bold ${
-						inbox.status === 'unread' ? 'after:bg-primary after:aspect-square after:h-[0.6em] after:rounded-full' : ''
-					}`;
+					const inboxClasses = cn('flex flex-col gap-[0.5em] rounded-[0.5em] border-[0.025em] border-solid p-[1em]', isSelected ? 'bg-info/30 border-transparent' : 'border-info/30');
+					const nameClasses = cn(
+						'inline-flex items-center gap-[0.5em] text-[1em] leading-none font-bold',
+						inbox.status === 'unread' && 'after:bg-primary after:aspect-square after:h-[0.6em] after:rounded-full'
+					);
 
 					return (
 						<div key={`${inbox.name}-${inbox.email}`} className={inboxClasses}>

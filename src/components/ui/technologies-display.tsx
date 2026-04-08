@@ -6,7 +6,7 @@ import { memo, useMemo } from 'react';
 
 const VISIBLE_TECHNOLOGIES_COUNT = 3;
 
-export const TechnologiesDisplay = memo<TechnologiesDisplayProps>(({ technologies, visibleCount = VISIBLE_TECHNOLOGIES_COUNT }) => {
+const TechnologiesDisplay = memo<TechnologiesDisplayProps>(({ technologies, visibleCount = VISIBLE_TECHNOLOGIES_COUNT }) => {
 	const visibleTechnologies = useMemo(() => {
 		if (!technologies || technologies.length === 0) {
 			return [];
@@ -55,3 +55,5 @@ export const TechnologiesDisplay = memo<TechnologiesDisplayProps>(({ technologie
 });
 
 TechnologiesDisplay.displayName = 'TechnologiesDisplay';
+
+export default TechnologiesDisplay;

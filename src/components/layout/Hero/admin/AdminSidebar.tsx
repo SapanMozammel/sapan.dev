@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import { IconAlienFilled, IconChevronDown } from '@tabler/icons-react';
 
 import { menuItems } from './data';
@@ -14,9 +15,11 @@ const AdminSidebar = () => {
 				{menuItems.map((item, index) => {
 					const isActive = index === 1;
 					const isLast = index === menuItems.length - 1;
-					const itemClasses = `flex items-center gap-[0.5em] border-s-[0.25em] border-solid py-[0.75em] ps-[1em] pe-[0.6em] ${
-						isActive ? 'from-info/30 rtl:to-info/30 border-info/50 bg-gradient-to-r to-transparent rtl:from-transparent' : 'border-transparent bg-transparent'
-					} uppercase ${isLast ? 'before:bg-info/20 relative mt-auto before:absolute before:-top-[1.25em] before:left-0 before:h-[0.05em] before:w-full' : ''}`;
+					const itemClasses = cn(
+						'flex items-center gap-[0.5em] border-s-[0.25em] border-solid py-[0.75em] ps-[1em] pe-[0.6em] uppercase',
+						isActive ? 'from-info/30 rtl:to-info/30 border-info/50 bg-gradient-to-r to-transparent rtl:from-transparent' : 'border-transparent bg-transparent',
+						isLast && 'before:bg-info/20 relative mt-auto before:absolute before:-top-[1.25em] before:left-0 before:h-[0.05em] before:w-full'
+					);
 
 					return (
 						<div key={item.title} className={itemClasses}>

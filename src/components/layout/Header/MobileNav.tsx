@@ -2,11 +2,11 @@
 
 import Logo from '@/components/icons/Logo';
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { usePathname, useRouter } from '@/i18n/navigation';
+import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { IconArticle, IconBrandGithub, IconBriefcase2, IconCode, IconHome, IconListDetails, IconMessageCircle, IconQuestionMark, IconTimeline, IconX } from '@tabler/icons-react';
-import Link from 'next/link';
+import NextLink from 'next/link';
 import { memo, useCallback, useEffect, useState } from 'react';
 
 const SECTION_IDS = ['home', 'technologies', 'portfolio', 'experience', 'testimonials', 'workflow', 'faq'] as const;
@@ -176,12 +176,12 @@ const MobileNav = memo(() => {
 				</nav>
 
 				<div className='border-secondary-200 dark:border-secondary-700 mt-auto border-t p-3'>
-					<Link href='https://github.com/SapanMozammel' target='_blank' onClick={() => setOpen(false)} className={itemClass(false)}>
+					<NextLink href='https://github.com/SapanMozammel' target='_blank' onClick={() => setOpen(false)} className={itemClass(false)}>
 						<span className={iconWrap(false)}>
 							<IconBrandGithub className='h-[18px] w-[18px]' stroke={1.5} />
 						</span>
 						<span className='flex-1'>GitHub</span>
-					</Link>
+					</NextLink>
 				</div>
 			</SheetContent>
 		</Sheet>

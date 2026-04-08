@@ -2,7 +2,7 @@
 
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { IconBrandGithub, IconBrandLinkedin, IconBrandWordpress, IconMailFilled, IconMapPinFilled, IconPhoneFilled } from '@tabler/icons-react';
-import Link from 'next/link';
+import NextLink from 'next/link';
 import { memo } from 'react';
 
 const SOCIAL_LINKS = [
@@ -27,17 +27,17 @@ const CtaConnect = memo(() => (
 				<IconMapPinFilled className='text-primary dark:text-success h-4 w-4 shrink-0' />
 				Based in Dhaka, Bangladesh. Shipping globally.
 			</p>
-			<Link
+			<NextLink
 				href='mailto:sapanmozammel@gmail.com'
 				className='text-secondary-600 hover:text-primary dark:text-secondary-400 dark:hover:text-success inline-flex items-center gap-2.5 text-sm font-medium transition-colors'
 			>
 				<IconMailFilled className='text-primary dark:text-success h-4 w-4 shrink-0' />
 				sapanmozammel@gmail.com
-			</Link>
-			<Link href='tel:+8801627134085' className='text-secondary-600 hover:text-primary dark:text-secondary-400 dark:hover:text-success inline-flex items-center gap-2.5 text-sm font-medium transition-colors'>
+			</NextLink>
+			<NextLink href='tel:+8801627134085' className='text-secondary-600 hover:text-primary dark:text-secondary-400 dark:hover:text-success inline-flex items-center gap-2.5 text-sm font-medium transition-colors'>
 				<IconPhoneFilled className='text-primary dark:text-success h-4 w-4 shrink-0' />
 				+88 01627134085
-			</Link>
+			</NextLink>
 		</div>
 
 		{/* Social icons with tooltips */}
@@ -45,7 +45,7 @@ const CtaConnect = memo(() => (
 			{SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
 				<Tooltip key={label}>
 					<TooltipTrigger asChild>
-						<Link
+						<NextLink
 							href={href}
 							target='_blank'
 							rel='noopener noreferrer'
@@ -53,7 +53,7 @@ const CtaConnect = memo(() => (
 							className='group bg-light hover:bg-primary dark:hover:bg-success flex h-9 w-9 items-center justify-center rounded-lg transition-all duration-300 hover:scale-110 hover:shadow-lg dark:bg-slate-900'
 						>
 							<Icon className='text-secondary-600 dark:text-secondary-400 dark:group-hover:text-dark h-4.5 w-4.5 transition-colors duration-300 group-hover:text-white' stroke={2} />
-						</Link>
+						</NextLink>
 					</TooltipTrigger>
 					<TooltipContent side='bottom'>{label}</TooltipContent>
 				</Tooltip>

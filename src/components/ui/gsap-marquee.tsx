@@ -113,7 +113,7 @@ const GsapMarqueeComponent: React.FC<MarqueeProps> = ({ children, speed = 60, di
 	);
 };
 
-export const GsapMarquee = memo(GsapMarqueeComponent);
+const GsapMarquee = memo(GsapMarqueeComponent);
 GsapMarquee.displayName = 'GsapMarquee';
 
 export default GsapMarquee;

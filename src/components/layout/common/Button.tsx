@@ -1,16 +1,17 @@
 'use client';
 
+import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { ButtonProps } from '@/types/button';
-import Link from 'next/link';
+import NextLink from 'next/link';
 import { memo, ReactNode, useMemo } from 'react';
 
 import { ButtonContent } from './Button/ButtonContent';
 import { ButtonCenterSvg, ButtonLeftSvg, ButtonRightSvg } from './Button/ButtonShapeSvg';
 import { getVariantConfig } from './Button/variants';
 
-// Derive spread types from Link/button to stay compatible with exactOptionalPropertyTypes
-type LinkRest = Omit<React.ComponentProps<typeof Link>, 'href' | 'className' | 'children'> & { to: string };
+// Derive spread types from NextLink/button to stay compatible with exactOptionalPropertyTypes
+type LinkRest = Omit<React.ComponentProps<typeof NextLink>, 'href' | 'className' | 'children'> & { to: string };
 type ButtonRest = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'className' | 'children'>;
 
 const BASE_CLASSES =
@@ -50,11 +51,23 @@ export const Button = memo<ButtonProps>((props) => {
 
 	if (isLink) {
 		const { to, ...linkProps } = rest as LinkRest;
+		const isExternal = to.startsWith('http') || to.startsWith('mailto:') || to.startsWith('tel:');
+		const inner = (
+			<ButtonInner config={config} loading={loading}>
+				{children}
+			</ButtonInner>
+		);
+		if (isExternal) {
+			return (
+				<NextLink href={to} className={computedClasses} {...linkProps}>
+					{inner}
+				</NextLink>
+			);
+		}
+		const { locale: _locale, ...i18nLinkProps } = linkProps;
 		return (
-			<Link href={to} className={computedClasses} {...linkProps}>
-				<ButtonInner config={config} loading={loading}>
-					{children}
-				</ButtonInner>
+			<Link href={to} className={computedClasses} {...i18nLinkProps}>
+				{inner}
 			</Link>
 		);
 	}

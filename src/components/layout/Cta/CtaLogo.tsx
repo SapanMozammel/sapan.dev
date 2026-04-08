@@ -1,8 +1,7 @@
 'use client';
 
 import Logo from '@/components/icons/Logo';
-import { usePathname, useRouter } from '@/i18n/navigation';
-import Link from 'next/link';
+import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { memo, useCallback } from 'react';
 
 const CtaLogo = memo(() => {

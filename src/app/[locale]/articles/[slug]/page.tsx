@@ -1,13 +1,13 @@
 import SectionSeparator from '@/components/layout/common/SectionSeparator';
 import BlogCard from '@/components/ui/blog-card';
 import { BLOG_POSTS, CATEGORY_COLORS, DEFAULT_CATEGORY_COLOR } from '@/data/content/blogs';
+import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { getBlurDataURL } from '@/lib/utils/image';
 import type { ContentBlock } from '@/types/blog';
 import { IconArrowLeft, IconClock, IconTag } from '@tabler/icons-react';
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 const BLUR_PLACEHOLDER = getBlurDataURL(1200, 600);
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	};
 }
 
-function renderBlock(block: ContentBlock, index: number) {
+const renderBlock = (block: ContentBlock, index: number) => {
 	switch (block.type) {
 		case 'heading':
 			if (block.level === 2) {
@@ -116,15 +116,15 @@ function renderBlock(block: ContentBlock, index: number) {
 		default:
 			return null;
 	}
-}
+};
 
-function formatDate(dateString: string): string {
+const formatDate = (dateString: string): string => {
 	return new Date(dateString).toLocaleDateString('en-US', {
 		year: 'numeric',
 		month: 'long',
 		day: 'numeric',
 	});
-}
+};
 
 const BlogDetailPage = async ({ params }: Props) => {
 	const { slug } = await params;
