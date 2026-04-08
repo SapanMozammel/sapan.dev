@@ -108,7 +108,7 @@ Source: current knowledge of the project patterns
 - Button system (8 variants)
 - Animation library selection and duration standards
 - File organization table
-- Pre-write checklist (10 items)
+- Pre-write checklist (11 items)
 
 ### `skills/architecture/routing.md`
 - Route structure table (paths, file locations, types)
@@ -117,7 +117,7 @@ Source: current knowledge of the project patterns
 - Translation file structure: `src/i18n/locales/[locale]/[namespace].json`
 - 4 namespaces (current): `common` · `navigation` · `home` · `blog`
 - Locale detection priority: URL segment → localStorage (`preferred-language`) → `Accept-Language` header → `en`
-- Navigation imports (`@/i18n/navigation` not `next/navigation`)
+- Navigation imports: `@/i18n/navigation` for internal routes, `NextLink from 'next/link'` for external. Both can coexist.
 - RTL support: Arabic sets `dir="rtl"` in `[locale]/layout.tsx`; use `rtl:` Tailwind variant in components
 - Graceful fallback: missing locale namespace files fall back to English automatically
 - Static generation with `generateStaticParams()`
@@ -289,7 +289,7 @@ Steps Claude must follow:
 Steps Claude must follow:
 1. If `$ARGUMENTS` is a locale code (e.g. `fr`, `ar`): translate only that locale
 2. If `$ARGUMENTS` is empty: translate all 16 locales in parallel
-3. Read all files in `src/i18n/locales/en/` as the source of truth (8 namespace files)
+3. Read all files in `src/i18n/locales/en/` as the source of truth (4 namespace files)
 4. For each target locale, spawn a **parallel subagent** with:
    - The full English namespace files
    - The existing target locale files (to preserve already-translated keys)
@@ -495,7 +495,7 @@ Used by `/implement`, `/new-section`, `/new-component`, and `/audit`:
 - [ ] Mobile-first breakpoints (`sm:`, `md:`, `lg:`)
 - [ ] Server Component by default — `'use client'` only when hooks/events required
 - [ ] If Client: `memo()` + `ComponentName.displayName = 'ComponentName'`
-- [ ] Navigation from `@/i18n/navigation` — never `next/navigation`
+- [ ] Navigation: `import { Link } from '@/i18n/navigation'` for internal routes. For external links (`https://`, `mailto:`, `tel:`), use `import NextLink from 'next/link'`. Both can coexist in the same file.
 - [ ] All imports use `@/` alias
 - [ ] No `any` types
 - [ ] `export default ComponentName` at the bottom — never both `export const` and `export default` for the same component

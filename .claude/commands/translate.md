@@ -5,7 +5,7 @@
 Steps Claude must follow:
 1. If `$ARGUMENTS` is a locale code (e.g. `fr`, `ar`): translate only that locale
 2. If `$ARGUMENTS` is empty: translate all 16 locales in parallel
-3. Read all files in `src/i18n/locales/en/` as the source of truth (8 namespace files)
+3. Read all files in `src/i18n/locales/en/` as the source of truth (4 namespace files)
 4. For each target locale, spawn a **parallel subagent** with:
    - The full English namespace files
    - The existing target locale files (to preserve already-translated keys)
