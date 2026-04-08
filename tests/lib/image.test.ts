@@ -86,16 +86,7 @@ describe('getOptimizedImageProps', () => {
 });
 
 describe('getTechLogo', () => {
-	it('returns local path by default', () => {
+	it('returns local path for known tech', () => {
 		expect(getTechLogo('react')).toBe(TECH_LOGOS.react);
-	});
-
-	it('returns CDN URL when useCDN is true', () => {
-		expect(getTechLogo('react', true)).toBe('https://cdn.simpleicons.org/react');
-	});
-
-	it('falls back to CDN for unknown tech key', () => {
-		// @ts-expect-error testing invalid key
-		expect(getTechLogo('unknown-tech')).toBe('https://cdn.simpleicons.org/unknown-tech');
 	});
 });

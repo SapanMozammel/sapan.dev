@@ -40,18 +40,6 @@ const nextConfig: NextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: 'cdn.simpleicons.org',
-				port: '',
-				pathname: '/**',
-			},
-			{
-				protocol: 'https',
-				hostname: 'randomuser.me',
-				port: '',
-				pathname: '/api/portraits/**',
-			},
-			{
-				protocol: 'https',
 				hostname: 'images.unsplash.com',
 				port: '',
 				pathname: '/**',

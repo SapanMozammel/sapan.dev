@@ -135,7 +135,7 @@ import { getBlurDataURL } from '@/lib/utils/image'
 // <Image placeholder="blur" blurDataURL={getBlurDataURL()} />
 ```
 
-Allowed remote domains: `cdn.simpleicons.org` · `randomuser.me` · `images.unsplash.com`
+Allowed remote domains: `images.unsplash.com`
 
 ---
 

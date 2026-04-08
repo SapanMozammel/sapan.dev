@@ -76,9 +76,6 @@ export const TECH_LOGOS = {
 	wordpress: '/images/tech/wordpress.svg',
 } as const;
 
-export const getTechLogo = (tech: keyof typeof TECH_LOGOS, useCDN: boolean = false): string => {
-	if (useCDN) {
-		return `https://cdn.simpleicons.org/${tech}`;
-	}
-	return TECH_LOGOS[tech] || `https://cdn.simpleicons.org/${tech}`;
+export const getTechLogo = (tech: keyof typeof TECH_LOGOS): string => {
+	return TECH_LOGOS[tech];
 };
