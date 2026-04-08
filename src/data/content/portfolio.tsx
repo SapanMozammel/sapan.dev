@@ -18,7 +18,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		technologies: ['TypeScript', 'Next.js', 'Tailwind CSS', 'React Query', 'React Hook Form', 'Zod', 'Firebase', 'React Modern Audio Player', 'Sentry'],
 		link: 'https://web.tubeonai.com/',
 		icon: <TubeOnAILogo className='h-full w-auto' />,
-		image: 'https://tubeonai.com/wp-content/uploads/2025/02/Summaries-scaled.webp',
+		image: '/images/portfolio/tubeonai.webp',
 	},
 	{
 		className: 'border-indigo-100 bg-indigo-25/90 dark:border-indigo-900 dark:bg-indigo-a100/90',
@@ -28,7 +28,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		technologies: ['TypeScript', 'React.js', 'Next.js', 'Redux.js', 'GraphQL', 'Tailwind CSS', 'SASS', 'shadcn/ui', 'WordPress', 'Webpack', 'Vite', 'Vercel'],
 		link: 'https://templately.com/',
 		icon: <TemplatelyLogo className='h-full w-auto' />,
-		image: 'https://blog.templately.com/wp-content/uploads/2023/07/image.jpeg',
+		image: '/images/portfolio/templately.jpeg',
 	},
 	{
 		className: 'border-blue-100 bg-blue-25/90 dark:border-blue-900 dark:bg-blue-a100/90',
@@ -38,7 +38,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		technologies: ['Vue.js', 'Vite', 'Tailwind CSS', 'Axios', 'Lodash', 'Laravel'],
 		link: 'https://app.xcloud.host/',
 		icon: <XCloudLogo className='h-full w-auto' />,
-		image: 'https://xcloud.host/wp-content/uploads/2025/08/Blog-_-Introducing-n8n-1-1024x576.jpg',
+		image: '/images/portfolio/xcloud.jpg',
 	},
 	{
 		className: 'border-green-100 bg-green-25/90 dark:border-green-900 dark:bg-green-a100/90',
@@ -48,7 +48,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		technologies: ['React.js', 'Draft.js', 'WordPress', 'QuickBuilder', 'React Query', 'Axios', 'Lodash', 'ApexCharts', 'Webpack'],
 		link: 'https://betterdocs.co/',
 		icon: <BetterdocsLogo className='h-full w-auto' />,
-		image: 'https://betterdocs.co/wp-content/uploads/2025/09/image-5.png',
+		image: '/images/portfolio/betterdocs.png',
 	},
 	{
 		className: 'border-cyan-100 bg-cyan-25/90 dark:border-cyan-900 dark:bg-cyan-a100/90',
@@ -58,7 +58,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		technologies: ['React.js', 'Redux.js', 'Bootstrap', 'ApexCharts', 'Axios', 'SCSS'],
 		link: 'https://store.wpdeveloper.com/',
 		icon: <WpDeveloperStoreLogo className='h-full w-auto' />,
-		image: 'https://assets.wpdeveloper.com/2023/10/image.png',
+		image: '/images/portfolio/wpdeveloper-store.png',
 	},
 	{
 		className: 'border-teal-100 bg-teal-25/90 dark:border-teal-900 dark:bg-teal-a100/90',
@@ -68,7 +68,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		technologies: ['TypeScript', 'React.js', 'WordPress', 'ApexCharts', 'Draft.js', 'QuickBuilder', 'Lodash'],
 		link: 'https://notificationx.com/',
 		icon: <NotificationXLogo className='h-full w-auto' />,
-		image: 'https://notificationx.com/wp-content/uploads/2025/09/image-16.png',
+		image: '/images/portfolio/notificationx.png',
 	},
 	{
 		className: 'border-violet-100 bg-violet-25/90 dark:border-violet-900 dark:bg-violet-a100/90',
@@ -78,7 +78,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		technologies: ['Vue.js', 'Bootstrap', 'jQuery', 'Laravel', 'Lodash', 'SCSS', 'Axios', 'ApexCharts'],
 		link: 'https://app.easy.jobs/',
 		icon: <EasyJobsLogo className='h-full w-auto' />,
-		image: 'https://easy.jobs/wp-content/uploads/2024/11/image.jpeg',
+		image: '/images/portfolio/easyjobs.jpeg',
 	},
 	{
 		className: 'border-emerald-100 bg-emerald-25/90 dark:border-emerald-900 dark:bg-emerald-a100/90',
@@ -88,7 +88,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		technologies: ['React.js', 'WordPress', 'WebPack', 'SCSS'],
 		link: 'https://schedulepress.com/',
 		icon: <SchedulePressLogo className='h-full w-auto' />,
-		image: 'https://schedulepress.com/wp-content/uploads/2025/07/image-6.png',
+		image: '/images/portfolio/schedulepress.png',
 	},
 	{
 		className: 'border-fuchsia-100 bg-fuchsia-25/90 dark:border-fuchsia-900 dark:bg-fuchsia-a100/90',
@@ -98,6 +98,6 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		technologies: ['React.js', 'Redux.js', 'WordPress', 'ApexCharts', 'Axios', 'SCSS', 'MaterialUI', 'Formik', 'Gulp'],
 		link: 'https://betterlinks.io/',
 		icon: <BetterLinksLogo className='h-full w-auto' />,
-		image: 'https://betterlinks.io/wp-content/uploads/2025/11/image-22.png',
+		image: '/images/portfolio/betterlinks.png',
 	},
 ];
