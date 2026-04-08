@@ -35,14 +35,14 @@ tests/
 
 Applied globally — do **not** re-mock in individual test files:
 
-`next/link` · `next/image` · `next-themes` · `next-intl` · `next/navigation` · `framer-motion` · `gsap` / `ScrollTrigger` · `@react-three/fiber` · `@react-three/drei` · `matchMedia` · `IntersectionObserver` · `ResizeObserver`
+`next/link` · `next/image` · `next-themes` · `next-intl` · `@/i18n/navigation` · `next/navigation` · `framer-motion` · `gsap` / `ScrollTrigger` · `@react-three/fiber` · `@react-three/drei` · `matchMedia` · `IntersectionObserver` · `ResizeObserver`
 
 ## test-utils.tsx
 
 Use instead of the default `render` for any component that uses the Redux store:
 
 ```tsx
-import { render } from '@/tests/test-utils'
+import { render } from '../test-utils'
 // wraps in <Provider store={store}>
 ```
 
