@@ -19,15 +19,19 @@ const POINT_SIZE = 2.5;
 const PLANE_SCALE = 7.5;
 const REVEAL_DURATION = 5;
 
-// Theme-aware colors — primary / success from the design system
-const COLOR_DARK_1 = new THREE.Color('#4a4ded'); // primary
-const COLOR_DARK_2 = new THREE.Color('#43ead4'); // success
-const COLOR_LIGHT_1 = new THREE.Color('#4a4ded'); // primary (same hue, vivid on white)
-const COLOR_LIGHT_2 = new THREE.Color('#2ab8a5'); // slightly deeper success for contrast on light bg
+// Read design system token from CSS custom property (Three.js needs hex, not var())
+const getCSSColor = (varName: string) =>
+	new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue(varName).trim());
 
 const Particles = memo<{ isDark: boolean }>(({ isDark }) => {
 	const revealStartTime = useRef<number | null>(null);
 	const [isRevealing, setIsRevealing] = useState(true);
+
+	// Read design system tokens once from CSS custom properties
+	const [colors] = useState(() => ({
+		primary: getCSSColor('--color-primary'),
+		success: getCSSColor('--color-success'),
+	}));
 
 	const simulationMaterial = useMemo(() => new SimulationMaterial(PLANE_SCALE), []);
 
@@ -84,8 +88,8 @@ const Particles = memo<{ isDark: boolean }>(({ isDark }) => {
 		}
 
 		// Theme-adaptive colors & opacity
-		const c1 = isDark ? COLOR_DARK_1 : COLOR_LIGHT_1;
-		const c2 = isDark ? COLOR_DARK_2 : COLOR_LIGHT_2;
+		const c1 = colors.primary;
+		const c2 = colors.success;
 		const opacity = isDark ? 1 : 0.5;
 
 		dofPointsMaterial.uniforms.uColor1.value.lerp(c1, delta * 3);

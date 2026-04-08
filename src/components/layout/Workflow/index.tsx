@@ -24,7 +24,7 @@ const Workflow = memo(() => {
 	const isLastStep = activeStep === totalSteps - 1;
 	const isResetting = isLastStep && stepProgress >= 50;
 
-	const activeColor = resolvedTheme === 'dark' ? '#43ead4' : '#4a4ded';
+	const activeColor = resolvedTheme === 'dark' ? 'var(--color-success)' : 'var(--color-primary)';
 	const inactiveColor = resolvedTheme === 'dark' ? 'var(--color-secondary-700)' : 'var(--color-secondary-200)';
 
 	useEffect(() => {
