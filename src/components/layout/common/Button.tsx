@@ -9,6 +9,10 @@ import { ButtonContent } from './Button/ButtonContent';
 import { ButtonCenterSvg, ButtonLeftSvg, ButtonRightSvg } from './Button/ButtonShapeSvg';
 import { getVariantConfig } from './Button/variants';
 
+// Derive spread types from Link/button to stay compatible with exactOptionalPropertyTypes
+type LinkRest = Omit<React.ComponentProps<typeof Link>, 'href' | 'className' | 'children'> & { to: string };
+type ButtonRest = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'className' | 'children'>;
+
 const BASE_CLASSES =
 	'group/button focus:ring-0 relative inline-flex !h-9 cursor-pointer items-center justify-center !px-[calc(theme(height.9)*21/44)] focus:outline-none disabled:pointer-events-none disabled:brightness-90 sm:!h-11 sm:!px-[calc(theme(height.11)*21/44)] dark:disabled:brightness-90';
 
@@ -45,7 +49,7 @@ export const Button = memo<ButtonProps>((props) => {
 	const config = useMemo(() => getVariantConfig(fill, gradient, isLink), [fill, gradient, isLink]);
 
 	if (isLink) {
-		const { to, ...linkProps } = rest as any;
+		const { to, ...linkProps } = rest as LinkRest;
 		return (
 			<Link href={to} className={computedClasses} {...linkProps}>
 				<ButtonInner config={config} loading={loading}>
@@ -55,7 +59,7 @@ export const Button = memo<ButtonProps>((props) => {
 		);
 	}
 
-	const { disabled, ...buttonProps } = rest as any;
+	const { disabled, ...buttonProps } = rest as ButtonRest;
 	return (
 		<button className={computedClasses} disabled={disabled} {...buttonProps}>
 			<ButtonInner config={config} loading={loading}>
