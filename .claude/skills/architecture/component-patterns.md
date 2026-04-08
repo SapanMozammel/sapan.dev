@@ -83,7 +83,7 @@ border border-solid border-secondary-200/50 dark:border-secondary-700/50
 
 ### Shadow
 ```
-shadow-lg shadow-black/5 dark:shadow-black/20
+shadow-lg shadow-black/5 dark:shadow-white/5
 ```
 
 ### Hover (card/panel)

@@ -125,18 +125,15 @@ border-primary dark:border-success
 
 | Light | Dark | Context |
 |---|---|---|
-| `shadow-black/5` | `dark:shadow-black/20` | Cards, containers |
-| `shadow-dark/5` | `dark:shadow-white/5` | Project cards |
-| `shadow-secondary-300/10` | `dark:shadow-dark/10` | Tech grid, article cards |
+| `shadow-black/5` | `dark:shadow-white/5` | Cards, containers, Project cards, Tech grid, article cards |
 | `shadow-primary/10` | `dark:shadow-success/10` | Workflow accent |
 
 ### Rings
 
 | Light | Dark | Context |
 |---|---|---|
-| `ring-white` | `dark:ring-secondary-900` | Timeline dots |
-| `ring-primary/90` | `dark:ring-success/20` | Active timeline dots |
-| — | `dark:ring-secondary-700/40` | Accordion active border ring (dark only) |
+| `ring-white` | `dark:ring-black` | Timeline dots |
+|`ring-secondary-200/50` | `dark:ring-secondary-700/50` | Accordion active border ring (dark only) |
 
 ### Misc
 
@@ -144,7 +141,7 @@ border-primary dark:border-success
 |---|---|---|
 | `opacity-5` | `dark:opacity-15` | Noise texture overlay |
 | `brightness-5` | `dark:invert` | Tech logo images |
-| — | `dark:disabled:brightness-90` | Button disabled state (dark only) |
+| `disabled:brightness-90` | `dark:disabled:brightness-90` | Button disabled state (dark only) |
 
 ---
 
@@ -158,9 +155,7 @@ bg-gradient-to-r bg-clip-text text-transparent
 
 ### Hero Heading Gradient (radial)
 ```
-bg-radial from-slate-400 via-slate-900 via-45% to-slate-600 to-75%
-dark:from-slate-600 dark:via-light dark:to-slate-400
-bg-clip-text text-transparent
+dark:via-light bg-radial from-slate-400 via-slate-900 via-45% to-slate-600 to-75% dark:from-slate-600 dark:to-slate-400
 ```
 
 ### Background Gradient (Tech grid items)

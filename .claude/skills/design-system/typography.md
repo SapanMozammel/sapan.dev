@@ -13,7 +13,7 @@
 **Rules:**
 - Never inherit font silently — always apply an explicit font class
 - Never introduce new font families — use only the five above
-- `font-bungee` is logo/brand only — do not use for UI text
+- `font-bungee` is logo/brand
 
 ## Role Assignments
 
