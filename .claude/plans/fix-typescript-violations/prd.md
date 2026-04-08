@@ -34,6 +34,6 @@ Eliminate all `interface` and `any` usage in component files.
 
 ## Acceptance Criteria
 
-- [x] `grep "^interface\s" src/components/` returns zero matches
-- [x] `grep "as any" src/components/` returns zero matches
-- [x] `pnpm run type:check` passes with zero errors
+- [✅] `grep "^interface\s" src/components/` returns zero matches
+- [✅] `grep "as any" src/components/` returns zero matches
+- [✅] `pnpm run type:check` passes with zero errors
