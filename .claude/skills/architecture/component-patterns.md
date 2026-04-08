@@ -219,8 +219,8 @@ Before writing or modifying any component:
 - [ ] Mobile-first breakpoints (`sm:`, `md:`, `lg:`)
 - [ ] Server Component by default — `'use client'` only when hooks/events required
 - [ ] If Client: `memo()` + `ComponentName.displayName = 'ComponentName'`
-- [ ] Navigation from `@/i18n/navigation` — never `next/navigation`
+- [ ] Navigation: `import { Link } from '@/i18n/navigation'` for internal routes. For external links (`https://`, `mailto:`, `tel:`), use `import NextLink from 'next/link'`. Both can coexist in the same file.
 - [ ] All imports use `@/` alias
 - [ ] `type Props = { ... }` — never `interface`
 - [ ] No `any` types
-- [ ] `export default ComponentName` at the bottom
+- [ ] `export default ComponentName` at the bottom — never both `export const` and `export default` for the same component

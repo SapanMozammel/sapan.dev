@@ -6,7 +6,7 @@ Steps Claude must follow:
 1. Read `.claude/plans/[plan-name]/prd.md` fully before any code
 2. Read all files listed under Affected Files and New Files
 3. Load all skills: `component-patterns.md`, `colors.md`, `typography.md`, `spacing.md`, `routing.md`, `state.md`, `data.md`
-4. Execute each step in order — before starting a step, add subtasks if it needs breakdown; mark `[🔄]` while running, `[✅]` when done; update `prd.md` in place
+4. Execute each step in order — before starting a step, add subtasks if it needs breakdown; mark `[🔄]` while running, `[✅]` when done; update `prd.md` in place. Never overwrite or remove completed (`[✅]`) steps
 5. Apply pre-write checklist (from `component-patterns.md`) to every component touched
 6. Run `pnpm run format:all` — auto-format all touched files
 7. Run `pnpm run type:check` — fix all errors before continuing

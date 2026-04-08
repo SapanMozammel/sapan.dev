@@ -11,7 +11,7 @@ Steps Claude must follow:
 6. Load relevant skills: always `component-patterns`; conditionally `colors`, `typography`, `spacing`, `routing`, `state`, `data`
 7. Load `skills/workflow/feature-planning.md` for the plan format
 8. Decide Server vs Client with explicit reasoning
-9. Write plan to `.claude/plans/[kebab-feature-name]/prd.md`
+9. Write plan to `.claude/plans/[kebab-feature-name]/prd.md` — if a PRD already exists, preserve completed tasks (`[✅]`) and append new steps
 10. Report: feature (1 sentence), branch name (if created), affected files, new files, step count, plan path
 11. Prompt: "Ready? Run /implement [plan-name]"
 

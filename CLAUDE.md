@@ -123,7 +123,7 @@ Always use `useAppDispatch()` / `useAppSelector()` — never raw Redux hooks.
 
 **i18n** (next-intl): 16 locales — `en` (default, no URL prefix), `fr`, `de`, `es`, `ar`, `zh-CN`, `pt-BR`, `ja`, `nl`, `it`, `ru`, `hi`, `no`, `tr`, `ko`, `bn`
 Translation files: `src/i18n/locales/[locale]/[namespace].json` (4 namespaces: common, navigation, home, blog)
-Always import `Link` / `useRouter` / `usePathname` from `@/i18n/navigation` — **never** `next/navigation`
+Internal routes: `import { Link } from '@/i18n/navigation'` — external links (`https://`, `mailto:`, `tel:`): `import NextLink from 'next/link'`
 Arabic (`ar`): `dir="rtl"`, use `rtl:` Tailwind variant
 
 ---
@@ -147,4 +147,5 @@ Allowed remote domains: `images.unsplash.com`
 - Design system tokens only — no hardcoded colors or hex values
 - `@/` alias for all internal imports
 - No `any` types — TypeScript strict mode (`noUnusedLocals`, `noUnusedParameters`, `exactOptionalPropertyTypes`)
-- `export default ComponentName` at the bottom of every component file
+- `export default ComponentName` at the bottom of every component file — never both `export const` and `export default` for the same component
+- PRD history is sacred — never overwrite or remove completed (`[✅]`) steps when updating a plan

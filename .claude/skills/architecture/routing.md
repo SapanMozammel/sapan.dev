@@ -53,11 +53,20 @@ src/i18n/locales/
 **Always** import from `@/i18n/navigation` — **never** from `next/navigation`:
 
 ```tsx
-// ✓ correct
+// ✓ internal routes — locale-aware
 import { Link, useRouter, usePathname } from '@/i18n/navigation'
 
-// ✗ wrong
-import { useRouter } from 'next/navigation'
+// ✓ external links (https://, mailto:, tel:) — no locale prefix needed
+import NextLink from 'next/link'
+
+// ✓ both can coexist — for components with mixed links (e.g. Button with dynamic `to` prop)
+import { Link } from '@/i18n/navigation'
+import NextLink from 'next/link'
+
+const isExternal = to.startsWith('http') || to.startsWith('mailto:') || to.startsWith('tel:')
+const LinkComponent = isExternal ? NextLink : Link
+
+// ✗ wrong — unaliased next/link for internal routes
 import Link from 'next/link'
 ```
 

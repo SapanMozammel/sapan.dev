@@ -191,7 +191,7 @@ Steps Claude must follow:
 6. Load relevant skills: always `component-patterns`; conditionally `colors`, `typography`, `spacing`, `routing`, `state`, `data`
 7. Load `skills/workflow/feature-planning.md` for the plan format
 8. Decide Server vs Client with explicit reasoning
-9. Write plan to `.claude/plans/[kebab-feature-name]/prd.md`
+9. Write plan to `.claude/plans/[kebab-feature-name]/prd.md` — if a PRD already exists, preserve completed tasks (`[✅]`) and append new steps
 10. Report: feature (1 sentence), branch name (if created), affected files, new files, step count, plan path
 11. Prompt: `"Ready? Run /implement [plan-name]"`
 
@@ -207,7 +207,7 @@ Steps Claude must follow:
 1. Read `.claude/plans/[plan-name]/prd.md` fully before any code
 2. Read all files listed under Affected Files and New Files
 3. Load all skills: `component-patterns.md`, `colors.md`, `typography.md`, `spacing.md`, `routing.md`, `state.md`, `data.md`
-4. Execute each step in order — before starting a step, add subtasks if it needs breakdown; mark `[🔄]` while running, `[✅]` when done; update `prd.md` in place
+4. Execute each step in order — before starting a step, add subtasks if it needs breakdown; mark `[🔄]` while running, `[✅]` when done; update `prd.md` in place. Never overwrite or remove completed (`[✅]`) steps
 5. Apply pre-write checklist (from `component-patterns.md`) to every component touched
 6. Run `pnpm run format:all` — auto-format all touched files
 7. Run `pnpm run type:check` — fix all errors before continuing
@@ -233,8 +233,9 @@ Steps Claude must follow:
    - **TypeScript** — `any` types, missing types
    - **Pass** — what's already correct
 6. For each violation: `file:line` — rule broken — fix
+7. If violations found: create or update a PRD at `.claude/plans/[audit-scope]-audit/prd.md` with all violations as implementation steps
 
-**Rules:** Report numbered, actionable fixes only. No full rewrites unless asked. Do not auto-apply fixes — present them for review.
+**Rules:** Report numbered, actionable fixes only. No full rewrites unless asked. Do not auto-apply fixes — present them for review. Always generate a PRD after the audit so violations can be fixed via `/implement`.
 
 ---
 
@@ -497,7 +498,7 @@ Used by `/implement`, `/new-section`, `/new-component`, and `/audit`:
 - [ ] Navigation from `@/i18n/navigation` — never `next/navigation`
 - [ ] All imports use `@/` alias
 - [ ] No `any` types
-- [ ] `export default ComponentName` at the bottom
+- [ ] `export default ComponentName` at the bottom — never both `export const` and `export default` for the same component
 
 ---
 
@@ -524,6 +525,8 @@ Subtasks are indented two spaces under their parent task. Claude adds subtasks i
 ```
 
 Claude updates task and subtask status as `/implement` runs each step.
+
+**Important:** When updating a PRD (e.g. after a re-audit), always preserve previously completed tasks (marked `[✅]`). Add new steps below or in a new "Round N" section — never overwrite done steps.
 
 ---
 

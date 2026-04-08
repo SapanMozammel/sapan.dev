@@ -13,5 +13,6 @@ Steps Claude must follow:
    - **TypeScript** — `any` types, missing types, `interface` used instead of `type`
    - **Pass** — what's already correct
 6. For each violation: `file:line` — rule broken — fix
+7. If violations found: create or update a PRD at `.claude/plans/[audit-scope]-audit/prd.md` with all violations as implementation steps
 
-**Rules:** Report numbered, actionable fixes only. No full rewrites unless asked. Do not auto-apply fixes — present them for review.
+**Rules:** Report numbered, actionable fixes only. No full rewrites unless asked. Do not auto-apply fixes — present them for review. Always generate a PRD after the audit so violations can be fixed via `/implement`.
