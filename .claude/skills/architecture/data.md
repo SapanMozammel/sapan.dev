@@ -6,11 +6,11 @@ Static content files — imported directly by Server Components.
 
 | File | Exports |
 |---|---|
-| `blogs.ts` | `BLOG_POSTS` — article metadata array |
-| `experience.ts` | `EXPERIENCE` — work history array |
-| `faq.ts` | `FAQ_ITEMS` — accordion items array |
-| `portfolio.tsx` | `PORTFOLIO_ITEMS` — project cards (uses `.tsx` for JSX icons) |
-| `testimonials.ts` | `TESTIMONIALS` — testimonial items array |
+| `blogs.ts` | `BLOG_POSTS`, `FEATURED_BLOGS`, `BLOGS_PER_PAGE`, `CATEGORY_COLORS`, `DEFAULT_CATEGORY_COLOR` |
+| `experience.ts` | `EXPERIENCE_DATA` — work history array |
+| `faq.ts` | `FAQ_DATA` — accordion items array |
+| `portfolio.tsx` | `PORTFOLIO_PROJECTS` — project cards (uses `.tsx` for JSX icons) |
+| `testimonials.ts` | `TESTIMONIAL_LIST` — testimonial items array |
 | `workflow.ts` | `WORKFLOW_STEPS` — process steps array |
 
 > `portfolio.tsx` uses `.tsx` extension because items include JSX (SVG icons inline). All others are `.ts`.
@@ -22,8 +22,8 @@ App-level configuration — imported by routing, i18n, and component logic.
 | File | Exports |
 |---|---|
 | `languages.ts` | `LANGUAGES` — locale metadata (name, flag, RTL) |
-| `routes.ts` | `NAV_ROUTES` — navigation link definitions |
-| `technologies.ts` | `TECHNOLOGIES` — tech stack grid items |
+| `routes.ts` | (empty — placeholder) |
+| `technologies.ts` | `TECH_STACK` — tech stack grid items |
 
 ## src/types/
 
@@ -43,12 +43,12 @@ TypeScript type definitions — one file per domain.
 | `image.ts` | `ImageProps` |
 | `marquee.ts` | `MarqueeProps` |
 | `particles.ts` | `ParticleConfig` |
-| `portfolio.ts` | `PortfolioItem` |
+| `portfolio.ts` | `PortfolioProject` |
 | `providers.ts` | `ProvidersProps` |
 | `separator.ts` | `SectionSeparatorProps` |
 | `stacking-cards.ts` | `StackingCardsConfig` |
-| `technology.ts` | `Technology` |
-| `testimonial.ts` | `TestimonialItem` |
+| `technology.ts` | `TechStackItem` |
+| `testimonial.ts` | `TestimonialData` |
 | `title.ts` | `SectionTitleProps` |
 | `workflow.ts` | `WorkflowStep` |
 

@@ -115,7 +115,7 @@ Source: current knowledge of the project patterns
 - Layout hierarchy (two-layer: root layout = html/body only; locale layout = providers + header + footer + RTL dir)
 - i18n: 16 locales, next-intl@4.x, `localePrefix: 'as-needed'` (English = no prefix)
 - Translation file structure: `src/i18n/locales/[locale]/[namespace].json`
-- 8 namespaces: `common` · `navigation` · `home` · `about` · `services` · `portfolio` · `blog` · `contact`
+- 4 namespaces (current): `common` · `navigation` · `home` · `blog`
 - Locale detection priority: URL segment → localStorage (`preferred-language`) → `Accept-Language` header → `en`
 - Navigation imports (`@/i18n/navigation` not `next/navigation`)
 - RTL support: Arabic sets `dir="rtl"` in `[locale]/layout.tsx`; use `rtl:` Tailwind variant in components

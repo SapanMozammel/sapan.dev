@@ -34,15 +34,11 @@ src/i18n/locales/
 │   ├── common.json
 │   ├── navigation.json
 │   ├── home.json
-│   ├── about.json
-│   ├── services.json
-│   ├── portfolio.json
-│   ├── blog.json
-│   └── contact.json
+│   └── blog.json
 └── [fr|de|es|ar|...]/      # Partial — missing keys fall back to en
 ```
 
-**8 namespaces:** `common` · `navigation` · `home` · `about` · `services` · `portfolio` · `blog` · `contact`
+**4 namespaces:** `common` · `navigation` · `home` · `blog`
 
 **Locale detection priority:**
 1. URL segment (e.g. `/fr/`)

@@ -39,9 +39,12 @@ src/
 ├── middleware.ts            # next-intl locale detection & routing
 ├── components/
 │   ├── layout/             # Page sections (each: index.tsx + sub-files)
-│   ├── layout/common/      # Shared: Button, SectionSeparator, SectionTitle, etc.
-│   ├── ui/                 # shadcn/ui base + custom: contact-modal, timeline,
-│   │                       # accordion, blog-card, project-card, gsap-marquee, etc.
+│   ├── layout/common/      # Shared: Button, SectionSeparator, SectionTitle, ConnectButton,
+│   │                       # LanguageSwitcher, ThemeSwitcher, TextUnderline
+│   ├── ui/                 # shadcn/ui base + custom: contact-modal, timeline, accordion,
+│   │                       # blog-card, project-card, gsap-marquee, cursor-tooltip,
+│   │                       # diamond-grid, technologies-display, dialog, popover,
+│   │                       # sheet, tooltip
 │   └── icons/              # SVG icons: Logo, Cloud, Pattern, WorldMap
 ├── data/
 │   ├── content/            # experience, portfolio, testimonials, faq, blogs, workflow
@@ -119,7 +122,7 @@ Always use `useAppDispatch()` / `useAppSelector()` — never raw Redux hooks.
 **Theme**: `next-themes` — not Redux.
 
 **i18n** (next-intl): 16 locales — `en` (default, no URL prefix), `fr`, `de`, `es`, `ar`, `zh-CN`, `pt-BR`, `ja`, `nl`, `it`, `ru`, `hi`, `no`, `tr`, `ko`, `bn`
-Translation files: `src/i18n/locales/[locale]/[namespace].json` (8 namespaces)
+Translation files: `src/i18n/locales/[locale]/[namespace].json` (4 namespaces: common, navigation, home, blog)
 Always import `Link` / `useRouter` / `usePathname` from `@/i18n/navigation` — **never** `next/navigation`
 Arabic (`ar`): `dir="rtl"`, use `rtl:` Tailwind variant
 
