@@ -6,7 +6,7 @@
 |---|---|---|
 | `--color-primary` | `#4a4ded` | Light-mode accent: text, bg, border, ring, fill, shadow, gradients, CTA rays |
 | `--color-success` | `#43ead4` | Dark-mode accent (mirrors primary): text, bg, border, ring, fill, shadow, gradients |
-| `--color-info` | `#1f8fff` | Hero radial glow, brand gradient end, SVG strokes/fills |
+| `--color-info` | `#1f8fff` | Hero radial glow, brand gradient end, SVG strokes/fills, admin dashboard borders/bg/shadows |
 | `--color-warning` | `#ff6f00` | Warning states, article callout variants, code block dots |
 | `--color-danger` | `#f56565` | Form validation errors (text + border), error icon bg |
 | `--color-white` | `#ffffff` | Light-mode text on accent, bg surfaces, ring, overlay glass |
@@ -57,6 +57,8 @@ border-primary dark:border-success
 | `bg-secondary` | `dark:bg-dark` | Contact modal |
 | `bg-light` | `dark:bg-slate-900` | Hamburger button, social link buttons, sheet base |
 | `bg-light/70` | `dark:bg-slate-900/70` | Hero decorative circles |
+| `bg-light/20` | `dark:bg-slate-900/20` | Admin screen container |
+| `bg-light/10` | `dark:bg-slate-900/10` | Admin travel card |
 | `bg-black` | `dark:bg-white` | Hamburger lines |
 | `bg-secondary-600/5` | `dark:bg-secondary-400/5` | Nav icon wraps (inactive) |
 | `bg-secondary-100` | `dark:bg-secondary-800` | Tags, chips, category default, timeline progress track |
@@ -68,6 +70,7 @@ border-primary dark:border-success
 | `bg-danger` | `dark:bg-success` | Testimonial decorative blur |
 | `bg-{color}-50` | `dark:bg-{color}-950` | Blog category badges (sky, blue, violet, green, orange, cyan) |
 | `bg-{color}-25/90` | `dark:bg-{color}-a100/90` | Portfolio card backgrounds |
+| `bg-info/30` | — | Admin dashboard buttons, avatars, email cards (same both modes) |
 | `bg-info/5`, `bg-warning/5`, `bg-success/5` | — | Article callout backgrounds (same both modes) |
 | `before:bg-primary` | `dark:before:bg-success` | Article list bullet dots, accordion toggle line |
 | `after:bg-primary` | `dark:after:bg-success` | Accordion toggle line |
@@ -119,6 +122,9 @@ border-primary dark:border-success
 | `border-primary/50` | `dark:border-success/50` | Icon containers |
 | `border-danger` | `dark:border-danger` | Form validation error (same both modes) |
 | `border-{color}-100` | `dark:border-{color}-900` | Portfolio card borders |
+| `border-info/20` | — | Admin travel card outer border |
+| `border-info/30` | — | Admin dashboard panels, dividers, inputs |
+| `border-info/50` | — | Admin decorative circles, performance ring |
 | `border-info/50`, `border-warning/50`, `border-success/50` | — | Article callout borders (same both modes) |
 | `focus:border-primary` | `dark:focus:border-success` | Form input focus state |
 | `divide-secondary-400` | `dark:divide-secondary-600` | Popover/switcher section dividers |
@@ -129,6 +135,7 @@ border-primary dark:border-success
 |---|---|---|
 | `shadow-black/5` | `dark:shadow-white/5` | Cards, containers, Project cards, Tech grid, article cards |
 | `shadow-primary/10` | `dark:shadow-success/10` | Workflow accent |
+| `shadow-info/10` | — | Admin screen container (same both modes) |
 
 ### Rings
 
@@ -178,6 +185,12 @@ bg-gradient-to-b from-primary/5 to-transparent     (blurred rays)
 bg-gradient-to-b from-primary/10 to-transparent    (top overlay)
 ```
 
+### Admin Sidebar Active (Hero dashboard)
+```
+from-info/30 bg-gradient-to-r to-transparent
+rtl:from-transparent rtl:to-info/30
+```
+
 ### Image Overlay Gradient (fixed, both modes)
 ```
 bg-gradient-to-t from-black/30 to-transparent              (blog card)
@@ -193,6 +206,13 @@ Stops: `--color-info` → `--color-success`
 
 | Light | Dark | Context |
 |---|---|---|
+| `fill-dark` | `dark:fill-white` | Button SVG paths |
+| `stroke-dark` | `dark:stroke-white` | Button SVG paths |
+| `group-hover/button:fill-primary` | `dark:group-hover/button:fill-success` | Button SVG hover |
+| `group-hover/button:stroke-primary` | `dark:group-hover/button:stroke-success` | Button SVG hover |
+| `group-disabled/button:fill-secondary-300` | — | Button SVG disabled state |
+| `group-disabled/button:stroke-secondary-300` | — | Button SVG disabled state |
+| `fill-none` | — | Button SVG outline paths |
 | `fill-primary` | `dark:fill-success` | Tooltip arrow |
 | `fill-secondary-100/50` | `dark:fill-secondary-800/50` | World map background (Hero) |
 | `fill-info/80` | — | Performance circle text (both modes) |

@@ -184,7 +184,7 @@ Commands are workflow prompts invoked via `/command-name`. They tell Claude *wha
 
 Steps Claude must follow:
 1. Restate feature in one sentence — ask to clarify if vague
-2. Ask the user: "Should I create a new branch for this?" — if yes, ask for a branch name (suggest `feature/[kebab-feature-name]` as default)
+2. Ask the user: "Should I create a new branch for this? (yes/no)" — if yes, suggest `feature/[kebab-feature-name]` and ask to confirm or rename
 3. If user wants a new branch, create it from the current branch before proceeding
 4. Glob + Grep to find affected files — never assume paths
 5. Read every affected file before proposing changes
@@ -497,6 +497,7 @@ Used by `/implement`, `/new-section`, `/new-component`, and `/audit`:
 - [ ] If Client: `memo()` + `ComponentName.displayName = 'ComponentName'`
 - [ ] Navigation: `import { Link } from '@/i18n/navigation'` for internal routes. For external links (`https://`, `mailto:`, `tel:`), use `import NextLink from 'next/link'`. Both can coexist in the same file.
 - [ ] All imports use `@/` alias
+- [ ] `type Props = { ... }` — never `interface`
 - [ ] No `any` types
 - [ ] `export default ComponentName` at the bottom — never both `export const` and `export default` for the same component
 

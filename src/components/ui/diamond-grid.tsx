@@ -120,7 +120,10 @@ const DiamondGrid = memo<DiamondGridProps>((props) => {
 				// Legacy pattern with default render
 				const item = content as DiamondGridItem;
 				return (
-					<div key={key} className='relative flex aspect-video w-full items-center justify-center rounded-[1.5vw] bg-red-400 text-sm font-medium text-white md:rounded-[1.25vw]'>
+					<div
+						key={key}
+						className='from-secondary-200/50 dark:from-secondary-700/50 dark:to-secondary-900/50 to-secondary/50 relative flex aspect-video w-full items-center justify-center rounded-[1.5vw] bg-gradient-to-b text-sm font-medium text-white md:rounded-[1.25vw]'
+					>
 						{item.logo ? (
 							<span className='relative h-3/5 w-full'>
 								<Image src={item.logo} alt={`${item.name} logo`} fill />

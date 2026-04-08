@@ -4,8 +4,8 @@ const Loading = () => {
 	return (
 		<div className='flex min-h-screen flex-col items-center justify-center px-4'>
 			<div className='text-center'>
-				<IconLoader className='mx-auto h-8 w-8 animate-spin text-blue-600 dark:text-blue-400' />
-				<p className='mt-4 text-gray-600 dark:text-gray-400'>Loading...</p>
+				<IconLoader className='text-primary dark:text-success mx-auto h-8 w-8 animate-spin' />
+				<p className='text-secondary-500 dark:text-secondary-500 mt-4'>Loading...</p>
 			</div>
 		</div>
 	);

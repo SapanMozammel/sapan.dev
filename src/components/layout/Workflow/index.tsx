@@ -69,8 +69,8 @@ const Workflow = memo(() => {
 						className='border-secondary-200/50 dark:border-secondary-700/50 relative flex w-full max-w-5xl flex-col gap-6 self-center overflow-hidden rounded-2xl border bg-white p-6 shadow-lg shadow-black/5 transition-all duration-300 md:p-8 dark:bg-black dark:shadow-white/5'
 					>
 						<div className='pointer-events-none absolute inset-0 z-0 overflow-hidden'>
-							<div className='absolute -top-[20%] -left-[10%] h-[70%] w-[70%] rounded-full bg-blue-500/10 blur-[130px]' />
-							<div className='absolute -right-[10%] -bottom-[20%] h-[70%] w-[70%] rounded-full bg-purple-500/5 blur-[130px]' />
+							<div className='bg-info/10 absolute -top-[20%] -left-[10%] h-[70%] w-[70%] rounded-full blur-[130px]' />
+							<div className='bg-primary/10 absolute -right-[10%] -bottom-[20%] h-[70%] w-[70%] rounded-full blur-[130px]' />
 						</div>
 						<WorkflowContent activeStep={activeStep} currentStep={currentStep} />
 						<WorkflowProgress activeStep={activeStep} stepProgress={stepProgress} isResetting={isResetting} activeColor={activeColor} inactiveColor={inactiveColor} onStepClick={handleStepClick} />
