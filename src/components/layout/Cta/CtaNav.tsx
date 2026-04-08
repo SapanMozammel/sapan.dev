@@ -1,7 +1,7 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname, useRouter } from '@/i18n/navigation';
+import Link from 'next/link';
 import { memo, useCallback } from 'react';
 
 const NAV_ITEMS = [

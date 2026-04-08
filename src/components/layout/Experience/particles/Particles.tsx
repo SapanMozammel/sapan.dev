@@ -20,8 +20,7 @@ const PLANE_SCALE = 7.5;
 const REVEAL_DURATION = 5;
 
 // Read design system token from CSS custom property (Three.js needs hex, not var())
-const getCSSColor = (varName: string) =>
-	new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue(varName).trim());
+const getCSSColor = (varName: string) => new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue(varName).trim());
 
 const Particles = memo<{ isDark: boolean }>(({ isDark }) => {
 	const revealStartTime = useRef<number | null>(null);

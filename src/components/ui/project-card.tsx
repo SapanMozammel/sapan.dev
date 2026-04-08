@@ -56,7 +56,7 @@ const ProjectCard = memo<ProjectCardProps>(({ project }) => {
 				</Link>
 			</div>
 			<div className='h-52 w-full px-4 pb-4 sm:h-80 sm:px-6 sm:pb-6 lg:h-full lg:pt-6'>
-				<CursorTooltip content={TOOLTIP_CONTENT} className='shadow-black/5 relative h-full w-full cursor-pointer overflow-hidden rounded-xl shadow-lg dark:shadow-white/5' onClick={handleClick}>
+				<CursorTooltip content={TOOLTIP_CONTENT} className='relative h-full w-full cursor-pointer overflow-hidden rounded-xl shadow-lg shadow-black/5 dark:shadow-white/5' onClick={handleClick}>
 					<Image
 						src={project.image}
 						alt={`${project.title?.replace(/ /g, '-') || 'project'}-image`}

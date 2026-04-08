@@ -2,11 +2,11 @@
 
 import Logo from '@/components/icons/Logo';
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { usePathname, useRouter } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { IconArticle, IconBrandGithub, IconBriefcase2, IconCode, IconHome, IconListDetails, IconMessageCircle, IconQuestionMark, IconTimeline, IconX } from '@tabler/icons-react';
 import Link from 'next/link';
-import { usePathname, useRouter } from '@/i18n/navigation';
 import { memo, useCallback, useEffect, useState } from 'react';
 
 const SECTION_IDS = ['home', 'technologies', 'portfolio', 'experience', 'testimonials', 'workflow', 'faq'] as const;

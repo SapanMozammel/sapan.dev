@@ -69,7 +69,7 @@ const WorkflowProgress = memo(({ activeStep, stepProgress, isResetting, activeCo
 								</svg>
 							</motion.div>
 							<div className='absolute -top-10 scale-50 opacity-0 transition-all duration-300 group-hover:top-[-45px] group-hover:scale-100 group-hover:opacity-100'>
-								<div className='rounded-full bg-black dark:bg-white px-3 py-1 text-[10px] font-bold text-white dark:text-dark backdrop-blur-md'>0{step.id}</div>
+								<div className='dark:text-dark rounded-full bg-black px-3 py-1 text-[10px] font-bold text-white backdrop-blur-md dark:bg-white'>0{step.id}</div>
 							</div>
 							<motion.div
 								animate={{

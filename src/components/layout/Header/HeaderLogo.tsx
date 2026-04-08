@@ -1,8 +1,8 @@
 'use client';
 
 import Logo from '@/components/icons/Logo';
-import Link from 'next/link';
 import { usePathname, useRouter } from '@/i18n/navigation';
+import Link from 'next/link';
 import { memo, useCallback } from 'react';
 
 const HeaderLogo = memo(() => {

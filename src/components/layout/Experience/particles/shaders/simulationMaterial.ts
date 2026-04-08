@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { periodicNoiseGLSL } from './utils';
 
-function getPlane(count: number, components: number, size: number = 512, scale: number = 1.0) {
+const getPlane = (count: number, components: number, size: number = 512, scale: number = 1.0) => {
 	const length = count * components;
 	const data = new Float32Array(length);
 
@@ -16,7 +16,7 @@ function getPlane(count: number, components: number, size: number = 512, scale: 
 	}
 
 	return data;
-}
+};
 
 export class SimulationMaterial extends THREE.ShaderMaterial {
 	constructor(scale: number = 10.0) {
