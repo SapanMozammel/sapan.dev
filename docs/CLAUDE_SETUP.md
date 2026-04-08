@@ -230,7 +230,7 @@ Steps Claude must follow:
 5. Report violations by category:
    - **Design System** — hardcoded colors, wrong font class, arbitrary spacing
    - **Architecture** — missing `'use client'`, missing `memo()`, wrong import path
-   - **TypeScript** — `any` types, missing types
+   - **TypeScript** — `any` types, missing types, `interface` used instead of `type`
    - **Pass** — what's already correct
 6. For each violation: `file:line` — rule broken — fix
 7. If violations found: create or update a PRD at `.claude/plans/[audit-scope]-audit/prd.md` with all violations as implementation steps
@@ -641,7 +641,7 @@ What this feature does and why it's needed.
 ```
 /audit src/components/layout/Hero/index.tsx
 ```
-→ Loads all design-system + architecture skills, checks every rule, reports violations with `file:line` references. No auto-fix.
+→ Loads all design-system + architecture skills, checks every rule, reports violations with `file:line` references. Generates a PRD for fixes. No auto-fix.
 
 ---
 

@@ -3,8 +3,8 @@ import { ReactNode } from 'react';
 // Base item type for diamond grid items
 export type DiamondGridItem = {
 	name: string;
+	logo?: string;
 	index?: number;
-	[key: string]: any; // Allow additional properties for flexibility
 };
 
 // Legacy props type for backward compatibility

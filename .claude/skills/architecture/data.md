@@ -21,7 +21,7 @@ App-level configuration — imported by routing, i18n, and component logic.
 
 | File | Exports |
 |---|---|
-| `languages.ts` | `LANGUAGES` — locale metadata (name, flag, RTL) |
+| `languages.ts` | `LANGUAGES`, `LanguageCode`, `Language` — locale metadata (name, flag, RTL) |
 | `routes.ts` | (empty — placeholder) |
 | `technologies.ts` | `TECH_STACK` — tech stack grid items |
 
@@ -31,26 +31,26 @@ TypeScript type definitions — one file per domain.
 
 | File | Types |
 |---|---|
-| `blog.ts` | `BlogPost` |
-| `button.ts` | `ButtonVariant`, `ButtonProps` |
-| `contact.ts` | `ContactFormData`, `ContactStatus` |
-| `cursor-tooltip.ts` | `CursorTooltipProps` |
-| `diamond-grid.ts` | `DiamondGridProps` |
+| `blog.ts` | `ContentBlock`, `BlogPost`, `BlogCardProps` |
+| `button.ts` | `ButtonProps`, `ConnectButtonProps`, `GradientStop`, `SvgShapeProps`, `CenterSvgProps`, `ButtonContentProps`, `ButtonVariantConfig` |
+| `contact.ts` | `ContactFormData`, `ContactFormErrors`, `ContactSubmitStatus`, `ContactFormProps` |
+| `cursor-tooltip.ts` | `CursorTooltipProps`, `Position`, `TooltipContentProps` |
+| `diamond-grid.ts` | `DiamondGridItem`, `DiamondGridLegacyProps`, `DiamondGridFlexibleProps`, `DiamondGridProps`, `LayoutConfig`, `ColumnGroup`, `DiamondColumnProps`, `LayoutConfigMap` |
 | `error.ts` | `ErrorProps` |
-| `experience.ts` | `ExperienceItem` |
-| `faq.ts` | `FaqItem` |
-| `i18n.ts` | `Locale`, `Messages` |
-| `image.ts` | `ImageProps` |
+| `experience.ts` | `ExperienceType`, `ExperienceItem`, `TimelineItemProps`, `TimelineProps`, `TimelineProgressBarProps` |
+| `faq.ts` | `FaqItem`, `AccordionItemProps`, `AccordionProps` |
+| `i18n.ts` | `Locale`, `LocaleState`, `TranslationNamespace` |
+| `image.ts` | `OptimizedImageProps`, `AvatarImageProps`, `LogoImageProps` |
 | `marquee.ts` | `MarqueeProps` |
-| `particles.ts` | `ParticleConfig` |
-| `portfolio.ts` | `PortfolioProject` |
+| `particles.ts` | `ParticleProps`, `ParticleBackgroundProps` |
+| `portfolio.ts` | `PortfolioProject`, `ProjectCardProps` |
 | `providers.ts` | `ProvidersProps` |
-| `separator.ts` | `SectionSeparatorProps` |
-| `stacking-cards.ts` | `StackingCardsConfig` |
-| `technology.ts` | `TechStackItem` |
+| `separator.ts` | `SeparatorTypes` |
+| `stacking-cards.ts` | `UseStackingCardsOptions` |
+| `technology.ts` | `TechStackItem`, `TechnologiesDisplayProps` |
 | `testimonial.ts` | `TestimonialData` |
-| `title.ts` | `SectionTitleProps` |
-| `workflow.ts` | `WorkflowStep` |
+| `title.ts` | `SectionTitleTypes` |
+| `workflow.ts` | `WorkflowStep`, `WorkflowContentProps`, `WorkflowProgressProps` |
 
 ## src/lib/utils/
 
@@ -59,10 +59,10 @@ Pure utility functions.
 | File | Exports |
 |---|---|
 | `index.ts` | `cn()` — clsx + tailwind-merge |
-| `image.ts` | `getBlurDataURL()`, `shimmer()` |
-| `date.ts` | Date formatting helpers |
-| `file.ts` | File utility helpers |
-| `string.ts` | String utility helpers |
+| `image.ts` | `shimmer()`, `toBase64()`, `getBlurDataURL()`, `getSolidColorPlaceholder()`, `IMAGE_SIZES`, `getOptimizedImageProps()`, `TECH_LOGOS`, `getTechLogo()` |
+| `date.ts` | (empty — placeholder) |
+| `file.ts` | (empty — placeholder) |
+| `string.ts` | (empty — placeholder) |
 
 ## Data Flow
 
