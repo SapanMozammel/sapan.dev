@@ -16,6 +16,9 @@ A setup guide for the `.claude/` configuration in this project.
 │   ├── new-component.md    # /new-component [Name]
 │   ├── translate.md        # /translate [locale?]
 │   ├── test.md             # /test [unit|e2e|i18n?]
+│   ├── commit.md           # /commit [message?] — stage all changes and commit
+│   ├── commit-staged.md    # /commit-staged [message?] — commit only staged changes
+│   ├── pr.md               # /pr [base-branch?] — create a pull request
 │   ├── update-setup.md     # /update-setup — sync CLAUDE_SETUP.md with current project state
 │   └── generate-config.md  # /generate-config — materialize .claude/ files from CLAUDE_SETUP.md
 ├── skills/
@@ -181,14 +184,16 @@ Commands are workflow prompts invoked via `/command-name`. They tell Claude *wha
 
 Steps Claude must follow:
 1. Restate feature in one sentence — ask to clarify if vague
-2. Glob + Grep to find affected files — never assume paths
-3. Read every affected file before proposing changes
-4. Load relevant skills: always `component-patterns`; conditionally `colors`, `typography`, `spacing`, `routing`, `state`, `data`
-5. Load `skills/workflow/feature-planning.md` for the plan format
-6. Decide Server vs Client with explicit reasoning
-7. Write plan to `.claude/plans/[kebab-feature-name]/prd.md`
-8. Report: feature (1 sentence), affected files, new files, step count, plan path
-9. Prompt: `"Ready? Run /implement [plan-name]"`
+2. Ask the user: "Should I create a new branch for this?" — if yes, ask for a branch name (suggest `feature/[kebab-feature-name]` as default)
+3. If user wants a new branch, create it from the current branch before proceeding
+4. Glob + Grep to find affected files — never assume paths
+5. Read every affected file before proposing changes
+6. Load relevant skills: always `component-patterns`; conditionally `colors`, `typography`, `spacing`, `routing`, `state`, `data`
+7. Load `skills/workflow/feature-planning.md` for the plan format
+8. Decide Server vs Client with explicit reasoning
+9. Write plan to `.claude/plans/[kebab-feature-name]/prd.md`
+10. Report: feature (1 sentence), branch name (if created), affected files, new files, step count, plan path
+11. Prompt: `"Ready? Run /implement [plan-name]"`
 
 **Rules:** No code written during planning. No extra features. No new dependencies unless unavoidable.
 
@@ -321,6 +326,50 @@ Steps Claude must follow:
 6. Final report: tests fixed, tests still failing (if any), next steps
 
 **Rules:** Fix the real issue — do not delete or skip failing tests. Do not widen types to silence errors.
+
+---
+
+### `commands/commit.md` — `/commit [message?]`
+
+**Purpose:** Stage all changes and create a commit.
+
+Steps Claude must follow:
+1. Run `git status` and `git diff` to review changes
+2. Run `git log --oneline -5` to match commit message style
+3. Stage relevant files with specific names — never `git add -A`
+4. Draft or use provided commit message; append co-author trailer
+5. Create the commit; verify with `git status`
+
+**Rules:** Never `git add -A`. Never amend unless asked. Never skip hooks. Never push unless asked. Warn on secret files.
+
+---
+
+### `commands/commit-staged.md` — `/commit-staged [message?]`
+
+**Purpose:** Commit only what is already staged — do not modify the staging area.
+
+Steps Claude must follow:
+1. Run `git status` to confirm staged changes exist
+2. Run `git diff --cached` to review staged changes
+3. Draft or use provided commit message; append co-author trailer
+4. Create the commit; verify with `git status`
+
+**Rules:** Never stage additional files. Never amend unless asked. Never skip hooks. Never push unless asked.
+
+---
+
+### `commands/pr.md` — `/pr [base-branch?]`
+
+**Purpose:** Create a pull request from the current branch to the base branch.
+
+Steps Claude must follow:
+1. Check git status, current branch, remote tracking
+2. Run `git diff <base>...HEAD` and `git log --oneline <base>..HEAD` to analyze ALL commits
+3. If uncommitted changes exist, ask user whether to commit first
+4. Draft title (under 70 chars) and summary (1-3 bullets) + test plan
+5. Push with `-u` if needed; create PR via `gh pr create`
+
+**Rules:** Never force-push. Confirm before PRing to `main`/`master`. Analyze all commits, not just the latest.
 
 ---
 
@@ -539,6 +588,32 @@ What this feature does and why it's needed.
 /implement services-section
 ```
 → Claude reads `plans/services-section/prd.md`, marks tasks `[🔄]` as it goes, `[✅]` when done, runs `type:check` and `test` at the end.
+
+---
+
+**Commit all changes**
+```
+/commit
+/commit fix: resolve hydration mismatch in ThemeSwitcher
+```
+→ Stages relevant files, drafts (or uses provided) commit message, creates commit with co-author trailer.
+
+---
+
+**Commit only staged changes**
+```
+/commit-staged
+```
+→ Commits exactly what's staged — does not touch the staging area.
+
+---
+
+**Create a pull request**
+```
+/pr
+/pr main
+```
+→ Analyzes all commits on the branch, drafts PR title + summary + test plan, pushes and creates PR via `gh`.
 
 ---
 
