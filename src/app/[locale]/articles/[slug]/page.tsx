@@ -60,9 +60,9 @@ function renderBlock(block: ContentBlock, index: number) {
 					<div className='bg-secondary-800 flex items-center justify-between px-4 py-2'>
 						<span className='font-hg text-secondary-400 text-xs font-semibold tracking-widest uppercase'>{block.language}</span>
 						<div className='flex gap-1.5'>
-							<span className='h-2.5 w-2.5 rounded-full bg-red-400/70' />
-							<span className='h-2.5 w-2.5 rounded-full bg-yellow-400/70' />
-							<span className='h-2.5 w-2.5 rounded-full bg-green-400/70' />
+							<span className='bg-danger/70 h-2.5 w-2.5 rounded-full' />
+							<span className='bg-warning/70 h-2.5 w-2.5 rounded-full' />
+							<span className='bg-success/70 h-2.5 w-2.5 rounded-full' />
 						</div>
 					</div>
 					<pre className='bg-secondary-900 overflow-x-auto p-5 text-[13px] leading-relaxed'>
@@ -96,14 +96,14 @@ function renderBlock(block: ContentBlock, index: number) {
 			);
 		case 'callout': {
 			const variantStyles = {
-				info: 'border-blue-400/50 bg-blue-50/50 dark:bg-blue-950/50 dark:border-blue-600/50',
-				warning: 'border-orange-400/50 bg-orange-50/50 dark:bg-orange-950/50 dark:border-orange-600/50',
-				tip: 'border-green-400/50 bg-green-50/50 dark:bg-green-950/50 dark:border-green-600/50',
+				info: 'border-info/50 bg-info/5 dark:bg-info/10 dark:border-info/30',
+				warning: 'border-warning/50 bg-warning/5 dark:bg-warning/10 dark:border-warning/30',
+				tip: 'border-success/50 bg-success/5 dark:bg-success/10 dark:border-success/30',
 			};
 			const labelStyles = {
-				info: 'text-blue-600 dark:text-blue-400',
-				warning: 'text-orange-600 dark:text-orange-400',
-				tip: 'text-green-600 dark:text-green-400',
+				info: 'text-info dark:text-info',
+				warning: 'text-warning dark:text-warning',
+				tip: 'text-success dark:text-success',
 			};
 			const variant = block.variant ?? 'info';
 			return (
