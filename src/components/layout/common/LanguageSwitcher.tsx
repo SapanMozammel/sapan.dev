@@ -3,6 +3,7 @@
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { LANGUAGES } from '@/data/config/languages';
+import { cn } from '@/lib/utils';
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { setLocale } from '@/store/slices/localeSlice';
 import type { Locale } from '@/types/i18n';
@@ -77,11 +78,12 @@ const LanguageSwitcher = () => {
 						<button
 							key={language.code}
 							type='button'
-							className={`flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-md px-2 py-1.5 text-xs transition-colors sm:text-sm ${
+							className={cn(
+								'flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-md px-2 py-1.5 text-xs transition-colors sm:text-sm',
 								mounted && currentLocale === language.code
 									? 'bg-primary/10 text-primary dark:bg-success/10 dark:text-success'
 									: 'text-secondary-500 dark:text-secondary-500 hover:text-primary dark:hover:text-success'
-							}`}
+							)}
 							onClick={() => changeLanguage(language.code)}
 						>
 							<span className='flex items-center gap-2'>

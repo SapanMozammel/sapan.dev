@@ -3,6 +3,7 @@
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { isMacOS } from '@/lib/helper';
+import { cn } from '@/lib/utils';
 import { IconContrastFilled, IconLoader, IconMoonFilled, IconSunFilled } from '@tabler/icons-react';
 import { useTheme } from 'next-themes';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -149,11 +150,12 @@ const ThemeSwitcher = () => {
 							<button
 								key={option.name}
 								type='button'
-								className={`flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-md px-2 py-1.5 text-xs transition-colors sm:text-sm ${
+								className={cn(
+									'flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-md px-2 py-1.5 text-xs transition-colors sm:text-sm',
 									mounted && theme === option.name
 										? 'bg-primary/10 text-primary dark:bg-success/10 dark:text-success'
 										: 'text-secondary-500 dark:text-secondary-500 hover:text-primary dark:hover:text-success'
-								}`}
+								)}
 								onClick={handleOptionClick}
 							>
 								<span className='capitalize'>{option.name} Theme</span>

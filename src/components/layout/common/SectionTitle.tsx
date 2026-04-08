@@ -11,8 +11,8 @@ const SectionTitle = ({ title, subtitle, watermark, className }: SectionTitleTyp
 				{watermark}
 			</span>
 		)}
-		{subtitle && <p className={`font-hg text-secondary-400 dark:text-secondary-600 ${watermark ? 'pt-[10vw]' : 'pt-[2vw]'} text-sm leading-none font-semibold tracking-widest uppercase`}>{subtitle}</p>}
-		<h2 className={`font-cg ${subtitle ? 'mt-1 sm:mt-3' : 'mt-5 mb-4 sm:mt-7'} text-dark mb-2 text-3xl leading-none font-medium tracking-wide sm:text-5xl dark:text-white`}>{title}</h2>
+		{subtitle && <p className={cn('font-hg text-secondary-400 dark:text-secondary-600 text-sm leading-none font-semibold tracking-widest uppercase', watermark ? 'pt-[10vw]' : 'pt-[2vw]')}>{subtitle}</p>}
+		<h2 className={cn('font-cg text-dark mb-2 text-3xl leading-none font-medium tracking-wide sm:text-5xl dark:text-white', subtitle ? 'mt-1 sm:mt-3' : 'mt-5 mb-4 sm:mt-7')}>{title}</h2>
 	</div>
 );
 
