@@ -7,7 +7,7 @@
 | `--color-primary` | `#4a4ded` | Light-mode accent: text, bg, border, ring, fill, shadow, gradients, CTA rays |
 | `--color-success` | `#43ead4` | Dark-mode accent (mirrors primary): text, bg, border, ring, fill, shadow, gradients |
 | `--color-info` | `#1f8fff` | Hero radial glow, brand gradient end, SVG strokes/fills |
-| `--color-warning` | `#ff6f00` | Reserved for warning states (unused in components) |
+| `--color-warning` | `#ff6f00` | Warning states, article callout variants, code block dots |
 | `--color-danger` | `#f56565` | Form validation errors (text + border), error icon bg |
 | `--color-white` | `#ffffff` | Light-mode text on accent, bg surfaces, ring, overlay glass |
 | `--color-black` | `#0e0c15` | Dark-mode bg surfaces, shadow colors, image overlays |
@@ -23,7 +23,9 @@ Key stops: `100` `200` `300` `400` `500` `600` `700` `800` `900`
 
 22 families: slate, gray, zinc, neutral, stone, red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose — each with shades 25–950 + a100.
 
-**Rule:** Semantic tokens first. Fall back to primitives only when semantic tokens don't fit.
+**Rules:**
+- Semantic tokens first. Fall back to primitives only when semantic tokens don't fit.
+- `bg-light` always pairs with `dark:bg-slate-900` — this is an intentional design rule, not a violation.
 
 ---
 
@@ -66,7 +68,7 @@ border-primary dark:border-success
 | `bg-danger` | `dark:bg-success` | Testimonial decorative blur |
 | `bg-{color}-50` | `dark:bg-{color}-950` | Blog category badges (sky, blue, violet, green, orange, cyan) |
 | `bg-{color}-25/90` | `dark:bg-{color}-a100/90` | Portfolio card backgrounds |
-| `bg-{color}-50/50` | `dark:bg-{color}-950/50` | Article callout backgrounds |
+| `bg-info/5`, `bg-warning/5`, `bg-success/5` | — | Article callout backgrounds (same both modes) |
 | `before:bg-primary` | `dark:before:bg-success` | Article list bullet dots, accordion toggle line |
 | `after:bg-primary` | `dark:after:bg-success` | Accordion toggle line |
 | `bg-secondary-800` | — | Code block header (both modes, no swap) |
@@ -86,7 +88,7 @@ border-primary dark:border-success
 | `text-secondary-600` | `dark:text-secondary-400` | Body text: descriptions, FAQ, excerpts, footer, nav inactive |
 | `text-secondary-700` | `dark:text-secondary-300` | Rich text: article paragraphs, list items |
 | `text-{color}-700` | `dark:text-{color}-300` | Blog category badge text |
-| `text-{color}-600` | `dark:text-{color}-400` | Article callout icons (blue, orange, green) |
+| `text-info`, `text-warning`, `text-success` | — | Article callout labels (same both modes) |
 | `placeholder:text-secondary-600/50` | `dark:placeholder:text-secondary-400/50` | Form input placeholders |
 
 ### Hover
@@ -117,7 +119,7 @@ border-primary dark:border-success
 | `border-primary/50` | `dark:border-success/50` | Icon containers |
 | `border-danger` | `dark:border-danger` | Form validation error (same both modes) |
 | `border-{color}-100` | `dark:border-{color}-900` | Portfolio card borders |
-| `border-{color}-400/50` | `dark:border-{color}-600/50` | Article callout borders |
+| `border-info/50`, `border-warning/50`, `border-success/50` | — | Article callout borders (same both modes) |
 | `focus:border-primary` | `dark:focus:border-success` | Form input focus state |
 | `divide-secondary-400` | `dark:divide-secondary-600` | Popover/switcher section dividers |
 

@@ -96,14 +96,14 @@ const renderBlock = (block: ContentBlock, index: number) => {
 			);
 		case 'callout': {
 			const variantStyles = {
-				info: 'border-info/50 bg-info/5 dark:bg-info/10 dark:border-info/30',
-				warning: 'border-warning/50 bg-warning/5 dark:bg-warning/10 dark:border-warning/30',
-				tip: 'border-success/50 bg-success/5 dark:bg-success/10 dark:border-success/30',
+				info: 'border-info/50 bg-info/5',
+				warning: 'border-warning/50 bg-warning/5',
+				tip: 'border-success/50 bg-success/5',
 			};
 			const labelStyles = {
-				info: 'text-info dark:text-info',
-				warning: 'text-warning dark:text-warning',
-				tip: 'text-success dark:text-success',
+				info: 'text-info',
+				warning: 'text-warning',
+				tip: 'text-success',
 			};
 			const variant = block.variant ?? 'info';
 			return (
