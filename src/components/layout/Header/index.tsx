@@ -28,8 +28,8 @@ const Header = () => (
 								<IconBrandGithub className='h-4 w-4 outline-none sm:h-5 sm:w-5' />
 							</Link>
 						</TooltipTrigger>
-						<TooltipContent side='right'>
-							<p>Visit my GitHub</p>
+						<TooltipContent side='bottom'>
+							<p>View on GitHub</p>
 						</TooltipContent>
 					</Tooltip>
 					<MobileNav />

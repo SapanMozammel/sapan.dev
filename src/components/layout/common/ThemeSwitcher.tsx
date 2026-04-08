@@ -122,7 +122,7 @@ const ThemeSwitcher = () => {
 						</button>
 					</PopoverTrigger>
 				</TooltipTrigger>
-				<TooltipContent side='right'>
+				<TooltipContent side='bottom'>
 					<p className='capitalize'>{mounted ? theme : 'Loading'} Theme</p>
 				</TooltipContent>
 			</Tooltip>

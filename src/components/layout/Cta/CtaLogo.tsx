@@ -2,7 +2,7 @@
 
 import Logo from '@/components/icons/Logo';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from '@/i18n/navigation';
 import { memo, useCallback } from 'react';
 
 const CtaLogo = memo(() => {

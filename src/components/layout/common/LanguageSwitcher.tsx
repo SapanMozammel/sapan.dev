@@ -64,7 +64,7 @@ const LanguageSwitcher = () => {
 						</button>
 					</PopoverTrigger>
 				</TooltipTrigger>
-				<TooltipContent side='right'>
+				<TooltipContent side='bottom'>
 					<p>{mounted ? currentLanguageName : 'Loading'}</p>
 				</TooltipContent>
 			</Tooltip>
