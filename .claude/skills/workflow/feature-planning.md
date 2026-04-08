@@ -32,6 +32,8 @@ Subtasks are indented two spaces under their parent. Claude adds subtasks inline
 - [⬜] Step 2: Add data file
 ```
 
+**PRD history is sacred:** When updating a PRD (e.g. after a re-audit), always preserve completed tasks (`[✅]`). Add new steps in a new "Round N" section — never overwrite done steps.
+
 ## Plan File Format
 
 ```markdown

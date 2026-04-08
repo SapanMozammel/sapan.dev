@@ -34,8 +34,8 @@ src/
 ├── app/[locale]/           # App Router — all routes under locale segment
 │   ├── (landing)/page.tsx  # Home (no URL segment)
 │   ├── articles/           # Listing + [slug] detail
-│   └── layout.tsx          # Locale layout: Providers, Header, Footer, RTL dir
-├── app/layout.tsx          # Root layout: html/body + fonts only
+│   └── layout.tsx          # Locale layout: html/body, fonts, RTL, Providers, Header, Footer
+├── app/layout.tsx          # Root layout: bare fragment + global.scss only
 ├── middleware.ts            # next-intl locale detection & routing
 ├── components/
 │   ├── layout/             # Page sections (each: index.tsx + sub-files)
