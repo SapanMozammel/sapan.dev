@@ -1,8 +1,6 @@
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { IconBrandGithub } from '@tabler/icons-react';
-import NextLink from 'next/link';
 import LanguageSwitcher from '../common/LanguageSwitcher';
 import ThemeSwitcher from '../common/ThemeSwitcher';
+import GitHubLink from './GitHubLink';
 import HeaderLogo from './HeaderLogo';
 import MobileNav from './MobileNav';
 import NavMenu from './NavMenu';
@@ -18,20 +16,7 @@ const Header = () => (
 				<div className='flex shrink-0 items-center justify-end gap-x-1 sm:gap-x-2 lg:min-w-48'>
 					<LanguageSwitcher />
 					<ThemeSwitcher />
-					<Tooltip>
-						<TooltipTrigger asChild>
-							<NextLink
-								href='https://github.com/SapanMozammel'
-								target='_blank'
-								className='hover:text-primary dark:hover:text-success text-dark hidden aspect-square h-6 cursor-pointer items-center justify-center ease-in-out sm:h-8 md:inline-flex dark:text-white'
-							>
-								<IconBrandGithub className='h-4 w-4 outline-none sm:h-5 sm:w-5' />
-							</NextLink>
-						</TooltipTrigger>
-						<TooltipContent side='bottom'>
-							<p>View on GitHub</p>
-						</TooltipContent>
-					</Tooltip>
+					<GitHubLink />
 					<MobileNav />
 				</div>
 			</div>
