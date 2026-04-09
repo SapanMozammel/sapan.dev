@@ -2,11 +2,11 @@
 
 ## Route Structure
 
-| URL | File | Type |
-|---|---|---|
-| `/` | `src/app/[locale]/(landing)/page.tsx` | Home (no URL segment) |
-| `/articles` | `src/app/[locale]/articles/page.tsx` | Articles listing |
-| `/articles/[slug]` | `src/app/[locale]/articles/[slug]/page.tsx` | Article detail |
+| URL | File | Type | Component |
+|---|---|---|---|
+| `/` | `src/app/[locale]/(landing)/page.tsx` | Home (no URL segment) | Server |
+| `/articles` | `src/app/[locale]/articles/page.tsx` | Articles listing (pagination + category filter) | Client |
+| `/articles/[slug]` | `src/app/[locale]/articles/[slug]/page.tsx` | Article detail | Server |
 
 ## Layout Hierarchy
 
