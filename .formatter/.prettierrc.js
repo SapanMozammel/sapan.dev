@@ -16,7 +16,6 @@ module.exports = {
 
 	// JSX formatting
 	jsxSingleQuote: true,
-	jsxBracketSameLine: false,
 	singleAttributePerLine: false,
 
 	// Plugins for modern development

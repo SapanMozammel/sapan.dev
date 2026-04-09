@@ -1,0 +1,43 @@
+'use client';
+
+import { cn } from '@/lib/utils';
+import * as PopoverPrimitive from '@radix-ui/react-popover';
+import * as React from 'react';
+
+// Memoize components to prevent unnecessary re-renders
+const Popover = React.memo<React.ComponentProps<typeof PopoverPrimitive.Root>>(({ ...props }) => {
+	return <PopoverPrimitive.Root data-slot='popover' {...props} />;
+});
+
+const PopoverTrigger = React.memo<React.ComponentProps<typeof PopoverPrimitive.Trigger>>(({ ...props }) => {
+	return <PopoverPrimitive.Trigger data-slot='popover-trigger' {...props} />;
+});
+
+const PopoverContent = React.memo<React.ComponentProps<typeof PopoverPrimitive.Content>>(({ className, align = 'center', sideOffset = 4, ...props }) => {
+	return (
+		<PopoverPrimitive.Portal>
+			<PopoverPrimitive.Content
+				data-slot='popover-content'
+				align={align}
+				sideOffset={sideOffset}
+				className={cn(
+					'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 border-secondary-400 dark:border-secondary-600 text-dark z-15 w-72 origin-(--radix-popover-content-transform-origin) rounded-lg border bg-white p-0 shadow-lg shadow-black/5 outline-hidden dark:bg-black dark:text-white dark:shadow-white/5',
+					className
+				)}
+				{...props}
+			/>
+		</PopoverPrimitive.Portal>
+	);
+});
+
+const PopoverAnchor = React.memo<React.ComponentProps<typeof PopoverPrimitive.Anchor>>(({ ...props }) => {
+	return <PopoverPrimitive.Anchor data-slot='popover-anchor' {...props} />;
+});
+
+// Add display names for better debugging
+Popover.displayName = 'Popover';
+PopoverTrigger.displayName = 'PopoverTrigger';
+PopoverContent.displayName = 'PopoverContent';
+PopoverAnchor.displayName = 'PopoverAnchor';
+
+export { Popover, PopoverAnchor, PopoverContent, PopoverTrigger };

@@ -1,45 +1,42 @@
-import Logo from '@/components/icons/Logo';
-import { GithubIcon, LoaderCircleIcon } from 'lucide-react';
-import Link from 'next/link';
-// const ThemeSwitcher = dynamic(
-//   () => import("@/components/layout/founder/common/ThemeSwitcher"),
-//   {
-//     ssr: false,
-//     loading: () => <Loader />,
-//   },
-// );
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { IconBrandGithub } from '@tabler/icons-react';
+import NextLink from 'next/link';
+import LanguageSwitcher from '../common/LanguageSwitcher';
+import ThemeSwitcher from '../common/ThemeSwitcher';
+import HeaderLogo from './HeaderLogo';
+import MobileNav from './MobileNav';
+import NavMenu from './NavMenu';
 
-const Loader = () => {
-	return (
-		<span className='text-secondary-500 dark:text-secondary-300 inline-flex aspect-square h-8 items-center justify-center'>
-			<LoaderCircleIcon className='w-5 animate-spin' />
-		</span>
-	);
-};
-
-const Header = () => {
-	return (
-		<header className='border-secondary-400 dark:border-secondary-600 fixed inset-x-0 top-0 z-10 flex h-20 flex-col border-b border-solid backdrop-blur-xl'>
-			<div className='container-fluid flex w-full grow flex-col'>
-				<div className='flex grow items-center justify-between'>
-					<Link href='/' className='flex cursor-pointer flex-row items-center gap-1.5 sm:gap-2 rtl:flex-row-reverse'>
-						<Logo className='h-8 sm:h-10' />
-						<h2 className='font-hg scale-y-110 pb-0.5 text-xl !leading-none font-normal tracking-tighter text-black italic sm:text-2xl dark:text-white'>sapan.dev</h2>
-					</Link>
-					<div className='ms-auto flex items-center gap-x-2 gap-y-1'>
-						{/* <ThemeSwitcher /> */}
-						<Link
-							href='https://github.com/SapanMozammel'
-							target='_blank'
-							className='hover:text-primary dark:hover:text-success inline-flex aspect-square h-8 cursor-pointer items-center justify-center text-black ease-in-out dark:text-white'
-						>
-							<GithubIcon className='w-5' />
-						</Link>
-					</div>
+const Header = () => (
+	<header className='border-secondary-400 dark:border-secondary-600 fixed inset-x-0 top-0 z-10 flex h-14 max-w-screen flex-col border-b border-solid backdrop-blur-xl sm:h-20'>
+		<div className='container-fluid flex w-full grow flex-col'>
+			<div className='flex grow items-center justify-between gap-3'>
+				<div className='flex items-center lg:min-w-48'>
+					<HeaderLogo />
+				</div>
+				<NavMenu />
+				<div className='flex shrink-0 items-center justify-end gap-x-1 sm:gap-x-2 lg:min-w-48'>
+					<LanguageSwitcher />
+					<ThemeSwitcher />
+					<Tooltip>
+						<TooltipTrigger asChild>
+							<NextLink
+								href='https://github.com/SapanMozammel'
+								target='_blank'
+								className='hover:text-primary dark:hover:text-success text-dark hidden aspect-square h-6 cursor-pointer items-center justify-center ease-in-out sm:h-8 md:inline-flex dark:text-white'
+							>
+								<IconBrandGithub className='h-4 w-4 outline-none sm:h-5 sm:w-5' />
+							</NextLink>
+						</TooltipTrigger>
+						<TooltipContent side='bottom'>
+							<p>View on GitHub</p>
+						</TooltipContent>
+					</Tooltip>
+					<MobileNav />
 				</div>
 			</div>
-		</header>
-	);
-};
+		</div>
+	</header>
+);
 
 export default Header;

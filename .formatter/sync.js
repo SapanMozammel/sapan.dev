@@ -187,12 +187,19 @@ const generatePrettierConfig = (config) => {
 	const bracketSpacing = getConfigValue('BRACKET_SPACING', 'true') === 'true';
 	const bracketSameLine = getConfigValue('BRACKET_SAME_LINE', 'false') === 'true';
 	const jsxSingleQuote = getConfigValue('JSX_SINGLE_QUOTE', 'true') === 'true';
-	const jsxBracketSameLine = getConfigValue('JSX_BRACKET_SAME_LINE', 'false') === 'true';
 	const singleAttributePerLine = getConfigValue('SINGLE_ATTRIBUTE_PER_LINE', 'false') === 'true';
 	const arrowParens = getConfigValue('ARROW_PARENS', 'avoid');
 	const endOfLine = getConfigValue('END_OF_LINE', 'lf');
 	const proseWrap = getConfigValue('PROSE_WRAP', 'preserve');
 	const trailingComma = getConfigValue('TRAILING_COMMA', 'es5');
+	const tailwindClassSorting = getConfigValue('TAILWIND_CLASS_SORTING', 'true') === 'true';
+
+	// Build plugins array based on configuration
+	const plugins = [];
+	if (tailwindClassSorting) {
+		plugins.push('prettier-plugin-tailwindcss');
+	}
+	const pluginsString = plugins.length > 0 ? `['${plugins.join("', '")}']` : '[]';
 
 	const prettierConfigContent = `module.exports = {
 	// Basic formatting
@@ -212,11 +219,10 @@ const generatePrettierConfig = (config) => {
 
 	// JSX formatting
 	jsxSingleQuote: ${jsxSingleQuote},
-	jsxBracketSameLine: ${jsxBracketSameLine},
 	singleAttributePerLine: ${singleAttributePerLine},
 
 	// Plugins for modern development
-	plugins: ['prettier-plugin-tailwindcss'],
+	plugins: ${pluginsString},
 
 	// File-specific overrides
 	overrides: [
@@ -263,7 +269,7 @@ const generatePrettierConfig = (config) => {
 	return prettierConfigContent;
 };
 
-// Generate .prettierignore for src only
+// Generate .prettierignore at project root
 const generatePrettierIgnore = () => {
 	return `# Generated from FORMATTER_CONFIG.md
 # Only format files in src folder
@@ -281,14 +287,13 @@ build/
 dist/
 *.min.js
 *.min.css
-wp-content/uploads/
-wp-config.php
 *.log
 coverage/
 .cache
 .next
 package-lock.json
 yarn.lock
+pnpm-lock.yaml
 composer.lock
 .DS_Store
 Thumbs.db
@@ -296,7 +301,7 @@ Thumbs.db
 *.temp`;
 };
 
-// Generate ESLint config (optimized for Next.js built-in ESLint)
+// Generate ESLint flat config (eslint.config.js) for ESLint 9+ / Next.js 16+
 const generateESLintConfig = (config) => {
 	// Helper function to get config value with fallback
 	const getConfigValue = (key, fallback) => config[key] !== undefined ? config[key] : fallback;
@@ -309,114 +314,128 @@ const generateESLintConfig = (config) => {
 	const eqeqeq = getConfigValue('EQEQEQ', 'error');
 	const reactHooksExhaustiveDeps = getConfigValue('REACT_HOOKS_EXHAUSTIVE_DEPS', 'warn');
 	const reactJsxNoTargetBlank = getConfigValue('REACT_JSX_NO_TARGET_BLANK', 'error');
+	const reactNoUnescapedEntities = getConfigValue('REACT_NO_UNESCAPED_ENTITIES', 'off');
 
-	return `module.exports = {
-	env: { browser: true, es2022: true, node: true, jest: true },
-	extends: [
-		'next/core-web-vitals',
-		'prettier',
-	],
-	parser: '@typescript-eslint/parser',
-	parserOptions: {
-		ecmaFeatures: { jsx: true },
-		ecmaVersion: 2022,
-		sourceType: 'module',
-		project: './tsconfig.json',
-	},
-	plugins: ['prettier'],
-	settings: {
-		react: { version: 'detect' },
-		'import/resolver': {
-			typescript: {
-				alwaysTryTypes: true,
+	return `const nextConfig = require('eslint-config-next/core-web-vitals');
+const prettierConfig = require('eslint-config-prettier');
+const prettierPlugin = require('eslint-plugin-prettier');
+const typescriptPlugin = require('@typescript-eslint/eslint-plugin');
+const typescriptParser = require('@typescript-eslint/parser');
+
+// Prettier options from .formatter/.prettierrc.js (strip Prettier-only keys not valid in ESLint rule)
+const { plugins: _p, overrides: _o, ...prettierOptions } = require('./.formatter/.prettierrc.js');
+
+module.exports = [
+	// Next.js core-web-vitals flat config (includes React, React Hooks, import, a11y, @next rules)
+	...Object.values(nextConfig),
+
+	// TypeScript + Prettier layer
+	{
+		files: ['**/*.ts', '**/*.tsx'],
+		plugins: {
+			prettier: prettierPlugin,
+			'@typescript-eslint': typescriptPlugin,
+		},
+		languageOptions: {
+			parser: typescriptParser,
+			parserOptions: {
+				ecmaFeatures: { jsx: true },
+				ecmaVersion: 2022,
+				sourceType: 'module',
 				project: './tsconfig.json',
 			},
 		},
+		rules: {
+			// Prettier — reads options from .formatter/.prettierrc.js
+			'prettier/prettier': ['error', prettierOptions],
+
+			// Code quality
+			'max-len': ['error', {
+				code: ${maxLineLength},
+				ignoreUrls: true,
+				ignoreStrings: true,
+				ignoreTemplateLiterals: true,
+				ignoreComments: true,
+			}],
+			'no-console': '${noConsole}',
+			'no-debugger': '${noDebugger}',
+			'prefer-const': '${preferConst}',
+			'no-var': '${noVar}',
+			'eqeqeq': ['${eqeqeq}', 'always'],
+			'curly': ['error', 'all'],
+
+			// React
+			'react/jsx-uses-react': 'off',
+			'react/react-in-jsx-scope': 'off',
+			'react/prop-types': 'off',
+			'react/jsx-key': 'error',
+			'react/jsx-no-duplicate-props': 'error',
+			'react/jsx-no-undef': 'error',
+			'react/jsx-no-target-blank': '${reactJsxNoTargetBlank}',
+			'react/no-unused-state': 'warn',
+			'react/self-closing-comp': 'error',
+			'react/no-unescaped-entities': '${reactNoUnescapedEntities}',
+
+			// React Hooks
+			'react-hooks/rules-of-hooks': 'error',
+			'react-hooks/exhaustive-deps': '${reactHooksExhaustiveDeps}',
+
+			// React Compiler rules (react-hooks v7) — project does not use React Compiler
+			'react-hooks/immutability': 'off',
+			'react-hooks/set-state-in-effect': 'off',
+			'react-hooks/refs': 'off',
+			'react-hooks/preserve-manual-memoization': 'off',
+
+			// Import
+			'no-duplicate-imports': 'error',
+			'import/no-unresolved': 'off',
+
+			// Next.js
+			'@next/next/no-html-link-for-pages': 'error',
+			'@next/next/no-img-element': 'warn',
+
+			// Best practices
+			'no-eval': 'error',
+			'no-implied-eval': 'error',
+			'no-new-func': 'error',
+			'no-script-url': 'error',
+			'no-alert': 'warn',
+			'object-shorthand': 'error',
+			'prefer-template': 'error',
+
+			// Disable conflicting prettier rules
+			...prettierConfig.rules,
+		},
 	},
-	rules: {
-		// Prettier integration - use our custom config to ensure consistency
-		'prettier/prettier': ['error', {
-			// Basic formatting
-			semi: ${getConfigValue('USE_SEMICOLONS', 'true') === 'true'},
-			singleQuote: ${getConfigValue('USE_SINGLE_QUOTES', 'true') === 'true'},
-			trailingComma: '${getConfigValue('TRAILING_COMMA', 'es5')}',
-			useTabs: ${getConfigValue('INDENT_STYLE', 'space') === 'tab'},
-			tabWidth: ${parseInt(getConfigValue('INDENT_SIZE', '2')) || 2},
-			printWidth: ${parseInt(getConfigValue('PRINT_WIDTH', '80')) || 80},
 
-			// Advanced formatting
-			bracketSpacing: ${getConfigValue('BRACKET_SPACING', 'true') === 'true'},
-			bracketSameLine: ${getConfigValue('BRACKET_SAME_LINE', 'false') === 'true'},
-			arrowParens: '${getConfigValue('ARROW_PARENS', 'avoid')}',
-			endOfLine: '${getConfigValue('END_OF_LINE', 'lf')}',
-			proseWrap: '${getConfigValue('PROSE_WRAP', 'preserve')}',
-
-			// JSX formatting
-			jsxSingleQuote: ${getConfigValue('JSX_SINGLE_QUOTE', 'true') === 'true'},
-			jsxBracketSameLine: ${getConfigValue('JSX_BRACKET_SAME_LINE', 'false') === 'true'},
-			singleAttributePerLine: ${getConfigValue('SINGLE_ATTRIBUTE_PER_LINE', 'false') === 'true'},
-		}],
-
-		// Code quality rules
-		'max-len': ['error', {
-			code: ${maxLineLength},
-			ignoreUrls: true,
-			ignoreStrings: true,
-			ignoreTemplateLiterals: true,
-			ignoreComments: true,
-		}],
-		'no-console': '${noConsole}',
-		'no-debugger': '${noDebugger}',
-		'prefer-const': '${preferConst}',
-		'no-var': '${noVar}',
-		'eqeqeq': ['${eqeqeq}', 'always'],
-		'curly': ['error', 'all'],
-
-		// React rules
-		'react/jsx-uses-react': 'off',
-		'react/react-in-jsx-scope': 'off',
-		'react/prop-types': 'off', // TypeScript handles this
-		'react/jsx-key': 'error',
-		'react/jsx-no-duplicate-props': 'error',
-		'react/jsx-no-undef': 'error',
-		'react/jsx-no-target-blank': '${reactJsxNoTargetBlank}',
-		'react/no-unused-state': 'warn',
-		'react/self-closing-comp': 'error',
-
-		// React Hooks rules
-		'react-hooks/rules-of-hooks': 'error',
-		'react-hooks/exhaustive-deps': '${reactHooksExhaustiveDeps}',
-
-		// Import/Export rules
-		'no-duplicate-imports': 'error',
-		'import/no-unresolved': 'off', // Handled by TypeScript
-
-		// Next.js specific rules
-		'@next/next/no-html-link-for-pages': 'error',
-		'@next/next/no-img-element': 'warn',
-
-		// Best practices
-		'no-eval': 'error',
-		'no-implied-eval': 'error',
-		'no-new-func': 'error',
-		'no-script-url': 'error',
-		'no-alert': 'warn',
-		'object-shorthand': 'error',
-		'prefer-template': 'error',
+	// JS files — no typed linting
+	{
+		files: ['**/*.js', '**/*.mjs', '**/*.cjs'],
+		plugins: { prettier: prettierPlugin },
+		rules: {
+			'prettier/prettier': ['error'],
+			'no-console': '${noConsole}',
+			'prefer-const': '${preferConst}',
+			'no-var': '${noVar}',
+		},
 	},
-	ignorePatterns: [
-		'node_modules/',
-		'.next/',
-		'out/',
-		'build/',
-		'dist/',
-		'*.min.js',
-		'*.min.css',
-		'coverage/',
-		'.cache/',
-		'public/',
-	],
-};`;
+
+	// Ignores
+	{
+		ignores: [
+			'node_modules/**',
+			'.next/**',
+			'out/**',
+			'build/**',
+			'dist/**',
+			'**/*.min.js',
+			'**/*.min.css',
+			'coverage/**',
+			'.cache/**',
+			'public/**',
+		],
+	},
+];`;
 };
 
 // Generate EditorConfig
@@ -462,6 +481,7 @@ const generateVSCodeSettings = (config) => {
 	const useTabs = getConfigValue('INDENT_STYLE', 'space') === 'tab';
 	const tabWidth = parseInt(getConfigValue('INDENT_SIZE', '2')) || 2;
 	const printWidth = parseInt(getConfigValue('PRINT_WIDTH', '80')) || 80;
+	const wordWrapColumn = parseInt(getConfigValue('WORD_WRAP_COLUMN', printWidth.toString())) || printWidth;
 
 	const formatOnSave = getConfigValue('FORMAT_ON_SAVE', 'false') === 'true';
 	const formatOnPaste = getConfigValue('FORMAT_ON_PASTE', 'false') === 'true';
@@ -469,6 +489,10 @@ const generateVSCodeSettings = (config) => {
 	const insertFinalNewline = getConfigValue('INSERT_FINAL_NEWLINE', 'true') === 'true';
 	const trimTrailingWhitespace = getConfigValue('TRIM_TRAILING_WHITESPACE', 'true') === 'true';
 	const wordWrap = getConfigValue('WORD_WRAP', 'off');
+
+	// Import organization settings
+	const organizeImportsOnSave = getConfigValue('ORGANIZE_IMPORTS_ON_SAVE', 'false') === 'true';
+	const removeUnusedImportsOnFormat = getConfigValue('REMOVE_UNUSED_IMPORTS_ON_FORMAT', 'true') === 'true';
 
 	const settings = {
 		// Workbench
@@ -480,18 +504,18 @@ const generateVSCodeSettings = (config) => {
 		'editor.tabSize': tabWidth,
 		'editor.detectIndentation': false,
 		'editor.wordWrap': wordWrap,
-		'editor.wordWrapColumn': printWidth,
+		'editor.wordWrapColumn': wordWrapColumn,
 		'editor.rulers': [printWidth],
 		'editor.formatOnSave': formatOnSave,
 		'editor.formatOnPaste': formatOnPaste,
 		'editor.trimAutoWhitespace': true,
 		'editor.renderWhitespace': 'boundary',
-		'editor.minimap.maxColumn': printWidth,
+		'editor.minimap.maxColumn': wordWrapColumn,
 
 		// Code actions
 		'editor.codeActionsOnSave': {
-			'source.fixAll.eslint': eslintAutoFix,
-			'source.organizeImports': true,
+			'source.fixAll.eslint': eslintAutoFix ? 'explicit' : 'never',
+			'source.organizeImports': organizeImportsOnSave ? 'explicit' : 'never',
 		},
 
 		// Files
@@ -503,13 +527,25 @@ const generateVSCodeSettings = (config) => {
 
 		// Prettier
 		'prettier.requireConfig': true,
-		'prettier.configPath': '.formatter/.prettierrc.js',
 		'prettier.useEditorConfig': false,
 
 		// ESLint
 		'eslint.enable': true,
 		'eslint.run': 'onSave',
 		'eslint.format.enable': true,
+
+		// TypeScript import organization
+		'typescript.preferences.organizeImports': {
+			'removeUnusedImports': removeUnusedImportsOnFormat,
+		},
+		'typescript.suggest.autoImports': 'on',
+		'typescript.updateImportsOnFileMove.enabled': 'always',
+
+		// Command palette actions for manual formatting with unused import removal
+		'typescript.preferences.includePackageJsonAutoImports': 'auto',
+
+		// Enable format and organize imports together
+		'editor.formatOnSaveMode': 'file',
 
 		// Language-specific formatters
 		'[javascript]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
@@ -552,49 +588,95 @@ const generateVSCodeSettings = (config) => {
 	return JSON.stringify(settings, null, '\t');
 };
 
-// Generate Cursor settings
-const generateCursorSettings = (config) => {
-	// Helper function to get config value with fallback
-	const getConfigValue = (key, fallback) => config[key] !== undefined ? config[key] : fallback;
+// Generate VSCode tasks for integrated formatting
+const generateVSCodeTasks = () => {
+	const tasks = {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Format and Organize",
+				"type": "shell",
+				"command": "node",
+				"args": ["-e", `
+					const { execSync } = require('child_process');
+					const fs = require('fs');
+					const path = require('path');
+					const ts = require('typescript');
 
-	const useTabs = getConfigValue('INDENT_STYLE', 'space') === 'tab';
-	const tabWidth = parseInt(getConfigValue('INDENT_SIZE', '2')) || 2;
-	const printWidth = parseInt(getConfigValue('PRINT_WIDTH', '80')) || 80;
-	const formatOnSave = getConfigValue('FORMAT_ON_SAVE', 'false') === 'true';
-	const formatOnPaste = getConfigValue('FORMAT_ON_PASTE', 'false') === 'true';
-	const eslintAutoFix = getConfigValue('ESLINT_AUTO_FIX', 'true') === 'true';
-	const wordWrap = getConfigValue('WORD_WRAP', 'off');
+					const filePath = process.argv[1];
+					if (!filePath || !fs.existsSync(filePath)) process.exit(0);
 
-	const settings = {
-		'editor.formatOnSave': formatOnSave,
-		'editor.formatOnPaste': formatOnPaste,
-		'editor.tabSize': tabWidth,
-		'editor.insertSpaces': !useTabs,
-		'editor.detectIndentation': false,
-		'editor.wordWrap': wordWrap,
-		'editor.wordWrapColumn': printWidth,
-		'editor.rulers': [printWidth],
-		'prettier.requireConfig': true,
-		'prettier.configPath': '.formatter/.prettierrc.js',
-		'eslint.enable': true,
-		'eslint.format.enable': true,
-		'editor.codeActionsOnSave': {
-			'source.fixAll.eslint': eslintAutoFix,
-			'source.organizeImports': true,
-		},
-		'[javascript]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
-		'[javascriptreact]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
-		'[typescript]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
-		'[typescriptreact]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
-		'[css]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
-		'[scss]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
-		'[json]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
-		'[markdown]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
-		'[yaml]': { 'editor.defaultFormatter': 'esbenp.prettier-vscode' },
+					// Step 1: Organize imports for TS/JS files FIRST
+					if (/\\.(ts|tsx|js|jsx)$/.test(filePath)) {
+						const sourceText = fs.readFileSync(filePath, 'utf8');
+						const configPath = ts.findConfigFile(process.cwd(), ts.sys.fileExists, 'tsconfig.json');
+						const configFile = ts.readConfigFile(configPath, ts.sys.readFile);
+						const compilerOptions = ts.parseJsonConfigFileContent(configFile.config, ts.sys, path.dirname(configPath));
+
+						const host = {
+							getScriptFileNames: () => [filePath],
+							getScriptVersion: () => '1',
+							getScriptSnapshot: (fileName) => fileName === filePath ? ts.ScriptSnapshot.fromString(sourceText) : undefined,
+							getCurrentDirectory: () => process.cwd(),
+							getCompilationSettings: () => compilerOptions.options,
+							getDefaultLibFileName: (options) => ts.getDefaultLibFilePath(options),
+							fileExists: ts.sys.fileExists,
+							readFile: ts.sys.readFile,
+							readDirectory: ts.sys.readDirectory,
+							getDirectories: ts.sys.getDirectories,
+						};
+
+						const service = ts.createLanguageService(host);
+						const changes = service.organizeImports({ type: 'file', fileName: filePath }, { removeUnusedImports: true, coalesceImports: true }, {});
+
+						if (changes && changes.length > 0) {
+							let newText = sourceText;
+							for (let i = changes.length - 1; i >= 0; i--) {
+								const change = changes[i];
+								for (let j = change.textChanges.length - 1; j >= 0; j--) {
+									const textChange = change.textChanges[j];
+									newText = newText.substring(0, textChange.span.start) + textChange.newText + newText.substring(textChange.span.start + textChange.span.length);
+								}
+							}
+							if (newText !== sourceText) fs.writeFileSync(filePath, newText);
+						}
+					}
+
+					// Step 2: Format with Prettier AFTER import organization
+					execSync(\`npx prettier --config .formatter/.prettierrc.js --write "\${filePath}"\`, { stdio: 'pipe' });
+				`, "${file}"],
+				"group": "build",
+				"presentation": {
+					"echo": false,
+					"reveal": "never",
+					"focus": false,
+					"panel": "shared",
+					"showReuseMessage": false,
+					"clear": false
+				},
+				"problemMatcher": []
+			}
+		]
 	};
 
-	return JSON.stringify(settings, null, '\t');
+	return JSON.stringify(tasks, null, '\t');
 };
+
+// Generate VSCode keybindings that use the built-in format command
+const generateVSCodeKeybindings = () => {
+	const keybindings = [
+		{
+			"key": "shift+alt+f",
+			"command": "editor.action.formatDocument",
+			"when": "editorTextFocus && !editorReadonly"
+		}
+	];
+
+	return JSON.stringify(keybindings, null, '\t');
+};
+
+
+
 
 // Generate .gitattributes for consistent line endings
 const generateGitAttributes = () => {
@@ -650,17 +732,20 @@ const sync = () => {
 	const prettierIgnore = generatePrettierIgnore();
 	const gitAttributes = generateGitAttributes();
 	const vscodeSettings = generateVSCodeSettings(config);
-	const cursorSettings = generateCursorSettings(config);
+	const vscodeTasks = generateVSCodeTasks();
+	const vscodeKeybindings = generateVSCodeKeybindings();
 
 	// Write all files with error handling
 	const files = [
 		{ path: '.formatter/.prettierrc.js', content: prettierConfig },
-		{ path: '.formatter/.eslintrc.js', content: eslintConfig },
+		{ path: 'eslint.config.js', content: eslintConfig },
 		{ path: '.formatter/.editorconfig', content: editorConfig },
-		{ path: '.formatter/.prettierignore', content: prettierIgnore },
+		{ path: '.prettierrc.js', content: `// Prettier configuration that extends .formatter/.prettierrc.js\n// This allows Prettier to work from the project root while keeping\n// the actual configuration in .formatter/ directory\n\nmodule.exports = require('./.formatter/.prettierrc.js');\n` },
+		{ path: '.prettierignore', content: prettierIgnore },
 		{ path: '.gitattributes', content: gitAttributes },
 		{ path: '.vscode/settings.json', content: vscodeSettings },
-		{ path: '.cursor/settings.json', content: cursorSettings },
+		{ path: '.vscode/tasks.json', content: vscodeTasks },
+		{ path: '.vscode/keybindings.json', content: vscodeKeybindings },
 	];
 
 	let successCount = 0;
@@ -672,7 +757,7 @@ const sync = () => {
 
 	if (successCount === files.length) {
 		console.log(`📋 Settings: ${config.PRINT_WIDTH} width, ${config.INDENT_STYLE}(${config.INDENT_SIZE}), ${config.USE_SINGLE_QUOTES === 'true' ? 'single' : 'double'} quotes`);
-		console.log('✅ Updated: .formatter/ configs (.eslintrc.js, .prettierrc.js), IDE settings');
+		console.log('✅ Updated: .formatter/.prettierrc.js, eslint.config.js (flat config), IDE settings');
 		console.log('🎯 Target: src folder only');
 		console.log('🛡️ File Safety: Enabled - No files will be deleted');
 		console.log('💡 Commands: pnpm run format | pnpm run lint:fix | pnpm run format:all');
@@ -683,5 +768,112 @@ const sync = () => {
 	}
 };
 
-if (require.main === module) sync();
-module.exports = { sync };
+// Organize imports functionality
+const organizeImports = () => {
+	console.log('🔄 Organizing imports and removing unused ones...');
+
+	const srcDir = path.join(process.cwd(), 'src');
+	if (!fs.existsSync(srcDir)) {
+		console.error('❌ src directory not found');
+		process.exit(1);
+	}
+
+	// Find all TypeScript files in src
+	const findTsFiles = (dir) => {
+		const files = [];
+		const items = fs.readdirSync(dir);
+		for (const item of items) {
+			const fullPath = path.join(dir, item);
+			const stat = fs.statSync(fullPath);
+			if (stat.isDirectory()) {
+				files.push(...findTsFiles(fullPath));
+			} else if (item.endsWith('.ts') || item.endsWith('.tsx')) {
+				files.push(fullPath);
+			}
+		}
+		return files;
+	};
+
+	const files = findTsFiles(srcDir);
+	console.log(`📄 Processing ${files.length} TypeScript files...`);
+
+	let processedCount = 0;
+
+	// Process each file
+	for (const filePath of files) {
+		try {
+			const ts = require('typescript');
+			const sourceText = fs.readFileSync(filePath, 'utf8');
+
+			// Read tsconfig.json
+			const configPath = ts.findConfigFile(process.cwd(), ts.sys.fileExists, 'tsconfig.json');
+			const configFile = ts.readConfigFile(configPath, ts.sys.readFile);
+			const compilerOptions = ts.parseJsonConfigFileContent(configFile.config, ts.sys, path.dirname(configPath));
+
+			// Create language service host
+			const host = {
+				getScriptFileNames: () => [filePath],
+				getScriptVersion: () => '1',
+				getScriptSnapshot: (fileName) => {
+					if (fileName === filePath) {
+						return ts.ScriptSnapshot.fromString(sourceText);
+					}
+					return undefined;
+				},
+				getCurrentDirectory: () => process.cwd(),
+				getCompilationSettings: () => compilerOptions.options,
+				getDefaultLibFileName: (options) => ts.getDefaultLibFilePath(options),
+				fileExists: ts.sys.fileExists,
+				readFile: ts.sys.readFile,
+				readDirectory: ts.sys.readDirectory,
+				getDirectories: ts.sys.getDirectories,
+			};
+
+			// Create language service
+			const service = ts.createLanguageService(host);
+
+			// Organize imports
+			const changes = service.organizeImports(
+				{ type: 'file', fileName: filePath },
+				{ removeUnusedImports: true, coalesceImports: true },
+				{}
+			);
+
+			if (changes && changes.length > 0) {
+				let newText = sourceText;
+				// Apply changes in reverse order to maintain positions
+				for (let i = changes.length - 1; i >= 0; i--) {
+					const change = changes[i];
+					for (let j = change.textChanges.length - 1; j >= 0; j--) {
+						const textChange = change.textChanges[j];
+						newText = newText.substring(0, textChange.span.start) +
+								 textChange.newText +
+								 newText.substring(textChange.span.start + textChange.span.length);
+					}
+				}
+
+				if (newText !== sourceText) {
+					fs.writeFileSync(filePath, newText);
+					console.log(`✅ ${filePath}`);
+					processedCount++;
+				}
+			}
+		} catch (error) {
+			console.warn(`⚠️  ${filePath}: ${error.message}`);
+		}
+	}
+
+	console.log(`🎯 Organized imports in ${processedCount} files`);
+};
+
+// Handle command line arguments
+if (require.main === module) {
+	const args = process.argv.slice(2);
+	if (args.includes('--organize-imports')) {
+		organizeImports();
+	} else {
+		sync();
+	}
+}
+
+module.exports = { sync, organizeImports };

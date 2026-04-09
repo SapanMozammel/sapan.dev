@@ -1,0 +1,28 @@
+# Generated from FORMATTER_CONFIG.md
+# Only format files in src folder
+
+# Ignore everything at root level
+/*
+
+# But include src folder
+!/src/
+
+# Standard ignores
+node_modules/
+vendor/
+build/
+dist/
+*.min.js
+*.min.css
+*.log
+coverage/
+.cache
+.next
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+composer.lock
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp

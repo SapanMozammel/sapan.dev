@@ -1,0 +1,18 @@
+{
+	"buttons": {
+		"submit": "Submit",
+		"cancel": "Cancel",
+		"learnMore": "Learn More",
+		"viewAll": "View All",
+		"getInTouch": "Get in Touch",
+		"viewProject": "View Project",
+		"readMore": "Read More"
+	},
+	"errors": {
+		"required": "This field is required",
+		"invalidEmail": "Please enter a valid email",
+		"somethingWentWrong": "Something went wrong. Please try again."
+	},
+	"loading": "Loading...",
+	"present": "Present"
+}

@@ -1,0 +1,28 @@
+{
+	"hero": {
+		"title": "Building digital experiences that matter",
+		"subtitle": "Full-stack developer crafting modern, performant web applications",
+		"cta": "View My Work",
+		"ctaSecondary": "Get in Touch"
+	},
+	"technologies": {
+		"title": "Technologies",
+		"subtitle": "Tools & technologies I work with"
+	},
+	"portfolio": {
+		"title": "Portfolio",
+		"subtitle": "A selection of my recent work"
+	},
+	"experience": {
+		"title": "Experience",
+		"subtitle": "My professional journey"
+	},
+	"testimonials": {
+		"title": "Testimonials",
+		"subtitle": "What people say about working with me"
+	},
+	"workflow": {
+		"title": "Workflow",
+		"subtitle": "How I approach projects"
+	}
+}

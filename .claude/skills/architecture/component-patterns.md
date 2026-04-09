@@ -1,0 +1,226 @@
+# Architecture — Component Patterns
+
+## Server vs Client Components
+
+| | Server (default) | Client |
+|---|---|---|
+| Directive | none | `'use client'` at top |
+| Hooks / state | ✗ | ✓ |
+| `memo()` | ✗ | ✓ + set `displayName` |
+| Event handlers | ✗ | ✓ |
+| When to use | Purely presentational | Needs interactivity, hooks, or events |
+
+**Rules:**
+- Server Component by default — add `'use client'` only when hooks/events are required
+- Server CAN import Client. Client CANNOT import Server.
+- `memo()` + `ComponentName.displayName = 'ComponentName'` mandatory on every Client Component
+
+## Component Templates
+
+### Server Component
+```tsx
+import { cn } from '@/lib/utils'
+
+type Props = {
+  className?: string
+}
+
+const ComponentName = ({ className }: Props) => {
+  return (
+    <div className={cn('base-classes', className)}>
+      {/* content */}
+    </div>
+  )
+}
+
+export default ComponentName
+```
+
+### Client Component
+```tsx
+'use client'
+
+import { memo } from 'react'
+import { cn } from '@/lib/utils'
+
+type Props = {
+  className?: string
+}
+
+const ComponentName = memo(({ className }: Props) => {
+  return (
+    <div className={cn('base-classes', className)}>
+      {/* content */}
+    </div>
+  )
+})
+
+ComponentName.displayName = 'ComponentName'
+
+export default ComponentName
+```
+
+## cn() Utility
+
+Always use `cn()` from `@/lib/utils` for all className composition — never string-concatenate:
+
+```tsx
+import { cn } from '@/lib/utils'
+
+// ✓ correct
+cn('base-class', isActive && 'active-class', className)
+
+// ✗ wrong
+`base-class ${isActive ? 'active-class' : ''}`
+```
+
+## Common UI Patterns
+
+### Border
+```
+border border-solid border-secondary-200/50 dark:border-secondary-700/50
+```
+
+### Shadow
+```
+shadow-lg shadow-black/5 dark:shadow-white/5
+```
+
+### Hover (card/panel)
+```
+hover:-translate-y-1 hover:shadow-lg transition-all duration-300
+```
+
+### Active / Selected State
+```
+bg-primary/10 text-primary dark:bg-success/10 dark:text-success
+```
+
+### Focus State (form inputs)
+```
+focus:border-primary dark:focus:border-success focus:outline-none
+```
+
+### Error State
+```
+border-danger text-danger
+```
+
+### Disabled State
+```
+opacity-50 cursor-not-allowed
+```
+
+---
+
+## Section Structure
+
+Every landing page section follows this exact pattern:
+
+```tsx
+<SectionSeparator lts rts lbs rbs bl ll rl>
+  <div className="container flex w-full grow flex-col">
+    <SectionTitle
+      title="Section Title"
+      subtitle="SECTION SUBTITLE"
+      watermark="Watermark"
+    />
+    {/* Section content */}
+  </div>
+</SectionSeparator>
+```
+
+### SectionSeparator Props (decorative corners/edges)
+- `lts` / `rts` / `lbs` / `rbs` — Left/Right Top/Bottom Stars (IconPlus corners)
+- `tl` / `bl` / `ll` / `rl` — Top/Bottom/Left/Right Lines
+
+### SectionTitle Props
+- `title` — Main heading (`font-cg`)
+- `subtitle` — Small caps label (secondary color)
+- `watermark` — Large background text (very low opacity)
+
+---
+
+## Button System
+
+Located at `src/components/layout/common/Button.tsx`, variants in `Button/variants.ts`.
+
+### Props
+- `fill: boolean` — filled vs outlined
+- `gradient: boolean` — gradient vs solid
+- `loading: boolean` — loading spinner
+- `to: string` — renders as Link instead of button
+
+### 8 Variants
+1. `link-fill-gradient` — Gradient-filled link
+2. `link-fill-solid` — Solid-filled link
+3. `link-outline-gradient` — Gradient-outlined link
+4. `link-outline-solid` — Solid-outlined link
+5. `button-fill-gradient` — Gradient-filled button
+6. `button-fill-solid` — Solid-filled button
+7. `button-outline-gradient` — Gradient-outlined button
+8. `button-outline-solid` — Solid-outlined button
+
+### Gradient Stops
+- Light: `var(--color-info)` → `var(--color-primary)`
+- Dark: `var(--color-primary)` → `var(--color-success)`
+
+---
+
+## Animation Library Selection
+
+| Interaction | Duration | Library |
+|---|---|---|
+| Hover | 150ms | CSS transition |
+| Button | 200ms | Framer Motion |
+| Card / panel | 300ms | Framer Motion |
+| Section entrance | 500ms | Framer Motion |
+| Page transition | 800ms | Framer Motion |
+| Scroll sequences | variable | GSAP + ScrollTrigger |
+| 3D | — | Three.js / R3F |
+
+### CSS Keyframe Classes
+| Class | Duration | Use |
+|---|---|---|
+| `animate-noise` | 1s infinite | Background texture |
+| `animate-spin-slow` | 10s infinite | Slow rotation |
+| `animate-faq-border-shift` | 3s infinite | Gradient border shift |
+| `animate-overlay-in` | 0.3s forwards | Modal fade in |
+| `animate-overlay-out` | 0.3s forwards | Modal fade out |
+| `animate-slide-in-from-{direction}` | 0.3s forwards | Slide in |
+| `animate-slide-out-to-{direction}` | 0.3s forwards | Slide out |
+
+---
+
+## File Organization
+
+| What | Where |
+|---|---|
+| Page sections | `src/components/layout/{SectionName}/index.tsx` |
+| Sub-components | `src/components/layout/{SectionName}/{SubComponent}.tsx` |
+| Shared layout pieces | `src/components/layout/common/` |
+| Base UI (shadcn + custom) | `src/components/ui/` |
+| Custom icons | `src/components/icons/` |
+| Static content | `src/data/content/` |
+| App config | `src/data/config/` |
+| Type definitions | `src/types/` |
+| Utilities | `src/lib/utils/` |
+| Styles | `src/styles/` |
+
+---
+
+## Pre-write Checklist
+
+Before writing or modifying any component:
+
+- [ ] `cn()` from `@/lib/utils` for all classNames — never string-concatenate
+- [ ] Design system tokens only — no hardcoded colors or hex values
+- [ ] `dark:` variant on every color class
+- [ ] Mobile-first breakpoints (`sm:`, `md:`, `lg:`)
+- [ ] Server Component by default — `'use client'` only when hooks/events required
+- [ ] If Client: `memo()` + `ComponentName.displayName = 'ComponentName'`
+- [ ] Navigation: `import { Link } from '@/i18n/navigation'` for internal routes. For external links (`https://`, `mailto:`, `tel:`), use `import NextLink from 'next/link'`. Both can coexist in the same file.
+- [ ] All imports use `@/` alias
+- [ ] `type Props = { ... }` — never `interface`
+- [ ] No `any` types
+- [ ] `export default ComponentName` at the bottom — never both `export const` and `export default` for the same component
