@@ -11,11 +11,12 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
 	metadataBase: new URL('https://sapan-dev.vercel.app'),
 	title: {
-		template: '%s | sapan.dev',
-		default: 'sapan.dev',
+		template: '%s | Sapan Mozammel',
+		default: 'Sapan Mozammel — Frontend Developer',
 	},
-	description: 'Full-stack developer crafting modern, performant web applications.',
-	authors: [{ name: 'Sapan Mozammel' }],
+	description: 'Frontend developer building digital experiences that matter — crafting modern, performant web applications with React, Next.js, TypeScript, and Node.js.',
+	keywords: ['Sapan Mozammel', 'Frontend Developer', 'React Developer', 'Next.js Developer', 'TypeScript', 'Node.js', 'Tailwind CSS', 'GraphQL', 'MongoDB', 'WordPress', 'Web Development', 'Portfolio', 'Bangladesh'],
+	authors: [{ name: 'Sapan Mozammel', url: 'https://sapan-dev.vercel.app' }],
 	creator: 'Sapan Mozammel',
 	robots: {
 		index: true,
@@ -38,7 +39,26 @@ export const metadata: Metadata = {
 	manifest: '/site.webmanifest',
 	openGraph: {
 		type: 'website',
-		siteName: 'sapan.dev',
+		siteName: 'Sapan Mozammel',
+		url: 'https://sapan-dev.vercel.app',
+		title: 'Sapan Mozammel — Frontend Developer',
+		description: 'Frontend developer building digital experiences that matter — crafting modern, performant web applications with React, Next.js, TypeScript, and Node.js.',
+		images: [
+			{
+				url: '/og-image.png',
+				width: 1200,
+				height: 630,
+				alt: 'Sapan Mozammel — Frontend Developer',
+			},
+		],
+	},
+	twitter: {
+		card: 'summary_large_image',
+		site: '@sapan_mozammel',
+		creator: '@sapan_mozammel',
+		title: 'Sapan Mozammel — Frontend Developer',
+		description: 'Frontend developer building digital experiences that matter — crafting modern, performant web applications with React, Next.js, TypeScript, and Node.js.',
+		images: ['/og-image.png'],
 	},
 };
 
