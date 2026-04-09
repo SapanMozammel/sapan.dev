@@ -9,7 +9,7 @@ import { getMessages } from 'next-intl/server';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-	metadataBase: new URL('https://sapan.dev'),
+	metadataBase: new URL('https://sapan-dev.vercel.app'),
 	title: {
 		template: '%s | sapan.dev',
 		default: 'sapan.dev',
@@ -27,6 +27,15 @@ export const metadata: Metadata = {
 			'max-snippet': -1,
 		},
 	},
+	icons: {
+		icon: [
+			{ url: '/favicon.svg', type: 'image/svg+xml' },
+			{ url: '/favicon-96x96.png', type: 'image/png', sizes: '96x96' },
+		],
+		shortcut: '/favicon.ico',
+		apple: { url: '/apple-touch-icon.png', sizes: '180x180' },
+	},
+	manifest: '/site.webmanifest',
 	openGraph: {
 		type: 'website',
 		siteName: 'sapan.dev',

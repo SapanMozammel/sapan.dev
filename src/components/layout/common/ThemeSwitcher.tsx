@@ -60,7 +60,6 @@ const ThemeSwitcher = memo(() => {
 			const currentIndex = themes.indexOf(themeString as (typeof themes)[number]);
 			const nextTheme = themes[(currentIndex + 1) % themes.length];
 			return setTheme(nextTheme);
-			// eslint-disable-next-line react-hooks/exhaustive-deps
 		},
 		[theme, setTheme]
 	);

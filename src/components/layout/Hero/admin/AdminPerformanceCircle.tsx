@@ -16,7 +16,7 @@ const AdminPerformanceCircle = () => {
 				<svg className='animate-spin-slow absolute inset-[0.1em]' viewBox='0 0 100 100'>
 					<path id='curve-text' fill='transparent' strokeWidth='none' d='M0 50a1 1 0 0 1 100 0A1 1 0 0 1 0 50' />
 					<text>
-						<textPath className='fill-info/80' dominantBaseline='Hanging' fontSize='0.435em' href='#curve-text' letterSpacing='0.1em'>
+						<textPath className='fill-info/80' dominantBaseline='hanging' fontSize='0.435em' href='#curve-text' letterSpacing='0.1em'>
 							PERFORMANCE - PERFORMANCE - PERFORMANCE - PERFORMANCE - PERFORMANCE - PERFORMANCE -
 						</textPath>
 					</text>

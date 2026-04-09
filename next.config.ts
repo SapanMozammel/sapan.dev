@@ -9,11 +9,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig: NextConfig = {
-	eslint: {
-		dirs: ['src'],
-		ignoreDuringBuilds: false,
-	},
-
 	typescript: {
 		ignoreBuildErrors: false,
 	},

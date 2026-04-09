@@ -36,7 +36,7 @@ src/
 │   ├── articles/           # Listing + [slug] detail
 │   └── layout.tsx          # Locale layout: html/body, fonts, RTL, Providers, Header, Footer
 ├── app/layout.tsx          # Root layout: bare fragment + global.scss only
-├── middleware.ts            # next-intl locale detection & routing
+├── proxy.ts                 # next-intl locale detection & routing
 ├── components/
 │   ├── layout/             # Page sections (each: index.tsx + sub-files)
 │   ├── layout/common/      # Shared: Button, SectionSeparator, SectionTitle, ConnectButton,

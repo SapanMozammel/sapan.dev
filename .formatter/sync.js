@@ -187,7 +187,6 @@ const generatePrettierConfig = (config) => {
 	const bracketSpacing = getConfigValue('BRACKET_SPACING', 'true') === 'true';
 	const bracketSameLine = getConfigValue('BRACKET_SAME_LINE', 'false') === 'true';
 	const jsxSingleQuote = getConfigValue('JSX_SINGLE_QUOTE', 'true') === 'true';
-	const jsxBracketSameLine = getConfigValue('JSX_BRACKET_SAME_LINE', 'false') === 'true';
 	const singleAttributePerLine = getConfigValue('SINGLE_ATTRIBUTE_PER_LINE', 'false') === 'true';
 	const arrowParens = getConfigValue('ARROW_PARENS', 'avoid');
 	const endOfLine = getConfigValue('END_OF_LINE', 'lf');
@@ -220,7 +219,6 @@ const generatePrettierConfig = (config) => {
 
 	// JSX formatting
 	jsxSingleQuote: ${jsxSingleQuote},
-	jsxBracketSameLine: ${jsxBracketSameLine},
 	singleAttributePerLine: ${singleAttributePerLine},
 
 	// Plugins for modern development
@@ -303,7 +301,7 @@ Thumbs.db
 *.temp`;
 };
 
-// Generate ESLint config (optimized for Next.js built-in ESLint)
+// Generate ESLint flat config (eslint.config.js) for ESLint 9+ / Next.js 16+
 const generateESLintConfig = (config) => {
 	// Helper function to get config value with fallback
 	const getConfigValue = (key, fallback) => config[key] !== undefined ? config[key] : fallback;
@@ -318,114 +316,126 @@ const generateESLintConfig = (config) => {
 	const reactJsxNoTargetBlank = getConfigValue('REACT_JSX_NO_TARGET_BLANK', 'error');
 	const reactNoUnescapedEntities = getConfigValue('REACT_NO_UNESCAPED_ENTITIES', 'off');
 
-	return `module.exports = {
-	env: { browser: true, es2022: true, node: true, jest: true },
-	extends: [
-		'next/core-web-vitals',
-		'prettier',
-	],
-	parser: '@typescript-eslint/parser',
-	parserOptions: {
-		ecmaFeatures: { jsx: true },
-		ecmaVersion: 2022,
-		sourceType: 'module',
-		project: './tsconfig.json',
-	},
-	plugins: ['prettier'],
-	settings: {
-		react: { version: 'detect' },
-		'import/resolver': {
-			typescript: {
-				alwaysTryTypes: true,
+	return `const nextConfig = require('eslint-config-next/core-web-vitals');
+const prettierConfig = require('eslint-config-prettier');
+const prettierPlugin = require('eslint-plugin-prettier');
+const typescriptPlugin = require('@typescript-eslint/eslint-plugin');
+const typescriptParser = require('@typescript-eslint/parser');
+
+// Prettier options from .formatter/.prettierrc.js (strip Prettier-only keys not valid in ESLint rule)
+const { plugins: _p, overrides: _o, ...prettierOptions } = require('./.formatter/.prettierrc.js');
+
+module.exports = [
+	// Next.js core-web-vitals flat config (includes React, React Hooks, import, a11y, @next rules)
+	...Object.values(nextConfig),
+
+	// TypeScript + Prettier layer
+	{
+		files: ['**/*.ts', '**/*.tsx'],
+		plugins: {
+			prettier: prettierPlugin,
+			'@typescript-eslint': typescriptPlugin,
+		},
+		languageOptions: {
+			parser: typescriptParser,
+			parserOptions: {
+				ecmaFeatures: { jsx: true },
+				ecmaVersion: 2022,
+				sourceType: 'module',
 				project: './tsconfig.json',
 			},
 		},
+		rules: {
+			// Prettier — reads options from .formatter/.prettierrc.js
+			'prettier/prettier': ['error', prettierOptions],
+
+			// Code quality
+			'max-len': ['error', {
+				code: ${maxLineLength},
+				ignoreUrls: true,
+				ignoreStrings: true,
+				ignoreTemplateLiterals: true,
+				ignoreComments: true,
+			}],
+			'no-console': '${noConsole}',
+			'no-debugger': '${noDebugger}',
+			'prefer-const': '${preferConst}',
+			'no-var': '${noVar}',
+			'eqeqeq': ['${eqeqeq}', 'always'],
+			'curly': ['error', 'all'],
+
+			// React
+			'react/jsx-uses-react': 'off',
+			'react/react-in-jsx-scope': 'off',
+			'react/prop-types': 'off',
+			'react/jsx-key': 'error',
+			'react/jsx-no-duplicate-props': 'error',
+			'react/jsx-no-undef': 'error',
+			'react/jsx-no-target-blank': '${reactJsxNoTargetBlank}',
+			'react/no-unused-state': 'warn',
+			'react/self-closing-comp': 'error',
+			'react/no-unescaped-entities': '${reactNoUnescapedEntities}',
+
+			// React Hooks
+			'react-hooks/rules-of-hooks': 'error',
+			'react-hooks/exhaustive-deps': '${reactHooksExhaustiveDeps}',
+
+			// React Compiler rules (react-hooks v7) — project does not use React Compiler
+			'react-hooks/immutability': 'off',
+			'react-hooks/set-state-in-effect': 'off',
+			'react-hooks/refs': 'off',
+			'react-hooks/preserve-manual-memoization': 'off',
+
+			// Import
+			'no-duplicate-imports': 'error',
+			'import/no-unresolved': 'off',
+
+			// Next.js
+			'@next/next/no-html-link-for-pages': 'error',
+			'@next/next/no-img-element': 'warn',
+
+			// Best practices
+			'no-eval': 'error',
+			'no-implied-eval': 'error',
+			'no-new-func': 'error',
+			'no-script-url': 'error',
+			'no-alert': 'warn',
+			'object-shorthand': 'error',
+			'prefer-template': 'error',
+
+			// Disable conflicting prettier rules
+			...prettierConfig.rules,
+		},
 	},
-	rules: {
-		// Prettier integration - use our custom config to ensure consistency
-		'prettier/prettier': ['error', {
-			// Basic formatting
-			semi: ${getConfigValue('USE_SEMICOLONS', 'true') === 'true'},
-			singleQuote: ${getConfigValue('USE_SINGLE_QUOTES', 'true') === 'true'},
-			trailingComma: '${getConfigValue('TRAILING_COMMA', 'es5')}',
-			useTabs: ${getConfigValue('INDENT_STYLE', 'space') === 'tab'},
-			tabWidth: ${parseInt(getConfigValue('INDENT_SIZE', '2')) || 2},
-			printWidth: ${parseInt(getConfigValue('PRINT_WIDTH', '80')) || 80},
 
-			// Advanced formatting
-			bracketSpacing: ${getConfigValue('BRACKET_SPACING', 'true') === 'true'},
-			bracketSameLine: ${getConfigValue('BRACKET_SAME_LINE', 'false') === 'true'},
-			arrowParens: '${getConfigValue('ARROW_PARENS', 'avoid')}',
-			endOfLine: '${getConfigValue('END_OF_LINE', 'lf')}',
-			proseWrap: '${getConfigValue('PROSE_WRAP', 'preserve')}',
-
-			// JSX formatting
-			jsxSingleQuote: ${getConfigValue('JSX_SINGLE_QUOTE', 'true') === 'true'},
-			jsxBracketSameLine: ${getConfigValue('JSX_BRACKET_SAME_LINE', 'false') === 'true'},
-			singleAttributePerLine: ${getConfigValue('SINGLE_ATTRIBUTE_PER_LINE', 'false') === 'true'},
-		}],
-
-		// Code quality rules
-		'max-len': ['error', {
-			code: ${maxLineLength},
-			ignoreUrls: true,
-			ignoreStrings: true,
-			ignoreTemplateLiterals: true,
-			ignoreComments: true,
-		}],
-		'no-console': '${noConsole}',
-		'no-debugger': '${noDebugger}',
-		'prefer-const': '${preferConst}',
-		'no-var': '${noVar}',
-		'eqeqeq': ['${eqeqeq}', 'always'],
-		'curly': ['error', 'all'],
-
-		// React rules
-		'react/jsx-uses-react': 'off',
-		'react/react-in-jsx-scope': 'off',
-		'react/prop-types': 'off', // TypeScript handles this
-		'react/jsx-key': 'error',
-		'react/jsx-no-duplicate-props': 'error',
-		'react/jsx-no-undef': 'error',
-		'react/jsx-no-target-blank': '${reactJsxNoTargetBlank}',
-		'react/no-unused-state': 'warn',
-		'react/self-closing-comp': 'error',
-		'react/no-unescaped-entities': '${reactNoUnescapedEntities}',
-
-		// React Hooks rules
-		'react-hooks/rules-of-hooks': 'error',
-		'react-hooks/exhaustive-deps': '${reactHooksExhaustiveDeps}',
-
-		// Import/Export rules
-		'no-duplicate-imports': 'error',
-		'import/no-unresolved': 'off', // Handled by TypeScript
-
-		// Next.js specific rules
-		'@next/next/no-html-link-for-pages': 'error',
-		'@next/next/no-img-element': 'warn',
-
-		// Best practices
-		'no-eval': 'error',
-		'no-implied-eval': 'error',
-		'no-new-func': 'error',
-		'no-script-url': 'error',
-		'no-alert': 'warn',
-		'object-shorthand': 'error',
-		'prefer-template': 'error',
+	// JS files — no typed linting
+	{
+		files: ['**/*.js', '**/*.mjs', '**/*.cjs'],
+		plugins: { prettier: prettierPlugin },
+		rules: {
+			'prettier/prettier': ['error'],
+			'no-console': '${noConsole}',
+			'prefer-const': '${preferConst}',
+			'no-var': '${noVar}',
+		},
 	},
-	ignorePatterns: [
-		'node_modules/',
-		'.next/',
-		'out/',
-		'build/',
-		'dist/',
-		'*.min.js',
-		'*.min.css',
-		'coverage/',
-		'.cache/',
-		'public/',
-	],
-};`;
+
+	// Ignores
+	{
+		ignores: [
+			'node_modules/**',
+			'.next/**',
+			'out/**',
+			'build/**',
+			'dist/**',
+			'**/*.min.js',
+			'**/*.min.css',
+			'coverage/**',
+			'.cache/**',
+			'public/**',
+		],
+	},
+];`;
 };
 
 // Generate EditorConfig
@@ -728,7 +738,7 @@ const sync = () => {
 	// Write all files with error handling
 	const files = [
 		{ path: '.formatter/.prettierrc.js', content: prettierConfig },
-		{ path: '.formatter/.eslintrc.js', content: eslintConfig },
+		{ path: 'eslint.config.js', content: eslintConfig },
 		{ path: '.formatter/.editorconfig', content: editorConfig },
 		{ path: '.prettierrc.js', content: `// Prettier configuration that extends .formatter/.prettierrc.js\n// This allows Prettier to work from the project root while keeping\n// the actual configuration in .formatter/ directory\n\nmodule.exports = require('./.formatter/.prettierrc.js');\n` },
 		{ path: '.prettierignore', content: prettierIgnore },
@@ -747,7 +757,7 @@ const sync = () => {
 
 	if (successCount === files.length) {
 		console.log(`📋 Settings: ${config.PRINT_WIDTH} width, ${config.INDENT_STYLE}(${config.INDENT_SIZE}), ${config.USE_SINGLE_QUOTES === 'true' ? 'single' : 'double'} quotes`);
-		console.log('✅ Updated: .formatter/ configs (.eslintrc.js, .prettierrc.js), IDE settings');
+		console.log('✅ Updated: .formatter/.prettierrc.js, eslint.config.js (flat config), IDE settings');
 		console.log('🎯 Target: src folder only');
 		console.log('🛡️ File Safety: Enabled - No files will be deleted');
 		console.log('💡 Commands: pnpm run format | pnpm run lint:fix | pnpm run format:all');

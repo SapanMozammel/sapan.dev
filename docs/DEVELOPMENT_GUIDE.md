@@ -126,7 +126,7 @@ src/
 │   └── content/                     # experience.ts, portfolio.tsx, testimonials.ts,
 │                                    # workflow.ts, faq.ts, blogs.ts
 │
-├── middleware.ts                     # next-intl locale detection & routing
+├── proxy.ts                          # next-intl locale detection & routing
 ├── i18n/
 │   ├── routing.ts                   # defineRouting — locales, defaultLocale, localePrefix
 │   ├── navigation.ts                # Typed Link, useRouter, usePathname
