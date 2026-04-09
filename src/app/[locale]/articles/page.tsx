@@ -25,71 +25,69 @@ const BlogPage = memo(() => {
 	};
 
 	return (
-		<section className='flex flex-col pt-14 sm:pt-20'>
-			<div className='relative z-2 flex grow flex-col pb-8 sm:pb-12 lg:pb-16'>
-				<SectionSeparator lts rts lbs rbs tl bl ll rl>
-					<div className='container flex w-full grow flex-col items-center justify-start gap-4 pb-8 sm:pb-12 lg:pb-16'>
-						<SectionTitle subtitle='Dev Journal' title='Thoughts on Frontend' watermark='Articles' />
-						<div className='mb-4 flex w-full flex-wrap justify-center gap-2'>
-							{ALL_CATEGORIES.map((cat) => (
-								<button
-									key={cat}
-									onClick={() => handleCategory(cat)}
-									className={cn(
-										'font-hg cursor-pointer rounded-full border px-4 py-1.5 text-xs font-bold tracking-widest uppercase transition-all duration-200',
-										activeCategory === cat
-											? 'border-primary bg-primary dark:border-success dark:bg-success dark:text-dark text-white'
-											: 'border-secondary-300 text-secondary-600 dark:text-secondary-400 hover:border-secondary-400 dark:border-secondary-700 dark:hover:border-secondary-600 hover:text-dark dark:hover:text-white'
-									)}
-								>
-									{cat}
-								</button>
-							))}
-						</div>
-						<div className='grid w-full grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3'>
-							{paginated.map((post) => (
-								<BlogCard key={post.slug} post={post} />
-							))}
-						</div>
-						{totalPages > 1 && (
-							<div className='mt-4 flex items-center gap-2'>
-								<button
-									onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-									disabled={currentPage === 1}
-									className='border-secondary-300 text-secondary-600 dark:text-secondary-400 hover:border-primary hover:text-primary dark:border-secondary-700 dark:hover:border-success dark:hover:text-success flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border transition-all duration-200 disabled:pointer-events-none disabled:opacity-40'
-									aria-label='Previous page'
-								>
-									<IconChevronLeft size={16} stroke={2} />
-								</button>
-								{Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-									<button
-										key={page}
-										onClick={() => setCurrentPage(page)}
-										className={cn(
-											'font-hg h-9 w-9 cursor-pointer rounded-lg border text-xs font-bold transition-all duration-200',
-											currentPage === page
-												? 'border-primary bg-primary dark:border-success dark:bg-success dark:text-dark text-white'
-												: 'border-secondary-300 text-secondary-600 dark:text-secondary-400 hover:border-primary hover:text-primary dark:border-secondary-700 dark:hover:border-success dark:hover:text-success'
-										)}
-										aria-label={`Page ${page}`}
-										aria-current={currentPage === page ? 'page' : undefined}
-									>
-										{page}
-									</button>
-								))}
-								<button
-									onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-									disabled={currentPage === totalPages}
-									className='border-secondary-300 text-secondary-600 dark:text-secondary-400 hover:border-primary hover:text-primary dark:border-secondary-700 dark:hover:border-success dark:hover:text-success flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border transition-all duration-200 disabled:pointer-events-none disabled:opacity-40'
-									aria-label='Next page'
-								>
-									<IconChevronRight size={16} stroke={2} />
-								</button>
-							</div>
-						)}
+		<section className='relative z-1 pt-14 pb-16 sm:pt-20 sm:pb-24 lg:pb-32'>
+			<SectionSeparator lts rts lbs rbs tl bl ll rl>
+				<div className='container flex w-full grow flex-col items-center justify-start gap-4'>
+					<SectionTitle subtitle='Dev Journal' title='Thoughts on Frontend' watermark='Articles' />
+					<div className='mb-4 flex w-full flex-wrap justify-center gap-2'>
+						{ALL_CATEGORIES.map((cat) => (
+							<button
+								key={cat}
+								onClick={() => handleCategory(cat)}
+								className={cn(
+									'font-hg cursor-pointer rounded-full border px-4 py-1.5 text-xs font-bold tracking-widest uppercase transition-all duration-200',
+									activeCategory === cat
+										? 'border-primary bg-primary dark:border-success dark:bg-success dark:text-dark text-white'
+										: 'border-secondary-300 text-secondary-600 dark:text-secondary-400 hover:border-secondary-400 dark:border-secondary-700 dark:hover:border-secondary-600 hover:text-dark dark:hover:text-white'
+								)}
+							>
+								{cat}
+							</button>
+						))}
 					</div>
-				</SectionSeparator>
-			</div>
+					<div className='grid w-full grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3'>
+						{paginated.map((post) => (
+							<BlogCard key={post.slug} post={post} />
+						))}
+					</div>
+					{totalPages > 1 && (
+						<div className='mt-4 flex items-center gap-2'>
+							<button
+								onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+								disabled={currentPage === 1}
+								className='border-secondary-300 text-secondary-600 dark:text-secondary-400 hover:border-primary hover:text-primary dark:border-secondary-700 dark:hover:border-success dark:hover:text-success flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border transition-all duration-200 disabled:pointer-events-none disabled:opacity-40'
+								aria-label='Previous page'
+							>
+								<IconChevronLeft size={16} stroke={2} />
+							</button>
+							{Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+								<button
+									key={page}
+									onClick={() => setCurrentPage(page)}
+									className={cn(
+										'font-hg h-9 w-9 cursor-pointer rounded-lg border text-xs font-bold transition-all duration-200',
+										currentPage === page
+											? 'border-primary bg-primary dark:border-success dark:bg-success dark:text-dark text-white'
+											: 'border-secondary-300 text-secondary-600 dark:text-secondary-400 hover:border-primary hover:text-primary dark:border-secondary-700 dark:hover:border-success dark:hover:text-success'
+									)}
+									aria-label={`Page ${page}`}
+									aria-current={currentPage === page ? 'page' : undefined}
+								>
+									{page}
+								</button>
+							))}
+							<button
+								onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+								disabled={currentPage === totalPages}
+								className='border-secondary-300 text-secondary-600 dark:text-secondary-400 hover:border-primary hover:text-primary dark:border-secondary-700 dark:hover:border-success dark:hover:text-success flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border transition-all duration-200 disabled:pointer-events-none disabled:opacity-40'
+								aria-label='Next page'
+							>
+								<IconChevronRight size={16} stroke={2} />
+							</button>
+						</div>
+					)}
+				</div>
+			</SectionSeparator>
 		</section>
 	);
 });

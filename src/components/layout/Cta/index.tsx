@@ -9,7 +9,7 @@ import CtaNav from './CtaNav';
 
 const Cta = () => (
 	<React.Fragment>
-		<section className='relative z-1 py-8 sm:py-12 lg:py-16'>
+		<section className='relative z-1 py-16 sm:py-20 lg:py-24'>
 			<SectionSeparator lts rts lbs rbs tl bl ll rl>
 				<div className='container'>
 					<div className='bg-dark border-success/15 relative z-10 mx-auto max-w-5xl overflow-hidden rounded-2xl border shadow-[0_8px_40px_-12px_color-mix(in_srgb,var(--color-primary)_25%,transparent),0_2px_12px_color-mix(in_srgb,var(--color-success)_15%,transparent)]'>

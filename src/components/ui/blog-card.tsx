@@ -54,7 +54,7 @@ const BlogCard = ({ post, className }: BlogCardProps) => {
 						</span>
 					))}
 				</div>
-				<div className='border-secondary-100 dark:border-secondary-800 flex items-center justify-between border-t pt-3'>
+				<div className='border-secondary-100 dark:border-secondary-800 mt-1.5 flex items-center justify-between border-t pt-4'>
 					<div className='text-secondary-400 dark:text-secondary-600 flex items-center gap-3 text-xs'>
 						<span className='font-hg font-medium'>{formatDate(post.publishedAt)}</span>
 						<span className='flex items-center gap-1'>

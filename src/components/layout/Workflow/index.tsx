@@ -59,9 +59,9 @@ const Workflow = memo(() => {
 	};
 
 	return (
-		<section id='workflow' className='relative z-1 pb-8 sm:pb-12 lg:pb-16'>
+		<section id='workflow' className='relative z-1 pb-16 sm:pb-20 lg:pb-24'>
 			<SectionSeparator lts rts lbs rbs tl bl ll rl>
-				<div className='container flex w-full grow flex-col items-center justify-start gap-8 pb-8 sm:pb-12 lg:pb-16'>
+				<div className='container flex w-full grow flex-col items-center justify-start gap-8'>
 					<SectionTitle subtitle='How I Work' title='From Idea to Launch' watermark='Workflow' />
 					<div
 						onMouseEnter={() => setIsPaused(true)}

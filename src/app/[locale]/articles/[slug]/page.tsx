@@ -138,78 +138,66 @@ const BlogDetailPage = async ({ params }: Props) => {
 	const categoryColor = CATEGORY_COLORS[post.category] ?? DEFAULT_CATEGORY_COLOR;
 
 	return (
-		<section className='flex flex-col pt-14 sm:pt-20'>
-			<div className='relative z-2 flex grow flex-col pb-8 sm:pb-12 lg:pb-16'>
-				<SectionSeparator lts rts lbs rbs tl bl ll rl>
-					<div className='container flex w-full grow flex-col items-center justify-start gap-8 pb-8 sm:pb-12 lg:pb-16'>
-						{/* Back navigation */}
-						<div className='w-full pt-6 sm:pt-10'>
-							<Link
-								href='/articles'
-								className='font-hg text-secondary-500 hover:text-primary dark:hover:text-success inline-flex items-center gap-2 text-xs font-bold tracking-wider uppercase transition-colors duration-200'
-							>
-								<IconArrowLeft size={14} stroke={2.5} />
-								All Articles
-							</Link>
+		<section className='relative z-1 pt-14 pb-16 sm:pt-20 sm:pb-24 lg:pb-32'>
+			<SectionSeparator lts rts lbs rbs tl bl ll rl>
+				<div className='container flex w-full grow flex-col items-center justify-start gap-4 sm:gap-5'>
+					{/* Back navigation */}
+					<div className='w-full pt-6 sm:pt-10'>
+						<Link
+							href='/articles'
+							className='font-hg text-secondary-500 hover:text-primary dark:hover:text-success inline-flex items-center gap-2 text-xs font-bold tracking-wider uppercase transition-colors duration-200'
+						>
+							<IconArrowLeft size={14} stroke={2.5} />
+							All Articles
+						</Link>
+					</div>
+					<div className='border-secondary-200/50 dark:border-secondary-700/50 relative w-full overflow-hidden rounded-2xl border bg-white shadow-lg shadow-black/5 dark:bg-black dark:shadow-white/5'>
+						<div className='relative h-56 w-full overflow-hidden sm:h-72 lg:h-96'>
+							<Image src={post.thumbnail} alt={post.title} fill sizes='(max-width: 768px) 100vw, 1200px' className='object-cover' placeholder='blur' blurDataURL={BLUR_PLACEHOLDER} priority quality={90} />
+							<div className='absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent' />
+							<span className={cn('font-hg absolute bottom-4 left-4 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest uppercase backdrop-blur-sm', categoryColor)}>{post.category}</span>
 						</div>
-						<div className='border-secondary-200/50 dark:border-secondary-700/50 relative w-full overflow-hidden rounded-2xl border bg-white shadow-lg shadow-black/5 dark:bg-black dark:shadow-white/5'>
-							<div className='relative h-56 w-full overflow-hidden sm:h-72 lg:h-96'>
-								<Image
-									src={post.thumbnail}
-									alt={post.title}
-									fill
-									sizes='(max-width: 768px) 100vw, 1200px'
-									className='object-cover'
-									placeholder='blur'
-									blurDataURL={BLUR_PLACEHOLDER}
-									priority
-									quality={90}
-								/>
-								<div className='absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent' />
-								<span className={cn('font-hg absolute bottom-4 left-4 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest uppercase backdrop-blur-sm', categoryColor)}>{post.category}</span>
-							</div>
-							<div className='flex flex-col gap-5 p-6 sm:p-8 lg:p-10'>
-								<div className='flex flex-wrap items-center gap-3'>
-									<div className='text-secondary-400 dark:text-secondary-600 flex items-center gap-1.5 text-xs'>
-										<IconClock size={13} stroke={2} />
-										<span className='font-hg font-medium'>{post.readTime} min read</span>
-									</div>
-									<span className='bg-secondary-200 dark:bg-secondary-700 h-1 w-1 rounded-full' />
-									<span className='text-secondary-400 dark:text-secondary-600 font-hg text-xs font-medium'>{formatDate(post.publishedAt)}</span>
+						<div className='flex flex-col gap-5 p-6 sm:p-8 lg:p-10'>
+							<div className='flex flex-wrap items-center gap-3'>
+								<div className='text-secondary-400 dark:text-secondary-600 flex items-center gap-1.5 text-xs'>
+									<IconClock size={13} stroke={2} />
+									<span className='font-hg font-medium'>{post.readTime} min read</span>
 								</div>
-								<h1 className='font-cg text-dark text-3xl leading-tight font-medium tracking-wide sm:text-4xl lg:text-5xl dark:text-white'>{post.title}</h1>
-								<p className='text-secondary-600 dark:text-secondary-400 max-w-3xl text-base leading-relaxed sm:text-lg'>{post.excerpt}</p>
-								<div className='flex flex-wrap items-center gap-2'>
-									<IconTag size={13} stroke={2} className='text-secondary-400 dark:text-secondary-600' />
-									{post.tags.map((tag) => (
-										<span
-											key={tag}
-											className='font-hg bg-secondary-100 text-secondary-500 dark:bg-secondary-800 dark:text-secondary-500 rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase'
-										>
-											{tag}
-										</span>
+								<span className='bg-secondary-200 dark:bg-secondary-700 h-1 w-1 rounded-full' />
+								<span className='text-secondary-400 dark:text-secondary-600 font-hg text-xs font-medium'>{formatDate(post.publishedAt)}</span>
+							</div>
+							<h1 className='font-cg text-dark text-3xl leading-tight font-medium tracking-wide sm:text-4xl lg:text-5xl dark:text-white'>{post.title}</h1>
+							<p className='text-secondary-600 dark:text-secondary-400 max-w-3xl text-base leading-relaxed sm:text-lg'>{post.excerpt}</p>
+							<div className='flex flex-wrap items-center gap-2'>
+								<IconTag size={13} stroke={2} className='text-secondary-400 dark:text-secondary-600' />
+								{post.tags.map((tag) => (
+									<span
+										key={tag}
+										className='font-hg bg-secondary-100 text-secondary-500 dark:bg-secondary-800 dark:text-secondary-500 rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase'
+									>
+										{tag}
+									</span>
+								))}
+							</div>
+						</div>
+					</div>
+					<div className='w-full max-w-3xl'>
+						<div className='prose-custom'>{post.content.map((block, index) => renderBlock(block, index))}</div>
+					</div>
+					{otherPosts.length > 0 && (
+						<div className='w-full'>
+							<div className='border-secondary-200/50 dark:border-secondary-700/50 mb-6 border-t pt-8'>
+								<p className='font-hg text-secondary-400 dark:text-secondary-600 mb-5 text-sm font-semibold tracking-widest uppercase'>More in {post.category}</p>
+								<div className='grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3'>
+									{otherPosts.map((related) => (
+										<BlogCard key={related.slug} post={related} />
 									))}
 								</div>
 							</div>
 						</div>
-						<div className='w-full max-w-3xl'>
-							<div className='prose-custom'>{post.content.map((block, index) => renderBlock(block, index))}</div>
-						</div>
-						{otherPosts.length > 0 && (
-							<div className='w-full'>
-								<div className='border-secondary-200/50 dark:border-secondary-700/50 mb-6 border-t pt-8'>
-									<p className='font-hg text-secondary-400 dark:text-secondary-600 mb-5 text-sm font-semibold tracking-widest uppercase'>More in {post.category}</p>
-									<div className='grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3'>
-										{otherPosts.map((related) => (
-											<BlogCard key={related.slug} post={related} />
-										))}
-									</div>
-								</div>
-							</div>
-						)}
-					</div>
-				</SectionSeparator>
-			</div>
+					)}
+				</div>
+			</SectionSeparator>
 		</section>
 	);
 };

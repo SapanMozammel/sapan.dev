@@ -17,9 +17,9 @@ const Portfolio = memo(() => {
 	});
 
 	return (
-		<section id='portfolio' className='relative z-1 pb-8 sm:pb-12 lg:pb-16'>
+		<section id='portfolio' className='relative z-1 pb-16 sm:pb-24 lg:pb-32'>
 			<SectionSeparator lts rts lbs rbs tl bl ll rl>
-				<div className='container flex w-full grow flex-col items-center justify-start gap-4 pb-8 sm:pb-12 lg:pb-16'>
+				<div className='container flex w-full grow flex-col items-center justify-start gap-4'>
 					<SectionTitle subtitle='Projects' title={`My Recent Works`} watermark='Portfolio' />
 					<div ref={stackingCardsRef} className='relative z-2 grid w-full grid-cols-1'>
 						{PORTFOLIO_PROJECTS.map((project) => (

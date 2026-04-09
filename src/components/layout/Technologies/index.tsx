@@ -14,9 +14,9 @@ const BLUR_PLACEHOLDER = getBlurDataURL(LOGO_SIZE, LOGO_SIZE);
 
 const Technologies = memo(() => {
 	return (
-		<section id='technologies' className='relative z-1 pt-[20vw]'>
+		<section id='technologies' className='relative z-1 pt-[20vw] pb-16 sm:pb-20 lg:pb-24'>
 			<SectionSeparator lts rts lbs rbs bl ll rl>
-				<div className='container flex w-full grow flex-col items-center justify-start gap-4 pb-8 text-center sm:pb-12 lg:pb-16'>
+				<div className='container flex w-full grow flex-col items-center justify-start gap-4 text-center'>
 					<SectionTitle subtitle='Technologies' title={`I'm an Expertise In`} watermark='Technologies' />
 					<DiamondGrid items={TECH_STACK}>
 						{(item) => (
