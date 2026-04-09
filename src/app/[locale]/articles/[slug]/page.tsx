@@ -167,7 +167,7 @@ const BlogDetailPage = async ({ params }: Props) => {
 								<span className='text-secondary-400 dark:text-secondary-600 font-hg text-xs font-medium'>{formatDate(post.publishedAt)}</span>
 							</div>
 							<h1 className='font-cg text-dark text-3xl leading-tight font-medium tracking-wide sm:text-4xl lg:text-5xl dark:text-white'>{post.title}</h1>
-							<p className='text-secondary-600 dark:text-secondary-400 max-w-3xl text-base leading-relaxed sm:text-lg'>{post.excerpt}</p>
+							<p className='text-secondary-600 dark:text-secondary-400 max-w-5xl text-base leading-relaxed sm:text-lg'>{post.excerpt}</p>
 							<div className='flex flex-wrap items-center gap-2'>
 								<IconTag size={13} stroke={2} className='text-secondary-400 dark:text-secondary-600' />
 								{post.tags.map((tag) => (
@@ -181,7 +181,7 @@ const BlogDetailPage = async ({ params }: Props) => {
 							</div>
 						</div>
 					</div>
-					<div className='w-full max-w-3xl'>
+					<div className='w-full max-w-5xl'>
 						<div className='prose-custom'>{post.content.map((block, index) => renderBlock(block, index))}</div>
 					</div>
 					{otherPosts.length > 0 && (
