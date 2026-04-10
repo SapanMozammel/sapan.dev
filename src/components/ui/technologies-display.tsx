@@ -39,7 +39,7 @@ const TechnologiesDisplay = memo<TechnologiesDisplayProps>(({ technologies, visi
 						<TooltipTrigger asChild>
 							<button
 								type='button'
-								className='bg-primary/10 text-primary dark:bg-success/10 dark:text-success inline-flex cursor-pointer items-center rounded-full px-1 py-0.5 text-xs !leading-none font-semibold transition-colors'
+								className='font-hg bg-primary/10 text-primary dark:bg-success/10 dark:text-success inline-flex cursor-pointer items-center rounded-full px-1 py-0.5 text-xs !leading-none font-semibold transition-colors'
 							>
 								+{remainingCount}
 							</button>

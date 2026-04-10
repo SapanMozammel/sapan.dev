@@ -18,7 +18,7 @@ const WorkflowContent = memo(({ activeStep, currentStep }: WorkflowContentProps)
 						className='space-y-4 sm:space-y-6'
 					>
 						<h3 className='font-cg text-dark text-2xl font-bold tracking-wide sm:text-4xl dark:text-white'>{currentStep.title}</h3>
-						<p className='text-secondary-600 dark:text-secondary-400 max-w-[64ch] text-sm !leading-relaxed tracking-wider sm:text-base'>{currentStep.description}</p>
+						<p className='font-dm text-secondary-600 dark:text-secondary-400 max-w-[64ch] text-sm !leading-relaxed tracking-wider sm:text-base'>{currentStep.description}</p>
 					</motion.div>
 				</AnimatePresence>
 			</div>

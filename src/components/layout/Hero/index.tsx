@@ -13,11 +13,11 @@ const Hero = () => (
 						<h1 className='sr-only'>
 							Hi, I am Sapan Mozammel, <br /> a fullstack frontend developer.
 						</h1>
-						<h2 className='font-hg dark:via-light inline-block bg-radial from-slate-400 via-slate-900 via-45% to-slate-600 to-75% bg-clip-text text-xl !leading-tight font-extrabold text-transparent sm:text-4xl lg:text-5xl dark:from-slate-600 dark:to-slate-400'>
+						<h2 className='font-hg dark:via-light inline-block bg-radial from-slate-400 via-slate-900 via-45% to-slate-600 to-75% bg-clip-text text-2xl !leading-tight font-bold text-transparent sm:text-3xl lg:text-5xl dark:from-slate-600 dark:to-slate-400'>
 							With every line of <TextUnderline className='text-dark dark:text-white'>JavaScript</TextUnderline>
 							, <br /> shaping the future of web development.
 						</h2>
-						<p className='text-secondary-600 dark:text-secondary-400 inline-flex max-w-[90ch] text-sm !leading-relaxed tracking-wider sm:text-base'>
+						<p className='font-dm text-secondary-600 dark:text-secondary-400 inline-flex max-w-[90ch] text-sm !leading-relaxed tracking-wider sm:text-base'>
 							With 5+ years of dynamic experience building applications using React, Redux, GraphQL, Next.js, Three.js, Node.js and many more, I take pride in writing clean, maintainable code while adhering
 							to engineering best practices.
 						</p>

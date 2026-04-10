@@ -50,7 +50,7 @@ const renderBlock = (block: ContentBlock, index: number) => {
 
 		case 'paragraph':
 			return (
-				<p key={index} className='text-secondary-700 dark:text-secondary-300 mb-5 text-[15px] leading-relaxed sm:text-base'>
+				<p key={index} className='font-dm text-secondary-700 dark:text-secondary-300 mb-5 text-sm leading-relaxed sm:text-base'>
 					{block.text}
 				</p>
 			);
@@ -65,7 +65,7 @@ const renderBlock = (block: ContentBlock, index: number) => {
 							<span className='bg-success/70 h-2.5 w-2.5 rounded-full' />
 						</div>
 					</div>
-					<pre className='bg-secondary-900 overflow-x-auto p-5 text-[13px] leading-relaxed'>
+					<pre className='bg-secondary-900 overflow-x-auto p-5 text-xs leading-relaxed sm:text-sm'>
 						<code className='text-secondary-100'>{block.code}</code>
 					</pre>
 				</div>
@@ -75,7 +75,7 @@ const renderBlock = (block: ContentBlock, index: number) => {
 				return (
 					<ol key={index} className='mb-5 list-decimal space-y-2 pl-6'>
 						{block.items.map((item, i) => (
-							<li key={i} className='text-secondary-700 dark:text-secondary-300 text-[15px] leading-relaxed sm:text-base'>
+							<li key={i} className='font-dm text-secondary-700 dark:text-secondary-300 text-sm leading-relaxed sm:text-base'>
 								{item}
 							</li>
 						))}
@@ -87,7 +87,7 @@ const renderBlock = (block: ContentBlock, index: number) => {
 					{block.items.map((item, i) => (
 						<li
 							key={i}
-							className='text-secondary-700 dark:text-secondary-300 before:bg-primary dark:before:bg-success relative text-[15px] leading-relaxed before:absolute before:top-[0.6em] before:-left-4 before:h-1.5 before:w-1.5 before:rounded-full sm:text-base'
+							className='font-dm text-secondary-700 dark:text-secondary-300 before:bg-primary dark:before:bg-success relative text-sm leading-relaxed before:absolute before:top-[0.6em] before:-left-4 before:h-1.5 before:w-1.5 before:rounded-full sm:text-base'
 						>
 							{item}
 						</li>
@@ -109,7 +109,7 @@ const renderBlock = (block: ContentBlock, index: number) => {
 			return (
 				<div key={index} className={cn('mb-5 rounded-xl border-l-4 p-4 sm:p-5', variantStyles[variant])}>
 					<p className={cn('font-hg mb-1 text-xs font-bold tracking-widest uppercase', labelStyles[variant])}>{variant}</p>
-					<p className='text-secondary-700 dark:text-secondary-300 text-sm leading-relaxed sm:text-base'>{block.text}</p>
+					<p className='font-dm text-secondary-700 dark:text-secondary-300 text-sm leading-relaxed sm:text-base'>{block.text}</p>
 				</div>
 			);
 		}
@@ -166,8 +166,8 @@ const BlogDetailPage = async ({ params }: Props) => {
 								<span className='bg-secondary-200 dark:bg-secondary-700 h-1 w-1 rounded-full' />
 								<span className='text-secondary-400 dark:text-secondary-600 font-hg text-xs font-medium'>{formatDate(post.publishedAt)}</span>
 							</div>
-							<h1 className='font-cg text-dark text-3xl leading-tight font-medium tracking-wide sm:text-4xl lg:text-5xl dark:text-white'>{post.title}</h1>
-							<p className='text-secondary-600 dark:text-secondary-400 max-w-5xl text-base leading-relaxed sm:text-lg'>{post.excerpt}</p>
+							<h1 className='font-cg text-dark text-2xl leading-tight font-medium tracking-wide sm:text-3xl lg:text-5xl dark:text-white'>{post.title}</h1>
+							<p className='font-dm text-secondary-600 dark:text-secondary-400 max-w-5xl text-base leading-relaxed sm:text-lg'>{post.excerpt}</p>
 							<div className='flex flex-wrap items-center gap-2'>
 								<IconTag size={13} stroke={2} className='text-secondary-400 dark:text-secondary-600' />
 								{post.tags.map((tag) => (

@@ -108,7 +108,7 @@ const Timeline = memo<TimelineProps>(({ items, className }) => {
 	}, [heights]);
 
 	return (
-		<div className={cn('relative w-full font-sans', className)}>
+		<div className={cn('relative w-full', className)}>
 			<TimelineProgressBar heights={heights} totalHeight={totalHeight} containerRef={timelineRef} scrollYProgress={scrollYProgress} />
 
 			<div ref={timelineRef} className='relative z-10 mx-auto w-full'>

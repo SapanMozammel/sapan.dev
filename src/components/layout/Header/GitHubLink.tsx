@@ -16,7 +16,7 @@ const GitHubLink = () => (
 			</NextLink>
 		</TooltipTrigger>
 		<TooltipContent side='bottom'>
-			<p>View on GitHub</p>
+			<p className='font-hg'>View on GitHub</p>
 		</TooltipContent>
 	</Tooltip>
 );

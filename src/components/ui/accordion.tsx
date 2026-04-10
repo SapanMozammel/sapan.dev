@@ -42,7 +42,7 @@ const AccordionItem = memo<AccordionItemProps>(({ question, answer, isOpen, onTo
 				<div className={cn('grid px-5 transition-all duration-300 lg:px-8', isOpen ? 'grid-rows-[1fr] pb-4 lg:pb-5' : 'grid-rows-[0fr] pb-0')}>
 					<div className='overflow-hidden'>
 						<div className='border-secondary-100 dark:border-secondary-800 border-t pt-4'>
-							<p className='text-secondary-600 dark:text-secondary-400 text-sm leading-relaxed lg:text-base'>{answer}</p>
+							<p className='font-dm text-secondary-600 dark:text-secondary-400 text-sm leading-relaxed lg:text-base'>{answer}</p>
 						</div>
 					</div>
 				</div>

@@ -78,7 +78,7 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 					)}
 				>
 					<div className='flex flex-col gap-1'>
-						<h3 className='font-hg text-dark text-3xl leading-none font-bold uppercase sm:text-5xl dark:text-white'>{job.company}</h3>
+						<h3 className='font-hg text-dark text-2xl leading-none font-bold uppercase sm:text-3xl lg:text-5xl dark:text-white'>{job.company}</h3>
 						<h5 className='font-cg text-secondary-600 dark:text-secondary-400 text-xl leading-snug font-medium sm:text-2xl'>{job.position}</h5>
 					</div>
 					{job.technologies && job.technologies.length > 0 && (
@@ -93,7 +93,7 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 							))}
 						</div>
 					)}
-					<p className='text-secondary-600 dark:text-secondary-400 leading-regular text-sm'>{job.description}</p>
+					<p className='font-dm text-secondary-600 dark:text-secondary-400 leading-regular text-sm'>{job.description}</p>
 					<div className='flex flex-col gap-1.5'>
 						<h4 className='font-hg text-dark text-lg font-bold dark:text-white'>Responsibilities</h4>
 						<ul className='text-secondary-600 dark:text-secondary-400 leading-regular flex list-none flex-col gap-1.5 text-sm'>

@@ -16,13 +16,13 @@ const Error = ({ error, reset }: ErrorProps) => {
 	return (
 		<div className='flex min-h-screen flex-col items-center justify-center px-4'>
 			<div className='text-center'>
-				<h1 className='text-danger text-4xl font-bold'>Something went wrong!</h1>
-				<p className='text-secondary-500 dark:text-secondary-500 mt-4'>{error.message || 'An unexpected error occurred. This might be due to a temporary server issue.'}</p>
+				<h1 className='font-cg text-danger text-2xl font-bold sm:text-4xl'>Something went wrong!</h1>
+				<p className='font-dm text-secondary-500 dark:text-secondary-500 mt-4'>{error.message || 'An unexpected error occurred. This might be due to a temporary server issue.'}</p>
 				<div className='mt-6 flex justify-center gap-4'>
-					<button onClick={reset} className='bg-primary dark:bg-success dark:text-dark rounded-md px-6 py-3 text-white transition-colors hover:opacity-90'>
+					<button onClick={reset} className='font-hg bg-primary dark:bg-success dark:text-dark rounded-md px-6 py-3 text-white transition-colors hover:opacity-90'>
 						Try again
 					</button>
-					<button onClick={() => window.location.reload()} className='bg-secondary-600 rounded-md px-6 py-3 text-white transition-colors hover:opacity-90'>
+					<button onClick={() => window.location.reload()} className='font-hg bg-secondary-600 rounded-md px-6 py-3 text-white transition-colors hover:opacity-90'>
 						Reload page
 					</button>
 				</div>

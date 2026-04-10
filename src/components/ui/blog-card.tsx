@@ -45,7 +45,7 @@ const BlogCard = ({ post, className }: BlogCardProps) => {
 					<h3 className='font-cg group-hover:text-primary dark:group-hover:text-success text-dark text-lg leading-snug font-medium tracking-wide transition-colors duration-200 sm:text-xl dark:text-white'>
 						{post.title}
 					</h3>
-					<p className='text-secondary-600 dark:text-secondary-400 line-clamp-2 text-sm leading-relaxed'>{post.excerpt}</p>
+					<p className='font-dm text-secondary-600 dark:text-secondary-400 line-clamp-2 text-sm leading-relaxed'>{post.excerpt}</p>
 				</div>
 				<div className='flex flex-wrap gap-1.5'>
 					{post.tags.slice(0, 3).map((tag) => (
