@@ -11,14 +11,15 @@
 ## Layout Hierarchy
 
 ```
-src/app/layout.tsx              # Root — bare fragment (<>{children}</>) + global.scss import
-src/app/[locale]/layout.tsx     # Locale — html, body, fonts, RTL dir, NextIntlClientProvider,
-                                #   Providers (Redux + Theme), Header, Footer, metadata
+src/app/layout.tsx              # Root — <html lang dir>/<body> with fonts, getLocale() for
+                                #   dynamic locale/RTL, global.scss import
+src/app/[locale]/layout.tsx     # Locale — NextIntlClientProvider, Providers (Redux + Theme),
+                                #   Header, main, Footer, noise overlay, metadata
 src/app/[locale]/(landing)/page.tsx
 ```
 
-- Root layout is a bare fragment — only imports `global.scss`, renders `<>{children}</>`
-- Locale layout handles everything: `<html lang>`, `<body>` with fonts, `dir="rtl"` for Arabic, `NextIntlClientProvider`, `Providers` (Redux + Theme), Header, Footer, noise overlay
+- Root layout owns `<html>` and `<body>` (Next.js 16 requires this). It calls `getLocale()` from `next-intl/server` to set `lang` and `dir` dynamically per request, applies the font variables, and toggles the Arabic font class for RTL locales.
+- Locale layout owns app structure: `NextIntlClientProvider`, `Providers` (Redux + Theme), Header, `<main>`, Footer, noise overlay, and exports the page metadata.
 
 ## i18n — next-intl v4
 

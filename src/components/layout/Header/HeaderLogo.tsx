@@ -33,7 +33,7 @@ const HeaderLogo = memo(() => {
 	return (
 		<Link href='/' onClick={handleClick} className='flex shrink-0 cursor-pointer flex-row items-center gap-1.5 sm:gap-2.5'>
 			<Logo className='h-6 sm:h-8' />
-			<h2 className='font-bungee from-primary to-info dark:from-success bg-gradient-to-r bg-clip-text text-base !leading-none font-normal text-transparent uppercase sm:text-2xl'>sapan.dev</h2>
+			<span className='font-bungee from-primary to-info dark:from-success bg-gradient-to-r bg-clip-text text-base !leading-none font-normal text-transparent uppercase sm:text-2xl'>sapan.dev</span>
 		</Link>
 	);
 });

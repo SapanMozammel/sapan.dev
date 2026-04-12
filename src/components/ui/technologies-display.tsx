@@ -29,7 +29,7 @@ const TechnologiesDisplay = memo<TechnologiesDisplayProps>(({ technologies, visi
 		<TooltipProvider>
 			<div className='flex flex-wrap items-center gap-1.5'>
 				{visibleTechnologies.map((tech, index) => (
-					<span key={tech} className='text-secondary-600 dark:text-secondary-400 text-sm leading-tight'>
+					<span key={tech} className='text-secondary-600 dark:text-secondary-400 text-paragraph-small'>
 						{tech}
 						{index < visibleTechnologies.length - 1 && ','}
 					</span>
@@ -39,7 +39,7 @@ const TechnologiesDisplay = memo<TechnologiesDisplayProps>(({ technologies, visi
 						<TooltipTrigger asChild>
 							<button
 								type='button'
-								className='font-hg bg-primary/10 text-primary dark:bg-success/10 dark:text-success inline-flex cursor-pointer items-center rounded-full px-1 py-0.5 text-xs !leading-none font-semibold transition-colors'
+								className='bg-primary/10 text-primary dark:bg-success/10 dark:text-success text-paragraph-small inline-flex cursor-pointer items-center rounded-full px-1.5 py-0 transition-colors'
 							>
 								+{remainingCount}
 							</button>

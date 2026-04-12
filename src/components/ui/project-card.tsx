@@ -30,17 +30,17 @@ const ProjectCard = memo<ProjectCardProps>(({ project }) => {
 		<div className={cn('z-2 grid min-h-110 w-full grid-cols-1 overflow-hidden rounded-2xl border border-solid backdrop-blur-xl lg:grid-cols-2 lg:rounded-4xl', project?.className)}>
 			<div className='flex flex-col items-start justify-center gap-2 p-4 sm:gap-4 sm:p-6 lg:p-8 xl:p-12'>
 				{project?.icon && <div className='h-10 w-auto'>{project.icon}</div>}
-				<p className='font-dm text-secondary-600 dark:text-secondary-400 text-sm leading-normal sm:text-base'>{project.description}</p>
+				<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-small'>{project.description}</p>
 				<div className='mt-1.5 mb-1.5 grid w-full grid-cols-1 gap-x-4 gap-y-2.5 sm:mb-0 sm:grid-cols-3'>
 					{project.role && (
 						<div className='flex flex-col gap-0.5'>
-							<h4 className='font-hg text-dark text-base font-bold sm:text-lg dark:text-white'>Role</h4>
-							<span className='text-secondary-600 dark:text-secondary-400 text-sm !leading-tight'>{project.role}</span>
+							<h5 className='text-dark text-heading-small-alt dark:text-white'>Role</h5>
+							<span className='text-secondary-600 dark:text-secondary-400 text-paragraph-small'>{project.role}</span>
 						</div>
 					)}
 					{project.technologies && project.technologies.length > 0 && (
 						<div className='col-span-2 flex flex-col gap-0.5'>
-							<h4 className='font-hg text-dark text-base font-bold sm:text-lg dark:text-white'>Technologies</h4>
+							<h5 className='text-dark text-heading-small-alt dark:text-white'>Technologies</h5>
 							<TechnologiesDisplay technologies={project.technologies} />
 						</div>
 					)}
@@ -49,7 +49,7 @@ const ProjectCard = memo<ProjectCardProps>(({ project }) => {
 					href={project?.link || '#'}
 					target='_blank'
 					rel='noopener noreferrer'
-					className='font-hg text-primary dark:text-success decoration-none inline-flex flex-row items-center gap-1 text-sm font-semibold tracking-wider uppercase transition-all duration-150 ease-in hover:gap-2 rtl:flex-row-reverse'
+					className='text-primary dark:text-success decoration-none text-heading-xsmall inline-flex flex-row items-center gap-1 tracking-wider uppercase transition-all duration-150 ease-in hover:gap-2 rtl:flex-row-reverse'
 				>
 					<span>Learn More</span>
 					<IconArrowRight stroke={3} className='mb-0.5 h-4 w-4 transition-transform duration-300' />

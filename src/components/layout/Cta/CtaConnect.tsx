@@ -19,22 +19,22 @@ const CtaConnect = memo(() => (
 				<span className='bg-primary dark:bg-success absolute inline-flex h-full w-full animate-ping rounded-full opacity-75' />
 				<span className='bg-primary dark:bg-success relative inline-flex h-2.5 w-2.5 rounded-full' />
 			</span>
-			<span className='font-hg text-primary dark:text-success text-sm font-medium'>Ready for your next project</span>
+			<span className='text-primary dark:text-success text-paragraph-small'>Ready for your next project</span>
 		</div>
 		{/* Location & Contact */}
 		<div className='font-hg flex flex-col gap-2.5'>
-			<p className='text-secondary-500 dark:text-secondary-500 flex items-center gap-2.5 text-sm'>
+			<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-small flex items-center gap-2.5'>
 				<IconMapPinFilled className='text-primary dark:text-success h-4 w-4 shrink-0' />
 				Based in Dhaka, Bangladesh. Shipping globally.
 			</p>
 			<NextLink
 				href='mailto:sapanmozammel@gmail.com'
-				className='text-secondary-600 hover:text-primary dark:text-secondary-400 dark:hover:text-success inline-flex items-center gap-2.5 text-sm font-medium transition-colors'
+				className='text-secondary-600 hover:text-primary dark:text-secondary-400 dark:hover:text-success text-paragraph-small inline-flex items-center gap-2.5 transition-colors'
 			>
 				<IconMailFilled className='text-primary dark:text-success h-4 w-4 shrink-0' />
 				sapanmozammel@gmail.com
 			</NextLink>
-			<NextLink href='tel:+8801627134085' className='text-secondary-600 hover:text-primary dark:text-secondary-400 dark:hover:text-success inline-flex items-center gap-2.5 text-sm font-medium transition-colors'>
+			<NextLink href='tel:+8801627134085' className='text-secondary-600 hover:text-primary dark:text-secondary-400 dark:hover:text-success text-paragraph-small inline-flex items-center gap-2.5 transition-colors'>
 				<IconPhoneFilled className='text-primary dark:text-success h-4 w-4 shrink-0' />
 				+88 01627134085
 			</NextLink>

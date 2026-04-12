@@ -22,11 +22,9 @@ const ContactModal = memo(() => {
 						<DialogHeader className='mb-6 flex-row items-start justify-between gap-4 space-y-0 text-left'>
 							<div className='flex items-center gap-4'>
 								<Logo className='h-8 w-8 shrink-0 sm:h-9 sm:w-9' />
-								<div className='flex flex-col gap-1.5'>
-									<DialogTitle className='font-hg text-dark text-xl !leading-none font-medium tracking-wide sm:text-2xl dark:text-white'>Let&apos;s connect</DialogTitle>
-									<DialogDescription className='text-secondary-600 dark:text-secondary-400 text-xs leading-none font-normal tracking-widest sm:text-sm'>
-										I&apos;ll get back to you within 24&nbsp;hours.
-									</DialogDescription>
+								<div className='flex flex-col gap-0.5'>
+									<DialogTitle className='text-heading-small text-dark tracking-wide dark:text-white'>Let&apos;s connect</DialogTitle>
+									<DialogDescription className='text-secondary-600 dark:text-secondary-400 text-paragraph-small tracking-widest'>I&apos;ll get back to you as soon as possible.</DialogDescription>
 								</div>
 							</div>
 							<DialogCloseButton />

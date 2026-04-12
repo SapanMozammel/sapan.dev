@@ -18,7 +18,6 @@ export const BLOG_POSTS: BlogPost[] = [
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'What Are React Server Components?',
 			},
 			{
@@ -32,7 +31,6 @@ export const BLOG_POSTS: BlogPost[] = [
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Server vs Client Components',
 			},
 			{
@@ -72,7 +70,6 @@ function LikeButton({ postId }: { postId: string }) {
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Patterns for Composing Server and Client Components',
 			},
 			{
@@ -98,7 +95,6 @@ import ServerRenderedContent from './ServerRenderedContent'; // breaks!`,
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Data Fetching Without useEffect',
 			},
 			{
@@ -121,7 +117,6 @@ import ServerRenderedContent from './ServerRenderedContent'; // breaks!`,
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Caching Strategy in Next.js 15',
 			},
 			{
@@ -142,7 +137,6 @@ fetch(url, { next: { revalidate: 60 } })`,
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Conclusion',
 			},
 			{
@@ -168,7 +162,6 @@ fetch(url, { next: { revalidate: 60 } })`,
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Const Type Parameters',
 			},
 			{
@@ -192,7 +185,6 @@ const arr = makeArray(['a', 'b'] as const); // readonly ["a", "b"]`,
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Decorators (The Real Ones)',
 			},
 			{
@@ -218,7 +210,6 @@ class UserService {
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'The satisfies Operator',
 			},
 			{
@@ -242,7 +233,6 @@ const palette = {
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Using Declarations',
 			},
 			{
@@ -274,7 +264,6 @@ function processData() {
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Performance Improvements',
 			},
 			{
@@ -310,7 +299,6 @@ function processData() {
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'The New CSS-First Configuration',
 			},
 			{
@@ -337,7 +325,6 @@ function processData() {
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Native Cascade Layers',
 			},
 			{
@@ -362,7 +349,6 @@ function processData() {
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'New Dynamic Utilities',
 			},
 			{
@@ -381,7 +367,6 @@ function processData() {
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Migrating from v3',
 			},
 			{
@@ -404,7 +389,6 @@ npm install tailwindcss@next @tailwindcss/vite`,
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Performance',
 			},
 			{
@@ -431,7 +415,6 @@ npm install tailwindcss@next @tailwindcss/vite`,
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'The Focus Management Problem',
 			},
 			{
@@ -466,7 +449,6 @@ npm install tailwindcss@next @tailwindcss/vite`,
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Keyboard Navigation Patterns',
 			},
 			{
@@ -485,7 +467,6 @@ npm install tailwindcss@next @tailwindcss/vite`,
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Live Regions for Dynamic Content',
 			},
 			{
@@ -517,7 +498,6 @@ npm install tailwindcss@next @tailwindcss/vite`,
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Color Contrast and Text Sizing',
 			},
 			{
@@ -526,7 +506,6 @@ npm install tailwindcss@next @tailwindcss/vite`,
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Testing with Real Assistive Technology',
 			},
 			{
@@ -558,7 +537,6 @@ npm install tailwindcss@next @tailwindcss/vite`,
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'The Three Core Web Vitals',
 			},
 			{
@@ -575,7 +553,6 @@ npm install tailwindcss@next @tailwindcss/vite`,
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Fixing LCP: The Low-Hanging Fruit',
 			},
 			{
@@ -598,7 +575,6 @@ npm install tailwindcss@next @tailwindcss/vite`,
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'INP: The Replacement for FID',
 			},
 			{
@@ -631,7 +607,6 @@ async function processLargeDataset(items) {
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Preventing CLS',
 			},
 			{
@@ -650,7 +625,6 @@ async function processLargeDataset(items) {
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Measuring in the Real World',
 			},
 			{
@@ -693,7 +667,6 @@ onCLS(sendToAnalytics);`,
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Server State vs Client State',
 			},
 			{
@@ -707,7 +680,6 @@ onCLS(sendToAnalytics);`,
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Zustand: Simple, Flat, Minimal',
 			},
 			{
@@ -743,7 +715,6 @@ function CartSummary() {
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Jotai: Atomic State for Fine-Grained Reactivity',
 			},
 			{
@@ -778,7 +749,6 @@ function Counter() {
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Redux Toolkit: When You Need the Big Gun',
 			},
 			{
@@ -787,7 +757,6 @@ function Counter() {
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Decision Framework',
 			},
 			{
@@ -807,7 +776,6 @@ function Counter() {
 			},
 			{
 				type: 'heading',
-				level: 2,
 				text: 'Conclusion',
 			},
 			{

@@ -27,8 +27,8 @@ const AccordionItem = memo<AccordionItemProps>(({ question, answer, isOpen, onTo
 			>
 				<button type='button' onClick={onToggle} aria-expanded={isOpen} className='flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left lg:px-8 lg:py-5'>
 					<span className='flex items-center gap-3'>
-						<span className='font-hg text-primary dark:text-success w-5 shrink-0 text-base font-semibold'>{String(index + 1).padStart(2, '0')}</span>
-						<span className='font-hg text-dark text-base leading-snug font-semibold lg:text-xl dark:text-white'>{question}</span>
+						<h5 className='text-primary dark:text-success text-heading-small w-5 shrink-0'>{String(index + 1).padStart(2, '0')}</h5>
+						<h5 className='text-dark text-heading-small dark:text-white'>{question}</h5>
 					</span>
 					<span
 						className={cn(
@@ -42,7 +42,7 @@ const AccordionItem = memo<AccordionItemProps>(({ question, answer, isOpen, onTo
 				<div className={cn('grid px-5 transition-all duration-300 lg:px-8', isOpen ? 'grid-rows-[1fr] pb-4 lg:pb-5' : 'grid-rows-[0fr] pb-0')}>
 					<div className='overflow-hidden'>
 						<div className='border-secondary-100 dark:border-secondary-800 border-t pt-4'>
-							<p className='font-dm text-secondary-600 dark:text-secondary-400 text-sm leading-relaxed lg:text-base'>{answer}</p>
+							<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-small'>{answer}</p>
 						</div>
 					</div>
 				</div>

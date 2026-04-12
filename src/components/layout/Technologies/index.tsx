@@ -41,7 +41,7 @@ const Technologies = memo(() => {
 										<span className='sr-only'>{item.name}</span>
 									</span>
 								) : (
-									<span className='text-dark text-lg font-bold dark:text-white'>{item.name}</span>
+									<span className='text-dark font-hg text-base font-bold dark:text-white'>{item.name}</span>
 								)}
 							</CursorTooltip>
 						)}

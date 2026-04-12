@@ -16,12 +16,12 @@ const Cta = () => (
 						<CtaBackground />
 						<div className='relative z-10 flex flex-col items-center gap-3 p-8 text-center sm:gap-4 sm:p-12 lg:p-16'>
 							<Logo className='h-10 w-10 sm:h-12 sm:w-12' />
-							<h2 className='font-cg text-2xl !leading-tight font-medium tracking-wider text-white sm:text-3xl lg:text-5xl'>
+							<h2 className='text-heading-large tracking-wider text-white'>
 								Have a project in mind?
 								<br />
-								<span className='font-cg text-success font-bold tracking-tight'>Let&apos;s build it together.</span>
+								<span className='text-success !font-bold tracking-tight'>Let&apos;s build it together.</span>
 							</h2>
-							<p className='font-dm text-secondary-400 inline-flex max-w-[90ch] text-sm !leading-relaxed tracking-wider sm:text-base'>
+							<p className='text-paragraph-medium text-secondary-400 inline-flex max-w-[90ch] tracking-wider'>
 								Whether you need a full product, a landing page,
 								<br className='hidden sm:block' />
 								or just want to explore ideas — I&apos;m here to collaborate.
@@ -53,7 +53,7 @@ const Cta = () => (
 						<div className='border-secondary-400 dark:border-secondary-600 col-span-1 flex flex-col gap-5 border-b px-6 py-10 sm:col-span-2 lg:border-r lg:border-b-0'>
 							<CtaLogo />
 							<div className='flex flex-col gap-2'>
-								<p className='font-dm text-secondary-600 dark:text-secondary-400 text-sm leading-relaxed font-normal'>
+								<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-small'>
 									With 5+ years of dynamic experience building applications using React, Redux, GraphQL, Next.js, Three.js, Node.js and many more, I take pride in writing clean, maintainable code while
 									adhering to engineering best practices.
 								</p>

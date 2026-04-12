@@ -42,10 +42,8 @@ const BlogCard = ({ post, className }: BlogCardProps) => {
 			</div>
 			<div className='flex grow flex-col gap-3 p-5'>
 				<div className='flex grow flex-col gap-2'>
-					<h3 className='font-cg group-hover:text-primary dark:group-hover:text-success text-dark text-lg leading-snug font-medium tracking-wide transition-colors duration-200 sm:text-xl dark:text-white'>
-						{post.title}
-					</h3>
-					<p className='font-dm text-secondary-600 dark:text-secondary-400 line-clamp-2 text-sm leading-relaxed'>{post.excerpt}</p>
+					<h5 className='text-heading-small group-hover:text-primary dark:group-hover:text-success text-dark tracking-wide transition-colors duration-200 dark:text-white'>{post.title}</h5>
+					<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-small line-clamp-2'>{post.excerpt}</p>
 				</div>
 				<div className='flex flex-wrap gap-1.5'>
 					{post.tags.slice(0, 3).map((tag) => (
@@ -62,7 +60,7 @@ const BlogCard = ({ post, className }: BlogCardProps) => {
 							<span className='font-hg font-medium'>{post.readTime} min</span>
 						</span>
 					</div>
-					<span className='font-hg text-primary dark:text-success transition-gap inline-flex items-center gap-1 text-sm font-semibold tracking-wider uppercase duration-200 group-hover:gap-2'>
+					<span className='text-primary dark:text-success decoration-none text-heading-xsmall inline-flex flex-row items-center gap-1 tracking-wider uppercase transition-all duration-150 ease-in hover:gap-2 rtl:flex-row-reverse'>
 						<span>Read More</span>
 						<IconArrowRight stroke={3} className='mb-0.5 h-4 w-4 transition-transform duration-300' />
 					</span>

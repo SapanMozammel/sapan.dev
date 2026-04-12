@@ -77,9 +77,9 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 						'group border-secondary-200/50 dark:border-secondary-700/50 relative flex flex-col gap-2 rounded-2xl border p-4 shadow-lg shadow-black/5 backdrop-blur-sm transition-all duration-300 md:gap-4 md:p-6 dark:shadow-white/5'
 					)}
 				>
-					<div className='flex flex-col gap-1'>
-						<h3 className='font-hg text-dark text-2xl leading-none font-bold uppercase sm:text-3xl lg:text-5xl dark:text-white'>{job.company}</h3>
-						<h5 className='font-cg text-secondary-600 dark:text-secondary-400 text-xl leading-snug font-medium sm:text-2xl'>{job.position}</h5>
+					<div className='flex flex-col'>
+						<h3 className='text-heading-medium-alt text-dark tracking-wide dark:text-white'>{job.company}</h3>
+						<h4 className='text-heading-small text-secondary-700 dark:text-secondary-300 tracking-wide'>{job.position}</h4>
 					</div>
 					{job.technologies && job.technologies.length > 0 && (
 						<div className='flex flex-wrap gap-1.5'>
@@ -93,10 +93,10 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 							))}
 						</div>
 					)}
-					<p className='font-dm text-secondary-600 dark:text-secondary-400 leading-regular text-sm'>{job.description}</p>
+					<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-small'>{job.description}</p>
 					<div className='flex flex-col gap-1.5'>
-						<h4 className='font-hg text-dark text-lg font-bold dark:text-white'>Responsibilities</h4>
-						<ul className='text-secondary-600 dark:text-secondary-400 leading-regular flex list-none flex-col gap-1.5 text-sm'>
+						<h5 className='text-dark text-heading-small-alt dark:text-white'>Responsibilities</h5>
+						<ul className='text-secondary-600 dark:text-secondary-400 text-paragraph-small flex list-none flex-col gap-1.5'>
 							{job.responsibilities?.map((resp, idx) => (
 								<li key={idx} className='relative flex items-start pl-4'>
 									<span className='border-primary dark:border-success absolute left-0 mt-2 h-1.5 w-1.5 rounded-full border bg-transparent' />
@@ -107,8 +107,8 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 					</div>
 					{job.achievements && job.achievements.length > 0 && (
 						<div className='flex flex-col gap-1.5'>
-							<h4 className='font-hg text-dark text-lg font-bold dark:text-white'>Impact & Achievements</h4>
-							<ul className='text-secondary-600 dark:text-secondary-400 leading-regular flex list-none flex-col gap-1.5 text-sm'>
+							<h5 className='text-dark text-heading-small-alt dark:text-white'>Impact & Achievements</h5>
+							<ul className='text-secondary-600 dark:text-secondary-400 text-paragraph-small flex list-none flex-col gap-1.5'>
 								{job.achievements.map((achievement, idx) => (
 									<li key={idx} className='relative flex items-start pl-4'>
 										<span className='border-primary dark:border-success absolute left-0 mt-2 h-1.5 w-1.5 rounded-full border bg-transparent' />

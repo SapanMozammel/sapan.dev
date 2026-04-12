@@ -112,7 +112,7 @@ Source: current knowledge of the project patterns
 
 ### `skills/architecture/routing.md`
 - Route structure table (paths, file locations, types)
-- Layout hierarchy (two-layer: root layout = bare fragment + global.scss; locale layout = html/body, fonts, RTL, providers, header, footer)
+- Layout hierarchy (two-layer: root layout = `<html>`/`<body>` with dynamic `lang`/`dir` via `getLocale()` + fonts + global.scss; locale layout = `NextIntlClientProvider`, Providers (Redux + Theme), Header, main, Footer, noise overlay, metadata)
 - i18n: 16 locales, next-intl@4.x, `localePrefix: 'as-needed'` (English = no prefix)
 - Translation file structure: `src/i18n/locales/[locale]/[namespace].json`
 - 4 namespaces (current): `common` · `navigation` · `home` · `blog`
