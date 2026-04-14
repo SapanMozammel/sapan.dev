@@ -8,7 +8,10 @@ export type UseStackingCardsOptions = {
 export type StackingCardConfig = {
 	stickyTop: number;
 	indexOffset: number;
+	topIncrement: number;
 	zIndex: number;
 	targetScale: number;
+	reverseTargetScale: number;
 	range: [number, number];
+	isLast: boolean;
 };

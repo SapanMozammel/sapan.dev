@@ -22,13 +22,19 @@ export const useStackingCards = (count: number, options: UseStackingCardsOptions
 	const scaleValues = generateScaleValues(count, defaultMinScale);
 	const step = count > 0 ? 1 / count : 0;
 
-	const cardConfigs: StackingCardConfig[] = Array.from({ length: count }, (_, i) => ({
-		stickyTop: topStart,
-		indexOffset: i * topIncrement,
-		zIndex: i + 1,
-		targetScale: scaleValues[i] ?? 1,
-		range: [i * step, 1] as [number, number],
-	}));
+	const cardConfigs: StackingCardConfig[] = Array.from({ length: count }, (_, i) => {
+		const isLast = i === count - 1;
+		return {
+			stickyTop: topStart,
+			indexOffset: i * topIncrement,
+			topIncrement,
+			zIndex: i + 1,
+			targetScale: scaleValues[i] ?? 1,
+			reverseTargetScale: scaleValues[0] ?? 1,
+			range: [i * step, 1] as [number, number],
+			isLast,
+		};
+	});
 
 	return { containerRef, scrollYProgress, cardConfigs, enabled };
 };
