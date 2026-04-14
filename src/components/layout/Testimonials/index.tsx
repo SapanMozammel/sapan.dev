@@ -1,6 +1,6 @@
 'use client';
 
-import GsapMarquee from '@/components/ui/gsap-marquee';
+import Marquee from '@/components/ui/marquee';
 import { TESTIMONIAL_LIST } from '@/data/content/testimonials';
 import { memo } from 'react';
 import SectionTitle from '../common/SectionTitle';
@@ -14,16 +14,16 @@ const Testimonials = memo(() => {
 				<div className='container-fluid flex w-full grow flex-col gap-8'>
 					<SectionTitle className='container' subtitle='Testimonials' title={`What People Say About Me`} watermark='Testimonials' />
 					<div className='relative z-2 flex w-full flex-col gap-4 overflow-hidden p-px md:gap-6 lg:gap-8'>
-						<GsapMarquee pauseOnHover speed={60}>
+						<Marquee pauseOnHover speed={60}>
 							{TESTIMONIAL_LIST.map((testimonial, index) => (
 								<TestimonialCard key={index} testimonial={testimonial} />
 							))}
-						</GsapMarquee>
-						<GsapMarquee pauseOnHover speed={60} direction='right'>
+						</Marquee>
+						<Marquee pauseOnHover speed={60} direction='right'>
 							{TESTIMONIAL_LIST.map((testimonial, index) => (
 								<TestimonialCard key={index} testimonial={testimonial} />
 							))}
-						</GsapMarquee>
+						</Marquee>
 					</div>
 				</div>
 			</TestimonialBackground>
