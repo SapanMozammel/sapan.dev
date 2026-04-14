@@ -1,12 +1,13 @@
 'use client';
 
+import CTALink from '@/components/ui/cta-link';
 import CursorTooltip from '@/components/ui/cursor-tooltip';
 import TechnologiesDisplay from '@/components/ui/technologies-display';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { getBlurDataURL } from '@/lib/utils/image';
 import type { ProjectCardProps } from '@/types/portfolio';
-import { IconArrowRight, IconArrowUpRight } from '@tabler/icons-react';
+import { IconArrowUpRight } from '@tabler/icons-react';
 import Image from 'next/image';
 import { memo, useCallback } from 'react';
 
@@ -45,14 +46,8 @@ const ProjectCard = memo<ProjectCardProps>(({ project }) => {
 						</div>
 					)}
 				</div>
-				<Link
-					href={project?.link || '#'}
-					target='_blank'
-					rel='noopener noreferrer'
-					className='text-primary dark:text-success decoration-none text-heading-xsmall inline-flex flex-row items-center gap-1 tracking-wider uppercase transition-all duration-150 ease-in hover:gap-2 rtl:flex-row-reverse'
-				>
-					<span>Learn More</span>
-					<IconArrowRight stroke={3} className='mb-0.5 h-4 w-4 transition-transform duration-300' />
+				<Link href={project?.link || '#'} target='_blank' rel='noopener noreferrer'>
+					<CTALink>Learn More</CTALink>
 				</Link>
 			</div>
 			<div className='h-52 w-full px-4 pb-4 sm:h-80 sm:px-6 sm:pb-6 lg:h-full lg:pt-6'>

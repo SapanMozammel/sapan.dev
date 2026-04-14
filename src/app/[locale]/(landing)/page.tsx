@@ -3,11 +3,14 @@ import Cta from '@/components/layout/Cta';
 import Experience from '@/components/layout/Experience';
 import Faq from '@/components/layout/Faq';
 import Hero from '@/components/layout/Hero';
-import Portfolio from '@/components/layout/Portfolio';
-import Technologies from '@/components/layout/Technologies';
-import Testimonials from '@/components/layout/Testimonials';
-import Workflow from '@/components/layout/Workflow';
-import ContactModal from '@/components/ui/contact-modal';
+import dynamic from 'next/dynamic';
+
+// Below-fold client components — lazy-loaded to reduce initial JS bundle
+const Technologies = dynamic(() => import('@/components/layout/Technologies'));
+const Portfolio = dynamic(() => import('@/components/layout/Portfolio'));
+const Testimonials = dynamic(() => import('@/components/layout/Testimonials'));
+const Workflow = dynamic(() => import('@/components/layout/Workflow'));
+const ContactModal = dynamic(() => import('@/components/ui/contact-modal'));
 
 const LandingPage = () => (
 	<>

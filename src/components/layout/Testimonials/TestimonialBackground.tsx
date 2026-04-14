@@ -10,6 +10,9 @@ const TestimonialBackground = memo<React.DetailedHTMLProps<React.AllHTMLAttribut
 	const linesRef = useRef<(SVGPathElement | null)[]>([]);
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [lineCount, setLineCount] = React.useState(0);
+	const rafMovRef = useRef<number | null>(null);
+	// Pre-compiled quickTo setters — rebuilt when lineCount changes, used in mousemove RAF
+	const quickToOpacity = useRef<Array<ReturnType<typeof gsap.quickTo> | null>>([]);
 
 	useEffect(() => {
 		const updateLayout = () => {
@@ -43,36 +46,41 @@ const TestimonialBackground = memo<React.DetailedHTMLProps<React.AllHTMLAttribut
 		updateLayout();
 
 		const handleMouseMove = (e: MouseEvent) => {
-			linesRef.current.forEach((line, index) => {
-				if (!line) {
+			// Skip if a frame is already pending — avoids stacking RAF callbacks
+			if (rafMovRef.current !== null) {
+				return;
+			}
+			const clientX = e.clientX;
+			rafMovRef.current = requestAnimationFrame(() => {
+				rafMovRef.current = null;
+				const container = containerRef.current;
+				if (!container) {
 					return;
 				}
-				if (index === 0 || index === linesRef.current.length - 1) {
-					return;
-				}
-
-				const rect = line.getBoundingClientRect();
-				const centerX = rect.left + rect.width / 2;
-				const distanceX = Math.abs(e.clientX - centerX);
+				// One getBoundingClientRect on the container instead of one per line
+				const containerRect = container.getBoundingClientRect();
+				const containerLeft = containerRect.left;
+				const containerWidth = containerRect.width;
+				const setters = quickToOpacity.current;
+				const len = setters.length;
 				const mouseRadius = 300;
 
-				if (distanceX < mouseRadius) {
-					const proximity = 1 - distanceX / mouseRadius;
-					const smoothProximity = proximity * proximity;
+				// Lines are evenly distributed via flex justify-between, so
+				// center X of line[i] = containerLeft + (i / (len - 1)) * containerWidth
+				for (let i = 1; i < len - 1; i++) {
+					const setter = setters[i];
+					if (!setter) {
+						continue;
+					}
+					const centerX = containerLeft + (i / (len - 1)) * containerWidth;
+					const distanceX = Math.abs(clientX - centerX);
 
-					gsap.to(line, {
-						opacity: 0.05 + 0.2 * smoothProximity,
-						duration: 0.1,
-						ease: 'power2.out',
-						overwrite: 'auto',
-					});
-				} else {
-					gsap.to(line, {
-						opacity: 0.05,
-						duration: 0.1,
-						ease: 'power2.out',
-						overwrite: 'auto',
-					});
+					if (distanceX < mouseRadius) {
+						const proximity = 1 - distanceX / mouseRadius;
+						setter(0.05 + 0.2 * proximity * proximity);
+					} else {
+						setter(0.05);
+					}
 				}
 			});
 		};
@@ -82,6 +90,9 @@ const TestimonialBackground = memo<React.DetailedHTMLProps<React.AllHTMLAttribut
 		return () => {
 			window.removeEventListener('mousemove', handleMouseMove);
 			resizeObserver.disconnect();
+			if (rafMovRef.current !== null) {
+				cancelAnimationFrame(rafMovRef.current);
+			}
 		};
 	}, []);
 
@@ -98,6 +109,9 @@ const TestimonialBackground = memo<React.DetailedHTMLProps<React.AllHTMLAttribut
 			}
 			line.setAttribute('d', `M 0.5 0 L 0.5 ${height}`);
 		});
+
+		// Rebuild pre-compiled quickTo setters for the new line set
+		quickToOpacity.current = linesRef.current.map((line) => (line ? gsap.quickTo(line, 'opacity', { duration: 0.1, ease: 'power2.out' }) : null));
 	}, [lineCount]);
 
 	const STAR_CLASSES = 'w-3 md:w-4 h-3 md:h-4 text-primary dark:text-success z-1';

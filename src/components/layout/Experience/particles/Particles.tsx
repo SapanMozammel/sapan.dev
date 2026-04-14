@@ -24,7 +24,7 @@ const getCSSColor = (varName: string) => new THREE.Color(getComputedStyle(docume
 
 const Particles = memo<{ isDark: boolean }>(({ isDark }) => {
 	const revealStartTime = useRef<number | null>(null);
-	const [isRevealing, setIsRevealing] = useState(true);
+	const isRevealingRef = useRef(true);
 
 	// Read design system tokens once from CSS custom properties
 	const [colors] = useState(() => ({
@@ -82,8 +82,8 @@ const Particles = memo<{ isDark: boolean }>(({ isDark }) => {
 		const easedProgress = 1 - Math.pow(1 - revealProgress, 3);
 		const revealFactor = easedProgress * 4.0;
 
-		if (revealProgress >= 1.0 && isRevealing) {
-			setIsRevealing(false);
+		if (revealProgress >= 1.0 && isRevealingRef.current) {
+			isRevealingRef.current = false;
 		}
 
 		// Theme-adaptive colors & opacity

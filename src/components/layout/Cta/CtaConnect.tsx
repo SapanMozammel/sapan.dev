@@ -1,5 +1,6 @@
 'use client';
 
+import StatusDot from '@/components/ui/status-dot';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { IconBrandGithub, IconBrandLinkedin, IconBrandWordpress, IconMailFilled, IconMapPinFilled, IconPhoneFilled } from '@tabler/icons-react';
 import NextLink from 'next/link';
@@ -15,10 +16,7 @@ const CtaConnect = memo(() => (
 	<div className='flex flex-col gap-4'>
 		{/* Availability */}
 		<div className='flex items-center gap-3 pl-0.5'>
-			<span className='relative flex h-2.5 w-2.5 shrink-0'>
-				<span className='bg-primary dark:bg-success absolute inline-flex h-full w-full animate-ping rounded-full opacity-75' />
-				<span className='bg-primary dark:bg-success relative inline-flex h-2.5 w-2.5 rounded-full' />
-			</span>
+			<StatusDot />
 			<span className='text-primary dark:text-success text-paragraph-small'>Ready for your next project</span>
 		</div>
 		{/* Location & Contact */}

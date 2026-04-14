@@ -1,5 +1,7 @@
 'use client';
 
+import Badge from '@/components/ui/badge';
+import BulletList from '@/components/ui/bullet-list';
 import { cn } from '@/lib/utils';
 import type { TimelineItemProps } from '@/types/experience';
 import { memo, useMemo, useRef } from 'react';
@@ -84,38 +86,21 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 					{job.technologies && job.technologies.length > 0 && (
 						<div className='flex flex-wrap gap-1.5'>
 							{job.technologies.map((tech, idx) => (
-								<span
-									key={idx}
-									className={cn('font-hg bg-secondary-100 text-secondary-500 dark:bg-secondary-800 dark:text-secondary-500 rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase')}
-								>
-									{tech}
-								</span>
+								<Badge key={idx}>{tech}</Badge>
 							))}
 						</div>
 					)}
 					<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-small'>{job.description}</p>
-					<div className='flex flex-col gap-1.5'>
-						<h5 className='text-dark text-heading-small-alt dark:text-white'>Responsibilities</h5>
-						<ul className='text-secondary-600 dark:text-secondary-400 text-paragraph-small flex list-none flex-col gap-1.5'>
-							{job.responsibilities?.map((resp, idx) => (
-								<li key={idx} className='relative flex items-start pl-4'>
-									<span className='border-primary dark:border-success absolute left-0 mt-2 h-1.5 w-1.5 rounded-full border bg-transparent' />
-									{resp}
-								</li>
-							))}
-						</ul>
-					</div>
+					{job.responsibilities && job.responsibilities.length > 0 && (
+						<div className='flex flex-col gap-1.5'>
+							<h5 className='text-dark text-heading-small-alt dark:text-white'>Responsibilities</h5>
+							<BulletList items={job.responsibilities} />
+						</div>
+					)}
 					{job.achievements && job.achievements.length > 0 && (
 						<div className='flex flex-col gap-1.5'>
 							<h5 className='text-dark text-heading-small-alt dark:text-white'>Impact & Achievements</h5>
-							<ul className='text-secondary-600 dark:text-secondary-400 text-paragraph-small flex list-none flex-col gap-1.5'>
-								{job.achievements.map((achievement, idx) => (
-									<li key={idx} className='relative flex items-start pl-4'>
-										<span className='border-primary dark:border-success absolute left-0 mt-2 h-1.5 w-1.5 rounded-full border bg-transparent' />
-										{achievement}
-									</li>
-								))}
-							</ul>
+							<BulletList items={job.achievements} />
 						</div>
 					)}
 				</div>

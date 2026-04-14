@@ -42,6 +42,10 @@ const Timeline = memo<TimelineProps>(({ items, className }) => {
 	});
 
 	const itemRefs = useRef<HTMLElement[]>([]);
+	// Cached per-item dot elements — queried once at setup, never on every scroll tick
+	const itemDotsCache = useRef<HTMLElement[][]>([]);
+	// Track which items have already faded in — avoids getBoundingClientRect on revealed items
+	const revealedItems = useRef<boolean[]>([]);
 
 	useEffect(() => {
 		let rafId: number;
@@ -50,39 +54,53 @@ const Timeline = memo<TimelineProps>(({ items, className }) => {
 			if (!timelineRef.current) {
 				return;
 			}
+
+			// --- Read phase (all layout reads before any writes) ---
 			const scrollPos = window.scrollY + window.innerHeight / 2;
 			const containerTop = timelineRef.current.getBoundingClientRect().top + window.scrollY;
 			const isDesktop = window.innerWidth >= 768;
 			const startY = isDesktop ? 42 : 10;
+			const vh = window.innerHeight;
 
+			// Populate caches on first call
 			if (itemRefs.current.length === 0) {
 				itemRefs.current = Array.from(timelineRef.current.querySelectorAll('[data-timeline-item]')) as HTMLElement[];
+				itemDotsCache.current = itemRefs.current.map((el) => Array.from(el.querySelectorAll('[data-timeline-dot]')) as HTMLElement[]);
+				revealedItems.current = itemRefs.current.map(() => false);
 			}
 
-			itemRefs.current.forEach((itemEl, i) => {
-				if (i >= heights.length) {
-					return;
-				}
-				const dotAbsoluteY = containerTop + heights[i] + startY;
-				const itemDots = itemEl.querySelectorAll('[data-timeline-dot]');
+			const len = Math.min(itemRefs.current.length, heights.length);
 
-				itemDots.forEach((innerDot) => {
-					const el = innerDot as HTMLElement;
-					if (scrollPos >= dotAbsoluteY) {
+			// Read bounding rects for unrevealed items only (batched before any writes)
+			const itemTops: (number | null)[] = new Array(len);
+			for (let i = 0; i < len; i++) {
+				itemTops[i] = revealedItems.current[i] ? null : itemRefs.current[i].getBoundingClientRect().top;
+			}
+
+			// --- Write phase ---
+			for (let i = 0; i < len; i++) {
+				const dotAbsoluteY = containerTop + heights[i] + startY;
+				const active = scrollPos >= dotAbsoluteY;
+				const dots = itemDotsCache.current[i];
+
+				for (let d = 0; d < dots.length; d++) {
+					const el = dots[d];
+					if (active) {
 						el.classList.add('bg-primary', 'dark:bg-success', 'border-indigo-100', 'dark:border-teal-900');
 						el.classList.remove('bg-secondary-300', 'dark:bg-secondary-700', 'border-secondary-100', 'dark:border-secondary-800');
 					} else {
 						el.classList.remove('bg-primary', 'dark:bg-success', 'border-indigo-100', 'dark:border-teal-900');
 						el.classList.add('bg-secondary-300', 'dark:bg-secondary-700', 'border-secondary-100', 'dark:border-secondary-800');
 					}
-				});
-
-				const rect = itemEl.getBoundingClientRect();
-				if (rect.top < window.innerHeight * 0.85) {
-					itemEl.style.opacity = '1';
-					itemEl.style.transform = 'translateY(0)';
 				}
-			});
+
+				// Reveal fade-in — skip items already revealed
+				if (!revealedItems.current[i] && itemTops[i] !== null && (itemTops[i] as number) < vh * 0.85) {
+					itemRefs.current[i].style.opacity = '1';
+					itemRefs.current[i].style.transform = 'translateY(0)';
+					revealedItems.current[i] = true;
+				}
+			}
 		};
 
 		const onScroll = () => {
@@ -104,6 +122,8 @@ const Timeline = memo<TimelineProps>(({ items, className }) => {
 			window.removeEventListener('scroll', onScroll);
 			cancelAnimationFrame(rafId);
 			itemRefs.current = [];
+			itemDotsCache.current = [];
+			revealedItems.current = [];
 		};
 	}, [heights]);
 

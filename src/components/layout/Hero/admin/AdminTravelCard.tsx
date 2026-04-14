@@ -6,8 +6,8 @@ const AdminTravelCard = () => {
 			<div className='border-info/30 flex w-full items-center justify-center rounded-[1em] border-[0.05em] border-solid bg-white/30 p-[1em] backdrop:blur-md dark:bg-black/30'>
 				<Cloud className='w-[9em]' />
 			</div>
-			<div className='mt-[0.9em] text-[1.4em] leading-snug font-semibold'>Designing a Travel App</div>
-			<div className='text-secondary-600 dark:text-secondary-400 mt-[0.8em] text-[0.9em] leading-snug font-light'>
+			<div className='mt-[0.9em] text-[1.4em] leading-snug'>Designing a Travel App</div>
+			<div className='text-secondary-600 dark:text-secondary-400 mt-[0.8em] text-[0.9em] leading-snug font-normal'>
 				Embark on a creative journey as you learn how to design a captivating travel app from concept to user-centric experience. This comprehensive course in Figma will immerse you in the world of travel app
 				design, covering everything from user interface aesthetics to intuitive user experiences (UX).
 			</div>

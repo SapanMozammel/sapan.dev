@@ -1,5 +1,7 @@
 import SectionSeparator from '@/components/layout/common/SectionSeparator';
+import Badge from '@/components/ui/badge';
 import BlogCard from '@/components/ui/blog-card';
+import MetaLabel from '@/components/ui/meta-label';
 import { BLOG_POSTS, CATEGORY_COLORS, DEFAULT_CATEGORY_COLOR } from '@/data/content/blogs';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
@@ -51,7 +53,7 @@ const renderBlock = (block: ContentBlock, index: number) => {
 			return (
 				<div key={index} className='mb-4 overflow-hidden rounded-xl'>
 					<div className='bg-secondary-800 flex items-center justify-between px-4 py-2'>
-						<span className='font-hg text-secondary-400 text-xs font-semibold tracking-widest uppercase'>{block.language}</span>
+						<span className='font-hg text-secondary-400 text-xs font-bold tracking-widest uppercase'>{block.language}</span>
 						<div className='flex gap-1.5'>
 							<span className='bg-danger/70 h-2.5 w-2.5 rounded-full' />
 							<span className='bg-warning/70 h-2.5 w-2.5 rounded-full' />
@@ -152,12 +154,9 @@ const BlogDetailPage = async ({ params }: Props) => {
 						</div>
 						<div className='flex flex-col gap-5 p-6 sm:p-8 lg:p-10'>
 							<div className='flex flex-wrap items-center gap-3'>
-								<div className='text-secondary-400 dark:text-secondary-600 flex items-center gap-1.5 text-xs'>
-									<IconClock size={13} stroke={2} />
-									<span className='font-hg font-medium'>{post.readTime} min read</span>
-								</div>
+								<MetaLabel icon={<IconClock size={13} stroke={2} />}>{post.readTime} min read</MetaLabel>
 								<span className='bg-secondary-200 dark:bg-secondary-700 h-1 w-1 rounded-full' />
-								<span className='text-secondary-400 dark:text-secondary-600 font-hg text-xs font-medium'>{formatDate(post.publishedAt)}</span>
+								<MetaLabel>{formatDate(post.publishedAt)}</MetaLabel>
 							</div>
 							<h1 className='sr-only'>{post.title}</h1>
 							<h2 className='text-heading-xlarge text-dark tracking-wide dark:text-white'>{post.title}</h2>
@@ -165,12 +164,7 @@ const BlogDetailPage = async ({ params }: Props) => {
 							<div className='flex flex-wrap items-center gap-2'>
 								<IconTag size={13} stroke={2} className='text-secondary-400 dark:text-secondary-600' />
 								{post.tags.map((tag) => (
-									<span
-										key={tag}
-										className='font-hg bg-secondary-100 text-secondary-500 dark:bg-secondary-800 dark:text-secondary-500 rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase'
-									>
-										{tag}
-									</span>
+									<Badge key={tag}>{tag}</Badge>
 								))}
 							</div>
 						</div>

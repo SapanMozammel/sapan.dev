@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { IconAlienFilled, IconChevronDown } from '@tabler/icons-react';
 
-import { menuItems } from './data';
+import { menuItems } from '@/data/content/admin-dashboard';
 
 const AdminSidebar = () => {
 	return (
