@@ -167,6 +167,27 @@ Located at `src/components/layout/common/Button.tsx`, variants in `Button/varian
 
 ---
 
+## Decorative Glow Blobs
+
+Full-page status/error pages use a centered radial glow blob for visual depth. Named `@utility` classes in `src/styles/utilities.scss` keep JSX clean and guarantee CSS generation — no inline `style`, no Tailwind arbitrary-value classes.
+
+### Available utilities
+
+| Class | Size | Color |
+|---|---|---|
+| `glow-blob-primary` | 640×260px | `--color-primary` at 28% |
+| `glow-blob-danger` | 640×260px | `--color-danger` at 18% |
+| `glow-blob-primary-sm` | 600×220px | `--color-primary` at 22% |
+
+```tsx
+<div className='glow-blob-primary pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full' />
+```
+
+- `background: color-mix(in oklab, var(--color-TOKEN) N%, transparent)` — reads the CSS variable directly, works in both light and dark mode without `dark:` variants; this is the only raw CSS property in the utility (no Tailwind equivalent)
+- Dimensions and blur use `@apply w-* h-* blur-*` inside the `@utility` block — Tailwind scale values preferred over arbitrary pixels
+- To add a new variant: add a `@utility glow-blob-*` block in `src/styles/utilities.scss` with `@apply` for size/blur and raw CSS for `background`
+- The parent must be `relative overflow-hidden`; content sits in `relative z-10`
+
 ## Animation Library Selection
 
 | Interaction | Duration | Library |

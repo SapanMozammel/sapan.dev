@@ -10,7 +10,7 @@ export const dmSans = DM_Sans({
 
 export const hankenGrotesk = Hanken_Grotesk({
 	display: 'swap',
-	weight: ['500', '600', '700'],
+	weight: ['500', '700'],
 	subsets: ['latin'],
 	style: ['normal'],
 	variable: '--font-hg',

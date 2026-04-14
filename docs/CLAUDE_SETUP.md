@@ -57,19 +57,17 @@ If `CLAUDE.md` and a skill conflict, **the skill wins** — it is more specific.
 
 ## Formatter & Linting Config
 
-All formatter/linter configuration lives in `.formatter/` (not at the project root):
+ESLint uses **flat config** at the project root (`eslint.config.js`). Prettier config lives in `.formatter/`:
 
 ```
+eslint.config.js          # ESLint flat config (root)
 .formatter/
-├── .eslintrc.js      # ESLint rules — extended by root .eslintrc.js
-├── .prettierrc.js    # Prettier config — referenced by all format scripts
-└── sync.js           # Import organizer — run by pnpm run imports:organize
+├── .prettierrc.js        # Prettier config — referenced by all format scripts
+└── sync.js               # Import organizer — run by pnpm run imports:organize
 ```
-
-The root `.eslintrc.js` is a thin wrapper that requires `.formatter/.eslintrc.js`. This keeps the root clean while allowing Next.js and editors to find ESLint from the project root.
 
 When running formatting commands in hooks or manually:
-- `pnpm run lint:fix` — ESLint with auto-fix (uses `.formatter/.eslintrc.js` via root wrapper)
+- `pnpm run lint:fix` — ESLint with auto-fix (uses `eslint.config.js` flat config)
 - `pnpm run format` — Prettier (uses `.formatter/.prettierrc.js`)
 - `pnpm run format:all` — imports:organize → format → lint:fix (full pipeline)
 
@@ -87,13 +85,14 @@ Skills are reference docs Claude loads automatically. Keep them factual and spec
 - Fills & strokes section
 
 ### `skills/design-system/typography.md`
-- Font families table
+- Font families table (class, font, loaded weights, usage)
 - Role assignments (which font for which UI element)
 - Text sizing scale (mobile-first)
 - Rules: never inherit font silently, always explicit
+- **Typography utilities** live in `src/styles/utilities.scss` as `@utility` blocks (`text-heading-*`, `text-paragraph-*`). They bundle font family + size + weight + line-height. `cn()` in `src/lib/utils/index.ts` uses `extendTailwindMerge` with a regex pattern to register these under the font-size group — prevents tailwind-merge from misclassifying them as text-color. New tiers auto-detected; new categories require extending the regex.
 
 ### `skills/design-system/spacing.md`
-- Container utility definitions (`.container`, `.container-fluid`)
+- Container utility definitions (`.container`, `.container-fluid`) — defined as `@utility` in `src/styles/utilities.scss`
 - Section spacing patterns
 - Content gaps and card padding
 - Responsive breakpoints
@@ -106,6 +105,7 @@ Source: current knowledge of the project patterns
 - Common UI patterns (border, shadow, hover, active, focus, error, disabled)
 - Section structure (SectionSeparator + SectionTitle)
 - Button system (8 variants)
+- Decorative glow blob pattern — named `@utility` classes (`glow-blob-primary`, `glow-blob-danger`, `glow-blob-primary-sm`) in `src/styles/utilities.scss`; `background: color-mix(in oklab, var(--color-TOKEN) N%, transparent)` is the only raw CSS property (no Tailwind equivalent); add new variants as additional `@utility glow-blob-*` blocks
 - Animation library selection and duration standards
 - File organization table
 - Pre-write checklist (11 items)
@@ -118,9 +118,10 @@ Source: current knowledge of the project patterns
 - 4 namespaces (current): `common` · `navigation` · `home` · `blog`
 - Locale detection priority: URL segment → localStorage (`preferred-language`) → `Accept-Language` header → `en`
 - Navigation imports: `@/i18n/navigation` for internal routes, `NextLink from 'next/link'` for external. Both can coexist.
-- RTL support: Arabic sets `dir="rtl"` in `[locale]/layout.tsx`; use `rtl:` Tailwind variant in components
+- RTL support: Arabic sets `dir="rtl"` in root `src/app/layout.tsx` (via `getLocale()` + `RTL_LOCALES` check); use `rtl:` Tailwind variant in components
 - Graceful fallback: missing locale namespace files fall back to English automatically
 - Static generation with `generateStaticParams()`
+- **Root not-found exception:** `src/app/not-found.tsx` renders outside `NextIntlClientProvider` — cannot use `Link` from `@/i18n/navigation` or `Button` with `to` prop (throws "No intl context found"). Use `NextLink from 'next/link'` directly there.
 
 ### `skills/architecture/state.md`
 - Redux store: `localeSlice` + `uiSlice`

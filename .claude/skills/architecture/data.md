@@ -53,7 +53,6 @@ TypeScript type definitions — one file per domain.
 | `badge.ts` | `BadgeProps` |
 | `bullet-list.ts` | `BulletListProps` |
 | `cta-link.ts` | `CTALinkProps` |
-| `error-page-layout.ts` | `ErrorPageLayoutProps` |
 | `form-field.ts` | `FormFieldProps` |
 | `meta-label.ts` | `MetaLabelProps` |
 | `status-dot.ts` | `StatusDotProps` |
