@@ -74,12 +74,30 @@ import Link from 'next/link'
 
 ## RTL Support (Arabic)
 
-- `[locale]/layout.tsx` sets `dir="rtl"` when locale is `ar`
+- `src/app/layout.tsx` (root layout) sets `dir="rtl"` when locale is `ar` — it calls `getLocale()` from `next-intl/server` and checks against `RTL_LOCALES`
 - Use `rtl:` Tailwind variant for RTL-specific overrides in components:
 
 ```tsx
 <div className="ml-4 rtl:ml-0 rtl:mr-4">
 ```
+
+## Root Not-Found Exception
+
+`src/app/not-found.tsx` renders **outside** the locale layout — it has no `NextIntlClientProvider`. Any component that internally uses next-intl's `Link` (including `Button` with a `to` prop) will throw:
+
+```
+No intl context found. Have you configured the provider?
+```
+
+In `src/app/not-found.tsx`, use `NextLink from 'next/link'` directly for any links:
+
+```tsx
+import Link from 'next/link'
+
+<Link href='/' className='...'>Go back home</Link>
+```
+
+The locale-level `src/app/[locale]/not-found.tsx` is fine — it renders inside `NextIntlClientProvider` and can use `Button` with `to` or `Link` from `@/i18n/navigation` normally.
 
 ## Static Generation
 

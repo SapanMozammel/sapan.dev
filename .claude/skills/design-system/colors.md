@@ -62,7 +62,8 @@ border-primary dark:border-success
 | `bg-black` | `dark:bg-white` | Hamburger lines |
 | `bg-secondary-600/5` | `dark:bg-secondary-400/5` | Nav icon wraps (inactive) |
 | `bg-secondary-100` | `dark:bg-secondary-800` | Tags, chips, category default, timeline progress track |
-| `bg-secondary-200` | `dark:bg-secondary-700` | Timeline dots, workflow progress track, article dot separators |
+| `bg-secondary-200` | `dark:bg-secondary-700` | Workflow progress track, article dot separators |
+| `bg-secondary-300` | `dark:bg-secondary-700` | Timeline dots (inactive) |
 | `bg-primary` | `dark:bg-success` | Active states, progress bar, availability dot, tooltips |
 | `bg-primary/80` | `dark:bg-success/80` | Cursor tooltip, project card badge |
 | `bg-primary/10` | `dark:bg-success/10` | Soft accent fills, icon containers, switchers |
@@ -115,7 +116,9 @@ border-primary dark:border-success
 | `border-secondary-100` | `dark:border-secondary-800` | Inner dividers |
 | `border-secondary-200` | `dark:border-secondary-700` | Dividers, sheet/panel borders, form inputs |
 | `border-secondary-200/50` | `dark:border-secondary-700/50` | Cards, containers |
-| `border-secondary-300` | `dark:border-secondary-700` | Pagination, interactive, timeline dots |
+| `border-secondary-100` | `dark:border-secondary-800` | Timeline dots (inactive) |
+| `border-secondary-300` | `dark:border-secondary-700` | Pagination, interactive |
+| `border-indigo-100` | `dark:border-teal-900` | Timeline dots (active, set via JS classList) |
 | `border-secondary-400` | `dark:border-secondary-600` | Section lines, header, footer |
 | `border-primary` | `dark:border-success` | Accent borders, tooltips |
 | `border-primary/10` | `dark:border-success/10` | Subtle accent containers |

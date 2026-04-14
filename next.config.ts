@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
 	},
 
 	experimental: {
-		optimizePackageImports: ['@tabler/icons-react', 'three'],
+		optimizePackageImports: ['@tabler/icons-react', 'three', '@react-three/drei', 'framer-motion', 'gsap'],
 	},
 
 	onDemandEntries: {

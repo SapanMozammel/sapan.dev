@@ -8,7 +8,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
 	const isRTL = RTL_LOCALES.includes(locale);
 
 	return (
-		<html lang={locale} dir={isRTL ? 'rtl' : 'ltr'} suppressHydrationWarning>
+		<html lang={locale} dir={isRTL ? 'rtl' : 'ltr'} suppressHydrationWarning className='relative'>
 			<body className={`${fontList} ${isRTL ? 'font-arabic' : 'font-dm'}`} suppressHydrationWarning>
 				{children}
 			</body>

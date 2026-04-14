@@ -47,3 +47,19 @@
 @utility text-paragraph-small {
 	@apply font-dm text-xs !leading-relaxed font-normal sm:text-sm;
 }
+
+// ── Glow Blob Utilities ────────────────────────────────────────
+@utility glow-blob-primary {
+	@apply h-65 w-160 max-w-[90vw] blur-[5rem];
+	background: color-mix(in oklab, var(--color-primary) 28%, transparent);
+}
+
+@utility glow-blob-danger {
+	@apply h-65 w-160 max-w-[90vw] blur-[5rem];
+	background: color-mix(in oklab, var(--color-danger) 18%, transparent);
+}
+
+@utility glow-blob-primary-sm {
+	@apply h-55 w-150 max-w-[90vw] blur-[5rem];
+	background: color-mix(in oklab, var(--color-primary) 22%, transparent);
+}
