@@ -2,7 +2,7 @@
 
 import type { StackingCardConfig, UseStackingCardsOptions } from '@/types/stacking-cards';
 import { useScroll } from 'framer-motion';
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
 
 const DEFAULT_TOP_START = 120;
 const DEFAULT_TOP_INCREMENT = 20;
@@ -19,22 +19,22 @@ export const useStackingCards = (count: number, options: UseStackingCardsOptions
 		offset: ['start start', 'end end'],
 	});
 
-	const scaleValues = generateScaleValues(count, defaultMinScale);
-	const step = count > 0 ? 1 / count : 0;
+	const cardConfigs = useMemo<StackingCardConfig[]>(() => {
+		const scaleValues = generateScaleValues(count, defaultMinScale);
+		const step = count > 0 ? 1 / count : 0;
+		const reverseTargetScale = scaleValues[0] ?? 1;
 
-	const cardConfigs: StackingCardConfig[] = Array.from({ length: count }, (_, i) => {
-		const isLast = i === count - 1;
-		return {
+		return Array.from({ length: count }, (_, i) => ({
 			stickyTop: topStart,
 			indexOffset: i * topIncrement,
 			topIncrement,
 			zIndex: i + 1,
 			targetScale: scaleValues[i] ?? 1,
-			reverseTargetScale: scaleValues[0] ?? 1,
+			reverseTargetScale,
 			range: [i * step, 1] as [number, number],
-			isLast,
-		};
-	});
+			isLast: i === count - 1,
+		}));
+	}, [count, topStart, topIncrement, defaultMinScale]);
 
 	return { containerRef, scrollYProgress, cardConfigs, enabled };
 };
