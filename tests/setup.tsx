@@ -48,14 +48,23 @@ vi.mock('next/navigation', () => ({
 // ── Framer Motion mock ──
 
 vi.mock('framer-motion', () => {
+	const isMotionValue = (v: unknown): v is { get: () => unknown } => typeof v === 'object' && v !== null && typeof (v as { get?: unknown }).get === 'function';
+
 	const createMotionComponent = (tag: string) => {
 		const Comp = React.forwardRef<HTMLElement, PropsWithChildren<Record<string, unknown>>>((props, ref) => {
 			const domProps: Record<string, unknown> = {};
 			const animationKeys = new Set(['initial', 'animate', 'exit', 'transition', 'whileHover', 'whileTap', 'whileInView', 'variants']);
 			for (const [key, value] of Object.entries(props)) {
-				if (!animationKeys.has(key)) {
-					domProps[key] = value;
+				if (animationKeys.has(key)) continue;
+				if (key === 'style' && typeof value === 'object' && value !== null) {
+					const cleanStyle: Record<string, unknown> = {};
+					for (const [styleKey, styleValue] of Object.entries(value as Record<string, unknown>)) {
+						cleanStyle[styleKey] = isMotionValue(styleValue) ? styleValue.get() : styleValue;
+					}
+					domProps[key] = cleanStyle;
+					continue;
 				}
+				domProps[key] = value;
 			}
 			return React.createElement(tag, { ...domProps, ref });
 		});
@@ -72,11 +81,26 @@ vi.mock('framer-motion', () => {
 		},
 	});
 
+	const createMotionValue = (initial: number) => {
+		let current = initial;
+		return {
+			get: () => current,
+			set: (v: number) => {
+				current = v;
+			},
+			jump: (v: number) => {
+				current = v;
+			},
+		};
+	};
+
 	return {
 		motion: motionProxy,
 		AnimatePresence: ({ children }: PropsWithChildren) => <>{children}</>,
 		useScroll: () => ({ scrollYProgress: { get: () => 0 } }),
 		useTransform: () => 0,
+		useMotionValue: (initial: number) => createMotionValue(initial),
+		useSpring: (initial: number) => createMotionValue(typeof initial === 'number' ? initial : 0),
 	};
 });
 

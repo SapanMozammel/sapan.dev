@@ -126,7 +126,7 @@ const DiamondGrid = memo<DiamondGridProps>((props) => {
 					>
 						{item.logo ? (
 							<span className='relative h-3/5 w-full'>
-								<Image src={item.logo} alt={`${item.name} logo`} fill />
+								<Image src={item.logo} alt={`${item.name} logo`} fill sizes='(max-width: 768px) 25vw, 20vw' />
 							</span>
 						) : (
 							<span>{item.name}</span>

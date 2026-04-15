@@ -2,7 +2,7 @@
 
 import { WORKFLOW_STEPS } from '@/data/content/workflow';
 import { useTheme } from 'next-themes';
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import SectionSeparator from '../common/SectionSeparator';
 import SectionTitle from '../common/SectionTitle';
 import WorkflowContent from './WorkflowContent';
@@ -53,10 +53,10 @@ const Workflow = memo(() => {
 		};
 	}, [isPaused, totalSteps, activeStep]);
 
-	const handleStepClick = (index: number) => {
+	const handleStepClick = useCallback((index: number) => {
 		setActiveStep(index);
 		setStepProgress(0);
-	};
+	}, []);
 
 	return (
 		<section id='workflow' className='relative z-1 pb-16 sm:pb-20 lg:pb-24'>
