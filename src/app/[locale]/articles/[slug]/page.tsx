@@ -175,7 +175,7 @@ const BlogDetailPage = async ({ params }: Props) => {
 					{otherPosts.length > 0 && (
 						<div className='w-full'>
 							<div className='border-secondary-200/50 dark:border-secondary-700/50 mb-6 border-t pt-8'>
-								<p className='text-secondary-500 text-heading-small-alt mb-5 tracking-widest uppercase'>More in {post.category}</p>
+								<p className='text-secondary-500 text-heading-xsmall mb-5 tracking-widest uppercase'>More in {post.category}</p>
 								<div className='grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3'>
 									{otherPosts.map((related) => (
 										<BlogCard key={related.slug} post={related} />
