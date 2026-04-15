@@ -486,7 +486,8 @@ html:has(input[name="theme"]:checked) {
 			},
 			{
 				type: 'list',
-				items: [':has() — universal support since 2023',
+				items: [
+					':has() — universal support since 2023',
 					'@scope — universal support since 2024',
 					'Container queries — universal support since 2023',
 					'Native nesting — universal support since 2023',
@@ -1123,8 +1124,7 @@ const mixed = price + eur; // ❌ Type error`,
 	{
 		slug: 'zod-typescript-runtime-validation',
 		title: 'Zod Meets TypeScript: Runtime-Safe Types at the Boundaries',
-		excerpt:
-			'TypeScript proves your code correct if the data matches the types. Zod verifies the data actually matches at runtime. Together they close the gap between your type system and the outside world.',
+		excerpt: 'TypeScript proves your code correct if the data matches the types. Zod verifies the data actually matches at runtime. Together they close the gap between your type system and the outside world.',
 		thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
 		category: 'TypeScript',
 		tags: ['TypeScript', 'Zod', 'Validation', 'Runtime Safety'],
@@ -1483,8 +1483,7 @@ turbo run build test --filter=[HEAD^1]`,
 	{
 		slug: 'vite-6-state-of-frontend-builds',
 		title: 'Vite 6 and the State of Frontend Builds in 2026',
-		excerpt:
-			'Vite 6 ships with Environment API, Rolldown integration, and a rewritten dev server. The gap between Vite and Webpack-based tools is now so large that sticking with the old stack is an active choice.',
+		excerpt: 'Vite 6 ships with Environment API, Rolldown integration, and a rewritten dev server. The gap between Vite and Webpack-based tools is now so large that sticking with the old stack is an active choice.',
 		thumbnail: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80',
 		category: 'Tooling',
 		tags: ['Vite', 'Build Tools', 'Rolldown', 'Performance'],
@@ -1632,7 +1631,7 @@ import logoData from './logo.svg?inline';  // base64 data URL`,
 			},
 			{
 				type: 'paragraph',
-				text: 'Vite 6 solidifies its position as the default JavaScript build tool for everything that is not Next.js. The Environment API unifies SSR, edge, and worker builds. Rolldown will close the production-build speed gap that has remained Webpack\'s last holdout. For new projects, Vite is the answer unless you have a specific reason to choose otherwise.',
+				text: "Vite 6 solidifies its position as the default JavaScript build tool for everything that is not Next.js. The Environment API unifies SSR, edge, and worker builds. Rolldown will close the production-build speed gap that has remained Webpack's last holdout. For new projects, Vite is the answer unless you have a specific reason to choose otherwise.",
 			},
 		],
 	},
@@ -1818,7 +1817,7 @@ export default function NewPostPage() {
 			},
 			{
 				type: 'paragraph',
-				text: 'Child components can read the parent form\'s pending status with useFormStatus. This decouples loading UI from the form component itself — a submit button knows when its enclosing form is submitting without prop drilling.',
+				text: "Child components can read the parent form's pending status with useFormStatus. This decouples loading UI from the form component itself — a submit button knows when its enclosing form is submitting without prop drilling.",
 			},
 			{
 				type: 'code',
@@ -1876,7 +1875,7 @@ function ProfileForm() {
 		content: [
 			{
 				type: 'paragraph',
-				text: 'The browser\'s main thread has to do too many things at once. Paint the frame. Run your React render. Handle the mouse click. Parse the JSON response. If any of these takes more than 16ms, the user sees jank. Web Workers are the built-in answer — separate JavaScript threads that run in parallel and cannot block the UI.',
+				text: "The browser's main thread has to do too many things at once. Paint the frame. Run your React render. Handle the mouse click. Parse the JSON response. If any of these takes more than 16ms, the user sees jank. Web Workers are the built-in answer — separate JavaScript threads that run in parallel and cannot block the UI.",
 			},
 			{
 				type: 'heading',
@@ -2874,7 +2873,7 @@ function Counter() {
 		content: [
 			{
 				type: 'paragraph',
-				text: 'Hex colors have been the web\'s default for 30 years. They are also bad — not because they are wrong, but because sRGB cannot represent most of what modern monitors can display, and the relationship between hex values and perceived brightness is nonlinear. Modern CSS introduces color spaces designed for humans, not for the 1996 VGA palette.',
+				text: "Hex colors have been the web's default for 30 years. They are also bad — not because they are wrong, but because sRGB cannot represent most of what modern monitors can display, and the relationship between hex values and perceived brightness is nonlinear. Modern CSS introduces color spaces designed for humans, not for the 1996 VGA palette.",
 			},
 			{
 				type: 'heading',
@@ -2956,7 +2955,7 @@ function Counter() {
 			},
 			{
 				type: 'paragraph',
-				text: 'P3 displays (standard on every Apple device since 2016 and most modern Android phones) can show colors sRGB cannot. A truly saturated red on P3 is physically brighter and more saturated than sRGB\'s maximum red. CSS lets you target wide-gamut colors with display-p3 or oklch with chroma values above sRGB\'s limit.',
+				text: "P3 displays (standard on every Apple device since 2016 and most modern Android phones) can show colors sRGB cannot. A truly saturated red on P3 is physically brighter and more saturated than sRGB's maximum red. CSS lets you target wide-gamut colors with display-p3 or oklch with chroma values above sRGB's limit.",
 			},
 			{
 				type: 'code',
@@ -3155,7 +3154,7 @@ function Counter() {
 			},
 			{
 				type: 'paragraph',
-				text: 'ITCSS proposed a specificity hierarchy a decade ago — settings, tools, generic, elements, objects, components, trumps. @layer is ITCSS with teeth. The order you always wanted from ITCSS\'s inverted-triangle diagram is now enforced by the cascade itself.',
+				text: "ITCSS proposed a specificity hierarchy a decade ago — settings, tools, generic, elements, objects, components, trumps. @layer is ITCSS with teeth. The order you always wanted from ITCSS's inverted-triangle diagram is now enforced by the cascade itself.",
 			},
 			{
 				type: 'code',
@@ -3426,7 +3425,7 @@ if (result.ok) {
 		content: [
 			{
 				type: 'paragraph',
-				text: 'Template literal types are TypeScript 4.1\'s quiet revolution. On the surface they are a minor syntax addition — you can now use backticks in types. Underneath, they give the type system the ability to analyze and construct strings. Combined with conditional types and infer, they enable entire libraries to be type-safe in ways that were previously impossible.',
+				text: "Template literal types are TypeScript 4.1's quiet revolution. On the surface they are a minor syntax addition — you can now use backticks in types. Underneath, they give the type system the ability to analyze and construct strings. Combined with conditional types and infer, they enable entire libraries to be type-safe in ways that were previously impossible.",
 			},
 			{
 				type: 'heading',
@@ -3457,7 +3456,7 @@ type Cap = Capitalize<'hello'>;   // 'Hello'`,
 			},
 			{
 				type: 'paragraph',
-				text: 'The most impactful real-world use is type-safe routing. Express, Hono, and modern frameworks use template literal types to parse path patterns at the type level — extracting parameter names so the handler\'s params object is correctly typed.',
+				text: "The most impactful real-world use is type-safe routing. Express, Hono, and modern frameworks use template literal types to parse path patterns at the type level — extracting parameter names so the handler's params object is correctly typed.",
 			},
 			{
 				type: 'code',
@@ -3498,7 +3497,7 @@ get('/users/:userId/posts/:postId', (req) => {
 			},
 			{
 				type: 'paragraph',
-				text: 'Libraries like Tailwind\'s type plugin and Panda CSS use template literal types to provide autocomplete for utility classes. The types understand responsive prefixes, pseudo-class modifiers, and arbitrary values.',
+				text: "Libraries like Tailwind's type plugin and Panda CSS use template literal types to provide autocomplete for utility classes. The types understand responsive prefixes, pseudo-class modifiers, and arbitrary values.",
 			},
 			{
 				type: 'code',
@@ -3602,7 +3601,7 @@ const err = get(user, 'profile.x');     // ❌ type error`,
 			},
 			{
 				type: 'paragraph',
-				text: 'Template literal types cannot do arithmetic, cannot call functions, and cannot execute arbitrary JavaScript. For cases that exceed the type system\'s capabilities, use generic constraints with branded types or fall back to runtime validation with Zod. The type system is a helper, not a replacement for runtime guarantees on external data.',
+				text: "Template literal types cannot do arithmetic, cannot call functions, and cannot execute arbitrary JavaScript. For cases that exceed the type system's capabilities, use generic constraints with branded types or fall back to runtime validation with Zod. The type system is a helper, not a replacement for runtime guarantees on external data.",
 			},
 			{
 				type: 'heading',
@@ -3628,7 +3627,7 @@ const err = get(user, 'profile.x');     // ❌ type error`,
 		content: [
 			{
 				type: 'paragraph',
-				text: 'Suspense has existed since React 16.6 but only became production-ready with React 18\'s concurrent rendering. Now paired with Server Components in React 19, it is the fundamental primitive for handling async UI — loading states, data fetching boundaries, and progressive hydration all flow from one mental model.',
+				text: "Suspense has existed since React 16.6 but only became production-ready with React 18's concurrent rendering. Now paired with Server Components in React 19, it is the fundamental primitive for handling async UI — loading states, data fetching boundaries, and progressive hydration all flow from one mental model.",
 			},
 			{
 				type: 'heading',
