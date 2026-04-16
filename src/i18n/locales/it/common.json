@@ -1,0 +1,59 @@
+{
+	"buttons": {
+		"learnMore": "Scopri di più",
+		"readMore": "Leggi di più",
+		"letsConnect": "Connettiamoci",
+		"close": "Chiudi",
+		"tryAgain": "Riprova",
+		"reload": "Ricarica",
+		"goHome": "Torna alla home"
+	},
+	"loading": "Caricamento...",
+	"labels": {
+		"role": "Ruolo",
+		"technologies": "Tecnologie",
+		"responsibilities": "Responsabilità",
+		"achievements": "Impatto e risultati",
+		"viewOnGithub": "Vedi su GitHub"
+	},
+	"footer": {
+		"copyright": "Tutti i diritti riservati.",
+		"designedBy": "Progettato e sviluppato da {name}"
+	},
+	"theme": {
+		"change": "Cambia tema",
+		"suffix": "Tema"
+	},
+	"contact": {
+		"modal": {
+			"title": "Mettiamoci in contatto",
+			"description": "Ti risponderò il prima possibile."
+		},
+		"form": {
+			"labels": {
+				"name": "Nome",
+				"email": "Email",
+				"title": "Titolo",
+				"message": "Messaggio"
+			},
+			"submit": "Invia messaggio"
+		},
+		"status": {
+			"loading": "Invio del messaggio in corso...",
+			"successTitle": "Messaggio inviato!",
+			"successDescription": "Grazie per avermi contattato. Ti risponderò presto.",
+			"errorTitle": "Qualcosa è andato storto",
+			"errorDescription": "Riprova o contattami via email."
+		}
+	},
+	"error": {
+		"label": "Errore",
+		"title": "Qualcosa è andato storto",
+		"defaultMessage": "Si è verificato un errore imprevisto. Potrebbe essere dovuto a un problema temporaneo del server."
+	},
+	"notFound": {
+		"label": "Errore",
+		"title": "Pagina non trovata",
+		"description": "Spiacenti, la pagina che stavi cercando non è stata trovata. Potrebbe essere stata spostata o eliminata."
+	}
+}

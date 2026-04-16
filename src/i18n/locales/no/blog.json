@@ -1,0 +1,9 @@
+{
+	"pagination": {
+		"previous": "Forrige side",
+		"next": "Neste side",
+		"page": "Side {page}"
+	},
+	"backToList": "Alle artikler",
+	"moreIn": "Mer i {category}"
+}

@@ -1,0 +1,44 @@
+{
+	"hero": {
+		"srTitle": "Hei, jeg er Sapan Mozammel, en fullstack frontend-utvikler.",
+		"headingPrefix": "Med hver linje",
+		"headingSuffix": ", former jeg fremtiden til webutvikling.",
+		"description": "Med over 5 års dynamisk erfaring med å bygge applikasjoner ved hjelp av React, Redux, GraphQL, Next.js, Three.js, Node.js og mye mer, er jeg stolt av å skrive ren og vedlikeholdbar kode samtidig som jeg følger beste praksis innen utvikling."
+	},
+	"technologies": {
+		"subtitle": "Teknologier",
+		"title": "Min ekspertise"
+	},
+	"portfolio": {
+		"subtitle": "Portefølje",
+		"title": "Mine nyeste arbeider"
+	},
+	"experience": {
+		"subtitle": "Erfaring",
+		"title": "Utviklingen som utvikler"
+	},
+	"testimonials": {
+		"subtitle": "Anbefalinger",
+		"title": "Hva folk sier om meg"
+	},
+	"workflow": {
+		"subtitle": "Slik jobber jeg",
+		"title": "Fra idé til lansering"
+	},
+	"faq": {
+		"subtitle": "Ting du kanskje lurer på",
+		"title": "Ofte stilte spørsmål"
+	},
+	"blog": {
+		"subtitle": "Blogg",
+		"title": "Tanker om frontend",
+		"viewAll": "Se alle artikler"
+	},
+	"cta": {
+		"heading": "Har du et prosjekt i tankene?",
+		"headingAccent": "La oss bygge det sammen.",
+		"description": "Enten du trenger et komplett produkt, en landingsside eller bare vil utforske idéer — jeg er her for å samarbeide.",
+		"availability": "Klar for ditt neste prosjekt",
+		"location": "Basert i Dhaka, Bangladesh. Leverer globalt."
+	}
+}

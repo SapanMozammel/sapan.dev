@@ -1,3 +1,5 @@
+'use client';
+
 import Badge from '@/components/ui/badge';
 import CTALink from '@/components/ui/cta-link';
 import MetaLabel from '@/components/ui/meta-label';
@@ -7,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { getBlurDataURL } from '@/lib/utils/image';
 import type { BlogCardProps } from '@/types/blog';
 import { IconClock } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 const BLUR_PLACEHOLDER = getBlurDataURL(800, 450);
 
@@ -18,6 +21,7 @@ const formatDate = (dateString: string): string =>
 	});
 
 const BlogCard = ({ post, className }: BlogCardProps) => {
+	const translateButtons = useTranslations('common.buttons');
 	const categoryColor = CATEGORY_COLORS[post.category] ?? DEFAULT_CATEGORY_COLOR;
 
 	return (
@@ -58,7 +62,7 @@ const BlogCard = ({ post, className }: BlogCardProps) => {
 						<MetaLabel>{formatDate(post.publishedAt)}</MetaLabel>
 						<MetaLabel icon={<IconClock size={12} stroke={2} />}>{post.readTime} min</MetaLabel>
 					</div>
-					<CTALink>Read More</CTALink>
+					<CTALink>{translateButtons('readMore')}</CTALink>
 				</div>
 			</div>
 		</Link>

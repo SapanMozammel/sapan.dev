@@ -2,18 +2,20 @@
 
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 import { memo, useCallback, useEffect, useState } from 'react';
 
 const SECTION_IDS = ['portfolio', 'experience', 'workflow'] as const;
 
 const NAV_ITEMS = [
-	{ label: 'Portfolio', section: 'portfolio' },
-	{ label: 'Experience', section: 'experience' },
-	{ label: 'Workflow', section: 'workflow' },
-	{ label: 'Articles', href: '/articles' },
+	{ key: 'portfolio', section: 'portfolio' },
+	{ key: 'experience', section: 'experience' },
+	{ key: 'workflow', section: 'workflow' },
+	{ key: 'articles', href: '/articles' },
 ] as const;
 
 const NavMenu = memo(() => {
+	const translateNav = useTranslations('navigation');
 	const [activeSection, setActiveSection] = useState('');
 	const pathname = usePathname();
 	const router = useRouter();
@@ -85,13 +87,13 @@ const NavMenu = memo(() => {
 				if ('section' in item) {
 					return (
 						<Link key={item.section} href='/' onClick={(e) => handleSectionClick(e, item.section)} className={linkClass(activeSection === item.section)}>
-							{item.label}
+							{translateNav(item.key)}
 						</Link>
 					);
 				}
 				return (
 					<Link key={item.href} href={item.href} className={linkClass(pathname.startsWith(item.href))}>
-						{item.label}
+						{translateNav(item.key)}
 					</Link>
 				);
 			})}

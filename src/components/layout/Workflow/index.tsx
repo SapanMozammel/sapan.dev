@@ -1,6 +1,7 @@
 'use client';
 
 import { WORKFLOW_STEPS } from '@/data/content/workflow';
+import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import SectionSeparator from '../common/SectionSeparator';
@@ -11,6 +12,7 @@ import WorkflowProgress from './WorkflowProgress';
 const AUTOPLAY_DURATION = 5000;
 
 const Workflow = memo(() => {
+	const translate = useTranslations('home.workflow');
 	const { resolvedTheme } = useTheme();
 	const [activeStep, setActiveStep] = useState(0);
 	const [isPaused, setIsPaused] = useState(false);
@@ -62,7 +64,7 @@ const Workflow = memo(() => {
 		<section id='workflow' className='relative z-1 pb-16 sm:pb-20 lg:pb-24'>
 			<SectionSeparator lts rts lbs rbs tl bl ll rl>
 				<div className='container flex w-full grow flex-col items-center justify-start gap-8'>
-					<SectionTitle subtitle='How I Work' title='From Idea to Launch' watermark='Workflow' />
+					<SectionTitle subtitle={translate('subtitle')} title={translate('title')} watermark='Workflow' />
 					<div
 						onMouseEnter={() => setIsPaused(true)}
 						onMouseLeave={() => setIsPaused(false)}

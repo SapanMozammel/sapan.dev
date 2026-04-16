@@ -1,0 +1,59 @@
+{
+	"buttons": {
+		"learnMore": "En savoir plus",
+		"readMore": "Lire la suite",
+		"letsConnect": "Connectons-nous",
+		"close": "Fermer",
+		"tryAgain": "Réessayer",
+		"reload": "Recharger",
+		"goHome": "Retour à l'accueil"
+	},
+	"loading": "Chargement...",
+	"labels": {
+		"role": "Rôle",
+		"technologies": "Technologies",
+		"responsibilities": "Responsabilités",
+		"achievements": "Impact et réalisations",
+		"viewOnGithub": "Voir sur GitHub"
+	},
+	"footer": {
+		"copyright": "Tous droits réservés.",
+		"designedBy": "Conçu et développé par {name}"
+	},
+	"theme": {
+		"change": "Changer le thème",
+		"suffix": "Thème"
+	},
+	"contact": {
+		"modal": {
+			"title": "Prenons contact",
+			"description": "Je vous répondrai dans les plus brefs délais."
+		},
+		"form": {
+			"labels": {
+				"name": "Nom",
+				"email": "E-mail",
+				"title": "Sujet",
+				"message": "Message"
+			},
+			"submit": "Envoyer le message"
+		},
+		"status": {
+			"loading": "Envoi de votre message...",
+			"successTitle": "Message envoyé !",
+			"successDescription": "Merci de m'avoir contacté. Je vous répondrai bientôt.",
+			"errorTitle": "Une erreur est survenue",
+			"errorDescription": "Veuillez réessayer ou me contacter par e-mail."
+		}
+	},
+	"error": {
+		"label": "Erreur",
+		"title": "Une erreur est survenue",
+		"defaultMessage": "Une erreur inattendue s'est produite. Cela peut être dû à un problème temporaire du serveur."
+	},
+	"notFound": {
+		"label": "Erreur",
+		"title": "Page introuvable",
+		"description": "Désolé, la page que vous recherchez est introuvable. Elle a peut-être été déplacée ou supprimée."
+	}
+}

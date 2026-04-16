@@ -1,0 +1,9 @@
+{
+	"pagination": {
+		"previous": "前のページ",
+		"next": "次のページ",
+		"page": "{page} ページ"
+	},
+	"backToList": "すべての記事",
+	"moreIn": "{category}の他の記事"
+}

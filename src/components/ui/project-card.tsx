@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { getBlurDataURL } from '@/lib/utils/image';
 import type { ProjectCardProps } from '@/types/portfolio';
 import { IconArrowUpRight } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { memo, useCallback } from 'react';
 
@@ -15,12 +16,14 @@ const IMAGE_SIZE = 600;
 const IMAGE_PLACEHOLDER = getBlurDataURL(IMAGE_SIZE, IMAGE_SIZE);
 
 const TOOLTIP_CONTENT = (
-	<span className='bg-primary/80 border-primary dark:border-success dark:bg-success/80 dark:text-dark pointer-events-none inline-flex rounded-2xl border-1 border-solid px-3 py-2 text-sm font-medium text-white'>
+	<span className='bg-primary/80 border-primary dark:border-success dark:bg-success/80 dark:text-dark pointer-events-none inline-flex rounded-2xl border-1 border-solid px-3 py-2 text-sm text-white'>
 		<IconArrowUpRight className='h-6 w-6' stroke={2.5} />
 	</span>
 );
 
 const ProjectCard = memo<ProjectCardProps>(({ project }) => {
+	const translateLabels = useTranslations('common.labels');
+	const translateButtons = useTranslations('common.buttons');
 	const handleClick = useCallback(() => {
 		if (project?.link) {
 			window.open(project.link, '_blank', 'noopener,noreferrer');
@@ -35,19 +38,19 @@ const ProjectCard = memo<ProjectCardProps>(({ project }) => {
 				<div className='mt-1.5 mb-1.5 grid w-full grid-cols-1 gap-x-4 gap-y-2.5 sm:mb-0 sm:grid-cols-3'>
 					{project.role && (
 						<div className='flex flex-col gap-0.5'>
-							<h5 className='text-dark text-heading-small-alt dark:text-white'>Role</h5>
+							<h5 className='text-dark text-heading-small-alt dark:text-white'>{translateLabels('role')}</h5>
 							<span className='text-secondary-600 dark:text-secondary-400 text-paragraph-small'>{project.role}</span>
 						</div>
 					)}
 					{project.technologies && project.technologies.length > 0 && (
 						<div className='col-span-2 flex flex-col gap-0.5'>
-							<h5 className='text-dark text-heading-small-alt dark:text-white'>Technologies</h5>
+							<h5 className='text-dark text-heading-small-alt dark:text-white'>{translateLabels('technologies')}</h5>
 							<TechnologiesDisplay technologies={project.technologies} />
 						</div>
 					)}
 				</div>
 				<Link href={project?.link || '#'} target='_blank' rel='noopener noreferrer'>
-					<CTALink>Learn More</CTALink>
+					<CTALink>{translateButtons('learnMore')}</CTALink>
 				</Link>
 			</div>
 			<div className='h-52 w-full px-4 pb-4 sm:h-80 sm:px-6 sm:pb-6 lg:h-full lg:pt-6'>

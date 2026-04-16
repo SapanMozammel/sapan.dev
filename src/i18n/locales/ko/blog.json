@@ -1,0 +1,9 @@
+{
+	"pagination": {
+		"previous": "이전 페이지",
+		"next": "다음 페이지",
+		"page": "{page} 페이지"
+	},
+	"backToList": "모든 게시물",
+	"moreIn": "{category}의 다른 글"
+}

@@ -1,0 +1,59 @@
+{
+	"buttons": {
+		"learnMore": "了解更多",
+		"readMore": "阅读更多",
+		"letsConnect": "与我联系",
+		"close": "关闭",
+		"tryAgain": "重试",
+		"reload": "重新加载",
+		"goHome": "返回首页"
+	},
+	"loading": "加载中...",
+	"labels": {
+		"role": "角色",
+		"technologies": "技术栈",
+		"responsibilities": "职责",
+		"achievements": "影响与成就",
+		"viewOnGithub": "在 GitHub 上查看"
+	},
+	"footer": {
+		"copyright": "保留所有权利。",
+		"designedBy": "由 {name} 设计与开发"
+	},
+	"theme": {
+		"change": "更改主题",
+		"suffix": "主题"
+	},
+	"contact": {
+		"modal": {
+			"title": "与我联系",
+			"description": "我会尽快回复您。"
+		},
+		"form": {
+			"labels": {
+				"name": "姓名",
+				"email": "邮箱",
+				"title": "标题",
+				"message": "留言"
+			},
+			"submit": "发送消息"
+		},
+		"status": {
+			"loading": "正在发送您的消息...",
+			"successTitle": "消息已发送！",
+			"successDescription": "感谢您的联系，我会尽快回复您。",
+			"errorTitle": "出错了",
+			"errorDescription": "请重试或通过邮件联系我。"
+		}
+	},
+	"error": {
+		"label": "错误",
+		"title": "出错了",
+		"defaultMessage": "发生了意外错误。这可能是由于临时的服务器问题导致的。"
+	},
+	"notFound": {
+		"label": "错误",
+		"title": "页面未找到",
+		"description": "抱歉，您查找的页面无法找到。它可能已被移动或删除。"
+	}
+}

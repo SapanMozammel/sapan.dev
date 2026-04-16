@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { setLocale } from '@/store/slices/localeSlice';
 import type { Locale } from '@/types/i18n';
 import { IconLoader } from '@tabler/icons-react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -17,6 +17,8 @@ const LanguageSwitcher = memo(() => {
 	const pathname = usePathname();
 	const dispatch = useDispatch();
 	const currentLocale = useLocale();
+	const translateNav = useTranslations('navigation');
+	const translateCommon = useTranslations('common');
 
 	const [mounted, setMounted] = useState(false);
 	const [isHovering, setIsHovering] = useState(false);
@@ -66,12 +68,12 @@ const LanguageSwitcher = memo(() => {
 					</PopoverTrigger>
 				</TooltipTrigger>
 				<TooltipContent side='bottom'>
-					<p className='font-hg'>{mounted ? currentLanguageName : 'Loading'}</p>
+					<p className='font-hg'>{mounted ? currentLanguageName : translateCommon('loading')}</p>
 				</TooltipContent>
 			</Tooltip>
 			<PopoverContent className='border-secondary-400 dark:border-secondary-600 divide-secondary-400 dark:divide-secondary-600 w-52 divide-y' align='end'>
 				<div className='font-hg text-dark flex items-center gap-1 px-3 py-2 text-xs font-medium sm:text-sm dark:text-white'>
-					<span>Change Language</span>
+					<span>{translateNav('changeLanguage')}</span>
 				</div>
 				<div className='flex max-h-80 flex-col gap-0.5 overflow-y-auto p-1'>
 					{LANGUAGES.map((language) => (

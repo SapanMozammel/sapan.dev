@@ -1,0 +1,59 @@
+{
+	"buttons": {
+		"learnMore": "Meer informatie",
+		"readMore": "Lees meer",
+		"letsConnect": "Laten we verbinden",
+		"close": "Sluiten",
+		"tryAgain": "Opnieuw proberen",
+		"reload": "Herladen",
+		"goHome": "Terug naar home"
+	},
+	"loading": "Laden...",
+	"labels": {
+		"role": "Rol",
+		"technologies": "Technologieën",
+		"responsibilities": "Verantwoordelijkheden",
+		"achievements": "Impact & prestaties",
+		"viewOnGithub": "Bekijk op GitHub"
+	},
+	"footer": {
+		"copyright": "Alle rechten voorbehouden.",
+		"designedBy": "Ontworpen en ontwikkeld door {name}"
+	},
+	"theme": {
+		"change": "Thema wijzigen",
+		"suffix": "Thema"
+	},
+	"contact": {
+		"modal": {
+			"title": "Laten we in contact komen",
+			"description": "Ik neem zo snel mogelijk contact met je op."
+		},
+		"form": {
+			"labels": {
+				"name": "Naam",
+				"email": "E-mail",
+				"title": "Titel",
+				"message": "Bericht"
+			},
+			"submit": "Bericht verzenden"
+		},
+		"status": {
+			"loading": "Je bericht wordt verzonden...",
+			"successTitle": "Bericht verzonden!",
+			"successDescription": "Bedankt voor je bericht. Ik neem snel contact op.",
+			"errorTitle": "Er ging iets mis",
+			"errorDescription": "Probeer het opnieuw of neem contact op via e-mail."
+		}
+	},
+	"error": {
+		"label": "Fout",
+		"title": "Er ging iets mis",
+		"defaultMessage": "Er is een onverwachte fout opgetreden. Dit kan komen door een tijdelijk serverprobleem."
+	},
+	"notFound": {
+		"label": "Fout",
+		"title": "Pagina niet gevonden",
+		"description": "Sorry, de pagina die je zocht is niet gevonden. Deze is mogelijk verplaatst of verwijderd."
+	}
+}

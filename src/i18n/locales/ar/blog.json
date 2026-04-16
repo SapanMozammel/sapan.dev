@@ -1,0 +1,9 @@
+{
+	"pagination": {
+		"previous": "الصفحة السابقة",
+		"next": "الصفحة التالية",
+		"page": "صفحة {page}"
+	},
+	"backToList": "جميع المقالات",
+	"moreIn": "المزيد في {category}"
+}

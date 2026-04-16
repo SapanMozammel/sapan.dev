@@ -1,0 +1,59 @@
+{
+	"buttons": {
+		"learnMore": "Saber más",
+		"readMore": "Leer más",
+		"letsConnect": "Conectemos",
+		"close": "Cerrar",
+		"tryAgain": "Intentar de nuevo",
+		"reload": "Recargar",
+		"goHome": "Volver al inicio"
+	},
+	"loading": "Cargando...",
+	"labels": {
+		"role": "Rol",
+		"technologies": "Tecnologías",
+		"responsibilities": "Responsabilidades",
+		"achievements": "Impacto y logros",
+		"viewOnGithub": "Ver en GitHub"
+	},
+	"footer": {
+		"copyright": "Todos los derechos reservados.",
+		"designedBy": "Diseñado y desarrollado por {name}"
+	},
+	"theme": {
+		"change": "Cambiar tema",
+		"suffix": "Tema"
+	},
+	"contact": {
+		"modal": {
+			"title": "Conectemos",
+			"description": "Te responderé lo antes posible."
+		},
+		"form": {
+			"labels": {
+				"name": "Nombre",
+				"email": "Correo electrónico",
+				"title": "Asunto",
+				"message": "Mensaje"
+			},
+			"submit": "Enviar mensaje"
+		},
+		"status": {
+			"loading": "Enviando tu mensaje...",
+			"successTitle": "¡Mensaje enviado!",
+			"successDescription": "Gracias por escribir. Me pondré en contacto pronto.",
+			"errorTitle": "Algo salió mal",
+			"errorDescription": "Por favor, inténtalo de nuevo o contáctame por correo electrónico."
+		}
+	},
+	"error": {
+		"label": "Error",
+		"title": "Algo salió mal",
+		"defaultMessage": "Ocurrió un error inesperado. Esto podría deberse a un problema temporal del servidor."
+	},
+	"notFound": {
+		"label": "Error",
+		"title": "Página no encontrada",
+		"description": "Lo sentimos, no se pudo encontrar la página que buscabas. Es posible que haya sido movida o eliminada."
+	}
+}

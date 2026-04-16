@@ -9,6 +9,7 @@ import { getBlurDataURL } from '@/lib/utils/image';
 import type { ContentBlock } from '@/types/blog';
 import { IconArrowLeft, IconClock, IconTag } from '@tabler/icons-react';
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
@@ -129,6 +130,7 @@ const BlogDetailPage = async ({ params }: Props) => {
 		notFound();
 	}
 
+	const translateBlog = await getTranslations('blog');
 	const otherPosts = BLOG_POSTS.filter((p) => p.slug !== slug && p.category === post.category).slice(0, 3);
 	const categoryColor = CATEGORY_COLORS[post.category] ?? DEFAULT_CATEGORY_COLOR;
 
@@ -143,7 +145,7 @@ const BlogDetailPage = async ({ params }: Props) => {
 							className='text-secondary-500 hover:text-primary dark:hover:text-success text-heading-xsmall inline-flex items-center gap-2 tracking-wider uppercase transition-colors duration-200'
 						>
 							<IconArrowLeft size={14} stroke={2.5} />
-							All Articles
+							{translateBlog('backToList')}
 						</Link>
 					</div>
 					<div className='border-secondary-200/50 dark:border-secondary-700/50 relative w-full overflow-hidden rounded-2xl border bg-white shadow-lg shadow-black/5 dark:bg-black dark:shadow-white/5'>
@@ -175,7 +177,7 @@ const BlogDetailPage = async ({ params }: Props) => {
 					{otherPosts.length > 0 && (
 						<div className='w-full'>
 							<div className='border-secondary-200/50 dark:border-secondary-700/50 mb-6 border-t pt-8'>
-								<p className='text-secondary-500 text-heading-xsmall mb-5 tracking-widest uppercase'>More in {post.category}</p>
+								<p className='text-secondary-500 text-heading-xsmall mb-5 tracking-widest uppercase'>{translateBlog('moreIn', { category: post.category })}</p>
 								<div className='grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3'>
 									{otherPosts.map((related) => (
 										<BlogCard key={related.slug} post={related} />

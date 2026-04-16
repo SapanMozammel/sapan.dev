@@ -1,0 +1,59 @@
+{
+	"buttons": {
+		"learnMore": "Mehr erfahren",
+		"readMore": "Weiterlesen",
+		"letsConnect": "Vernetzen wir uns",
+		"close": "Schließen",
+		"tryAgain": "Erneut versuchen",
+		"reload": "Neu laden",
+		"goHome": "Zur Startseite"
+	},
+	"loading": "Wird geladen...",
+	"labels": {
+		"role": "Rolle",
+		"technologies": "Technologien",
+		"responsibilities": "Verantwortlichkeiten",
+		"achievements": "Wirkung & Erfolge",
+		"viewOnGithub": "Auf GitHub ansehen"
+	},
+	"footer": {
+		"copyright": "Alle Rechte vorbehalten.",
+		"designedBy": "Gestaltet und entwickelt von {name}"
+	},
+	"theme": {
+		"change": "Design ändern",
+		"suffix": "Design"
+	},
+	"contact": {
+		"modal": {
+			"title": "Nehmen wir Kontakt auf",
+			"description": "Ich melde mich so schnell wie möglich bei Ihnen zurück."
+		},
+		"form": {
+			"labels": {
+				"name": "Name",
+				"email": "E-Mail",
+				"title": "Betreff",
+				"message": "Nachricht"
+			},
+			"submit": "Nachricht senden"
+		},
+		"status": {
+			"loading": "Ihre Nachricht wird gesendet...",
+			"successTitle": "Nachricht gesendet!",
+			"successDescription": "Danke, dass Sie sich gemeldet haben. Ich melde mich bald.",
+			"errorTitle": "Etwas ist schiefgelaufen",
+			"errorDescription": "Bitte versuchen Sie es erneut oder kontaktieren Sie mich per E-Mail."
+		}
+	},
+	"error": {
+		"label": "Fehler",
+		"title": "Etwas ist schiefgelaufen",
+		"defaultMessage": "Ein unerwarteter Fehler ist aufgetreten. Dies könnte auf ein vorübergehendes Serverproblem zurückzuführen sein."
+	},
+	"notFound": {
+		"label": "Fehler",
+		"title": "Seite nicht gefunden",
+		"description": "Entschuldigung, die gesuchte Seite konnte nicht gefunden werden. Sie wurde möglicherweise verschoben oder gelöscht."
+	}
+}

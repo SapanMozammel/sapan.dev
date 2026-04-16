@@ -3,11 +3,13 @@
 import Logo from '@/components/icons/Logo';
 import { Dialog, DialogCloseButton, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useContactForm } from '@/hooks/useContactForm';
+import { useTranslations } from 'next-intl';
 import { memo } from 'react';
 import ContactForm from './ContactForm';
 import { ContactError, ContactLoading, ContactSuccess } from './ContactStatusStates';
 
 const ContactModal = memo(() => {
+	const translateModal = useTranslations('common.contact.modal');
 	const { isOpen, form, errors, status, handleOpenChange, handleClose, handleSubmit, handleRetry, handleChange } = useContactForm();
 
 	return (
@@ -23,8 +25,8 @@ const ContactModal = memo(() => {
 							<div className='flex items-center gap-4'>
 								<Logo className='h-8 w-8 shrink-0 sm:h-9 sm:w-9' />
 								<div className='flex flex-col gap-0.5'>
-									<DialogTitle className='text-heading-small text-dark tracking-wide dark:text-white'>Let&apos;s connect</DialogTitle>
-									<DialogDescription className='text-secondary-600 dark:text-secondary-400 text-paragraph-small tracking-widest'>I&apos;ll get back to you as soon as possible.</DialogDescription>
+									<DialogTitle className='text-heading-small text-dark tracking-wide dark:text-white'>{translateModal('title')}</DialogTitle>
+									<DialogDescription className='text-secondary-600 dark:text-secondary-400 text-paragraph-small tracking-widest'>{translateModal('description')}</DialogDescription>
 								</div>
 							</div>
 							<DialogCloseButton />

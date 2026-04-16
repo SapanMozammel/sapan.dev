@@ -4,11 +4,13 @@ import ProjectCard from '@/components/ui/project-card';
 import StackingCardWrapper from '@/components/ui/stacking-card-wrapper';
 import { PORTFOLIO_PROJECTS } from '@/data/content/portfolio';
 import { useStackingCards } from '@/hooks/useStackingCards';
+import { useTranslations } from 'next-intl';
 import { createRef, memo, useMemo } from 'react';
 import SectionSeparator from '../common/SectionSeparator';
 import SectionTitle from '../common/SectionTitle';
 
 const Portfolio = memo(() => {
+	const translate = useTranslations('home.portfolio');
 	const { containerRef, scrollYProgress, cardConfigs, enabled } = useStackingCards(PORTFOLIO_PROJECTS.length, {
 		topStart: 120,
 		topIncrement: 20,
@@ -22,7 +24,7 @@ const Portfolio = memo(() => {
 		<section id='portfolio' className='relative z-1 pb-16 sm:pb-24 lg:pb-32'>
 			<SectionSeparator lts rts lbs rbs tl bl ll rl>
 				<div className='container flex w-full grow flex-col items-center justify-start gap-4'>
-					<SectionTitle subtitle='Projects' title={`My Recent Works`} watermark='Portfolio' />
+					<SectionTitle subtitle={translate('subtitle')} title={translate('title')} watermark='Portfolio' />
 					<div ref={containerRef} className='relative z-2 w-full'>
 						{PORTFOLIO_PROJECTS.map((project, index) => {
 							const config = cardConfigs[index];

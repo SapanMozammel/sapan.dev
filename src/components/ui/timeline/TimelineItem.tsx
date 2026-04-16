@@ -4,11 +4,13 @@ import Badge from '@/components/ui/badge';
 import BulletList from '@/components/ui/bullet-list';
 import { cn } from '@/lib/utils';
 import type { TimelineItemProps } from '@/types/experience';
+import { useTranslations } from 'next-intl';
 import { memo, useMemo, useRef } from 'react';
 
 import { checkTimelineDirection } from './timeline-utils';
 
 const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, index }) => {
+	const translateLabels = useTranslations('common.labels');
 	const itemRef = useRef<HTMLDivElement>(null);
 	const isLeft = checkTimelineDirection(index);
 
@@ -93,13 +95,13 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 					<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-small'>{job.description}</p>
 					{job.responsibilities && job.responsibilities.length > 0 && (
 						<div className='flex flex-col gap-1.5'>
-							<h5 className='text-dark text-heading-small-alt dark:text-white'>Responsibilities</h5>
+							<h5 className='text-dark text-heading-small-alt dark:text-white'>{translateLabels('responsibilities')}</h5>
 							<BulletList items={job.responsibilities} />
 						</div>
 					)}
 					{job.achievements && job.achievements.length > 0 && (
 						<div className='flex flex-col gap-1.5'>
-							<h5 className='text-dark text-heading-small-alt dark:text-white'>Impact & Achievements</h5>
+							<h5 className='text-dark text-heading-small-alt dark:text-white'>{translateLabels('achievements')}</h5>
 							<BulletList items={job.achievements} />
 						</div>
 					)}

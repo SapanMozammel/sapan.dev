@@ -1,0 +1,59 @@
+{
+	"buttons": {
+		"learnMore": "Lær mer",
+		"readMore": "Les mer",
+		"letsConnect": "La oss ta kontakt",
+		"close": "Lukk",
+		"tryAgain": "Prøv igjen",
+		"reload": "Last inn på nytt",
+		"goHome": "Gå tilbake til forsiden"
+	},
+	"loading": "Laster...",
+	"labels": {
+		"role": "Rolle",
+		"technologies": "Teknologier",
+		"responsibilities": "Ansvarsområder",
+		"achievements": "Innvirkning og prestasjoner",
+		"viewOnGithub": "Se på GitHub"
+	},
+	"footer": {
+		"copyright": "Alle rettigheter forbeholdt.",
+		"designedBy": "Designet og utviklet av {name}"
+	},
+	"theme": {
+		"change": "Endre tema",
+		"suffix": "Tema"
+	},
+	"contact": {
+		"modal": {
+			"title": "La oss ta kontakt",
+			"description": "Jeg kommer tilbake til deg så snart som mulig."
+		},
+		"form": {
+			"labels": {
+				"name": "Navn",
+				"email": "E-post",
+				"title": "Tittel",
+				"message": "Melding"
+			},
+			"submit": "Send melding"
+		},
+		"status": {
+			"loading": "Sender meldingen din...",
+			"successTitle": "Melding sendt!",
+			"successDescription": "Takk for at du tok kontakt. Jeg tar kontakt snart.",
+			"errorTitle": "Noe gikk galt",
+			"errorDescription": "Vennligst prøv igjen eller ta kontakt via e-post."
+		}
+	},
+	"error": {
+		"label": "Feil",
+		"title": "Noe gikk galt",
+		"defaultMessage": "En uventet feil oppstod. Dette kan skyldes et midlertidig serverproblem."
+	},
+	"notFound": {
+		"label": "Feil",
+		"title": "Siden ble ikke funnet",
+		"description": "Beklager, siden du lette etter ble ikke funnet. Den kan ha blitt flyttet eller slettet."
+	}
+}

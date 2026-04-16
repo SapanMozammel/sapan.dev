@@ -6,23 +6,25 @@ import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { IconArticle, IconBrandGithub, IconBriefcase2, IconCode, IconHome, IconListDetails, IconMessageCircle, IconQuestionMark, IconTimeline, IconX } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 import NextLink from 'next/link';
 import { memo, useCallback, useEffect, useState } from 'react';
 
 const SECTION_IDS = ['home', 'technologies', 'portfolio', 'experience', 'testimonials', 'workflow', 'faq'] as const;
 
 const NAV_ITEMS = [
-	{ label: 'Home', section: 'home', icon: IconHome, number: '01' },
-	{ label: 'Technologies', section: 'technologies', icon: IconCode, number: '02' },
-	{ label: 'Portfolio', section: 'portfolio', icon: IconBriefcase2, number: '03' },
-	{ label: 'Experience', section: 'experience', icon: IconTimeline, number: '04' },
-	{ label: 'Testimonials', section: 'testimonials', icon: IconMessageCircle, number: '05' },
-	{ label: 'Workflow', section: 'workflow', icon: IconListDetails, number: '06' },
-	{ label: 'Articles', href: '/articles', icon: IconArticle, number: '07' },
-	{ label: 'FAQ', section: 'faq', icon: IconQuestionMark, number: '08' },
+	{ key: 'home', section: 'home', icon: IconHome, number: '01' },
+	{ key: 'technologies', section: 'technologies', icon: IconCode, number: '02' },
+	{ key: 'portfolio', section: 'portfolio', icon: IconBriefcase2, number: '03' },
+	{ key: 'experience', section: 'experience', icon: IconTimeline, number: '04' },
+	{ key: 'testimonials', section: 'testimonials', icon: IconMessageCircle, number: '05' },
+	{ key: 'workflow', section: 'workflow', icon: IconListDetails, number: '06' },
+	{ key: 'articles', href: '/articles', icon: IconArticle, number: '07' },
+	{ key: 'faq', section: 'faq', icon: IconQuestionMark, number: '08' },
 ] as const;
 
 const MobileNav = memo(() => {
+	const translateNav = useTranslations('navigation');
 	const [activeSection, setActiveSection] = useState('');
 	const [open, setOpen] = useState(false);
 	const pathname = usePathname();
@@ -114,7 +116,10 @@ const MobileNav = memo(() => {
 	return (
 		<Sheet open={open} onOpenChange={setOpen}>
 			<SheetTrigger asChild>
-				<button className='bg-light relative inline-flex h-8 w-8 cursor-pointer flex-col items-center justify-center rounded-lg sm:h-10 sm:w-10 md:hidden dark:bg-slate-900' aria-label='Toggle menu'>
+				<button
+					className='bg-light relative inline-flex h-8 w-8 cursor-pointer flex-col items-center justify-center rounded-lg sm:h-10 sm:w-10 md:hidden dark:bg-slate-900'
+					aria-label={translateNav('toggleMenu')}
+				>
 					<span
 						className={cn(
 							'absolute left-1/2 h-px w-4 -translate-x-1/2 rounded-full bg-black transition-all duration-300 dark:bg-white',
@@ -137,7 +142,7 @@ const MobileNav = memo(() => {
 			</SheetTrigger>
 			<SheetContent side='right' className='border-secondary-200 dark:border-secondary-700 flex w-80 max-w-[95%] flex-col gap-0 bg-white/95 p-0 backdrop-blur-xl sm:max-w-90 dark:bg-black/95'>
 				<VisuallyHidden>
-					<SheetTitle>Navigation Menu</SheetTitle>
+					<SheetTitle>{translateNav('navigationMenu')}</SheetTitle>
 				</VisuallyHidden>
 
 				<div className='border-secondary-200 dark:border-secondary-700 flex items-center justify-between border-b px-5 py-4'>
@@ -148,7 +153,7 @@ const MobileNav = memo(() => {
 					<SheetClose asChild>
 						<button
 							className='hover:text-primary dark:hover:text-success text-dark inline-flex aspect-square h-8 cursor-pointer items-center justify-center rounded-lg transition-colors dark:text-white'
-							aria-label='Close menu'
+							aria-label={translateNav('closeMenu')}
 						>
 							<IconX className='h-5 w-5' />
 						</button>
@@ -160,11 +165,11 @@ const MobileNav = memo(() => {
 						const active = 'section' in item ? activeSection === item.section : pathname.startsWith(item.href);
 						const Icon = item.icon;
 						return (
-							<Link key={item.label} href={'section' in item ? '/' : item.href} onClick={'section' in item ? (e) => handleSectionClick(e, item.section) : () => setOpen(false)} className={itemClass(active)}>
+							<Link key={item.key} href={'section' in item ? '/' : item.href} onClick={'section' in item ? (e) => handleSectionClick(e, item.section) : () => setOpen(false)} className={itemClass(active)}>
 								<span className={iconWrap(active)}>
 									<Icon className='h-[18px] w-[18px]' stroke={1.5} />
 								</span>
-								<span className='flex-1'>{item.label}</span>
+								<span className='flex-1'>{translateNav(item.key)}</span>
 								<span
 									className={cn('text-[10px] font-normal tracking-widest transition-colors duration-200', active ? 'text-primary/50 dark:text-success/50' : 'text-secondary-400 dark:text-secondary-600')}
 								>

@@ -4,6 +4,7 @@ import CursorTooltip from '@/components/ui/cursor-tooltip';
 import { DiamondGrid } from '@/components/ui/diamond-grid';
 import { TECH_STACK } from '@/data/config/technologies';
 import { getBlurDataURL } from '@/lib/utils/image';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { memo } from 'react';
 import SectionSeparator from '../common/SectionSeparator';
@@ -13,11 +14,13 @@ const LOGO_SIZE = 64;
 const BLUR_PLACEHOLDER = getBlurDataURL(LOGO_SIZE, LOGO_SIZE);
 
 const Technologies = memo(() => {
+	const translate = useTranslations('home.technologies');
+
 	return (
 		<section id='technologies' className='relative z-1 pt-[20vw] pb-16 sm:pb-20 lg:pb-24'>
 			<SectionSeparator lts rts lbs rbs bl ll rl>
 				<div className='container flex w-full grow flex-col items-center justify-start gap-4 text-center'>
-					<SectionTitle subtitle='Technologies' title={`I'm an Expertise In`} watermark='Technologies' />
+					<SectionTitle subtitle={translate('subtitle')} title={translate('title')} watermark='Technologies' />
 					<DiamondGrid items={TECH_STACK}>
 						{(item) => (
 							<CursorTooltip

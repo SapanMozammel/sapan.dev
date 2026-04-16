@@ -1,0 +1,44 @@
+{
+	"hero": {
+		"srTitle": "你好，我是 Sapan Mozammel，一名全栈前端开发工程师。",
+		"headingPrefix": "用每一行",
+		"headingSuffix": "，塑造 Web 开发的未来。",
+		"description": "凭借 5 年以上使用 React、Redux、GraphQL、Next.js、Three.js、Node.js 等技术构建应用程序的丰富经验，我始终遵循工程最佳实践，以编写整洁、可维护的代码为荣。"
+	},
+	"technologies": {
+		"subtitle": "技术栈",
+		"title": "我所擅长的领域"
+	},
+	"portfolio": {
+		"subtitle": "作品集",
+		"title": "我的近期作品"
+	},
+	"experience": {
+		"subtitle": "工作经历",
+		"title": "作为开发者的成长之路"
+	},
+	"testimonials": {
+		"subtitle": "客户评价",
+		"title": "他们对我的评价"
+	},
+	"workflow": {
+		"subtitle": "我的工作方式",
+		"title": "从构思到上线"
+	},
+	"faq": {
+		"subtitle": "你可能想问的问题",
+		"title": "常见问题解答"
+	},
+	"blog": {
+		"subtitle": "博客",
+		"title": "前端开发随笔",
+		"viewAll": "查看所有文章"
+	},
+	"cta": {
+		"heading": "有项目想法吗？",
+		"headingAccent": "让我们一起来实现它。",
+		"description": "无论您需要完整的产品、落地页，还是想探索新想法 —— 我都乐于协作。",
+		"availability": "随时为您的下一个项目待命",
+		"location": "坐标孟加拉国达卡，服务全球。"
+	}
+}

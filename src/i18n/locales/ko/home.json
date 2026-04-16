@@ -1,0 +1,44 @@
+{
+	"hero": {
+		"srTitle": "안녕하세요, 풀스택 프론트엔드 개발자 Sapan Mozammel입니다.",
+		"headingPrefix": "한 줄 한 줄의",
+		"headingSuffix": "(으)로 웹 개발의 미래를 만들어 갑니다.",
+		"description": "React, Redux, GraphQL, Next.js, Three.js, Node.js를 비롯한 다양한 기술로 애플리케이션을 개발해 온 5년 이상의 경력을 갖추고 있습니다. 엔지니어링 모범 사례를 지키며 깔끔하고 유지보수하기 쉬운 코드를 작성하는 일에 자부심을 가지고 있습니다."
+	},
+	"technologies": {
+		"subtitle": "기술 스택",
+		"title": "제가 전문으로 하는 분야입니다"
+	},
+	"portfolio": {
+		"subtitle": "포트폴리오",
+		"title": "최근 작업물"
+	},
+	"experience": {
+		"subtitle": "경력",
+		"title": "개발자로서의 성장 과정"
+	},
+	"testimonials": {
+		"subtitle": "추천사",
+		"title": "저에 대한 평가"
+	},
+	"workflow": {
+		"subtitle": "저의 작업 방식",
+		"title": "아이디어에서 런칭까지"
+	},
+	"faq": {
+		"subtitle": "궁금하실 만한 내용",
+		"title": "자주 묻는 질문"
+	},
+	"blog": {
+		"subtitle": "블로그",
+		"title": "프론트엔드에 대한 생각",
+		"viewAll": "모든 글 보기"
+	},
+	"cta": {
+		"heading": "구상 중인 프로젝트가 있으신가요?",
+		"headingAccent": "함께 만들어 봅시다.",
+		"description": "완제품, 랜딩 페이지, 또는 아이디어 탐색까지 — 협업을 위해 이곳에 있습니다.",
+		"availability": "다음 프로젝트를 맞이할 준비가 되었습니다",
+		"location": "방글라데시 다카에 거점, 전 세계로 제공합니다."
+	}
+}

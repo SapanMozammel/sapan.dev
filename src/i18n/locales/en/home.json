@@ -1,28 +1,44 @@
 {
 	"hero": {
-		"title": "Building digital experiences that matter",
-		"subtitle": "Full-stack developer crafting modern, performant web applications",
-		"cta": "View My Work",
-		"ctaSecondary": "Get in Touch"
+		"srTitle": "Hi, I am Sapan Mozammel, a fullstack frontend developer.",
+		"headingPrefix": "With every line of",
+		"headingSuffix": ", shaping the future of web development.",
+		"description": "With 5+ years of dynamic experience building applications using React, Redux, GraphQL, Next.js, Three.js, Node.js and many more, I take pride in writing clean, maintainable code while adhering to engineering best practices."
 	},
 	"technologies": {
-		"title": "Technologies",
-		"subtitle": "Tools & technologies I work with"
+		"subtitle": "Technologies",
+		"title": "I'm an Expertise In"
 	},
 	"portfolio": {
-		"title": "Portfolio",
-		"subtitle": "A selection of my recent work"
+		"subtitle": "Portfolio",
+		"title": "My Recent Works"
 	},
 	"experience": {
-		"title": "Experience",
-		"subtitle": "My professional journey"
+		"subtitle": "Experience",
+		"title": "Evolution as a Developer"
 	},
 	"testimonials": {
-		"title": "Testimonials",
-		"subtitle": "What people say about working with me"
+		"subtitle": "Testimonials",
+		"title": "What People Say About Me"
 	},
 	"workflow": {
-		"title": "Workflow",
-		"subtitle": "How I approach projects"
+		"subtitle": "How I Work",
+		"title": "From Idea to Launch"
+	},
+	"faq": {
+		"subtitle": "Things You Might Ask",
+		"title": "Frequently Asked Questions"
+	},
+	"blog": {
+		"subtitle": "Blog",
+		"title": "Thoughts on Frontend",
+		"viewAll": "View all articles"
+	},
+	"cta": {
+		"heading": "Have a project in mind?",
+		"headingAccent": "Let's build it together.",
+		"description": "Whether you need a full product, a landing page, or just want to explore ideas — I'm here to collaborate.",
+		"availability": "Ready for your next project",
+		"location": "Based in Dhaka, Bangladesh. Shipping globally."
 	}
 }

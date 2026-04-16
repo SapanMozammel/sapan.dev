@@ -23,9 +23,44 @@ vi.mock('next-themes', () => ({
 	useTheme: () => ({ theme: 'dark', resolvedTheme: 'dark', setTheme: vi.fn() }),
 }));
 
+// Load English messages for test translation (mirrors next-intl at runtime).
+const enCommon = await import('../src/i18n/locales/en/common.json').then((m) => m.default);
+const enNavigation = await import('../src/i18n/locales/en/navigation.json').then((m) => m.default);
+const enHome = await import('../src/i18n/locales/en/home.json').then((m) => m.default);
+const enBlog = await import('../src/i18n/locales/en/blog.json').then((m) => m.default);
+
+const MESSAGES: Record<string, unknown> = { common: enCommon, navigation: enNavigation, home: enHome, blog: enBlog };
+
+const getByPath = (obj: unknown, dottedPath: string): unknown => {
+	return dottedPath.split('.').reduce<unknown>((acc, part) => {
+		if (acc && typeof acc === 'object' && part in (acc as Record<string, unknown>)) {
+			return (acc as Record<string, unknown>)[part];
+		}
+		return undefined;
+	}, obj);
+};
+
+const interpolate = (template: string, values?: Record<string, unknown>): string => {
+	if (!values) return template;
+	return template.replace(/\{(\w+)\}/g, (_, k) => (k in values ? String(values[k]) : `{${k}}`));
+};
+
+const makeTranslator =
+	(namespace?: string) =>
+	(key: string, values?: Record<string, unknown>): string => {
+		const fullPath = namespace ? `${namespace}.${key}` : key;
+		const value = getByPath(MESSAGES, fullPath);
+		return typeof value === 'string' ? interpolate(value, values) : fullPath;
+	};
+
 vi.mock('next-intl', () => ({
-	useTranslations: () => (key: string) => key,
+	useTranslations: (namespace?: string) => makeTranslator(namespace),
 	useLocale: () => 'en',
+}));
+
+vi.mock('next-intl/server', () => ({
+	getTranslations: async (namespace?: string) => makeTranslator(namespace),
+	getLocale: async () => 'en',
 }));
 
 vi.mock('@/i18n/navigation', () => ({

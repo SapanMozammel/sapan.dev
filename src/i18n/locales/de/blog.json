@@ -1,0 +1,9 @@
+{
+	"pagination": {
+		"previous": "Vorherige Seite",
+		"next": "Nächste Seite",
+		"page": "Seite {page}"
+	},
+	"backToList": "Alle Artikel",
+	"moreIn": "Mehr in {category}"
+}

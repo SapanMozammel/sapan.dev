@@ -6,11 +6,14 @@ import BlogCard from '@/components/ui/blog-card';
 import { BLOG_POSTS, BLOGS_PER_PAGE } from '@/data/content/blogs';
 import { cn } from '@/lib/utils';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 import { memo, useMemo, useState } from 'react';
 
 const ALL_CATEGORIES = ['All', ...Array.from(new Set(BLOG_POSTS.map((p) => p.category)))];
 
 const BlogPage = memo(() => {
+	const translate = useTranslations('home.blog');
+	const translatePagination = useTranslations('blog.pagination');
 	const [activeCategory, setActiveCategory] = useState('All');
 	const [currentPage, setCurrentPage] = useState(1);
 
@@ -28,7 +31,7 @@ const BlogPage = memo(() => {
 		<section className='relative z-1 pt-14 pb-16 sm:pt-20 sm:pb-24 lg:pb-32'>
 			<SectionSeparator lts rts lbs rbs tl bl ll rl>
 				<div className='container flex w-full grow flex-col items-center justify-start gap-4'>
-					<SectionTitle subtitle='Dev Journal' title='Thoughts on Frontend' watermark='Articles' />
+					<SectionTitle subtitle={translate('subtitle')} title={translate('title')} watermark='Articles' />
 					<div className='mb-4 flex w-full flex-wrap justify-center gap-2'>
 						{ALL_CATEGORIES.map((cat) => (
 							<button
@@ -56,7 +59,7 @@ const BlogPage = memo(() => {
 								onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
 								disabled={currentPage === 1}
 								className='border-secondary-300 text-secondary-600 dark:text-secondary-400 hover:border-primary hover:text-primary dark:border-secondary-700 dark:hover:border-success dark:hover:text-success flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border transition-all duration-200 disabled:pointer-events-none disabled:opacity-40'
-								aria-label='Previous page'
+								aria-label={translatePagination('previous')}
 							>
 								<IconChevronLeft size={16} stroke={2} />
 							</button>
@@ -70,7 +73,7 @@ const BlogPage = memo(() => {
 											? 'border-primary bg-primary dark:border-success dark:bg-success dark:text-dark text-white'
 											: 'border-secondary-300 text-secondary-600 dark:text-secondary-400 hover:border-primary hover:text-primary dark:border-secondary-700 dark:hover:border-success dark:hover:text-success'
 									)}
-									aria-label={`Page ${page}`}
+									aria-label={translatePagination('page', { page })}
 									aria-current={currentPage === page ? 'page' : undefined}
 								>
 									{page}
@@ -80,7 +83,7 @@ const BlogPage = memo(() => {
 								onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
 								disabled={currentPage === totalPages}
 								className='border-secondary-300 text-secondary-600 dark:text-secondary-400 hover:border-primary hover:text-primary dark:border-secondary-700 dark:hover:border-success dark:hover:text-success flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border transition-all duration-200 disabled:pointer-events-none disabled:opacity-40'
-								aria-label='Next page'
+								aria-label={translatePagination('next')}
 							>
 								<IconChevronRight size={16} stroke={2} />
 							</button>
