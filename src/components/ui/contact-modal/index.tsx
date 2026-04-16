@@ -10,7 +10,7 @@ import { ContactError, ContactLoading, ContactSuccess } from './ContactStatusSta
 
 const ContactModal = memo(() => {
 	const translateModal = useTranslations('common.contact.modal');
-	const { isOpen, form, errors, status, handleOpenChange, handleClose, handleSubmit, handleRetry, handleChange } = useContactForm();
+	const { isOpen, form, errors, status, handleOpenChange, handleClose, handleSubmit, handleRetry, handleChange, handleTurnstileToken } = useContactForm();
 
 	return (
 		<Dialog open={isOpen} onOpenChange={handleOpenChange}>
@@ -39,7 +39,7 @@ const ContactModal = memo(() => {
 						) : status === 'error' ? (
 							<ContactError onRetry={handleRetry} />
 						) : (
-							<ContactForm form={form} errors={errors} onChange={handleChange} onSubmit={handleSubmit} />
+							<ContactForm form={form} errors={errors} onChange={handleChange} onSubmit={handleSubmit} onTurnstileToken={handleTurnstileToken} />
 						)}
 					</div>
 				</div>

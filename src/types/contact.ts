@@ -3,6 +3,8 @@ export type ContactFormData = {
 	email: string;
 	title: string;
 	message: string;
+	website: string;
+	turnstileToken: string;
 };
 
 export type ContactFormErrors = {
@@ -19,4 +21,5 @@ export type ContactFormProps = {
 	errors: ContactFormErrors;
 	onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 	onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+	onTurnstileToken: (token: string) => void;
 };

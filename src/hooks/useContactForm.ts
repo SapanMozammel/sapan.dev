@@ -5,7 +5,7 @@ import { closeContactModal } from '@/store/slices/uiSlice';
 import { ContactFormData, ContactFormErrors, ContactSubmitStatus } from '@/types/contact';
 import { useCallback, useState } from 'react';
 
-const INITIAL_FORM: ContactFormData = { name: '', email: '', title: '', message: '' };
+const INITIAL_FORM: ContactFormData = { name: '', email: '', title: '', message: '', website: '', turnstileToken: '' };
 
 export const useContactForm = () => {
 	const isOpen = useAppSelector((state) => state.ui.isContactModalOpen);
@@ -60,15 +60,27 @@ export const useContactForm = () => {
 			if (!validate()) {
 				return;
 			}
+			if (!form.turnstileToken) {
+				setStatus('error');
+				return;
+			}
 			setStatus('loading');
 			try {
-				await new Promise<void>((resolve) => setTimeout(resolve, 1500));
+				const res = await fetch('/api/contact', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(form),
+				});
+				if (!res.ok) {
+					setStatus('error');
+					return;
+				}
 				setStatus('success');
 			} catch {
 				setStatus('error');
 			}
 		},
-		[validate]
+		[form, validate]
 	);
 
 	const handleRetry = useCallback(() => {
@@ -85,5 +97,9 @@ export const useContactForm = () => {
 		});
 	}, []);
 
-	return { isOpen, form, errors, status, handleOpenChange, handleClose, handleSubmit, handleRetry, handleChange };
+	const handleTurnstileToken = useCallback((token: string) => {
+		setForm((prev) => ({ ...prev, turnstileToken: token }));
+	}, []);
+
+	return { isOpen, form, errors, status, handleOpenChange, handleClose, handleSubmit, handleRetry, handleChange, handleTurnstileToken };
 };
