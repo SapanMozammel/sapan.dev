@@ -32,9 +32,9 @@ const ProjectCard = memo<ProjectCardProps>(({ project }) => {
 
 	return (
 		<div className={cn('z-2 grid min-h-110 w-full grid-cols-1 overflow-hidden rounded-2xl border border-solid backdrop-blur-xl lg:grid-cols-2 lg:rounded-4xl', project?.className)}>
-			<div className='flex flex-col items-start justify-center gap-2 p-4 sm:gap-4 sm:p-6 lg:p-8 xl:p-12'>
+			<div className='flex shrink-0 flex-col items-start justify-center gap-2 p-4 max-sm:min-h-86 sm:gap-4 sm:p-6 sm:max-lg:min-h-82 lg:p-8 xl:p-12'>
 				{project?.icon && <div className='h-10 w-auto'>{project.icon}</div>}
-				<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-small'>{project.description}</p>
+				<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-small line-clamp-6'>{project.description}</p>
 				<div className='mt-1.5 mb-1.5 grid w-full grid-cols-1 gap-x-4 gap-y-2.5 sm:mb-0 sm:grid-cols-3'>
 					{project.role && (
 						<div className='flex flex-col gap-0.5'>
