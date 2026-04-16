@@ -28,7 +28,7 @@ const Portfolio = memo(() => {
 					<div ref={containerRef} className='relative z-2 w-full'>
 						{PORTFOLIO_PROJECTS.map((project, index) => {
 							const config = cardConfigs[index];
-							const triggerRef = config.isLast ? cardRefs[index] : cardRefs[index + 1];
+							const triggerRef = cardRefs[PORTFOLIO_PROJECTS.length - 1];
 							return (
 								<StackingCardWrapper key={project.title} config={config} scrollYProgress={scrollYProgress} enabled={enabled} cardRef={cardRefs[index]} triggerRef={triggerRef}>
 									<ProjectCard project={project} />
