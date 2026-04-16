@@ -18,7 +18,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		technologies: ['TypeScript', 'Next.js', 'Tailwind CSS', 'React Query', 'React Hook Form', 'Zod', 'Firebase', 'React Modern Audio Player', 'Sentry'],
 		link: 'https://web.tubeonai.com/',
 		icon: <TubeOnAILogo className='h-full w-auto' />,
-		image: '/images/portfolio/tubeonai.webp',
+		image: '/images/portfolio/tubeonai.png',
 	},
 	{
 		className: 'border-indigo-100 bg-indigo-25/90 dark:border-indigo-900 dark:bg-indigo-a100/90',
@@ -28,7 +28,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		technologies: ['TypeScript', 'React.js', 'Next.js', 'Redux.js', 'GraphQL', 'Tailwind CSS', 'SASS', 'shadcn/ui', 'WordPress', 'Webpack', 'Vite', 'Vercel'],
 		link: 'https://templately.com/',
 		icon: <TemplatelyLogo className='h-full w-auto' />,
-		image: '/images/portfolio/templately.jpeg',
+		image: '/images/portfolio/templately.png',
 	},
 	{
 		className: 'border-blue-100 bg-blue-25/90 dark:border-blue-900 dark:bg-blue-a100/90',
@@ -38,7 +38,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		technologies: ['Vue.js', 'Vite', 'Tailwind CSS', 'Axios', 'Lodash', 'Laravel'],
 		link: 'https://app.xcloud.host/',
 		icon: <XCloudLogo className='h-full w-auto' />,
-		image: '/images/portfolio/xcloud.jpg',
+		image: '/images/portfolio/xcloud.png',
 	},
 	{
 		className: 'border-green-100 bg-green-25/90 dark:border-green-900 dark:bg-green-a100/90',
@@ -78,7 +78,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		technologies: ['Vue.js', 'Bootstrap', 'jQuery', 'Laravel', 'Lodash', 'SCSS', 'Axios', 'ApexCharts'],
 		link: 'https://app.easy.jobs/',
 		icon: <EasyJobsLogo className='h-full w-auto' />,
-		image: '/images/portfolio/easyjobs.jpeg',
+		image: '/images/portfolio/easyjobs.png',
 	},
 	{
 		className: 'border-emerald-100 bg-emerald-25/90 dark:border-emerald-900 dark:bg-emerald-a100/90',
