@@ -14,12 +14,12 @@ const ContactModal = memo(() => {
 
 	return (
 		<Dialog open={isOpen} onOpenChange={handleOpenChange}>
-			<DialogContent className='mx-4 max-w-lg p-0'>
+			<DialogContent className='w-screen max-w-xl p-0'>
 				<div
 					aria-hidden
-					className='animate-faq-border-shift pointer-events-none absolute -inset-px rounded-[calc(theme(borderRadius.2xl)+theme(spacing.px))] bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-success)_35%,var(--color-primary)_65%,var(--color-success)_100%)] [background-size:300%_300%] !outline-none select-none'
+					className='animate-faq-border-shift pointer-events-none absolute -inset-px mx-4 rounded-[calc(theme(borderRadius.2xl)+theme(spacing.px))] bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-success)_35%,var(--color-primary)_65%,var(--color-success)_100%)] [background-size:300%_300%] !outline-none select-none'
 				/>
-				<div className='dark:bg-dark bg-secondary relative z-10 overflow-hidden rounded-2xl shadow-[0_8px_32px_color-mix(in_srgb,var(--color-primary)_14%,transparent),0_2px_8px_color-mix(in_srgb,var(--color-success)_8%,transparent)]'>
+				<div className='dark:bg-dark bg-secondary relative z-10 mx-4 overflow-hidden rounded-2xl shadow-[0_8px_32px_color-mix(in_srgb,var(--color-primary)_14%,transparent),0_2px_8px_color-mix(in_srgb,var(--color-success)_8%,transparent)]'>
 					<div className='p-6 sm:p-7'>
 						<DialogHeader className='mb-6 flex-row items-start justify-between gap-4 space-y-0 text-left'>
 							<div className='flex items-center gap-4'>
