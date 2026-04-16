@@ -7,33 +7,33 @@ import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from '../test-utils';
 
 describe('Cta', () => {
-	it('renders CTA heading', () => {
-		render(<Cta />);
+	it('renders CTA heading', async () => {
+		render(await Cta());
 		expect(screen.getByText(/Have a project in mind/i)).toBeInTheDocument();
 	});
 
-	it('renders collaboration message', () => {
-		render(<Cta />);
+	it('renders collaboration message', async () => {
+		render(await Cta());
 		expect(screen.getByText(/Let's build it together/i)).toBeInTheDocument();
 	});
 
-	it('renders description text', () => {
-		render(<Cta />);
+	it('renders description text', async () => {
+		render(await Cta());
 		expect(screen.getByText(/Whether you need a full product/i)).toBeInTheDocument();
 	});
 
-	it('renders connect button', () => {
-		render(<Cta />);
+	it('renders connect button', async () => {
+		render(await Cta());
 		expect(screen.getByText("Let's Connect")).toBeInTheDocument();
 	});
 
-	it('renders within a section element', () => {
-		const { container } = render(<Cta />);
+	it('renders within a section element', async () => {
+		const { container } = render(await Cta());
 		expect(container.querySelector('section')).toBeInTheDocument();
 	});
 
-	it('renders logo', () => {
-		const { container } = render(<Cta />);
+	it('renders logo', async () => {
+		const { container } = render(await Cta());
 		const svgs = container.querySelectorAll('svg');
 		expect(svgs.length).toBeGreaterThan(0);
 	});

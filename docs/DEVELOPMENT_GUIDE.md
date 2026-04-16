@@ -136,11 +136,7 @@ src/
 │       │   ├── common.json
 │       │   ├── navigation.json
 │       │   ├── home.json
-│       │   ├── about.json
-│       │   ├── services.json
-│       │   ├── portfolio.json
-│       │   ├── blog.json
-│       │   └── contact.json
+│       │   └── blog.json
 │       └── [fr|de|es|ar|...]/       # Partial — falls back to en per namespace
 │
 ├── store/
@@ -192,16 +188,14 @@ src/
 
 ## Formatter & Linting Config
 
-All formatter/linter configuration lives in `.formatter/` (not at the project root):
+ESLint uses **flat config** at the project root (`eslint.config.js`). Prettier config lives in `.formatter/`:
 
 ```
+eslint.config.js          # ESLint flat config (root)
 .formatter/
-├── .eslintrc.js      # ESLint rules — extended by root .eslintrc.js
-├── .prettierrc.js    # Prettier config — used by all format scripts
-└── sync.js           # Import organizer script — run by imports:organize
+├── .prettierrc.js        # Prettier config — used by all format scripts
+└── sync.js               # Import organizer script — run by imports:organize
 ```
-
-The root `.eslintrc.js` is a thin wrapper that requires `.formatter/.eslintrc.js`. This keeps the root clean while allowing Next.js and editors to find ESLint from the project root.
 
 ---
 

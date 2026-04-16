@@ -1,0 +1,59 @@
+{
+	"buttons": {
+		"learnMore": "Daha Fazla Bilgi",
+		"readMore": "Devamını Oku",
+		"letsConnect": "Bağlantı Kuralım",
+		"close": "Kapat",
+		"tryAgain": "Tekrar Dene",
+		"reload": "Yeniden Yükle",
+		"goHome": "Ana sayfaya dön"
+	},
+	"loading": "Yükleniyor...",
+	"labels": {
+		"role": "Rol",
+		"technologies": "Teknolojiler",
+		"responsibilities": "Sorumluluklar",
+		"achievements": "Etki ve başarılar",
+		"viewOnGithub": "GitHub'da görüntüle"
+	},
+	"footer": {
+		"copyright": "Tüm hakları saklıdır.",
+		"designedBy": "{name} tarafından tasarlandı ve geliştirildi"
+	},
+	"theme": {
+		"change": "Temayı değiştir",
+		"suffix": "Tema"
+	},
+	"contact": {
+		"modal": {
+			"title": "İletişime geçelim",
+			"description": "Size en kısa sürede geri döneceğim."
+		},
+		"form": {
+			"labels": {
+				"name": "Ad",
+				"email": "E-posta",
+				"title": "Başlık",
+				"message": "Mesaj"
+			},
+			"submit": "Mesaj Gönder"
+		},
+		"status": {
+			"loading": "Mesajınız gönderiliyor...",
+			"successTitle": "Mesaj gönderildi!",
+			"successDescription": "İletişime geçtiğiniz için teşekkürler. Yakında sizinle irtibata geçeceğim.",
+			"errorTitle": "Bir şeyler ters gitti",
+			"errorDescription": "Lütfen tekrar deneyin veya e-posta ile ulaşın."
+		}
+	},
+	"error": {
+		"label": "Hata",
+		"title": "Bir şeyler ters gitti",
+		"defaultMessage": "Beklenmeyen bir hata oluştu. Bu, geçici bir sunucu sorunundan kaynaklanıyor olabilir."
+	},
+	"notFound": {
+		"label": "Hata",
+		"title": "Sayfa Bulunamadı",
+		"description": "Üzgünüz, aradığınız sayfa bulunamadı. Taşınmış veya silinmiş olabilir."
+	}
+}

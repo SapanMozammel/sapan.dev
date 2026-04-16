@@ -2,77 +2,82 @@
 
 import { cn } from '@/lib/utils';
 import { IconPlus } from '@tabler/icons-react';
-import gsap from 'gsap';
-import React, { memo, useEffect, useRef } from 'react';
+import { motion, motionValue, type MotionValue, useAnimationFrame } from 'framer-motion';
+import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
+
+const BASELINE_OPACITY = 0.05;
+const EDGE_OPACITY = 1;
+const HOVER_OPACITY_BOOST = 0.2;
+const MOUSE_RADIUS = 300;
+const SMOOTHING = 24;
+const OPACITY_EPSILON = 0.0005;
 
 const TestimonialBackground = memo<React.DetailedHTMLProps<React.AllHTMLAttributes<HTMLDivElement>, HTMLDivElement>>((props) => {
 	const { children, className, ...rest } = props;
-	const linesRef = useRef<(SVGPathElement | null)[]>([]);
 	const containerRef = useRef<HTMLDivElement>(null);
-	const [lineCount, setLineCount] = React.useState(0);
+	const [lineCount, setLineCount] = useState(0);
+	const [pathD, setPathD] = useState('');
+	const targetsRef = useRef<number[]>([]);
+	const rafMovRef = useRef<number | null>(null);
+
+	const opacityValues = useMemo(() => {
+		if (lineCount === 0) {
+			targetsRef.current = [];
+			return [] as MotionValue<number>[];
+		}
+		const lastIdx = lineCount - 1;
+		const values: MotionValue<number>[] = [];
+		const targets: number[] = [];
+		for (let i = 0; i < lineCount; i++) {
+			const isEdge = i === 0 || i === lastIdx;
+			const initial = isEdge ? EDGE_OPACITY : BASELINE_OPACITY;
+			values.push(motionValue(initial));
+			targets.push(initial);
+		}
+		targetsRef.current = targets;
+		return values;
+	}, [lineCount]);
 
 	useEffect(() => {
 		const updateLayout = () => {
 			const container = containerRef.current;
-			if (!container) {
-				return;
-			}
-
+			if (!container) return;
 			const width = container.clientWidth;
 			const height = container.clientHeight;
-
 			const targetCount = Math.ceil(width / 4) + 1;
 			setLineCount((prev) => (prev !== targetCount ? targetCount : prev));
-
-			linesRef.current.forEach((line) => {
-				if (!line) {
-					return;
-				}
-				line.setAttribute('d', `M 0.5 0 L 0.5 ${height}`);
-			});
+			setPathD(`M 0.5 0 L 0.5 ${height}`);
 		};
 
 		const resizeObserver = new ResizeObserver(() => {
 			requestAnimationFrame(updateLayout);
 		});
-
 		if (containerRef.current) {
 			resizeObserver.observe(containerRef.current);
 		}
-
 		updateLayout();
 
 		const handleMouseMove = (e: MouseEvent) => {
-			linesRef.current.forEach((line, index) => {
-				if (!line) {
-					return;
-				}
-				if (index === 0 || index === linesRef.current.length - 1) {
-					return;
-				}
-
-				const rect = line.getBoundingClientRect();
-				const centerX = rect.left + rect.width / 2;
-				const distanceX = Math.abs(e.clientX - centerX);
-				const mouseRadius = 300;
-
-				if (distanceX < mouseRadius) {
-					const proximity = 1 - distanceX / mouseRadius;
-					const smoothProximity = proximity * proximity;
-
-					gsap.to(line, {
-						opacity: 0.05 + 0.2 * smoothProximity,
-						duration: 0.1,
-						ease: 'power2.out',
-						overwrite: 'auto',
-					});
-				} else {
-					gsap.to(line, {
-						opacity: 0.05,
-						duration: 0.1,
-						ease: 'power2.out',
-						overwrite: 'auto',
-					});
+			if (rafMovRef.current !== null) return;
+			const clientX = e.clientX;
+			rafMovRef.current = requestAnimationFrame(() => {
+				rafMovRef.current = null;
+				const container = containerRef.current;
+				if (!container) return;
+				const rect = container.getBoundingClientRect();
+				const containerLeft = rect.left;
+				const containerWidth = rect.width;
+				const targets = targetsRef.current;
+				const len = targets.length;
+				for (let i = 1; i < len - 1; i++) {
+					const centerX = containerLeft + (i / (len - 1)) * containerWidth;
+					const distanceX = Math.abs(clientX - centerX);
+					if (distanceX < MOUSE_RADIUS) {
+						const proximity = 1 - distanceX / MOUSE_RADIUS;
+						targets[i] = BASELINE_OPACITY + HOVER_OPACITY_BOOST * proximity * proximity;
+					} else {
+						targets[i] = BASELINE_OPACITY;
+					}
 				}
 			});
 		};
@@ -82,23 +87,31 @@ const TestimonialBackground = memo<React.DetailedHTMLProps<React.AllHTMLAttribut
 		return () => {
 			window.removeEventListener('mousemove', handleMouseMove);
 			resizeObserver.disconnect();
+			if (rafMovRef.current !== null) {
+				cancelAnimationFrame(rafMovRef.current);
+			}
 		};
 	}, []);
 
-	useEffect(() => {
-		const container = containerRef.current;
-		if (!container) {
-			return;
-		}
-		const height = container.clientHeight;
-
-		linesRef.current.forEach((line) => {
-			if (!line) {
-				return;
+	useAnimationFrame((_, delta) => {
+		const values = opacityValues;
+		const targets = targetsRef.current;
+		const len = values.length;
+		if (len <= 2) return;
+		const alpha = 1 - Math.exp(-SMOOTHING * Math.min(delta / 1000, 0.1));
+		for (let i = 1; i < len - 1; i++) {
+			const mv = values[i];
+			if (!mv) continue;
+			const target = targets[i] ?? BASELINE_OPACITY;
+			const current = mv.get();
+			const diff = target - current;
+			if (Math.abs(diff) > OPACITY_EPSILON) {
+				mv.set(current + diff * alpha);
+			} else if (current !== target) {
+				mv.set(target);
 			}
-			line.setAttribute('d', `M 0.5 0 L 0.5 ${height}`);
-		});
-	}, [lineCount]);
+		}
+	});
 
 	const STAR_CLASSES = 'w-3 md:w-4 h-3 md:h-4 text-primary dark:text-success z-1';
 
@@ -110,19 +123,10 @@ const TestimonialBackground = memo<React.DetailedHTMLProps<React.AllHTMLAttribut
 				<IconPlus stroke={6} className={cn(STAR_CLASSES, 'absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/2')} />
 				<IconPlus stroke={6} className={cn(STAR_CLASSES, 'absolute right-0 bottom-0 translate-x-1/2 translate-y-1/2')} />
 				<div className='flex h-full w-full justify-between'>
-					{Array.from({ length: lineCount }).map((_, i) => (
+					{opacityValues.map((mv, i) => (
 						<div key={i} className={cn('group/line relative h-full w-px first:-translate-x-1/2 last:translate-x-1/2', 'text-secondary-400 dark:text-secondary-600')}>
 							<svg className='pointer-events-none absolute top-0 left-0 h-full w-px overflow-visible'>
-								<path
-									ref={(el) => {
-										linesRef.current[i] = el;
-									}}
-									d=''
-									stroke='currentColor'
-									strokeWidth='1'
-									fill='none'
-									className={cn('transition-opacity', 'opacity-5 group-first/line:opacity-100 group-last/line:opacity-100')}
-								/>
+								<motion.path d={pathD} stroke='currentColor' strokeWidth='1' fill='none' style={{ opacity: mv }} />
 							</svg>
 						</div>
 					))}

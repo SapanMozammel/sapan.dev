@@ -5,6 +5,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { isMacOS } from '@/lib/helper';
 import { cn } from '@/lib/utils';
 import { IconContrastFilled, IconLoader, IconMoonFilled, IconSunFilled } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
@@ -25,6 +26,8 @@ const themeOptions = [
 ] as const;
 
 const ThemeSwitcher = memo(() => {
+	const translateTheme = useTranslations('common.theme');
+	const translateCommon = useTranslations('common');
 	const { theme, setTheme, systemTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
 	const [isHovering, setIsHovering] = useState(false);
@@ -123,12 +126,14 @@ const ThemeSwitcher = memo(() => {
 					</PopoverTrigger>
 				</TooltipTrigger>
 				<TooltipContent side='bottom'>
-					<p className='capitalize'>{mounted ? theme : 'Loading'} Theme</p>
+					<p className='font-hg capitalize'>
+						{mounted ? theme : translateCommon('loading')} {translateTheme('suffix')}
+					</p>
 				</TooltipContent>
 			</Tooltip>
 			<PopoverContent className='border-secondary-400 dark:border-secondary-600 divide-secondary-400 dark:divide-secondary-600 w-44 divide-y' align='end'>
-				<div className='text-dark flex items-center gap-1 px-3 py-2 text-xs font-medium sm:text-sm dark:text-white'>
-					<span>Change Theme</span>
+				<div className='font-hg text-dark flex items-center gap-1 px-3 py-2 text-xs font-medium sm:text-sm dark:text-white'>
+					<span>{translateTheme('change')}</span>
 					<span className='text-primary dark:text-success ms-auto text-xs'>⌘⌥T</span>
 				</div>
 				<div className='flex flex-col gap-0.5 p-1'>
@@ -150,14 +155,16 @@ const ThemeSwitcher = memo(() => {
 								key={option.name}
 								type='button'
 								className={cn(
-									'flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-md px-2 py-1.5 text-xs transition-colors sm:text-sm',
+									'font-hg flex w-full cursor-pointer items-center justify-between gap-1.5 rounded-md px-2 py-1.5 text-xs transition-colors sm:text-sm',
 									mounted && theme === option.name
 										? 'bg-primary/10 text-primary dark:bg-success/10 dark:text-success'
 										: 'text-secondary-500 dark:text-secondary-500 hover:text-primary dark:hover:text-success'
 								)}
 								onClick={handleOptionClick}
 							>
-								<span className='capitalize'>{option.name} Theme</span>
+								<span className='capitalize'>
+									{option.name} {translateTheme('suffix')}
+								</span>
 								<span className='inline-flex aspect-square w-5 scale-85 items-center justify-center'>{option.icon}</span>
 							</button>
 						);

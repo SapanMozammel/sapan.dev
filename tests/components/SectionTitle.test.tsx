@@ -15,7 +15,7 @@ describe('SectionTitle', () => {
 
 	it('does not render subtitle when not provided', () => {
 		const { container } = render(<SectionTitle title='Title' />);
-		expect(container.querySelector('p')).toBeNull();
+		expect(container.querySelector('h5')).toBeNull();
 	});
 
 	it('renders watermark when provided', () => {
@@ -36,13 +36,13 @@ describe('SectionTitle', () => {
 
 	it('uses different padding when watermark is present', () => {
 		const { container } = render(<SectionTitle title='Title' subtitle='Sub' watermark='WM' />);
-		const subtitle = container.querySelector('p');
+		const subtitle = container.querySelector('h5');
 		expect(subtitle?.className).toContain('pt-[10vw]');
 	});
 
 	it('uses smaller padding when no watermark', () => {
 		const { container } = render(<SectionTitle title='Title' subtitle='Sub' />);
-		const subtitle = container.querySelector('p');
+		const subtitle = container.querySelector('h5');
 		expect(subtitle?.className).toContain('pt-[2vw]');
 	});
 });

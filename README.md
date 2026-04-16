@@ -2,7 +2,7 @@
 
 Personal portfolio of **[Sapan Mozammel](https://sapan-dev.vercel.app)** — Frontend Developer based in Dhaka, Bangladesh.
 
-Built with Next.js 15 App Router, React 19, TypeScript, Tailwind CSS v4, and a focus on modern, performant, and visually engaging web experiences.
+Built with Next.js 16 App Router, React 19, TypeScript, Tailwind CSS v4, and a focus on modern, performant, and visually engaging web experiences.
 
 **Live → [sapan-dev.vercel.app](https://sapan-dev.vercel.app)**
 
@@ -26,8 +26,8 @@ Built with Next.js 15 App Router, React 19, TypeScript, Tailwind CSS v4, and a f
 
 | Category | Technology |
 |---|---|
-| Framework | Next.js 15 (App Router, Turbopack) |
-| Language | TypeScript 5.8 — strict mode |
+| Framework | Next.js 16 (App Router, Turbopack) |
+| Language | TypeScript 6 — strict mode |
 | Styling | Tailwind CSS v4 + SCSS |
 | Animation | Framer Motion · GSAP 3 · Three.js / React Three Fiber |
 | State | Redux Toolkit |

@@ -1,0 +1,9 @@
+{
+	"pagination": {
+		"previous": "Önceki sayfa",
+		"next": "Sonraki sayfa",
+		"page": "Sayfa {page}"
+	},
+	"backToList": "Tüm Makaleler",
+	"moreIn": "{category} kategorisinde daha fazlası"
+}

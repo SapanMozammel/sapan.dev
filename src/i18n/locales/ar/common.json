@@ -1,0 +1,59 @@
+{
+	"buttons": {
+		"learnMore": "اعرف المزيد",
+		"readMore": "اقرأ المزيد",
+		"letsConnect": "لنتواصل",
+		"close": "إغلاق",
+		"tryAgain": "حاول مرة أخرى",
+		"reload": "إعادة التحميل",
+		"goHome": "العودة إلى الصفحة الرئيسية"
+	},
+	"loading": "جارٍ التحميل...",
+	"labels": {
+		"role": "الدور",
+		"technologies": "التقنيات",
+		"responsibilities": "المسؤوليات",
+		"achievements": "الأثر والإنجازات",
+		"viewOnGithub": "عرض على GitHub"
+	},
+	"footer": {
+		"copyright": "جميع الحقوق محفوظة.",
+		"designedBy": "تصميم وتطوير {name}"
+	},
+	"theme": {
+		"change": "تغيير المظهر",
+		"suffix": "مظهر"
+	},
+	"contact": {
+		"modal": {
+			"title": "لنتواصل",
+			"description": "سأردّ عليك في أقرب وقت ممكن."
+		},
+		"form": {
+			"labels": {
+				"name": "الاسم",
+				"email": "البريد الإلكتروني",
+				"title": "العنوان",
+				"message": "الرسالة"
+			},
+			"submit": "إرسال الرسالة"
+		},
+		"status": {
+			"loading": "جارٍ إرسال رسالتك...",
+			"successTitle": "تم إرسال الرسالة!",
+			"successDescription": "شكرًا لتواصلك. سأعود إليك قريبًا.",
+			"errorTitle": "حدث خطأ ما",
+			"errorDescription": "يُرجى المحاولة مرة أخرى أو التواصل عبر البريد الإلكتروني."
+		}
+	},
+	"error": {
+		"label": "خطأ",
+		"title": "حدث خطأ ما",
+		"defaultMessage": "حدث خطأ غير متوقع. قد يكون ذلك بسبب مشكلة مؤقتة في الخادم."
+	},
+	"notFound": {
+		"label": "خطأ",
+		"title": "الصفحة غير موجودة",
+		"description": "عذرًا، تعذّر العثور على الصفحة التي تبحث عنها. قد تكون قد نُقلت أو حُذفت."
+	}
+}

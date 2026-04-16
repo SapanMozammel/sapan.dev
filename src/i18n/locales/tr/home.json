@@ -1,0 +1,44 @@
+{
+	"hero": {
+		"srTitle": "Merhaba, ben Sapan Mozammel, fullstack frontend geliştiricisiyim.",
+		"headingPrefix": "Her satır",
+		"headingSuffix": " ile web geliştirmenin geleceğini şekillendiriyorum.",
+		"description": "React, Redux, GraphQL, Next.js, Three.js, Node.js ve daha pek çok teknolojiyle uygulamalar geliştirdiğim 5+ yıllık dinamik deneyimimle, mühendislik en iyi uygulamalarına bağlı kalarak temiz ve sürdürülebilir kod yazmaktan gurur duyuyorum."
+	},
+	"technologies": {
+		"subtitle": "Teknolojiler",
+		"title": "Uzmanlık Alanlarım"
+	},
+	"portfolio": {
+		"subtitle": "Portföy",
+		"title": "Son Çalışmalarım"
+	},
+	"experience": {
+		"subtitle": "Deneyim",
+		"title": "Geliştirici Olarak Yolculuğum"
+	},
+	"testimonials": {
+		"subtitle": "Referanslar",
+		"title": "Hakkımda Söylenenler"
+	},
+	"workflow": {
+		"subtitle": "Nasıl Çalışırım",
+		"title": "Fikirden Lansmana"
+	},
+	"faq": {
+		"subtitle": "Sorabileceğiniz Şeyler",
+		"title": "Sıkça Sorulan Sorular"
+	},
+	"blog": {
+		"subtitle": "Blog",
+		"title": "Frontend Üzerine Düşünceler",
+		"viewAll": "Tüm makaleleri görüntüle"
+	},
+	"cta": {
+		"heading": "Aklınızda bir proje mi var?",
+		"headingAccent": "Hadi birlikte hayata geçirelim.",
+		"description": "İster tam bir ürün, ister bir açılış sayfası, ister yalnızca fikir alışverişi — iş birliği için buradayım.",
+		"availability": "Bir sonraki projeniz için hazırım",
+		"location": "Dakka, Bangladeş merkezli. Dünya çapında hizmet veriyorum."
+	}
+}

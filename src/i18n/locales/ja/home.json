@@ -1,0 +1,44 @@
+{
+	"hero": {
+		"srTitle": "こんにちは、フルスタックフロントエンド開発者の Sapan Mozammel です。",
+		"headingPrefix": "一行一行のコードで、",
+		"headingSuffix": "Web 開発の未来を形づくります。",
+		"description": "React、Redux、GraphQL、Next.js、Three.js、Node.js をはじめとする多彩な技術を用いたアプリケーション開発において、5 年以上の経験を積んでまいりました。エンジニアリングのベストプラクティスに従い、クリーンで保守性の高いコードを書くことを常に大切にしています。"
+	},
+	"technologies": {
+		"subtitle": "技術スタック",
+		"title": "私の得意分野"
+	},
+	"portfolio": {
+		"subtitle": "ポートフォリオ",
+		"title": "最近の制作実績"
+	},
+	"experience": {
+		"subtitle": "経歴",
+		"title": "開発者としての歩み"
+	},
+	"testimonials": {
+		"subtitle": "お客様の声",
+		"title": "いただいた評価"
+	},
+	"workflow": {
+		"subtitle": "私の仕事の進め方",
+		"title": "アイデアからローンチまで"
+	},
+	"faq": {
+		"subtitle": "よくいただくご質問",
+		"title": "よくある質問"
+	},
+	"blog": {
+		"subtitle": "ブログ",
+		"title": "フロントエンドについての考察",
+		"viewAll": "すべての記事を見る"
+	},
+	"cta": {
+		"heading": "構想中のプロジェクトはありますか？",
+		"headingAccent": "一緒に形にしましょう。",
+		"description": "完成品、ランディングページ、あるいはアイデアの壁打ちまで — 共に創造するパートナーとしてお手伝いします。",
+		"availability": "次のプロジェクトに備えて待機中",
+		"location": "バングラデシュ・ダッカを拠点に、世界中にお届けします。"
+	}
+}

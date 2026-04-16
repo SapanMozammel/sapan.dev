@@ -1,5 +1,7 @@
 import SectionSeparator from '@/components/layout/common/SectionSeparator';
+import Badge from '@/components/ui/badge';
 import BlogCard from '@/components/ui/blog-card';
+import MetaLabel from '@/components/ui/meta-label';
 import { BLOG_POSTS, CATEGORY_COLORS, DEFAULT_CATEGORY_COLOR } from '@/data/content/blogs';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
@@ -7,6 +9,7 @@ import { getBlurDataURL } from '@/lib/utils/image';
 import type { ContentBlock } from '@/types/blog';
 import { IconArrowLeft, IconClock, IconTag } from '@tabler/icons-react';
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
@@ -35,37 +38,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const renderBlock = (block: ContentBlock, index: number) => {
 	switch (block.type) {
 		case 'heading':
-			if (block.level === 2) {
-				return (
-					<h2 key={index} className='font-cg text-dark mt-10 mb-4 text-2xl font-medium tracking-wide sm:text-3xl dark:text-white'>
-						{block.text}
-					</h2>
-				);
-			}
 			return (
-				<h3 key={index} className='font-cg text-dark mt-8 mb-3 text-xl font-medium tracking-wide sm:text-2xl dark:text-white'>
+				<h3 key={index} className='text-heading-medium-alt text-dark mt-8 mb-4 tracking-wide dark:text-white'>
 					{block.text}
 				</h3>
 			);
 
 		case 'paragraph':
 			return (
-				<p key={index} className='text-secondary-700 dark:text-secondary-300 mb-5 text-[15px] leading-relaxed sm:text-base'>
+				<p key={index} className='text-paragraph-small text-secondary-600 dark:text-secondary-400 mb-4'>
 					{block.text}
 				</p>
 			);
 		case 'code':
 			return (
-				<div key={index} className='mb-6 overflow-hidden rounded-xl'>
+				<div key={index} className='mb-4 overflow-hidden rounded-xl'>
 					<div className='bg-secondary-800 flex items-center justify-between px-4 py-2'>
-						<span className='font-hg text-secondary-400 text-xs font-semibold tracking-widest uppercase'>{block.language}</span>
+						<span className='font-hg text-secondary-400 text-xs font-bold tracking-widest uppercase'>{block.language}</span>
 						<div className='flex gap-1.5'>
 							<span className='bg-danger/70 h-2.5 w-2.5 rounded-full' />
 							<span className='bg-warning/70 h-2.5 w-2.5 rounded-full' />
 							<span className='bg-success/70 h-2.5 w-2.5 rounded-full' />
 						</div>
 					</div>
-					<pre className='bg-secondary-900 overflow-x-auto p-5 text-[13px] leading-relaxed'>
+					<pre className='bg-secondary-900 text-paragraph-small overflow-x-auto p-5'>
 						<code className='text-secondary-100'>{block.code}</code>
 					</pre>
 				</div>
@@ -73,9 +69,9 @@ const renderBlock = (block: ContentBlock, index: number) => {
 		case 'list':
 			if (block.ordered) {
 				return (
-					<ol key={index} className='mb-5 list-decimal space-y-2 pl-6'>
+					<ol key={index} className='mb-4 list-decimal space-y-2 pl-6'>
 						{block.items.map((item, i) => (
-							<li key={i} className='text-secondary-700 dark:text-secondary-300 text-[15px] leading-relaxed sm:text-base'>
+							<li key={i} className='text-paragraph-small text-secondary-600 dark:text-secondary-400'>
 								{item}
 							</li>
 						))}
@@ -83,11 +79,11 @@ const renderBlock = (block: ContentBlock, index: number) => {
 				);
 			}
 			return (
-				<ul key={index} className='mb-5 space-y-2 pl-6'>
+				<ul key={index} className='mb-4 space-y-2 pl-6'>
 					{block.items.map((item, i) => (
 						<li
 							key={i}
-							className='text-secondary-700 dark:text-secondary-300 before:bg-primary dark:before:bg-success relative text-[15px] leading-relaxed before:absolute before:top-[0.6em] before:-left-4 before:h-1.5 before:w-1.5 before:rounded-full sm:text-base'
+							className='text-secondary-600 dark:text-secondary-400 before:bg-primary dark:before:bg-success relative before:absolute before:top-[0.6em] before:-left-4 before:h-1.5 before:w-1.5 before:rounded-full'
 						>
 							{item}
 						</li>
@@ -107,9 +103,9 @@ const renderBlock = (block: ContentBlock, index: number) => {
 			};
 			const variant = block.variant ?? 'info';
 			return (
-				<div key={index} className={cn('mb-5 rounded-xl border-l-4 p-4 sm:p-5', variantStyles[variant])}>
-					<p className={cn('font-hg mb-1 text-xs font-bold tracking-widest uppercase', labelStyles[variant])}>{variant}</p>
-					<p className='text-secondary-700 dark:text-secondary-300 text-sm leading-relaxed sm:text-base'>{block.text}</p>
+				<div key={index} className={cn('mb-4 rounded-xl border-l-4 p-4 sm:p-5', variantStyles[variant])}>
+					<p className={cn('text-heading-xsmall mb-1 tracking-widest uppercase', labelStyles[variant])}>{variant}</p>
+					<p className='text-paragraph-small text-secondary-600 dark:text-secondary-400'>{block.text}</p>
 				</div>
 			);
 		}
@@ -134,6 +130,7 @@ const BlogDetailPage = async ({ params }: Props) => {
 		notFound();
 	}
 
+	const translateBlog = await getTranslations('blog');
 	const otherPosts = BLOG_POSTS.filter((p) => p.slug !== slug && p.category === post.category).slice(0, 3);
 	const categoryColor = CATEGORY_COLORS[post.category] ?? DEFAULT_CATEGORY_COLOR;
 
@@ -145,10 +142,10 @@ const BlogDetailPage = async ({ params }: Props) => {
 					<div className='w-full pt-6 sm:pt-10'>
 						<Link
 							href='/articles'
-							className='font-hg text-secondary-500 hover:text-primary dark:hover:text-success inline-flex items-center gap-2 text-xs font-bold tracking-wider uppercase transition-colors duration-200'
+							className='text-secondary-500 hover:text-primary dark:hover:text-success text-heading-xsmall inline-flex items-center gap-2 tracking-wider uppercase transition-colors duration-200'
 						>
 							<IconArrowLeft size={14} stroke={2.5} />
-							All Articles
+							{translateBlog('backToList')}
 						</Link>
 					</div>
 					<div className='border-secondary-200/50 dark:border-secondary-700/50 relative w-full overflow-hidden rounded-2xl border bg-white shadow-lg shadow-black/5 dark:bg-black dark:shadow-white/5'>
@@ -159,35 +156,28 @@ const BlogDetailPage = async ({ params }: Props) => {
 						</div>
 						<div className='flex flex-col gap-5 p-6 sm:p-8 lg:p-10'>
 							<div className='flex flex-wrap items-center gap-3'>
-								<div className='text-secondary-400 dark:text-secondary-600 flex items-center gap-1.5 text-xs'>
-									<IconClock size={13} stroke={2} />
-									<span className='font-hg font-medium'>{post.readTime} min read</span>
-								</div>
+								<MetaLabel icon={<IconClock size={13} stroke={2} />}>{post.readTime} min read</MetaLabel>
 								<span className='bg-secondary-200 dark:bg-secondary-700 h-1 w-1 rounded-full' />
-								<span className='text-secondary-400 dark:text-secondary-600 font-hg text-xs font-medium'>{formatDate(post.publishedAt)}</span>
+								<MetaLabel>{formatDate(post.publishedAt)}</MetaLabel>
 							</div>
-							<h1 className='font-cg text-dark text-3xl leading-tight font-medium tracking-wide sm:text-4xl lg:text-5xl dark:text-white'>{post.title}</h1>
-							<p className='text-secondary-600 dark:text-secondary-400 max-w-5xl text-base leading-relaxed sm:text-lg'>{post.excerpt}</p>
+							<h1 className='sr-only'>{post.title}</h1>
+							<h2 className='text-heading-xlarge text-dark tracking-wide dark:text-white'>{post.title}</h2>
+							<p className='text-secondary-700 dark:text-secondary-300 text-paragraph-medium max-w-5xl'>{post.excerpt}</p>
 							<div className='flex flex-wrap items-center gap-2'>
 								<IconTag size={13} stroke={2} className='text-secondary-400 dark:text-secondary-600' />
 								{post.tags.map((tag) => (
-									<span
-										key={tag}
-										className='font-hg bg-secondary-100 text-secondary-500 dark:bg-secondary-800 dark:text-secondary-500 rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase'
-									>
-										{tag}
-									</span>
+									<Badge key={tag}>{tag}</Badge>
 								))}
 							</div>
 						</div>
 					</div>
-					<div className='w-full max-w-5xl'>
+					<div className='mt-4 w-full max-w-5xl'>
 						<div className='prose-custom'>{post.content.map((block, index) => renderBlock(block, index))}</div>
 					</div>
 					{otherPosts.length > 0 && (
 						<div className='w-full'>
 							<div className='border-secondary-200/50 dark:border-secondary-700/50 mb-6 border-t pt-8'>
-								<p className='font-hg text-secondary-400 dark:text-secondary-600 mb-5 text-sm font-semibold tracking-widest uppercase'>More in {post.category}</p>
+								<p className='text-secondary-500 text-heading-xsmall mb-5 tracking-widest uppercase'>{translateBlog('moreIn', { category: post.category })}</p>
 								<div className='grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3'>
 									{otherPosts.map((related) => (
 										<BlogCard key={related.slug} post={related} />

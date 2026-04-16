@@ -11,14 +11,15 @@
 ## Layout Hierarchy
 
 ```
-src/app/layout.tsx              # Root — bare fragment (<>{children}</>) + global.scss import
-src/app/[locale]/layout.tsx     # Locale — html, body, fonts, RTL dir, NextIntlClientProvider,
-                                #   Providers (Redux + Theme), Header, Footer, metadata
+src/app/layout.tsx              # Root — <html lang dir>/<body> with fonts, getLocale() for
+                                #   dynamic locale/RTL, global.scss import
+src/app/[locale]/layout.tsx     # Locale — NextIntlClientProvider, Providers (Redux + Theme),
+                                #   Header, main, Footer, noise overlay, metadata
 src/app/[locale]/(landing)/page.tsx
 ```
 
-- Root layout is a bare fragment — only imports `global.scss`, renders `<>{children}</>`
-- Locale layout handles everything: `<html lang>`, `<body>` with fonts, `dir="rtl"` for Arabic, `NextIntlClientProvider`, `Providers` (Redux + Theme), Header, Footer, noise overlay
+- Root layout owns `<html>` and `<body>` (Next.js 16 requires this). It calls `getLocale()` from `next-intl/server` to set `lang` and `dir` dynamically per request, applies the font variables, and toggles the Arabic font class for RTL locales.
+- Locale layout owns app structure: `NextIntlClientProvider`, `Providers` (Redux + Theme), Header, `<main>`, Footer, noise overlay, and exports the page metadata.
 
 ## i18n — next-intl v4
 
@@ -73,12 +74,30 @@ import Link from 'next/link'
 
 ## RTL Support (Arabic)
 
-- `[locale]/layout.tsx` sets `dir="rtl"` when locale is `ar`
+- `src/app/layout.tsx` (root layout) sets `dir="rtl"` when locale is `ar` — it calls `getLocale()` from `next-intl/server` and checks against `RTL_LOCALES`
 - Use `rtl:` Tailwind variant for RTL-specific overrides in components:
 
 ```tsx
 <div className="ml-4 rtl:ml-0 rtl:mr-4">
 ```
+
+## Root Not-Found Exception
+
+`src/app/not-found.tsx` renders **outside** the locale layout — it has no `NextIntlClientProvider`. Any component that internally uses next-intl's `Link` (including `Button` with a `to` prop) will throw:
+
+```
+No intl context found. Have you configured the provider?
+```
+
+In `src/app/not-found.tsx`, use `NextLink from 'next/link'` directly for any links:
+
+```tsx
+import Link from 'next/link'
+
+<Link href='/' className='...'>Go back home</Link>
+```
+
+The locale-level `src/app/[locale]/not-found.tsx` is fine — it renders inside `NextIntlClientProvider` and can use `Button` with `to` or `Link` from `@/i18n/navigation` normally.
 
 ## Static Generation
 

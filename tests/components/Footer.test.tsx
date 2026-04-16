@@ -3,19 +3,19 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 describe('Footer', () => {
-	it('renders footer element', () => {
-		const { container } = render(<Footer />);
+	it('renders footer element', async () => {
+		const { container } = render(await Footer());
 		expect(container.querySelector('footer')).toBeInTheDocument();
 	});
 
-	it('renders copyright text with current year', () => {
-		render(<Footer />);
+	it('renders copyright text with current year', async () => {
+		render(await Footer());
 		const year = new Date().getFullYear().toString();
 		expect(screen.getByText(new RegExp(`${year}.*All rights reserved`))).toBeInTheDocument();
 	});
 
-	it('renders the developer credit', () => {
-		render(<Footer />);
+	it('renders the developer credit', async () => {
+		render(await Footer());
 		expect(screen.getByText(/Designed & Developed by SapanMozammel/i)).toBeInTheDocument();
 	});
 });

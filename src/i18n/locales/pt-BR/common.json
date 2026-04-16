@@ -1,0 +1,59 @@
+{
+	"buttons": {
+		"learnMore": "Saiba mais",
+		"readMore": "Leia mais",
+		"letsConnect": "Vamos nos conectar",
+		"close": "Fechar",
+		"tryAgain": "Tentar novamente",
+		"reload": "Recarregar",
+		"goHome": "Voltar ao início"
+	},
+	"loading": "Carregando...",
+	"labels": {
+		"role": "Função",
+		"technologies": "Tecnologias",
+		"responsibilities": "Responsabilidades",
+		"achievements": "Impacto e conquistas",
+		"viewOnGithub": "Ver no GitHub"
+	},
+	"footer": {
+		"copyright": "Todos os direitos reservados.",
+		"designedBy": "Projetado e desenvolvido por {name}"
+	},
+	"theme": {
+		"change": "Alterar tema",
+		"suffix": "Tema"
+	},
+	"contact": {
+		"modal": {
+			"title": "Vamos conversar",
+			"description": "Responderei o mais rápido possível."
+		},
+		"form": {
+			"labels": {
+				"name": "Nome",
+				"email": "E-mail",
+				"title": "Título",
+				"message": "Mensagem"
+			},
+			"submit": "Enviar mensagem"
+		},
+		"status": {
+			"loading": "Enviando sua mensagem...",
+			"successTitle": "Mensagem enviada!",
+			"successDescription": "Obrigado pelo contato. Retornarei em breve.",
+			"errorTitle": "Algo deu errado",
+			"errorDescription": "Tente novamente ou entre em contato por e-mail."
+		}
+	},
+	"error": {
+		"label": "Erro",
+		"title": "Algo deu errado",
+		"defaultMessage": "Ocorreu um erro inesperado. Pode ser um problema temporário no servidor."
+	},
+	"notFound": {
+		"label": "Erro",
+		"title": "Página não encontrada",
+		"description": "Desculpe, a página que você procurava não foi encontrada. Ela pode ter sido movida ou excluída."
+	}
+}

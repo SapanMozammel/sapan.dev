@@ -1,22 +1,24 @@
 'use client';
 
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import { memo, useCallback } from 'react';
 
 const NAV_ITEMS = [
-	{ label: 'Home', section: 'home' },
-	{ label: 'Technologies', section: 'technologies' },
-	{ label: 'Portfolio', section: 'portfolio' },
-	{ label: 'Experience', section: 'experience' },
-	{ label: 'Testimonials', section: 'testimonials' },
-	{ label: 'Workflow', section: 'workflow' },
-	{ label: 'Articles', href: '/articles' },
-	{ label: 'FAQ', section: 'faq' },
+	{ key: 'home', section: 'home' },
+	{ key: 'technologies', section: 'technologies' },
+	{ key: 'portfolio', section: 'portfolio' },
+	{ key: 'experience', section: 'experience' },
+	{ key: 'testimonials', section: 'testimonials' },
+	{ key: 'workflow', section: 'workflow' },
+	{ key: 'articles', href: '/articles' },
+	{ key: 'faq', section: 'faq' },
 ] as const;
 
 const LINK_CLASS = 'text-secondary-600 hover:text-primary dark:text-secondary-400 dark:hover:text-success font-hg text-sm font-medium transition-colors';
 
 const CtaNav = memo(() => {
+	const translateNav = useTranslations('navigation');
 	const pathname = usePathname();
 	const router = useRouter();
 
@@ -47,12 +49,12 @@ const CtaNav = memo(() => {
 		<div className='grid grid-cols-2 gap-x-6 gap-y-4'>
 			{NAV_ITEMS.map((item) =>
 				'section' in item ? (
-					<Link key={item.label} href='/' onClick={(e) => handleSectionClick(e, item.section)} className={LINK_CLASS}>
-						{item.label}
+					<Link key={item.key} href='/' onClick={(e) => handleSectionClick(e, item.section)} className={LINK_CLASS}>
+						{translateNav(item.key)}
 					</Link>
 				) : (
-					<Link key={item.label} href={item.href} className={LINK_CLASS}>
-						{item.label}
+					<Link key={item.key} href={item.href} className={LINK_CLASS}>
+						{translateNav(item.key)}
 					</Link>
 				)
 			)}

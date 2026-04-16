@@ -1,18 +1,59 @@
 {
 	"buttons": {
-		"submit": "Submit",
-		"cancel": "Cancel",
 		"learnMore": "Learn More",
-		"viewAll": "View All",
-		"getInTouch": "Get in Touch",
-		"viewProject": "View Project",
-		"readMore": "Read More"
-	},
-	"errors": {
-		"required": "This field is required",
-		"invalidEmail": "Please enter a valid email",
-		"somethingWentWrong": "Something went wrong. Please try again."
+		"readMore": "Read More",
+		"letsConnect": "Let's Connect",
+		"close": "Close",
+		"tryAgain": "Try Again",
+		"reload": "Reload",
+		"goHome": "Go back home"
 	},
 	"loading": "Loading...",
-	"present": "Present"
+	"labels": {
+		"role": "Role",
+		"technologies": "Technologies",
+		"responsibilities": "Responsibilities",
+		"achievements": "Impact & Achievements",
+		"viewOnGithub": "View on GitHub"
+	},
+	"footer": {
+		"copyright": "All rights reserved.",
+		"designedBy": "Designed & Developed by {name}"
+	},
+	"theme": {
+		"change": "Change Theme",
+		"suffix": "Theme"
+	},
+	"contact": {
+		"modal": {
+			"title": "Let's connect",
+			"description": "I'll get back to you as soon as possible."
+		},
+		"form": {
+			"labels": {
+				"name": "Name",
+				"email": "Email",
+				"title": "Title",
+				"message": "Message"
+			},
+			"submit": "Send Message"
+		},
+		"status": {
+			"loading": "Sending your message...",
+			"successTitle": "Message sent!",
+			"successDescription": "Thanks for reaching out. I'll be in touch soon.",
+			"errorTitle": "Something went wrong",
+			"errorDescription": "Please try again or reach out via email."
+		}
+	},
+	"error": {
+		"label": "Error",
+		"title": "Something went wrong",
+		"defaultMessage": "An unexpected error occurred. This might be due to a temporary server issue."
+	},
+	"notFound": {
+		"label": "Error",
+		"title": "Page Not Found",
+		"description": "Sorry, the page you were looking for could not be found. It may have been moved or deleted."
+	}
 }

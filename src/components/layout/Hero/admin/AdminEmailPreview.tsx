@@ -1,6 +1,6 @@
 import { IconArchive, IconArchiveOff, IconArrowBackUp, IconDots, IconRotate2, IconRotateClockwise, IconToggleLeft, IconTrash } from '@tabler/icons-react';
 
-import { inboxList } from './data';
+import { inboxList } from '@/data/content/admin-dashboard';
 
 const AdminEmailPreview = () => {
 	return (

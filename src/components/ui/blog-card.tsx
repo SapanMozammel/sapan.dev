@@ -1,9 +1,15 @@
+'use client';
+
+import Badge from '@/components/ui/badge';
+import CTALink from '@/components/ui/cta-link';
+import MetaLabel from '@/components/ui/meta-label';
 import { CATEGORY_COLORS, DEFAULT_CATEGORY_COLOR } from '@/data/content/blogs';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { getBlurDataURL } from '@/lib/utils/image';
 import type { BlogCardProps } from '@/types/blog';
-import { IconArrowRight, IconClock } from '@tabler/icons-react';
+import { IconClock } from '@tabler/icons-react';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 const BLUR_PLACEHOLDER = getBlurDataURL(800, 450);
 
@@ -15,6 +21,7 @@ const formatDate = (dateString: string): string =>
 	});
 
 const BlogCard = ({ post, className }: BlogCardProps) => {
+	const translateButtons = useTranslations('common.buttons');
 	const categoryColor = CATEGORY_COLORS[post.category] ?? DEFAULT_CATEGORY_COLOR;
 
 	return (
@@ -42,30 +49,20 @@ const BlogCard = ({ post, className }: BlogCardProps) => {
 			</div>
 			<div className='flex grow flex-col gap-3 p-5'>
 				<div className='flex grow flex-col gap-2'>
-					<h3 className='font-cg group-hover:text-primary dark:group-hover:text-success text-dark text-lg leading-snug font-medium tracking-wide transition-colors duration-200 sm:text-xl dark:text-white'>
-						{post.title}
-					</h3>
-					<p className='text-secondary-600 dark:text-secondary-400 line-clamp-2 text-sm leading-relaxed'>{post.excerpt}</p>
+					<h5 className='text-heading-small group-hover:text-primary dark:group-hover:text-success text-dark tracking-wide transition-colors duration-200 dark:text-white'>{post.title}</h5>
+					<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-small line-clamp-2'>{post.excerpt}</p>
 				</div>
 				<div className='flex flex-wrap gap-1.5'>
 					{post.tags.slice(0, 3).map((tag) => (
-						<span key={tag} className='font-hg bg-secondary-100 text-secondary-500 dark:bg-secondary-800 dark:text-secondary-500 rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase'>
-							{tag}
-						</span>
+						<Badge key={tag}>{tag}</Badge>
 					))}
 				</div>
 				<div className='border-secondary-100 dark:border-secondary-800 mt-1.5 flex items-center justify-between border-t pt-4'>
-					<div className='text-secondary-400 dark:text-secondary-600 flex items-center gap-3 text-xs'>
-						<span className='font-hg font-medium'>{formatDate(post.publishedAt)}</span>
-						<span className='flex items-center gap-1'>
-							<IconClock size={12} stroke={2} />
-							<span className='font-hg font-medium'>{post.readTime} min</span>
-						</span>
+					<div className='flex items-center gap-3'>
+						<MetaLabel>{formatDate(post.publishedAt)}</MetaLabel>
+						<MetaLabel icon={<IconClock size={12} stroke={2} />}>{post.readTime} min</MetaLabel>
 					</div>
-					<span className='font-hg text-primary dark:text-success transition-gap inline-flex items-center gap-1 text-sm font-semibold tracking-wider uppercase duration-200 group-hover:gap-2'>
-						<span>Read More</span>
-						<IconArrowRight stroke={3} className='mb-0.5 h-4 w-4 transition-transform duration-300' />
-					</span>
+					<CTALink>{translateButtons('readMore')}</CTALink>
 				</div>
 			</div>
 		</Link>

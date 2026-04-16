@@ -6,6 +6,7 @@ Static content files — imported directly by Server Components.
 
 | File | Exports |
 |---|---|
+| `admin-dashboard.tsx` | `menuItems`, `inboxList` — Hero admin screen mock data (uses `.tsx` for JSX icons) |
 | `blogs.ts` | `BLOG_POSTS`, `FEATURED_BLOGS`, `BLOGS_PER_PAGE`, `CATEGORY_COLORS`, `DEFAULT_CATEGORY_COLOR` |
 | `experience.ts` | `EXPERIENCE_DATA` — work history array |
 | `faq.ts` | `FAQ_DATA` — accordion items array |
@@ -22,7 +23,6 @@ App-level configuration — imported by routing, i18n, and component logic.
 | File | Exports |
 |---|---|
 | `languages.ts` | `LANGUAGES`, `LanguageCode`, `Language` — locale metadata (name, flag, RTL) |
-| `routes.ts` | (empty — placeholder) |
 | `technologies.ts` | `TECH_STACK` — tech stack grid items |
 
 ## src/types/
@@ -32,7 +32,7 @@ TypeScript type definitions — one file per domain.
 | File | Types |
 |---|---|
 | `blog.ts` | `ContentBlock`, `BlogPost`, `BlogCardProps` |
-| `button.ts` | `ButtonProps`, `ConnectButtonProps`, `GradientStop`, `SvgShapeProps`, `CenterSvgProps`, `ButtonContentProps`, `ButtonVariantConfig` |
+| `button.ts` | `BaseButtonProps`, `LinkButtonProps`, `RegularButtonProps`, `ButtonProps`, `ConnectButtonProps`, `GradientStop`, `SvgShapeProps`, `CenterSvgProps`, `ButtonContentProps`, `ButtonVariantConfig` |
 | `contact.ts` | `ContactFormData`, `ContactFormErrors`, `ContactSubmitStatus`, `ContactFormProps` |
 | `cursor-tooltip.ts` | `CursorTooltipProps`, `Position`, `TooltipContentProps` |
 | `diamond-grid.ts` | `DiamondGridItem`, `DiamondGridLegacyProps`, `DiamondGridFlexibleProps`, `DiamondGridProps`, `LayoutConfig`, `ColumnGroup`, `DiamondColumnProps`, `LayoutConfigMap` |
@@ -50,6 +50,13 @@ TypeScript type definitions — one file per domain.
 | `technology.ts` | `TechStackItem`, `TechnologiesDisplayProps` |
 | `testimonial.ts` | `TestimonialData` |
 | `title.ts` | `SectionTitleTypes` |
+| `badge.ts` | `BadgeProps` |
+| `bullet-list.ts` | `BulletListProps` |
+| `cta-link.ts` | `CTALinkProps` |
+| `form-field.ts` | `FormFieldProps` |
+| `meta-label.ts` | `MetaLabelProps` |
+| `status-dot.ts` | `StatusDotProps` |
+| `status-message.ts` | `StatusMessageProps` |
 | `workflow.ts` | `WorkflowStep`, `WorkflowContentProps`, `WorkflowProgressProps` |
 
 ## src/lib/utils/
@@ -58,11 +65,8 @@ Pure utility functions.
 
 | File | Exports |
 |---|---|
-| `index.ts` | `cn()` — clsx + tailwind-merge |
+| `index.ts` | `cn()` — clsx + extendTailwindMerge (with typography preset regex) |
 | `image.ts` | `shimmer()`, `toBase64()`, `getBlurDataURL()`, `getSolidColorPlaceholder()`, `IMAGE_SIZES`, `getOptimizedImageProps()`, `TECH_LOGOS`, `getTechLogo()` |
-| `date.ts` | (empty — placeholder) |
-| `file.ts` | (empty — placeholder) |
-| `string.ts` | (empty — placeholder) |
 
 ## Data Flow
 

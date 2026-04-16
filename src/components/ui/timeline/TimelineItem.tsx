@@ -1,12 +1,16 @@
 'use client';
 
+import Badge from '@/components/ui/badge';
+import BulletList from '@/components/ui/bullet-list';
 import { cn } from '@/lib/utils';
 import type { TimelineItemProps } from '@/types/experience';
+import { useTranslations } from 'next-intl';
 import { memo, useMemo, useRef } from 'react';
 
 import { checkTimelineDirection } from './timeline-utils';
 
 const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, index }) => {
+	const translateLabels = useTranslations('common.labels');
 	const itemRef = useRef<HTMLDivElement>(null);
 	const isLeft = checkTimelineDirection(index);
 
@@ -77,45 +81,28 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 						'group border-secondary-200/50 dark:border-secondary-700/50 relative flex flex-col gap-2 rounded-2xl border p-4 shadow-lg shadow-black/5 backdrop-blur-sm transition-all duration-300 md:gap-4 md:p-6 dark:shadow-white/5'
 					)}
 				>
-					<div className='flex flex-col gap-1'>
-						<h3 className='font-hg text-dark text-3xl leading-none font-bold uppercase sm:text-5xl dark:text-white'>{job.company}</h3>
-						<h5 className='font-cg text-secondary-600 dark:text-secondary-400 text-xl leading-snug font-medium sm:text-2xl'>{job.position}</h5>
+					<div className='flex flex-col'>
+						<h3 className='text-heading-medium-alt text-dark tracking-wide dark:text-white'>{job.company}</h3>
+						<h4 className='text-heading-small text-secondary-700 dark:text-secondary-300 tracking-wide'>{job.position}</h4>
 					</div>
 					{job.technologies && job.technologies.length > 0 && (
 						<div className='flex flex-wrap gap-1.5'>
 							{job.technologies.map((tech, idx) => (
-								<span
-									key={idx}
-									className={cn('font-hg bg-secondary-100 text-secondary-500 dark:bg-secondary-800 dark:text-secondary-500 rounded-md px-2 py-0.5 text-[10px] font-semibold tracking-wider uppercase')}
-								>
-									{tech}
-								</span>
+								<Badge key={idx}>{tech}</Badge>
 							))}
 						</div>
 					)}
-					<p className='text-secondary-600 dark:text-secondary-400 leading-regular text-sm'>{job.description}</p>
-					<div className='flex flex-col gap-1.5'>
-						<h4 className='font-hg text-dark text-lg font-bold dark:text-white'>Responsibilities</h4>
-						<ul className='text-secondary-600 dark:text-secondary-400 leading-regular flex list-none flex-col gap-1.5 text-sm'>
-							{job.responsibilities?.map((resp, idx) => (
-								<li key={idx} className='relative flex items-start pl-4'>
-									<span className='border-primary dark:border-success absolute left-0 mt-2 h-1.5 w-1.5 rounded-full border bg-transparent' />
-									{resp}
-								</li>
-							))}
-						</ul>
-					</div>
+					<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-small'>{job.description}</p>
+					{job.responsibilities && job.responsibilities.length > 0 && (
+						<div className='flex flex-col gap-1.5'>
+							<h5 className='text-dark text-heading-small-alt dark:text-white'>{translateLabels('responsibilities')}</h5>
+							<BulletList items={job.responsibilities} />
+						</div>
+					)}
 					{job.achievements && job.achievements.length > 0 && (
 						<div className='flex flex-col gap-1.5'>
-							<h4 className='font-hg text-dark text-lg font-bold dark:text-white'>Impact & Achievements</h4>
-							<ul className='text-secondary-600 dark:text-secondary-400 leading-regular flex list-none flex-col gap-1.5 text-sm'>
-								{job.achievements.map((achievement, idx) => (
-									<li key={idx} className='relative flex items-start pl-4'>
-										<span className='border-primary dark:border-success absolute left-0 mt-2 h-1.5 w-1.5 rounded-full border bg-transparent' />
-										{achievement}
-									</li>
-								))}
-							</ul>
+							<h5 className='text-dark text-heading-small-alt dark:text-white'>{translateLabels('achievements')}</h5>
+							<BulletList items={job.achievements} />
 						</div>
 					)}
 				</div>

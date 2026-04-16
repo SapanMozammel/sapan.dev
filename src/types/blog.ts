@@ -1,6 +1,6 @@
 export type ContentBlock =
 	| { type: 'paragraph'; text: string }
-	| { type: 'heading'; level: 2 | 3; text: string }
+	| { type: 'heading'; text: string }
 	| { type: 'code'; language: string; code: string }
 	| { type: 'list'; ordered?: boolean; items: string[] }
 	| { type: 'callout'; variant?: 'info' | 'warning' | 'tip'; text: string };

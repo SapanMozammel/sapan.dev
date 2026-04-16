@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 const TextUnderline = ({ children, className, ...rest }: React.DetailedHTMLProps<React.AllHTMLAttributes<HTMLDivElement>, HTMLDivElement>) => (
 	<span className={cn('relative', className)} {...rest}>
 		{children}
-		<svg className='absolute inset-x-0 -bottom-[0.25em] aspect-[372/32]' viewBox='0 0 372 32'>
+		<svg className='absolute inset-x-0 -bottom-[0.25em] aspect-[372/32] w-full' viewBox='0 0 372 32'>
 			<g clipPath='url(#clip0_1682_152)'>
 				<path
 					fill='url(#paint0_linear_1682_152)'

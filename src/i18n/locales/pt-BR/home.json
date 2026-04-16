@@ -1,0 +1,44 @@
+{
+	"hero": {
+		"srTitle": "Olá, eu sou Sapan Mozammel, um desenvolvedor frontend fullstack.",
+		"headingPrefix": "A cada linha de",
+		"headingSuffix": ", moldando o futuro do desenvolvimento web.",
+		"description": "Com mais de 5 anos de experiência dinâmica construindo aplicações com React, Redux, GraphQL, Next.js, Three.js, Node.js e muito mais, tenho orgulho de escrever código limpo e sustentável, seguindo as melhores práticas de engenharia."
+	},
+	"technologies": {
+		"subtitle": "Tecnologias",
+		"title": "Sou especialista em"
+	},
+	"portfolio": {
+		"subtitle": "Portfólio",
+		"title": "Meus trabalhos recentes"
+	},
+	"experience": {
+		"subtitle": "Experiência",
+		"title": "Evolução como desenvolvedor"
+	},
+	"testimonials": {
+		"subtitle": "Depoimentos",
+		"title": "O que as pessoas dizem sobre mim"
+	},
+	"workflow": {
+		"subtitle": "Como eu trabalho",
+		"title": "Da ideia ao lançamento"
+	},
+	"faq": {
+		"subtitle": "Coisas que você pode perguntar",
+		"title": "Perguntas frequentes"
+	},
+	"blog": {
+		"subtitle": "Blog",
+		"title": "Reflexões sobre frontend",
+		"viewAll": "Ver todos os artigos"
+	},
+	"cta": {
+		"heading": "Tem um projeto em mente?",
+		"headingAccent": "Vamos construir juntos.",
+		"description": "Seja um produto completo, uma landing page ou apenas explorar ideias — estou aqui para colaborar.",
+		"availability": "Pronto para o seu próximo projeto",
+		"location": "Baseado em Dhaka, Bangladesh. Entregando globalmente."
+	}
+}

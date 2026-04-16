@@ -1,13 +1,13 @@
 import { cn } from '@/lib/utils';
 import { IconAdjustments, IconFilter } from '@tabler/icons-react';
 
-import { inboxList } from './data';
+import { inboxList } from '@/data/content/admin-dashboard';
 
 const AdminEmailList = () => {
 	return (
 		<div className='border-info/30 w-7/12 shrink-0 border-e-[0.025em] border-solid'>
 			<div className='border-info/30 flex h-[3.5em] items-center border-b-[0.025em] border-solid p-[1em]'>
-				<div className='text-[1.1em] font-semibold'>Inbox</div>
+				<div className='text-[1.1em]'>Inbox</div>
 				<div className='ms-auto flex items-center gap-[1em]'>
 					<IconFilter className='text-secondary-500 dark:text-secondary-500 h-[1.05em] w-[1.05em]' />
 					<IconAdjustments className='text-secondary-500 dark:text-secondary-500 h-[0.9em] w-[0.9em]' />

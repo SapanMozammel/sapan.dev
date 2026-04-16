@@ -4,6 +4,7 @@ import CursorTooltip from '@/components/ui/cursor-tooltip';
 import { DiamondGrid } from '@/components/ui/diamond-grid';
 import { TECH_STACK } from '@/data/config/technologies';
 import { getBlurDataURL } from '@/lib/utils/image';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { memo } from 'react';
 import SectionSeparator from '../common/SectionSeparator';
@@ -13,17 +14,19 @@ const LOGO_SIZE = 64;
 const BLUR_PLACEHOLDER = getBlurDataURL(LOGO_SIZE, LOGO_SIZE);
 
 const Technologies = memo(() => {
+	const translate = useTranslations('home.technologies');
+
 	return (
 		<section id='technologies' className='relative z-1 pt-[20vw] pb-16 sm:pb-20 lg:pb-24'>
 			<SectionSeparator lts rts lbs rbs bl ll rl>
 				<div className='container flex w-full grow flex-col items-center justify-start gap-4 text-center'>
-					<SectionTitle subtitle='Technologies' title={`I'm an Expertise In`} watermark='Technologies' />
+					<SectionTitle subtitle={translate('subtitle')} title={translate('title')} watermark='Technologies' />
 					<DiamondGrid items={TECH_STACK}>
 						{(item) => (
 							<CursorTooltip
 								key={`${item.name}-${item.index}`}
 								content={item.name}
-								className='from-secondary-200/50 dark:from-secondary-700/50 dark:to-secondary-900/50 to-secondary/50 flex aspect-video w-full items-center justify-center rounded-[2.25vw] bg-gradient-to-b text-sm font-medium text-white transition-shadow duration-300 select-none md:rounded-[1.25vw]'
+								className='from-secondary-200/50 dark:from-secondary-700/50 dark:to-secondary-900/50 to-secondary/50 flex aspect-video w-full items-center justify-center rounded-[2.25vw] bg-gradient-to-b text-sm text-white transition-shadow duration-300 select-none md:rounded-[1.25vw]'
 							>
 								{item.logo ? (
 									<span className='relative h-1/2 w-full'>
@@ -41,7 +44,7 @@ const Technologies = memo(() => {
 										<span className='sr-only'>{item.name}</span>
 									</span>
 								) : (
-									<span className='text-dark text-lg font-bold dark:text-white'>{item.name}</span>
+									<span className='text-dark font-hg text-base font-bold dark:text-white'>{item.name}</span>
 								)}
 							</CursorTooltip>
 						)}

@@ -1,0 +1,9 @@
+{
+	"pagination": {
+		"previous": "पिछला पृष्ठ",
+		"next": "अगला पृष्ठ",
+		"page": "पृष्ठ {page}"
+	},
+	"backToList": "सभी लेख",
+	"moreIn": "{category} में और"
+}

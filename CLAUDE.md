@@ -23,7 +23,7 @@ pnpm run build         # Production build
 
 ## Stack
 
-Next.js 15 · React 19 · TypeScript 5.8 · Tailwind CSS v4 · SCSS · Redux Toolkit · next-intl · next-themes · Framer Motion · GSAP · Three.js / R3F · shadcn/ui (new-york, Tabler icons)
+Next.js 16 · React 19 · TypeScript 6 · Tailwind CSS v4 · SCSS · Redux Toolkit · next-intl · next-themes · Framer Motion · GSAP · Three.js / R3F · shadcn/ui (new-york, Tabler icons)
 
 ---
 
@@ -34,8 +34,8 @@ src/
 ├── app/[locale]/           # App Router — all routes under locale segment
 │   ├── (landing)/page.tsx  # Home (no URL segment)
 │   ├── articles/           # Listing + [slug] detail
-│   └── layout.tsx          # Locale layout: html/body, fonts, RTL, Providers, Header, Footer
-├── app/layout.tsx          # Root layout: bare fragment + global.scss only
+│   └── layout.tsx          # Locale layout: Providers, Header, Footer, metadata
+├── app/layout.tsx          # Root layout: html/body, fonts, RTL dir via getLocale(), global.scss
 ├── proxy.ts                 # next-intl locale detection & routing
 ├── components/
 │   ├── layout/             # Page sections (each: index.tsx + sub-files)
@@ -47,13 +47,13 @@ src/
 │   │                       # sheet, tooltip
 │   └── icons/              # SVG icons: Logo, Cloud, Pattern, WorldMap
 ├── data/
-│   ├── content/            # experience, portfolio, testimonials, faq, blogs, workflow
-│   └── config/             # routes, languages, technologies
+│   ├── content/            # admin-dashboard, experience, portfolio, testimonials, faq, blogs, workflow
+│   └── config/             # languages, technologies
 ├── i18n/                   # next-intl: routing.ts, navigation.ts, request.ts, locales/
 ├── store/                  # Redux: localeSlice, uiSlice
 ├── hooks/                  # useContactForm, useStackingCards
-├── lib/utils/              # cn(), getBlurDataURL(), date, file, string helpers
-├── styles/                 # global.scss, themes.scss, animations.scss
+├── lib/utils/              # cn() (index.ts), image utilities: getBlurDataURL(), getOptimizedImageProps(), TECH_LOGOS, etc. (image.ts)
+├── styles/                 # global.scss, themes.scss, utilities.scss, animations.scss
 └── types/                  # TypeScript types
 tests/                      # Vitest suites (root-level, outside Next.js compilation)
 ```
