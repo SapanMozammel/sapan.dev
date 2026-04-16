@@ -156,7 +156,7 @@ const BlogDetailPage = async ({ params }: Props) => {
 						</div>
 						<div className='flex flex-col gap-5 p-6 sm:p-8 lg:p-10'>
 							<div className='flex flex-wrap items-center gap-3'>
-								<MetaLabel icon={<IconClock size={13} stroke={2} />}>{post.readTime} min read</MetaLabel>
+								<MetaLabel icon={<IconClock size={13} stroke={2} />}>{post.readTime} min</MetaLabel>
 								<span className='bg-secondary-200 dark:bg-secondary-700 h-1 w-1 rounded-full' />
 								<MetaLabel>{formatDate(post.publishedAt)}</MetaLabel>
 							</div>
