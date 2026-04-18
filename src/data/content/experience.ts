@@ -31,7 +31,7 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
 		position: 'Frontend Developer',
 		startDate: '2023-11',
 		endDate: '2024-05',
-		location: 'Remote',
+		location: 'Wyoming, US (Remote)',
 		type: 'Part-time',
 		description:
 			'TubeOnAI is an AI platform that summarizes and repurposes videos, podcasts, PDFs, and articles into clear, actionable content. As a Frontend Developer, I worked on the Next.js web app, building UI components, integrating APIs, and ensuring a smooth, responsive experience across devices.',
