@@ -4,7 +4,7 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
 	{
 		id: '1',
 		company: 'Startise',
-		position: 'Frontend Engineer',
+		position: 'Frontend Developer',
 		startDate: '2024-06',
 		location: 'Mirpur DOHS, Dhaka 1206, Bangladesh',
 		type: 'Full-time',
