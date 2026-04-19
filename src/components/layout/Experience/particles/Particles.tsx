@@ -8,7 +8,8 @@ import * as THREE from 'three';
 import { DofPointsMaterial } from './shaders/pointMaterial';
 import { SimulationMaterial } from './shaders/simulationMaterial';
 
-const SIZE = 512;
+const DESKTOP_SIZE = 512;
+const MOBILE_SIZE = 256;
 const SPEED = 1.0;
 const FOCUS = 2.5;
 const APERTURE = 1.5;
@@ -26,6 +27,10 @@ const Particles = memo<{ isDark: boolean }>(({ isDark }) => {
 	const revealStartTime = useRef<number | null>(null);
 	const isRevealingRef = useRef(true);
 
+	// Pick grid size once at mount: 512 on lg+, 256 below. Half-resolution
+	// on mobile cuts particle count from 262k → 65k for thermal/battery budget.
+	const [size] = useState(() => (typeof window !== 'undefined' && window.matchMedia('(min-width: 1024px)').matches ? DESKTOP_SIZE : MOBILE_SIZE));
+
 	// Read design system tokens once from CSS custom properties
 	const [colors] = useState(() => ({
 		primary: getCSSColor('--color-primary'),
@@ -34,11 +39,13 @@ const Particles = memo<{ isDark: boolean }>(({ isDark }) => {
 
 	const simulationMaterial = useMemo(() => new SimulationMaterial(PLANE_SCALE), []);
 
-	const target = useFBO(SIZE, SIZE, {
+	// HalfFloatType (16-bit) renders cleanly on far more mobile GPUs than FloatType (32-bit).
+	// Position range [-7.5, 7.5] fits comfortably in half-float precision.
+	const target = useFBO(size, size, {
 		minFilter: THREE.NearestFilter,
 		magFilter: THREE.NearestFilter,
 		format: THREE.RGBAFormat,
-		type: THREE.FloatType,
+		type: THREE.HalfFloatType,
 	});
 
 	const dofPointsMaterial = useMemo(() => {
@@ -55,15 +62,15 @@ const Particles = memo<{ isDark: boolean }>(({ isDark }) => {
 	const uvs = useMemo(() => new Float32Array([0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0]), []);
 
 	const particles = useMemo(() => {
-		const length = SIZE * SIZE;
+		const length = size * size;
 		const data = new Float32Array(length * 3);
 		for (let i = 0; i < length; i++) {
 			const i3 = i * 3;
-			data[i3 + 0] = (i % SIZE) / SIZE;
-			data[i3 + 1] = i / SIZE / SIZE;
+			data[i3 + 0] = (i % size) / size;
+			data[i3 + 1] = i / size / size;
 		}
 		return data;
-	}, []);
+	}, [size]);
 
 	useFrame((state, delta) => {
 		state.gl.setRenderTarget(target);

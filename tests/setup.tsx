@@ -146,6 +146,7 @@ vi.mock('framer-motion', () => {
 		AnimatePresence: ({ children }: PropsWithChildren) => <>{children}</>,
 		useScroll: () => ({ scrollYProgress: { get: () => 0 } }),
 		useTransform: () => 0,
+		useReducedMotion: () => false,
 		useMotionValue: (initial: number) => createMotionValue(initial),
 		useSpring: (initial: number) => createMotionValue(typeof initial === 'number' ? initial : 0),
 	};
