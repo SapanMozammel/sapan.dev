@@ -50,13 +50,22 @@ export const Button = memo<ButtonProps>((props) => {
 	const config = useMemo(() => getVariantConfig(fill, gradient, isLink), [fill, gradient, isLink]);
 
 	if (isLink) {
-		const { to, ...linkProps } = rest as LinkRest;
+		const { to, ...linkProps } = rest as LinkRest & { download?: boolean | string };
 		const isExternal = to.startsWith('http') || to.startsWith('mailto:') || to.startsWith('tel:');
+		const isDownload = 'download' in linkProps && linkProps.download !== undefined;
 		const inner = (
 			<ButtonInner config={config} loading={loading}>
 				{children}
 			</ButtonInner>
 		);
+		if (isDownload) {
+			const { locale: _locale, download, ...anchorProps } = linkProps as LinkRest & { download?: boolean | string };
+			return (
+				<a href={to} className={computedClasses} download={download} {...(anchorProps as React.AnchorHTMLAttributes<HTMLAnchorElement>)}>
+					{inner}
+				</a>
+			);
+		}
 		if (isExternal) {
 			return (
 				<NextLink href={to} className={computedClasses} {...linkProps}>

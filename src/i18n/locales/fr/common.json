@@ -6,7 +6,8 @@
 		"close": "Fermer",
 		"tryAgain": "Réessayer",
 		"reload": "Recharger",
-		"goHome": "Retour à l'accueil"
+		"goHome": "Retour à l'accueil",
+		"downloadResume": "Télécharger le CV"
 	},
 	"loading": "Chargement...",
 	"labels": {

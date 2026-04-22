@@ -6,7 +6,8 @@
 		"close": "Lukk",
 		"tryAgain": "Prøv igjen",
 		"reload": "Last inn på nytt",
-		"goHome": "Gå tilbake til forsiden"
+		"goHome": "Gå tilbake til forsiden",
+		"downloadResume": "Last ned CV"
 	},
 	"loading": "Laster...",
 	"labels": {

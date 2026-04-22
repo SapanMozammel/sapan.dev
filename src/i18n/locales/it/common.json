@@ -6,7 +6,8 @@
 		"close": "Chiudi",
 		"tryAgain": "Riprova",
 		"reload": "Ricarica",
-		"goHome": "Torna alla home"
+		"goHome": "Torna alla home",
+		"downloadResume": "Scarica CV"
 	},
 	"loading": "Caricamento...",
 	"labels": {

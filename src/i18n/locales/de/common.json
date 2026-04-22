@@ -6,7 +6,8 @@
 		"close": "Schließen",
 		"tryAgain": "Erneut versuchen",
 		"reload": "Neu laden",
-		"goHome": "Zur Startseite"
+		"goHome": "Zur Startseite",
+		"downloadResume": "Lebenslauf herunterladen"
 	},
 	"loading": "Wird geladen...",
 	"labels": {
