@@ -42,7 +42,15 @@ const supportsHalfFloatFBO = (): boolean => {
 	}
 };
 
-const ParticleFallback = memo(() => <div aria-hidden className='glow-blob-primary pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full select-none' />);
+// Theme-adaptive fallback that replaces the WebGL scene on touch devices and
+// unsupported GPUs. Uses the design system's light-mode primary + dark-mode
+// success swap (indigo on white, teal on black) at 45% to stay perceivable
+// on mid-range phone screens in ambient light — `glow-blob-primary`'s 28%
+// reads as near-black on OLED panels and was the source of the "blank area"
+// symptom after the coarse-pointer gate stopped the scene from mounting.
+const ParticleFallback = memo(() => (
+	<div aria-hidden className='bg-primary/45 dark:bg-success/45 pointer-events-none absolute top-1/2 left-1/2 h-65 w-160 max-w-[90vw] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[5rem] select-none' />
+));
 ParticleFallback.displayName = 'ParticleFallback';
 
 const ParticleBackground = memo<ParticleBackgroundProps>(({ className }) => {
@@ -52,6 +60,12 @@ const ParticleBackground = memo<ParticleBackgroundProps>(({ className }) => {
 	// both start with `false`, then the client flips to the real capability after mount.
 	// Worst case on supported devices: one frame of the CSS fallback before the canvas mounts.
 	const [canRenderScene, setCanRenderScene] = useState(false);
+	// Skip the WebGL scene on coarse-pointer devices (phones/tablets) — even
+	// where the half-float probe reports success, real-world mobile GPU stacks
+	// (iOS Safari quirks, Mali/Adreno drivers, WebViews) fail intermittently,
+	// and the thermal/battery cost isn't worth the ambient effect on a device
+	// the user is holding. The CSS `glow-blob-primary` fallback still renders.
+	const [isCoarsePointer, setIsCoarsePointer] = useState(false);
 	// Pause the render loop while the section is offscreen so the GPU isn't
 	// spinning at 60fps while the user reads Articles/Contact below — kills
 	// mobile battery and thermally throttles scroll perf on mid-range Android.
@@ -60,6 +74,7 @@ const ParticleBackground = memo<ParticleBackgroundProps>(({ className }) => {
 
 	useEffect(() => {
 		setCanRenderScene(supportsHalfFloatFBO());
+		setIsCoarsePointer(window.matchMedia('(pointer: coarse)').matches);
 	}, []);
 
 	useEffect(() => {
@@ -77,7 +92,7 @@ const ParticleBackground = memo<ParticleBackgroundProps>(({ className }) => {
 	}, []);
 
 	const isDark = resolvedTheme === 'dark';
-	const showScene = !reducedMotion && canRenderScene;
+	const showScene = !reducedMotion && !isCoarsePointer && canRenderScene;
 
 	return (
 		<div ref={containerRef} className={cn('section-separator pointer-events-none -z-1 overflow-hidden will-change-transform select-none', className)} aria-hidden='true'>
