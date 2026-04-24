@@ -6,7 +6,8 @@
 		"close": "Close",
 		"tryAgain": "Try Again",
 		"reload": "Reload",
-		"goHome": "Go back home"
+		"goHome": "Go back home",
+		"downloadResume": "Download Resume"
 	},
 	"loading": "Loading...",
 	"labels": {

@@ -2,6 +2,7 @@ import Logo from '@/components/icons/Logo';
 import ConnectButton from '@/components/layout/common/ConnectButton';
 import SectionSeparator from '@/components/layout/common/SectionSeparator';
 import CtaBackground from '@/components/layout/Cta/CtaBackground';
+import AnimatedSphere from '@/components/ui/animated-sphere';
 import { getTranslations } from 'next-intl/server';
 import React from 'react';
 import CtaConnect from './CtaConnect';
@@ -19,14 +20,19 @@ const Cta = async () => {
 					<div className='container'>
 						<div className='bg-dark border-success/15 relative z-10 mx-auto max-w-5xl overflow-hidden rounded-2xl border shadow-[0_8px_40px_-12px_color-mix(in_srgb,var(--color-primary)_25%,transparent),0_2px_12px_color-mix(in_srgb,var(--color-success)_15%,transparent)]'>
 							<CtaBackground />
-							<div className='relative z-10 flex flex-col items-center gap-3 p-8 text-center sm:gap-4 sm:p-12 lg:p-16'>
+							<div aria-hidden className='pointer-events-none absolute inset-0 z-[5] flex items-center justify-center select-none lg:left-auto lg:justify-end'>
+								<div className='aspect-square h-[120%] max-h-120 opacity-30 lg:h-[130%] lg:max-h-none lg:translate-x-[27.5%] lg:opacity-70'>
+									<AnimatedSphere />
+								</div>
+							</div>
+							<div className='relative z-10 flex flex-col items-center gap-3 p-8 text-center sm:gap-4 sm:p-12 lg:max-w-[60%] lg:items-start lg:p-16 lg:text-left'>
 								<Logo className='h-10 w-10 sm:h-12 sm:w-12' />
 								<h2 className='text-heading-large tracking-wider text-white'>
 									{translateCta('heading')}
 									<br />
-									<span className='text-success !font-bold tracking-tight'>{translateCta('headingAccent')}</span>
+									<span className='text-success tracking-tight'>{translateCta('headingAccent')}</span>
 								</h2>
-								<p className='text-paragraph-medium text-secondary-400 inline-flex max-w-[90ch] tracking-wider'>{translateCta('description')}</p>
+								<p className='text-paragraph-medium text-secondary-400 max-w-[60ch] tracking-wider'>{translateCta('description')}</p>
 								<ConnectButton fill gradient className='mt-4 sm:mt-6' />
 							</div>
 						</div>

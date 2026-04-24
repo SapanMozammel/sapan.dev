@@ -6,7 +6,8 @@
 		"close": "关闭",
 		"tryAgain": "重试",
 		"reload": "重新加载",
-		"goHome": "返回首页"
+		"goHome": "返回首页",
+		"downloadResume": "下载简历"
 	},
 	"loading": "加载中...",
 	"labels": {

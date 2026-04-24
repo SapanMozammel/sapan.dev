@@ -1,7 +1,7 @@
-import ConnectButton from '@/components/layout/common/ConnectButton';
+import DownloadResumeButton from '@/components/layout/common/DownloadResumeButton';
 import SectionSeparator from '@/components/layout/common/SectionSeparator';
 import TextUnderline from '@/components/layout/common/TextUnderline';
-import AdminScreen from '@/components/layout/Hero/AdminScreen';
+import AboutScreen from '@/components/layout/Hero/about/AboutScreen';
 import HeroBackground from '@/components/layout/Hero/HeroBackground';
 import { getTranslations } from 'next-intl/server';
 
@@ -20,9 +20,9 @@ const Hero = async () => {
 								{translate('headingSuffix')}
 							</h2>
 							<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-medium inline-flex max-w-[90ch] tracking-wider'>{translate('description')}</p>
-							<ConnectButton className='mt-0 sm:mt-4' />
+							<DownloadResumeButton className='mt-0 sm:mt-4' />
 							<div className='mt-4 -mb-[20vw] w-3/4 sm:mt-10 lg:mt-14'>
-								<AdminScreen />
+								<AboutScreen />
 							</div>
 						</div>
 					</SectionSeparator>

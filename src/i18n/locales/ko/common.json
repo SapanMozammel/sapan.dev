@@ -6,7 +6,8 @@
 		"close": "닫기",
 		"tryAgain": "다시 시도",
 		"reload": "새로고침",
-		"goHome": "홈으로 돌아가기"
+		"goHome": "홈으로 돌아가기",
+		"downloadResume": "이력서 다운로드"
 	},
 	"loading": "불러오는 중...",
 	"labels": {

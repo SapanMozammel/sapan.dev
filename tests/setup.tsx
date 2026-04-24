@@ -80,6 +80,18 @@ vi.mock('next/navigation', () => ({
 	useRouter: () => ({ push: vi.fn(), replace: vi.fn(), back: vi.fn(), prefetch: vi.fn() }),
 }));
 
+// ── Turnstile mock ──
+
+vi.mock('@marsidev/react-turnstile', () => ({
+	Turnstile: ({ onSuccess }: { onSuccess?: (token: string) => void }) => {
+		// Auto-resolve with a fake token so form submissions are not blocked in tests
+		React.useEffect(() => {
+			onSuccess?.('test-turnstile-token');
+		}, [onSuccess]);
+		return <div data-testid='turnstile-widget' />;
+	},
+}));
+
 // ── Framer Motion mock ──
 
 vi.mock('framer-motion', () => {
@@ -134,6 +146,7 @@ vi.mock('framer-motion', () => {
 		AnimatePresence: ({ children }: PropsWithChildren) => <>{children}</>,
 		useScroll: () => ({ scrollYProgress: { get: () => 0 } }),
 		useTransform: () => 0,
+		useReducedMotion: () => false,
 		useMotionValue: (initial: number) => createMotionValue(initial),
 		useSpring: (initial: number) => createMotionValue(typeof initial === 'number' ? initial : 0),
 	};

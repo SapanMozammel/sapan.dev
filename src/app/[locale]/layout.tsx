@@ -70,6 +70,7 @@ const LocaleLayout = async ({ children }: LocaleLayoutProps) => {
 
 	return (
 		<NextIntlClientProvider messages={messages}>
+			<link rel='preconnect' href='https://challenges.cloudflare.com' />
 			<HtmlLocaleSync />
 			<div className='text-dark relative bg-white dark:bg-black dark:text-white'>
 				<Header />

@@ -6,7 +6,8 @@
 		"close": "Sluiten",
 		"tryAgain": "Opnieuw proberen",
 		"reload": "Herladen",
-		"goHome": "Terug naar home"
+		"goHome": "Terug naar home",
+		"downloadResume": "CV downloaden"
 	},
 	"loading": "Laden...",
 	"labels": {

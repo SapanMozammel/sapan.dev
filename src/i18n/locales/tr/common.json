@@ -6,7 +6,8 @@
 		"close": "Kapat",
 		"tryAgain": "Tekrar Dene",
 		"reload": "Yeniden Yükle",
-		"goHome": "Ana sayfaya dön"
+		"goHome": "Ana sayfaya dön",
+		"downloadResume": "CV'yi indir"
 	},
 	"loading": "Yükleniyor...",
 	"labels": {
