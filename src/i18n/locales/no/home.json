@@ -3,7 +3,36 @@
 		"srTitle": "Hei, jeg er Sapan Mozammel, en fullstack frontend-utvikler.",
 		"headingPrefix": "Med hver linje",
 		"headingSuffix": ", former jeg fremtiden til webutvikling.",
-		"description": "Med over 5 års dynamisk erfaring med å bygge applikasjoner ved hjelp av React, Redux, GraphQL, Next.js, Three.js, Node.js og mye mer, er jeg stolt av å skrive ren og vedlikeholdbar kode samtidig som jeg følger beste praksis innen utvikling."
+		"description": "Med over 5 års dynamisk erfaring med å bygge applikasjoner ved hjelp av React, Redux, GraphQL, Next.js, Three.js, Node.js og mye mer, er jeg stolt av å skrive ren og vedlikeholdbar kode samtidig som jeg følger beste praksis innen utvikling.",
+		"about": {
+			"tabs": {
+				"about": "Om meg",
+				"experience": "Erfaring",
+				"education": "Utdanning",
+				"skills": "Ferdigheter",
+				"languages": "Språk"
+			},
+			"photoCard": {
+				"name": "Sapan Mozammel",
+				"tagline": "Frontend-utvikler · Dhaka · Remote",
+				"badge": "Tilgjengelig",
+				"imageAlt": "Portrett av Sapan Mozammel"
+			},
+			"availability": {
+				"pill": "Åpen for remote · 30 dagers oppsigelse"
+			},
+			"quickFacts": {
+				"experience": "Erfaring"
+			},
+			"languages": {
+				"levels": {
+					"Native": "Morsmål",
+					"Professional": "Profesjonell",
+					"Conversational": "Samtale",
+					"Basic": "Grunnleggende"
+				}
+			}
+		}
 	},
 	"technologies": {
 		"subtitle": "Teknologier",

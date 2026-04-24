@@ -1,6 +1,10 @@
 import Hero from '@/components/layout/Hero';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { render, screen } from '../test-utils';
+
+vi.mock('@/components/layout/Hero/about/AboutScreen', () => ({
+	default: () => <div data-testid='about-screen-stub' />,
+}));
 
 describe('Hero', () => {
 	it('renders the sr-only heading', async () => {
@@ -23,13 +27,18 @@ describe('Hero', () => {
 		expect(screen.getByText(/5\+ years of dynamic experience/i)).toBeInTheDocument();
 	});
 
-	it('renders connect button', async () => {
+	it('renders the download resume button', async () => {
 		render(await Hero());
-		expect(screen.getByText("Let's Connect")).toBeInTheDocument();
+		expect(screen.getByText('Download Resume')).toBeInTheDocument();
 	});
 
 	it('renders within a section element', async () => {
 		const { container } = render(await Hero());
 		expect(container.querySelector('section')).toBeInTheDocument();
+	});
+
+	it('renders the About screen', async () => {
+		render(await Hero());
+		expect(screen.getByTestId('about-screen-stub')).toBeInTheDocument();
 	});
 });

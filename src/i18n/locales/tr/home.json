@@ -3,7 +3,36 @@
 		"srTitle": "Merhaba, ben Sapan Mozammel, fullstack frontend geliştiricisiyim.",
 		"headingPrefix": "Her satır",
 		"headingSuffix": " ile web geliştirmenin geleceğini şekillendiriyorum.",
-		"description": "React, Redux, GraphQL, Next.js, Three.js, Node.js ve daha pek çok teknolojiyle uygulamalar geliştirdiğim 5+ yıllık dinamik deneyimimle, mühendislik en iyi uygulamalarına bağlı kalarak temiz ve sürdürülebilir kod yazmaktan gurur duyuyorum."
+		"description": "React, Redux, GraphQL, Next.js, Three.js, Node.js ve daha pek çok teknolojiyle uygulamalar geliştirdiğim 5+ yıllık dinamik deneyimimle, mühendislik en iyi uygulamalarına bağlı kalarak temiz ve sürdürülebilir kod yazmaktan gurur duyuyorum.",
+		"about": {
+			"tabs": {
+				"about": "Hakkımda",
+				"experience": "Deneyim",
+				"education": "Eğitim",
+				"skills": "Yetenekler",
+				"languages": "Diller"
+			},
+			"photoCard": {
+				"name": "Sapan Mozammel",
+				"tagline": "Frontend geliştirici · Dakka · Uzaktan",
+				"badge": "Müsait",
+				"imageAlt": "Sapan Mozammel portresi"
+			},
+			"availability": {
+				"pill": "Uzaktan çalışmaya açık · 30 gün ihbar"
+			},
+			"quickFacts": {
+				"experience": "Deneyim"
+			},
+			"languages": {
+				"levels": {
+					"Native": "Ana dil",
+					"Professional": "Profesyonel",
+					"Conversational": "Konuşma",
+					"Basic": "Temel"
+				}
+			}
+		}
 	},
 	"technologies": {
 		"subtitle": "Teknolojiler",
