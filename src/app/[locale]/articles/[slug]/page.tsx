@@ -9,7 +9,7 @@ import { getBlurDataURL } from '@/lib/utils/image';
 import type { ContentBlock } from '@/types/blog';
 import { IconArrowLeft, IconClock, IconTag } from '@tabler/icons-react';
 import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
@@ -123,7 +123,8 @@ const formatDate = (dateString: string): string => {
 };
 
 const BlogDetailPage = async ({ params }: Props) => {
-	const { slug } = await params;
+	const { slug, locale } = await params;
+	setRequestLocale(locale);
 	const post = BLOG_POSTS.find((p) => p.slug === slug);
 
 	if (!post) {

@@ -30,13 +30,14 @@ describe('CursorTooltip', () => {
 		expect(screen.getByText('Hover me')).toBeInTheDocument();
 	});
 
-	it('applies cursor-none class to container', () => {
+	it('applies pointer-fine:cursor-none to container', () => {
 		render(
 			<CursorTooltip content='Tooltip'>
 				<span>Content</span>
 			</CursorTooltip>
 		);
-		expect(screen.getByText('Content').parentElement).toHaveClass('cursor-none');
+		// Gated behind @media (pointer: fine) so touch devices retain native tap highlight.
+		expect(screen.getByText('Content').parentElement).toHaveClass('pointer-fine:cursor-none');
 	});
 
 	it('applies custom className to container', () => {

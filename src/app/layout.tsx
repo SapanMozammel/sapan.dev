@@ -1,20 +1,10 @@
-import { fontList } from '@/app/fonts';
-import { RTL_LOCALES } from '@/i18n/routing';
-import Providers from '@/providers';
 import '@/styles/global.scss';
-import { getLocale } from 'next-intl/server';
 
-const RootLayout = async ({ children }: { children: React.ReactNode }) => {
-	const locale = await getLocale();
-	const isRTL = RTL_LOCALES.includes(locale);
-
-	return (
-		<html lang={locale} dir={isRTL ? 'rtl' : 'ltr'} suppressHydrationWarning className='relative'>
-			<body className={`${fontList} ${isRTL ? 'font-arabic' : 'font-dm'}`} suppressHydrationWarning>
-				<Providers>{children}</Providers>
-			</body>
-		</html>
-	);
-};
+// Root layout intentionally forwards children. html/body/lang/dir live in
+// `[locale]/layout.tsx` so next-intl can call `setRequestLocale(locale)` and
+// static rendering works for pages with `generateStaticParams` — calling
+// `getLocale()` here would force every descendant to dynamic and 500 any
+// statically-rendered server component (e.g. /articles/[slug]).
+const RootLayout = ({ children }: { children: React.ReactNode }) => children;
 
 export default RootLayout;

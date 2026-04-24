@@ -10,6 +10,10 @@ const MarqueeComponent: React.FC<MarqueeProps> = ({ children, speed = 60, direct
 	const contentRef = useRef<HTMLDivElement>(null);
 	const [contentWidth, setContentWidth] = useState(0);
 	const pausedRef = useRef(false);
+	// Skip the per-frame motion-value write while the marquee is offscreen —
+	// useAnimationFrame can't be cancelled, but an early return avoids the
+	// transform update, which is the expensive part on mobile.
+	const inViewRef = useRef(false);
 	const x = useMotionValue(0);
 
 	const measure = useCallback(() => {
@@ -28,8 +32,21 @@ const MarqueeComponent: React.FC<MarqueeProps> = ({ children, speed = 60, direct
 		};
 	}, [measure]);
 
+	useEffect(() => {
+		const el = containerRef.current;
+		if (!el) return;
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				inViewRef.current = entry?.isIntersecting ?? false;
+			},
+			{ rootMargin: '100px' }
+		);
+		observer.observe(el);
+		return () => observer.disconnect();
+	}, []);
+
 	useAnimationFrame((_, delta) => {
-		if (pausedRef.current || contentWidth === 0) return;
+		if (pausedRef.current || !inViewRef.current || contentWidth === 0) return;
 		const moveBy = (speed * delta) / 1000;
 		let next = x.get();
 		if (direction === 'left') {

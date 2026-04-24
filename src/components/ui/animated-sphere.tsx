@@ -38,6 +38,10 @@ const AnimatedSphere = memo(() => {
 
 		let time = 0;
 		let frameId = 0;
+		// Pause the rAF loop while the CTA section is offscreen — otherwise
+		// the canvas keeps burning battery (~60fps of 2D draws) on mobile
+		// after the user has scrolled past. IO fires an initial entry on observe().
+		let visible = false;
 
 		const resize = () => {
 			const dpr = window.devicePixelRatio || 1;
@@ -51,6 +55,10 @@ const AnimatedSphere = memo(() => {
 		window.addEventListener('resize', resize);
 
 		const render = () => {
+			if (!visible) {
+				frameId = 0;
+				return;
+			}
 			const rect = canvas.getBoundingClientRect();
 			ctx.clearRect(0, 0, rect.width, rect.height);
 
@@ -109,10 +117,21 @@ const AnimatedSphere = memo(() => {
 			frameId = requestAnimationFrame(render);
 		};
 
-		render();
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				const wasVisible = visible;
+				visible = entry?.isIntersecting ?? false;
+				if (visible && !wasVisible && !frameId) {
+					frameId = requestAnimationFrame(render);
+				}
+			},
+			{ rootMargin: '200px' }
+		);
+		observer.observe(canvas);
 
 		return () => {
 			window.removeEventListener('resize', resize);
+			observer.disconnect();
 			cancelAnimationFrame(frameId);
 		};
 	}, []);
