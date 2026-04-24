@@ -5,6 +5,19 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.1] - 2026-04-24
+
+### Fixed
+
+- **500 on every article detail page** — `/articles/[slug]` returned `DYNAMIC_SERVER_USAGE` for all 24 posts × 16 locales because `getLocale()` in `app/layout.tsx` and `getMessages()` in `[locale]/layout.tsx` fell back to `headers()` (a dynamic Next API) during static rendering. Landing/listing pages tolerated it (client components forced dynamic render at request time); `[slug]` has `generateStaticParams`, so Next attempted a static render and served `/500`. Restructured to the canonical next-intl pattern: `app/layout.tsx` is now a pass-through, `html`/`body`/`lang`/`dir`/fonts moved into `[locale]/layout.tsx`, which calls `setRequestLocale(locale)` before any translation API and guards unknown locales with `hasLocale()` → `notFound()`. `setRequestLocale` threaded through every statically-rendered server page (`(landing)`, `articles/[slug]`, `loading`, `not-found`), and `app/not-found.tsx` now carries its own `html`/`body`/fonts since the root layout no longer supplies them. Build pre-renders **405 pages (was 5)** and `/articles/[slug]` serves as pure static HTML.
+- **ParticleBackground blank on real mobile devices** — the WebGL capability probe assumed WebGL 2 guarantees half-float render-target support, but per spec `RGBA16F` is not color-renderable without `EXT_color_buffer_float` (or `EXT_color_buffer_half_float`). On affected devices (older iOS Safari, some Mali/Adreno Android, some WebViews) three.js bound an incomplete FBO, every particle sampled position `(0,0,0)`, and the Experience section rendered empty. Probe now checks the extension and verifies a 2×2 half-float FBO reports `FRAMEBUFFER_COMPLETE` before trusting the device. DevTools device-mode never tripped it because emulation keeps the desktop GL driver.
+- **No WebGL context-loss recovery** — iOS Safari evicts GPU contexts under memory pressure (tab switch, low-mem) and the canvas would stay blank forever. `ParticleScene.onCreated` now attaches a `webglcontextlost` listener that flips `ParticleBackground` back to the CSS `glow-blob-primary` fallback.
+- **Particle canvas ran at 60fps while offscreen** — `ParticleScene` used the default `frameloop="always"`, draining battery and thermally throttling scroll. `ParticleBackground` now observes its container with `IntersectionObserver` (`rootMargin: 400px`) and threads `frameloop={inView ? 'always' : 'never'}` into the Canvas.
+- **Parallax dead on touch devices** — `ParallaxRig` listened to `mousemove`, which iOS/Android never fire from a finger. Swapped to `pointermove` so touch-drag drives the rotation alongside desktop hover.
+- **`AnimatedSphere` & `Marquee` rAF loops ran forever** — both canvases kept animating after the user scrolled past. `AnimatedSphere` now early-returns when offscreen and kicks off a fresh `requestAnimationFrame` on re-entry via `IntersectionObserver`. `Marquee` gates the per-frame motion-value write behind an `inViewRef` (the expensive part — `useAnimationFrame` itself can't be cancelled).
+- **`min-h-screen` on status pages** — `not-found.tsx`, `[locale]/not-found.tsx`, `[locale]/loading.tsx`, `[locale]/error.tsx` used `100vh`, which on iOS Safari includes the URL-bar area and jumps by ~80px as the bar hides/reveals. Switched to `min-h-dvh`.
+- **`CursorTooltip` suppressed tap feedback on touch** — `cursor-none` on the wrapper killed `-webkit-tap-highlight-color`, making project-card and tech-chip taps feel unresponsive. Scoped behind `pointer-fine:` so coarse pointers retain the native highlight.
+
 ## [0.3.0] - 2026-04-24
 
 ### Added

@@ -95,7 +95,7 @@ const CursorTooltipComponent: React.FC<CursorTooltipProps> = ({ children, conten
 
 	return (
 		<>
-			<div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} onClick={onClick} className={cn('cursor-none', className)}>
+			<div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove} onClick={onClick} className={cn('pointer-fine:cursor-none', className)}>
 				{children}
 			</div>
 			{mounted &&

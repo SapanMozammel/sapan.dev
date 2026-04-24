@@ -7,19 +7,19 @@ import * as THREE from 'three';
 import Particles from './Particles';
 import { VignetteShader } from './shaders/vignetteShader';
 
-// Parallax rig — listens to window mousemove (works even when canvas has pointer-events: none)
-// and smoothly rotates its children toward the cursor.
+// Parallax rig — listens to window pointermove so both desktop cursor hover and
+// mobile touch-drag drive the rotation (mousemove never fires from a finger on iOS/Android).
 const ParallaxRig = memo<{ children: React.ReactNode }>(({ children }) => {
 	const groupRef = useRef<THREE.Group>(null);
-	const mouse = useRef({ x: 0, y: 0 });
+	const pointer = useRef({ x: 0, y: 0 });
 
 	useEffect(() => {
-		const onMove = (e: MouseEvent) => {
-			mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
-			mouse.current.y = (e.clientY / window.innerHeight) * 2 - 1;
+		const onMove = (e: PointerEvent) => {
+			pointer.current.x = (e.clientX / window.innerWidth) * 2 - 1;
+			pointer.current.y = (e.clientY / window.innerHeight) * 2 - 1;
 		};
-		window.addEventListener('mousemove', onMove, { passive: true });
-		return () => window.removeEventListener('mousemove', onMove);
+		window.addEventListener('pointermove', onMove, { passive: true });
+		return () => window.removeEventListener('pointermove', onMove);
 	}, []);
 
 	useFrame((_state, delta) => {
@@ -27,8 +27,8 @@ const ParallaxRig = memo<{ children: React.ReactNode }>(({ children }) => {
 			return;
 		}
 		const smooth = 1 - Math.pow(0.001, delta); // frame-rate independent smoothing
-		groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, mouse.current.x * 0.12, smooth);
-		groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, mouse.current.y * 0.08, smooth);
+		groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, pointer.current.x * 0.12, smooth);
+		groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, pointer.current.y * 0.08, smooth);
 	});
 
 	return <group ref={groupRef}>{children}</group>;
@@ -36,7 +36,13 @@ const ParallaxRig = memo<{ children: React.ReactNode }>(({ children }) => {
 
 ParallaxRig.displayName = 'ParallaxRig';
 
-const ParticleScene = memo<{ isDark: boolean }>(({ isDark }) => {
+type ParticleSceneProps = {
+	isDark: boolean;
+	inView: boolean;
+	onContextLost: () => void;
+};
+
+const ParticleScene = memo<ParticleSceneProps>(({ isDark, inView, onContextLost }) => {
 	return (
 		<Canvas
 			camera={{
@@ -46,12 +52,22 @@ const ParticleScene = memo<{ isDark: boolean }>(({ isDark }) => {
 				far: 300,
 			}}
 			dpr={[1, 1.5]}
+			frameloop={inView ? 'always' : 'never'}
 			gl={{
 				antialias: false,
 				alpha: true,
 				powerPreference: 'high-performance',
 			}}
 			style={{ background: 'transparent' }}
+			onCreated={(state) => {
+				state.gl.domElement.addEventListener(
+					'webglcontextlost',
+					() => {
+						onContextLost();
+					},
+					false
+				);
+			}}
 		>
 			<Suspense fallback={null}>
 				<ParallaxRig>

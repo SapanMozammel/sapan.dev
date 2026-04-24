@@ -1,12 +1,14 @@
 import { Button } from '@/components/layout/common/Button';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
 
 const NotFound = async () => {
+	const locale = await getLocale();
+	setRequestLocale(locale);
 	const translateNotFound = await getTranslations('common.notFound');
 	const translateButtons = await getTranslations('common.buttons');
 
 	return (
-		<div className='relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4'>
+		<div className='relative flex min-h-dvh flex-col items-center justify-center overflow-hidden px-4'>
 			<div className='glow-blob-primary pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full' />
 			<div className='relative z-10 text-center'>
 				<p className='text-primary dark:text-success text-heading-xsmall tracking-[0.3em] uppercase'>{translateNotFound('label')}</p>

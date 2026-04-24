@@ -1,8 +1,12 @@
+import { fontList } from '@/app/fonts';
 import HtmlLocaleSync from '@/components/layout/common/HtmlLocaleSync';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { routing, RTL_LOCALES } from '@/i18n/routing';
+import Providers from '@/providers';
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import { getMessages, setRequestLocale } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 
 import type { Metadata } from 'next';
 
@@ -60,25 +64,40 @@ export const metadata: Metadata = {
 	},
 };
 
+export const generateStaticParams = () => routing.locales.map((locale) => ({ locale }));
+
 type LocaleLayoutProps = {
 	children: React.ReactNode;
 	params: Promise<{ locale: string }>;
 };
 
-const LocaleLayout = async ({ children }: LocaleLayoutProps) => {
+const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
+	const { locale } = await params;
+	if (!hasLocale(routing.locales, locale)) {
+		notFound();
+	}
+	setRequestLocale(locale);
+
+	const isRTL = RTL_LOCALES.includes(locale);
 	const messages = await getMessages();
 
 	return (
-		<NextIntlClientProvider messages={messages}>
-			<link rel='preconnect' href='https://challenges.cloudflare.com' />
-			<HtmlLocaleSync />
-			<div className='text-dark relative bg-white dark:bg-black dark:text-white'>
-				<Header />
-				<main className='relative -my-2.5 overflow-x-clip py-2.5'>{children}</main>
-				<Footer />
-				<div className="animate-noise pointer-events-none absolute inset-0 z-20 hidden bg-[url('/noise.png')] bg-repeat opacity-5 select-none lg:block dark:opacity-15" />
-			</div>
-		</NextIntlClientProvider>
+		<html lang={locale} dir={isRTL ? 'rtl' : 'ltr'} suppressHydrationWarning className='relative'>
+			<body className={`${fontList} ${isRTL ? 'font-arabic' : 'font-dm'}`} suppressHydrationWarning>
+				<Providers>
+					<NextIntlClientProvider messages={messages}>
+						<link rel='preconnect' href='https://challenges.cloudflare.com' />
+						<HtmlLocaleSync />
+						<div className='text-dark relative bg-white dark:bg-black dark:text-white'>
+							<Header />
+							<main className='relative -my-2.5 overflow-x-clip py-2.5'>{children}</main>
+							<Footer />
+							<div className="animate-noise pointer-events-none absolute inset-0 z-20 hidden bg-[url('/noise.png')] bg-repeat opacity-5 select-none lg:block dark:opacity-15" />
+						</div>
+					</NextIntlClientProvider>
+				</Providers>
+			</body>
+		</html>
 	);
 };
 
