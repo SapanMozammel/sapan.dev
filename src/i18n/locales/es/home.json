@@ -3,36 +3,7 @@
 		"srTitle": "Hola, soy Sapan Mozammel, desarrollador frontend fullstack.",
 		"headingPrefix": "Con cada línea de",
 		"headingSuffix": ", dando forma al futuro del desarrollo web.",
-		"description": "Con más de 5 años de experiencia dinámica creando aplicaciones con React, Redux, GraphQL, Next.js, Three.js, Node.js y muchas otras tecnologías, me enorgullece escribir código limpio y mantenible, siguiendo las mejores prácticas de ingeniería.",
-		"about": {
-			"tabs": {
-				"about": "Sobre mí",
-				"experience": "Experiencia",
-				"education": "Educación",
-				"skills": "Habilidades",
-				"languages": "Idiomas"
-			},
-			"photoCard": {
-				"name": "Sapan Mozammel",
-				"tagline": "Desarrollador frontend · Dhaka · Remoto",
-				"badge": "Disponible",
-				"imageAlt": "Retrato de Sapan Mozammel"
-			},
-			"availability": {
-				"pill": "Abierto a remoto · 30 días de preaviso"
-			},
-			"quickFacts": {
-				"experience": "Experiencia"
-			},
-			"languages": {
-				"levels": {
-					"Native": "Nativo",
-					"Professional": "Profesional",
-					"Conversational": "Conversacional",
-					"Basic": "Básico"
-				}
-			}
-		}
+		"description": "Con más de 5 años de experiencia dinámica creando aplicaciones con React, Redux, GraphQL, Next.js, Three.js, Node.js y muchas otras tecnologías, me enorgullece escribir código limpio y mantenible, siguiendo las mejores prácticas de ingeniería."
 	},
 	"technologies": {
 		"subtitle": "Tecnologías",

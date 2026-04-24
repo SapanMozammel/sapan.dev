@@ -1,6 +1,6 @@
 const StatsHalfCircle = () => {
 	return (
-		<div className='border-info/50 bg-light/70 pointer-events-none absolute top-[2.5em] -left-[7.5em] aspect-square h-[8.5em] rounded-full border-[0.05em] border-solid backdrop-blur select-none dark:bg-slate-900/70'>
+		<div className='border-info/50 bg-light/70 font-hg pointer-events-none absolute top-[2.5em] -left-[7.5em] aspect-square h-[8.5em] rounded-full border-[0.05em] border-solid backdrop-blur select-none dark:bg-slate-900/70'>
 			<div className='absolute inset-[0.2em]'>
 				<svg viewBox='-4 -4 148 148' xmlns='http://www.w3.org/2000/svg' className='absolute -inset-[1.1em] fill-none'>
 					<g filter='url(#half-wave-wrapper)'>
@@ -68,8 +68,8 @@ const StatsHalfCircle = () => {
 					</defs>
 				</svg>
 				<div className='absolute inset-0 flex flex-col items-center justify-center'>
-					<div className='text-dark/70 text-[2.25em] leading-none font-extrabold tracking-tighter dark:text-white/70'>6M+</div>
-					<div className='text-dark/60 mt-[0.25em] text-[0.6em] font-semibold tracking-widest uppercase dark:text-white/60'>Users Reached</div>
+					<div className='text-dark/70 text-[2.25em] leading-none font-bold tracking-tighter dark:text-white/70'>6M+</div>
+					<div className='text-dark/70 mt-[0.25em] text-[0.6em] font-bold tracking-widest uppercase dark:text-white/70'>Users Reached</div>
 				</div>
 			</div>
 		</div>

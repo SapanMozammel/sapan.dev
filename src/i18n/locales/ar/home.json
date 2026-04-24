@@ -3,36 +3,7 @@
 		"srTitle": "مرحبًا، أنا Sapan Mozammel، مطوّر واجهات أمامية متكامل.",
 		"headingPrefix": "مع كل سطر من",
 		"headingSuffix": "، أصوغ مستقبل تطوير الويب.",
-		"description": "بفضل خبرة ديناميكية تمتد لأكثر من خمس سنوات في بناء التطبيقات باستخدام React وRedux وGraphQL وNext.js وThree.js وNode.js وغيرها الكثير، أفخر بكتابة شيفرة نظيفة وقابلة للصيانة مع الالتزام بأفضل الممارسات الهندسية.",
-		"about": {
-			"tabs": {
-				"about": "نبذة",
-				"experience": "الخبرة",
-				"education": "التعليم",
-				"skills": "المهارات",
-				"languages": "اللغات"
-			},
-			"photoCard": {
-				"name": "سابان موزامل",
-				"tagline": "مطور واجهات · دكا · عمل عن بُعد",
-				"badge": "متاح",
-				"imageAlt": "صورة سابان موزامل"
-			},
-			"availability": {
-				"pill": "متاح للعمل عن بُعد · إشعار 30 يومًا"
-			},
-			"quickFacts": {
-				"experience": "الخبرة"
-			},
-			"languages": {
-				"levels": {
-					"Native": "لغة أم",
-					"Professional": "احترافي",
-					"Conversational": "محادثة",
-					"Basic": "أساسي"
-				}
-			}
-		}
+		"description": "بفضل خبرة ديناميكية تمتد لأكثر من خمس سنوات في بناء التطبيقات باستخدام React وRedux وGraphQL وNext.js وThree.js وNode.js وغيرها الكثير، أفخر بكتابة شيفرة نظيفة وقابلة للصيانة مع الالتزام بأفضل الممارسات الهندسية."
 	},
 	"technologies": {
 		"subtitle": "التقنيات",

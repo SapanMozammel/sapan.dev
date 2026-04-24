@@ -1,4 +1,4 @@
-import type { EducationItem } from '@/types/about';
+import type { Certification, EducationItem } from '@/types/about';
 
 export const EDUCATION_DATA: EducationItem[] = [
 	{
@@ -17,5 +17,32 @@ export const EDUCATION_DATA: EducationItem[] = [
 		location: 'Brahmanbaria, Bangladesh',
 		startDate: '2014',
 		endDate: '2017',
+	},
+];
+
+export const CERTIFICATIONS_DATA: Certification[] = [
+	{
+		id: 'ai-ml-bcc',
+		name: 'Artificial Intelligence & Machine Learning',
+		issuer: 'Bangladesh Computer Council, ICT Division',
+		year: 2021,
+	},
+	{
+		id: 'js-umich',
+		name: 'Interactivity with JavaScript',
+		issuer: 'University of Michigan',
+		year: 2020,
+	},
+	{
+		id: 'mobile-game-dev',
+		name: 'Advanced Mobile Game Development',
+		issuer: 'ICT Division',
+		year: 2017,
+	},
+	{
+		id: 'mobile-game-gfx',
+		name: 'Mobile Game Graphics Design',
+		issuer: 'ICT Division',
+		year: 2017,
 	},
 ];

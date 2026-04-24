@@ -14,3 +14,27 @@ export const getYearsOfExperience = (now: Date = new Date()): number => {
 	const monthAdjust = now.getMonth() < start.getMonth() ? -1 : 0;
 	return Math.max(0, diffYears + monthAdjust);
 };
+
+const parseYearMonth = (value: string): Date | null => {
+	const [yearStr, monthStr = '01'] = value.split('-');
+	const year = parseInt(yearStr as string, 10);
+	const month = parseInt(monthStr, 10) - 1;
+	if (Number.isNaN(year) || Number.isNaN(month)) return null;
+	return new Date(year, month, 1);
+};
+
+export const getRoleDuration = (start?: string, end?: string, now: Date = new Date()): string => {
+	if (!start) return '';
+	const startDate = parseYearMonth(start);
+	if (!startDate) return '';
+	const endDate = end ? (parseYearMonth(end) ?? now) : now;
+
+	const totalMonths = Math.max(0, (endDate.getFullYear() - startDate.getFullYear()) * 12 + (endDate.getMonth() - startDate.getMonth()));
+	const years = Math.floor(totalMonths / 12);
+	const months = totalMonths % 12;
+
+	if (years === 0 && months === 0) return '1m';
+	if (years === 0) return `${months}m`;
+	if (months === 0) return `${years}y`;
+	return `${years}y ${months}m`;
+};

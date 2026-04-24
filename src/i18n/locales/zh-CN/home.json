@@ -3,36 +3,7 @@
 		"srTitle": "你好，我是 Sapan Mozammel，一名全栈前端开发工程师。",
 		"headingPrefix": "用每一行",
 		"headingSuffix": "，塑造 Web 开发的未来。",
-		"description": "凭借 5 年以上使用 React、Redux、GraphQL、Next.js、Three.js、Node.js 等技术构建应用程序的丰富经验，我始终遵循工程最佳实践，以编写整洁、可维护的代码为荣。",
-		"about": {
-			"tabs": {
-				"about": "关于",
-				"experience": "经验",
-				"education": "教育",
-				"skills": "技能",
-				"languages": "语言"
-			},
-			"photoCard": {
-				"name": "Sapan Mozammel",
-				"tagline": "前端开发 · 达卡 · 远程",
-				"badge": "可入职",
-				"imageAlt": "Sapan Mozammel 的头像"
-			},
-			"availability": {
-				"pill": "接受远程 · 30 天通知期"
-			},
-			"quickFacts": {
-				"experience": "经验"
-			},
-			"languages": {
-				"levels": {
-					"Native": "母语",
-					"Professional": "专业",
-					"Conversational": "会话",
-					"Basic": "基础"
-				}
-			}
-		}
+		"description": "凭借 5 年以上使用 React、Redux、GraphQL、Next.js、Three.js、Node.js 等技术构建应用程序的丰富经验，我始终遵循工程最佳实践，以编写整洁、可维护的代码为荣。"
 	},
 	"technologies": {
 		"subtitle": "技术栈",

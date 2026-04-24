@@ -12,6 +12,7 @@ export type ExperienceItem = {
 	responsibilities?: string[];
 	technologies?: string[];
 	achievements?: string[];
+	tags?: string[];
 };
 
 export type TimelineItemProps = {

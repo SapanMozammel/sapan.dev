@@ -24,17 +24,17 @@ const AboutSidebar = memo<AboutSidebarProps>(({ tabs, activeTabId, onSelect, pro
 	);
 
 	return (
-		<div className='border-info/30 flex w-1/4 shrink-0 flex-col gap-[1em] border-e-[0.025em] border-solid bg-white/50 p-[1.25em] dark:bg-black/50'>
+		<div className='border-info/30 font-dm flex w-1/4 shrink-0 flex-col gap-[1em] border-e-[0.025em] border-solid bg-white/50 p-[1.25em] dark:bg-black/50'>
 			<div className='border-info/30 flex items-center gap-[0.75em] rounded-[0.4em] border-[0.025em] border-solid py-[0.75em] ps-[1em] pe-[0.8em] uppercase'>
 				<Logo className='size-[1.375em]' />
-				<div className='text-[1em]'>{profileName}</div>
-				<IconChevronDown className='ms-auto size-[1em]' />
+				<div className='font-hg text-[1em]'>{profileName}</div>
+				<IconChevronDown aria-hidden='true' className='ms-auto size-[1em]' />
 			</div>
 			<div role='tablist' aria-orientation='vertical' className='mt-[2em] flex grow flex-col gap-[1.25em]'>
 				{tabs.map((tab) => {
 					const isActive = tab.id === activeTabId;
 					const tabClasses = cn(
-						'group/tab flex w-full items-center gap-[0.75em] border-s-[0.25em] border-solid py-[0.75em] ps-[1em] pe-[0.6em] text-start uppercase cursor-pointer transition-colors',
+						'group/tab flex w-full items-center gap-[0.75em] border-s-[0.25em] border-solid py-[0.75em] ps-[1em] pe-[0.6em] text-start uppercase cursor-pointer transition-colors focus-visible:outline-primary focus-visible:outline-[0.1em] focus-visible:outline-offset-[-0.1em] dark:focus-visible:outline-success',
 						isActive ? 'from-info/30 rtl:to-info/30 border-info/50 bg-gradient-to-r to-transparent rtl:from-transparent' : 'border-transparent bg-transparent hover:bg-info/10'
 					);
 					return (

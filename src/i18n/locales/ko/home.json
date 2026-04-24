@@ -3,36 +3,7 @@
 		"srTitle": "안녕하세요, 풀스택 프론트엔드 개발자 Sapan Mozammel입니다.",
 		"headingPrefix": "한 줄 한 줄의",
 		"headingSuffix": "(으)로 웹 개발의 미래를 만들어 갑니다.",
-		"description": "React, Redux, GraphQL, Next.js, Three.js, Node.js를 비롯한 다양한 기술로 애플리케이션을 개발해 온 5년 이상의 경력을 갖추고 있습니다. 엔지니어링 모범 사례를 지키며 깔끔하고 유지보수하기 쉬운 코드를 작성하는 일에 자부심을 가지고 있습니다.",
-		"about": {
-			"tabs": {
-				"about": "소개",
-				"experience": "경력",
-				"education": "학력",
-				"skills": "스킬",
-				"languages": "언어"
-			},
-			"photoCard": {
-				"name": "Sapan Mozammel",
-				"tagline": "프론트엔드 개발자 · 다카 · 원격 근무 가능",
-				"badge": "채용 가능",
-				"imageAlt": "Sapan Mozammel 초상"
-			},
-			"availability": {
-				"pill": "원격 근무 가능 · 30일 사전 통지"
-			},
-			"quickFacts": {
-				"experience": "경력"
-			},
-			"languages": {
-				"levels": {
-					"Native": "모국어",
-					"Professional": "비즈니스",
-					"Conversational": "회화",
-					"Basic": "초급"
-				}
-			}
-		}
+		"description": "React, Redux, GraphQL, Next.js, Three.js, Node.js를 비롯한 다양한 기술로 애플리케이션을 개발해 온 5년 이상의 경력을 갖추고 있습니다. 엔지니어링 모범 사례를 지키며 깔끔하고 유지보수하기 쉬운 코드를 작성하는 일에 자부심을 가지고 있습니다."
 	},
 	"technologies": {
 		"subtitle": "기술 스택",

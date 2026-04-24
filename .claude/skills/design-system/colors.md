@@ -52,7 +52,8 @@ border-primary dark:border-success
 |---|---|---|
 | `bg-white` | `dark:bg-black` | Page body, cards, blog cards, containers, workflow, popover |
 | `bg-white/95` | `dark:bg-black/95` | Mobile nav sheet with backdrop-blur |
-| `bg-white/50` | `dark:bg-black/50` | Testimonial cards, sheet overlay |
+| `bg-white/50` | `dark:bg-black/50` | Testimonial cards, sheet overlay, About screen availability pill / tech chips |
+| `bg-white/30` | `dark:bg-black/30` | About screen panel cards, chips, PhotoCard inner frame |
 | `bg-secondary` | `dark:bg-secondary-900` | Accordion items |
 | `bg-secondary` | `dark:bg-dark` | Contact modal |
 | `bg-light` | `dark:bg-slate-900` | Hamburger button, social link buttons, sheet base |

@@ -8,6 +8,7 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
 		startDate: '2024-06',
 		location: 'Mirpur DOHS, Dhaka 1206, Bangladesh',
 		type: 'Full-time',
+		tags: ['v1 Architect'],
 		description: 'Startise is the dynamic parent company of WPDeveloper & many other subsidiaries which helps million to start, evolve and get success.',
 		responsibilities: [
 			'Developed and maintained the frontend for Templately landing pages, admin application, and WordPress plugin',
@@ -33,6 +34,7 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
 		endDate: '2024-05',
 		location: 'Wyoming, US (Remote)',
 		type: 'Part-time',
+		tags: ['AI Platform'],
 		description:
 			'TubeOnAI is an AI platform that summarizes and repurposes videos, podcasts, PDFs, and articles into clear, actionable content. As a Frontend Developer, I worked on the Next.js web app, building UI components, integrating APIs, and ensuring a smooth, responsive experience across devices.',
 		responsibilities: [
@@ -59,6 +61,7 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
 		endDate: '2024-05',
 		location: 'Mirpur DOHS, Dhaka 1206, Bangladesh',
 		type: 'Full-time',
+		tags: ['Re-architect', '6M+ Users'],
 		description: 'WPDeveloper is WordPress-based product company. With 6 million+ happy users from 180+ countries, the company is powering up WordPress web building experience.',
 		responsibilities: [
 			'Developed and maintained admin interfaces for multiple WordPress plugins including BetterDocs, NotificationX, SchedulePress, and BetterLinks',
@@ -85,6 +88,7 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
 		endDate: '2020-10',
 		location: 'Mirpur DOHS, Dhaka 1206, Bangladesh',
 		type: 'Internship',
+		tags: ['First Frontend Dev'],
 		description: 'Easy.Jobs is an AI Recruiting Software for Startups to Enterprises was never this fun. easy.jobs is your all-in-one recruitment SaaS tool for career page & ATS.',
 		responsibilities: [
 			'Developed the frontend for easy.jobs using Vue.js, Bootstrap, and SCSS',

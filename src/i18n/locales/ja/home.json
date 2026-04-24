@@ -3,36 +3,7 @@
 		"srTitle": "こんにちは、フルスタックフロントエンド開発者の Sapan Mozammel です。",
 		"headingPrefix": "一行一行のコードで、",
 		"headingSuffix": "Web 開発の未来を形づくります。",
-		"description": "React、Redux、GraphQL、Next.js、Three.js、Node.js をはじめとする多彩な技術を用いたアプリケーション開発において、5 年以上の経験を積んでまいりました。エンジニアリングのベストプラクティスに従い、クリーンで保守性の高いコードを書くことを常に大切にしています。",
-		"about": {
-			"tabs": {
-				"about": "プロフィール",
-				"experience": "経験",
-				"education": "学歴",
-				"skills": "スキル",
-				"languages": "言語"
-			},
-			"photoCard": {
-				"name": "Sapan Mozammel",
-				"tagline": "フロントエンド開発者 · ダッカ · リモート可",
-				"badge": "対応可",
-				"imageAlt": "Sapan Mozammel のポートレート"
-			},
-			"availability": {
-				"pill": "リモート可 · 30日前予告"
-			},
-			"quickFacts": {
-				"experience": "経験"
-			},
-			"languages": {
-				"levels": {
-					"Native": "母語",
-					"Professional": "ビジネスレベル",
-					"Conversational": "会話レベル",
-					"Basic": "初級"
-				}
-			}
-		}
+		"description": "React、Redux、GraphQL、Next.js、Three.js、Node.js をはじめとする多彩な技術を用いたアプリケーション開発において、5 年以上の経験を積んでまいりました。エンジニアリングのベストプラクティスに従い、クリーンで保守性の高いコードを書くことを常に大切にしています。"
 	},
 	"technologies": {
 		"subtitle": "技術スタック",

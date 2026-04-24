@@ -40,11 +40,11 @@ const AboutTabs = memo<AboutTabsProps>(({ tabs, profileName }) => {
 	if (!activeTab) return null;
 
 	return (
-		<div className='flex h-full w-full overflow-hidden rounded-[0.6em] text-[0.8vw] tracking-widest'>
+		<div className='font-dm flex h-full w-full overflow-hidden rounded-[0.6em] text-[0.8vw] tracking-widest'>
 			<AboutSidebar tabs={tabs} activeTabId={activeTabId} onSelect={setActiveTabId} profileName={profileName} onTabKeyDown={handleTabKeyDown} tabRefs={tabRefs} />
 			<div className='flex h-full grow flex-col'>
 				<div className='border-info/30 flex h-[3.5em] shrink-0 items-center border-b-[0.025em] border-solid px-[1.25em]'>
-					<div className='text-secondary-500 dark:text-secondary-500 text-[1em] tracking-widest uppercase'>{activeTab.label}</div>
+					<div className='text-secondary-500 font-hg dark:text-secondary-500 text-[1em] tracking-widest uppercase'>{activeTab.label}</div>
 				</div>
 				<div className='relative grow overflow-y-auto'>
 					{tabs.map((tab) => (
@@ -54,7 +54,7 @@ const AboutTabs = memo<AboutTabsProps>(({ tabs, profileName }) => {
 							id={`about-panel-${tab.id}`}
 							aria-labelledby={`about-tab-${tab.id}`}
 							hidden={tab.id !== activeTabId}
-							className={cn('h-full', tab.id === activeTabId ? 'block' : 'hidden')}
+							className={cn('min-h-full', tab.id === activeTabId ? 'block' : 'hidden')}
 						>
 							{tab.content}
 						</div>
