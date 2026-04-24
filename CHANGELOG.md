@@ -5,6 +5,13 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.2] - 2026-04-24
+
+### Fixed
+
+- **Experience section rendered blank on real mobile devices (Redmi Note 7 Pro reported)** — 0.3.1's half-float FBO probe couldn't catch Adreno 612 / Mali driver bugs where the GPU reports `EXT_color_buffer_float` support and `checkFramebufferStatus` returns `FRAMEBUFFER_COMPLETE`, but rendering to `RGBA16F` still produces empty output. Every particle sampled `(0, 0, 0)` and the canvas appeared blank. `ParticleBackground` now also gates the scene behind `window.matchMedia('(pointer: coarse)').matches` — the shared heuristic Tailwind uses for `pointer-coarse:`. Touch-first devices (phones, tablets) never mount `<ParticleScene>`; the CSS fallback takes over.
+- **Fallback glow was invisible on OLED dark mode** — with the scene skipped on mobile, the CSS fallback became the load-bearing visual, but the shared `glow-blob-primary` utility (`color-mix(in oklab, --color-primary 28%, transparent)` + 80px blur) resolved to `rgb(21, 22, 66)` at center on black and faded to pure black at the edges — below the perception threshold in ambient light. Also used the wrong token: design system swaps to `--color-success` (teal) in dark mode elsewhere (`text-primary dark:text-success`). `ParticleFallback` now inlines its own classes as `bg-primary/45 dark:bg-success/45` (indigo on light, teal on dark, at 45%) so changes don't affect the shared utility — `glow-blob-primary` stays at 28% for `/loading`, `/not-found`, `/error` where understated is correct.
+
 ## [0.3.1] - 2026-04-24
 
 ### Fixed

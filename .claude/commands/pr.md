@@ -33,6 +33,13 @@ EOF
 ```
 
 9. Report: PR URL, title, base branch, number of commits, files changed
+10. **Suggest a merge commit message** for when the PR is merged. Default to squash-merge style (matches the repo's one-commit-per-release convention on `main`). Provide:
+    - **Title** (under 72 chars, ending with ` (#<PR number>)` — what GitHub appends on squash):
+      - If the PR is a release (i.e., bumps `package.json` version + has a `CHANGELOG.md` entry), use `chore: release vX.Y.Z — <short descriptor> (#N)`
+      - Otherwise use the dominant commit `<type>` from the PR commits (`fix:`, `feat:`, `refactor:`, etc.) and a descriptive one-liner
+    - **Body** (2–4 sentences): the "why" summarized from the PR body. Name the specific problem solved or capability added; avoid restating bullets verbatim.
+    - **Alternative** (one line): a tighter title-only option (e.g., `chore: release vX.Y.Z (#N)`) for users who prefer minimal messages, OR a note about non-squash merge if history preservation matters.
+    - Present all three together at the end of the report, clearly labeled.
 
 **Rules:**
 - Never force-push
@@ -40,3 +47,4 @@ EOF
 - If the current branch IS `main`/`master`, ask the user to create a feature branch first
 - Include all commits in the analysis, not just the most recent one
 - Do not push if the user hasn't asked — ask first if unsure
+- The suggested merge message in step 10 is **advisory** — do NOT merge the PR yourself; the user decides when and how to merge
