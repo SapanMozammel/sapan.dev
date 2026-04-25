@@ -64,6 +64,24 @@ export const metadata: Metadata = {
 	},
 };
 
+const personJsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: 'Sapan Mozammel',
+	legalName: 'Mozammel Ali',
+	alternateName: 'Mozammel Ali',
+	url: 'https://sapan-dev.vercel.app',
+	image: 'https://sapan-dev.vercel.app/og-image.png',
+	jobTitle: 'Frontend Developer',
+	email: 'sapanmozammel@gmail.com',
+	address: {
+		'@type': 'PostalAddress',
+		addressLocality: 'Dhaka',
+		addressCountry: 'BD',
+	},
+	sameAs: ['https://github.com/SapanMozammel', 'https://linkedin.com/in/sapanmozammel', 'https://twitter.com/sapan_mozammel'],
+};
+
 export const generateStaticParams = () => routing.locales.map((locale) => ({ locale }));
 
 type LocaleLayoutProps = {
@@ -84,6 +102,7 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
 	return (
 		<html lang={locale} dir={isRTL ? 'rtl' : 'ltr'} suppressHydrationWarning className='relative'>
 			<body className={`${fontList} ${isRTL ? 'font-arabic' : 'font-dm'}`} suppressHydrationWarning>
+				<script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
 				<Providers>
 					<NextIntlClientProvider messages={messages}>
 						<link rel='preconnect' href='https://challenges.cloudflare.com' />

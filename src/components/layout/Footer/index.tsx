@@ -8,9 +8,9 @@ const Footer = async () => {
 			<div className='container-fluid'>
 				<div className='flex flex-col items-center justify-between gap-1 px-0 py-4 text-center sm:flex-row sm:py-6 sm:text-[unset]'>
 					<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-small tracking-wider'>
-						&copy; {new Date().getFullYear()} {translateFooter('copyright')}
+						&copy; {new Date().getFullYear()} Mozammel Ali (Sapan Mozammel). {translateFooter('copyright')}
 					</p>
-					<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-small tracking-wider'>{translateFooter('designedBy', { name: 'SapanMozammel' })}</p>
+					<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-small tracking-wider'>{translateFooter('designedBy', { name: 'Sapan Mozammel' })}</p>
 				</div>
 			</div>
 		</footer>

@@ -12,7 +12,8 @@ const SOCIAL_ICONS = {
 const AboutPanel = () => {
 	const years = getYearsOfExperience();
 
-	const quickFacts = [{ id: 'experience', label: 'Experience', value: `${years}+ years` }, ...ABOUT_DATA.quickFacts];
+	const [firstFact, ...restFacts] = ABOUT_DATA.quickFacts;
+	const quickFacts = [firstFact, { id: 'experience', label: 'Experience', value: `${years}+ years` }, ...restFacts];
 
 	return (
 		<div className='font-dm flex h-full flex-col gap-[1em] p-[1.25em]'>

@@ -172,7 +172,10 @@ const ContactAutoReply = ({ name = PREVIEW_PROPS.name }: Partial<ContactAutoRepl
 					Hello {name},
 				</Heading>
 				<Section>
-					<Text style={body}>Thank you so much for reaching out. Your message has safely arrived in my inbox, and I genuinely appreciate the time you took to write. I'll review it carefully and respond to you personally as soon as I'm able.</Text>
+					<Text style={body}>
+						Thank you so much for reaching out. Your message has safely arrived in my inbox, and I genuinely appreciate the time you took to write. I'll review it carefully and respond to you personally as
+						soon as I'm able.
+					</Text>
 					<Text style={body}>In the meantime, you're warmly welcome to explore more of my work:</Text>
 					<Link href='https://sapan-dev.vercel.app' style={button}>
 						View portfolio →
@@ -181,7 +184,9 @@ const ContactAutoReply = ({ name = PREVIEW_PROPS.name }: Partial<ContactAutoRepl
 				<Text style={signature}>— Sapan Mozammel</Text>
 				<Text style={signatureRole}>Frontend developer</Text>
 				<Hr style={divider} />
-				<Text style={footerText}>This is an automated confirmation, but please be assured your message has reached me directly. You're welcome to reply to this email at any time — it will come straight to my inbox.</Text>
+				<Text style={footerText}>
+					This is an automated confirmation, but please be assured your message has reached me directly. You're welcome to reply to this email at any time — it will come straight to my inbox.
+				</Text>
 				<Text style={footerMono}>sapan-dev.vercel.app · Dhaka, Bangladesh</Text>
 			</Container>
 		</Body>
