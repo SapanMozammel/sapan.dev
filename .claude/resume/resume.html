@@ -44,7 +44,7 @@
   .container {
     width: 210mm;
     margin: 0 auto;
-    padding: 9mm 11mm 7mm;
+    padding: 9mm 11mm 5mm;
   }
 
   /* ======================= HEADER ======================= */
@@ -53,7 +53,7 @@
     grid-template-columns: 1fr auto;
     gap: 18px;
     align-items: start;
-    margin-bottom: 18px;
+    margin-bottom: 8px;
   }
 
   .name {
@@ -64,6 +64,16 @@
     text-transform: uppercase;
     margin: 0 0 2px;
     line-height: 1.1;
+  }
+
+  .name-legal {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0;
+    text-transform: none;
+    margin-left: 2px;
+    vertical-align: 2px;
   }
 
   .role {
@@ -109,8 +119,8 @@
 
   /* ======================= SECTIONS ======================= */
   .section {
-    margin-top: 3px;
-    margin-bottom: 3px;
+    margin-top: 2px;
+    margin-bottom: 2px;
   }
 
   .section h2 {
@@ -240,6 +250,11 @@
     color: var(--ink);
   }
 
+  .project-item a.project-name {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
   .project-item .project-stack {
     color: var(--muted);
     font-style: italic;
@@ -288,13 +303,14 @@
   <!-- ============ HEADER ============ -->
   <header class="header">
     <div>
-      <h1 class="name">{{NAME}}</h1>
+      <h1 class="name">{{NAME}} <span class="name-legal">({{LEGAL_NAME}})</span></h1>
       <div class="role">{{ROLE}}</div>
       <div class="contact-row">
         <a href="mailto:{{EMAIL}}">{{EMAIL}}</a><span class="sep">|</span>
         <a href="https://{{WEBSITE}}">{{WEBSITE}}</a><span class="sep">|</span>
         <a href="https://{{LINKEDIN}}">{{LINKEDIN}}</a><span class="sep">|</span>
         <a href="https://{{GITHUB}}">{{GITHUB}}</a><span class="sep">|</span>
+        <a href="tel:{{PHONE_TEL}}">{{PHONE}}</a><span class="sep">|</span>
         <span>{{LOCATION}}</span>
       </div>
     </div>

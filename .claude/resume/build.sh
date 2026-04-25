@@ -7,7 +7,7 @@ set -e
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 RESUME_DIR="$ROOT/.claude/resume"
 IMG="$ROOT/public/images/me/sapan-headshot.jpg"
-OUT_PDF="$ROOT/Sapan-Mozammel-Frontend-Developer.pdf"
+OUT_PDF="$ROOT/public/resume/Sapan-Mozammel-Frontend-Developer-resume-3.pdf"
 
 echo "→ rendering template with content.py + base64 headshot..."
 IMG_B64=$(base64 -i "$IMG" | tr -d '\n')
@@ -41,8 +41,12 @@ def render_experience(entries):
 def render_projects(entries):
     out = []
     for p in entries:
+        if p.get("url"):
+            name_html = f'<a class="project-name" href="{p["url"]}">{p["name"]}</a>'
+        else:
+            name_html = f'<span class="project-name">{p["name"]}</span>'
         out.append(f'''        <div class="project-item">
-          <span class="project-name">{p["name"]}</span><span class="project-stack">{p["stack"]}</span>
+          {name_html}<span class="project-stack">{p["stack"]}</span>
           <span class="project-desc">{p["desc"]}</span>
         </div>''')
     return "\n".join(out)
@@ -73,7 +77,10 @@ with open(f"{RESUME_DIR}/resume.html", "r") as f:
 
 replacements = {
     "{{NAME}}": c.NAME,
+    "{{LEGAL_NAME}}": c.LEGAL_NAME,
     "{{ROLE}}": c.ROLE,
+    "{{PHONE}}": c.CONTACT["phone"],
+    "{{PHONE_TEL}}": c.CONTACT["phone"].replace(" ", ""),
     "{{EMAIL}}": c.CONTACT["email"],
     "{{WEBSITE}}": c.CONTACT["website"],
     "{{LINKEDIN}}": c.CONTACT["linkedin"],

@@ -13,10 +13,10 @@ content file and an HTML template.
 └── resume.html     ← template + CSS styling — edit only for design changes
 ```
 
-Generated on build (both gitignored in root `.gitignore`):
+Generated on build:
 
-- `Sapan-Mozammel-Frontend-Developer.pdf` — final PDF at project root
-- `.claude/resume/resume-built.html` — intermediate HTML with headshot inlined
+- `public/resume/Sapan-Mozammel-Frontend-Developer-resume-3.pdf` — final PDF, served by the website's download button (committed). Overwritten on each build — the v3 slot is the canonical "current resume" for this template. v1 and v2 archives in the same folder use older templates and stay untouched.
+- `.claude/resume/resume-built.html` — intermediate HTML with headshot inlined (gitignored)
 
 ## Build
 
@@ -118,7 +118,7 @@ Verify page count after any change:
 ```bash
 python3 -c "
 import re
-with open('Sapan-Mozammel-Frontend-Developer.pdf','rb') as f:
+with open('public/resume/Sapan-Mozammel-Frontend-Developer-resume-3.pdf','rb') as f:
     print('Pages:', len(re.findall(rb'/Type\s*/Page[^s]', f.read())))
 "
 ```
