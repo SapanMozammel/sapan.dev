@@ -4,6 +4,7 @@ export const ABOUT_DATA: AboutData = {
 	bio: 'Product-minded frontend developer shipping React, Next.js, and TypeScript applications for SaaS, AI, and developer-tool companies. Experienced designing v1 frontend foundations, re-architecting complex admin panels, and integrating REST/GraphQL APIs with strict typing, accessibility, and performance discipline.',
 	availability: 'Available · Full-time Remote · EOR / Contractor-friendly · 30-day notice',
 	quickFacts: [
+		{ id: 'legalName', label: 'Legal name', value: 'Mozammel Ali' },
 		{ id: 'location', label: 'Location', value: 'Dhaka, Bangladesh' },
 		{ id: 'timezone', label: 'Timezone', value: 'UTC +6' },
 		{ id: 'reach', label: 'Reach', value: '6M+ users · 180+ countries' },

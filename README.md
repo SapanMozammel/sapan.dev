@@ -10,15 +10,16 @@ Built with Next.js 16 App Router, React 19, TypeScript, Tailwind CSS v4, and a f
 
 ## Features
 
-- **Multi-section landing page** — Hero, Technologies, Portfolio, Experience, Testimonials, Workflow, Blog, FAQ, CTA
-- **Blog** — Article listing and individual article pages
-- **Contact modal** — Redux-managed form with validation
+- **Multi-section landing page** — Hero (with interactive About panel), Technologies, Portfolio, Experience, Testimonials, Workflow, Blog, FAQ, CTA
+- **Blog** — 23 articles with article listing and individual article pages
+- **Contact form with real email delivery** — Resend-backed API route, gated by honeypot + Upstash rate limit (3 req/10 min per IP) + Cloudflare Turnstile, with auto-reply emails
+- **Resume PDF** — One-click download from the Hero CTA; reproducible build pipeline at `.claude/resume/` (Python content + HTML template + Chrome headless print)
 - **Internationalization** — 16 locales via next-intl, RTL support for Arabic
 - **Dark mode** — System-aware, toggleable via next-themes
 - **Animations** — GSAP ScrollTrigger, Framer Motion, Three.js / R3F particle system
 - **Fully typed** — TypeScript strict mode, no `any`
 - **Tested** — 26 Vitest test suites across components, store, and utilities
-- **SEO** — Dynamic sitemap, robots.txt, Open Graph, Twitter card metadata
+- **SEO** — Dynamic sitemap, robots.txt, Open Graph, Twitter card metadata, Schema.org `Person` JSON-LD
 
 ---
 
@@ -34,6 +35,8 @@ Built with Next.js 16 App Router, React 19, TypeScript, Tailwind CSS v4, and a f
 | i18n | next-intl — 16 locales |
 | Theme | next-themes (`.dark` class strategy) |
 | UI | shadcn/ui (new-york) · Radix UI · Tabler Icons |
+| Email | Resend (transactional + auto-reply) |
+| Anti-spam | Cloudflare Turnstile + Upstash Redis rate limit |
 | Testing | Vitest · React Testing Library |
 | Deployment | Vercel |
 
@@ -58,10 +61,20 @@ pnpm run dev
 
 ## Environment Variables
 
+See [.env.example](.env.example) for the full template.
+
 | Variable | Description |
 |---|---|
 | `NEXT_PUBLIC_SITE_URL` | Public URL of the site — used for sitemap, canonical URLs, and OG tags |
 | `ANALYZE` | Set to `true` to enable bundle analysis during build |
+| `RESEND_API_KEY` | Resend API key for contact-form email delivery |
+| `CONTACT_TO_EMAIL` | Inbox where contact submissions are sent |
+| `CONTACT_FROM_EMAIL` | Sender address used by Resend (must be a verified domain) |
+| `CONTACT_REPLY_TO` | Reply-to header on outbound auto-reply emails |
+| `UPSTASH_REDIS_REST_URL` | Upstash Redis URL for contact-form rate limiting |
+| `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis token (server-only) |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Cloudflare Turnstile public site key |
+| `TURNSTILE_SECRET_KEY` | Cloudflare Turnstile secret key (server-only) |
 
 ---
 
@@ -127,9 +140,23 @@ Tests live in `tests/` (outside Next.js compilation). 26 test files cover compon
 
 ---
 
+## Resume Build
+
+The downloadable resume PDF is generated from a content/template split at [.claude/resume/](.claude/resume/) — `content.py` holds all the text, `resume.html` is the template, and `build.sh` renders to a one-page A4 PDF via Chrome headless. After editing content, run from the project root:
+
+```bash
+bash .claude/resume/build.sh
+```
+
+Output overwrites `public/resume/Sapan-Mozammel-Frontend-Developer-resume-3.pdf` in place. v1 and v2 archives in the same folder use older templates and stay untouched. Full pipeline notes in [.claude/resume/README.md](.claude/resume/README.md).
+
+---
+
 ## Documentation
 
 | Document | Description |
 |---|---|
 | [Development Guide](docs/DEVELOPMENT_GUIDE.md) | Workflow, scripts, formatter setup, troubleshooting |
+| [Resume Build System](.claude/resume/README.md) | How the downloadable resume PDF is rendered |
+| [CHANGELOG](CHANGELOG.md) | Release history (Keep a Changelog format) |
 | [CLAUDE.md](CLAUDE.md) | Claude Code conventions for this repo |

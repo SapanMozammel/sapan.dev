@@ -15,6 +15,12 @@ const PhotoCard = () => {
 					className='object-cover object-top'
 				/>
 			</div>
+			<div className='pointer-events-auto mt-[1em] flex w-full flex-col gap-[0.25em] px-[0.5em] pb-[0.25em] select-text'>
+				<h3 className='font-hg text-dark text-[1.05em] leading-tight dark:text-white'>
+					Sapan Mozammel <span className='text-secondary-500 dark:text-secondary-400'>(Mozammel Ali)</span>
+				</h3>
+				<p className='text-secondary-500 text-[0.65em] tracking-widest uppercase'>Frontend Developer</p>
+			</div>
 		</div>
 	);
 };

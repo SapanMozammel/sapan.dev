@@ -10,9 +10,11 @@ Inline emphasis uses <strong>...</strong>. Use &amp; for literal ampersands.
 # --------------------------------------------------------------------------
 
 NAME = "Sapan Mozammel"
+LEGAL_NAME = "Mozammel Ali"
 ROLE = "Frontend Developer"
 
 CONTACT = {
+    "phone": "+88 01627134085",
     "email": "sapanmozammel@gmail.com",
     "website": "sapan-dev.vercel.app",
     "linkedin": "linkedin.com/in/sapanmozammel",
@@ -25,7 +27,7 @@ CONTACT = {
 # --------------------------------------------------------------------------
 
 SUMMARY = (
-    "Product-minded frontend developer with <strong>5+ years</strong> shipping "
+    "Product-minded frontend developer with <strong>6+ years</strong> shipping "
     "React, Next.js, and TypeScript applications for SaaS, AI, and developer-tool "
     "companies serving <strong>6M+ users across 180+ countries</strong>. "
     "Experienced designing v1 frontend foundations, re-architecting complex admin "
@@ -93,6 +95,7 @@ EXPERIENCE = [
 PROJECTS = [
     {
         "name": "sapan-dev.vercel.app",
+        "url": "https://sapan-dev.vercel.app",
         "stack": "— Next.js · React 19 · Three.js",
         "desc": "Portfolio, 16 locales incl. RTL Arabic, server-component-first.",
     },

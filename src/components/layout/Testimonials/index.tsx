@@ -8,6 +8,10 @@ import SectionTitle from '../common/SectionTitle';
 import TestimonialBackground from './TestimonialBackground';
 import TestimonialCard from './TestimonialCard';
 
+// Distinct prime-stride permutations so the two rows feel shuffled, not mirrored.
+const TOP_ROW = TESTIMONIAL_LIST.map((_, i, arr) => arr[(i * 5) % arr.length]!);
+const BOTTOM_ROW = TESTIMONIAL_LIST.map((_, i, arr) => arr[(9 + i * 7) % arr.length]!);
+
 const Testimonials = memo(() => {
 	const translate = useTranslations('home.testimonials');
 
@@ -18,12 +22,12 @@ const Testimonials = memo(() => {
 					<SectionTitle className='container' subtitle={translate('subtitle')} title={translate('title')} watermark='Testimonials' />
 					<div className='relative z-2 flex w-full flex-col gap-4 overflow-hidden p-px md:gap-6 lg:gap-8'>
 						<Marquee pauseOnHover speed={60}>
-							{TESTIMONIAL_LIST.map((testimonial, index) => (
+							{TOP_ROW.map((testimonial, index) => (
 								<TestimonialCard key={index} testimonial={testimonial} />
 							))}
 						</Marquee>
 						<Marquee pauseOnHover speed={60} direction='right'>
-							{TESTIMONIAL_LIST.map((testimonial, index) => (
+							{BOTTOM_ROW.map((testimonial, index) => (
 								<TestimonialCard key={index} testimonial={testimonial} />
 							))}
 						</Marquee>
