@@ -5,8 +5,8 @@ export const BLOG_POSTS: BlogPost[] = [
 		slug: 'react-compiler-auto-memoization',
 		title: 'React Compiler: Write Code, Skip the Optimization',
 		excerpt:
-			'React 19 ships with a compiler that auto-memoizes your components. No more useMemo, useCallback, or React.memo boilerplate for most cases. Here is how the compiler works, when to trust it, and the edge cases that still need manual intervention.',
-		thumbnail: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80',
+			'Notes from running the React Compiler on the BetterDocs admin (a 4-year-old codebase with ~80 components and useMemo scattered everywhere) and starting clean with it on xCloud v1. What broke, what did not, and where I still reach for manual memoization.',
+		thumbnail: 'https://images.unsplash.com/photo-1763568258244-9d5aa9c3ce45?w=800&q=80',
 		category: 'React',
 		tags: ['React', 'React Compiler', 'Performance', 'Optimization'],
 		readTime: 7,
@@ -15,7 +15,11 @@ export const BLOG_POSTS: BlogPost[] = [
 		content: [
 			{
 				type: 'paragraph',
-				text: 'For a decade, writing performant React has meant strategically sprinkling useMemo, useCallback, and React.memo across your codebase. The React Compiler changes that. It reads your components, understands what depends on what, and inserts memoization automatically at build time.',
+				text: 'Halfway through re-architecting the BetterDocs admin panel, I caught myself doing something silly — wrapping a calculation in useMemo, then a few weeks later removing the useMemo because the dependency check turned out to cost more than the calculation it was guarding. That kind of guesswork is what the React Compiler is meant to end. It reads your components, figures out what depends on what, and inserts memoization at build time.',
+			},
+			{
+				type: 'paragraph',
+				text: 'I have used it on two pretty different codebases now: BetterDocs admin (4 years old, ~80 components, useMemo grown organically across the surface) and xCloud v1 (greenfield, compiler on from day one). What follows is a mix of how the compiler works and what actually happened when I turned it on.',
 			},
 			{
 				type: 'heading',
@@ -23,7 +27,7 @@ export const BLOG_POSTS: BlogPost[] = [
 			},
 			{
 				type: 'paragraph',
-				text: 'Manual memoization has two failure modes. Either you over-memoize — wrapping everything in useMemo and paying the cost of equality checks that never save work — or you under-memoize and miss the re-renders that actually matter. Both mistakes are invisible without profiling.',
+				text: 'Manual memoization has two failure modes. Over-memoize and you pay for equality checks that never save work — I have watched the React Profiler in Chrome literally show useMemo calls eating more frame time than the calculations they were guarding. Under-memoize and you ship re-renders nobody notices until a designer says the panel feels sluggish during typing. Both mistakes are invisible without profiling, and almost nobody profiles.',
 			},
 			{
 				type: 'code',
@@ -115,15 +119,23 @@ export default {
 			{
 				type: 'callout',
 				variant: 'tip',
-				text: 'Start with annotation mode on a large codebase. Add "use memo" directives to hot paths first, measure the win, then flip to full compilation once you have confidence.',
+				text: "On an older codebase, start with annotation mode. Add 'use memo' directives to your hot paths first (in our case the BetterDocs analytics dashboard, which renders ApexCharts on every state change), measure the win, then flip to full compilation once the rest of the codebase is clean.",
 			},
 			{
 				type: 'heading',
-				text: 'When to Still Memoize Manually',
+				text: 'What Broke When I Turned It On',
 			},
 			{
 				type: 'paragraph',
-				text: 'The compiler handles the common case beautifully, but there are still reasons to reach for manual memoization. Expensive computations that should be cached across renders of different components, stable references for external APIs (IntersectionObserver, ResizeObserver), and third-party libraries that compare props by identity all still benefit from explicit useMemo.',
+				text: 'On a fresh build with the compiler enabled, around 12 of our ~80 BetterDocs admin components bailed out — the compiler refused to process them. The eslint-plugin-react-compiler linter had been quietly flagging those for weeks; the bailouts were mostly conditional hook calls and a few places where we were mutating data received from React Query (an old pattern from before we knew better). About half a day to fix, and the bailout count dropped to two — both intentional, around third-party library boundaries. xCloud v1 had zero bailouts on day one, which is the upside of starting clean.',
+			},
+			{
+				type: 'heading',
+				text: 'When I Still Memoize Manually',
+			},
+			{
+				type: 'paragraph',
+				text: 'With the compiler on, there are still a few cases where I reach for explicit useMemo. ApexCharts instances on the BetterDocs analytics dashboard re-render heavily on prop identity, so the chart factory has to be memoized at the component boundary. IntersectionObservers in infinite-scroll lists need stable callbacks to avoid teardown-and-reattach cycles. And a couple of older third-party form libraries on the Templately admin compare props by reference — explicit memoization stays in those spots.',
 			},
 			{
 				type: 'heading',
@@ -131,15 +143,15 @@ export default {
 			},
 			{
 				type: 'paragraph',
-				text: 'React DevTools shows a compiled badge on components the compiler has processed. If a component is mysteriously absent, either it violated the Rules of React or the compiler could not statically analyze it. The react-compiler-healthcheck CLI reports which files compiled successfully across your project.',
+				text: 'React DevTools shows a compiled badge on components the compiler has processed. If a component is mysteriously absent, either it violated the Rules of React or the compiler could not statically analyze it. The react-compiler-healthcheck CLI reports which files compiled successfully across your project — useful for tracking bailout count down over time.',
 			},
 			{
 				type: 'heading',
-				text: 'Conclusion',
+				text: 'Where I Have Landed',
 			},
 			{
 				type: 'paragraph',
-				text: 'The React Compiler represents a fundamental shift — from optimization being a manual craft to being a solved problem at the framework level. For new projects, enable it from day one and delete the useMemo/useCallback boilerplate. For existing projects, adopt it incrementally and treat the linter warnings as your migration guide.',
+				text: 'On new projects (xCloud v1 is the first), the compiler is on day one and I do not write useMemo or useCallback at all. On older codebases like BetterDocs, the migration is iterative — fix the lint violations, switch to annotation mode, profile the hot paths, then flip to full compilation. Either way, the era of guessing about memoization is over for me. That is the more important shift, more than any specific bundle-size win.',
 			},
 		],
 	},
@@ -147,14 +159,18 @@ export default {
 		slug: 'view-transitions-api-native-page-animations',
 		title: 'View Transitions API: Native Page Animations Finally Work',
 		excerpt:
-			'The View Transitions API turns what used to require entire animation libraries into a single CSS property. Here is how to use it for both same-document and cross-document transitions, including the Next.js App Router integration.',
-		thumbnail: 'https://images.unsplash.com/photo-1618761714954-0b8cd0026356?w=800&q=80',
+			'Notes from rebuilding sapan.dev with the View Transitions API for navigation across 16 locales. Replaced an entire Framer Motion orchestration layer with a CSS file, found one annoying flash on RTL Arabic, and walked away with a much smaller bundle.',
+		thumbnail: 'https://images.unsplash.com/photo-1623282033815-40b05d96c903?w=800&q=80',
 		category: 'CSS',
 		tags: ['CSS', 'Web APIs', 'Animation', 'UX'],
 		readTime: 6,
 		publishedAt: '2026-04-05',
 		featured: true,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'Earlier this year I rebuilt sapan.dev to use the View Transitions API for navigation across 16 locales. The previous version used Framer Motion variants to coordinate layout shifts between routes — it worked, but every route change had to be orchestrated by hand and the bundle was paying for it. Switching to View Transitions replaced roughly 200 lines of motion-orchestration code with a small CSS file.',
+			},
 			{
 				type: 'paragraph',
 				text: 'For years, smooth page transitions on the web required frameworks like Framer Motion or SPA libraries that hijack navigation. The View Transitions API changes that. It is a native browser API that captures the old DOM, renders the new one, and animates between them — declaratively, with CSS.',
@@ -289,7 +305,7 @@ export default {
 			},
 			{
 				type: 'paragraph',
-				text: 'The View Transitions API eliminates an entire category of JavaScript animation work. For hero image morphs, page transitions, and tab switches, you now write CSS instead of orchestrating Framer Motion variants. The library footprint drops, the code becomes more declarative, and the animations become more performant. This is one of the best browser additions in years.',
+				text: 'Rebuilding sapan.dev with View Transitions saved me an entire animation library and made the portfolio feel snappier. The Framer Motion variants for route transitions are deleted, the bundle is smaller, and animations run on the compositor instead of the main thread. One caveat worth flagging: getting it to feel right with RTL Arabic took a couple of tries — view-transition-name on a flex-reversed layout produced a horizontal flash that I eventually fixed by scoping view-transition-name only to LTR locales. For most projects though, this is a clear win and one of the best browser additions in years.',
 			},
 		],
 	},
@@ -297,14 +313,18 @@ export default {
 		slug: 'modern-css-2026-scope-has-container-queries',
 		title: 'Modern CSS in 2026: @scope, :has(), and Container Queries',
 		excerpt:
-			'CSS in 2026 looks different from CSS in 2020. Parent selectors work, style isolation is native, and components can query their own size instead of the viewport. Here are the modern features I reach for in every new project.',
-		thumbnail: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80',
+			'Modern CSS features I now reach for in every project — and the specific moments on the Templately admin and sapan.dev where each one replaced a chunk of JavaScript or some BEM gymnastics that had been there for years.',
+		thumbnail: 'https://images.unsplash.com/photo-1517134191118-9d595e4c8c2b?w=800&q=80',
 		category: 'CSS',
 		tags: ['CSS', 'Modern CSS', 'Container Queries', ':has()'],
 		readTime: 8,
 		publishedAt: '2026-03-28',
 		featured: false,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'On the Templately admin redesign last year, I deleted a class-toggling helper that had been carried since the original v1. It existed only because CSS could not select a parent based on its descendants. Then :has() shipped, and the whole helper became three CSS rules. Most of the modern CSS features below have a story like that — they replace something we used to write JavaScript or BEM gymnastics for.',
+			},
 			{
 				type: 'paragraph',
 				text: 'Modern CSS has quietly absorbed most of what we used to need JavaScript for. Parent selectors, style scoping, and container-aware layouts are no longer roadmap items — they are shipping in every major browser. If your CSS still looks like 2020, you are writing more code than you need to.',
@@ -494,20 +514,36 @@ html:has(input[name="theme"]:checked) {
 					'Anchor positioning — universal support since early 2026',
 				],
 			},
+			{
+				type: 'heading',
+				text: 'Where These Showed Up On Real Projects',
+			},
+			{
+				type: 'paragraph',
+				text: 'Across sapan.dev and the Templately admin redesign, every one of these features pulled its weight. :has() killed off the class-toggling helper. @scope let me drop a BEM convention the team had been carrying for years. Container queries finally let card components stop checking the viewport for layout decisions. Native nesting let me delete Sass from sapan.dev entirely — the build pipeline is one less step. If your CSS still looks like 2020, it is more verbose than it needs to be.',
+			},
 		],
 	},
 	{
 		slug: 'astro-islands-architecture-mpa-return',
 		title: 'Astro Islands and the Return of the MPA',
 		excerpt:
-			'For years the industry assumed every web app should be a SPA. Astro bets the opposite — start with static HTML, hydrate only the interactive islands. Here is what the islands model gets right and when to choose it over Next.js.',
-		thumbnail: 'https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=800&q=80',
+			'Spent a weekend rebuilding the static parts of sapan.dev in Astro to see what the islands model actually feels like. TTI dropped from ~600ms to ~150ms, the JS bundle went from 240KB to 11KB — and there were a few sharp edges that made me appreciate what Next.js handles for free.',
+		thumbnail: 'https://images.unsplash.com/photo-1614028480987-73081d86a38b?w=800&q=80',
 		category: 'Tooling',
 		tags: ['Astro', 'Architecture', 'Islands', 'Performance'],
 		readTime: 7,
 		publishedAt: '2026-03-22',
 		featured: false,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'Out of curiosity, I spent a weekend rebuilding the static parts of sapan.dev in Astro. The portfolio is built in Next.js 16 with App Router, but most pages are content-heavy — bio, project lists, the blog index — with only a handful of truly interactive surfaces (theme switcher, language switcher, contact modal). I wanted to see whether the islands model would meaningfully change anything in that shape of project.',
+			},
+			{
+				type: 'paragraph',
+				text: 'The numbers were striking on the landing page: TTI dropped from around 600ms to 150ms, and the JS bundle went from 240KB to 11KB. Most of that delta came from React not shipping at all on pages where nothing was actually interactive.',
+			},
 			{
 				type: 'paragraph',
 				text: 'Every time a web framework trend cycles, the underlying question is the same — where does the work happen, server or client? Astro takes a pragmatic position. Most pages are mostly static. Ship static HTML. Hydrate only the components that actually need interactivity. Everything else stays HTML.',
@@ -637,7 +673,11 @@ export const collections = { blog };`,
 			},
 			{
 				type: 'paragraph',
-				text: 'Islands architecture is not a silver bullet — it is a deliberate tradeoff. You give up the seamless SPA feel in exchange for dramatically less JavaScript and faster initial loads. For content-first sites, that tradeoff is almost always worth it. Astro is the cleanest expression of this philosophy available today.',
+				text: 'I am not migrating sapan.dev to Astro full-time. The i18n story for 16 locales is a lot smoother in Next.js (next-intl is doing real work there), and React Server Components in App Router cover most of what islands solve for me without leaving the React mental model. The sharp edges I hit in the weekend port were mostly around the i18n routing and around React Query for the contact form — both solvable, neither delightful.',
+			},
+			{
+				type: 'paragraph',
+				text: 'But for content-heavy sites where the interactive parts are isolated — a documentation site, a marketing landing page, a single-purpose blog — Astro is genuinely better than what we are doing in Next.js right now. Worth knowing about, even if it is not your daily framework.',
 			},
 		],
 	},
@@ -645,14 +685,18 @@ export const collections = { blog };`,
 		slug: 'biome-rust-toolchain-eslint-prettier',
 		title: 'Biome: The Rust Toolchain Replacing ESLint and Prettier',
 		excerpt:
-			'Biome is a single tool that replaces ESLint, Prettier, and several other ecosystem tools with one Rust binary that runs 20-100x faster. Here is how it compares, what it gets right, and when it is not yet ready.',
-		thumbnail: 'https://images.unsplash.com/photo-1555099962-4199c345e5dd?w=800&q=80',
+			'Migrated sapan.dev from ESLint + Prettier to Biome over a weekend — pre-commit hooks went from ~12s to under a second, and the config dropped from three files to one. Notes on what migrated cleanly and what I had to keep ESLint for.',
+		thumbnail: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80',
 		category: 'Tooling',
 		tags: ['Biome', 'Tooling', 'ESLint', 'Prettier', 'Rust'],
 		readTime: 7,
 		publishedAt: '2026-03-18',
 		featured: false,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'On sapan.dev, the pre-commit hook was getting irritating. ESLint + Prettier + import sort across roughly 200 TypeScript files took about 12 seconds — long enough that I started skipping the hook on small commits, which is exactly the wrong direction. Migrated to Biome over a weekend and the same hook now runs in under a second. Both my git commit reflexes and my CI minutes are happier.',
+			},
 			{
 				type: 'paragraph',
 				text: 'ESLint and Prettier have defined JavaScript tooling for nearly a decade. Both are written in JavaScript. On a medium codebase, a full lint + format pass can take 20 seconds. Biome, written in Rust, does the same work in 200 milliseconds. That 100x speedup changes what tooling you can run in a pre-commit hook and what feedback loops you can afford.',
@@ -796,7 +840,7 @@ npx biome check . --reporter json > biome.json`,
 			},
 			{
 				type: 'paragraph',
-				text: 'Biome represents the end of the JavaScript-in-JavaScript-tooling era. For 80% of projects, it is already the right default — faster, simpler, and with less dependency management. For the remaining 20%, watch the monthly releases. The gap to full ESLint parity closes every version.',
+				text: 'On sapan.dev I kept ESLint around for two things Biome does not yet cover well: the next-intl plugin (locale-key checks) and a couple of project-specific custom rules. Biome handles formatting and 90% of linting; ESLint runs as a smaller second pass on those holdouts. Slightly less tidy than I would like, but the speed win is so big that the hybrid setup is still a net improvement. For most projects Biome is already the right default — faster, simpler, less dependency management. The remaining gaps close every monthly release.',
 			},
 		],
 	},
@@ -804,14 +848,18 @@ npx biome check . --reporter json > biome.json`,
 		slug: 'edge-computing-frontend-cloudflare-workers',
 		title: 'Edge Computing for Frontend Developers',
 		excerpt:
-			'The edge is not just CDN caching anymore. Cloudflare Workers, Vercel Edge Functions, and Deno Deploy run your code in hundreds of cities with cold starts under 5ms. Here is what runs at the edge, what cannot, and when it is worth it.',
-		thumbnail: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80',
+			'On sapan.dev the locale-detection logic lives at Vercel Edge — sub-30ms response from anywhere on the planet. On TubeOnAI we used Cloudflare Workers for auth-token validation. Notes on what genuinely belongs at the edge and what I have learned the hard way to keep regional.',
+		thumbnail: 'https://images.unsplash.com/photo-1719253480609-579ad1622c65?w=800&q=80',
 		category: 'Performance',
 		tags: ['Edge', 'Cloudflare', 'Workers', 'Performance', 'Deployment'],
 		readTime: 8,
 		publishedAt: '2026-03-14',
 		featured: false,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'sapan.dev serves traffic from 16 locales. The first time I deployed it as a regional Vercel function, a friend in Singapore reported the locale redirect taking 600ms — not the page render, just the redirect deciding which language to serve. After moving the locale-detection middleware to Vercel Edge, the same redirect runs in under 30ms anywhere. That is the kind of win edge runtimes give you on frontend-shaped workloads.',
+			},
 			{
 				type: 'paragraph',
 				text: 'Traditional serverless ran in a handful of cloud regions. Cold starts took 500ms. Your Tokyo user talked to an us-east-1 server. Edge computing fixes this by running your code in every major city on Earth. Cold starts measured in milliseconds. Round-trip latency under 50ms for nearly every user. For frontend-heavy workloads, the win is substantial.',
@@ -961,7 +1009,7 @@ export default {
 			},
 			{
 				type: 'paragraph',
-				text: 'Edge computing for frontend developers is less about replacing your backend and more about collapsing a layer. Auth, routing, personalization, and small API calls run closer to the user with lower latency and lower cost. Combined with static HTML and islands architecture, the edge tier makes modern web apps feel faster than they have any right to.',
+				text: 'On TubeOnAI we tried running auth-token verification at the edge using Cloudflare Workers — straightforward win, the validation is fast and stateless. We also tried doing the AI summarization itself there, briefly, and that was a mistake. Long-running compute, big SDK trees, and direct database access all want a regional function. The pattern that worked for us: edge for auth, redirects, locale routing, simple personalization; regional for anything heavy. Edge is less about replacing your backend and more about collapsing the auth/routing layer closer to the user. Done right, the experience feels noticeably snappier than it has any right to.',
 			},
 		],
 	},
@@ -969,14 +1017,18 @@ export default {
 		slug: 'branded-types-typescript-domain-modeling',
 		title: 'Branded Types: Domain Modeling with TypeScript',
 		excerpt:
-			'A UserId and a PostId are both strings, but mixing them is a bug. Branded types let TypeScript catch these domain errors at compile time without runtime overhead. Here is the pattern and when to reach for it.',
-		thumbnail: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80',
+			'On the Templately admin we had four different ID types passed around as strings — TemplateId, CategoryId, UserId, OrganizationId — and the bugs that came from mixing them were hard to spot in code review. Branded types fixed that. Notes on the pattern and when it actually pays off.',
+		thumbnail: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&q=80',
 		category: 'TypeScript',
 		tags: ['TypeScript', 'Types', 'Domain Modeling', 'Type Safety'],
 		readTime: 6,
 		publishedAt: '2026-03-05',
 		featured: false,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'On the Templately admin codebase, we hit this bug at least three times: a function expecting a TemplateId got passed a CategoryId. Both are strings. TypeScript happily allowed it. The actual error only showed up at runtime when the API returned an empty result and the UI silently rendered an empty state. Each time, the fix was the same — add a runtime check, write a regression test, move on. Branded types eliminated the whole class.',
+			},
 			{
 				type: 'paragraph',
 				text: 'The TypeScript type system is structural — two types with the same shape are interchangeable. That is usually a feature, but it becomes a liability when different concepts happen to share the same primitive. A UserId and a PostId are both strings. A USD amount and a EUR amount are both numbers. Mixing them up is a bug TypeScript happily lets through.',
@@ -1117,21 +1169,26 @@ const mixed = price + eur; // ❌ Type error`,
 			},
 			{
 				type: 'paragraph',
-				text: 'Branded types are one of those patterns that feel awkward for the first day and liberating for the next five years. They move entire classes of bugs from runtime to compile time, document your domain in the type system, and cost zero at runtime. For any codebase large enough to have multiple ID types or units, they pay for themselves quickly.',
+				text: 'On the Templately admin, after we branded TemplateId, CategoryId, UserId, and OrganizationId, the ID-confusion bugs stopped recurring. We did not catch a single new instance in the next six months — the compiler caught them at PR time instead. The friction at the system boundaries was real (every API response had to go through a constructor) but the friction is the point: it forces validation at the edges. Branded types feel awkward for the first day and liberating for the next several years. For any codebase large enough to have multiple ID types or unit systems, they pay for themselves quickly.',
 			},
 		],
 	},
 	{
 		slug: 'zod-typescript-runtime-validation',
 		title: 'Zod Meets TypeScript: Runtime-Safe Types at the Boundaries',
-		excerpt: 'TypeScript proves your code correct if the data matches the types. Zod verifies the data actually matches at runtime. Together they close the gap between your type system and the outside world.',
-		thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+		excerpt:
+			'On TubeOnAI we wired Zod into every API boundary, every form, and every Firebase response — and the next month our error tracker stopped recording shape-mismatch bugs entirely. Notes on the Zod patterns I now reach for by default.',
+		thumbnail: 'https://images.unsplash.com/photo-1509822929063-6b6cfc9b42f2?w=800&q=80',
 		category: 'TypeScript',
 		tags: ['TypeScript', 'Zod', 'Validation', 'Runtime Safety'],
 		readTime: 7,
 		publishedAt: '2026-02-15',
 		featured: false,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'Early on at TubeOnAI, our error tracker (Sentry) was reporting a steady trickle of "cannot read property of undefined" bugs that all traced back to API responses not matching the TypeScript types we expected. The types said one shape, the API returned another, and the bug only surfaced when a user clicked through to a screen that depended on the missing field. We rewrote the data layer to push every API response through a Zod schema. The shape-mismatch bugs in Sentry dropped to zero the following month.',
+			},
 			{
 				type: 'paragraph',
 				text: 'TypeScript is erased at runtime. The moment data enters your app from an API, a form, a URL parameter, or localStorage, your types are a hope rather than a guarantee. Zod is the most popular library for closing that gap — schemas that validate at runtime and infer types at compile time, from a single source of truth.',
@@ -1303,7 +1360,7 @@ export const env = EnvSchema.parse(process.env);`,
 			},
 			{
 				type: 'paragraph',
-				text: 'Runtime validation is not optional for production TypeScript code. The choice is not whether to validate but whether to validate with a schema library or by hand. Zod wins because it is expressive, composable, and generates types directly from schemas — removing the worst kind of duplication.',
+				text: 'On TubeOnAI, the Zod migration paid for itself by the second sprint — Sentry stopped flagging shape-mismatch errors, the form validation got tighter, and the engineers added schemas faster than I expected once the pattern was visible. Runtime validation is not optional for production TypeScript code. The only real choice is whether you validate with a schema library or by hand. Zod wins because it is expressive, composable, and generates types directly from schemas — removing the worst kind of duplication.',
 			},
 		],
 	},
@@ -1311,14 +1368,18 @@ export const env = EnvSchema.parse(process.env);`,
 		slug: 'turborepo-monorepos-that-scale',
 		title: 'Turborepo: Monorepos That Actually Scale',
 		excerpt:
-			'Most monorepos collapse under their own weight after 30+ packages. Turborepo fixes this with remote caching, task pipelines, and incremental builds that make 200-package repos feel like single-package projects.',
-		thumbnail: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80',
+			'The WPDeveloper plugin suite — BetterDocs, NotificationX, SchedulePress, BetterLinks, and a few smaller ones — was a monorepo that took close to 8 minutes for a clean build. After Turborepo with remote caching, the same build dropped to ~40 seconds on warm caches. Notes on what actually moved the needle.',
+		thumbnail: 'https://images.unsplash.com/photo-1566837945700-30057527ade0?w=800&q=80',
 		category: 'Tooling',
 		tags: ['Turborepo', 'Monorepo', 'Tooling', 'Performance'],
 		readTime: 7,
 		publishedAt: '2026-01-28',
 		featured: false,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'The WPDeveloper plugin suite — BetterDocs, NotificationX, SchedulePress, BetterLinks, and a few smaller ones — shared a monorepo with shared UI components, shared TypeScript types, and shared tooling. Clean builds were taking close to 8 minutes by the time we had ~12 plugins in there, which meant CI was the bottleneck on PR feedback. Adding Turborepo with remote caching dropped warm-cache builds to about 40 seconds. That changed how the team worked — PRs got reviewed faster, hotfixes went out faster, and we stopped scheduling builds around lunch breaks.',
+			},
 			{
 				type: 'paragraph',
 				text: 'Monorepos promise shared code, unified tooling, and atomic changes across packages. They deliver — until the repo grows large enough that builds take 10 minutes and CI costs spiral. Turborepo is a build orchestrator designed to keep monorepos fast as they scale, using aggressive caching and dependency-aware task graphs.',
@@ -1476,14 +1537,15 @@ turbo run build test --filter=[HEAD^1]`,
 			},
 			{
 				type: 'paragraph',
-				text: 'A correctly configured Turborepo turns a sprawling monorepo back into a fast, manageable codebase. The key is being honest about your inputs and outputs — the cache is only as good as your configuration. Once dialed in, the speedup is so significant that it feels like cheating.',
+				text: 'On the WPDeveloper plugin monorepo, getting the Turborepo config right took a couple of iterations — we had a few packages with sloppy "inputs" declarations that were invalidating caches more than necessary. Once we tightened those up, the cache hit rate went above 80% on regular CI runs. The key insight is that the cache is only as good as your config: be honest about what each task actually depends on, and the speedup is so significant it feels like cheating. After this migration I reach for Turborepo on every monorepo I touch.',
 			},
 		],
 	},
 	{
 		slug: 'vite-6-state-of-frontend-builds',
 		title: 'Vite 6 and the State of Frontend Builds in 2026',
-		excerpt: 'Vite 6 ships with Environment API, Rolldown integration, and a rewritten dev server. The gap between Vite and Webpack-based tools is now so large that sticking with the old stack is an active choice.',
+		excerpt:
+			'The xCloud v1 frontend runs on Vue 3 + Vite + a Laravel API — the Vite dev server is what makes that loop tolerable. Notes on what Vite 6 ships, where Rolldown changes things, and the few cases where I still hit friction.',
 		thumbnail: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&q=80',
 		category: 'Tooling',
 		tags: ['Vite', 'Build Tools', 'Rolldown', 'Performance'],
@@ -1491,6 +1553,10 @@ turbo run build test --filter=[HEAD^1]`,
 		publishedAt: '2026-01-12',
 		featured: false,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'On the xCloud v1 frontend, the dev loop is Vue 3 hot-reloading against a Laravel API in another tab. The whole thing only works because Vite starts the dev server in well under a second and reflects file changes near-instantly. After years of Webpack projects where dev startup took 30 seconds and HMR had a noticeable lag, this still feels suspiciously fast. Vite 6 is the maturity release that solidifies why the ecosystem has shifted.',
+			},
 			{
 				type: 'paragraph',
 				text: 'Five years ago, Webpack was the answer to every build question. Today, Vite is the default for virtually every new React, Vue, and Svelte project, and its ecosystem has absorbed the best ideas from every previous generation of tooling. Vite 6 is the maturity release — stable internals, a unified environment model, and a path to Rust-powered bundling.',
@@ -1631,7 +1697,7 @@ import logoData from './logo.svg?inline';  // base64 data URL`,
 			},
 			{
 				type: 'paragraph',
-				text: "Vite 6 solidifies its position as the default JavaScript build tool for everything that is not Next.js. The Environment API unifies SSR, edge, and worker builds. Rolldown will close the production-build speed gap that has remained Webpack's last holdout. For new projects, Vite is the answer unless you have a specific reason to choose otherwise.",
+				text: "On xCloud v1, Vite is doing real work — fast cold starts in dev, fast HMR while we are wiring complex dashboard state, and a production build that never feels slow even as the app grows. Vite 6 solidifies its position as the default JavaScript build tool for everything that is not Next.js. The Environment API unifies SSR, edge, and worker builds. Rolldown will close the production-build speed gap that has been Webpack's last holdout. For new projects, Vite is the answer unless you have a specific reason to choose otherwise.",
 			},
 		],
 	},
@@ -1639,14 +1705,18 @@ import logoData from './logo.svg?inline';  // base64 data URL`,
 		slug: 'react-19-actions-use-action-state',
 		title: 'React 19 Actions and useActionState',
 		excerpt:
-			'React 19 adds a first-class way to handle form submissions with async functions, loading states, and optimistic UI. Actions replace the useState + try/catch + useTransition boilerplate with one primitive.',
-		thumbnail: 'https://images.unsplash.com/photo-1620325867502-221cfb5faa5f?w=800&q=80',
+			'On the sapan.dev contact form I rewrote the React Hook Form + manual pending/error setup as a single useActionState call. The component dropped from ~80 lines to ~30, and useOptimistic gave the submit button a snappier feel. Notes on what Actions actually replace.',
+		thumbnail: 'https://images.unsplash.com/photo-1569748130764-3fed0c102c59?w=800&q=80',
 		category: 'React',
 		tags: ['React', 'React 19', 'Forms', 'Server Actions'],
 		readTime: 7,
 		publishedAt: '2025-12-28',
 		featured: false,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'When I rewrote the sapan.dev contact form last quarter, the original implementation had useState for pending, useState for error, useState for the success message, and a try/catch wrapping the API call — with all the careful ordering you need to avoid stale closures and double-submits. The React 19 rewrite collapsed it into a single useActionState. The component went from roughly 80 lines to 30 and a couple of subtle race conditions disappeared on the way.',
+			},
 			{
 				type: 'paragraph',
 				text: 'Handling a form submission in React used to require useState for the pending flag, useState for the error, useState for the result, try/catch around the async call, and careful ordering to avoid stale closures. React 19 collapses all of that into Actions — async functions you pass to forms or call from useActionState.',
@@ -1857,7 +1927,7 @@ function ProfileForm() {
 			},
 			{
 				type: 'paragraph',
-				text: 'React 19 Actions do for forms what hooks did for state. The boilerplate disappears, the common cases become one-liners, and the complex cases become tractable. Combined with Server Actions and useOptimistic, the three-layer dance of client state, API call, and server mutation collapses into a single async function.',
+				text: 'After the sapan.dev contact form rewrite, every new form I write reaches for useActionState first and falls back to React Hook Form only when the form has complex per-field validation logic. React 19 Actions do for forms what hooks did for state — the boilerplate disappears, the common cases become one-liners, and the complex cases become tractable. Combined with Server Actions and useOptimistic, the three-layer dance of client state, API call, and server mutation collapses into a single async function. Worth migrating one form at a time as you touch them.',
 			},
 		],
 	},
@@ -1865,14 +1935,18 @@ function ProfileForm() {
 		slug: 'web-workers-offload-main-thread',
 		title: 'Web Workers in Modern Frontend: Offloading the Main Thread',
 		excerpt:
-			'The main thread has to paint, animate, run your React tree, and respond to input — all in 16ms. Web Workers move expensive work off the hot path. Here is how to use them in modern apps without the ergonomic pain.',
-		thumbnail: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80',
+			'The BetterDocs analytics dashboard parses 30-day docs traffic into ApexCharts on every state change — and it was visibly stuttering when the dataset got large. Moved the parsing into a Web Worker and the panel stopped jank-locking the input field. Notes on what belongs in a worker and what does not.',
+		thumbnail: 'https://images.unsplash.com/photo-1667372393086-9d4001d51cf1?w=800&q=80',
 		category: 'Performance',
 		tags: ['Web Workers', 'Performance', 'Concurrency', 'INP'],
 		readTime: 8,
 		publishedAt: '2025-11-20',
 		featured: false,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'The BetterDocs analytics dashboard renders ApexCharts on every state change — page-view trends, search queries, top documents, the usual. With a small dataset it is fine, but on workspaces with a few months of history the chart-data preparation took 80-120ms per render. The user noticed this as a typing lag in the date-range filter — every keystroke recomputed the data, and every recomputation blocked the input. The fix was to move the data shaping into a Web Worker.',
+			},
 			{
 				type: 'paragraph',
 				text: "The browser's main thread has to do too many things at once. Paint the frame. Run your React render. Handle the mouse click. Parse the JSON response. If any of these takes more than 16ms, the user sees jank. Web Workers are the built-in answer — separate JavaScript threads that run in parallel and cannot block the UI.",
@@ -2072,14 +2146,15 @@ self.onmessage = (e) => {
 			},
 			{
 				type: 'paragraph',
-				text: 'Web Workers are one of the highest-leverage performance tools most developers do not use. With modern bundler support and Comlink for ergonomics, the integration cost is minimal. If your app has any computation over 50ms, measure the win of moving it off the main thread. Your INP will thank you.',
+				text: 'After moving the BetterDocs analytics chart-data preparation into a Web Worker via Comlink, the input lag on the date-range filter went away — INP dropped from around 250ms to under 80ms on the workspaces with the largest datasets. The integration cost was minimal once Comlink was in place. Web Workers are one of the highest-leverage performance tools most developers still do not reach for. If your app has any computation over 50ms on a hot path, measure the win of moving it off the main thread.',
 			},
 		],
 	},
 	{
 		slug: 'mastering-react-server-components-nextjs-15',
 		title: 'Mastering React Server Components in Next.js 15',
-		excerpt: 'React Server Components fundamentally change how we think about rendering. Learn how to leverage RSC in Next.js 15 to ship less JavaScript and build faster apps.',
+		excerpt:
+			'sapan.dev is built server-component-first across all 16 locales. Notes from designing it that way: the bundle savings, the patterns I keep reaching for, and the moments I had to pull back from "everything server" because the UX needed it.',
 		thumbnail: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80',
 		category: 'React',
 		tags: ['React', 'Next.js', 'Server Components', 'Performance'],
@@ -2087,6 +2162,10 @@ self.onmessage = (e) => {
 		publishedAt: '2026-03-10',
 		featured: true,
 		content: [
+			{
+				type: 'paragraph',
+				text: "When I rebuilt sapan.dev on Next.js App Router, I went server-component-first by default — every component is a Server Component unless it has a real reason to be a Client Component. After several months in production across 16 locales, the bundle is significantly smaller than the previous Pages Router version, and the patterns have settled into something I would now reach for on most new React projects. Below is what I have learned, including the spots where I had to pull back from 'everything server' because the UX needed local state.",
+			},
 			{
 				type: 'paragraph',
 				text: 'React Server Components (RSC) represent one of the most significant architectural shifts in React since hooks. With Next.js 15 making them the default, understanding how to use them effectively is no longer optional — it is essential.',
@@ -2216,14 +2295,15 @@ fetch(url, { next: { revalidate: 60 } })`,
 			},
 			{
 				type: 'paragraph',
-				text: 'React Server Components are not just a performance optimization — they are a new mental model for building web applications. Embrace the server-first mindset, use Client Components sparingly for interactivity, and leverage the full power of async/await for data fetching. The result is faster apps, smaller bundles, and simpler code.',
+				text: 'On sapan.dev, the server-first approach paid off in three concrete ways: the JS bundle is roughly half what the Pages Router version shipped, the locale-aware metadata generates entirely on the server (no flash of wrong language), and a lot of pages now ship with zero client JS at all. Where I pulled back: the contact modal, theme switcher, language switcher, and a handful of GSAP/Three.js scenes — all genuinely local-state interactive, all kept as Client Components without guilt. The mental model that worked best: design the tree as Server Components, and pinpoint Client islands where interactivity actually starts. RSC is not just a perf win — it is a different shape of React, and once you stop fighting it the simpler patterns return.',
 			},
 		],
 	},
 	{
 		slug: 'typescript-5-new-features',
 		title: 'TypeScript 5.0: Features That Changed How I Write Code',
-		excerpt: 'From const type parameters to variadic tuple types, TypeScript 5.x shipped a wave of features that make the type system more expressive and ergonomic. Here are the ones I reach for every day.',
+		excerpt:
+			'A handful of TypeScript 5.x features changed how I write code day-to-day on the Templately admin and sapan.dev. Notes on the ones I reach for constantly — `satisfies`, `const` type parameters, `using` — and the ones I have not yet found a real use for.',
 		thumbnail: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&q=80',
 		category: 'TypeScript',
 		tags: ['TypeScript', 'JavaScript', 'Developer Experience'],
@@ -2231,6 +2311,10 @@ fetch(url, { next: { revalidate: 60 } })`,
 		publishedAt: '2026-02-22',
 		featured: true,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'On the Templately admin, the cleanup pass after upgrading to TypeScript 5 was a study in how much friction a few new features can remove. The `satisfies` operator alone replaced a dozen awkward `as const` assertions in our config objects. The new `const` type parameters fixed a handful of generic helpers that had been quietly widening literal types for years. Below are the TS 5 features I now reach for constantly, the ones I rarely use, and the changes the upgrade actually made to working code.',
+			},
 			{
 				type: 'paragraph',
 				text: 'TypeScript has been on a remarkable trajectory. Each release brings features that feel like they should have existed from the start. TypeScript 5.x in particular delivered several quality-of-life improvements that I now consider essential in every project.',
@@ -2354,13 +2438,21 @@ function processData() {
 					'Isolated declarations for faster parallel builds',
 				],
 			},
+			{
+				type: 'heading',
+				text: 'What I Reach For Most',
+			},
+			{
+				type: 'paragraph',
+				text: "Across the Templately admin, sapan.dev, and the smaller side projects I have rewritten in the past year, three TS 5 features come up constantly: `satisfies` (every config object), `const` type parameters (any helper that takes a tuple of options), and the new module resolution modes (which finally got Vite-resolved imports working without phantom red squiggles). Decorators I have not used yet — most of my code is functional and the use cases haven't shown up. `using` declarations are useful but niche; I have used them exactly once, for a Firebase admin connection in a test setup. Worth knowing the whole feature set, but it is OK if you only use the three above.",
+			},
 		],
 	},
 	{
 		slug: 'tailwind-css-v4-complete-guide',
 		title: 'Tailwind CSS v4: A Complete Guide to the New Architecture',
 		excerpt:
-			'Tailwind v4 rewrites the engine from scratch with a CSS-first configuration, native cascade layers, and zero config defaults. Here is everything you need to know to migrate and take advantage of what is new.',
+			'sapan.dev runs on Tailwind v4 — no `tailwind.config.js`, the design tokens live in CSS, and the build is dramatically faster. Notes from the migration off v3 and what the new architecture actually changes day-to-day.',
 		thumbnail: 'https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&q=80',
 		category: 'CSS',
 		tags: ['Tailwind CSS', 'CSS', 'Styling', 'Frontend'],
@@ -2368,6 +2460,10 @@ function processData() {
 		publishedAt: '2026-02-08',
 		featured: true,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'When I rebuilt sapan.dev, I jumped straight to Tailwind v4 without a v3 phase. The thing that surprised me most: there is no `tailwind.config.js` at all anymore. The design tokens are CSS custom properties declared in `@theme`, and they become utilities automatically. After years of bouncing between a `tailwind.config.js` and a `globals.css` to keep tokens in sync, this single-source-of-truth feels like a meaningful simplification.',
+			},
 			{
 				type: 'paragraph',
 				text: 'Tailwind CSS v4 is not a minor update — it is a ground-up rewrite. The configuration moves from JavaScript to CSS, the build engine is rewritten in Rust (via Lightning CSS), and many conventions that felt essential in v3 are now replaced with better defaults.',
@@ -2470,20 +2566,32 @@ npm install tailwindcss@next @tailwindcss/vite`,
 				type: 'paragraph',
 				text: 'The Lightning CSS-powered engine is dramatically faster. Full rebuilds that took 400ms in v3 now complete in under 50ms. Incremental rebuilds are nearly instant. For large projects, this meaningfully improves developer experience.',
 			},
+			{
+				type: 'heading',
+				text: 'Where I Have Landed',
+			},
+			{
+				type: 'paragraph',
+				text: 'On sapan.dev with v4, the design system is entirely in CSS — `--color-primary`, `--color-success`, the dark-mode swap pairs (e.g., `text-primary dark:text-success`) — and there is no JavaScript build step for tokens. The `data-[state=open]` variants made the popovers and sheets cleaner. Native container queries with `@lg:flex-row` removed a couple of plugin dependencies. Worth migrating if you are starting fresh; the codemod handles most of the upgrade if you have an existing v3 codebase, but expect to do a visual regression pass afterwards (the renamed shadow/rounded/blur utilities will catch you out).',
+			},
 		],
 	},
 	{
 		slug: 'building-accessible-ui-components',
 		title: 'Building Accessible UI Components: Beyond ARIA Labels',
 		excerpt:
-			'Accessibility is not a checklist — it is a design constraint that improves the experience for everyone. Learn the patterns that separate truly accessible components from ones that just pass automated audits.',
-		thumbnail: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&q=80',
+			'Shipping sapan.dev across 16 locales including RTL Arabic surfaced every accessibility shortcut I had ever quietly made. Notes on what automated audits miss, what testing with real assistive tech actually catches, and the patterns I now reach for by default.',
+		thumbnail: 'https://images.unsplash.com/photo-1600132806608-231446b2e7af?w=800&q=80',
 		category: 'Performance',
 		tags: ['Accessibility', 'HTML', 'ARIA', 'UX'],
 		readTime: 9,
 		publishedAt: '2026-01-20',
 		featured: false,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'On sapan.dev, the RTL Arabic locale is what taught me how much of my CSS was secretly assuming left-to-right. Skip links, focus rings, modal close-button positions — all of them needed an audit. Most of the issues I caught were in the gap between "passes Lighthouse" and "actually works for an Arabic-speaking screen-reader user." That gap — what automated tools miss — is where most of this post lives.',
+			},
 			{
 				type: 'paragraph',
 				text: 'Most developers learn accessibility from automated auditing tools like axe or Lighthouse. These tools are useful, but they only catch about 30% of real accessibility issues. The rest require understanding what assistive technology users actually experience.',
@@ -2592,20 +2700,32 @@ npm install tailwindcss@next @tailwindcss/vite`,
 				variant: 'tip',
 				text: 'Use the Accessibility Insights for Web extension for a guided manual testing workflow. It walks you through the most impactful checks that automated tools miss.',
 			},
+			{
+				type: 'heading',
+				text: 'What I Have Settled On',
+			},
+			{
+				type: 'paragraph',
+				text: 'After shipping sapan.dev with 16 locales (Arabic in RTL, more languages coming), most of the real a11y wins came from doing two things consistently: building the keyboard interaction first (if it only works with a mouse, something is wrong), and testing with VoiceOver on at least the most-trafficked routes before merging. Lighthouse and axe stay running in CI as a floor — they catch the obvious regressions. Manual testing with a real screen reader is the ceiling, and it is where the actual UX shows up. Worth the extra hour per feature.',
+			},
 		],
 	},
 	{
 		slug: 'web-performance-core-web-vitals-2025',
 		title: 'Web Performance in 2025: Core Web Vitals and What Actually Matters',
 		excerpt:
-			"Google's Core Web Vitals are now a significant ranking signal. But beyond SEO, performance directly affects conversion and retention. Here is how to measure, diagnose, and fix the issues that matter most.",
-		thumbnail: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+			'The WPDeveloper plugin suite serves 6M+ users across 180+ countries — meaning a lot of devices, a lot of network conditions, and a lot of CrUX data. Notes on what actually moved the Core Web Vitals needle on real production traffic and what was performance theater.',
+		thumbnail: 'https://images.unsplash.com/photo-1633307057722-a4740ba0c5d0?w=800&q=80',
 		category: 'Performance',
 		tags: ['Performance', 'Core Web Vitals', 'LCP', 'INP', 'CLS'],
 		readTime: 10,
 		publishedAt: '2026-01-05',
 		featured: false,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'Working on the WPDeveloper plugin suite was the closest I have been to seeing real CrUX data move in response to specific changes. With 6M+ active installations across 180+ countries, the user base spans every device class and every network condition you can imagine. Every optimization I shipped showed up in real numbers a few weeks later — sometimes the way I expected, sometimes not. The post below is the lessons that survived contact with that production data.',
+			},
 			{
 				type: 'paragraph',
 				text: 'Web performance is a user experience problem before it is a technical problem. A 100ms delay in response time causes a 1% drop in revenue at Amazon scale. For most sites, the opportunity cost of poor performance is invisible — but it is always there.',
@@ -2723,12 +2843,21 @@ onLCP(sendToAnalytics);
 onINP(sendToAnalytics);
 onCLS(sendToAnalytics);`,
 			},
+			{
+				type: 'heading',
+				text: 'What Actually Moved The Numbers',
+			},
+			{
+				type: 'paragraph',
+				text: 'On the WPDeveloper plugin admin pages, the changes that visibly moved CrUX numbers were almost never the glamorous ones. Image preloading and `fetchpriority="high"` on the LCP element gave the biggest LCP wins. Moving heavy chart-data prep into a Web Worker (separate post) was what fixed INP on the analytics dashboards. CLS was mostly fixed by adding explicit `width`/`height` attributes to admin avatars and skeleton placeholders. The temptation is always to chase the cool optimization; the real wins are the boring ones, applied consistently. Measure before, measure after, ship the small things.',
+			},
 		],
 	},
 	{
 		slug: 'state-management-2025-zustand-jotai-redux',
 		title: 'State Management in 2025: Zustand, Jotai, and Redux Toolkit',
-		excerpt: "The state management landscape has matured significantly. Redux is no longer the only serious option, and choosing the right tool depends on your app's complexity, team size, and data access patterns.",
+		excerpt:
+			'Templately runs on Redux Toolkit. TubeOnAI is React Query for server state and a small Zustand store for UI. sapan.dev gets by on Redux Toolkit + URL state. Three projects, three different state strategies, and the pattern that emerged for picking between them.',
 		thumbnail: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80',
 		category: 'React',
 		tags: ['React', 'State Management', 'Zustand', 'Jotai', 'Redux'],
@@ -2736,6 +2865,10 @@ onCLS(sendToAnalytics);`,
 		publishedAt: '2025-12-15',
 		featured: false,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'In the past two years I have shipped React apps that ended up using three different state strategies. Templately is on Redux Toolkit because the team adopted it early and the patterns are deeply baked in. TubeOnAI runs React Query for server state and a small Zustand store for transient UI (player state, modal flags). sapan.dev gets by entirely on Redux Toolkit + URL state, no React Query at all. Below is the pattern that emerged across them — and the things I would not do twice.',
+			},
 			{
 				type: 'paragraph',
 				text: 'The state management conversation in the React ecosystem has changed dramatically. Context API closed the gap for simple cases, React Query and SWR own server state, and the remaining client state problem is served by a range of lean, focused libraries.',
@@ -2855,7 +2988,7 @@ function Counter() {
 			},
 			{
 				type: 'paragraph',
-				text: 'There is no single correct answer for state management in 2025. The question is matching the tool to the problem. Separate server state from client state first, then pick the library that fits your complexity level. The best state manager is the one your team understands and maintains well.',
+				text: 'Across Templately, TubeOnAI, and sapan.dev, the lesson that surfaced repeatedly: separate server state from client state first, then pick the smallest library that fits the remaining client state. Most projects I have started in the past year reach for React Query plus a tiny Zustand store, and the team rarely outgrows that combination. Redux still earns its keep when the state machine is genuinely complex, the team is large, or you need the time-travel debugging — but those are increasingly the exceptions, not the rule. The best state manager is the one your team can read at a glance six months from now.',
 			},
 		],
 	},
@@ -2863,7 +2996,7 @@ function Counter() {
 		slug: 'modern-css-colors-oklch-color-mix',
 		title: 'Modern CSS Colors: oklch, color-mix, and Wide Gamut',
 		excerpt:
-			'CSS color in 2026 is radically different from hex. Perceptually uniform color spaces, wide-gamut displays, and native color mixing let you build design systems that look correct everywhere. Here is what changed and how to use it.',
+			"sapan.dev's design tokens are oklch all the way down. The brand color is one variable; every shade, hover, and disabled state derives from it programmatically. Notes on what oklch and color-mix actually buy you in a design system.",
 		thumbnail: 'https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=800&q=80',
 		category: 'CSS',
 		tags: ['CSS', 'Color', 'Design Systems', 'oklch'],
@@ -2871,6 +3004,10 @@ function Counter() {
 		publishedAt: '2025-11-05',
 		featured: false,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'On sapan.dev I made a small commitment when designing the token system: every color goes through oklch first, no hex anywhere in the source. The brand color (the primary blue) is one oklch variable; every shade, every hover state, every disabled-state desaturation derives from it through relative color syntax. The result is that swapping the brand color is genuinely a one-line change — and the dark-mode pair (--color-success) was easier to balance because the chroma stays consistent across both modes. Below is what the modern color tools actually buy you in a real design system.',
+			},
 			{
 				type: 'paragraph',
 				text: "Hex colors have been the web's default for 30 years. They are also bad — not because they are wrong, but because sRGB cannot represent most of what modern monitors can display, and the relationship between hex values and perceived brightness is nonlinear. Modern CSS introduces color spaces designed for humans, not for the 1996 VGA palette.",
@@ -3036,7 +3173,7 @@ function Counter() {
 			},
 			{
 				type: 'paragraph',
-				text: 'Modern CSS color is not about new notation — it is about finally giving designers and developers the tools that print and film have had for decades. Perceptually uniform scales, programmatic derivation, and access to wide gamut displays fundamentally change how design systems work. If you are still hand-picking hex values, you are building on 1996 foundations.',
+				text: 'On sapan.dev, the moment the oklch token system clicked was when I realized I was no longer eyeballing hover states. `oklch(from var(--brand) calc(l - 0.08) c h)` — the hover is mathematically 8% darker, the hue and chroma stay locked, and the result looks consistent regardless of which brand color you swap in. Modern CSS color is not about new notation. It is about finally giving design systems the tools that print and film have had for decades. If you are still hand-picking hex values, you are building on 1996 foundations.',
 			},
 		],
 	},
@@ -3045,13 +3182,17 @@ function Counter() {
 		title: 'CSS @layer: Architecture Without Specificity Wars',
 		excerpt:
 			'CSS specificity is the source of 90% of "why is my style not applying" debugging. @layer gives you explicit control over cascade order that is independent of selector complexity — finally making large stylesheets tractable.',
-		thumbnail: 'https://images.unsplash.com/photo-1581276879432-15e50529f34b?w=800&q=80',
+		thumbnail: 'https://images.unsplash.com/photo-1518085250887-2f903c200fee?w=800&q=80',
 		category: 'CSS',
 		tags: ['CSS', 'Architecture', 'Cascade', '@layer'],
 		readTime: 6,
 		publishedAt: '2025-10-18',
 		featured: false,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'On the BetterDocs admin we had a four-year-old CSS codebase fighting itself — the design system would set a button background, a page-level rule would override it for one screen, and an old utility class would beat them both with `!important`. Every visual bug fix took three rounds of CSS detective work. Adopting @layer was what finally settled the cascade. We carved the existing CSS into reset, base, components, and utilities layers, and the specificity wars stopped showing up in the bug tracker.',
+			},
 			{
 				type: 'paragraph',
 				text: 'Every large CSS codebase eventually faces the same problem — specificity wars. The design system sets a value. A page overrides it. A component overrides the page. The global reset fights the component. Solutions have ranged from BEM conventions to !important to CSS-in-JS scope isolation. @layer is the native solution that finally works.',
@@ -3221,7 +3362,7 @@ function Counter() {
 			},
 			{
 				type: 'paragraph',
-				text: 'CSS @layer is the most important architectural addition to CSS in a decade. It replaces BEM conventions, specificity-stacking tricks, and !important with an actual cascade-level ordering primitive. For new projects, establish your layer order day one. For existing projects, adopt incrementally — the cascade rewards the effort.',
+				text: "On the BetterDocs admin migration, the layer adoption was incremental — a few files at a time over a couple of weeks, no big-bang rewrite. The payoff showed up gradually: cascade-related bugs in QA dropped, code reviews stopped including 'why is this `!important`' comments, and new contributors stopped tripping over which file was overriding which. CSS @layer is the most important architectural addition to CSS in a decade — it replaces BEM conventions, specificity-stacking tricks, and `!important` with an actual cascade-level ordering primitive. New projects, day one. Existing projects, adopt incrementally — the cascade rewards the effort.",
 			},
 		],
 	},
@@ -3229,14 +3370,18 @@ function Counter() {
 		slug: 'discriminated-unions-type-safe-state',
 		title: 'Discriminated Unions: The Pattern That Changed How I Model State',
 		excerpt:
-			'The loading/error/success state pattern with three booleans is the source of countless bugs. Discriminated unions express the same states in a way that makes impossible combinations literally impossible.',
-		thumbnail: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&q=80',
+			'On TubeOnAI, the original load/error/data form state was three independent booleans — and we kept hitting bugs where data was set AND loading was true. Switched to a single discriminated union and the entire class of bugs went away. Notes on the pattern that changed how I model state.',
+		thumbnail: 'https://images.unsplash.com/photo-1724166573009-4634b974ebb2?w=800&q=80',
 		category: 'TypeScript',
 		tags: ['TypeScript', 'State Modeling', 'Pattern', 'Type Safety'],
 		readTime: 7,
 		publishedAt: '2025-10-02',
 		featured: false,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'On the TubeOnAI summarization view, our data layer started life with three independent state pieces — `isLoading`, `error`, `data` — across every async hook. The bugs were predictable: a refetch would set `isLoading = true` while `data` was still populated from the previous query, and our UI logic that branched on `isLoading` first hid the stale-but-still-valid data the user wanted to see. We fixed individual occurrences for a few months before realizing the bug was structural. Refactoring to a discriminated union killed the whole class.',
+			},
 			{
 				type: 'paragraph',
 				text: 'Every React developer has written this code: isLoading, error, data, all as separate pieces of state. Then the bugs arrive. Data is present AND loading is true. Error is set AND data is also set. Your UI branches on isLoading first, so errors never render when loading is still true. The root cause is modeling mutually exclusive states as independent booleans. Discriminated unions fix this structurally.',
@@ -3407,7 +3552,7 @@ if (result.ok) {
 			},
 			{
 				type: 'paragraph',
-				text: 'Discriminated unions are a state-modeling superpower. They turn a vague "this might be one of several things" into a precise "this is exactly one of these options, and the compiler will enforce which fields exist in each case." Once you start thinking in unions, every piece of state that has multiple phases becomes dramatically clearer.',
+				text: 'After the TubeOnAI refactor, every new async hook on the project started life as a discriminated union and the stale-data bugs simply stopped recurring. Discriminated unions are a state-modeling superpower — they turn a vague "this might be one of several things" into a precise "this is exactly one of these options, and the compiler will enforce which fields exist in each case." Once you start thinking in unions, every piece of state that has multiple phases becomes dramatically clearer. Worth refactoring toward, one hook at a time.',
 			},
 		],
 	},
@@ -3415,14 +3560,18 @@ if (result.ok) {
 		slug: 'template-literal-types-type-level-strings',
 		title: 'Template Literal Types: Type-Level String Manipulation',
 		excerpt:
-			'TypeScript template literal types turn the type system into a tiny programming language for strings. Route matching, CSS property autocomplete, event name inference — patterns that used to require manual type writing now infer from your data.',
-		thumbnail: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=800&q=80',
+			'On sapan.dev I wrote a small typed event-emitter for the contact-modal flow that felt like magic — string keys, fully typed payloads, no manual annotation. Template literal types are doing the work. Notes on the patterns I now reach for and the moments TypeScript pushes back.',
+		thumbnail: 'https://images.unsplash.com/photo-1685558593626-686907d7ee4b?w=800&q=80',
 		category: 'TypeScript',
 		tags: ['TypeScript', 'Template Literals', 'Type Magic', 'Inference'],
 		readTime: 7,
 		publishedAt: '2025-09-15',
 		featured: false,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'A while back I was writing a small event emitter for the sapan.dev contact-modal flow — open/close events, form-state events, validation events. The first version used plain strings and untyped payloads, and within a week I was already chasing bugs where the wrong event payload shape was being passed around. The rewrite used template literal types for the event names with a payload map, and the entire class of mismatches stopped being possible. The compiler now refuses any combination of event name and payload that does not match.',
+			},
 			{
 				type: 'paragraph',
 				text: "Template literal types are TypeScript 4.1's quiet revolution. On the surface they are a minor syntax addition — you can now use backticks in types. Underneath, they give the type system the ability to analyze and construct strings. Combined with conditional types and infer, they enable entire libraries to be type-safe in ways that were previously impossible.",
@@ -3609,7 +3758,7 @@ const err = get(user, 'profile.x');     // ❌ type error`,
 			},
 			{
 				type: 'paragraph',
-				text: 'Template literal types transformed what TypeScript can infer. Route parameters, CSS utilities, event payloads, and deep object paths all flow through the type system without manual annotation. They are the feature that made TypeScript competitive with full-strength type systems for real-world JavaScript. Once you start noticing opportunities to use them, you see patterns everywhere.',
+				text: 'After writing that typed emitter for sapan.dev I started spotting opportunities everywhere — the locale routing types, internal route helpers, even a small CSS-class autocomplete pattern in our component prop types. Template literal types are the feature that made TypeScript competitive with full-strength type systems for real-world JavaScript. They have a compilation cost on big recursive types, so use them where the safety pays for the build-time penalty — but where they fit, the inference feels like cheating.',
 			},
 		],
 	},
@@ -3617,14 +3766,18 @@ const err = get(user, 'profile.x');     // ❌ type error`,
 		slug: 'react-suspense-streaming-patterns',
 		title: 'React Suspense Patterns: Streaming UI with Confidence',
 		excerpt:
-			'Suspense is one of the most misunderstood features in React. Used correctly, it replaces loading states, error boundaries, and waterfall data fetching with a single declarative primitive. Here are the patterns that actually work in production.',
-		thumbnail: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80',
+			'sapan.dev streams its blog index from the server using Suspense — skeleton card, then progressive content as the data resolves. Notes on the Suspense patterns I keep reaching for in App Router, and the moments where I had to fall back to client-side loading states instead.',
+		thumbnail: 'https://images.unsplash.com/photo-1610986602726-19f650133f7a?w=800&q=80',
 		category: 'React',
 		tags: ['React', 'Suspense', 'Streaming', 'Data Fetching'],
 		readTime: 8,
 		publishedAt: '2025-08-28',
 		featured: false,
 		content: [
+			{
+				type: 'paragraph',
+				text: 'On sapan.dev the blog index is the place where Suspense earns its keep. The post list comes from a server-side data layer; instead of a full-page spinner while everything resolves, the layout (header, sidebar, footer) renders immediately, and a Suspense boundary streams in the cards as the data is ready. The user never sees a blank page, and the time-to-first-meaningful-paint is dramatically better than the old useEffect + skeleton dance. Below is what I actually do with Suspense in App Router and where I have learned to stop reaching for it.',
+			},
 			{
 				type: 'paragraph',
 				text: "Suspense has existed since React 16.6 but only became production-ready with React 18's concurrent rendering. Now paired with Server Components in React 19, it is the fundamental primitive for handling async UI — loading states, data fetching boundaries, and progressive hydration all flow from one mental model.",
@@ -3849,7 +4002,7 @@ function SearchBar() {
 			},
 			{
 				type: 'paragraph',
-				text: 'Suspense is the declarative primitive that absorbs loading states, progressive rendering, and streaming into the same mental model. Combined with use(), startTransition, and Error Boundaries, it eliminates the manual state machines that dominated React data fetching for a decade. For any UI with async work — which is most UI — Suspense is the foundation to build on.',
+				text: 'On sapan.dev the Suspense boundaries are placed around each substantive section — the blog list, the experience timeline, the testimonials marquee — so each can resolve and stream independently rather than blocking each other. The places I have learned NOT to use Suspense: anything where the fallback would be visible for less than ~150ms (it just looks like a flicker), and anything where the user is in an active flow (mid-form submission, mid-search). Both of those are still better served by a local pending state. For everything else — first paint, navigation, route boundaries — Suspense is the foundation to build on. Combined with `use()`, `startTransition`, and Error Boundaries, it absorbs the manual state machines that dominated React data fetching for a decade.',
 			},
 		],
 	},
