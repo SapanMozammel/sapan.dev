@@ -2,7 +2,7 @@ import type { TestimonialData } from '@/types/testimonial';
 
 export const TESTIMONIAL_LIST: TestimonialData[] = [
 	{
-		message: `Sapan architected the entire frontend for xCloud v1. He worked closely with the backend team on the API integration and made sensible decisions about state management and component reuse. The structure he established made onboarding the next developer straightforward — that's not always the case with a v1.`,
+		message: `On xCloud v1, Sapan led the frontend architecture from day one. He owned it end-to-end — component structure, state management, API integration with our backend team. The codebase was clean enough that our next frontend developer ramped up in days. That's the actual test of a v1 frontend, and Sapan passed it. Would work with him again without hesitation.`,
 		name: `Nasir Nobin`,
 		designation: `CTO`,
 		company: `xCloud`,
@@ -10,7 +10,7 @@ export const TESTIMONIAL_LIST: TestimonialData[] = [
 		createdAt: `2025-01-28`,
 	},
 	{
-		message: `Sapan contributed across Templately, xCloud, and the WPDeveloper plugin suite during his time here. What distinguished him was consistency — clean code, strict TypeScript, no shortcuts on accessibility. He understood the WordPress ecosystem well enough to bridge the React sides effectively.`,
+		message: `Across his time on our engineering org, Sapan worked on Templately, xCloud, and the WPDeveloper plugin suite. What I trusted about him over the long run was consistency — strict TypeScript, accessibility done properly, real working knowledge of the WordPress ecosystem (which most React-first engineers skip). Frontend engineer who didn't need much oversight.`,
 		name: `Kazi Anwarul Karim`,
 		designation: `Director of Engineering`,
 		company: `Startise`,
@@ -18,7 +18,7 @@ export const TESTIMONIAL_LIST: TestimonialData[] = [
 		createdAt: `2025-01-14`,
 	},
 	{
-		message: `Sapan joined us remotely as a part-time frontend developer and hit the ground running. He owned the Next.js web app, set up React Query in a way that meaningfully reduced our API load, and tackled the audio player integration that had been blocking us for a while. Reliable, communicative, and technically sharp.`,
+		message: `At TubeOnAI, the entire frontend was Sapan's — he worked with us remotely, part-time, for a few months. We're a small team and managing remote contractors usually adds overhead, but he made it easier than expected. Restructured our React Query setup in a way that visibly cut API costs, and unblocked the audio player integration that had been stuck for weeks. Communicative, didn't need management.`,
 		name: `Mehedi Hasan`,
 		designation: `Co-Founder`,
 		company: `TubeOnAI`,
@@ -26,7 +26,7 @@ export const TESTIMONIAL_LIST: TestimonialData[] = [
 		createdAt: `2024-04-10`,
 	},
 	{
-		message: `Sapan handled both the Templately admin panel and the landing app simultaneously — switching between a React SPA and a Next.js marketing site. He managed it well, wrote maintainable code, and collaborated closely with our backend team on API design without needing constant hand-holding.`,
+		message: `Templately ran on parallel codebases — the admin SPA on one side, the Next.js marketing site on the other. Mozammel handled both at the same time, which freed me up to focus on platform-side work. Code was maintainable, communication with the backend team during API design was direct without being abrasive. The kind of teammate you can hand work to and not have to follow up on.`,
 		name: `Rahat Hossain`,
 		designation: `Lead Engineer`,
 		company: `Templately`,
@@ -34,7 +34,7 @@ export const TESTIMONIAL_LIST: TestimonialData[] = [
 		createdAt: `2025-03-01`,
 	},
 	{
-		message: `Sapan was our first frontend developer on easy.jobs and he set the bar high. He picked up Vue.js and our Laravel API structure quickly, built the initial career site interface, and wrote code that was clean enough for the team to extend without rewrites. Starting a product on a solid frontend foundation is harder than it sounds — he pulled it off.`,
+		message: `Sapan joined easy.jobs as our first frontend developer back in 2020. Junior at the time but he didn't ship like one. Picked up Vue.js and our Laravel API quickly, built the initial career site interface, and the component patterns he established are still in use today. Setting the frontend foundation for a SaaS is make-or-break work, and he got it right.`,
 		name: `Julkar N. Nahian`,
 		designation: `Lead Engineer`,
 		company: `Easy.Jobs`,
@@ -42,7 +42,7 @@ export const TESTIMONIAL_LIST: TestimonialData[] = [
 		createdAt: `2020-10-14`,
 	},
 	{
-		message: `Sapan is one of the rare frontend developers who genuinely cares about design fidelity. He doesn't just implement components — he understands why a spacing decision was made, why a transition works a certain way. Handing off Figma files to him is effortless because the conversation is always about the intent, not just the pixels.`,
+		message: `As a designer at Startise, my work depended on engineers respecting design intent. Sapan was one of the few who actually asked about it before implementing — why a spacing decision was made, why a transition lands a certain way. Most engineers don't. After a while I started sending him design drafts before they were polished, because the conversation usually made them better.`,
 		name: `Nabil Ahmed Emon`,
 		designation: `Lead Product Designer`,
 		company: `Startise`,
@@ -50,7 +50,7 @@ export const TESTIMONIAL_LIST: TestimonialData[] = [
 		createdAt: `2025-03-24`,
 	},
 	{
-		message: `Working with Sapan on the TubeOnAI frontend was smooth. He wrote clean, typed TypeScript, didn't over-engineer things, and was always easy to talk to when a component needed rethinking. The kind of peer who makes the overall codebase better just by being on the team.`,
+		message: `Spent around six months on the TubeOnAI frontend alongside Sapan. Clean typed TypeScript, didn't over-engineer, easy to talk to when a component needed a rethink. The kind of peer who lifts the codebase quality just by being on the team — that's about all you can ask of a teammate.`,
 		name: `Shariar Faisal`,
 		designation: `Software Engineer`,
 		company: `TubeOnAI`,
@@ -58,7 +58,7 @@ export const TESTIMONIAL_LIST: TestimonialData[] = [
 		createdAt: `2024-03-22`,
 	},
 	{
-		message: `From a product perspective, Sapan is one of those developers who actually reads the spec. He caught edge cases during implementation that we hadn't accounted for at planning, which saved a lot of back-and-forth. His Templately work shipped cleanly with very few post-launch issues.`,
+		message: `From a product perspective, Sapan was one of the few engineers I worked with who actually read the spec end-to-end. Came into planning meetings with edge-case questions I hadn't thought through, which forced cleaner specs out of me. His Templately work came back from QA with very few issues. PMs talk about which engineers are reliable to plan around — Sapan came up.`,
 		name: `Nahid Hasan Tushar`,
 		designation: `Lead Support & Product Manager`,
 		company: `Startise`,
@@ -66,7 +66,7 @@ export const TESTIMONIAL_LIST: TestimonialData[] = [
 		createdAt: `2025-02-18`,
 	},
 	{
-		message: `Sapan and I worked through several demanding parts of the xCloud frontend together. He's methodical, knows when to ask for input, and his code is clean enough that you can pick up where he left off without confusion. The kind of engineer you want on a fast-moving product.`,
+		message: `Several of the more demanding parts of the xCloud frontend, Mozammel and I built together — state synchronization across the dashboard, optimistic updates on the ops panel. He's methodical without being slow, knows when to escalate a question, and his code reads well enough that I never had to untangle anything when picking up where he left off.`,
 		name: `Misuk Adhikari`,
 		designation: `Lead Engineer`,
 		company: `xCloud`,
@@ -74,7 +74,7 @@ export const TESTIMONIAL_LIST: TestimonialData[] = [
 		createdAt: `2025-02-11`,
 	},
 	{
-		message: `The admin UX improvements Sapan made to BetterDocs genuinely reduced our support request volume. When the UI explains itself, users don't need to write in. That kind of frontend thinking — where usability is the goal, not just feature delivery — made a real difference to our team.`,
+		message: `After Sapan rebuilt the BetterDocs admin UX, our weekly support ticket volume dropped enough that the support lead mentioned it in a standup. UI that explains itself instead of needing a manual — that's the right kind of frontend work, and not every engineer thinks in those terms.`,
 		name: `Muhammad Azizur Rahman`,
 		designation: `Associate Product Manager`,
 		company: `WPDeveloper`,
@@ -82,7 +82,7 @@ export const TESTIMONIAL_LIST: TestimonialData[] = [
 		createdAt: `2023-09-05`,
 	},
 	{
-		message: `As project manager on several plugin features, I found Sapan easy to work with. He gave realistic estimates, flagged blockers early, and his code was solid enough that QA rarely came back with frontend-related issues. That kind of reliability makes project management significantly simpler.`,
+		message: `Managed several plugin features with Sapan as the frontend developer. Estimates were close to actual, blockers got flagged early instead of on the day they were due, QA didn't bounce his work much. From a PM standpoint, that's the difference between planning and constantly replanning.`,
 		name: `Md. Jamil Uddin`,
 		designation: `Project Manager`,
 		company: `WpDeveloper`,
@@ -90,7 +90,7 @@ export const TESTIMONIAL_LIST: TestimonialData[] = [
 		createdAt: `2023-06-17`,
 	},
 	{
-		message: `The xCloud v1 frontend Sapan built gave us a solid foundation to iterate on. The component structure was logical, the UI handled loading and error states correctly, and we got very few post-launch complaints about the interface. That kind of quality baseline matters a lot for a v1.`,
+		message: `Post-launch, the xCloud interface held up well — sensible component structure, loading and error states handled correctly (which sounds obvious but a lot of first releases skip them), and very few user complaints about the UI in the first weeks. From the PM seat, that's what mattered.`,
 		name: `Shifat Hossain`,
 		designation: `Lead Support & Product Manager`,
 		company: `xCloud`,
@@ -98,7 +98,7 @@ export const TESTIMONIAL_LIST: TestimonialData[] = [
 		createdAt: `2025-03-10`,
 	},
 	{
-		message: `Sapan understood our WordPress data structures well enough to design the right frontend for the backend we'd built — without us over-explaining the PHP side. That cross-stack awareness is uncommon in pure frontend developers and made our collaboration on Templately noticeably more efficient.`,
+		message: `As a WordPress developer, most of the React engineers I work with treat the PHP side as a black box — they ask me to translate everything. Sapan didn't. He took the time to learn our data structures and came to me with specific questions instead of generic ones. Made the Templately collaboration a lot less of a translation exercise.`,
 		name: `Alimuzzaman Alim`,
 		designation: `Senior WordPress Developer`,
 		company: `Templately`,
@@ -106,7 +106,7 @@ export const TESTIMONIAL_LIST: TestimonialData[] = [
 		createdAt: `2024-12-09`,
 	},
 	{
-		message: `I saw Sapan's code across multiple Startise projects. He used TypeScript properly — not just as a formality but to actually catch bugs at compile time. His component design was pragmatic and his state management choices were clean. Solid frontend engineer who doesn't need much oversight.`,
+		message: `Read a lot of Mozammel's code at Startise — Templately, BetterDocs admin, a few smaller plugin frontends. His TypeScript usage was mature; he was using it to actually catch bugs at compile, not just for autocomplete. Pragmatic component design, clean state choices. Solid frontend engineer who doesn't need much oversight.`,
 		name: `Md. Khairul Islam`,
 		designation: `Senior Javascript Developer`,
 		company: `Startise`,
@@ -114,7 +114,7 @@ export const TESTIMONIAL_LIST: TestimonialData[] = [
 		createdAt: `2025-03-15`,
 	},
 	{
-		message: `Sapan is one of the few frontend developers who asks about interaction intent before implementing a design — not after. He catches hover states and transitions that others miss, and if something looks off from the spec, he flags it before shipping. That saves the entire team a revision cycle.`,
+		message: `Most engineers I hand designs to ship the screens, then come back with questions after we notice something's off. Sapan asked first. He'd catch hover states I hadn't fully specced, flag spacing inconsistencies in my own files, push back when something didn't look right. Saved a revision cycle on most of the projects we did together.`,
 		name: `Md Shah Newas Mazumder`,
 		designation: `UX UI Designer`,
 		company: `Startise`,
@@ -122,7 +122,7 @@ export const TESTIMONIAL_LIST: TestimonialData[] = [
 		createdAt: `2025-02-03`,
 	},
 	{
-		message: `Sapan always asked the right questions about our PHP APIs before building the UI — what data comes back, what edge cases exist, what error states to handle. Frontend developers who think about the full data flow are genuinely valuable on a full-stack team, and he's one of them.`,
+		message: `Built APIs for a lot of frontend developers over the years. The ones I dread are the ones who don't ask questions — they assume things, ship, and the bugs come back to me. Sapan was the opposite. Asked what comes back, what edge cases exist, what error shapes were possible. Templately integration went smoothly because of that upfront work.`,
 		name: `Md Abdul Kuddus`,
 		designation: `Senior PHP Developer`,
 		company: `Templately`,
@@ -130,7 +130,7 @@ export const TESTIMONIAL_LIST: TestimonialData[] = [
 		createdAt: `2024-11-20`,
 	},
 	{
-		message: `From a security standpoint, Sapan was one of the more conscientious frontend developers I've worked with. He sanitized user inputs, avoided common XSS patterns, and asked about auth token handling when integrating APIs. That kind of security awareness at the frontend layer genuinely reduces our overall attack surface.`,
+		message: `Frontend security usually gets the least attention — most engineers treat it as someone else's problem. Sapan was the exception on the Startise team. Sanitized inputs as a habit, asked about auth token handling when integrating new APIs, avoided XSS patterns I'd have to flag in code review for other developers. Easier collaboration when the frontend isn't fighting you on the basics.`,
 		name: `Abu Hurayra`,
 		designation: `Application Security Engineer`,
 		company: `Startise`,
