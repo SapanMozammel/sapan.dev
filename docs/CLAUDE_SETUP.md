@@ -11,7 +11,7 @@ A setup guide for the `.claude/` configuration in this project.
 ├── commands/
 │   ├── plan.md             # /plan [feature description]
 │   ├── implement.md        # /implement [plan-name]
-│   ├── audit.md            # /audit
+│   ├── review.md           # /review (replaces /audit; broader scope: 6-priority code review with auto-PRD-on-violations)
 │   ├── new-section.md      # /new-section [Name]
 │   ├── new-component.md    # /new-component [Name]
 │   ├── translate.md        # /translate [locale?]
@@ -219,24 +219,17 @@ Steps Claude must follow:
 
 ---
 
-### `commands/audit.md` — `/audit`
+### `commands/review.md` — `/review` (replaces deprecated `/audit`)
 
-**Purpose:** Check a file against all design system and architecture rules.
+**Purpose:** Review staged or recent changes against sapan code conventions, security, a11y, hydration, performance, and effect/state rules. Broader than `/audit` — six priority categories (P1 Security/A11y, P2 Hydration/RSC, P3 Data Layer when Apollo is in use, P4 Performance, P5 Effects/State, P6 Conventions).
 
-Steps Claude must follow:
-1. Target = `$ARGUMENTS` if provided, otherwise the file currently open in the editor
-2. Read the file fully
-3. Load: `colors.md`, `typography.md`, `spacing.md`, `component-patterns.md`
-4. Check every rule in the pre-write checklist
-5. Report violations by category:
-   - **Design System** — hardcoded colors, wrong font class, arbitrary spacing
-   - **Architecture** — missing `'use client'`, missing `memo()`, wrong import path
-   - **TypeScript** — `any` types, missing types, `interface` used instead of `type`
-   - **Pass** — what's already correct
-6. For each violation: `file:line` — rule broken — fix
-7. If violations found: create or update a PRD at `.claude/plans/[audit-scope]-audit/prd.md` with all violations as implementation steps
+Scope is auto-detected: staged diff (`git diff --cached`) → working tree (`git diff`) → fall back to `$ARGUMENTS` for a single file or glob.
 
-**Rules:** Report numbered, actionable fixes only. No full rewrites unless asked. Do not auto-apply fixes — present them for review. Always generate a PRD after the audit so violations can be fixed via `/implement`.
+**Auto-PRD-on-violations** (sapan memory rule, NOT opt-in): when any Critical or Warning is found, the command writes/updates `.claude/plans/[scope-slug]-review/prd.md` with each violation as an `[⬜]` Implementation Step. PRD `[✅]` history is preserved. Final prompt: "Ready? Run `/implement [scope-slug]-review`".
+
+The standalone `code-reviewer` agent enforces the same checklist + auto-PRD rule for cases where the user wants an agent-driven review (background, parallel) rather than an interactive slash command.
+
+See `.claude/commands/review.md` for the full priority checklist and the `/review` invocation rules.
 
 ---
 
@@ -492,7 +485,7 @@ Add hooks to auto-lint and type-check after every file edit. Tests are **not** r
 
 ## Pre-write Checklist
 
-Used by `/implement`, `/new-section`, `/new-component`, and `/audit`:
+Used by `/implement`, `/new-section`, `/new-component`, and `/review`:
 
 - [ ] `cn()` from `@/lib/utils` for all classNames — never string-concatenate
 - [ ] Design system tokens only — no hardcoded colors or hex values
@@ -645,7 +638,7 @@ What this feature does and why it's needed.
 
 **Audit an existing file**
 ```
-/audit src/components/layout/Hero/index.tsx
+/review src/components/layout/Hero/index.tsx
 ```
 → Loads all design-system + architecture skills, checks every rule, reports violations with `file:line` references. Generates a PRD for fixes. No auto-fix.
 

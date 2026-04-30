@@ -1,4 +1,4 @@
-# /audit-i18n
+# /review-i18n
 
 **Purpose:** Deep audit of internationalization coverage — produce two PRDs: (1) hardcoded user-facing strings that should be translated, (2) translated values that should NOT be (proper nouns, tech names, broken placeholders).
 

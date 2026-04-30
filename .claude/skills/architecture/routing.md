@@ -107,3 +107,12 @@ All routes use `generateStaticParams()` to pre-render all locale variants at bui
 export const generateStaticParams = () =>
   locales.map((locale) => ({ locale }))
 ```
+
+---
+
+## See also (external reference)
+
+Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
+
+- [`external/nextjs/nextjs-app-router-fundamentals/`](../external/nextjs/nextjs-app-router-fundamentals/) — App Router routing fundamentals
+- [`external/nextjs/nextjs-app-router-patterns/`](../external/nextjs/nextjs-app-router-patterns/) — advanced patterns (parallel routes, intercepting routes, advanced data fetching)

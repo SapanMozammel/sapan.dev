@@ -87,3 +87,12 @@ No `fetch()`, no API calls for static content — it's all imported directly.
 - `portfolio.tsx` is the only data file that may contain JSX — all others must be `.ts`
 - New data files go in `src/data/content/` (changing content) or `src/data/config/` (app config)
 - New type files go in `src/types/` — one file per domain, named after the domain
+
+---
+
+## See also (external reference)
+
+Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
+
+- [`external/typescript/typescript-expert/`](../external/typescript/typescript-expert/) — deep TS problem-solving for complex data type modeling
+- [`external/data/apollo-client/`](../external/data/apollo-client/) — Apollo Client 4.x patterns. **Load only when Apollo is in use** (file imports from `src/lib/apollo/`). Apollo lands as foundation via `apollo-client-integration` PRD; once a real query ships, this skill is the deep reference.

@@ -58,3 +58,12 @@ const isOpen = useAppSelector((state) => state.ui.isContactModalOpen)
 **`useStackingCards`** — `src/hooks/useStackingCards.ts`
 - GSAP ScrollTrigger stacking animation for Portfolio section
 - Returns ref to attach to card container
+
+---
+
+## See also (external reference)
+
+Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
+
+- [`external/react/react-best-practices/`](../external/react/react-best-practices/) — hook usage, state colocation, derived-state patterns
+- [`external/data/apollo-client/`](../external/data/apollo-client/) — Apollo state management (`InMemoryCache`, reactive variables — sapan does NOT use reactive variables). **Load only when Apollo is in use** to understand the Redux/Apollo boundary documented above (Redux for UI state; Apollo for remote data + cache). Apollo lands via `apollo-client-integration` PRD.

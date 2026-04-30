@@ -67,3 +67,11 @@ import { render } from '../test-utils'
 - Never mock internal utilities — mock only at system boundaries (fetch, localStorage, router)
 - Fix the real issue — do not delete or skip failing tests
 - Do not widen types to silence errors
+
+---
+
+## See also (external reference)
+
+Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
+
+- [`external/testing/playwright-best-practices/`](../external/testing/playwright-best-practices/) — Playwright fundamentals (POM, fixtures, mocking via `page.route()`, axe-core a11y, visual regression, console-error monitoring). **Load only when writing Playwright e2e specs**, after `test-infra-integration` PRD ships. Sapan's Vitest+RTL conventions in this file remain authoritative for unit/component tests.

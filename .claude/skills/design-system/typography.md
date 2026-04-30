@@ -69,3 +69,11 @@ Custom `@utility` blocks in `src/styles/utilities.scss` bundle font family + siz
 | Watermarks | `text-5xl sm:text-7xl` |
 
 Always use mobile-first breakpoints (`sm:`, `md:`, `lg:`) — no bare large sizes without a smaller default.
+
+---
+
+## See also (external reference)
+
+Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
+
+- [`external/design/frontend-design/`](../external/design/frontend-design/) — production-grade visual quality, anti-generic-AI aesthetics, type-pairing patterns. Sapan's font registry (`font-dm`/`font-hg`/`font-cg`/`font-bungee`/`font-arabic`) is closed; load this skill for general typography principles, not for adding fonts.

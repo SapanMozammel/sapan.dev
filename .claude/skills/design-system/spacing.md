@@ -117,3 +117,11 @@ These arbitrary values are **not violations** — no Tailwind scale equivalent e
 - Always mobile-first — write the base (mobile) style first, then add `sm:` / `md:` / `lg:` overrides
 - Never use arbitrary values for spacing when a Tailwind scale value exists
 - Use `container` or `container-fluid` for section widths — never set `max-w-*` manually on sections
+
+---
+
+## See also (external reference)
+
+Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
+
+- [`external/design/web-design-guidelines/`](../external/design/web-design-guidelines/) — spacing rhythm, density principles, responsive breakpoint conventions. Sapan's spacing scale and breakpoint set are closed; load for cross-cutting layout decisions, not for introducing new arbitrary spacing values.

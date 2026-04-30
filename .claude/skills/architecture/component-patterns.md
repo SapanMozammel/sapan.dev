@@ -245,3 +245,14 @@ Before writing or modifying any component:
 - [ ] `type Props = { ... }` — never `interface`
 - [ ] No `any` types
 - [ ] `export default ComponentName` at the bottom — never both `export const` and `export default` for the same component
+
+---
+
+## See also (external reference)
+
+Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
+
+- [`workflow/no-use-effect.md`](../workflow/no-use-effect.md) — strict no-direct-`useEffect` rule (ALWAYS ACTIVE; sapan-canonical, the 6-rule guide for derived state, event handlers, `useMemo`, `useSyncExternalStore`, key-based reset, `useMountEffect`)
+- [`external/react/react-best-practices/`](../external/react/react-best-practices/) — TSX quality checklist (component structure, hooks, a11y, perf, TS)
+- [`external/nextjs/nextjs-app-router-fundamentals/`](../external/nextjs/nextjs-app-router-fundamentals/) — App Router 13+ basics (layouts, routing, metadata)
+- [`external/nextjs/nextjs-app-router-patterns/`](../external/nextjs/nextjs-app-router-patterns/) — advanced patterns (Server Components, streaming, parallel routes)

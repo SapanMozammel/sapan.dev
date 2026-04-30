@@ -148,4 +148,45 @@ Allowed remote domains: `images.unsplash.com`
 - `@/` alias for all internal imports
 - No `any` types — TypeScript strict mode (`noUnusedLocals`, `noUnusedParameters`, `exactOptionalPropertyTypes`)
 - `export default ComponentName` at the bottom of every component file — never both `export const` and `export default` for the same component
-- PRD history is sacred — never overwrite or remove completed (`[✅]`) steps when updating a plan
+- PRD history is sacred — never overwrite or remove completed (`[✅]`) steps when updating a plan; use `[⬜]` / `[🔄]` / `[✅]` markers, never `[x]`
+
+---
+
+## Slash Commands
+
+Project-level commands live in `.claude/commands/`. Each is invoked as `/<name> [args]`.
+
+| Command | Purpose |
+|---|---|
+| `/plan [feature]` | Explore code + load skills + write a PRD at `.claude/plans/[kebab-name]/prd.md`. No code written. |
+| `/implement [plan-name]` | Read the PRD, execute step-by-step, run quality gates, mark progress. |
+| `/review [scope?]` | 6-priority code review (Security/A11y, Hydration/RSC, Data Layer, Perf, Effects/State, Conventions). Auto-writes a follow-up PRD on Critical/Warning findings. **Replaces deprecated `/audit`**. |
+| `/review-i18n` | Translation parity audit — produces three PRDs: `missing-translations-audit`, `over-translation-audit`, `orphan-translation-keys-audit`. **Renamed from `/audit-i18n`**. |
+| `/fix-issue [num\|description]` | TDD-first bug fix flow — write failing test, fix smallest unit, re-run gate. Optional `gh issue view` integration. |
+| `/test [unit\|e2e\|i18n\|<file>]` | Run a test suite OR generate Vitest+RTL / Playwright tests for a target. |
+| `/commit [message?]` | Smart commit with secret-scan, type(scope) prefix, HEREDOC body, sapan co-author trailer. |
+| `/commit-staged [message?]` | Commit only what's already staged (no auto-staging). |
+| `/push [flags?]` | Safe push — quality gate, branch guard, refuses force-push to default branch. |
+| `/pr [base?]` | Create a structured PR with quality gate, auto-detected change categories, suggested merge-commit message. |
+| `/translate [locale?]` | i18n translation helper. |
+| `/new-component [Name]` | Scaffold a new component per sapan conventions. |
+| `/new-section [Name]` | Scaffold a new page section per sapan conventions. |
+| `/generate-config [skill\|command\|all?]` | Config scaffolding helper. |
+| `/update-setup [section?]` | Update `docs/CLAUDE_SETUP.md`. |
+
+**Removed:** `/audit` (subsumed by `/review`). **Renamed:** `/audit-i18n` → `/review-i18n`. **Not adopted:** R&D's standalone `/feature` (merged into `/plan`).
+
+## Agents
+
+Custom agents live in `.claude/agents/`. Invoked via the Agent tool with the matching `subagent_type`.
+
+| Agent | When to invoke |
+|---|---|
+| `code-reviewer` | Before commit / before PR — runs the same 6-priority checklist as `/review`, but in a parallel agent context. Auto-writes PRD on violations. |
+| `test-writer` | When adding/changing components or fixing bugs TDD-style. Generates Vitest+RTL tests with sapan's `render` from `tests/test-utils.tsx`. Apollo `MockedProvider` patterns gated until `apollo-client-integration` ships; Playwright e2e gated until `test-infra-integration` ships. |
+
+## External Skills Library
+
+Framework-level reference skills live in `.claude/skills/external/{nextjs,react,typescript,testing,design,data,tooling}/`. Sapan rules in `.claude/skills/{architecture,design-system,workflow}/` are **authoritative** — when external guidance conflicts with sapan rules, sapan wins.
+
+See [`.claude/skills/external/README.md`](.claude/skills/external/README.md) for the full index, source attribution, and per-category overlap notes.
