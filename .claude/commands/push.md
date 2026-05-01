@@ -60,7 +60,7 @@ Optional flags: `$ARGUMENTS`
      git diff --name-only "$BASE"...HEAD | grep -vE '\.md$|^docs/' | head -1
      # If grep returns any line, the diff is NOT docs-only — refuse --skip-tests
      ```
-   - Prettier runs via the PostToolUse hook in `.claude/settings.json` and via `pnpm format:all` before commit; no separate command is needed here.
+   - Prettier runs via the PostToolUse hook in `.claude/settings.json` and via `/format` (or `pnpm run format:all` directly) before commit; no separate command is needed here. Use `/format` when changes touch `className` strings or `@apply` directives — it adds the Tailwind v3→v4 `!utility` sweep on top of the standard format pipeline.
 
 6. **Push.**
    - Default: `git push` (or `git push -u origin "$CURRENT"` for first push).

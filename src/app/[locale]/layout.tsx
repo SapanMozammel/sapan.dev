@@ -3,6 +3,7 @@ import HtmlLocaleSync from '@/components/layout/common/HtmlLocaleSync';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import { routing, RTL_LOCALES } from '@/i18n/routing';
+import { cn } from '@/lib/utils';
 import Providers from '@/providers';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
@@ -101,7 +102,7 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
 
 	return (
 		<html lang={locale} dir={isRTL ? 'rtl' : 'ltr'} suppressHydrationWarning className='relative'>
-			<body className={`${fontList} ${isRTL ? 'font-arabic' : 'font-dm'}`} suppressHydrationWarning>
+			<body className={cn(fontList, isRTL ? 'font-arabic' : 'font-dm')} suppressHydrationWarning>
 				<script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
 				<Providers>
 					<NextIntlClientProvider messages={messages}>

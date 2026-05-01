@@ -59,6 +59,7 @@ Invoke each via the **Skill** tool before tracing the bug. **Sapan rules in `CLA
 
 6. **Re-run and widen.**
    ```bash
+   /format                                # organize-imports + Prettier + ESLint --fix + Tailwind v3→v4 `!utility` sweep
    pnpm run test                          # full Vitest suite
    pnpm run lint                          # must be clean
    pnpm run type:check                    # must be clean

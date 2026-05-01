@@ -583,6 +583,12 @@ const generateVSCodeSettings = (config) => {
 			javascript: 'javascriptreact',
 			typescript: 'typescriptreact',
 		},
+
+		// Tailwind CSS IntelliSense (bradlc.vscode-tailwindcss)
+		'tailwindCSS.experimental.configFile': 'src/styles/global.scss',
+		'tailwindCSS.includeLanguages': {
+			scss: 'css',
+		},
 	};
 
 	return JSON.stringify(settings, null, '\t');

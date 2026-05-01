@@ -79,7 +79,7 @@ h. **Write tests** in `tests/` (sapan convention — outside `src/`, NOT `__test
 i. **Quality gate** — run all of these and fix every failure before declaring done:
 
    ```bash
-   pnpm run format:all                # auto-format touched files (Prettier + ESLint --fix + organize-imports)
+   /format                             # organize-imports + Prettier + ESLint --fix + Tailwind v3→v4 `!utility` sweep (replaces standalone `pnpm run format:all`)
    pnpm run lint                       # must be clean
    pnpm run test                       # must be green
    pnpm run type:check                 # must be clean (tsc --noEmit)
