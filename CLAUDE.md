@@ -15,6 +15,10 @@ pnpm run format:all    # Organize imports + Prettier + ESLint fix
 # Test & build
 pnpm run test          # Vitest (run once)
 pnpm run build         # Production build
+
+# Run before push
+pnpm run test:e2e      # Playwright e2e (defaults to all 8 projects)
+pnpm run test:e2e:ui   # Playwright UI mode (interactive)
 ```
 
 > Full script reference → `docs/DEVELOPMENT_GUIDE.md`
@@ -24,6 +28,8 @@ pnpm run build         # Production build
 ## Stack
 
 Next.js 16 · React 19 · TypeScript 6 · Tailwind CSS v4 · SCSS · Redux Toolkit · next-intl · next-themes · Framer Motion · GSAP · Three.js / R3F · shadcn/ui (new-york, Tabler icons)
+
+**Testing:** Vitest + RTL for unit/component (in `tests/`); Playwright + axe-core for e2e (in `e2e/` on dedicated port `8001`). E2e conventions live at [.claude/skills/workflow/e2e.md](.claude/skills/workflow/e2e.md) — 8-project matrix (chromium/firefox/webkit desktop + iPhone 15 + Pixel 7 + i18n-rtl + dark-mode + motion-on), reduced-motion default, mock-everything-external rule. Slash commands `/e2e-add-spec`, `/lhci`, and the `e2e-spec-author` agent are deferred to follow-up PRD `test-infra-tooling-followup`.
 
 ---
 
@@ -56,6 +62,10 @@ src/
 ├── styles/                 # global.scss, themes.scss, utilities.scss, animations.scss
 └── types/                  # TypeScript types
 tests/                      # Vitest suites (root-level, outside Next.js compilation)
+e2e/                        # Playwright specs (root-level, scoped via tsconfig.e2e.json)
+├── fixtures.ts             # Extended `test` — mockContact, mockTurnstile, setLocale, reduced-motion default
+├── pages/                  # POMs — HomePage, ArticlesPage
+└── *.spec.ts               # 8 specs — landing, navigation, responsive, accessibility, articles, i18n, theme, contact-modal
 ```
 
 ---

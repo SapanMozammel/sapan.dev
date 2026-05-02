@@ -10,6 +10,7 @@
 *.lcov
 /test-results/
 /playwright-report/
+/playwright/.cache/
 *.spec.js.snap
 *.test.js.snap
 

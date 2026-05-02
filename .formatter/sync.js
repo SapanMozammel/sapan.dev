@@ -420,6 +420,31 @@ module.exports = [
 		},
 	},
 
+	// Playwright e2e — relaxed rules for spec authoring
+	{
+		files: ['e2e/**/*.ts', 'playwright.config.ts'],
+		plugins: { '@typescript-eslint': typescriptPlugin },
+		languageOptions: {
+			parser: typescriptParser,
+			parserOptions: {
+				ecmaVersion: 2022,
+				sourceType: 'module',
+				project: './tsconfig.e2e.json',
+			},
+			globals: {
+				console: 'readonly',
+				process: 'readonly',
+			},
+		},
+		rules: {
+			'no-console': 'off',
+			'react/jsx-uses-react': 'off',
+			'react/react-in-jsx-scope': 'off',
+			'react-hooks/rules-of-hooks': 'off',
+			'@next/next/no-html-link-for-pages': 'off',
+		},
+	},
+
 	// Ignores
 	{
 		ignores: [

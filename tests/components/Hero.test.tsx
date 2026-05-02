@@ -24,7 +24,7 @@ describe('Hero', () => {
 
 	it('renders the description paragraph', async () => {
 		render(await Hero());
-		expect(screen.getByText(/5\+ years of dynamic experience/i)).toBeInTheDocument();
+		expect(screen.getByText(/6\+ years of dynamic experience/i)).toBeInTheDocument();
 	});
 
 	it('renders the download resume button', async () => {

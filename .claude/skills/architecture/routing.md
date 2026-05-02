@@ -110,7 +110,11 @@ export const generateStaticParams = () =>
 
 ---
 
-## See also (external reference)
+## See also
+
+For locale-aware spec patterns (sample-locale parameterization, `<html lang>` / `<html dir>` assertions, switcher persistence), see [`../workflow/e2e.md`](../workflow/e2e.md).
+
+### External reference
 
 Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
 

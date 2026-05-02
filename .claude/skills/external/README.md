@@ -51,13 +51,14 @@ When in doubt during code authoring or review: read the sapan skill first, then 
 
 **Removed:** the `nextjs-react-typescript` skill was deleted because it actively conflicts with sapan rules in `CLAUDE.md` Code Conventions: it advocates `interface` over `type` (sapan: `type` only), `function` over arrow functions (sapan: arrow only), named exports over `export default` (sapan: `export default` at bottom), and `nuqs` for URL search params (sapan doesn't use it). The conflict was higher than the value of its 52-line summary. Sapan's `CLAUDE.md` Code Conventions block is the canonical reference for sapan TypeScript style.
 
-### `testing/` (1 skill) — Playwright
+### `testing/` (2 skills) — Playwright + e2e patterns
 
 | Skill | Source | When to use |
 |---|---|---|
 | `playwright-best-practices` | currents.dev | Comprehensive Playwright reference — POM, mocking via `page.route()`, axe-core a11y, visual regression, console-error monitoring, multi-tab flows, file uploads, GraphQL mocking, mobile/responsive, performance budgets, security. **Load when writing or debugging e2e specs**, after `test-infra-integration` PRD ships and `e2e/` directory exists. |
+| `e2e-testing-patterns` | currents.dev / R&D drop | Patterns reference — selector strategy, fixture composition, network mocking, parallelism, flake mitigation. Pair with `playwright-best-practices` when designing a new spec or refactoring an existing one. |
 
-**Overlap note:** sapan's `workflow/testing.md` (Vitest unit/component conventions) is authoritative for test placement (`tests/` outside `src/`, NOT `__tests__/`). After `test-infra-integration` ships, the bridge skill `workflow/e2e.md` cites this external skill for general Playwright wisdom while encoding sapan-specific Playwright conventions (8-project matrix, port 8000, fixture catalog, reduced-motion default).
+**Overlap note:** sapan's `workflow/testing.md` (Vitest unit/component conventions) is authoritative for test placement (`tests/` outside `src/`, NOT `__tests__/`). The bridge skill `workflow/e2e.md` cites both external skills for general Playwright wisdom while encoding sapan-specific conventions (8-project matrix, dedicated e2e port 8001, fixture catalog, reduced-motion default).
 
 ### `design/` (2 skills) — UI / UX / a11y
 
@@ -88,7 +89,6 @@ When in doubt during code authoring or review: read the sapan skill first, then 
 ## Skipped (not in this library)
 
 - **`nextjs`** (general Next.js skill) — redundant with `next-best-practices` + `nextjs-app-router-*`. Not copied.
-- **`e2e-testing-patterns`** — claimed by sibling `test-infra-integration` PRD (it copies the skill standalone). When that PRD ships, the skill lands at `external/testing/e2e-testing-patterns/`.
 
 ## Loading priority
 

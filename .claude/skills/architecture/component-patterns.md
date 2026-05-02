@@ -248,7 +248,11 @@ Before writing or modifying any component:
 
 ---
 
-## See also (external reference)
+## See also
+
+For e2e enforcement of server/client boundaries (reduced-motion default, RSC routes don't await client JS for first paint), see [`../workflow/e2e.md`](../workflow/e2e.md).
+
+### External reference
 
 Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
 

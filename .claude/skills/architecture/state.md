@@ -61,7 +61,11 @@ const isOpen = useAppSelector((state) => state.ui.isContactModalOpen)
 
 ---
 
-## See also (external reference)
+## See also
+
+For Redux dispatch patterns in e2e (opening ContactModal via `window.__store__.dispatch`, asserting locale persistence after reload), see [`../workflow/e2e.md`](../workflow/e2e.md).
+
+### External reference
 
 Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
 

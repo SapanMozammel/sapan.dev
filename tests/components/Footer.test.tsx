@@ -16,6 +16,6 @@ describe('Footer', () => {
 
 	it('renders the developer credit', async () => {
 		render(await Footer());
-		expect(screen.getByText(/Designed & Developed by SapanMozammel/i)).toBeInTheDocument();
+		expect(screen.getByText(/Designed & Developed by Sapan Mozammel/i)).toBeInTheDocument();
 	});
 });
