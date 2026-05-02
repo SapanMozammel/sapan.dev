@@ -14,12 +14,7 @@ const scanRoute = async (page: Page, path: string) => {
 		//   rendered with `text-transparent` and read tone from the gradient. Axe cannot evaluate
 		//   gradient fills, so it reports the placeholder color as low-contrast. Manual contrast
 		//   review covered the gradient stops separately.
-		.disableRules(['color-contrast'])
-		// Pre-existing source issue — tracked for follow-up PRD `a11y-scrollable-pre-blocks`:
-		// MDX-rendered `<pre>` code blocks in article detail can overflow horizontally; axe flags
-		// `scrollable-region-focusable` because the wrapper is scrollable but not in tab order.
-		// Real fix: add `tabIndex={0}` to the `<pre>` (or its wrapper) so keyboard users can pan.
-		.exclude('article pre, .rounded-xl > pre, .rounded-xl.overflow-hidden > pre');
+		.disableRules(['color-contrast']);
 
 	const results = await builder.analyze();
 	const blocking = results.violations.filter((v) => SERIOUS_LEVELS.has(v.impact ?? ''));
