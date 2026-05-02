@@ -15,14 +15,6 @@ const scanRoute = async (page: Page, path: string) => {
 		//   gradient fills, so it reports the placeholder color as low-contrast. Manual contrast
 		//   review covered the gradient stops separately.
 		.disableRules(['color-contrast'])
-		// Pre-existing source issues — tracked for follow-up PRD `a11y-icon-only-controls`:
-		// - LanguageSwitcher + ThemeSwitcher trigger buttons render only an icon with no aria-label.
-		// - GitHubLink renders an icon-only external link without an accessible name.
-		// Excluding the specific nodes keeps the rest of the page under strict button-name/link-name
-		// scrutiny so any new icon-only control surfaces the failure immediately.
-		.exclude('header button[aria-controls]')
-		.exclude('header a[aria-label=""]')
-		.exclude('header a:has(svg):not(:has(span))')
 		// Pre-existing source issue — tracked for follow-up PRD `a11y-form-label-association`:
 		// FormField renders `<label>` and `<input>` as siblings without `htmlFor`/`id`. Implicit
 		// label requires nesting; explicit requires `htmlFor`. Neither holds today, so axe flags

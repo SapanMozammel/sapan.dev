@@ -59,6 +59,7 @@ const LanguageSwitcher = memo(() => {
 					<PopoverTrigger asChild>
 						<button
 							type='button'
+							aria-label={translateNav('changeLanguage')}
 							className='hover:text-primary dark:hover:text-success text-dark inline-flex aspect-square h-6 cursor-pointer items-center justify-center ease-in-out sm:h-8 dark:text-white'
 							onMouseEnter={() => setIsHovering(true)}
 							onMouseLeave={() => setIsHovering(false)}

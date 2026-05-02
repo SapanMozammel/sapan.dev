@@ -14,6 +14,7 @@ const GitHubLink = () => {
 				<NextLink
 					href='https://github.com/SapanMozammel'
 					target='_blank'
+					aria-label={translateLabels('viewOnGithub')}
 					className='hover:text-primary dark:hover:text-success text-dark hidden aspect-square h-6 cursor-pointer items-center justify-center ease-in-out sm:h-8 md:inline-flex dark:text-white'
 				>
 					<IconBrandGithub className='h-4 w-4 outline-none sm:h-5 sm:w-5' />
