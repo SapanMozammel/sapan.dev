@@ -15,12 +15,6 @@ const scanRoute = async (page: Page, path: string) => {
 		//   gradient fills, so it reports the placeholder color as low-contrast. Manual contrast
 		//   review covered the gradient stops separately.
 		.disableRules(['color-contrast'])
-		// Pre-existing source issue — tracked for follow-up PRD `a11y-form-label-association`:
-		// FormField renders `<label>` and `<input>` as siblings without `htmlFor`/`id`. Implicit
-		// label requires nesting; explicit requires `htmlFor`. Neither holds today, so axe flags
-		// `label`. Excluded here so the rest of the page remains under strict scrutiny.
-		.exclude('[role="dialog"] fieldset')
-		.exclude('fieldset > input, fieldset > textarea')
 		// Pre-existing source issue — tracked for follow-up PRD `a11y-scrollable-pre-blocks`:
 		// MDX-rendered `<pre>` code blocks in article detail can overflow horizontally; axe flags
 		// `scrollable-region-focusable` because the wrapper is scrollable but not in tab order.

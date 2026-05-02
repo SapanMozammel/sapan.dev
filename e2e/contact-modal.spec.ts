@@ -1,11 +1,10 @@
 import enCommon from '../src/i18n/locales/en/common.json';
 import { expect, test } from './fixtures';
 
+const labels = enCommon.contact.form.labels;
 const status = enCommon.contact.status;
 
-const fieldByName = (page: import('@playwright/test').Page, name: 'name' | 'email' | 'title' | 'message') => {
-	return name === 'message' ? page.locator('textarea[name="message"]') : page.locator(`input[name="${name}"]`);
-};
+const fieldByLabel = (page: import('@playwright/test').Page, label: string) => page.getByLabel(label, { exact: true });
 
 const openModal = async (page: import('@playwright/test').Page) => {
 	await page.goto('/');
@@ -15,10 +14,10 @@ const openModal = async (page: import('@playwright/test').Page) => {
 };
 
 const fillValid = async (page: import('@playwright/test').Page) => {
-	await fieldByName(page, 'name').fill('Ada Lovelace');
-	await fieldByName(page, 'email').fill('ada@example.com');
-	await fieldByName(page, 'title').fill('Test integration');
-	await fieldByName(page, 'message').fill('Hello from a Playwright spec.');
+	await fieldByLabel(page, labels.name).fill('Ada Lovelace');
+	await fieldByLabel(page, labels.email).fill('ada@example.com');
+	await fieldByLabel(page, labels.title).fill('Test integration');
+	await fieldByLabel(page, labels.message).fill('Hello from a Playwright spec.');
 };
 
 test.describe('contact modal', () => {
@@ -26,10 +25,10 @@ test.describe('contact modal', () => {
 		await mockTurnstile();
 		await openModal(page);
 
-		await expect(fieldByName(page, 'name')).toBeVisible();
-		await expect(fieldByName(page, 'email')).toBeVisible();
-		await expect(fieldByName(page, 'title')).toBeVisible();
-		await expect(fieldByName(page, 'message')).toBeVisible();
+		await expect(fieldByLabel(page, labels.name)).toBeVisible();
+		await expect(fieldByLabel(page, labels.email)).toBeVisible();
+		await expect(fieldByLabel(page, labels.title)).toBeVisible();
+		await expect(fieldByLabel(page, labels.message)).toBeVisible();
 	});
 
 	test('submitting an empty form surfaces validation errors', async ({ page, mockContact, mockTurnstile }) => {
