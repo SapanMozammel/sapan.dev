@@ -54,7 +54,7 @@ If the assertion fits comfortably in jsdom + RTL (a single component's render, p
 | `mobile-chromium` | `devices['Pixel 7']` | Mobile responsive on Chromium engine |
 | `i18n-rtl` | Chromium, locale `ar`, `baseURL` `/ar` | Arabic RTL flow |
 | `dark-mode` | Chromium, `colorScheme: 'dark'` | Dark-mode token swaps |
-| `motion-on` | Chromium, no reduced-motion override | Runs ONLY `motion.spec.ts` (deferred to follow-up); reduced-motion stays disabled here |
+| `motion-on` | Chromium, no reduced-motion override | Runs ONLY `motion.spec.ts`; reduced-motion stays disabled here |
 
 **Default port: `8001`.** Playwright spawns its own dev server via `webServer.command: 'pnpm next dev --port=8001 --turbo'` so the developer's regular `pnpm dev` on `8000` keeps running side-by-side. Never hardcode `8000` — use `baseURL` in tests.
 
@@ -99,13 +99,13 @@ Every external network call has a `page.route()` mock — without exception:
 - GraphQL endpoint (when Apollo ships) → `mockGraphQL()`
 - Any third-party CDN (fonts, analytics) → no-op route or stubbed response
 
-A spec that hits a real external service is rejected at review. The `e2e-spec-author` agent (deferred to follow-up) refuses to scaffold one.
+A spec that hits a real external service is rejected at review. The `e2e-spec-author` agent refuses to scaffold one.
 
 ## Reduced-motion-default policy
 
 Framer Motion + GSAP entrances are non-deterministic under headless CI. The default `page` fixture emulates `prefers-reduced-motion: reduce` so animated content settles instantly and assertions are stable.
 
-The `motion-on` project is the only place where motion runs un-emulated, and only the (deferred) `motion.spec.ts` file targets it. No other spec disables reduced-motion.
+The `motion-on` project is the only place where motion runs un-emulated, and only `motion.spec.ts` targets it (file-scoped via `testMatch: /motion\.spec\.ts$/` in `playwright.config.ts`). No other spec disables reduced-motion.
 
 ---
 
@@ -159,13 +159,17 @@ A spec that asserts `'Get in touch'` literally is rejected at review — assert 
 
 ## Slash commands & agent
 
-| Tool | Status |
-|---|---|
-| `/e2e-add-spec [feature description]` | Deferred to follow-up PRD `test-infra-tooling-followup`. Will scaffold a new spec end-to-end via the `e2e-spec-author` agent. |
-| `/lhci` | Deferred. Will run Lighthouse CI once `.lighthouserc.json` lands. |
-| `e2e-spec-author` agent | Deferred. Will read this skill + sapan architecture skills + the two external testing skills before scaffolding. |
+| Tool | Purpose | Example |
+|---|---|---|
+| [`/e2e-add-spec [feature]`](../../commands/e2e-add-spec.md) | Scaffold a new e2e spec via the `e2e-spec-author` agent — runs the resulting spec on `chromium-desktop` and reports surface | `/e2e-add-spec Test that the FAQ accordion expands on click and persists open state` |
+| [`/lhci`](../../commands/lhci.md) | Run Lighthouse CI locally against `/` and `/articles`, report budget verdict + score deltas vs the previous run | `/lhci` |
+| [`e2e-spec-author`](../../agents/e2e-spec-author.md) | Agent that designs and scaffolds Playwright specs from a feature description; reads this skill + sapan architecture skills + the two external testing skills before writing | Spawn via Agent tool with `subagent_type: 'e2e-spec-author'`, or use `/e2e-add-spec` |
 
-Until the follow-up ships, specs are written by hand against the conventions in this skill.
+**When to use the agent vs hand-write:**
+- **Use the agent (`/e2e-add-spec`)** for fresh feature surfaces — new flows, new components, anything that warrants its own spec file. The agent picks the right project matrix, mock surface, and POM use.
+- **Hand-write** when extending an existing spec (e.g. adding a locale row to `i18n.spec.ts`, a new test block to `theme.spec.ts`), or when the assertion shape is non-obvious and you need close control over the selectors.
+
+The user always reviews the agent's output before commit — flag any structural selector or `test.skip` gate explicitly in the report.
 
 ---
 

@@ -247,14 +247,50 @@ The default `page` fixture also forces `prefers-reduced-motion: reduce` (so Fram
 
 ### Known a11y exclusions (allow-listed in `accessibility.spec.ts`)
 
-Tracked for follow-up PRDs because they reflect real source issues, not spec-side workarounds:
+Only the gradient `color-contrast` exception remains — the three a11y follow-up PRDs (`a11y-icon-only-controls`, `a11y-form-label-association`, `a11y-scrollable-pre-blocks`) all landed and removed their respective `.exclude()` entries.
 
 | Exclusion | Why | Follow-up |
 |---|---|---|
-| `header button[aria-controls]` + GitHub icon link | LanguageSwitcher / ThemeSwitcher / GitHubLink are icon-only without accessible names | `a11y-icon-only-controls` |
-| `<fieldset> > input/textarea` in dialogs | `FormField` renders `<label>` and `<input>` as siblings without `htmlFor`/`id` association | `a11y-form-label-association` |
-| `article pre`, `.rounded-xl > pre` | MDX code blocks scroll horizontally but are not focusable | `a11y-scrollable-pre-blocks` |
 | `color-contrast` rule (global disable) | Gradient `bg-clip-text` headings render `text-transparent`; axe can't measure gradient contrast. Manual review covers the gradient stops. | None — accepted |
+
+### Lighthouse CI
+
+Performance + accessibility + best-practices + SEO budget gating via `@lhci/cli`. Spawns its own dev server on **port 8002** (sapan dev = 8000, e2e = 8001, lhci = 8002 — port registry is the single source of truth).
+
+```bash
+pnpm run lhci          # autorun: collect → assert → upload (3 runs × 2 URLs, median)
+pnpm run lhci:collect  # collect only — skip assertions
+pnpm run lhci:assert   # rerun assertions against the existing collection
+```
+
+`/lhci` slash command wraps `pnpm run lhci` and adds: persisting the previous run for delta comparison, parsing per-URL median scores, and surfacing the top failing audits.
+
+**Current thresholds** (`.lighthouserc.json`, deliberately relaxed for first 2 weeks):
+
+| Category | Level | Min score |
+|---|---|---|
+| performance | `warn` | 0.80 |
+| accessibility | `error` | 0.95 |
+| best-practices | `error` | 0.90 |
+| seo | `warn` | 0.90 |
+
+`performance` and `seo` are `warn` not `error` because:
+- **Homepage perf** is bound by Three.js + R3F + GSAP cold-start; sits ~0.68 in dev mode, climbs in production but stays borderline. Promote to `error` after a perf-tuning pass.
+- **Homepage seo** sits ~0.92 because of two real findings — `link-text` (Lighthouse's heuristic doesn't credit `aria-label` for icon-only `<a>`) and `robots-txt` validity. Track in micro-PRDs and promote `seo` to `error 0.95` once both are clean.
+
+**CI:** `.github/workflows/ci.yml` has a `lighthouse` job that runs `pnpm exec lhci autorun` after `build`, with `continue-on-error: true` for the first 2 weeks. Promote to blocking after threshold tuning is complete.
+
+### Authoring with the `e2e-spec-author` agent
+
+For new feature areas, prefer scaffolding via the agent rather than hand-authoring. It reads sapan e2e conventions before writing, picks the right project matrix and mock surface, and runs the resulting spec on `chromium-desktop` for fast feedback.
+
+```bash
+/e2e-add-spec Test that the FAQ accordion expands on click and persists open state across reload
+```
+
+The agent produces a spec at `e2e/<feature>.spec.ts`. **Always review the spec before commit** — selectors that are structural (rather than role-based) deserve a second look, and any `test.skip` gate should match a real architectural constraint.
+
+Hand-write specs when **extending** an existing spec file (e.g. adding a locale row to `i18n.spec.ts`) or when the assertion shape is non-obvious. The agent is for fresh feature surfaces.
 
 ---
 

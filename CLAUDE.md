@@ -178,6 +178,9 @@ Project-level commands live in `.claude/commands/`. Each is invoked as `/<name> 
 | `/commit-staged [message?]` | Commit only what's already staged (no auto-staging). |
 | `/push [flags?]` | Safe push — quality gate, branch guard, refuses force-push to default branch. |
 | `/pr [base?]` | Create a structured PR with quality gate, auto-detected change categories, suggested merge-commit message. |
+| `/merge [source]` | Safe local merge — quality gate, smart squash-vs-no-ff default, refuses dirty trees and divergent targets, never pushes. |
+| `/e2e-add-spec [feature]` | Scaffold a new Playwright e2e spec via the `e2e-spec-author` agent — runs the spec on `chromium-desktop` and reports surface. |
+| `/lhci` | Run Lighthouse CI locally against `/` and `/articles`, report budget verdict + score deltas vs the previous run. |
 | `/translate [locale?]` | i18n translation helper. |
 | `/new-component [Name]` | Scaffold a new component per sapan conventions. |
 | `/new-section [Name]` | Scaffold a new page section per sapan conventions. |
@@ -193,7 +196,8 @@ Custom agents live in `.claude/agents/`. Invoked via the Agent tool with the mat
 | Agent | When to invoke |
 |---|---|
 | `code-reviewer` | Before commit / before PR — runs the same 6-priority checklist as `/review`, but in a parallel agent context. Auto-writes PRD on violations. |
-| `test-writer` | When adding/changing components or fixing bugs TDD-style. Generates Vitest+RTL tests with sapan's `render` from `tests/test-utils.tsx`. Apollo `MockedProvider` patterns gated until `apollo-client-integration` ships; Playwright e2e gated until `test-infra-integration` ships. |
+| `test-writer` | When adding/changing components or fixing bugs TDD-style. Generates Vitest+RTL tests with sapan's `render` from `tests/test-utils.tsx`. Apollo `MockedProvider` patterns gated until `apollo-client-integration` ships. |
+| `e2e-spec-author` | When `/implement` decides a feature warrants Playwright e2e coverage. Scaffolds the spec from a feature description, decides project matrix + mock surface, runs on `chromium-desktop` for fast feedback. Invoked via `/e2e-add-spec` or directly via the Agent tool. |
 
 ## External Skills Library
 

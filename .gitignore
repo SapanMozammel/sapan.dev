@@ -11,6 +11,7 @@
 /test-results/
 /playwright-report/
 /playwright/.cache/
+/.lighthouseci/
 *.spec.js.snap
 *.test.js.snap
 
