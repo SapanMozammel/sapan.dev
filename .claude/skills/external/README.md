@@ -102,9 +102,7 @@ For most sapan work:
 
 External skills should be refreshed periodically from upstream. To update one:
 
-1. `cp -R new-ai-architecture-rnd/.{agents,claude}/skills/<skill-name> .claude/skills/external/<category>/<skill-name>` (or fetch from the upstream source directly when the R&D folder is pruned)
+1. Fetch from the upstream source directly.
 2. Re-apply any sapan-specific trims (e.g., the apollo-client `integration-{client,react-router,tanstack-start}.md` deletes)
 3. Verify `Skill` tool can still load it
 4. Note the upstream version in this README if it materially changed
-
-The R&D source folder (`new-ai-architecture-rnd/`) is gitignored and pruned after the four planned PRDs (`claude-tooling-integration`, `apollo-client-integration`, `test-infra-integration`, `tailwind-mangle-integration`) all merge. After that, refresh from the upstream skill libraries directly.

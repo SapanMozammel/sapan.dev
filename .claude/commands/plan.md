@@ -45,7 +45,7 @@ Invoke each via the **Skill** tool before exploring code. **Sapan rules in `CLAU
 
 3. **Read sapan context.** Root `CLAUDE.md` plus `.claude/skills/{architecture,design-system,workflow}/*.md` for any directories the feature will touch.
 
-4. **Skim sibling PRDs in `.claude/plans/*/prd.md`** to reuse existing patterns and avoid conflicts (especially `claude-tooling-integration`, `apollo-client-integration`, `test-infra-integration`, `tailwind-mangle-integration`).
+4. **Skim sibling PRDs in `.claude/plans/*/prd.md`** (active and historical) to reuse existing patterns and avoid conflicts.
 
 5. **`Glob` + `Grep` the codebase** for related routes, components, slices, types, and data files. Note what can be reused or extended vs newly built. Never assume paths — verify.
 

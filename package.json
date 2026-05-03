@@ -6,6 +6,8 @@
 		"dev": "next dev --port=8000 --turbo",
 		"dev:webpack": "next dev --port=8000",
 		"build": "next build",
+		"build:mangled": "pnpm build && pnpm mangle",
+		"mangle": "node scripts/mangle.mjs",
 		"start": "next start",
 		"sync": "node .formatter/sync.js",
 		"type:check": "tsc --noEmit",

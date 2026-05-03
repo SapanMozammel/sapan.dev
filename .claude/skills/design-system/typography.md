@@ -72,6 +72,10 @@ Always use mobile-first breakpoints (`sm:`, `md:`, `lg:`) — no bare large size
 
 ---
 
+## See also
+
+- [`workflow/tailwind-mangle.md`](../workflow/tailwind-mangle.md) — sapan's custom `@utility` classes (`text-heading-xlarge`, `text-paragraph-medium`, `font-cg`, etc.) get mangled to `tw-X` in production. The mangler auto-discovers them from emitted CSS — no special registration. Note: `font-dm` and `font-arabic` are runtime-toggled on `<body>` via `classList.toggle`, so they are auto-reserved by the mangler and keep their original names.
+
 ## See also (external reference)
 
 Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.

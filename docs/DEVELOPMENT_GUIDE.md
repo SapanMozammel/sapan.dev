@@ -19,9 +19,15 @@ pnpm run dev:webpack  # Fallback dev server using webpack
 
 ### Build & Production
 ```bash
-pnpm run build
-pnpm run start
+pnpm run build           # Turbopack production build (default; staging-fast, no class mangling)
+pnpm run build:mangled   # pnpm build + post-build Tailwind class mangler (production deploy path)
+pnpm run mangle          # Re-run mangler against an existing .next/ (skip the build step)
+pnpm run start           # Serve the built output
 ```
+
+**Class mangling.** `pnpm build:mangled` runs `scripts/mangle.mjs` after the Turbopack build to rewrite Tailwind class names to short `tw-X` tokens in CSS, HTML, and JS chunks. Vercel deploys use this command via `vercel.json`'s `buildCommand` override — production sites ship mangled, local `pnpm build` stays un-mangled for fast iteration. The mapping is written to `.tw-patch/class-list.json` (gitignored, regenerated each run, uploaded as a CI artifact for prod-support reverse lookup). Full conventions: [.claude/skills/workflow/tailwind-mangle.md](../.claude/skills/workflow/tailwind-mangle.md). Pre-build sanity check: invoke the `tailwind-class-reviewer` agent.
+
+**Reverse lookup.** When prod hits an issue referencing a `tw-abc` class: open `.tw-patch/class-list.json` (or download the `tw-class-list` CI artifact from the affected build), find the entry whose value is `tw-abc`, read the key.
 
 ### Code Quality
 ```bash

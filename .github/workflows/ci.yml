@@ -159,6 +159,42 @@ jobs:
 
       - run: pnpm run build
 
+  mangled-build:
+    name: Mangled Build
+    needs: build
+    runs-on: ubuntu-latest
+    continue-on-error: true # Informational for the first 2 weeks; promote to blocking once stable
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - id: cache-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            node_modules
+            ~/.cache/pnpm
+          key: deps-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - if: steps.cache-restore.outputs.cache-hit != 'true'
+        run: pnpm install --frozen-lockfile
+
+      - run: pnpm run build:mangled
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tw-class-list
+          path: .tw-patch/class-list.json
+          retention-days: 30
+
   e2e:
     name: E2E (${{ matrix.project }})
     needs: build

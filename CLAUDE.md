@@ -20,6 +20,7 @@ pnpm gql:codegen       # Regenerate GraphQL types — run after editing any .gra
 # Run before push
 pnpm run test:e2e      # Playwright e2e (defaults to all 8 projects)
 pnpm run test:e2e:ui   # Playwright UI mode (interactive)
+pnpm run build:mangled # Optional — verifies prod class mangling locally before Vercel deploy
 ```
 
 > Full script reference → `docs/DEVELOPMENT_GUIDE.md`
@@ -154,7 +155,7 @@ Allowed remote domains: `images.unsplash.com`
 
 - Arrow functions only — never `function Foo() {}`
 - `type` only — never `interface` for props or any TypeScript definitions
-- `cn()` from `@/lib/utils` for all className composition — never string-concatenate
+- `cn()` from `@/lib/utils` for all className composition — never template literals (`` className={`...${x}`} ``), never string concatenation, never ternary with two string branches outside `cn()`. Required for prod class mangling (`pnpm build:mangled`, Vercel default via `vercel.json`); see [.claude/skills/workflow/tailwind-mangle.md](.claude/skills/workflow/tailwind-mangle.md)
 - Design system tokens only — no hardcoded colors or hex values
 - `@/` alias for all internal imports
 - No `any` types — TypeScript strict mode (`noUnusedLocals`, `noUnusedParameters`, `exactOptionalPropertyTypes`)
