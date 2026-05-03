@@ -15,6 +15,7 @@ pnpm run format:all    # Organize imports + Prettier + ESLint fix
 # Test & build
 pnpm run test          # Vitest (run once)
 pnpm run build         # Production build
+pnpm gql:codegen       # Regenerate GraphQL types — run after editing any .graphql file
 
 # Run before push
 pnpm run test:e2e      # Playwright e2e (defaults to all 8 projects)
@@ -27,7 +28,7 @@ pnpm run test:e2e:ui   # Playwright UI mode (interactive)
 
 ## Stack
 
-Next.js 16 · React 19 · TypeScript 6 · Tailwind CSS v4 · SCSS · Redux Toolkit · next-intl · next-themes · Framer Motion · GSAP · Three.js / R3F · shadcn/ui (new-york, Tabler icons)
+Next.js 16 · React 19 · TypeScript 6 · Tailwind CSS v4 · SCSS · Redux Toolkit · next-intl · next-themes · Framer Motion · GSAP · Three.js / R3F · shadcn/ui (new-york, Tabler icons) · Apollo Client 4.x (via `@apollo/client-integration-nextjs`, foundation only — see [.claude/skills/architecture/data-graphql.md](.claude/skills/architecture/data-graphql.md))
 
 **Testing:** Vitest + RTL for unit/component (in `tests/`); Playwright + axe-core for e2e (in `e2e/` on dedicated port `8001`). E2e conventions live at [.claude/skills/workflow/e2e.md](.claude/skills/workflow/e2e.md) — 8-project matrix (chromium/firefox/webkit desktop + iPhone 15 + Pixel 7 + i18n-rtl + dark-mode + motion-on), reduced-motion default, mock-everything-external rule. Slash commands `/e2e-add-spec`, `/lhci`, and the `e2e-spec-author` agent are deferred to follow-up PRD `test-infra-tooling-followup`.
 
@@ -181,6 +182,8 @@ Project-level commands live in `.claude/commands/`. Each is invoked as `/<name> 
 | `/merge [source]` | Safe local merge — quality gate, smart squash-vs-no-ff default, refuses dirty trees and divergent targets, never pushes. |
 | `/e2e-add-spec [feature]` | Scaffold a new Playwright e2e spec via the `e2e-spec-author` agent — runs the spec on `chromium-desktop` and reports surface. |
 | `/lhci` | Run Lighthouse CI locally against `/` and `/articles`, report budget verdict + score deltas vs the previous run. |
+| `/gql-codegen` | Run GraphQL codegen + type-check; surface drift between `.graphql` operations and generated types. |
+| `/gql-add-query [feature]` | Scaffold a new GraphQL operation end-to-end via the `graphql-architect` agent (decides RSC vs Client, writes operation + optional fragment, runs codegen, scaffolds component). |
 | `/translate [locale?]` | i18n translation helper. |
 | `/new-component [Name]` | Scaffold a new component per sapan conventions. |
 | `/new-section [Name]` | Scaffold a new page section per sapan conventions. |
@@ -198,6 +201,7 @@ Custom agents live in `.claude/agents/`. Invoked via the Agent tool with the mat
 | `code-reviewer` | Before commit / before PR — runs the same 6-priority checklist as `/review`, but in a parallel agent context. Auto-writes PRD on violations. |
 | `test-writer` | When adding/changing components or fixing bugs TDD-style. Generates Vitest+RTL tests with sapan's `render` from `tests/test-utils.tsx`. Apollo `MockedProvider` patterns gated until `apollo-client-integration` ships. |
 | `e2e-spec-author` | When `/implement` decides a feature warrants Playwright e2e coverage. Scaffolds the spec from a feature description, decides project matrix + mock surface, runs on `chromium-desktop` for fast feedback. Invoked via `/e2e-add-spec` or directly via the Agent tool. |
+| `graphql-architect` | When a feature needs remote GraphQL data. Designs and scaffolds operations end-to-end: decides RSC vs Client, forces RSC when `GRAPHQL_AUTH_TOKEN` is required, writes operation + optional fragment, runs codegen + type-check. Invoked via `/gql-add-query` or directly via the Agent tool. |
 
 ## External Skills Library
 

@@ -140,6 +140,7 @@ module.exports = [
 			'coverage/**',
 			'.cache/**',
 			'public/**',
+			'src/types/graphql/**',
 		],
 	},
 ];

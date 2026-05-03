@@ -2,11 +2,14 @@ import { test as base, expect, type Page } from '@playwright/test';
 
 type ContactMode = 'success' | 'error';
 
+type GraphQLOperationResponse = Record<string, unknown>;
+type GraphQLOperationMap = Record<string, GraphQLOperationResponse>;
+
 type SapanFixtures = {
 	mockContact: (mode: ContactMode) => Promise<void>;
 	mockTurnstile: () => Promise<void>;
 	setLocale: (locale: string) => Promise<void>;
-	// + mockGraphQL when apollo-client-integration ships
+	mockGraphQL: (operations: GraphQLOperationMap) => Promise<void>;
 };
 
 export const test = base.extend<SapanFixtures>({
@@ -84,6 +87,37 @@ export const test = base.extend<SapanFixtures>({
 				{ name: 'NEXT_LOCALE', value: locale, url: page.url() === 'about:blank' ? `http://localhost:8001${path}` : page.url() },
 			]);
 			await page.goto(path);
+		};
+		await use(installer);
+	},
+
+	mockGraphQL: async ({ page }, use) => {
+		const installer = async (operations: GraphQLOperationMap) => {
+			const endpoint = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
+			const route = endpoint ? endpoint : '**/graphql';
+			await page.route(route, async (handler) => {
+				const request = handler.request();
+				if (request.method() !== 'POST') {
+					await handler.continue();
+					return;
+				}
+				const body = request.postDataJSON() as { operationName?: string } | null;
+				const operationName = body?.operationName ?? '';
+				const data = operations[operationName];
+				if (!data) {
+					await handler.fulfill({
+						status: 404,
+						contentType: 'application/json',
+						body: JSON.stringify({ errors: [{ message: `[mockGraphQL] no mock registered for operation "${operationName}"` }] }),
+					});
+					return;
+				}
+				await handler.fulfill({
+					status: 200,
+					contentType: 'application/json',
+					body: JSON.stringify({ data }),
+				});
+			});
 		};
 		await use(installer);
 	},

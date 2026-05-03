@@ -63,6 +63,8 @@ const isOpen = useAppSelector((state) => state.ui.isContactModalOpen)
 
 ## See also
 
+For the Redux/Apollo state boundary (UI vs remote data), see [`data-graphql.md`](./data-graphql.md).
+
 For Redux dispatch patterns in e2e (opening ContactModal via `window.__store__.dispatch`, asserting locale persistence after reload), see [`../workflow/e2e.md`](../workflow/e2e.md).
 
 ### External reference

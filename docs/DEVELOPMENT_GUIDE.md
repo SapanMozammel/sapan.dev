@@ -294,6 +294,79 @@ Hand-write specs when **extending** an existing spec file (e.g. adding a locale 
 
 ---
 
+## Apollo Client (GraphQL Foundation)
+
+Apollo Client 4.x is wired as foundation only — `<ApolloWrapper>` mounts on every page but the scaffold is **inert by default**: no queries shipped, `NEXT_PUBLIC_GRAPHQL_ENDPOINT` blank in `.env.example`, the runtime throws a clear error if any query fires without an endpoint set.
+
+**Convention skill:** [.claude/skills/architecture/data-graphql.md](../.claude/skills/architecture/data-graphql.md) — sapan-canonical rules. Reference: [.claude/skills/external/data/apollo-client/](../.claude/skills/external/data/apollo-client/) for general Apollo 4.x patterns.
+
+### File layout
+
+```
+src/lib/apollo/
+├── client.ts              # registerApolloClient — RSC singleton + getClient/query/PreloadQuery
+├── provider.tsx           # 'use client' <ApolloWrapper> using ApolloNextAppProvider
+├── links.ts               # createServerLinks() (with auth) + createClientLinks() (no auth)
+├── cache.ts               # createCache() factory — fresh InMemoryCache per call
+├── operations/            # .graphql operation files (named operations only)
+└── fragments/             # .graphql fragment files (colocate to component when used)
+codegen.ts                 # GraphQL Code Generator config (client-preset)
+schema.graphql             # Placeholder schema — replace when first feature lands
+src/types/graphql/         # Codegen output (gitignored, regenerated on demand)
+```
+
+### Provider ordering
+
+Locale layout chain (`src/app/[locale]/layout.tsx`):
+
+```
+<Providers>                          # Redux + NextThemes
+  <NextIntlClientProvider>           # next-intl
+    <ApolloWrapper>                  # innermost — Suspense hydration close to consumers
+      <HtmlLocaleSync />
+      <Header />
+      {children}
+      <Footer />
+    </ApolloWrapper>
+  </NextIntlClientProvider>
+</Providers>
+```
+
+### Auth boundary (server-only token)
+
+| Env var | Visibility | Read by |
+|---|---|---|
+| `NEXT_PUBLIC_GRAPHQL_ENDPOINT` | Browser-visible (URL only) | Both `createServerLinks()` and `createClientLinks()` |
+| `GRAPHQL_AUTH_TOKEN` | Server-only — never prefix with `NEXT_PUBLIC_` | Only `createServerLinks()` (via `SetContextLink`) |
+
+If a feature needs authenticated data, fetch via RSC `query()` and pass the resolved data to client components as props. Client-side authenticated queries are forbidden — the `graphql-architect` agent refuses to scaffold one.
+
+### Codegen flow
+
+Run `pnpm gql:codegen` (or `/gql-codegen`) after writing or changing any `.graphql` file. Output lives in `src/types/graphql/` (gitignored, regenerated on demand). The placeholder `schema.graphql` keeps the toolchain valid until the first GraphQL feature lands.
+
+> **Note:** `src/types/graphql/` is excluded from `tsconfig.json` until a real operation lands — the empty `client-preset` stub trips `noUnusedLocals` (`import * as types` declared but unused). Once the first operation references `types`, lift this exclusion in the feature PRD.
+
+### Slash commands & agent
+
+- **`/gql-codegen`** — runs `pnpm gql:codegen` + `pnpm run type:check`, surfaces drift between `.graphql` operations and generated types
+- **`/gql-add-query [feature description]`** — delegates to the `graphql-architect` agent for end-to-end scaffolding (decides RSC vs Client, writes operation + optional fragment, runs codegen, scaffolds component)
+- **`graphql-architect` agent** — designs and scaffolds GraphQL operations from feature descriptions; reads the bridge skill first, sapan architecture skills second, external Apollo skill last
+
+### Endpoint policy (open question)
+
+Three plausible candidates, decided in the first feature PRD that uses Apollo:
+
+| Candidate | URL | Auth pattern |
+|---|---|---|
+| Hashnode | `https://gql.hashnode.com/` | None (fully public) |
+| GitHub | `https://api.github.com/graphql` | Server-only PAT via `GRAPHQL_AUTH_TOKEN`; query via RSC only |
+| Custom backend | TBD | Cookie session or server-only token |
+
+Until the endpoint is decided, the scaffold ships inert — the runtime is wired, the agent + commands + tests are in place, but no queries fire.
+
+---
+
 ## Formatter & Linting Config
 
 ESLint uses **flat config** at the project root (`eslint.config.js`). Prettier config lives in `.formatter/`:

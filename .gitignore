@@ -84,7 +84,8 @@ pnpm-lock.yaml
 # SCSS/Sass
 .sass-cache/
 
-# GraphQL codegen (if used)
+# GraphQL codegen
+/src/types/graphql/
 /generated/
 *.generated.*
 

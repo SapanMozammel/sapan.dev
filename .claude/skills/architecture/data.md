@@ -90,7 +90,11 @@ No `fetch()`, no API calls for static content — it's all imported directly.
 
 ---
 
-## See also (external reference)
+## See also
+
+For GraphQL data fetching conventions (RSC vs Client decision, fragment colocation, codegen flow, auth boundary), see [`data-graphql.md`](./data-graphql.md).
+
+### External reference
 
 Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
 
