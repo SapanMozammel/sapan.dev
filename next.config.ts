@@ -5,11 +5,6 @@ import { validateServerEnv } from './src/lib/env.server-schema';
 
 validateServerEnv();
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-	enabled: process.env.ANALYZE === 'true',
-});
-
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig: NextConfig = {
@@ -67,4 +62,4 @@ const nextConfig: NextConfig = {
 	},
 };
 
-export default withBundleAnalyzer(withNextIntl(nextConfig));
+export default withNextIntl(nextConfig);

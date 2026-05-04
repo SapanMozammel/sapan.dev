@@ -63,10 +63,11 @@ pnpm run test:e2e:install                      # Re-install Playwright browsers
 
 ### Analysis
 ```bash
-pnpm run analyze         # Full bundle analysis (opens browser report)
-pnpm run analyze:server  # Server bundle only
-pnpm run analyze:browser # Client bundle only
+pnpm run analyze         # Turbopack-native interactive analyzer at http://localhost:4000
+pnpm run analyze:report  # Static analysis written to .next/diagnostics/analyze/ (no server)
 ```
+
+Both run `next experimental-analyze --no-mangling` (mangling disabled so the analyzer shows source class identifiers, not the post-build `tw-X` tokens). The Turbopack-native analyzer replaced the old webpack-only `@next/bundle-analyzer` flow because sapan's `next build` defaults to Turbopack, on which the old plugin printed a warning and produced no report.
 
 ---
 
