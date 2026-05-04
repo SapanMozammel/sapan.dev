@@ -97,6 +97,8 @@ jobs:
 
       - run: pnpm run type:check
 
+      - run: pnpm exec tsc -p tsconfig.test.json --noEmit
+
       - run: pnpm exec tsc -p tsconfig.e2e.json --noEmit
 
   unit:

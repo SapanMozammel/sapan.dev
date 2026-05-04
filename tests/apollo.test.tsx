@@ -36,7 +36,7 @@ describe('ApolloWrapper provider', () => {
 		);
 		expect(screen.getByTestId('apollo-child')).toBeInTheDocument();
 
-		const apolloErrors = consoleErrorSpy.mock.calls.filter((args) => args.some((arg) => typeof arg === 'string' && /apollo/i.test(arg)));
+		const apolloErrors = consoleErrorSpy.mock.calls.filter((args: unknown[]) => args.some((arg: unknown) => typeof arg === 'string' && /apollo/i.test(arg)));
 		expect(apolloErrors).toHaveLength(0);
 	});
 });

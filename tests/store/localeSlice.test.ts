@@ -1,8 +1,9 @@
 import localeReducer, { initializeLocale, LOCALE_STORAGE_KEY, setLocale } from '@/store/slices/localeSlice';
+import type { LocaleState } from '@/types/i18n';
 import { afterEach, describe, expect, it } from 'vitest';
 
 describe('localeSlice', () => {
-	const initialState = { currentLocale: 'en', isRTL: false };
+	const initialState: LocaleState = { currentLocale: 'en', isRTL: false };
 
 	it('has correct initial state', () => {
 		expect(localeReducer(undefined, { type: 'unknown' })).toEqual(initialState);
@@ -21,7 +22,7 @@ describe('localeSlice', () => {
 	});
 
 	it('switches from RTL back to LTR', () => {
-		const rtlState = { currentLocale: 'ar', isRTL: true };
+		const rtlState: LocaleState = { currentLocale: 'ar', isRTL: true };
 		const state = localeReducer(rtlState, setLocale('en'));
 		expect(state.currentLocale).toBe('en');
 		expect(state.isRTL).toBe(false);
