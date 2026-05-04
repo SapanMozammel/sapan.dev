@@ -24,7 +24,7 @@ Invoke each via the **Skill** tool before running the gate or reading the diff. 
 - `next-best-practices` — load before judging Priority 2 (Hydration & RSC).
 - `web-design-guidelines` — load before judging Priority 1 (Security & A11y).
 - `no-use-effect` — load before judging Priority 5 (Effects & State).
-- `apollo-client` — **load only when reviewing files that import from `src/lib/apollo/`** (Apollo lands via `apollo-client-integration` PRD; rules apply only when Apollo is actually in use).
+- `apollo-client` — **load only when reviewing files that import from `src/lib/apollo/`**. Rules apply only when Apollo is actually in use.
 
 ## Review Process
 
@@ -60,7 +60,7 @@ Invoke each via the **Skill** tool before running the gate or reading the diff. 
 
 ### P3: Data Layer (Critical / Warning)
 
-**Sapan is static-content first.** Static data lives in `src/data/{content,config}/` and is imported directly by Server Components. Data-layer rules below apply ONLY to files that import from `src/lib/apollo/` (Apollo is foundation-only via `apollo-client-integration` PRD until a real query lands).
+**Sapan is static-content first.** Static data lives in `src/data/{content,config}/` and is imported directly by Server Components. Data-layer rules below apply ONLY to files that import from `src/lib/apollo/` (Apollo is foundation-only — no endpoint set until a real query lands).
 
 When Apollo IS in use (file imports from `@/lib/apollo/`):
 - `useQuery` / `useSuspenseQuery` should generally be the choice; `useQuery` requires explicit `loading` and `error` handling before reading `data`

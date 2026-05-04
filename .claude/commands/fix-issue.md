@@ -1,5 +1,5 @@
 ---
-description: Investigate and fix a sapan portfolio bug using TDD (Vitest+RTL today; Playwright after test-infra-integration ships)
+description: Investigate and fix a sapan portfolio bug using TDD — Vitest+RTL for unit/component, Playwright for e2e
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash(pnpm run test*), Bash(pnpm run lint*), Bash(pnpm run type:check*), Bash(pnpm exec vitest*), Bash(pnpm exec playwright*), Bash(git diff*), Bash(git log*), Bash(git status*), Bash(gh issue *), Bash(gh pr *), Bash(command -v *)
 ---
 
@@ -18,8 +18,8 @@ Invoke each via the **Skill** tool before tracing the bug. **Sapan rules in `CLA
 - `no-use-effect` — strict no-direct-`useEffect` rule. Bugs caused by `useEffect` for derived state should be fixed by removing the effect, not patching it.
 - `react-best-practices` — React quality checklist (component structure, hooks, a11y, perf).
 - `next-best-practices` — Next.js conventions, RSC boundaries, image/font, route handlers — load when the bug touches an `app/**` route or a Server Component.
-- `playwright-best-practices` — load when the bug needs a Playwright reproduction (route-level, multi-page, visual, a11y) **and** `test-infra-integration` PRD has shipped (i.e., `e2e/` directory exists).
-- `apollo-client` — load **only** when the bug touches a file that imports from `src/lib/apollo/` (Apollo lands via `apollo-client-integration` PRD; rules apply only when Apollo is in use).
+- `playwright-best-practices` — load when the bug needs a Playwright reproduction (route-level, multi-page, visual, a11y).
+- `apollo-client` — load **only** when the bug touches a file that imports from `src/lib/apollo/`. Rules apply only when Apollo is in use.
 
 ## Process
 
@@ -45,14 +45,13 @@ Invoke each via the **Skill** tool before tracing the bug. **Sapan rules in `CLA
 3. **Pick the test layer** (sapan placement):
    - Pure utility / helper / `src/lib/*` → Vitest unit in `tests/lib/foo.test.ts` (sapan places tests in `tests/` outside `src/`, NOT `__tests__/` next to source).
    - Component with state, effects, or Redux → Vitest + RTL in `tests/components/Foo.test.tsx`. Import `render` from `tests/test-utils.tsx` (Redux-Provider-wrapped). Global mocks (next/link, next-intl, next-themes, @/i18n/navigation, Framer, GSAP, R3F) live in `tests/setup.tsx` — extend it if a new global mock is needed.
-   - Route-level flow, multi-page, visual or a11y regression → Playwright spec in `e2e/<feature>.spec.ts` — **only after `test-infra-integration` PRD ships**. Until then, route-level bugs reproduce via Vitest with mocked routing or via manual smoke at `pnpm dev`.
-   - When Apollo is in use → `MockedProvider` from `@apollo/client/testing` (gated until `apollo-client-integration` lands).
+   - Route-level flow, multi-page, visual or a11y regression → Playwright spec in `e2e/<feature>.spec.ts`.
+   - When Apollo is in use → `MockedProvider` from `@apollo/client/testing`.
 
 4. **Write the failing test FIRST.** It must fail for the reason the bug describes, not for an unrelated assertion. Run only that test:
    ```bash
    pnpm exec vitest tests/path/to/foo.test
-   # After test-infra-integration ships:
-   # pnpm exec playwright test e2e/<file>.spec.ts --project=chromium-desktop
+   pnpm exec playwright test e2e/<file>.spec.ts --project=chromium-desktop
    ```
 
 5. **Fix the smallest unit.** Address the root cause. Do not wrap the failing call in `try/catch` to silence it, do not paper over with optional chaining, do not add a fallback that hides the broken state. If the cause is in shared infrastructure (`src/lib/utils/*`, `src/components/layout/common/*`, `src/store/slices/*`), fix it in place — do not refactor opportunistically unless the user asks.
@@ -63,8 +62,7 @@ Invoke each via the **Skill** tool before tracing the bug. **Sapan rules in `CLA
    pnpm run test                          # full Vitest suite
    pnpm run lint                          # must be clean
    pnpm run type:check                    # must be clean
-   # After test-infra-integration ships:
-   # pnpm exec playwright test --project=chromium-desktop  # affected spec(s)
+   pnpm exec playwright test --project=chromium-desktop  # affected spec(s)
    ```
    For visual changes, update screenshots only when intentional: `pnpm exec playwright test --update-snapshots <spec>`. Never blanket-update.
 

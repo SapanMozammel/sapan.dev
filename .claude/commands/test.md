@@ -1,5 +1,5 @@
 ---
-description: Run or generate tests — Vitest unit/component, i18n parity audit, or Playwright e2e (after test-infra-integration ships)
+description: Run or generate tests — Vitest unit/component, i18n parity audit, or Playwright e2e
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash(pnpm run test*), Bash(pnpm run test:watch*), Bash(pnpm run test:coverage*), Bash(pnpm exec vitest *), Bash(pnpm exec playwright *), Bash(pnpm run lint*), Bash(git diff*), Bash(git log*)
 ---
 
@@ -20,8 +20,8 @@ Invoke each via the **Skill** tool. **Sapan rules in `CLAUDE.md`, `workflow/test
 
 - `react-best-practices` — TSX testing patterns + the broader component checklist.
 - `web-design-guidelines` — defines critical a11y violations the test should catch.
-- `playwright-best-practices` — load **only** when writing or running e2e specs (i.e., `test-infra-integration` PRD has shipped and `e2e/` directory exists).
-- `apollo-client` — load **only** when the target imports from `@/lib/apollo/` (after `apollo-client-integration` ships).
+- `playwright-best-practices` — load **only** when writing or running e2e specs.
+- `apollo-client` — load **only** when the target imports from `@/lib/apollo/`.
 
 ## Run Mode
 
@@ -30,7 +30,7 @@ Determine scope from `$ARGUMENTS`:
 | Argument | Action |
 |---|---|
 | `unit` | `pnpm run test` (Vitest, run-once) |
-| `e2e` | `pnpm run test:e2e` — **only after `test-infra-integration` ships**; otherwise print "Playwright not yet integrated; run `/implement test-infra-integration` first" and stop |
+| `e2e` | `pnpm run test:e2e` (Playwright, defaults to all 8 projects in the matrix). Use `--project=chromium-desktop` for a fast single-browser smoke. |
 | `i18n` | Run sapan's i18n audit: parallel-spawn agents to check translation parity (missing keys, over-translation, orphan keys, ICU placeholder integrity) per `.claude/commands/review-i18n.md` (was `audit-i18n.md`); produce the three PRDs at `.claude/plans/{missing-translations-audit, over-translation-audit, orphan-translation-keys-audit}/prd.md` |
 | empty | `pnpm run test` (and `pnpm run test:e2e` if `e2e/` exists) |
 
@@ -56,13 +56,13 @@ Triggered when `$ARGUMENTS` is a file path, component name, or feature descripti
 2. **Pick the test layer.**
    - Pure function / utility / `src/lib/*` module → **Vitest unit** in `tests/lib/foo.test.ts`. No DOM.
    - React component, custom hook, or Context provider → **Vitest + RTL** in `tests/components/Foo.test.tsx`. Use `render` from `tests/test-utils.tsx` (Redux-Provider-wrapped).
-   - Whole route, multi-component journey, visual regression, accessibility audit → **Playwright** in `e2e/<feature>.spec.ts` — **only after `test-infra-integration` ships**.
+   - Whole route, multi-component journey, visual regression, accessibility audit → **Playwright** in `e2e/<feature>.spec.ts`.
 
 3. **Reuse what exists.** Before writing fresh helpers:
    - Check `tests/test-utils.tsx` — sapan's `render` already wraps in `<Provider store={store}>`. Always import `render` from here, never directly from `@testing-library/react`.
    - Check `tests/setup.tsx` — sapan's global mocks (next/link, next/image, next-themes, next-intl, @/i18n/navigation, @marsidev/react-turnstile, framer-motion, gsap, gsap/ScrollTrigger, @react-three/fiber, @react-three/drei, matchMedia, IntersectionObserver, ResizeObserver). **If a new global mock is needed, extend `tests/setup.tsx` rather than adding `vi.mock(...)` per test.**
    - Check sibling `tests/components/*` for existing patterns and match their style.
-   - When `apollo-client-integration` ships: expect a future `tests/apollo-utils.tsx` for `MockedProvider` wrapping.
+   - When Apollo is in use: a future `tests/apollo-utils.tsx` is the place to host `MockedProvider` wrapping helpers.
 
 4. **Generate the spec.** Cover the layers below — skip what genuinely doesn't apply, but don't stop at "renders without crashing".
 
@@ -80,7 +80,7 @@ Triggered when `$ARGUMENTS` is a file path, component name, or feature descripti
 - [ ] **Accessibility** — roles, labels, focus management on dialogs/menus. Prefer `getByRole` over `getByTestId`.
 - [ ] **Apollo mocks** (when target uses Apollo) — at least one success + one error mock per query/mutation hit.
 
-### Coverage checklist (Playwright e2e — gated until `test-infra-integration` ships)
+### Coverage checklist (Playwright e2e)
 
 - [ ] **Happy path** through the feature.
 - [ ] **At least one edge case** (empty results, validation failure, network error via `page.route(...)`).
@@ -95,7 +95,7 @@ Triggered when `$ARGUMENTS` is a file path, component name, or feature descripti
    | Type | Location | Naming |
    |------|----------|--------|
    | Vitest unit / component | `tests/components/`, `tests/lib/`, `tests/data/`, `tests/store/`, `tests/ui/` | `Foo.test.tsx` / `helper.test.ts` |
-   | Playwright e2e | `e2e/` (after `test-infra-integration` ships) | `<feature>.spec.ts` |
+   | Playwright e2e | `e2e/` | `<feature>.spec.ts` |
 
    **Sapan diverges from the R&D `__tests__/` convention** — sapan's `vitest.config.ts` includes `tests/**/*.test.{ts,tsx}` and excludes `__tests__/`. Keep tests in `tests/` outside `src/`.
 
@@ -104,8 +104,7 @@ Triggered when `$ARGUMENTS` is a file path, component name, or feature descripti
    ```bash
    pnpm exec vitest tests/path/to/foo.test       # single file
    pnpm run test                                  # full suite
-   # After test-infra-integration ships:
-   # pnpm exec playwright test e2e/<file>.spec.ts --project=chromium-desktop
+   pnpm exec playwright test e2e/<file>.spec.ts --project=chromium-desktop
    ```
 
    For visual specs verify all viewports pass; on first run create the baseline with `--update-snapshots` and review the PNGs in `e2e/screenshots/` before committing.
@@ -115,7 +114,7 @@ Triggered when `$ARGUMENTS` is a file path, component name, or feature descripti
 ## Mocking rules
 
 - Sapan's `tests/setup.tsx` already mocks: `next/link`, `next/image`, `next-themes`, `next-intl` (with auto-loaded `en` translations from `src/i18n/locales/en/`), `@/i18n/navigation`, `@marsidev/react-turnstile` (auto-resolves with fake token), `framer-motion`, `gsap`, `gsap/ScrollTrigger`, `@react-three/fiber`, `@react-three/drei`, `matchMedia`, `IntersectionObserver`, `ResizeObserver`. **Don't duplicate these per test** — extend `tests/setup.tsx`.
-- Apollo (when in use): wrap with `MockedProvider` (gated until `apollo-client-integration` ships).
+- Apollo (when in use): wrap with `MockedProvider` from `@apollo/client/testing` — see `architecture/data-graphql.md`.
 - localStorage: `vi.stubGlobal('localStorage', { getItem, setItem, removeItem, clear })` and reset between tests in `beforeEach`. Sapan's only meaningful localStorage key is `preferred-language` (locale persistence).
 - **Never mock the module under test. Never mock React itself.**
 

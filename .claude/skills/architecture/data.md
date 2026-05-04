@@ -99,4 +99,4 @@ For GraphQL data fetching conventions (RSC vs Client decision, fragment colocati
 Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
 
 - [`external/typescript/typescript-expert/`](../external/typescript/typescript-expert/) — deep TS problem-solving for complex data type modeling
-- [`external/data/apollo-client/`](../external/data/apollo-client/) — Apollo Client 4.x patterns. **Load only when Apollo is in use** (file imports from `src/lib/apollo/`). Apollo lands as foundation via `apollo-client-integration` PRD; once a real query ships, this skill is the deep reference.
+- [`external/data/apollo-client/`](../external/data/apollo-client/) — Apollo Client 4.x patterns. **Load only when Apollo is in use** (file imports from `src/lib/apollo/`). Once a real query ships, this skill is the deep reference.

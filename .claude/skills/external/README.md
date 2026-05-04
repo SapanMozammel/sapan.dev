@@ -55,7 +55,7 @@ When in doubt during code authoring or review: read the sapan skill first, then 
 
 | Skill | Source | When to use |
 |---|---|---|
-| `playwright-best-practices` | currents.dev | Comprehensive Playwright reference — POM, mocking via `page.route()`, axe-core a11y, visual regression, console-error monitoring, multi-tab flows, file uploads, GraphQL mocking, mobile/responsive, performance budgets, security. **Load when writing or debugging e2e specs**, after `test-infra-integration` PRD ships and `e2e/` directory exists. |
+| `playwright-best-practices` | currents.dev | Comprehensive Playwright reference — POM, mocking via `page.route()`, axe-core a11y, visual regression, console-error monitoring, multi-tab flows, file uploads, GraphQL mocking, mobile/responsive, performance budgets, security. **Load when writing or debugging e2e specs.** |
 | `e2e-testing-patterns` | currents.dev / R&D drop | Patterns reference — selector strategy, fixture composition, network mocking, parallelism, flake mitigation. Pair with `playwright-best-practices` when designing a new spec or refactoring an existing one. |
 
 **Overlap note:** sapan's `workflow/testing.md` (Vitest unit/component conventions) is authoritative for test placement (`tests/` outside `src/`, NOT `__tests__/`). The bridge skill `workflow/e2e.md` cites both external skills for general Playwright wisdom while encoding sapan-specific conventions (8-project matrix, dedicated e2e port 8001, fixture catalog, reduced-motion default).
@@ -73,11 +73,11 @@ When in doubt during code authoring or review: read the sapan skill first, then 
 
 | Skill | Source | When to use |
 |---|---|---|
-| `apollo-client` | Apollographql | Apollo Client 4.x patterns — setup, hooks, caching, fragments, RSC integration, testing. **Load only when reviewing or authoring files that import from `src/lib/apollo/`** (Apollo lands via `apollo-client-integration` PRD; rules apply only when Apollo is in use). |
+| `apollo-client` | Apollographql | Apollo Client 4.x patterns — setup, hooks, caching, fragments, RSC integration, testing. **Load only when reviewing or authoring files that import from `src/lib/apollo/`.** Rules apply only when Apollo is in use. |
 
 **Trim note:** the `references/integration-{client,react-router,tanstack-start}.md` files were deleted during copy — sapan uses Next.js, only `integration-nextjs.md` applies.
 
-**Overlap note:** when Apollo is in use, sapan's `architecture/data-graphql.md` (created by `apollo-client-integration` PRD) is authoritative for sapan-specific conventions (RSC vs client decision, Redux/Apollo state boundary, fragment colocation, `dataMasking: true`, codegen flow). Load that bridge skill first; cite this external skill for deeper Apollo wisdom.
+**Overlap note:** when Apollo is in use, sapan's `architecture/data-graphql.md` is authoritative for sapan-specific conventions (RSC vs client decision, Redux/Apollo state boundary, fragment colocation, `dataMasking: true`, codegen flow). Load that bridge skill first; cite this external skill for deeper Apollo wisdom.
 
 ### `tooling/` (2 skills) — bundler + skill authoring
 
@@ -95,7 +95,7 @@ When in doubt during code authoring or review: read the sapan skill first, then 
 For most sapan work:
 
 1. **Sapan skills first** — `architecture/component-patterns.md`, the relevant `design-system/*.md`, applicable `workflow/*.md`. These are project-canonical.
-2. **Bridge skills** when present — `workflow/e2e.md` (after `test-infra-integration` ships), `architecture/data-graphql.md` (after `apollo-client-integration` ships). They cite external skills + extend with sapan specifics.
+2. **Bridge skills** when present — `workflow/e2e.md`, `architecture/data-graphql.md`. They cite external skills + extend with sapan specifics.
 3. **External skills here** — only when a specific case isn't covered by sapan or bridge skills.
 
 ## How to update this library

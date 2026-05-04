@@ -227,7 +227,7 @@ Each PRD follows the workflow convention:
 - `/review-i18n` — this audit
 - `/translate [locale?]` — propagate English changes to other locales
 - `/implement missing-translations-audit` — apply PRD 1 fixes
-- `/audit [file?]` — generic design system / architecture audit (not i18n)
+- `/review [file?]` — generic design system / architecture review (not i18n)
 
 ---
 
@@ -235,4 +235,4 @@ Each PRD follows the workflow convention:
 
 Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
 
-- [`external/testing/playwright-best-practices/`](../external/testing/playwright-best-practices/) — i18n + locale testing patterns (browser-level Playwright tests). **Load only after `test-infra-integration` PRD ships** and `e2e/i18n.spec.ts` exists. Sapan's `/review-i18n` runs translation-parity audits via Vitest + Node scripts; Playwright e2e adds the runtime-rendered locale verification.
+- [`external/testing/playwright-best-practices/`](../external/testing/playwright-best-practices/) — i18n + locale testing patterns (browser-level Playwright tests). Sapan's `/review-i18n` runs translation-parity audits via Vitest + Node scripts; Playwright `e2e/i18n.spec.ts` adds the runtime-rendered locale verification.

@@ -31,7 +31,7 @@ pnpm run build:mangled # Optional — verifies prod class mangling locally befor
 
 Next.js 16 · React 19 · TypeScript 6 · Tailwind CSS v4 · SCSS · Redux Toolkit · next-intl · next-themes · Framer Motion · GSAP · Three.js / R3F · shadcn/ui (new-york, Tabler icons) · Apollo Client 4.x (via `@apollo/client-integration-nextjs`, foundation only — see [.claude/skills/architecture/data-graphql.md](.claude/skills/architecture/data-graphql.md))
 
-**Testing:** Vitest + RTL for unit/component (in `tests/`); Playwright + axe-core for e2e (in `e2e/` on dedicated port `8001`). E2e conventions live at [.claude/skills/workflow/e2e.md](.claude/skills/workflow/e2e.md) — 8-project matrix (chromium/firefox/webkit desktop + iPhone 15 + Pixel 7 + i18n-rtl + dark-mode + motion-on), reduced-motion default, mock-everything-external rule. Slash commands `/e2e-add-spec`, `/lhci`, and the `e2e-spec-author` agent are deferred to follow-up PRD `test-infra-tooling-followup`.
+**Testing:** Vitest + RTL for unit/component (in `tests/`); Playwright + axe-core for e2e (in `e2e/` on dedicated port `8001`). E2e conventions live at [.claude/skills/workflow/e2e.md](.claude/skills/workflow/e2e.md) — 8-project matrix (chromium/firefox/webkit desktop + iPhone 15 + Pixel 7 + i18n-rtl + dark-mode + motion-on), reduced-motion default, mock-everything-external rule.
 
 ---
 
@@ -201,7 +201,7 @@ Custom agents live in `.claude/agents/`. Invoked via the Agent tool with the mat
 | Agent | When to invoke |
 |---|---|
 | `code-reviewer` | Before commit / before PR — runs the same 6-priority checklist as `/review`, but in a parallel agent context. Auto-writes PRD on violations. |
-| `test-writer` | When adding/changing components or fixing bugs TDD-style. Generates Vitest+RTL tests with sapan's `render` from `tests/test-utils.tsx`. Apollo `MockedProvider` patterns gated until `apollo-client-integration` ships. |
+| `test-writer` | When adding/changing components or fixing bugs TDD-style. Generates Vitest+RTL tests with sapan's `render` from `tests/test-utils.tsx`. Apollo `MockedProvider` patterns apply when files import from `@/lib/apollo/`. |
 | `e2e-spec-author` | When `/implement` decides a feature warrants Playwright e2e coverage. Scaffolds the spec from a feature description, decides project matrix + mock surface, runs on `chromium-desktop` for fast feedback. Invoked via `/e2e-add-spec` or directly via the Agent tool. |
 | `graphql-architect` | When a feature needs remote GraphQL data. Designs and scaffolds operations end-to-end: decides RSC vs Client, forces RSC when `GRAPHQL_AUTH_TOKEN` is required, writes operation + optional fragment, runs codegen + type-check. Invoked via `/gql-add-query` or directly via the Agent tool. |
 

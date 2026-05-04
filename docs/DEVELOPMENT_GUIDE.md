@@ -228,7 +228,7 @@ e2e/
 | `mockContact` | `(mode: 'success' \| 'error') => Promise<void>` | Routes `**/api/contact` to a deterministic Resend stub. |
 | `mockTurnstile` | `() => Promise<void>` | Pre-installs `window.turnstile.render(...)` via `addInitScript` so the synthetic widget invokes its success callback and the form submit button enables. |
 | `setLocale` | `(locale: string) => Promise<void>` | Navigates to a locale-prefixed URL with the `NEXT_LOCALE` cookie set. |
-| `mockGraphQL` | _reserved_ | Slot held for sibling PRD `apollo-client-integration` Step 26. |
+| `mockGraphQL` | _reserved_ | Slot held for the first GraphQL feature; activate when Apollo gets a real endpoint. |
 
 The default `page` fixture also forces `prefers-reduced-motion: reduce` (so Framer Motion + GSAP entrances settle instantly) and rewrites `page.goto()` to default to `waitUntil: 'domcontentloaded'`. Sapan's home page keeps the network hot indefinitely (Three.js + fonts + analytics), so neither `'load'` nor `'networkidle'` is safe.
 

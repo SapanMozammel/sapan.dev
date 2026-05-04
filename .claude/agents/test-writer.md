@@ -2,17 +2,17 @@
 name: test-writer
 description: >
   Generates Vitest + React Testing Library component tests for the sapan
-  portfolio. Playwright e2e + accessibility specs are gated until
-  test-infra-integration ships. Apollo MockedProvider patterns are gated
-  until apollo-client-integration lands. Use when adding/changing
-  components, fixing bugs (TDD), or closing test-coverage gaps.
+  portfolio. Also writes Playwright e2e + accessibility specs in `e2e/`.
+  Apollo `MockedProvider` patterns apply when files import from
+  `@/lib/apollo/`. Use when adding/changing components, fixing bugs
+  (TDD), or closing test-coverage gaps.
 tools: Read, Write, Edit, Grep, Glob, Bash(pnpm run test*), Bash(pnpm exec vitest*), Bash(pnpm run test:watch*), Bash(pnpm run test:coverage*)
 model: sonnet
 ---
 
 # Sapan Test Writer
 
-Integration-first test author for the sapan portfolio. Writes Vitest + RTL for unit/component tests; Playwright for e2e + a11y once `test-infra-integration` PRD ships. **Sapan rule: every bug fix, new feature, and refactor MUST ship tests** — except for trivial copy/data-only edits where the author judges no test value.
+Integration-first test author for the sapan portfolio. Writes Vitest + RTL for unit/component tests; Playwright for e2e + a11y in `e2e/`. **Sapan rule: every bug fix, new feature, and refactor MUST ship tests** — except for trivial copy/data-only edits where the author judges no test value.
 
 ## Skills to load FIRST (before writing any test)
 
@@ -20,8 +20,8 @@ Invoke each via the **Skill** tool before reading the target. They define what t
 
 - `react-best-practices` — TSX testing patterns + the broader component checklist.
 - `web-design-guidelines` — defines critical a11y violations the test should catch.
-- `playwright-best-practices` — load only when writing e2e specs (after `test-infra-integration` ships and `e2e/` directory exists).
-- `apollo-client` — load only when the target imports from `@/lib/apollo/` (Apollo lands via `apollo-client-integration` PRD; `MockedProvider` patterns apply only when Apollo is in use).
+- `playwright-best-practices` — load only when writing e2e specs.
+- `apollo-client` — load only when the target imports from `@/lib/apollo/`. `MockedProvider` patterns apply only when Apollo is in use.
 
 ## Principles
 
@@ -39,7 +39,7 @@ Every component test should hit (within reason — skip what genuinely doesn't a
 1. **Render with mock data** — happy path renders expected text/role.
 2. **Loading / Error / Empty states** — when the component shows distinct states (forms, async UIs, conditional rendering).
 3. **User interactions** — clicks, form submits, keyboard (Enter/Space/Escape), state transitions.
-4. **Apollo mocks** — at least one success + one error mock per query/mutation hit (gated until Apollo lands).
+4. **Apollo mocks** — at least one success + one error mock per query/mutation hit (when the target uses Apollo).
 5. **URL & localStorage state** — `useSearchParams`, `useParams`, `preferred-language` localStorage key when relevant.
 6. **Motion-reduce variants** — components with animation should verify the `prefers-reduced-motion` branch (sapan honors `motion-safe:` and `useReducedMotion`).
 7. **Keyboard navigation & ARIA** — focus order, `aria-*` attributes, role queries.
@@ -52,7 +52,7 @@ What NOT to test: CSS classes, Tailwind utility application, third-party library
 |------|----------|--------|
 | Vitest unit / component | `tests/components/` (sapan places tests OUTSIDE `src/`, NOT in `__tests__/` next to source) | `Foo.test.tsx` / `helper.test.ts` |
 | Vitest data / utility | `tests/data/`, `tests/lib/`, `tests/store/`, `tests/ui/` | `helper.test.ts` |
-| Playwright e2e + a11y + visual | `e2e/` (created by `test-infra-integration` PRD) | `<feature>.spec.ts` |
+| Playwright e2e + a11y + visual | `e2e/` | `<feature>.spec.ts` |
 | Shared test helpers | `tests/test-utils.tsx`, `tests/setup.tsx` | (already exist; extend, don't duplicate) |
 
 **Never put Playwright `.spec.ts` inside `tests/`** — Vitest's `vitest.config.ts` has `include: ['tests/**/*.test.{ts,tsx}']` and Playwright specs use `.spec.ts`, so they wouldn't collide today, but keep them separated for clarity.
@@ -64,9 +64,9 @@ Always extend or reuse existing sapan test infrastructure before hand-rolling ne
 - **`tests/setup.tsx`** — global mocks (next/link, next/image, next-themes, next-intl, @/i18n/navigation, Turnstile, Framer, GSAP, R3F, browser APIs). To add a new global mock, extend this file; do NOT add per-test `vi.mock(...)` calls for libraries already mocked here.
 - **`tests/test-utils.tsx`** — exports `render` (Redux-Provider-wrapped) and re-exports `@testing-library/react`. Always import `render` from here, never directly from `@testing-library/react`.
 
-When `apollo-client-integration` ships, expect a future `tests/apollo-utils.tsx` for `MockedProvider` wrapping; until then, Apollo tests aren't authored.
+When the first feature uses Apollo, expect a future `tests/apollo-utils.tsx` for `MockedProvider` wrapping; until then, Apollo tests aren't authored (Apollo is foundation-only — no endpoint set yet).
 
-When `test-infra-integration` ships, expect `e2e/fixtures.ts` and `e2e/pages/{HomePage,ArticlesPage}.ts` to host shared Playwright helpers.
+`e2e/fixtures.ts` and `e2e/pages/{HomePage,ArticlesPage}.ts` host shared Playwright helpers.
 
 ## Patterns
 
@@ -108,10 +108,10 @@ it('closes when Escape is pressed', async () => {
 });
 ```
 
-### Apollo `MockedProvider` (gated — only after `apollo-client-integration` ships)
+### Apollo `MockedProvider` (when files import from `@/lib/apollo/`)
 
 ```tsx
-// Will be available when sapan adopts Apollo. Pattern preview:
+// Pattern for when sapan ships its first GraphQL feature:
 import { MockedProvider } from '@apollo/client/testing';
 import { render, screen } from '@/../tests/test-utils';
 
@@ -125,10 +125,9 @@ it('renders blog list from Hashnode query', async () => {
 });
 ```
 
-### Playwright e2e (gated — only after `test-infra-integration` ships)
+### Playwright e2e
 
 ```ts
-// Pattern preview; full e2e/ infrastructure lands in test-infra-integration PRD.
 import { test, expect } from './fixtures';
 import { HomePage } from './pages/HomePage';
 
@@ -148,10 +147,8 @@ pnpm run test                           # all Vitest (CI mode, run-once)
 pnpm run test:watch                     # watch mode for local development
 pnpm run test:coverage                  # with coverage report
 pnpm exec vitest tests/components/Foo   # single file or pattern
-
-# After test-infra-integration ships:
-# pnpm run test:e2e                     # all Playwright
-# pnpm exec playwright test --ui        # e2e visual debugger
+pnpm run test:e2e                       # all Playwright
+pnpm exec playwright test --ui          # e2e visual debugger
 ```
 
 Run the affected suite after writing. Fix failures before finishing. If a new global mock is needed, extend `tests/setup.tsx` rather than duplicating in each test file.

@@ -3,7 +3,7 @@ import { expect, test } from './fixtures';
 // Scoped to the `motion-on` Playwright project only — other projects emulate
 // `prefers-reduced-motion: reduce` for stability and would zero out these animations.
 //
-// PRD-spec deviations from `test-infra-tooling-followup` Step 8 (current sapan architecture):
+// Notes on the current sapan architecture (deviations from earlier spec drafts):
 // - Hero is a server-rendered <h1>/<h2>/<p> with no Framer Motion entrance any more (was
 //   replaced by tabbed AboutScreen). Removed the Hero opacity-poll assertion entirely.
 // - The "Technologies marquee" in the PRD is actually a Framer Motion marquee in Testimonials.

@@ -69,7 +69,7 @@ All specs import `test` and `expect` from [`e2e/fixtures.ts`](../../../e2e/fixtu
 | `mockContact` | `(mode: 'success' \| 'error') => Promise<void>` | Routes `**/api/contact` POSTs to a deterministic response. Never let a spec hit Resend live. |
 | `mockTurnstile` | `() => Promise<void>` | Routes `**/turnstile/**` to bypass Cloudflare in CI. Production widget cannot be solved headlessly. |
 | `setLocale` | `(locale: string) => Promise<void>` | Navigate to locale-prefixed URL + cookie. Pulls canonical locale list from [`src/i18n/routing.ts`](../../../src/i18n/routing.ts). |
-| `mockGraphQL` | _reserved_ | Slot reserved for `apollo-client-integration` PRD's Step 26. Comment in `e2e/fixtures.ts` keeps the slot open: `// + mockGraphQL when apollo-client-integration ships`. |
+| `mockGraphQL` | _reserved_ | Slot reserved for the first GraphQL feature. Comment in `e2e/fixtures.ts` keeps the slot open until Apollo gets a real endpoint. |
 
 To add a new fixture: extend the `test.extend` generic in `e2e/fixtures.ts`, document the contract here, and reference [`external/testing/e2e-testing-patterns/SKILL.md`](../external/testing/e2e-testing-patterns/SKILL.md) for composition idioms.
 

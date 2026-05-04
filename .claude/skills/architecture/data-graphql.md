@@ -1,6 +1,6 @@
 # Architecture — GraphQL Data (Apollo Client 4.x)
 
-Sapan's Apollo Client conventions. Apollo runs **alongside** Redux: Redux owns UI state, Apollo owns remote data + its cache. The runtime is wired by the `apollo-client-integration` PRD; this skill is the convention layer that sits on top.
+Sapan's Apollo Client conventions. Apollo runs **alongside** Redux: Redux owns UI state, Apollo owns remote data + its cache. The runtime is wired in `src/lib/apollo/`; this skill is the convention layer that sits on top.
 
 This skill is a thin extension of sapan's architecture skills. It cites and links — it does NOT duplicate component-pattern, state, or no-effect rules.
 

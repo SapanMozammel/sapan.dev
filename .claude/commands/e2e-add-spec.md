@@ -26,8 +26,8 @@ Examples:
    ls e2e/fixtures.ts e2e/pages playwright.config.ts >/dev/null 2>&1 || echo "MISSING"
    ```
 
-   - If any of `e2e/fixtures.ts`, `e2e/pages/`, `playwright.config.ts` are missing, abort with: "E2e infrastructure not present — `test-infra-integration` PRD must ship first."
-   - Verify `.claude/agents/e2e-spec-author.md` exists; abort if missing with: "`e2e-spec-author` agent not registered — `test-infra-tooling-followup` PRD must ship first."
+   - If any of `e2e/fixtures.ts`, `e2e/pages/`, `playwright.config.ts` are missing, abort with: "E2e infrastructure not present — restore the `e2e/` directory before running this command."
+   - Verify `.claude/agents/e2e-spec-author.md` exists; abort if missing with: "`e2e-spec-author` agent not registered — restore `.claude/agents/e2e-spec-author.md` before running this command."
 
 3. **Invoke the `e2e-spec-author` agent** via the Agent tool with `subagent_type: 'e2e-spec-author'`. Pass the feature description verbatim, plus brief context:
    - Current `e2e/` spec list (so the agent decides single-purpose-vs-extension)

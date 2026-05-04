@@ -34,8 +34,8 @@ Invoke each via the **Skill** tool before reading the PRD. **Sapan rules in `CLA
 - `no-use-effect` — automatic on any React component code (skill is ALWAYS ACTIVE)
 - `frontend-design` — when the PRD has UI work that requires distinctive visual quality
 - `web-design-guidelines` — before any user-facing surface
-- `playwright-best-practices` — when the PRD adds e2e specs (after `test-infra-integration` ships)
-- `apollo-client` — when the PRD touches `src/lib/apollo/` (after `apollo-client-integration` ships)
+- `playwright-best-practices` — when the PRD adds e2e specs
+- `apollo-client` — when the PRD touches `src/lib/apollo/`
 - `figma:figma-implement-design` — only if the PRD references a Figma URL or node id
 
 ## Process (in order)
@@ -70,11 +70,11 @@ d. **Apply the pre-write checklist** from `component-patterns.md` to every compo
 
 e. **Style with sapan tokens.** Use `--color-{primary,success,info,warning,danger}` and `--color-secondary-N`. Custom utilities (`text-heading-xlarge`, `font-cg`, etc.) are defined in `src/styles/utilities.scss`. Never introduce new fonts; sapan's 5-font registry is closed (`font-dm`/`font-hg`/`font-cg`/`font-bungee`/`font-arabic`).
 
-f. **Wire data** from `src/data/content/*` (static content) or `src/data/config/*` (app config). When `apollo-client-integration` has shipped and the feature uses GraphQL, follow `architecture/data-graphql.md` (RSC `query()` for static reads, `useSuspenseQuery` for client interactive reads, fragment colocation, generated types only).
+f. **Wire data** from `src/data/content/*` (static content) or `src/data/config/*` (app config). When the feature uses GraphQL, follow `architecture/data-graphql.md` (RSC `query()` for static reads, `useSuspenseQuery` for client interactive reads, fragment colocation, generated types only).
 
 g. **State boundaries:** Redux for UI state (`uiSlice` for modals, `localeSlice` for locale + RTL). Theme via `next-themes` (NOT Redux). Local `useState` for form fields and animation. Always use typed `useAppDispatch` / `useAppSelector` from `@/store/hooks`.
 
-h. **Write tests** in `tests/` (sapan convention — outside `src/`, NOT `__tests__/` next to source). Use `render` from `tests/test-utils.tsx` (Redux-Provider-wrapped). Global mocks live in `tests/setup.tsx` — extend rather than duplicate. Cover happy path + loading/error/empty states + interactions + a11y. Playwright e2e in `e2e/` only after `test-infra-integration` ships.
+h. **Write tests** in `tests/` (sapan convention — outside `src/`, NOT `__tests__/` next to source). Use `render` from `tests/test-utils.tsx` (Redux-Provider-wrapped). Global mocks live in `tests/setup.tsx` — extend rather than duplicate. Cover happy path + loading/error/empty states + interactions + a11y. Playwright e2e in `e2e/`.
 
 i. **Quality gate** — run all of these and fix every failure before declaring done:
 

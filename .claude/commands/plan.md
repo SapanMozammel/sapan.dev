@@ -33,8 +33,8 @@ Invoke each via the **Skill** tool before exploring code. **Sapan rules in `CLAU
 - `frontend-design` — when the feature has UI work that requires distinctive visual quality
 - `web-design-guidelines` — required for the A11y / UX section
 - `vercel-react-best-practices` — when judging perf decisions
-- `apollo-client` — only when the feature touches `src/lib/apollo/` (after `apollo-client-integration` ships)
-- `playwright-best-practices` — when the feature adds e2e specs (after `test-infra-integration` ships)
+- `apollo-client` — only when the feature touches `src/lib/apollo/`
+- `playwright-best-practices` — when the feature adds e2e specs
 - `figma:figma-implement-design` — only if a Figma URL or node id is supplied
 
 ## Process
@@ -78,7 +78,7 @@ Use exactly these sections in order (omit a section only if it has no content fo
 - **i18n** — translation keys per namespace (`common`/`navigation`/`home`/`blog`); locale-prefix routing (`as-needed`); RTL impact on `ar` (`dir="rtl"`); `Link` from `@/i18n/navigation` for internal nav
 - **State** — Redux slices (`uiSlice` for UI state, `localeSlice` for locale + RTL); typed `useAppDispatch` / `useAppSelector` only; theme via `next-themes` (NOT Redux)
 - **Accessibility** — WCAG 2.1 AA: keyboard nav, focus rings, ARIA roles/labels, color contrast, `motion-reduce:` variants, screen reader notes
-- **Testing Strategy** — Vitest unit/component tests in `tests/` (sapan placement, NOT `__tests__/`); Playwright e2e in `e2e/` once `test-infra-integration` Phase 2 (Playwright Foundation) ships; coverage bar (render + loading/error/empty + interactions + URL/localStorage + motion-reduce + a11y)
+- **Testing Strategy** — Vitest unit/component tests in `tests/` (sapan placement, NOT `__tests__/`); Playwright e2e in `e2e/`; coverage bar (render + loading/error/empty + interactions + URL/localStorage + motion-reduce + a11y)
 - **Performance** — RSC streaming, `<Suspense>` fallbacks, `next/dynamic({ ssr: false })` for heavy modals/3D content, `next/image` `sizes` and `priority`, bundle deltas
 - **SEO** — `metadata` or `generateMetadata` export per locale, JSON-LD if applicable, hreflang for 16 locales + `x-default`, sapan canonical: `legalName: "Mozammel Ali"` and brand `"Sapan Mozammel"`
 - **Affected Files** — list every existing file that will be modified

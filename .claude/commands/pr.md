@@ -158,4 +158,4 @@ Parse `$ARGUMENTS`, strip flags, treat the remainder as the target branch:
 - This project uses **pnpm**. Never substitute `npm` / `npx` / `yarn`.
 - TypeScript strict mode + `exactOptionalPropertyTypes` are on; `pnpm run type:check` is the canonical type check.
 - Prettier runs via the PostToolUse hook in `.claude/settings.json` and via `/format` (or `pnpm run format:all` directly) — no separate command in the PR gate. Prefer `/format` when the diff touches `className` strings or `@apply` directives — it adds the Tailwind v3→v4 `!utility` sweep on top of the standard format pipeline.
-- **GraphQL section is included only when Apollo is in use** — i.e., when files under `src/lib/apollo/**` changed. Skip the section otherwise (sapan is static-content first; Apollo lands as foundation via `apollo-client-integration` PRD).
+- **GraphQL section is included only when Apollo is in use** — i.e., when files under `src/lib/apollo/**` changed. Skip the section otherwise (sapan is static-content first; Apollo is foundation-only with no endpoint set).

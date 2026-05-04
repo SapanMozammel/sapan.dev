@@ -22,7 +22,7 @@ Optional flags: `$ARGUMENTS`
    [ -f .lighthouserc.json ] || echo "MISSING"
    ```
 
-   If missing, abort with: "`.lighthouserc.json` not found — `test-infra-tooling-followup` PRD's Step 2 hasn't shipped on this branch."
+   If missing, abort with: "`.lighthouserc.json` not found at the repo root."
 
 2. **Persist the previous run** — if `.lighthouseci/manifest.json` already exists, copy it to `.lighthouseci/last-run-manifest.json` BEFORE running. The new `lhci collect` will overwrite the directory; we need the snapshot for delta comparison.
 

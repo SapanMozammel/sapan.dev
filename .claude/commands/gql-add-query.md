@@ -19,7 +19,7 @@ Example: `/gql-add-query "Show the 5 most recent Hashnode posts for the current 
 
 2. **Confirm endpoint state.** Check `NEXT_PUBLIC_GRAPHQL_ENDPOINT` and `schema.graphql`:
    - Endpoint set + real schema → proceed to step 3
-   - Endpoint blank + placeholder schema (`type Query { _stub: Boolean }`) → tell the user this is the first GraphQL feature; the endpoint must be decided (Hashnode vs GitHub vs custom — see `.claude/plans/apollo-client-integration/prd.md` "Endpoint policy") before scaffolding a real operation. Offer to scaffold a typed stub against the placeholder, OR stop until the endpoint lands. Do not silently invent an endpoint.
+   - Endpoint blank + placeholder schema (`type Query { _stub: Boolean }`) → tell the user this is the first GraphQL feature; the endpoint must be decided (Hashnode vs GitHub vs custom) before scaffolding a real operation. Offer to scaffold a typed stub against the placeholder, OR stop until the endpoint lands. Do not silently invent an endpoint.
 
 3. **Invoke the `graphql-architect` agent** via the Agent tool with `subagent_type: graphql-architect`. Pass the feature description verbatim. The agent reads its required-reading list (bridge skill `architecture/data-graphql.md` first, then sapan architecture/workflow/design-system skills, then the external `apollo-client` reference) before writing any code.
 

@@ -72,4 +72,4 @@ For Redux dispatch patterns in e2e (opening ContactModal via `window.__store__.d
 Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
 
 - [`external/react/react-best-practices/`](../external/react/react-best-practices/) — hook usage, state colocation, derived-state patterns
-- [`external/data/apollo-client/`](../external/data/apollo-client/) — Apollo state management (`InMemoryCache`, reactive variables — sapan does NOT use reactive variables). **Load only when Apollo is in use** to understand the Redux/Apollo boundary documented above (Redux for UI state; Apollo for remote data + cache). Apollo lands via `apollo-client-integration` PRD.
+- [`external/data/apollo-client/`](../external/data/apollo-client/) — Apollo state management (`InMemoryCache`, reactive variables — sapan does NOT use reactive variables). **Load only when Apollo is in use** to understand the Redux/Apollo boundary documented above (Redux for UI state; Apollo for remote data + cache).
