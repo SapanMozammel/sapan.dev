@@ -1,16 +1,14 @@
+import { env } from '@/lib/env';
 import { ApolloLink, from } from '@apollo/client/link';
 import { SetContextLink } from '@apollo/client/link/context';
 import { ErrorLink } from '@apollo/client/link/error';
 import { HttpLink } from '@apollo/client/link/http';
 import { RetryLink } from '@apollo/client/link/retry';
 
-const ENDPOINT_ENV = 'NEXT_PUBLIC_GRAPHQL_ENDPOINT';
-const TOKEN_ENV = 'GRAPHQL_AUTH_TOKEN';
-
 const getEndpoint = (): string => {
-	const uri = process.env[ENDPOINT_ENV];
+	const uri = env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
 	if (!uri) {
-		throw new Error(`[apollo] ${ENDPOINT_ENV} is not set. Set it before firing any GraphQL operation. See .env.example.`);
+		throw new Error('[apollo] NEXT_PUBLIC_GRAPHQL_ENDPOINT is not set. Set it before firing any GraphQL operation. See .env.example.');
 	}
 	return uri;
 };
@@ -30,14 +28,13 @@ const createErrorLink = (): ErrorLink =>
 
 const createHttpLink = (): HttpLink => new HttpLink({ uri: getEndpoint });
 
-const createServerAuthLink = (): SetContextLink =>
+const createServerAuthLink = (token: string | undefined): SetContextLink =>
 	new SetContextLink((prevContext) => {
-		const token = process.env[TOKEN_ENV];
 		if (!token) return {};
 		const prevHeaders = (prevContext.headers ?? {}) as Record<string, string>;
 		return { headers: { ...prevHeaders, authorization: `Bearer ${token}` } };
 	});
 
-export const createServerLinks = (): ApolloLink => from([createRetryLink(), createErrorLink(), createServerAuthLink(), createHttpLink()]);
+export const createServerLinks = (token: string | undefined): ApolloLink => from([createRetryLink(), createErrorLink(), createServerAuthLink(token), createHttpLink()]);
 
 export const createClientLinks = (): ApolloLink => from([createRetryLink(), createErrorLink(), createHttpLink()]);

@@ -1,4 +1,19 @@
 /// <reference types="vitest/globals" />
+/// <reference types="node" />
+
+// ── Env stubs for `@/lib/env` parse-at-module-load ──
+// Must run before any test file imports `@/lib/env*`. Real values come from
+// `.env.local` in dev / Vercel dashboard in prod; test runs only need the
+// schema to parse cleanly so consumer modules can be exercised.
+process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??= 'test-turnstile-site-key';
+process.env.RESEND_API_KEY ??= 're_test';
+process.env.CONTACT_TO_EMAIL ??= 'test-to@sapan.dev';
+process.env.CONTACT_FROM_EMAIL ??= 'test-from@sapan.dev';
+process.env.CONTACT_REPLY_TO ??= 'test-reply@sapan.dev';
+process.env.UPSTASH_REDIS_REST_URL ??= 'https://test.upstash.io';
+process.env.UPSTASH_REDIS_REST_TOKEN ??= 'test-redis-token';
+process.env.TURNSTILE_SECRET_KEY ??= 'test-turnstile-secret';
+
 import '@testing-library/jest-dom/vitest';
 import React, { type PropsWithChildren } from 'react';
 

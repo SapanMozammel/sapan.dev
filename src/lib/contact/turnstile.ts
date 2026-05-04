@@ -1,3 +1,5 @@
+import { env } from '@/lib/env.server';
+
 const VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 
 type TurnstileResponse = {
@@ -6,10 +8,9 @@ type TurnstileResponse = {
 };
 
 export const verifyTurnstile = async (token: string | undefined, ip: string | undefined): Promise<boolean> => {
-	const secret = process.env.TURNSTILE_SECRET_KEY;
-	if (!secret || !token) return false;
+	if (!token) return false;
 
-	const body = new URLSearchParams({ secret, response: token });
+	const body = new URLSearchParams({ secret: env.TURNSTILE_SECRET_KEY, response: token });
 	if (ip) body.append('remoteip', ip);
 
 	try {

@@ -158,6 +158,7 @@ Allowed remote domains: `images.unsplash.com`
 - `cn()` from `@/lib/utils` for all className composition — never template literals (`` className={`...${x}`} ``), never string concatenation, never ternary with two string branches outside `cn()`. Required for prod class mangling (`pnpm build:mangled`, Vercel default via `vercel.json`); see [.claude/skills/workflow/tailwind-mangle.md](.claude/skills/workflow/tailwind-mangle.md)
 - Design system tokens only — no hardcoded colors or hex values
 - `@/` alias for all internal imports
+- Env vars: read only via `@/lib/env` (public, `NEXT_PUBLIC_*`) or `@/lib/env.server` (server-only secrets); never `process.env.X` directly except for `NODE_ENV`. `next.config.ts` calls `validateServerEnv()` from `@/lib/env` to fail-fast on missing required vars at build start
 - No `any` types — TypeScript strict mode (`noUnusedLocals`, `noUnusedParameters`, `exactOptionalPropertyTypes`)
 - `export default ComponentName` at the bottom of every component file — never both `export const` and `export default` for the same component
 - PRD history is sacred — never overwrite or remove completed (`[✅]`) steps when updating a plan; use `[⬜]` / `[🔄]` / `[✅]` markers, never `[x]`

@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/layout/common/Button';
 import FormField from '@/components/ui/form-field';
+import { env } from '@/lib/env';
 import type { ContactFormProps } from '@/types/contact';
 import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
@@ -9,7 +10,7 @@ import { memo } from 'react';
 
 const Turnstile = dynamic(() => import('@marsidev/react-turnstile').then((mod) => mod.Turnstile), { ssr: false });
 
-const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '';
+const TURNSTILE_SITE_KEY = env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 const ContactForm = memo<ContactFormProps>(({ form, errors, onChange, onSubmit, onTurnstileToken }) => {
 	const translateLabels = useTranslations('common.contact.form.labels');
