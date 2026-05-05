@@ -1,12 +1,12 @@
-import BetterdocsLogo from '@/lib/icons/projects/Betterdocs/Logo';
-import BetterLinksLogo from '@/lib/icons/projects/BetterLinks/Logo';
-import EasyJobsLogo from '@/lib/icons/projects/EasyJobs/Logo';
-import NotificationXLogo from '@/lib/icons/projects/NotificationX/Logo';
-import SchedulePressLogo from '@/lib/icons/projects/SchedulePress/Logo';
-import TemplatelyLogo from '@/lib/icons/projects/Templately/Logo';
-import TubeOnAILogo from '@/lib/icons/projects/TubeOnAI/Logo';
-import WpDeveloperStoreLogo from '@/lib/icons/projects/WpDeveloperStore/Logo';
-import XCloudLogo from '@/lib/icons/projects/xCloud/Logo';
+import BetterdocsLogo from '@/components/icons/projects/Betterdocs/Logo';
+import BetterLinksLogo from '@/components/icons/projects/BetterLinks/Logo';
+import EasyJobsLogo from '@/components/icons/projects/EasyJobs/Logo';
+import NotificationXLogo from '@/components/icons/projects/NotificationX/Logo';
+import SchedulePressLogo from '@/components/icons/projects/SchedulePress/Logo';
+import TemplatelyLogo from '@/components/icons/projects/Templately/Logo';
+import TubeOnAILogo from '@/components/icons/projects/TubeOnAI/Logo';
+import WpDeveloperStoreLogo from '@/components/icons/projects/WpDeveloperStore/Logo';
+import XCloudLogo from '@/components/icons/projects/xCloud/Logo';
 import type { PortfolioProject } from '@/types/portfolio';
 
 export const PORTFOLIO_PROJECTS: PortfolioProject[] = [

@@ -6,9 +6,9 @@ import { ButtonProps } from '@/types/button';
 import NextLink from 'next/link';
 import { memo, ReactNode, useMemo } from 'react';
 
-import { ButtonContent } from './Button/ButtonContent';
-import { ButtonCenterSvg, ButtonLeftSvg, ButtonRightSvg } from './Button/ButtonShapeSvg';
-import { getVariantConfig } from './Button/variants';
+import { ButtonContent } from './ButtonContent';
+import { ButtonCenterSvg, ButtonLeftSvg, ButtonRightSvg } from './ButtonShapeSvg';
+import { getVariantConfig } from './variants';
 
 // Derive spread types from NextLink/button to stay compatible with exactOptionalPropertyTypes
 type LinkRest = Omit<React.ComponentProps<typeof NextLink>, 'href' | 'className' | 'children'> & { to: string };

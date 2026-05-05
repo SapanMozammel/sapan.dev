@@ -1,5 +1,4 @@
 import { fontList } from '@/app/fonts';
-import HtmlLocaleSync from '@/components/layout/common/HtmlLocaleSync';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import { routing, RTL_LOCALES } from '@/i18n/routing';
@@ -109,7 +108,6 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
 					<NextIntlClientProvider messages={messages}>
 						<ApolloWrapper>
 							<link rel='preconnect' href='https://challenges.cloudflare.com' />
-							<HtmlLocaleSync />
 							<div className='text-dark relative bg-white dark:bg-black dark:text-white'>
 								<Header />
 								<main className='relative -my-2.5 overflow-x-clip py-2.5'>{children}</main>
