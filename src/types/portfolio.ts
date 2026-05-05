@@ -1,5 +1,7 @@
+export type ColorScheme = 'sky' | 'indigo' | 'blue' | 'green' | 'cyan' | 'teal' | 'violet' | 'emerald' | 'fuchsia';
+
 export type PortfolioProject = {
-	className?: string;
+	colorScheme: ColorScheme;
 	title: string;
 	description: string;
 	image: string;

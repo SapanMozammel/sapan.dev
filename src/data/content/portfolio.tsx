@@ -11,7 +11,7 @@ import type { PortfolioProject } from '@/types/portfolio';
 
 export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 	{
-		className: 'border-sky-100 bg-sky-25/90 dark:border-sky-900 dark:bg-sky-a100/90',
+		colorScheme: 'sky',
 		title: 'TubeOnAI',
 		description: `TubeOnAI is an AI platform that summarizes and repurposes videos, podcasts, PDFs, and articles into clear, actionable content. As a Frontend Developer, I worked on the Next.js web app, building UI components, integrating APIs, and ensuring a smooth, responsive experience across devices.`,
 		role: 'Frontend Developer',
@@ -21,7 +21,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: '/images/portfolio/tubeonai.png',
 	},
 	{
-		className: 'border-indigo-100 bg-indigo-25/90 dark:border-indigo-900 dark:bg-indigo-a100/90',
+		colorScheme: 'indigo',
 		title: 'Templately',
 		description: `Templately is a WordPress-based template cloud platform that empowers users and teams to build, share, and manage professional websites seamlessly. Here, I contributed to the Admin Panel, Landing App, WordPress Plugin, enterprise tools, and internal apps to enhance performance and UX.`,
 		role: 'Frontend Developer & Plugin Developer',
@@ -31,7 +31,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: '/images/portfolio/templately.png',
 	},
 	{
-		className: 'border-blue-100 bg-blue-25/90 dark:border-blue-900 dark:bg-blue-a100/90',
+		colorScheme: 'blue',
 		title: 'xCloud',
 		description: `xCloud is a scalable cloud-based hosting platform designed to manage, store, and process digital resources efficiently. It provides secure access, real-time operations, and performance-focused workflows. Here, I worked on the frontend architecture design with Vue.js and Tailwind CSS.`,
 		role: 'Frontend Developer',
@@ -41,7 +41,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: '/images/portfolio/xcloud.png',
 	},
 	{
-		className: 'border-green-100 bg-green-25/90 dark:border-green-900 dark:bg-green-a100/90',
+		colorScheme: 'green',
 		title: 'Betterdocs',
 		description: `BetterDocs is a WordPress documentation and knowledge base plugin that helps teams create, organize, and present help content efficiently. It enhances self-service with instant search, structured categories, analytics, faq, chatbot, and clean layouts. I worked on re-architecting the admin panel, building the analytics dashboard, and developing the FAQ Builder.`,
 		role: 'Plugin Developer',
@@ -51,7 +51,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: '/images/portfolio/betterdocs.png',
 	},
 	{
-		className: 'border-cyan-100 bg-cyan-25/90 dark:border-cyan-900 dark:bg-cyan-a100/90',
+		colorScheme: 'cyan',
 		title: 'WpDeveloper Store',
 		description: `All WPDeveloper users use this application to maintain their licenses and buy premium items. For all WPDeveloper users, this is the Dashboard app. This dashboard application is built with React.Js. As a front-end developer, I used Bootstrap and React.Js to create this dashboard.`,
 		role: 'Frontend Developer',
@@ -61,7 +61,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: '/images/portfolio/wpdeveloper-store.png',
 	},
 	{
-		className: 'border-teal-100 bg-teal-25/90 dark:border-teal-900 dark:bg-teal-a100/90',
+		colorScheme: 'teal',
 		title: 'NotificationX',
 		description: `NotificationX is a WordPress marketing and social proof plugin that displays real-time notifications to boost conversions and engagement. It supports sales alerts, reviews, comments, and email signups. I worked on improving the admin experience, feature integration, and UI workflows for better usability.`,
 		role: 'Plugin Developer',
@@ -71,7 +71,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: '/images/portfolio/notificationx.png',
 	},
 	{
-		className: 'border-violet-100 bg-violet-25/90 dark:border-violet-900 dark:bg-violet-a100/90',
+		colorScheme: 'violet',
 		title: 'Easy.Jobs',
 		description: `easy.jobs is an AI-powered recruitment and applicant tracking SaaS that helps businesses attract, evaluate, and hire top talent efficiently with customizable career sites, automated screening, and team collaboration tools. As the project's first front-end developer, I worked with Bootstrap, Vue.js, and Laravel.`,
 		role: 'Frontend Developer',
@@ -81,7 +81,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: '/images/portfolio/easyjobs.png',
 	},
 	{
-		className: 'border-emerald-100 bg-emerald-25/90 dark:border-emerald-900 dark:bg-emerald-a100/90',
+		colorScheme: 'emerald',
 		title: 'SchedulePress',
 		description: `SchedulePress is a WordPress editorial and scheduling plugin that helps teams plan, manage, and automate content publishing. It supports scheduled posts, missed schedule handling, and editorial workflows. I contributed by improving admin-side features, refining scheduling logic, and enhancing UI workflows for better usability.`,
 		role: 'Frontend Developer',
@@ -91,7 +91,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: '/images/portfolio/schedulepress.png',
 	},
 	{
-		className: 'border-fuchsia-100 bg-fuchsia-25/90 dark:border-fuchsia-900 dark:bg-fuchsia-a100/90',
+		colorScheme: 'fuchsia',
 		title: 'BetterLinks',
 		description: `BetterLinks is a WordPress link management and URL shortener plugin for creating, organizing, and tracking branded links with analytics. As the first Frontend Developer on the project, I set up the frontend foundation, built admin features, enhanced analytics views, and refined UI workflows.`,
 		role: 'Frontend Developer',
