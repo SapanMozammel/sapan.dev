@@ -35,7 +35,7 @@ TypeScript type definitions — one file per domain.
 | `button.ts` | `BaseButtonProps`, `LinkButtonProps`, `RegularButtonProps`, `ButtonProps`, `ConnectButtonProps`, `GradientStop`, `SvgShapeProps`, `CenterSvgProps`, `ButtonContentProps`, `ButtonVariantConfig` |
 | `contact.ts` | `ContactFormData`, `ContactFormErrors`, `ContactSubmitStatus`, `ContactFormProps` |
 | `cursor-tooltip.ts` | `CursorTooltipProps`, `Position`, `TooltipContentProps` |
-| `diamond-grid.ts` | `DiamondGridItem`, `DiamondGridLegacyProps`, `DiamondGridFlexibleProps`, `DiamondGridProps`, `LayoutConfig`, `ColumnGroup`, `DiamondColumnProps`, `LayoutConfigMap` |
+| `diamond-grid.ts` | `DiamondGridItem`, `DiamondGridProps`, `LayoutConfig`, `ColumnGroup`, `DiamondColumnProps` |
 | `error.ts` | `ErrorProps` |
 | `experience.ts` | `ExperienceType`, `ExperienceItem`, `TimelineItemProps`, `TimelineProps`, `TimelineProgressBarProps` |
 | `faq.ts` | `FaqItem`, `AccordionItemProps`, `AccordionProps` |

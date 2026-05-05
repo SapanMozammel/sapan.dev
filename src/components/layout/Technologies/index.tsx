@@ -21,10 +21,10 @@ const Technologies = memo(() => {
 			<SectionSeparator lts rts lbs rbs bl ll rl>
 				<div className='container flex w-full grow flex-col items-center justify-start gap-4 text-center'>
 					<SectionTitle subtitle={translate('subtitle')} title={translate('title')} watermark='Technologies' />
-					<DiamondGrid items={TECH_STACK}>
-						{(item) => (
+					<DiamondGrid>
+						{TECH_STACK.map((item, index) => (
 							<CursorTooltip
-								key={`${item.name}-${item.index}`}
+								key={`${item.name}-${index}`}
 								content={item.name}
 								className='from-secondary-200/50 dark:from-secondary-700/50 dark:to-secondary-900/50 to-secondary/50 flex aspect-video w-full items-center justify-center rounded-[2.25vw] bg-gradient-to-b text-sm text-white transition-shadow duration-300 select-none md:rounded-[1.25vw]'
 							>
@@ -47,7 +47,7 @@ const Technologies = memo(() => {
 									<span className='text-dark font-hg text-base font-bold dark:text-white'>{item.name}</span>
 								)}
 							</CursorTooltip>
-						)}
+						))}
 					</DiamondGrid>
 				</div>
 			</SectionSeparator>
