@@ -40,7 +40,6 @@ TypeScript type definitions — one file per domain.
 | `experience.ts` | `ExperienceType`, `ExperienceItem`, `TimelineItemProps`, `TimelineProps`, `TimelineProgressBarProps` |
 | `faq.ts` | `FaqItem`, `AccordionItemProps`, `AccordionProps` |
 | `i18n.ts` | `Locale`, `LocaleState`, `TranslationNamespace` |
-| `image.ts` | `OptimizedImageProps`, `AvatarImageProps`, `LogoImageProps` |
 | `marquee.ts` | `MarqueeProps` |
 | `particles.ts` | `ParticleProps`, `ParticleBackgroundProps` |
 | `portfolio.ts` | `PortfolioProject`, `ProjectCardProps` |
