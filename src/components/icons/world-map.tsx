@@ -1,6 +1,6 @@
-import React from 'react';
+import { memo } from 'react';
 
-const WorldMap = (props: React.SVGProps<SVGSVGElement>) => {
+const WorldMap = memo<React.SVGProps<SVGSVGElement>>((props) => {
 	return (
 		<svg xmlns='http://www.w3.org/2000/svg' width='3571' height='1631' viewBox='0 0 3571 1631' {...props}>
 			<g>
@@ -24,6 +24,8 @@ const WorldMap = (props: React.SVGProps<SVGSVGElement>) => {
 			</g>
 		</svg>
 	);
-};
+});
+
+WorldMap.displayName = 'WorldMap';
 
 export default WorldMap;

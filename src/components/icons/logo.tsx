@@ -1,6 +1,6 @@
-import * as React from 'react';
+import { memo } from 'react';
 
-const Logo = (props: React.SVGProps<SVGSVGElement>) => (
+const Logo = memo<React.SVGProps<SVGSVGElement>>((props) => (
 	<svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 512 512' {...props}>
 		<path
 			fill='url(#paint0_linear_1599_136)'
@@ -41,6 +41,8 @@ const Logo = (props: React.SVGProps<SVGSVGElement>) => (
 			</linearGradient>
 		</defs>
 	</svg>
-);
+));
+
+Logo.displayName = 'Logo';
 
 export default Logo;

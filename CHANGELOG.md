@@ -143,40 +143,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.0] - 2026-04-09
 
-Initial launch of sapan.dev — full portfolio site v1.
-
-### Added
-
-- **Next.js 16 App Router** with `[locale]` dynamic segment, React 19, TypeScript 6, Tailwind CSS v4 (CSS `@theme` config), SCSS, Redux Toolkit, next-intl, next-themes, Framer Motion, GSAP, Three.js / R3F, shadcn/ui (new-york, Tabler icons).
-- **Landing sections** — Hero (with admin dashboard mock UI), Technologies, Portfolio, Experience (particle background), Testimonials, Workflow (stacking cards), Blog, FAQ (accordion), CTA, Header, Footer.
-- **Articles** — listing (`/articles`) with category filter and pagination, detail page (`/articles/[slug]`) with "More in category" section.
-- **Contact modal** — form with validation, loading/success/error states, Redux-backed open/close via `uiSlice`.
-- **Cursor tooltip** — hover-driven cursor affordance using Framer Motion.
-- **Design system** — primary/success/info/danger tokens with dark-mode swap (`text-primary dark:text-success`), Hanken Grotesk / Cormorant Garamond / DM Sans / Bungee / Noto Sans Arabic fonts.
-- **RTL support** — Arabic locale with `dir="rtl"` and `rtl:` Tailwind variants.
-- **Theme switcher** — light / dark / system via `next-themes` with keyboard shortcut (⌘⌥T / Ctrl+Alt+T).
-- **Language switcher** — scaffolding for 16 locales (actual translations landed in 0.2.0).
-- **Redux store** — `localeSlice` (persists to localStorage), `uiSlice` (contact modal state).
-- **Particle background** (Experience section) using R3F.
-- **GSAP-driven stacking cards, testimonial marquee, and testimonial background** (migrated to Framer Motion in 0.2.0).
-- **Status pages** — error, not-found, loading.
-- **Metadata / SEO** — page title/description/keywords, OG + Twitter card, OG image, favicon set, web app manifest.
-- **Testing infra** — Vitest + Testing Library, component tests for Header, MobileNav, NavMenu.
-- **Docs** — `README.md`, `CLAUDE.md`, `docs/CLAUDE_SETUP.md`, `docs/DEVELOPMENT_GUIDE.md`.
-- **Claude Code configuration** — skill files (colors, typography, spacing, component-patterns, routing, data, state, testing, feature-planning) and commands (`/audit`, `/plan`, `/implement`, `/commit`, `/commit-staged`, `/pr`).
-- **Tooling** — ESLint flat config, Prettier with import organizer, `format:all` script, `tsc --noEmit` type-check.
-- **Next-intl `proxy.ts`** (renamed from `middleware.ts`) for locale detection and routing.
-
-### Notable refactors and fixes during 0.1.0 development
-
-- Replace Sora / EB Garamond with Hanken Grotesk / Cormorant Garamond; replace Tektur with Bungee.
-- Migrate all className concatenation to `cn()` utility.
-- Replace hardcoded hex colors with CSS custom properties and design tokens across components.
-- Replace `next/navigation` with `@/i18n/navigation` for locale-aware routing.
-- Move tests from `src/__tests__` to top-level `tests/`.
-- Use local portfolio images and technology SVGs (drop unused remote image domains).
-- Add `memo()` wrappers to `ThemeSwitcher` and `LanguageSwitcher`.
-- Consolidate section spacing and complete design-system skill files.
+Initial launch of sapan.dev — full portfolio v1. Full scope (sections, infra, tooling, design system, i18n, testing, Claude Code config) is captured in the git tag and commit log.
 
 [0.2.0]: https://github.com/sapan-dev/sapan.dev/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/sapan-dev/sapan.dev/releases/tag/v0.1.0

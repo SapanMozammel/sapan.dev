@@ -1,6 +1,6 @@
-import React from 'react';
+import { memo } from 'react';
 
-const Pattern = (props: React.SVGProps<SVGSVGElement>) => {
+const Pattern = memo<React.SVGProps<SVGSVGElement>>((props) => {
 	return (
 		<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1998 1420' {...props}>
 			<path fill='transparent' stroke='currentColor' strokeMiterlimit='10' d='M1407.003 741.293 1266.71 601l140.293-140.293L1547.296 601Z' opacity='0.5' />
@@ -81,6 +81,8 @@ const Pattern = (props: React.SVGProps<SVGSVGElement>) => {
 			</g>
 		</svg>
 	);
-};
+});
+
+Pattern.displayName = 'Pattern';
 
 export default Pattern;
