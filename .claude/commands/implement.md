@@ -102,6 +102,7 @@ l. **Report:** files created, files modified, type check result, test result, ve
 - **Default to Server Component.** Add `'use client'` only when the component genuinely needs state, refs, events, or browser APIs.
 - **Reuse existing components and utilities** (`src/lib/utils/*`, `src/components/layout/common/*`, `src/components/ui/*`, `src/store/hooks`) before adding new dependencies.
 - **Never commit `.env`, secrets, or files containing API keys.** Stage files explicitly — never `git add -A` / `git add .`.
+- **Never auto-stage during implementation work.** For renames, use plain `mv` (NOT `git mv`). For single-file deletes, use `rm` (NOT `git rm`). For directory deletes, ask the user — `git rm -rf` auto-stages and violates the no-auto-staging rule. The user manages staging via `/commit-staged` or manual `git add`. (Sapan memory: `feedback_no_unprompted_git.md`.)
 - **Never bypass git hooks** (`--no-verify`, `--no-gpg-sign`).
 - **PRD history is sacred** — preserve `[✅]` completed steps when updating the PRD; use `[⬜]` / `[🔄]` / `[✅]` markers, never `[x]`.
 - **Sapan-canonical exceptions** (per memory): `bg-light dark:bg-slate-900` is the canonical pair (don't flag); `font-bungee` is logo/brand-only; legal name is "Mozammel Ali" (copyright/JSON-LD), brand name is "Sapan Mozammel" (everywhere public); use "Frontend Developer" not "Senior"; avoid specific response-time windows like "24 hours".

@@ -22,17 +22,12 @@ Consult these references based on what you're doing:
 | Activity                            | Reference Files                                                                                                                               |
 | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Writing E2E tests**               | [test-suite-structure.md](core/test-suite-structure.md), [locators.md](core/locators.md), [assertions-waiting.md](core/assertions-waiting.md) |
-| **Writing component tests**         | [component-testing.md](testing-patterns/component-testing.md), [test-suite-structure.md](core/test-suite-structure.md)                        |
-| **Writing API tests**               | [api-testing.md](testing-patterns/api-testing.md), [test-suite-structure.md](core/test-suite-structure.md)                                    |
-| **Writing GraphQL tests**           | [graphql-testing.md](testing-patterns/graphql-testing.md), [api-testing.md](testing-patterns/api-testing.md)                                  |
-| **Writing visual regression tests** | [visual-regression.md](testing-patterns/visual-regression.md), [canvas-webgl.md](testing-patterns/canvas-webgl.md)                            |
+| **Writing GraphQL tests**           | [graphql-testing.md](testing-patterns/graphql-testing.md)                                                                                     |
 | **Structuring test code with POM**  | [page-object-model.md](core/page-object-model.md), [test-suite-structure.md](core/test-suite-structure.md)                                    |
 | **Setting up test data/fixtures**   | [fixtures-hooks.md](core/fixtures-hooks.md), [test-data.md](core/test-data.md)                                                                |
-| **Handling authentication**         | [authentication.md](advanced/authentication.md), [authentication-flows.md](advanced/authentication-flows.md)                                  |
 | **Testing date/time features**      | [clock-mocking.md](advanced/clock-mocking.md)                                                                                                 |
-| **Testing file upload/download**    | [file-operations.md](testing-patterns/file-operations.md), [file-upload-download.md](testing-patterns/file-upload-download.md)                |
+| **Testing file upload/download**    | [file-operations.md](testing-patterns/file-operations.md)                                                                                     |
 | **Testing forms/validation**        | [forms-validation.md](testing-patterns/forms-validation.md)                                                                                   |
-| **Testing drag and drop**           | [drag-drop.md](testing-patterns/drag-drop.md)                                                                                                 |
 | **Testing accessibility**           | [accessibility.md](testing-patterns/accessibility.md)                                                                                         |
 | **Testing security (XSS, CSRF)**    | [security-testing.md](testing-patterns/security-testing.md)                                                                                   |
 | **Using test annotations**          | [annotations.md](core/annotations.md)                                                                                                         |
@@ -40,8 +35,6 @@ Consult these references based on what you're doing:
 | **Testing iframes**                 | [iframes.md](browser-apis/iframes.md)                                                                                                         |
 | **Testing canvas/WebGL**            | [canvas-webgl.md](testing-patterns/canvas-webgl.md)                                                                                           |
 | **Internationalization (i18n)**     | [i18n.md](testing-patterns/i18n.md)                                                                                                           |
-| **Testing Electron apps**           | [electron.md](testing-patterns/electron.md)                                                                                                   |
-| **Testing browser extensions**      | [browser-extensions.md](testing-patterns/browser-extensions.md)                                                                               |
 
 ### Mobile & Responsive Testing
 
@@ -56,11 +49,10 @@ Consult these references based on what you're doing:
 
 ### Real-Time & Browser APIs
 
-**When to use**: Testing WebSockets, geolocation, permissions, multi-tab flows
+**When to use**: Testing geolocation, permissions, multi-tab flows
 
 | Activity                        | Reference Files                                                                          |
 | ------------------------------- | ---------------------------------------------------------------------------------------- |
-| **WebSocket/real-time testing** | [websockets.md](browser-apis/websockets.md)                                              |
 | **Geolocation mocking**         | [browser-apis.md](browser-apis/browser-apis.md)                                          |
 | **Permission handling**         | [browser-apis.md](browser-apis/browser-apis.md)                                          |
 | **Clipboard testing**           | [browser-apis.md](browser-apis/browser-apis.md)                                          |
@@ -92,21 +84,9 @@ Consult these references based on what you're doing:
 | ------------------------------ | ----------------------------------------------------------------------------------------------------- |
 | **Error boundary testing**     | [error-testing.md](debugging/error-testing.md)                                                        |
 | **Network failure simulation** | [error-testing.md](debugging/error-testing.md), [network-advanced.md](advanced/network-advanced.md)   |
-| **Offline mode testing**       | [error-testing.md](debugging/error-testing.md), [service-workers.md](browser-apis/service-workers.md) |
-| **Service worker testing**     | [service-workers.md](browser-apis/service-workers.md)                                                 |
+| **Offline mode testing**       | [error-testing.md](debugging/error-testing.md)                                                        |
 | **Loading state testing**      | [error-testing.md](debugging/error-testing.md)                                                        |
 | **Form validation testing**    | [error-testing.md](debugging/error-testing.md)                                                        |
-
-### Multi-User & Collaboration Testing
-
-**When to use**: Testing features involving multiple users, roles, or real-time collaboration
-
-| Activity                       | Reference Files                                                                      |
-| ------------------------------ | ------------------------------------------------------------------------------------ |
-| **Multiple users in one test** | [multi-user.md](advanced/multi-user.md)                                              |
-| **Real-time collaboration**    | [multi-user.md](advanced/multi-user.md), [websockets.md](browser-apis/websockets.md) |
-| **Role-based access testing**  | [multi-user.md](advanced/multi-user.md)                                              |
-| **Concurrent action testing**  | [multi-user.md](advanced/multi-user.md)                                              |
 
 ### Architecture Decisions
 
@@ -121,14 +101,12 @@ Consult these references based on what you're doing:
 
 ### Framework-Specific Testing
 
-**When to use**: Testing React, Angular, Vue, or Next.js applications
+**When to use**: Testing React or Next.js applications
 
-| Activity                  | Reference Files                     |
-| ------------------------- | ----------------------------------- |
-| **Testing React apps**    | [react.md](frameworks/react.md)     |
-| **Testing Angular apps**  | [angular.md](frameworks/angular.md) |
-| **Testing Vue/Nuxt apps** | [vue.md](frameworks/vue.md)         |
-| **Testing Next.js apps**  | [nextjs.md](frameworks/nextjs.md)   |
+| Activity                 | Reference Files                   |
+| ------------------------ | --------------------------------- |
+| **Testing React apps**   | [react.md](frameworks/react.md)   |
+| **Testing Next.js apps** | [nextjs.md](frameworks/nextjs.md) |
 
 ### Refactoring & Maintenance
 
@@ -153,9 +131,7 @@ Consult these references based on what you're doing:
 | **Configuring Playwright project**      | [configuration.md](core/configuration.md), [projects-dependencies.md](core/projects-dependencies.md)                     |
 | **Setting up CI/CD pipelines**          | [ci-cd.md](infrastructure-ci-cd/ci-cd.md), [github-actions.md](infrastructure-ci-cd/github-actions.md)                   |
 | **GitHub Actions setup**                | [github-actions.md](infrastructure-ci-cd/github-actions.md)                                                              |
-| **GitLab CI setup**                     | [gitlab.md](infrastructure-ci-cd/gitlab.md)                                                                              |
 | **Other CI providers**                  | [other-providers.md](infrastructure-ci-cd/other-providers.md)                                                            |
-| **Docker/container setup**              | [docker.md](infrastructure-ci-cd/docker.md)                                                                              |
 | **Global setup & teardown**             | [global-setup.md](core/global-setup.md)                                                                                  |
 | **Project dependencies**                | [projects-dependencies.md](core/projects-dependencies.md)                                                                |
 | **Optimizing test performance**         | [performance.md](infrastructure-ci-cd/performance.md), [test-suite-structure.md](core/test-suite-structure.md)           |
@@ -194,33 +170,23 @@ What are you doing?
 │
 ├─ Writing a new test?
 │  ├─ E2E test → core/test-suite-structure.md, core/locators.md, core/assertions-waiting.md
-│  ├─ Component test → testing-patterns/component-testing.md
-│  ├─ API test → testing-patterns/api-testing.md, core/test-suite-structure.md
 │  ├─ GraphQL test → testing-patterns/graphql-testing.md
-│  ├─ Visual regression → testing-patterns/visual-regression.md
 │  ├─ Visual/canvas test → testing-patterns/canvas-webgl.md, core/test-suite-structure.md
 │  ├─ Accessibility test → testing-patterns/accessibility.md
 │  ├─ Mobile/responsive test → advanced/mobile-testing.md
 │  ├─ i18n/locale test → testing-patterns/i18n.md
-│  ├─ Electron app test → testing-patterns/electron.md
-│  ├─ Browser extension test → testing-patterns/browser-extensions.md
-│  ├─ Multi-user test → advanced/multi-user.md
-│  ├─ Form validation test → testing-patterns/forms-validation.md
-│  └─ Drag and drop test → testing-patterns/drag-drop.md
+│  └─ Form validation test → testing-patterns/forms-validation.md
 │
 ├─ Testing specific features?
-│  ├─ File upload/download → testing-patterns/file-operations.md, testing-patterns/file-upload-download.md
+│  ├─ File operations → testing-patterns/file-operations.md
 │  ├─ Date/time dependent → advanced/clock-mocking.md
-│  ├─ WebSocket/real-time → browser-apis/websockets.md
 │  ├─ Geolocation/permissions → browser-apis/browser-apis.md
 │  ├─ OAuth/SSO mocking → advanced/third-party.md, advanced/multi-context.md
 │  ├─ Payments/email/SMS → advanced/third-party.md
 │  ├─ iFrames → browser-apis/iframes.md
 │  ├─ Canvas/WebGL/charts → testing-patterns/canvas-webgl.md
-│  ├─ Service workers/PWA → browser-apis/service-workers.md
 │  ├─ i18n/localization → testing-patterns/i18n.md
-│  ├─ Security (XSS, CSRF) → testing-patterns/security-testing.md
-│  └─ Performance/Web Vitals → testing-patterns/performance-testing.md
+│  └─ Security (XSS, CSRF) → testing-patterns/security-testing.md
 │
 ├─ Architecture decisions?
 │  ├─ POM vs fixtures → architecture/pom-vs-fixtures.md
@@ -230,13 +196,7 @@ What are you doing?
 │
 ├─ Framework-specific testing?
 │  ├─ React app → frameworks/react.md
-│  ├─ Angular app → frameworks/angular.md
-│  ├─ Vue/Nuxt app → frameworks/vue.md
 │  └─ Next.js app → frameworks/nextjs.md
-│
-├─ Authentication testing?
-│  ├─ Basic auth patterns → advanced/authentication.md
-│  └─ Complex flows (MFA, reset) → advanced/authentication-flows.md
 │
 ├─ Test is failing/flaky?
 │  ├─ Flaky test investigation → debugging/flaky-tests.md
@@ -251,7 +211,6 @@ What are you doing?
 ├─ Testing error scenarios?
 │  ├─ Network failures → debugging/error-testing.md, advanced/network-advanced.md
 │  ├─ Offline (unexpected) → debugging/error-testing.md
-│  ├─ Offline-first/PWA → browser-apis/service-workers.md
 │  ├─ Error boundaries → debugging/error-testing.md
 │  └─ Form validation → testing-patterns/forms-validation.md, debugging/error-testing.md
 │
@@ -265,9 +224,7 @@ What are you doing?
 ├─ Setting up infrastructure?
 │  ├─ CI/CD → infrastructure-ci-cd/ci-cd.md
 │  ├─ GitHub Actions → infrastructure-ci-cd/github-actions.md
-│  ├─ GitLab CI → infrastructure-ci-cd/gitlab.md
 │  ├─ Other CI providers → infrastructure-ci-cd/other-providers.md
-│  ├─ Docker/containers → infrastructure-ci-cd/docker.md
 │  ├─ Sharding/parallel → infrastructure-ci-cd/parallel-sharding.md
 │  ├─ Reporting/artifacts → infrastructure-ci-cd/reporting.md
 │  ├─ Global setup/teardown → core/global-setup.md

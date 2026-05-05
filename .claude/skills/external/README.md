@@ -79,12 +79,11 @@ When in doubt during code authoring or review: read the sapan skill first, then 
 
 **Overlap note:** when Apollo is in use, sapan's `architecture/data-graphql.md` is authoritative for sapan-specific conventions (RSC vs client decision, Redux/Apollo state boundary, fragment colocation, `dataMasking: true`, codegen flow). Load that bridge skill first; cite this external skill for deeper Apollo wisdom.
 
-### `tooling/` (2 skills) — bundler + skill authoring
+### `tooling/` (1 skill) — bundler
 
 | Skill | Source | When to use |
 |---|---|---|
 | `turbopack` | Anthropic | Turbopack expert guidance — bundler config, HMR optimization, build issues, Turbopack vs Webpack differences. Sapan uses Turbopack default for `next dev` and `next build`. |
-| `skill-creator` | Anthropic | Skill authoring — create new skills, modify existing, run evals to test, optimize descriptions. Load when adding a new skill to sapan or external library. |
 
 ## Skipped (not in this library)
 
