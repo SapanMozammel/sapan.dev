@@ -1,8 +1,20 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import type { FormFieldProps } from '@/types/form-field';
 import { memo, useId } from 'react';
+
+type FormFieldProps = {
+	label: string;
+	name: string;
+	value: string;
+	error?: string | undefined;
+	onChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+	type?: 'text' | 'email' | 'textarea';
+	placeholder?: string;
+	autoComplete?: string;
+	rows?: number;
+	className?: string;
+};
 
 const INPUT_BASE =
 	'font-dm text-dark dark:text-white w-full rounded-md border bg-transparent px-3 py-2.5 text-sm font-normal leading-tight outline-none transition-colors duration-150 placeholder:text-secondary-600/50 dark:placeholder:text-secondary-400/50 focus:ring-0';

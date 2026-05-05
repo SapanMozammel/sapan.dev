@@ -1,9 +1,16 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import type { MarqueeProps } from '@/types/marquee';
 import { motion, useAnimationFrame, useMotionValue } from 'framer-motion';
 import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
+
+type MarqueeProps = {
+	children: React.ReactNode;
+	speed?: number;
+	direction?: 'left' | 'right';
+	pauseOnHover?: boolean;
+	className?: string;
+};
 
 const MarqueeComponent: React.FC<MarqueeProps> = ({ children, speed = 60, direction = 'left', pauseOnHover = false, className }) => {
 	const containerRef = useRef<HTMLDivElement>(null);

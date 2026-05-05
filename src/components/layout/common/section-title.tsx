@@ -1,5 +1,11 @@
 import { cn } from '@/lib/utils';
-import { SectionTitleTypes } from '@/types/title';
+
+type SectionTitleTypes = {
+	className?: string;
+	title: string;
+	subtitle?: string;
+	watermark?: string;
+};
 
 const SectionTitle = ({ title, subtitle, watermark, className }: SectionTitleTypes) => (
 	<div className={cn('relative z-1 w-full py-6 text-center sm:py-10', className)}>

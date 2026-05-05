@@ -164,6 +164,10 @@ vi.mock('framer-motion', () => {
 		useReducedMotion: () => false,
 		useMotionValue: (initial: number) => createMotionValue(initial),
 		useSpring: (initial: number) => createMotionValue(typeof initial === 'number' ? initial : 0),
+		useAnimationFrame: vi.fn(),
+		useInView: () => false,
+		useDragControls: () => ({ start: vi.fn() }),
+		motionValue: createMotionValue,
 	};
 });
 

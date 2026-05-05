@@ -1,5 +1,9 @@
 import { cn } from '@/lib/utils';
-import type { BulletListProps } from '@/types/bullet-list';
+
+type BulletListProps = {
+	items: string[];
+	className?: string;
+};
 
 const BulletList = ({ items, className }: BulletListProps) => (
 	<ul className={cn('text-secondary-600 dark:text-secondary-400 text-paragraph-small flex list-none flex-col gap-1.5', className)}>

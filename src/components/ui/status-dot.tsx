@@ -1,5 +1,9 @@
 import { cn } from '@/lib/utils';
-import type { StatusDotProps } from '@/types/status-dot';
+
+type StatusDotProps = {
+	pulse?: boolean | undefined;
+	className?: string;
+};
 
 const StatusDot = ({ pulse = true, className }: StatusDotProps) => (
 	<span className={cn('relative flex h-2.5 w-2.5 shrink-0', className)}>

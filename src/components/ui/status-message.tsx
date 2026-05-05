@@ -1,5 +1,12 @@
 import { cn } from '@/lib/utils';
-import type { StatusMessageProps } from '@/types/status-message';
+
+type StatusMessageProps = {
+	icon: React.ReactNode;
+	iconBg: string;
+	title: string;
+	description: string;
+	children?: React.ReactNode;
+};
 
 const StatusMessage = ({ icon, iconBg, title, description, children }: StatusMessageProps) => (
 	<div className='flex flex-col items-center gap-3 py-6 text-center'>

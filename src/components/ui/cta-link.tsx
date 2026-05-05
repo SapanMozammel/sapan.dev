@@ -1,6 +1,10 @@
 import { cn } from '@/lib/utils';
-import type { CTALinkProps } from '@/types/cta-link';
 import { IconArrowRight } from '@tabler/icons-react';
+
+type CTALinkProps = {
+	children: React.ReactNode;
+	className?: string;
+};
 
 const CTALink = ({ children, className }: CTALinkProps) => (
 	<span

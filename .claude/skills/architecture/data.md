@@ -27,35 +27,22 @@ App-level configuration — imported by routing, i18n, and component logic.
 
 ## src/types/
 
-TypeScript type definitions — one file per domain.
+TypeScript type definitions — one file per domain. Single-consumer prop types are colocated with their component (kept inline as `type Props = { … }` next to the component that uses them); only types shared across multiple consumers, or that describe content/data shapes, live in `src/types/`.
 
 | File | Types |
 |---|---|
+| `about.ts` | `QuickFact`, `EducationItem`, `LanguageLevel`, `LanguageItem`, `SkillGroup`, `Certification`, `SocialLink`, `AboutData`, `AboutTabId`, `AboutTab` |
 | `blog.ts` | `ContentBlock`, `BlogPost`, `BlogCardProps` |
 | `button.ts` | `BaseButtonProps`, `LinkButtonProps`, `RegularButtonProps`, `ButtonProps`, `ConnectButtonProps`, `GradientStop`, `SvgShapeProps`, `CenterSvgProps`, `ButtonContentProps`, `ButtonVariantConfig` |
 | `contact.ts` | `ContactFormData`, `ContactFormErrors`, `ContactSubmitStatus`, `ContactFormProps` |
-| `cursor-tooltip.ts` | `CursorTooltipProps`, `Position`, `TooltipContentProps` |
-| `diamond-grid.ts` | `DiamondGridItem`, `DiamondGridProps`, `LayoutConfig`, `ColumnGroup`, `DiamondColumnProps` |
-| `error.ts` | `ErrorProps` |
 | `experience.ts` | `ExperienceType`, `ExperienceItem`, `TimelineItemProps`, `TimelineProps`, `TimelineProgressBarProps` |
 | `faq.ts` | `FaqItem`, `AccordionItemProps`, `AccordionProps` |
+| `graphql/` | Generated GraphQL document + result types (codegen output) |
 | `i18n.ts` | `Locale`, `LocaleState` |
-| `marquee.ts` | `MarqueeProps` |
-| `particles.ts` | `ParticleProps`, `ParticleBackgroundProps` |
 | `portfolio.ts` | `PortfolioProject`, `ProjectCardProps` |
-| `providers.ts` | `ProvidersProps` |
-| `separator.ts` | `SeparatorTypes` |
 | `stacking-cards.ts` | `UseStackingCardsOptions` |
 | `technology.ts` | `TechStackItem`, `TechnologiesDisplayProps` |
 | `testimonial.ts` | `TestimonialData` |
-| `title.ts` | `SectionTitleTypes` |
-| `badge.ts` | `BadgeProps` |
-| `bullet-list.ts` | `BulletListProps` |
-| `cta-link.ts` | `CTALinkProps` |
-| `form-field.ts` | `FormFieldProps` |
-| `meta-label.ts` | `MetaLabelProps` |
-| `status-dot.ts` | `StatusDotProps` |
-| `status-message.ts` | `StatusMessageProps` |
 | `workflow.ts` | `WorkflowStep`, `WorkflowContentProps`, `WorkflowProgressProps` |
 
 ## src/lib/utils/
@@ -85,7 +72,8 @@ No `fetch()`, no API calls for static content — it's all imported directly.
 - No `any` types — TypeScript strict mode enforced
 - `portfolio.tsx` is the only data file that may contain JSX — all others must be `.ts`
 - New data files go in `src/data/content/` (changing content) or `src/data/config/` (app config)
-- New type files go in `src/types/` — one file per domain, named after the domain
+- New type files go in `src/types/` only when shared across multiple consumers or describing content/data shapes; single-consumer prop types stay inline next to the component
+- One file per domain, named after the domain
 
 ---
 

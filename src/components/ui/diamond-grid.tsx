@@ -1,8 +1,28 @@
 'use client';
 
 import { cn } from '@/lib/utils/index';
-import type { ColumnGroup, DiamondColumnProps, DiamondGridProps, LayoutConfig } from '@/types/diamond-grid';
-import React, { Children, memo, useMemo } from 'react';
+import React, { Children, memo, useMemo, type ReactNode } from 'react';
+
+type DiamondGridProps = {
+	children: ReactNode;
+	className?: string;
+};
+
+type LayoutConfig = {
+	maxItems: number;
+	columns: number;
+	pattern: number[];
+};
+
+type ColumnGroup = {
+	content: ReactNode;
+	index: number;
+};
+
+type DiamondColumnProps = {
+	columnItems: ColumnGroup[];
+	columnIndex: number;
+};
 
 const LAYOUT_CONFIGS = {
 	large: { maxItems: 16, columns: 7, pattern: [1, 2, 3, 4, 3, 2, 1] },

@@ -1,6 +1,16 @@
 import { cn } from '@/lib/utils';
-import { SeparatorTypes } from '@/types/separator';
 import { IconPlus } from '@tabler/icons-react';
+
+type SeparatorTypes = {
+	lts?: boolean;
+	rts?: boolean;
+	lbs?: boolean;
+	rbs?: boolean;
+	tl?: boolean;
+	bl?: boolean;
+	ll?: boolean;
+	rl?: boolean;
+};
 
 const STAR_CLASSES = 'w-3 md:w-4 h-3 md:h-4 text-primary dark:text-success z-1';
 const LINE_CLASSES = 'border-solid border-secondary-400 dark:border-secondary-600';

@@ -1,9 +1,13 @@
 'use client';
 
 import { Button } from '@/components/layout/common/button';
-import type { ErrorProps } from '@/types/error';
 import { useTranslations } from 'next-intl';
 import { memo, useEffect } from 'react';
+
+type ErrorProps = {
+	error: Error & { digest?: string };
+	reset: () => void;
+};
 
 const Error = memo(({ error, reset }: ErrorProps) => {
 	const translateError = useTranslations('common.error');

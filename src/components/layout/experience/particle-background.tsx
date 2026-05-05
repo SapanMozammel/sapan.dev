@@ -1,11 +1,14 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import type { ParticleBackgroundProps } from '@/types/particles';
 import { useReducedMotion } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import dynamic from 'next/dynamic';
 import { memo, useCallback, useEffect, useRef, useState } from 'react';
+
+type ParticleBackgroundProps = {
+	className?: string;
+};
 
 const ParticleScene = dynamic(() => import('./particles/particle-scene'), { ssr: false });
 

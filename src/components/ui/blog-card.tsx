@@ -3,7 +3,7 @@
 import Badge from '@/components/ui/badge';
 import CTALink from '@/components/ui/cta-link';
 import MetaLabel from '@/components/ui/meta-label';
-import { CATEGORY_COLORS, DEFAULT_CATEGORY_COLOR } from '@/data/content/blogs';
+import { CATEGORY_COLORS, DEFAULT_CATEGORY_COLOR } from '@/data/config/blog-categories';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 import { getBlurDataURL } from '@/lib/utils/image';
