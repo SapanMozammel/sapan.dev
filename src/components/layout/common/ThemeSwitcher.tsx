@@ -2,7 +2,7 @@
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { isMacOS } from '@/lib/helper';
+import { isAppleDevice } from '@/lib/helper';
 import { cn } from '@/lib/utils';
 import { IconContrastFilled, IconLoader, IconMoonFilled, IconSunFilled } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
@@ -69,7 +69,7 @@ const ThemeSwitcher = memo(() => {
 
 	const handleKeyDown = useCallback(
 		(event: KeyboardEvent) => {
-			const baseKey = (isMacOS() && event.metaKey) || (!isMacOS() && event.ctrlKey);
+			const baseKey = (isAppleDevice() && event.metaKey) || (!isAppleDevice() && event.ctrlKey);
 			if (baseKey && event.altKey && event.code.toLowerCase() === 'KeyT'.toLowerCase()) {
 				event.preventDefault(); // Prevent default browser behavior if any
 				changeTheme();

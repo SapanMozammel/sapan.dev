@@ -1,12 +1,8 @@
-export const isMacOS = () => {
-	if (typeof navigator !== 'undefined') {
-		if ((navigator as any).userAgentData) {
-			// Use userAgentData for modern browsers
-			return (navigator as any).userAgentData.platform === 'macOS';
-		} else {
-			// Fallback to userAgent
-			return /Mac/.test(navigator.userAgent);
-		}
-	}
-	return false;
+type NavigatorWithUAData = Navigator & { userAgentData?: { platform: string } };
+
+export const isAppleDevice = (): boolean => {
+	if (typeof navigator === 'undefined') return false;
+	const nav = navigator as NavigatorWithUAData;
+	if (nav.userAgentData) return nav.userAgentData.platform === 'macOS';
+	return /Mac/.test(navigator.userAgent);
 };

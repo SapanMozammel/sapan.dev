@@ -6,5 +6,3 @@ export type LocaleState = {
 	currentLocale: Locale;
 	isRTL: boolean;
 };
-
-export type TranslationNamespace = 'common' | 'navigation' | 'home' | 'about' | 'services' | 'portfolio' | 'blog' | 'contact';

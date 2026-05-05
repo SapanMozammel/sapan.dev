@@ -39,7 +39,7 @@ TypeScript type definitions — one file per domain.
 | `error.ts` | `ErrorProps` |
 | `experience.ts` | `ExperienceType`, `ExperienceItem`, `TimelineItemProps`, `TimelineProps`, `TimelineProgressBarProps` |
 | `faq.ts` | `FaqItem`, `AccordionItemProps`, `AccordionProps` |
-| `i18n.ts` | `Locale`, `LocaleState`, `TranslationNamespace` |
+| `i18n.ts` | `Locale`, `LocaleState` |
 | `marquee.ts` | `MarqueeProps` |
 | `particles.ts` | `ParticleProps`, `ParticleBackgroundProps` |
 | `portfolio.ts` | `PortfolioProject`, `ProjectCardProps` |
