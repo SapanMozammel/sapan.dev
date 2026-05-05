@@ -1,9 +1,9 @@
 import BlogCard from '@/components/ui/blog-card';
 import { BLOG_POSTS } from '@/data/content/blogs';
 import { getTranslations } from 'next-intl/server';
-import { Button } from '../common/button';
-import SectionSeparator from '../common/section-separator';
-import SectionTitle from '../common/section-title';
+import { Button } from '@/components/layout/common/button';
+import SectionSeparator from '@/components/layout/common/section-separator';
+import SectionTitle from '@/components/layout/common/section-title';
 
 const Blog = async () => {
 	const translate = await getTranslations('home.blog');

@@ -6,8 +6,8 @@ import { PORTFOLIO_PROJECTS } from '@/data/content/portfolio';
 import { useStackingCards } from '@/hooks/use-stacking-cards';
 import { useTranslations } from 'next-intl';
 import { createRef, memo, useMemo } from 'react';
-import SectionSeparator from '../common/section-separator';
-import SectionTitle from '../common/section-title';
+import SectionSeparator from '@/components/layout/common/section-separator';
+import SectionTitle from '@/components/layout/common/section-title';
 
 const Portfolio = memo(() => {
 	const translate = useTranslations('home.portfolio');

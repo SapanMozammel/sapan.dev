@@ -7,8 +7,8 @@ import { getBlurDataURL } from '@/lib/utils/image';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { memo } from 'react';
-import SectionSeparator from '../common/section-separator';
-import SectionTitle from '../common/section-title';
+import SectionSeparator from '@/components/layout/common/section-separator';
+import SectionTitle from '@/components/layout/common/section-title';
 
 const LOGO_SIZE = 64;
 const BLUR_PLACEHOLDER = getBlurDataURL(LOGO_SIZE, LOGO_SIZE);

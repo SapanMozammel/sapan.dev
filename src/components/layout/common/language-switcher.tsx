@@ -5,17 +5,17 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { LANGUAGES } from '@/data/config/languages';
 import { usePathname, useRouter } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
+import { useAppDispatch } from '@/store/hooks';
 import { setLocale } from '@/store/slices/locale-slice';
 import type { Locale } from '@/types/i18n';
 import { IconLoader } from '@tabler/icons-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
 
 const LanguageSwitcher = memo(() => {
 	const router = useRouter();
 	const pathname = usePathname();
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const currentLocale = useLocale();
 	const translateNav = useTranslations('navigation');
 	const translateCommon = useTranslations('common');

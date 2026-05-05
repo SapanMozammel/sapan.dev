@@ -1,5 +1,5 @@
-import LanguageSwitcher from '../common/language-switcher';
-import ThemeSwitcher from '../common/theme-switcher';
+import LanguageSwitcher from '@/components/layout/common/language-switcher';
+import ThemeSwitcher from '@/components/layout/common/theme-switcher';
 import GitHubLink from './github-link';
 import HeaderLogo from './header-logo';
 import MobileNav from './mobile-nav';
