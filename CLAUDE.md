@@ -189,8 +189,6 @@ Project-level commands live in `.claude/commands/`. Each is invoked as `/<name> 
 | `/translate [locale?]` | i18n translation helper. |
 | `/new-component [Name]` | Scaffold a new component per sapan conventions. |
 | `/new-section [Name]` | Scaffold a new page section per sapan conventions. |
-| `/generate-config [skill\|command\|all?]` | Config scaffolding helper. |
-| `/update-setup [section?]` | Update `docs/CLAUDE_SETUP.md`. |
 
 **Removed:** `/audit` (subsumed by `/review`). **Renamed:** `/audit-i18n` → `/review-i18n`. **Not adopted:** R&D's standalone `/feature` (merged into `/plan`).
 
