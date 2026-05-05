@@ -1,4 +1,4 @@
-import { Button } from '@/components/layout/common/Button';
+import { Button } from '@/components/layout/common/button';
 import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server';
 
 const NotFound = async () => {

@@ -1,6 +1,6 @@
 import { fontList } from '@/app/fonts';
-import Footer from '@/components/layout/Footer';
-import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/footer';
+import Header from '@/components/layout/header';
 import { routing, RTL_LOCALES } from '@/i18n/routing';
 import ApolloWrapper from '@/lib/apollo/provider';
 import { cn } from '@/lib/utils';

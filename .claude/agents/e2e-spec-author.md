@@ -62,8 +62,8 @@ Before writing any spec, read these files and apply their rules:
    - **Refuse** to scaffold a spec that hits real external services. If the feature requires a third-party integration with no mockable surface, surface the gap and stop.
 
 5. **Decide POM:**
-   - HomePage flows → use `e2e/pages/HomePage.ts`
-   - Articles flows → use `e2e/pages/ArticlesPage.ts`
+   - HomePage flows → use `e2e/pages/home-page.ts`
+   - Articles flows → use `e2e/pages/articles-page.ts`
    - Single-purpose specs (i18n, seo, theme, motion) → inline selectors, skip POM
 
 6. **Read asserted copy/metadata from source — never hardcode:**

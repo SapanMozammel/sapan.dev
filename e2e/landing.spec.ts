@@ -1,6 +1,6 @@
 import homeMessages from '../src/i18n/locales/en/home.json';
 import { expect, test } from './fixtures';
-import { HomePage, SECTION_IDS } from './pages/HomePage';
+import { HomePage, SECTION_IDS } from './pages/home-page';
 
 test.describe('landing page', () => {
 	test('renders all 8 anchored sections', async ({ page }) => {

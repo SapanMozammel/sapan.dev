@@ -163,7 +163,7 @@ End with one of: **APPROVE** (no Critical/Warning) · **APPROVE WITH WARNINGS** 
 When the review finds **any Critical or Warning** issues, the agent MUST write or update a follow-up PRD at `.claude/plans/[scope-slug]-review/prd.md` so the user can run `/implement [scope-slug]-review` to apply fixes.
 
 **Slug derivation:**
-- File-scoped review → kebab-case from the most-changed file path (e.g., `src/components/layout/Hero/index.tsx` → `hero-component-review`)
+- File-scoped review → kebab-case from the most-changed file path (e.g., `src/components/layout/hero/index.tsx` → `hero-component-review`)
 - Diff-scoped review → kebab-case from the feature/branch name (e.g., a diff on `feature/contact-form-redesign` → `contact-form-redesign-review`)
 - Multi-file review with no obvious feature → `code-review-{YYYY-MM-DD}` (today's date)
 

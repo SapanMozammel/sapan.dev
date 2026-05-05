@@ -217,16 +217,18 @@ Full-page status/error pages use a centered radial glow blob for visual depth. N
 
 | What | Where |
 |---|---|
-| Page sections | `src/components/layout/{SectionName}/index.tsx` |
-| Sub-components | `src/components/layout/{SectionName}/{SubComponent}.tsx` |
+| Page sections | `src/components/layout/{section-name}/index.tsx` |
+| Sub-components | `src/components/layout/{section-name}/{sub-component}.tsx` |
 | Shared layout pieces | `src/components/layout/common/` |
 | Base UI (shadcn + custom) | `src/components/ui/` |
-| Custom icons | `src/components/icons/` |
+| Custom icons | `src/components/icons/` (`projects/<brand>/logo.tsx` for project logos) |
 | Static content | `src/data/content/` |
 | App config | `src/data/config/` |
 | Type definitions | `src/types/` |
 | Utilities | `src/lib/utils/` |
 | Styles | `src/styles/` |
+
+**Filename casing.** Every file and folder name is **kebab-case** (`hero-background.tsx`, `cta-logo.tsx`, `notification-x/logo.tsx`, `use-contact-form.ts`, `locale-slice.ts`). React component identifiers (the exported symbol) stay PascalCase. `index.tsx` is the entry file inside any folder unit. Locale folders (`pt-BR`, `zh-CN`) follow BCP-47 and are exempt; Next.js route segments (`[locale]`, `[slug]`, `(landing)`) follow App Router syntax and are exempt.
 
 ---
 

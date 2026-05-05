@@ -1,7 +1,7 @@
 'use client';
 
-import SectionSeparator from '@/components/layout/common/SectionSeparator';
-import SectionTitle from '@/components/layout/common/SectionTitle';
+import SectionSeparator from '@/components/layout/common/section-separator';
+import SectionTitle from '@/components/layout/common/section-title';
 import BlogCard from '@/components/ui/blog-card';
 import { BLOG_POSTS, BLOGS_PER_PAGE } from '@/data/content/blogs';
 import { cn } from '@/lib/utils';

@@ -66,7 +66,7 @@ Always extend or reuse existing sapan test infrastructure before hand-rolling ne
 
 When the first feature uses Apollo, expect a future `tests/apollo-utils.tsx` for `MockedProvider` wrapping; until then, Apollo tests aren't authored (Apollo is foundation-only — no endpoint set yet).
 
-`e2e/fixtures.ts` and `e2e/pages/{HomePage,ArticlesPage}.ts` host shared Playwright helpers.
+`e2e/fixtures.ts` and `e2e/pages/{home-page,articles-page}.ts` host shared Playwright helpers.
 
 ## Patterns
 
@@ -76,7 +76,7 @@ When the first feature uses Apollo, expect a future `tests/apollo-utils.tsx` for
 import { render, screen } from '@/../tests/test-utils';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect } from 'vitest';
-import Hero from '@/components/layout/Hero';
+import Hero from '@/components/layout/hero';
 
 describe('Hero', () => {
   it('renders the headline', async () => {
@@ -129,7 +129,7 @@ it('renders blog list from Hashnode query', async () => {
 
 ```ts
 import { test, expect } from './fixtures';
-import { HomePage } from './pages/HomePage';
+import { HomePage } from './pages/home-page';
 
 test('homepage anchors all 8 sections', async ({ page }) => {
   const home = new HomePage(page);

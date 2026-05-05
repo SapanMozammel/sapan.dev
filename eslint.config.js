@@ -3,6 +3,7 @@ const prettierConfig = require('eslint-config-prettier');
 const prettierPlugin = require('eslint-plugin-prettier');
 const typescriptPlugin = require('@typescript-eslint/eslint-plugin');
 const typescriptParser = require('@typescript-eslint/parser');
+const unicornPlugin = require('eslint-plugin-unicorn').default ?? require('eslint-plugin-unicorn');
 
 // Prettier options from .formatter/.prettierrc.js (strip Prettier-only keys not valid in ESLint rule)
 const { plugins: _p, overrides: _o, ...prettierOptions } = require('./.formatter/.prettierrc.js');
@@ -17,6 +18,7 @@ module.exports = [
 		plugins: {
 			prettier: prettierPlugin,
 			'@typescript-eslint': typescriptPlugin,
+			unicorn: unicornPlugin,
 		},
 		languageOptions: {
 			parser: typescriptParser,
@@ -84,6 +86,9 @@ module.exports = [
 			'no-alert': 'warn',
 			'object-shorthand': 'error',
 			'prefer-template': 'error',
+
+			// Filename casing — kebab-case for all .ts/.tsx files (sapan H2-B convention)
+			'unicorn/filename-case': ['error', { case: 'kebabCase' }],
 
 			// Disable conflicting prettier rules
 			...prettierConfig.rules,

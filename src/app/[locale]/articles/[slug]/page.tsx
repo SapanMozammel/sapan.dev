@@ -1,4 +1,4 @@
-import SectionSeparator from '@/components/layout/common/SectionSeparator';
+import SectionSeparator from '@/components/layout/common/section-separator';
 import Badge from '@/components/ui/badge';
 import BlogCard from '@/components/ui/blog-card';
 import MetaLabel from '@/components/ui/meta-label';

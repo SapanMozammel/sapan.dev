@@ -1,5 +1,5 @@
 import { expect, test } from './fixtures';
-import { HomePage } from './pages/HomePage';
+import { HomePage } from './pages/home-page';
 
 const isMobileProject = (name: string) => name.startsWith('mobile-');
 

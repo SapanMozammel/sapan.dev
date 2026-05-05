@@ -1,4 +1,4 @@
-export * from './localeSlice';
-export { default as localeReducer } from './localeSlice';
-export * from './uiSlice';
-export { default as uiReducer } from './uiSlice';
+export * from './locale-slice';
+export { default as localeReducer } from './locale-slice';
+export * from './ui-slice';
+export { default as uiReducer } from './ui-slice';

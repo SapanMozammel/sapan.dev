@@ -86,49 +86,47 @@ src/
 │       └── loading.tsx
 │
 ├── components/
-│   ├── layout/                       # Page sections (each has index.tsx)
-│   │   ├── Hero/
+│   ├── layout/                       # Page sections (each has index.tsx). All filenames + folders are kebab-case.
+│   │   ├── hero/
 │   │   │   ├── index.tsx
-│   │   │   └── HeroBackground.tsx
-│   │   ├── Experience/
+│   │   │   └── hero-background.tsx
+│   │   ├── experience/
 │   │   │   ├── index.tsx
-│   │   │   ├── ParticleBackground.tsx
+│   │   │   ├── particle-background.tsx
 │   │   │   └── particles/           # Three.js particle system
-│   │   ├── Portfolio/               # Stacking card projects
-│   │   ├── Technologies/            # Tech stack grid
-│   │   ├── Testimonials/
-│   │   │   └── TestimonialBackground.tsx
-│   │   ├── Workflow/
+│   │   ├── portfolio/               # Stacking card projects
+│   │   ├── technologies/            # Tech stack grid
+│   │   ├── testimonials/
+│   │   │   └── testimonial-background.tsx
+│   │   ├── workflow/
 │   │   │   ├── index.tsx
-│   │   │   ├── WorkflowContent.tsx
-│   │   │   └── WorkflowProgress.tsx
-│   │   ├── Blog/                    # Blog cards section
-│   │   ├── Faq/                     # Accordion FAQ
-│   │   ├── Cta/
-│   │   │   └── CtaBackground.tsx
-│   │   ├── Header/
+│   │   │   ├── workflow-content.tsx
+│   │   │   └── workflow-progress.tsx
+│   │   ├── blog/                    # Blog cards section
+│   │   ├── faq/                     # Accordion FAQ
+│   │   ├── cta/
+│   │   │   └── cta-background.tsx
+│   │   ├── header/
 │   │   │   ├── index.tsx            # Server: logo, nav, switchers
-│   │   │   ├── NavMenu.tsx          # Client: desktop nav + scroll-spy
-│   │   │   └── MobileNav.tsx        # Client: sheet-based mobile nav
-│   │   ├── Footer/
-│   │   │   ├── FooterNav.tsx        # Client: section scroll navigation
-│   │   │   └── FooterConnect.tsx    # Client: availability + social links
+│   │   │   ├── nav-menu.tsx         # Client: desktop nav + scroll-spy
+│   │   │   └── mobile-nav.tsx       # Client: sheet-based mobile nav
+│   │   ├── footer/
+│   │   │   └── index.tsx
 │   │   └── common/
-│   │       ├── Button.tsx
-│   │       ├── Button/              # ButtonContent, ButtonShapeSvg, variants.ts
-│   │       ├── ConnectButton.tsx
-│   │       ├── SectionSeparator.tsx
-│   │       ├── SectionTitle.tsx
-│   │       ├── TextUnderline.tsx
-│   │       ├── ThemeSwitcher.tsx
-│   │       └── LanguageSwitcher.tsx
-│   ├── ui/                          # shadcn/ui + custom UI components
+│   │       ├── button/              # index.tsx + button-content, button-shape-svg, variants.ts
+│   │       ├── connect-button.tsx
+│   │       ├── section-separator.tsx
+│   │       ├── section-title.tsx
+│   │       ├── text-underline.tsx
+│   │       ├── theme-switcher.tsx
+│   │       └── language-switcher.tsx
+│   ├── ui/                          # shadcn/ui + custom UI components (kebab-case)
 │   │   ├── accordion.tsx
 │   │   ├── blog-card.tsx
-│   │   ├── contact-modal/           # index.tsx, ContactForm.tsx, ContactStatusStates.tsx
-│   │   ├── timeline/                # index.tsx, TimelineItem.tsx, TimelineProgressBar.tsx, timeline-utils.ts
+│   │   ├── contact-modal/           # index.tsx, contact-form.tsx, contact-status-states.tsx
+│   │   ├── timeline/                # index.tsx, timeline-item.tsx, timeline-progress-bar.tsx, timeline-utils.ts
 │   │   ├── diamond-grid.tsx
-│   │   ├── gsap-marquee.tsx
+│   │   ├── marquee.tsx
 │   │   ├── project-card.tsx
 │   │   ├── technologies-display.tsx
 │   │   ├── cursor-tooltip.tsx
@@ -136,11 +134,11 @@ src/
 │   │   ├── dialog.tsx
 │   │   ├── popover.tsx
 │   │   └── tooltip.tsx
-│   └── icons/                       # Custom SVG icons
-│       ├── Logo.tsx
-│       ├── Cloud.tsx
-│       ├── Pattern.tsx
-│       └── WorldMap.tsx
+│   └── icons/                       # Custom SVG icons (kebab-case files)
+│       ├── logo.tsx
+│       ├── pattern.tsx
+│       ├── world-map.tsx
+│       └── projects/<brand>/logo.tsx  # 9 brand logos (better-links, betterdocs, ..., x-cloud)
 │
 ├── data/
 │   ├── config/                      # languages.ts, routes.ts, technologies.ts
@@ -164,12 +162,12 @@ src/
 │   ├── index.ts
 │   ├── hooks/index.ts               # useAppDispatch, useAppSelector
 │   └── slices/
-│       ├── localeSlice.ts           # currentLocale, isRTL — persists to localStorage
-│       └── uiSlice.ts               # isContactModalOpen
+│       ├── locale-slice.ts          # currentLocale, isRTL — persists to localStorage
+│       └── ui-slice.ts              # isContactModalOpen
 │
 ├── hooks/
-│   ├── useContactForm.ts            # Form state, validation, Redux dispatch
-│   └── useStackingCards.ts          # GSAP ScrollTrigger stacking (Portfolio)
+│   ├── use-contact-form.ts          # Form state, validation, Redux dispatch
+│   └── use-stacking-cards.ts        # GSAP ScrollTrigger stacking (Portfolio)
 │
 ├── lib/
 │   └── utils/
@@ -217,8 +215,8 @@ End-to-end tests live in [`e2e/`](../e2e) at the project root, scoped via [`tsco
 e2e/
 ├── fixtures.ts             # Extended `test` — mockContact, mockTurnstile, setLocale + reduced-motion default
 ├── pages/                  # Page Objects
-│   ├── HomePage.ts         # 8 section locators + scrollToSection helper
-│   └── ArticlesPage.ts     # Listing + goToArticle / firstArticleSlug helpers
+│   ├── home-page.ts         # 8 section locators + scrollToSection helper
+│   └── articles-page.ts     # Listing + goToArticle / firstArticleSlug helpers
 └── *.spec.ts               # 8 specs: landing, navigation, responsive, accessibility, articles, i18n, theme, contact-modal
 ```
 

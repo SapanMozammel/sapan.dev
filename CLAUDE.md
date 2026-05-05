@@ -53,20 +53,20 @@ src/
 │   │                       # blog-card, project-card, gsap-marquee, cursor-tooltip,
 │   │                       # diamond-grid, technologies-display, dialog, popover,
 │   │                       # sheet, tooltip
-│   └── icons/              # SVG icons: Logo, Cloud, Pattern, WorldMap
+│   └── icons/              # SVG icons (kebab files): logo, pattern, world-map; projects/<brand>/logo
 ├── data/
 │   ├── content/            # admin-dashboard, experience, portfolio, testimonials, faq, blogs, workflow
 │   └── config/             # languages, technologies
 ├── i18n/                   # next-intl: routing.ts, navigation.ts, request.ts, locales/
-├── store/                  # Redux: localeSlice, uiSlice
-├── hooks/                  # useContactForm, useStackingCards
-├── lib/utils/              # cn() (index.ts), image utilities: getBlurDataURL(), getOptimizedImageProps(), TECH_LOGOS, etc. (image.ts)
+├── store/                  # Redux: locale-slice, ui-slice
+├── hooks/                  # use-contact-form, use-stacking-cards
+├── lib/utils/              # cn() (index.ts), getBlurDataURL() (image.ts)
 ├── styles/                 # global.scss, themes.scss, utilities.scss, animations.scss
 └── types/                  # TypeScript types
 tests/                      # Vitest suites (root-level, outside Next.js compilation)
 e2e/                        # Playwright specs (root-level, scoped via tsconfig.e2e.json)
 ├── fixtures.ts             # Extended `test` — mockContact, mockTurnstile, setLocale, reduced-motion default
-├── pages/                  # POMs — HomePage, ArticlesPage
+├── pages/                  # POMs — home-page, articles-page
 └── *.spec.ts               # 8 specs — landing, navigation, responsive, accessibility, articles, i18n, theme, contact-modal
 ```
 
@@ -154,6 +154,7 @@ Allowed remote domains: `images.unsplash.com`
 ## Code Conventions
 
 - Arrow functions only — never `function Foo() {}`
+- **kebab-case for all file and folder names** (`hero-background.tsx`, `cta-logo.tsx`, `layout/header/`, `icons/projects/notification-x/logo.tsx`); React component identifiers (the exported symbol) stay PascalCase. Locale folders (`pt-BR`, `zh-CN`) follow BCP-47 and are exempt.
 - `type` only — never `interface` for props or any TypeScript definitions
 - `cn()` from `@/lib/utils` for all className composition — never template literals (`` className={`...${x}`} ``), never string concatenation, never ternary with two string branches outside `cn()`. Required for prod class mangling (`pnpm build:mangled`, Vercel default via `vercel.json`); see [.claude/skills/workflow/tailwind-mangle.md](.claude/skills/workflow/tailwind-mangle.md)
 - Design system tokens only — no hardcoded colors or hex values

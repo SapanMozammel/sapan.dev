@@ -113,8 +113,8 @@ The `motion-on` project is the only place where motion runs un-emulated, and onl
 
 | POM | Path | Use |
 |---|---|---|
-| `HomePage` | `e2e/pages/HomePage.ts` | Selectors for the 8 anchored sections (`#home`, `#technologies`, `#portfolio`, `#experience`, `#testimonials`, `#workflow`, `#blog`, `#faq`) + `scrollToSection(id)` helper |
-| `ArticlesPage` | `e2e/pages/ArticlesPage.ts` | Listing locator + `goToArticle(slug)` helper |
+| `HomePage` | `e2e/pages/home-page.ts` | Selectors for the 8 anchored sections (`#home`, `#technologies`, `#portfolio`, `#experience`, `#testimonials`, `#workflow`, `#blog`, `#faq`) + `scrollToSection(id)` helper |
+| `ArticlesPage` | `e2e/pages/articles-page.ts` | Listing locator + `goToArticle(slug)` helper |
 
 Single-purpose specs (i18n, seo, theme) skip POM and inline their selectors — POM overhead isn't worth it for one-shot DOM probes.
 
@@ -151,7 +151,7 @@ Read all expected copy from source files; never hardcode strings:
 - Translation keys → `src/i18n/locales/<locale>/<namespace>.json` (4 namespaces: `common`, `navigation`, `home`, `blog`)
 - Static content → `src/data/content/*`
 - Locale list, `localePrefix`, RTL set → `src/i18n/routing.ts`
-- Section anchor IDs → derive from `e2e/pages/HomePage.ts`, never inline
+- Section anchor IDs → derive from `e2e/pages/home-page.ts`, never inline
 
 A spec that asserts `'Get in touch'` literally is rejected at review — assert against the imported translation value.
 

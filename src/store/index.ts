@@ -1,6 +1,6 @@
 import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit';
 import { LOCALE_STORAGE_KEY, localeReducer, uiReducer } from './slices';
-import { setLocale } from './slices/localeSlice';
+import { setLocale } from './slices/locale-slice';
 
 const listenerMiddleware = createListenerMiddleware();
 

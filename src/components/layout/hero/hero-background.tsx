@@ -1,0 +1,20 @@
+import Pattern from '@/components/icons/pattern';
+import WorldMap from '@/components/icons/world-map';
+import { cn } from '@/lib/utils';
+
+const HeroBackground = ({ children, className, ...rest }: React.DetailedHTMLProps<React.AllHTMLAttributes<HTMLDivElement>, HTMLDivElement>) => (
+	<>
+		{children}
+		<div className={cn('pointer-events-none absolute inset-0 -z-2 overflow-hidden select-none', className)} {...rest}>
+			<div className='absolute inset-0 flex items-center justify-center'>
+				<WorldMap className='fill-secondary-100/50 dark:fill-secondary-800/50 h-full w-auto' />
+			</div>
+			<div className='absolute inset-0 flex items-center justify-center'>
+				<Pattern className='text-secondary-700 dark:text-secondary-300 h-full w-auto' />
+			</div>
+			<div className='from-info/50 via-info/15 absolute top-1/2 left-1/2 aspect-square w-256 max-w-full -translate-x-1/2 -translate-y-1/2 bg-radial via-40% to-transparent to-60%' />
+		</div>
+	</>
+);
+
+export default HeroBackground;

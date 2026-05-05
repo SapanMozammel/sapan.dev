@@ -1,5 +1,5 @@
-import ContactAdminEmail from '@/emails/ContactAdminEmail';
-import ContactAutoReply from '@/emails/ContactAutoReply';
+import ContactAdminEmail from '@/emails/contact-admin-email';
+import ContactAutoReply from '@/emails/contact-auto-reply';
 import { ratelimit } from '@/lib/contact/ratelimit';
 import { resend } from '@/lib/contact/resend';
 import { contactSchema } from '@/lib/contact/schema';

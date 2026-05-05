@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/layout/common/Button';
+import { Button } from '@/components/layout/common/button';
 import type { ErrorProps } from '@/types/error';
 import { useTranslations } from 'next-intl';
 import { memo, useEffect } from 'react';

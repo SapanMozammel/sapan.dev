@@ -1,5 +1,5 @@
 import { expect, test } from './fixtures';
-import { ArticlesPage } from './pages/ArticlesPage';
+import { ArticlesPage } from './pages/articles-page';
 
 test.describe('articles', () => {
 	test('listing renders at least one card', async ({ page }) => {

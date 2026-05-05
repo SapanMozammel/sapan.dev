@@ -1,12 +1,12 @@
 'use client';
 
-import Logo from '@/components/icons/Logo';
+import Logo from '@/components/icons/logo';
 import { Dialog, DialogCloseButton, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useContactForm } from '@/hooks/useContactForm';
+import { useContactForm } from '@/hooks/use-contact-form';
 import { useTranslations } from 'next-intl';
 import { memo } from 'react';
-import ContactForm from './ContactForm';
-import { ContactError, ContactLoading, ContactSuccess } from './ContactStatusStates';
+import ContactForm from './contact-form';
+import { ContactError, ContactLoading, ContactSuccess } from './contact-status-states';
 
 const ContactModal = memo(() => {
 	const translateModal = useTranslations('common.contact.modal');
