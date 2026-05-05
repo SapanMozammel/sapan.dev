@@ -65,7 +65,7 @@ Pure utility functions.
 | File | Exports |
 |---|---|
 | `index.ts` | `cn()` — clsx + extendTailwindMerge (with typography preset regex) |
-| `image.ts` | `shimmer()`, `toBase64()`, `getBlurDataURL()`, `getSolidColorPlaceholder()`, `IMAGE_SIZES`, `getOptimizedImageProps()`, `TECH_LOGOS`, `getTechLogo()` |
+| `image.ts` | `getBlurDataURL()` |
 
 ## Data Flow
 
