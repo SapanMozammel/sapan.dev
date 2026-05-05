@@ -14,7 +14,7 @@ pnpm run dev          # http://localhost:8000 (Turbopack)
 ### Development
 ```bash
 pnpm run dev          # Dev server with Turbopack (port 8000)
-pnpm run dev:webpack  # Fallback dev server using webpack
+pnpm run dev:webpack  # Webpack-only fallback — use when Turbopack hits a regression or for stack traces from webpack-only deps
 ```
 
 ### Build & Production

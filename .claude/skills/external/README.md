@@ -18,12 +18,11 @@ When in doubt during code authoring or review: read the sapan skill first, then 
 
 ## Categories
 
-### `nextjs/` (4 skills) — Next.js App Router framework reference
+### `nextjs/` (3 skills) — Next.js App Router framework reference
 
 | Skill | Source | When to use |
 |---|---|---|
 | `next-best-practices` | Anthropic | **Load first** for any Next.js work — file conventions, RSC boundaries, data patterns, async APIs, metadata, route handlers, image/font optimization, bundling. Drives Priority 2 (Hydration & RSC) decisions in code review. |
-| `nextjs-app-router-fundamentals` | Anthropic | App Router 13+ basics — migrating from Pages Router, layouts, routing, metadata. Lower priority for new sapan code (sapan is Next 16); useful for understanding why patterns work. |
 | `nextjs-app-router-patterns` | Anthropic | Advanced patterns — Server Components, streaming, parallel routes, advanced data fetching. Load when implementing parallel routes, intercepting routes, or non-trivial data flows. |
 | `next-upgrade` | Anthropic | Procedural — follow when upgrading Next.js to a new major version. Cites official codemods. |
 

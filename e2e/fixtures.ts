@@ -15,6 +15,7 @@ type SapanFixtures = {
 export const test = base.extend<SapanFixtures>({
 	page: async ({ page }, use) => {
 		await page.emulateMedia({ reducedMotion: 'reduce' });
+		// Default waitUntil to 'domcontentloaded' — 'load' blocks on tracking pixels and lazy images, adding 5-30s of CI flake.
 		const originalGoto = page.goto.bind(page);
 		page.goto = (async (url: string, options?: Parameters<typeof originalGoto>[1]) => {
 			return originalGoto(url, { waitUntil: 'domcontentloaded', ...options });

@@ -118,5 +118,4 @@ For locale-aware spec patterns (sample-locale parameterization, `<html lang>` / 
 
 Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
 
-- [`external/nextjs/nextjs-app-router-fundamentals/`](../external/nextjs/nextjs-app-router-fundamentals/) — App Router routing fundamentals
 - [`external/nextjs/nextjs-app-router-patterns/`](../external/nextjs/nextjs-app-router-patterns/) — advanced patterns (parallel routes, intercepting routes, advanced data fetching)

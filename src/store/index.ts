@@ -4,6 +4,7 @@ import uiReducer from './slices/ui-slice';
 
 const listenerMiddleware = createListenerMiddleware();
 
+// Persist locale to localStorage on setLocale dispatch — middleware (not store.subscribe()) so it runs once per action and stays out of the render path.
 listenerMiddleware.startListening({
 	actionCreator: setLocale,
 	effect: (action) => {

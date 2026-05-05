@@ -261,5 +261,4 @@ Sapan rules in this file are authoritative; external references are framework-le
 - [`workflow/no-use-effect.md`](../workflow/no-use-effect.md) — strict no-direct-`useEffect` rule (ALWAYS ACTIVE; sapan-canonical, the 6-rule guide for derived state, event handlers, `useMemo`, `useSyncExternalStore`, key-based reset, `useMountEffect`)
 - [`workflow/tailwind-mangle.md`](../workflow/tailwind-mangle.md) — production class mangling. The `cn()` mandate above is what makes this safe: any non-`cn()` className composition (template literal, string concat, runtime-computed) silently breaks the prod build. Auto-detects runtime `classList.*` reservations.
 - [`external/react/react-best-practices/`](../external/react/react-best-practices/) — TSX quality checklist (component structure, hooks, a11y, perf, TS)
-- [`external/nextjs/nextjs-app-router-fundamentals/`](../external/nextjs/nextjs-app-router-fundamentals/) — App Router 13+ basics (layouts, routing, metadata)
 - [`external/nextjs/nextjs-app-router-patterns/`](../external/nextjs/nextjs-app-router-patterns/) — advanced patterns (Server Components, streaming, parallel routes)
