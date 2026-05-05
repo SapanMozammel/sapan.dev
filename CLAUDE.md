@@ -39,91 +39,38 @@ Next.js 16 · React 19 · TypeScript 6 · Tailwind CSS v4 · SCSS · Redux Toolk
 
 ```
 src/
-├── app/[locale]/           # App Router — all routes under locale segment
-│   ├── (landing)/page.tsx  # Home (no URL segment)
-│   ├── articles/           # Listing + [slug] detail
-│   └── layout.tsx          # Locale layout: Providers, Header, Footer, metadata
-├── app/layout.tsx          # Root layout: html/body, fonts, RTL dir via getLocale(), global.scss
-├── proxy.ts                 # next-intl locale detection & routing
-├── components/
-│   ├── layout/             # Page sections (each: index.tsx + sub-files)
-│   ├── layout/common/      # Shared: Button, SectionSeparator, SectionTitle, ConnectButton,
-│   │                       # LanguageSwitcher, ThemeSwitcher, TextUnderline
-│   ├── ui/                 # shadcn/ui base + custom: contact-modal, timeline, accordion,
-│   │                       # blog-card, project-card, gsap-marquee, cursor-tooltip,
-│   │                       # diamond-grid, technologies-display, dialog, popover,
-│   │                       # sheet, tooltip
-│   └── icons/              # SVG icons (kebab files): logo, pattern, world-map; projects/<brand>/logo
-├── data/
-│   ├── content/            # admin-dashboard, experience, portfolio, testimonials, faq, blogs, workflow
-│   └── config/             # languages, technologies
-├── i18n/                   # next-intl: routing.ts, navigation.ts, request.ts, locales/
-├── store/                  # Redux: locale-slice, ui-slice
-├── hooks/                  # use-contact-form, use-stacking-cards
-├── lib/utils/              # cn() (index.ts), getBlurDataURL() (image.ts)
-├── styles/                 # global.scss, themes.scss, utilities.scss, animations.scss
-└── types/                  # TypeScript types
-tests/                      # Vitest suites (root-level, outside Next.js compilation)
-e2e/                        # Playwright specs (root-level, scoped via tsconfig.e2e.json)
-├── fixtures.ts             # Extended `test` — mockContact, mockTurnstile, setLocale, reduced-motion default
-├── pages/                  # POMs — home-page, articles-page
-└── *.spec.ts               # 8 specs — landing, navigation, responsive, accessibility, articles, i18n, theme, contact-modal
+├── app/[locale]/  # App Router routes (16 locales)
+├── components/    # layout/, ui/, icons/
+├── data/          # content/ + config/
+├── i18n/          # next-intl
+├── store/         # Redux Toolkit (2 slices: locale-slice, ui-slice)
+├── hooks/, lib/, styles/, types/, providers/, emails/
+tests/             # Vitest unit + component (33 files)
+e2e/               # Playwright (8 specs, 8-project matrix, port 8001)
+public/            # Static assets
+scripts/           # mangle.mjs (post-build Tailwind class mangler)
+.formatter/        # Single source for ESLint+Prettier+EditorConfig
 ```
+
+Full tree → [docs/DEVELOPMENT_GUIDE.md](docs/DEVELOPMENT_GUIDE.md). All file and folder names are kebab-case (see Code Conventions below).
 
 ---
 
 ## Server vs Client Components
 
-| | Server (default) | Client |
-|--|--|--|
-| Directive | none | `'use client'` at top |
-| Hooks / state | ✗ | ✓ |
-| `memo()` | ✗ | ✓ + set `displayName` |
-| When to use | Purely presentational | Needs interactivity, hooks, or events |
+Server Component by default; `'use client'` only when hooks, events, refs, or browser APIs are needed. Client Component → `memo()` + `ComponentName.displayName`. Server CAN import Client; Client CANNOT import Server.
 
-Server CAN import Client. Client CANNOT import Server.
+→ [.claude/skills/architecture/component-patterns.md](.claude/skills/architecture/component-patterns.md) for the full decision tree, templates, and pre-write checklist.
 
 ---
 
 ## Styling
 
-- Tailwind CSS v4 — no `tailwind.config.js`, config lives in CSS `@theme`
-- SCSS in `src/styles/` for globals, CSS variables, keyframes
-- **Never** build Tailwind class names dynamically via template literals — strings must be static
-- Dark mode via `.dark` class strategy (`next-themes`)
+Tailwind CSS v4 (config in CSS `@theme`, no `tailwind.config.js`) + SCSS partials in `src/styles/`. Dark mode via `.dark` class strategy (`next-themes`). Never build Tailwind class names dynamically — strings must be static (per `cn()` mandate; required for production class mangling).
 
-### Design System Tokens
-
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--color-primary` | #4a4ded | Light-mode accent |
-| `--color-success` | #43ead4 | Dark-mode accent (mirrors primary) |
-| `--color-info` | #1f8fff | Hero glow, brand gradient |
-| `--color-danger` | #f56565 | Errors, validation |
-
-**Dark mode swap:** `text-primary dark:text-success` · `bg-primary/10 dark:bg-success/10`
-
-### Fonts
-
-| Class | Font | Use for |
-|-------|------|---------|
-| `font-dm` | DM Sans | Body copy, UI labels |
-| `font-hg` | Hanken Grotesk | Nav, buttons, badges |
-| `font-cg` | Cormorant Garamond | Headings, CTAs, display |
-| `font-bungee` | Bungee | Logo + brand watermark only |
-| `font-arabic` | Noto Sans Arabic | RTL (Arabic locale) |
-
-### Animation Durations
-
-| Interaction | Duration | Library |
-|-------------|----------|---------|
-| Hover | 150ms | CSS |
-| Button | 200ms | Framer Motion |
-| Card / panel | 300ms | Framer Motion |
-| Section entrance | 500ms | Framer Motion |
-| Page transition | 800ms | Framer Motion |
-| Scroll sequences | variable | GSAP + ScrollTrigger |
-| 3D | — | Three.js / R3F |
+- **Design tokens** (`--color-primary` light / `--color-success` dark / `--color-info` / `--color-danger`) → [.claude/skills/design-system/colors.md](.claude/skills/design-system/colors.md) for full token list + dark-mode pair guidance.
+- **Fonts** (`font-dm` / `font-hg` / `font-cg` / `font-bungee` (logo-only) / `font-arabic` (RTL)) → [.claude/skills/design-system/typography.md](.claude/skills/design-system/typography.md) for the full registry, weights, and UI-element-to-font mapping.
+- **Animation durations + library selection** (CSS for hover, Framer Motion for entrances, GSAP for scroll, Three.js/R3F for 3D) + **CSS keyframe utility classes** (`animate-noise`, `animate-spin-slow`, `animate-faq-border-shift`, `animate-overlay-{in,out}`, `animate-slide-{in-from,out-to}-{direction}`) → [.claude/skills/architecture/component-patterns.md](.claude/skills/architecture/component-patterns.md#animation-library-selection).
 
 ---
 
