@@ -1,7 +1,6 @@
 const nextConfig = require('eslint-config-next/core-web-vitals');
 const prettierConfig = require('eslint-config-prettier');
 const prettierPlugin = require('eslint-plugin-prettier');
-const typescriptPlugin = require('@typescript-eslint/eslint-plugin');
 const typescriptParser = require('@typescript-eslint/parser');
 const unicornPlugin = require('eslint-plugin-unicorn').default ?? require('eslint-plugin-unicorn');
 
@@ -17,7 +16,6 @@ module.exports = [
 		files: ['**/*.ts', '**/*.tsx'],
 		plugins: {
 			prettier: prettierPlugin,
-			'@typescript-eslint': typescriptPlugin,
 			unicorn: unicornPlugin,
 		},
 		languageOptions: {
@@ -107,10 +105,8 @@ module.exports = [
 		},
 	},
 
-	// Playwright e2e — relaxed rules for spec authoring
 	{
 		files: ['e2e/**/*.ts', 'playwright.config.ts'],
-		plugins: { '@typescript-eslint': typescriptPlugin },
 		languageOptions: {
 			parser: typescriptParser,
 			parserOptions: {
