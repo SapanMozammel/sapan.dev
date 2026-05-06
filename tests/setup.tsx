@@ -1,10 +1,10 @@
 /// <reference types="vitest/globals" />
 /// <reference types="node" />
 
-// ── Env stubs for `@/lib/env` parse-at-module-load ──
+// ── Env stubs for `@/lib/env` read-at-module-load ──
 // Must run before any test file imports `@/lib/env*`. Real values come from
-// `.env.local` in dev / Vercel dashboard in prod; test runs only need the
-// schema to parse cleanly so consumer modules can be exercised.
+// `.env.local` in dev / Vercel dashboard in prod; test runs need defaults so
+// consumer modules that read env at load can be exercised.
 process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ??= 'test-turnstile-site-key';
 process.env.RESEND_API_KEY ??= 're_test';
 process.env.CONTACT_TO_EMAIL ??= 'test-to@sapan.dev';
