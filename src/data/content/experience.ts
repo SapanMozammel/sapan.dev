@@ -27,33 +27,6 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
 		],
 	},
 	{
-		id: '2',
-		company: 'TubeOnAI',
-		position: 'Frontend Developer',
-		startDate: '2023-11',
-		endDate: '2024-05',
-		location: 'Wyoming, US (Remote)',
-		type: 'Part-time',
-		tags: ['AI Platform'],
-		description:
-			'TubeOnAI is an AI platform that summarizes and repurposes videos, podcasts, PDFs, and articles into clear, actionable content. As a Frontend Developer, I worked on the Next.js web app, building UI components, integrating APIs, and ensuring a smooth, responsive experience across devices.',
-		responsibilities: [
-			'Developed and maintained the TubeOnAI web application using Next.js, TypeScript, and Tailwind CSS',
-			'Implemented scalable data fetching and caching using React Query',
-			'Built complex forms with validation using React Hook Form and Zod',
-			'Integrated Firebase services for authentication and backend interactions',
-			'Implemented audio playback features using React Modern Audio Player',
-			'Monitored and improved application stability using Sentry',
-		],
-		technologies: ['TypeScript', 'Next.js', 'Tailwind CSS', 'React Query', 'Zod', 'Firebase', 'React Hook Form', 'React Modern Audio Player', 'Sentry'],
-		achievements: [
-			'Delivered key frontend features for the TubeOnAI web application',
-			'Improved application reliability through error monitoring and debugging with Sentry',
-			'Built reusable UI and form components to accelerate development',
-			'Optimized data fetching and state management using React Query',
-		],
-	},
-	{
 		id: '3',
 		company: 'WPDeveloper',
 		position: 'Frontend Developer',
