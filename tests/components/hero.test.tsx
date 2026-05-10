@@ -7,24 +7,19 @@ vi.mock('@/components/layout/hero/about/about-screen', () => ({
 }));
 
 describe('Hero', () => {
-	it('renders the sr-only heading', async () => {
-		render(await Hero());
-		expect(screen.getByRole('heading', { level: 1 })).toHaveClass('sr-only');
-	});
-
 	it('renders the main tagline', async () => {
 		render(await Hero());
-		expect(screen.getByText(/shaping the future of web development/i)).toBeInTheDocument();
+		expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/scalable, high-performance web applications/i);
 	});
 
-	it('renders JavaScript with underline', async () => {
+	it('renders the heading highlight word', async () => {
 		render(await Hero());
-		expect(screen.getByText('JavaScript')).toBeInTheDocument();
+		expect(screen.getAllByText('Next.js').length).toBeGreaterThan(0);
 	});
 
 	it('renders the description paragraph', async () => {
 		render(await Hero());
-		expect(screen.getByText(/6\+ years of dynamic experience/i)).toBeInTheDocument();
+		expect(screen.getByText(/admin dashboards, SaaS Frontend/i)).toBeInTheDocument();
 	});
 
 	it('renders the download resume button', async () => {

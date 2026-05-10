@@ -6,5 +6,10 @@
 	},
 	"backToList": "Alle artikelen",
 	"moreIn": "Meer in {category}",
-	"codeBlock": "Codeblok"
+	"codeBlock": "Codeblok",
+	"callout": {
+		"info": "Info",
+		"warning": "Waarschuwing",
+		"tip": "Tip"
+	}
 }

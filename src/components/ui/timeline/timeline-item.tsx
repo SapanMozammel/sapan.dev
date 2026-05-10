@@ -66,7 +66,7 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 			<div className={cn('absolute top-10.5 z-2 hidden -translate-y-1/2 md:block', isLeft ? 'left-1/2 -translate-x-1/2' : 'right-1/2 translate-x-1/2')}>
 				<div data-timeline-dot className='bg-secondary-300 dark:bg-secondary-700 border-secondary-100 dark:border-secondary-800 h-3.5 w-3.5 rounded-full border-2 ring-2 ring-white dark:ring-black' />
 			</div>
-			<div className='absolute top-1 left-0 z-20 md:hidden' aria-hidden='true'>
+			<div className='absolute top-1 -left-0.25 z-20 md:hidden' aria-hidden='true'>
 				<div data-timeline-dot className='bg-secondary-300 dark:bg-secondary-700 border-secondary-100 dark:border-secondary-800 h-3.5 w-3.5 rounded-full border-2 ring-2 ring-white dark:ring-black' />
 			</div>
 			<div className={cn('flex-1 pt-0 md:w-1/2', isLeft ? 'ml-6 md:mr-4 md:ml-0' : 'ml-6 md:ml-4')}>

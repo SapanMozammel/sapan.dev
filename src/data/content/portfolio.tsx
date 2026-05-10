@@ -1,5 +1,5 @@
-import BetterdocsLogo from '@/components/icons/projects/betterdocs/logo';
 import BetterLinksLogo from '@/components/icons/projects/better-links/logo';
+import BetterdocsLogo from '@/components/icons/projects/betterdocs/logo';
 import EasyJobsLogo from '@/components/icons/projects/easy-jobs/logo';
 import NotificationXLogo from '@/components/icons/projects/notification-x/logo';
 import SchedulePressLogo from '@/components/icons/projects/schedule-press/logo';
@@ -13,7 +13,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 	{
 		colorScheme: 'sky',
 		title: 'TubeOnAI',
-		description: `TubeOnAI is an AI platform that summarizes and repurposes videos, podcasts, PDFs, and articles into clear, actionable content. As a Frontend Developer, I worked on the Next.js web app, building UI components, integrating APIs, and ensuring a smooth, responsive experience across devices.`,
+		description: `AI platform that summarizes videos, podcasts, PDFs, and articles into actionable content. Owned the Next.js web app — UI system, React Query data layer, audio player integration, and Zod-validated form flows across the full product surface.`,
 		role: 'Frontend Developer',
 		technologies: ['TypeScript', 'Next.js', 'Tailwind CSS', 'React Query', 'React Hook Form', 'Zod', 'Firebase', 'React Modern Audio Player', 'Sentry'],
 		link: 'https://web.tubeonai.com/',
@@ -23,7 +23,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 	{
 		colorScheme: 'indigo',
 		title: 'Templately',
-		description: `Templately is a WordPress-based template cloud platform that empowers users and teams to build, share, and manage professional websites seamlessly. Here, I contributed to the Admin Panel, Landing App, WordPress Plugin, enterprise tools, and internal apps to enhance performance and UX.`,
+		description: `WordPress template cloud where teams build, share, and manage professional websites at scale. Worked across the admin SPA, the Next.js marketing site, and the WordPress plugin frontend in parallel — plus enterprise tools and internal apps used by the wider engineering org.`,
 		role: 'Frontend Developer & Plugin Developer',
 		technologies: ['TypeScript', 'React.js', 'Next.js', 'Redux.js', 'GraphQL', 'Tailwind CSS', 'SASS', 'shadcn/ui', 'WordPress', 'Webpack', 'Vite', 'Vercel'],
 		link: 'https://templately.com/',
@@ -33,7 +33,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 	{
 		colorScheme: 'blue',
 		title: 'xCloud',
-		description: `xCloud is a scalable cloud-based hosting platform designed to manage, store, and process digital resources efficiently. It provides secure access, real-time operations, and performance-focused workflows. Here, I worked on the frontend architecture design with Vue.js and Tailwind CSS.`,
+		description: `Cloud hosting platform for managing and deploying digital resources at scale. Architected the v1 frontend in Vue.js + Tailwind CSS — component structure, state synchronization across the dashboard, optimistic updates on the ops panel, and clean handoff that ramped the next frontend developer in days.`,
 		role: 'Frontend Developer',
 		technologies: ['Vue.js', 'Vite', 'Tailwind CSS', 'Axios', 'Lodash', 'Laravel'],
 		link: 'https://app.xcloud.host/',
@@ -43,7 +43,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 	{
 		colorScheme: 'green',
 		title: 'Betterdocs',
-		description: `BetterDocs is a WordPress documentation and knowledge base plugin that helps teams create, organize, and present help content efficiently. It enhances self-service with instant search, structured categories, analytics, faq, chatbot, and clean layouts. I worked on re-architecting the admin panel, building the analytics dashboard, and developing the FAQ Builder.`,
+		description: `WordPress documentation and knowledge-base plugin used by support and product teams to ship self-serve help. Re-architected the admin panel, built the ApexCharts analytics dashboard, and shipped the FAQ Builder — UI redesign measurably reduced weekly support ticket volume.`,
 		role: 'Plugin Developer',
 		technologies: ['React.js', 'Draft.js', 'WordPress', 'QuickBuilder', 'React Query', 'Axios', 'Lodash', 'ApexCharts', 'Webpack'],
 		link: 'https://betterdocs.co/',
@@ -53,7 +53,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 	{
 		colorScheme: 'cyan',
 		title: 'WpDeveloper Store',
-		description: `All WPDeveloper users use this application to maintain their licenses and buy premium items. For all WPDeveloper users, this is the Dashboard app. This dashboard application is built with React.Js. As a front-end developer, I used Bootstrap and React.Js to create this dashboard.`,
+		description: `Customer dashboard where WPDeveloper users manage licenses, renewals, and premium product access. Built the React + Redux dashboard with ApexCharts-driven analytics views and tightened the data layer for predictable state across multi-step flows.`,
 		role: 'Frontend Developer',
 		technologies: ['React.js', 'Redux.js', 'Bootstrap', 'ApexCharts', 'Axios', 'SCSS'],
 		link: 'https://store.wpdeveloper.com/',
@@ -63,7 +63,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 	{
 		colorScheme: 'teal',
 		title: 'NotificationX',
-		description: `NotificationX is a WordPress marketing and social proof plugin that displays real-time notifications to boost conversions and engagement. It supports sales alerts, reviews, comments, and email signups. I worked on improving the admin experience, feature integration, and UI workflows for better usability.`,
+		description: `WordPress marketing and social-proof plugin showing real-time alerts for sales, reviews, and signups across millions of sites. Refined the admin UX, modernised feature-integration flows, and rebuilt notification authoring with QuickBuilder for less friction in the editor.`,
 		role: 'Plugin Developer',
 		technologies: ['TypeScript', 'React.js', 'WordPress', 'ApexCharts', 'Draft.js', 'QuickBuilder', 'Lodash'],
 		link: 'https://notificationx.com/',
@@ -73,7 +73,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 	{
 		colorScheme: 'violet',
 		title: 'Easy.Jobs',
-		description: `easy.jobs is an AI-powered recruitment and applicant tracking SaaS that helps businesses attract, evaluate, and hire top talent efficiently with customizable career sites, automated screening, and team collaboration tools. As the project's first front-end developer, I worked with Bootstrap, Vue.js, and Laravel.`,
+		description: `AI-powered recruitment SaaS with customizable career sites, automated screening, and applicant tracking for businesses of every size. Joined as the first frontend developer and shipped the v1 in Vue.js + Bootstrap — career-site interfaces and reusable component patterns still in use today.`,
 		role: 'Frontend Developer',
 		technologies: ['Vue.js', 'Bootstrap', 'jQuery', 'Laravel', 'Lodash', 'SCSS', 'Axios', 'ApexCharts'],
 		link: 'https://app.easy.jobs/',
@@ -83,7 +83,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 	{
 		colorScheme: 'emerald',
 		title: 'SchedulePress',
-		description: `SchedulePress is a WordPress editorial and scheduling plugin that helps teams plan, manage, and automate content publishing. It supports scheduled posts, missed schedule handling, and editorial workflows. I contributed by improving admin-side features, refining scheduling logic, and enhancing UI workflows for better usability.`,
+		description: `WordPress editorial and scheduling plugin for teams running structured content publishing pipelines. Refined the admin-side scheduling UI, hardened missed-schedule edge cases, and improved editorial workflow ergonomics for daily editor use.`,
 		role: 'Frontend Developer',
 		technologies: ['React.js', 'WordPress', 'WebPack', 'SCSS'],
 		link: 'https://schedulepress.com/',
@@ -93,7 +93,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 	{
 		colorScheme: 'fuchsia',
 		title: 'BetterLinks',
-		description: `BetterLinks is a WordPress link management and URL shortener plugin for creating, organizing, and tracking branded links with analytics. As the first Frontend Developer on the project, I set up the frontend foundation, built admin features, enhanced analytics views, and refined UI workflows.`,
+		description: `WordPress link management and URL shortener with branded-link analytics for marketing teams. Set up the frontend foundation as the first developer on the project, built core admin features, and shaped the analytics views with ApexCharts and Redux.`,
 		role: 'Frontend Developer',
 		technologies: ['React.js', 'Redux.js', 'WordPress', 'ApexCharts', 'Axios', 'SCSS', 'MaterialUI', 'Formik', 'Gulp'],
 		link: 'https://betterlinks.io/',

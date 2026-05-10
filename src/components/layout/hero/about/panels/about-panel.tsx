@@ -19,7 +19,7 @@ const AboutPanel = () => {
 		<div className='font-dm flex h-full flex-col gap-[1em] p-[1.25em]'>
 			<div className='border-info/30 inline-flex w-fit items-center gap-[0.5em] rounded-[2em] border-[0.025em] border-solid bg-white/50 px-[0.9em] py-[0.4em] text-[0.75em] font-semibold tracking-wide uppercase dark:bg-black/50'>
 				<span aria-hidden='true' className='bg-primary dark:bg-success aspect-square h-[0.55em] rounded-full' />
-				<span>Open to Remote · 30-day notice</span>
+				<span>Open to remote · 30-day notice</span>
 			</div>
 			<p className='text-dark/80 text-[0.85em] leading-[1.6] dark:text-white/80'>{ABOUT_DATA.bio}</p>
 			<section className='flex flex-col gap-[0.4em]'>
@@ -75,7 +75,7 @@ const AboutPanel = () => {
 						</div>
 					))}
 				</div>
-				<div className='text-secondary-500 dark:text-secondary-500 text-[0.7em] tracking-wide italic'>Built with the same stack you see in Skills →</div>
+				<div className='text-secondary-500 dark:text-secondary-500 text-[0.7em] tracking-wide italic'>Same stack as the Skills tab →</div>
 			</div>
 		</div>
 	);

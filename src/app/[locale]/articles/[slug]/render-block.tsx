@@ -1,7 +1,9 @@
 import { cn } from '@/lib/utils';
 import type { ContentBlock } from '@/types/blog';
 
-export const renderBlock = (block: ContentBlock, index: number, codeBlockLabel: string) => {
+type CalloutLabels = { info: string; warning: string; tip: string };
+
+export const renderBlock = (block: ContentBlock, index: number, codeBlockLabel: string, calloutLabels: CalloutLabels) => {
 	switch (block.type) {
 		case 'heading':
 			return (
@@ -75,7 +77,7 @@ export const renderBlock = (block: ContentBlock, index: number, codeBlockLabel: 
 			const variant = block.variant ?? 'info';
 			return (
 				<div key={index} className={cn('mb-4 rounded-xl border-l-4 p-4 sm:p-5', variantStyles[variant])}>
-					<p className={cn('text-heading-xsmall mb-1 tracking-widest uppercase', labelStyles[variant])}>{variant}</p>
+					<p className={cn('text-heading-xsmall mb-1 tracking-widest uppercase', labelStyles[variant])}>{calloutLabels[variant]}</p>
 					<p className='text-paragraph-small text-secondary-600 dark:text-secondary-400'>{block.text}</p>
 				</div>
 			);

@@ -9,17 +9,17 @@ import { render, screen } from '../test-utils';
 describe('Cta', () => {
 	it('renders CTA heading', async () => {
 		render(await Cta());
-		expect(screen.getByText(/Have a project in mind/i)).toBeInTheDocument();
+		expect(screen.getByText(/Hiring or building something/i)).toBeInTheDocument();
 	});
 
 	it('renders collaboration message', async () => {
 		render(await Cta());
-		expect(screen.getByText(/Let's build it together/i)).toBeInTheDocument();
+		expect(screen.getByText(/I'm available for both/i)).toBeInTheDocument();
 	});
 
 	it('renders description text', async () => {
 		render(await Cta());
-		expect(screen.getByText(/Whether you need a full product/i)).toBeInTheDocument();
+		expect(screen.getByText(/full-time remote roles/i)).toBeInTheDocument();
 	});
 
 	it('renders connect button', async () => {
@@ -97,7 +97,7 @@ describe('CtaNav', () => {
 describe('CtaConnect', () => {
 	it('renders availability status', () => {
 		rtlRender(<CtaConnect />);
-		expect(rtlScreen.getByText('Ready for your next project')).toBeInTheDocument();
+		expect(rtlScreen.getByText('Open to remote roles')).toBeInTheDocument();
 	});
 
 	it('renders the pulsing availability dot', () => {

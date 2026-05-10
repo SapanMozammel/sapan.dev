@@ -1,8 +1,8 @@
+import SectionSeparator from '@/components/layout/common/section-separator';
+import SectionTitle from '@/components/layout/common/section-title';
 import Timeline from '@/components/ui/timeline';
 import { EXPERIENCE_DATA } from '@/data/content/experience';
 import { getTranslations } from 'next-intl/server';
-import SectionSeparator from '@/components/layout/common/section-separator';
-import SectionTitle from '@/components/layout/common/section-title';
 import ParticleBackground from './particle-background';
 
 const Experience = async () => {

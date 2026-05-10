@@ -19,7 +19,7 @@ const AboutScreen = () => {
 	];
 
 	return (
-		<div className='group/about-screen font-dm text-dark relative aspect-[16/10] w-full text-start text-[0.75vw] !font-normal dark:text-white'>
+		<div className='group/about-screen font-dm text-dark relative aspect-[16/10] w-full text-start text-[0.75vw] font-normal! dark:text-white'>
 			<div className='bg-light/20 border-info/30 shadow-info/10 pointer-events-none flex h-full w-full rounded-[0.6em] border-[0.025em] border-solid shadow-lg backdrop-blur select-none dark:bg-slate-900/20'>
 				<div className='pointer-events-auto flex h-full w-full'>
 					<AboutTabs tabs={tabs} profileName='Sapan Mozammel' />

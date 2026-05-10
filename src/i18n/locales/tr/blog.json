@@ -6,5 +6,10 @@
 	},
 	"backToList": "Tüm Makaleler",
 	"moreIn": "{category} kategorisinde daha fazlası",
-	"codeBlock": "Kod bloğu"
+	"codeBlock": "Kod bloğu",
+	"callout": {
+		"info": "Bilgi",
+		"warning": "Uyarı",
+		"tip": "İpucu"
+	}
 }

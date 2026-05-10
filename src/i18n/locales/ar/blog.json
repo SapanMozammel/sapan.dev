@@ -6,5 +6,10 @@
 	},
 	"backToList": "جميع المقالات",
 	"moreIn": "المزيد في {category}",
-	"codeBlock": "كتلة برمجية"
+	"codeBlock": "كتلة برمجية",
+	"callout": {
+		"info": "معلومة",
+		"warning": "تحذير",
+		"tip": "نصيحة"
+	}
 }

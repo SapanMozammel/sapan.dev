@@ -6,5 +6,10 @@
 	},
 	"backToList": "Все статьи",
 	"moreIn": "Ещё в категории {category}",
-	"codeBlock": "Блок кода"
+	"codeBlock": "Блок кода",
+	"callout": {
+		"info": "Инфо",
+		"warning": "Внимание",
+		"tip": "Совет"
+	}
 }

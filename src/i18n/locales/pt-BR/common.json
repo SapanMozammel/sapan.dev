@@ -37,6 +37,10 @@
 				"title": "Título",
 				"message": "Mensagem"
 			},
+			"placeholders": {
+				"title": "ex. redesign de landing page",
+				"message": "Conte sobre seu projeto..."
+			},
 			"submit": "Enviar mensagem"
 		},
 		"status": {

@@ -6,5 +6,10 @@
 	},
 	"backToList": "सभी लेख",
 	"moreIn": "{category} में और",
-	"codeBlock": "कोड ब्लॉक"
+	"codeBlock": "कोड ब्लॉक",
+	"callout": {
+		"info": "जानकारी",
+		"warning": "चेतावनी",
+		"tip": "सुझाव"
+	}
 }

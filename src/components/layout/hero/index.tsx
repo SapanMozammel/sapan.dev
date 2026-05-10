@@ -14,11 +14,10 @@ const Hero = async () => {
 				<HeroBackground>
 					<SectionSeparator lts rts lbs rbs bl ll rl>
 						<div className='container flex w-full grow flex-col items-center justify-center gap-4 pt-16 text-center sm:pt-24 lg:pt-32'>
-							<h1 className='sr-only'>{translate('srTitle')}</h1>
-							<h2 className='text-heading-xlarge dark:via-light inline-block bg-radial from-slate-400 via-slate-900 via-45% to-slate-600 to-75% bg-clip-text text-transparent dark:from-slate-600 dark:to-slate-400'>
-								{translate('headingPrefix')} <TextUnderline className='text-dark dark:text-white'>JavaScript</TextUnderline>
+							<h1 className='text-heading-xlarge dark:via-light inline-block max-w-[40ch] bg-radial from-slate-400 via-slate-900 via-45% to-slate-600 to-75% bg-clip-text tracking-wide text-transparent dark:from-slate-600 dark:to-slate-400'>
+								{translate('headingPrefix')} <TextUnderline className='text-dark dark:text-white'>{translate('headingHighlight')}</TextUnderline>
 								{translate('headingSuffix')}
-							</h2>
+							</h1>
 							<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-medium inline-flex max-w-[90ch] tracking-wider'>{translate('description')}</p>
 							<DownloadResumeButton className='mt-0 sm:mt-4' />
 							<div className='mt-4 -mb-[20vw] w-3/4 sm:mt-10 lg:mt-14'>

@@ -15,7 +15,7 @@ type LinkRest = Omit<React.ComponentProps<typeof NextLink>, 'href' | 'className'
 type ButtonRest = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'className' | 'children'>;
 
 const BASE_CLASSES =
-	'group/button focus:ring-0 relative inline-flex !h-9 cursor-pointer items-center justify-center !px-[calc(theme(height.9)*21/44)] focus:outline-none disabled:pointer-events-none disabled:brightness-90 sm:!h-11 sm:!px-[calc(theme(height.11)*21/44)] dark:disabled:brightness-90';
+	'group/button focus:ring-0 relative inline-flex h-9! cursor-pointer items-center justify-center px-[calc(theme(height.9)*21/44)]! focus:outline-none disabled:pointer-events-none disabled:brightness-90 sm:h-11! sm:px-[calc(theme(height.11)*21/44)]! dark:disabled:brightness-90';
 
 const ButtonInner = ({ config, children, loading }: { config: ReturnType<typeof getVariantConfig>; children: ReactNode; loading?: boolean | undefined }) => (
 	<>

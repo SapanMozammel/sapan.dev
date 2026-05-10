@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 		template: '%s | Sapan Mozammel',
 		default: 'Sapan Mozammel — Frontend Developer',
 	},
-	description: 'Frontend developer building digital experiences that matter — crafting modern, performant web applications with React, Next.js, TypeScript, and Node.js.',
+	description: 'Frontend Developer focused on React, Next.js, and TypeScript — building admin dashboards, SaaS FrontEnd, and WordPress plugin UIs with strict typing, accessibility, and Core Web Vitals as defaults.',
 	keywords: ['Sapan Mozammel', 'Frontend Developer', 'React Developer', 'Next.js Developer', 'TypeScript', 'Node.js', 'Tailwind CSS', 'GraphQL', 'MongoDB', 'WordPress', 'Web Development', 'Portfolio', 'Bangladesh'],
 	authors: [{ name: 'Sapan Mozammel', url: 'https://sapan-dev.vercel.app' }],
 	creator: 'Sapan Mozammel',
@@ -45,7 +45,8 @@ export const metadata: Metadata = {
 		siteName: 'Sapan Mozammel',
 		url: 'https://sapan-dev.vercel.app',
 		title: 'Sapan Mozammel — Frontend Developer',
-		description: 'Frontend developer building digital experiences that matter — crafting modern, performant web applications with React, Next.js, TypeScript, and Node.js.',
+		description:
+			'Frontend Developer focused on React, Next.js, and TypeScript — building admin dashboards, SaaS FrontEnd, and WordPress plugin UIs with strict typing, accessibility, and Core Web Vitals as defaults.',
 		images: [
 			{
 				url: '/og-image.png',
@@ -60,7 +61,8 @@ export const metadata: Metadata = {
 		site: '@sapan_mozammel',
 		creator: '@sapan_mozammel',
 		title: 'Sapan Mozammel — Frontend Developer',
-		description: 'Frontend developer building digital experiences that matter — crafting modern, performant web applications with React, Next.js, TypeScript, and Node.js.',
+		description:
+			'Frontend Developer focused on React, Next.js, and TypeScript — building admin dashboards, SaaS FrontEnd, and WordPress plugin UIs with strict typing, accessibility, and Core Web Vitals as defaults.',
 		images: ['/og-image.png'],
 	},
 };

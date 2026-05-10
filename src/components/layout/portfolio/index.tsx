@@ -1,13 +1,13 @@
 'use client';
 
+import SectionSeparator from '@/components/layout/common/section-separator';
+import SectionTitle from '@/components/layout/common/section-title';
 import ProjectCard from '@/components/ui/project-card';
 import StackingCardWrapper from '@/components/ui/stacking-card-wrapper';
 import { PORTFOLIO_PROJECTS } from '@/data/content/portfolio';
 import { useStackingCards } from '@/hooks/use-stacking-cards';
 import { useTranslations } from 'next-intl';
 import { createRef, memo, useMemo } from 'react';
-import SectionSeparator from '@/components/layout/common/section-separator';
-import SectionTitle from '@/components/layout/common/section-title';
 
 const Portfolio = memo(() => {
 	const translate = useTranslations('home.portfolio');

@@ -1,11 +1,11 @@
 'use client';
 
+import SectionSeparator from '@/components/layout/common/section-separator';
+import SectionTitle from '@/components/layout/common/section-title';
 import { WORKFLOW_STEPS } from '@/data/content/workflow';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import { memo, useCallback, useEffect, useRef, useState } from 'react';
-import SectionSeparator from '@/components/layout/common/section-separator';
-import SectionTitle from '@/components/layout/common/section-title';
 import WorkflowContent from './workflow-content';
 import WorkflowProgress from './workflow-progress';
 

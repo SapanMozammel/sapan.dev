@@ -1,5 +1,7 @@
 'use client';
 
+import SectionSeparator from '@/components/layout/common/section-separator';
+import SectionTitle from '@/components/layout/common/section-title';
 import CursorTooltip from '@/components/ui/cursor-tooltip';
 import { DiamondGrid } from '@/components/ui/diamond-grid';
 import { TECH_STACK } from '@/data/config/technologies';
@@ -7,8 +9,6 @@ import { getBlurDataURL } from '@/lib/utils/image';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { memo } from 'react';
-import SectionSeparator from '@/components/layout/common/section-separator';
-import SectionTitle from '@/components/layout/common/section-title';
 
 const LOGO_SIZE = 64;
 const BLUR_PLACEHOLDER = getBlurDataURL(LOGO_SIZE, LOGO_SIZE);

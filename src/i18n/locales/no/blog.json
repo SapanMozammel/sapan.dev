@@ -6,5 +6,10 @@
 	},
 	"backToList": "Alle artikler",
 	"moreIn": "Mer i {category}",
-	"codeBlock": "Kodeblokk"
+	"codeBlock": "Kodeblokk",
+	"callout": {
+		"info": "Info",
+		"warning": "Advarsel",
+		"tip": "Tips"
+	}
 }

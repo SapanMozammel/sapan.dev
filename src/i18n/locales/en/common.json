@@ -37,6 +37,10 @@
 				"title": "Title",
 				"message": "Message"
 			},
+			"placeholders": {
+				"title": "e.g. Landing page redesign",
+				"message": "Tell me about your project..."
+			},
 			"submit": "Send Message"
 		},
 		"status": {

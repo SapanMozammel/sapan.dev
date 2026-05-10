@@ -1,9 +1,9 @@
 {
 	"hero": {
-		"srTitle": "Hallo, ik ben Sapan Mozammel, een fullstack frontend developer.",
-		"headingPrefix": "Met elke regel",
-		"headingSuffix": ", vorm ik de toekomst van webontwikkeling.",
-		"description": "Met meer dan 6 jaar dynamische ervaring in het bouwen van applicaties met React, Redux, GraphQL, Next.js, Three.js, Node.js en nog veel meer, ben ik er trots op schone, onderhoudbare code te schrijven volgens de beste engineering-praktijken."
+		"headingPrefix": "Frontend Engineer gericht op het bouwen van schaalbare, high-performance webapplicaties met React, ",
+		"headingHighlight": "Next.js",
+		"headingSuffix": ", en TypeScript",
+		"description": "Schaalbare admin-dashboards, SaaS-frontends en plugin-UI's bouwen met React, Next.js en TypeScript — gericht op performance en clean, onderhoudbare architectuur, ondersteund door 6+ jaar frontend-ervaring. Beschikbaar voor remote rollen."
 	},
 	"technologies": {
 		"subtitle": "Technologieën",
@@ -32,13 +32,14 @@
 	"blog": {
 		"subtitle": "Blog",
 		"title": "Gedachten over frontend",
-		"viewAll": "Alle artikelen bekijken"
+		"viewAll": "Alle artikelen bekijken",
+		"allCategories": "Alle"
 	},
 	"cta": {
-		"heading": "Een project in gedachten?",
-		"headingAccent": "Laten we het samen bouwen.",
-		"description": "Of je nu een volledig product, een landing page of gewoon ideeën wil verkennen — ik werk graag samen.",
-		"availability": "Klaar voor je volgende project",
-		"location": "Gevestigd in Dhaka, Bangladesh. Wereldwijd actief."
+		"heading": "Aan het werven of iets aan het bouwen?",
+		"headingAccent": "Ik ben beschikbaar voor beide.",
+		"description": "Open voor fulltime remote rollen, contractwerk en korte opdrachten. Stuur een bericht — ik reageer zo snel mogelijk.",
+		"availability": "Open voor remote rollen",
+		"location": "Gevestigd in Dhaka, Bangladesh · UTC+6"
 	}
 }

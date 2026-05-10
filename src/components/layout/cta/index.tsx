@@ -45,7 +45,7 @@ const Cta = async () => {
 						<div className='pointer-events-none flex items-center justify-center overflow-hidden py-6 select-none'>
 							<span
 								aria-hidden
-								className='font-bungee text-center text-[15.5vw] leading-none font-normal tracking-wider !text-transparent uppercase [-webkit-text-stroke:2px_color-mix(in_srgb,var(--color-primary)_25%,transparent)] dark:[-webkit-text-stroke:2px_color-mix(in_srgb,var(--color-success)_25%,transparent)]'
+								className='font-bungee text-center text-[15.5vw] leading-none font-normal tracking-wider text-transparent! uppercase [-webkit-text-stroke:2px_color-mix(in_srgb,var(--color-primary)_25%,transparent)] dark:[-webkit-text-stroke:2px_color-mix(in_srgb,var(--color-success)_25%,transparent)]'
 							>
 								sapan.dev
 							</span>

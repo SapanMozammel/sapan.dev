@@ -6,5 +6,10 @@
 	},
 	"backToList": "Tous les articles",
 	"moreIn": "Plus dans {category}",
-	"codeBlock": "Bloc de code"
+	"codeBlock": "Bloc de code",
+	"callout": {
+		"info": "Info",
+		"warning": "Avertissement",
+		"tip": "Astuce"
+	}
 }

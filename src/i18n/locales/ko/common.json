@@ -37,6 +37,10 @@
 				"title": "제목",
 				"message": "메시지"
 			},
+			"placeholders": {
+				"title": "예: 랜딩 페이지 리디자인",
+				"message": "프로젝트에 대해 알려주세요..."
+			},
 			"submit": "메시지 보내기"
 		},
 		"status": {

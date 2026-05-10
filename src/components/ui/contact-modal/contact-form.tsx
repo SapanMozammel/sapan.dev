@@ -14,6 +14,7 @@ const TURNSTILE_SITE_KEY = env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 const ContactForm = memo<ContactFormProps>(({ form, errors, onChange, onSubmit, onTurnstileToken }) => {
 	const translateLabels = useTranslations('common.contact.form.labels');
+	const translatePlaceholders = useTranslations('common.contact.form.placeholders');
 	const translateForm = useTranslations('common.contact.form');
 
 	return (
@@ -22,8 +23,8 @@ const ContactForm = memo<ContactFormProps>(({ form, errors, onChange, onSubmit, 
 				<FormField label={translateLabels('name')} name='name' value={form.name} error={errors.name} onChange={onChange} placeholder='John Doe' autoComplete='name' className='flex-1' />
 				<FormField label={translateLabels('email')} name='email' type='email' value={form.email} error={errors.email} onChange={onChange} placeholder='john@example.com' autoComplete='email' className='flex-1' />
 			</div>
-			<FormField label={translateLabels('title')} name='title' value={form.title} error={errors.title} onChange={onChange} placeholder='e.g. Landing page redesign' />
-			<FormField label={translateLabels('message')} name='message' type='textarea' value={form.message} error={errors.message} onChange={onChange} placeholder='Tell me about your project...' rows={3} />
+			<FormField label={translateLabels('title')} name='title' value={form.title} error={errors.title} onChange={onChange} placeholder={translatePlaceholders('title')} />
+			<FormField label={translateLabels('message')} name='message' type='textarea' value={form.message} error={errors.message} onChange={onChange} placeholder={translatePlaceholders('message')} rows={3} />
 
 			<input type='text' name='website' value={form.website} onChange={onChange} tabIndex={-1} autoComplete='off' aria-hidden className='pointer-events-none absolute -left-[9999px] h-0 w-0 opacity-0' />
 

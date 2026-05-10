@@ -1,8 +1,8 @@
+import SectionSeparator from '@/components/layout/common/section-separator';
+import SectionTitle from '@/components/layout/common/section-title';
 import Accordion from '@/components/ui/accordion';
 import { FAQ_DATA } from '@/data/content/faq';
 import { getTranslations } from 'next-intl/server';
-import SectionSeparator from '@/components/layout/common/section-separator';
-import SectionTitle from '@/components/layout/common/section-title';
 
 const Faq = async () => {
 	const translate = await getTranslations('home.faq');

@@ -18,13 +18,11 @@ const CtaConnect = memo(() => {
 
 	return (
 		<div className='flex flex-col gap-4'>
-			{/* Availability */}
-			<div className='flex items-center gap-3 pl-0.5'>
-				<StatusDot />
-				<span className='text-primary dark:text-success text-paragraph-small'>{translateCta('availability')}</span>
-			</div>
-			{/* Location & Contact */}
 			<div className='font-hg flex flex-col gap-2.5'>
+				<p className='flex items-center gap-3 pl-0.5'>
+					<StatusDot />
+					<span className='text-primary dark:text-success text-paragraph-small'>{translateCta('availability')}</span>
+				</p>
 				<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-small flex items-center gap-2.5'>
 					<IconMapPinFilled className='text-primary dark:text-success h-4 w-4 shrink-0' />
 					{translateCta('location')}

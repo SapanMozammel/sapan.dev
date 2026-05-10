@@ -6,5 +6,10 @@
 	},
 	"backToList": "All Articles",
 	"moreIn": "More in {category}",
-	"codeBlock": "Code block"
+	"codeBlock": "Code block",
+	"callout": {
+		"info": "Info",
+		"warning": "Warning",
+		"tip": "Tip"
+	}
 }

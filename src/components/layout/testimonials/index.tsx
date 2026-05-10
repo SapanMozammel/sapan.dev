@@ -1,10 +1,10 @@
 'use client';
 
+import SectionTitle from '@/components/layout/common/section-title';
 import Marquee from '@/components/ui/marquee';
 import { TESTIMONIAL_LIST } from '@/data/content/testimonials';
 import { useTranslations } from 'next-intl';
 import { memo } from 'react';
-import SectionTitle from '@/components/layout/common/section-title';
 import TestimonialBackground from './testimonial-background';
 import TestimonialCard from './testimonial-card';
 

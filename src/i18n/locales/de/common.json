@@ -37,6 +37,10 @@
 				"title": "Betreff",
 				"message": "Nachricht"
 			},
+			"placeholders": {
+				"title": "z. B. Landingpage-Redesign",
+				"message": "Erzählen Sie mir von Ihrem Projekt …"
+			},
 			"submit": "Nachricht senden"
 		},
 		"status": {

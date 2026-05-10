@@ -148,7 +148,7 @@ const MobileNav = memo(() => {
 				<div className='border-secondary-200 dark:border-secondary-700 flex items-center justify-between border-b px-5 py-4'>
 					<Link href='/' onClick={() => setOpen(false)} className='flex items-center gap-2'>
 						<Logo className='h-6' />
-						<span className='font-bungee from-primary to-info dark:from-success bg-gradient-to-r bg-clip-text text-base !leading-none font-normal text-transparent uppercase'>sapan.dev</span>
+						<span className='font-bungee from-primary to-info dark:from-success bg-gradient-to-r bg-clip-text text-base leading-none! font-normal text-transparent uppercase'>sapan.dev</span>
 					</Link>
 					<SheetClose asChild>
 						<button

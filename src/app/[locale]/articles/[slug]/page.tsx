@@ -54,6 +54,12 @@ const BlogDetailPage = async ({ params }: Props) => {
 	}
 
 	const translateBlog = await getTranslations('blog');
+	const translateCallout = await getTranslations('blog.callout');
+	const calloutLabels = {
+		info: translateCallout('info'),
+		warning: translateCallout('warning'),
+		tip: translateCallout('tip'),
+	};
 	const otherPosts = BLOG_POSTS.filter((p) => p.slug !== slug && p.category === post.category).slice(0, 3);
 	const categoryColor = CATEGORY_COLORS[post.category] ?? DEFAULT_CATEGORY_COLOR;
 
@@ -83,8 +89,7 @@ const BlogDetailPage = async ({ params }: Props) => {
 								<span className='bg-secondary-200 dark:bg-secondary-700 h-1 w-1 rounded-full' />
 								<MetaLabel>{formatDate(post.publishedAt)}</MetaLabel>
 							</div>
-							<h1 className='sr-only'>{post.title}</h1>
-							<h2 className='text-heading-xlarge text-dark tracking-wide dark:text-white'>{post.title}</h2>
+							<h1 className='text-heading-xlarge text-dark tracking-wide dark:text-white'>{post.title}</h1>
 							<p className='text-secondary-700 dark:text-secondary-300 text-paragraph-medium max-w-5xl'>{post.excerpt}</p>
 							<div className='flex flex-wrap items-center gap-2'>
 								<IconTag size={13} stroke={2} className='text-secondary-400 dark:text-secondary-600' />
@@ -95,7 +100,7 @@ const BlogDetailPage = async ({ params }: Props) => {
 						</div>
 					</div>
 					<div className='mt-4 w-full max-w-5xl'>
-						<div className='prose-custom'>{post.content.map((block, index) => renderBlock(block, index, translateBlog('codeBlock')))}</div>
+						<div className='prose-custom'>{post.content.map((block, index) => renderBlock(block, index, translateBlog('codeBlock'), calloutLabels))}</div>
 					</div>
 					{otherPosts.length > 0 && (
 						<div className='w-full'>
