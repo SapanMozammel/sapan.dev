@@ -1,7 +1,7 @@
 import ContactAdminEmail from '@/emails/contact-admin-email';
 import ContactAutoReply from '@/emails/contact-auto-reply';
-import { ratelimit } from '@/lib/contact/ratelimit';
-import { resend } from '@/lib/contact/resend';
+import { getRatelimit } from '@/lib/contact/ratelimit';
+import { getResend } from '@/lib/contact/resend';
 import { contactSchema } from '@/lib/contact/schema';
 import { verifyTurnstile } from '@/lib/contact/turnstile';
 import { env } from '@/lib/env.server';
@@ -28,7 +28,7 @@ export const POST = async (req: Request) => {
 
 	const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || req.headers.get('x-real-ip') || 'anonymous';
 
-	const { success: withinLimit } = await ratelimit.limit(ip);
+	const { success: withinLimit } = await getRatelimit().limit(ip);
 	if (!withinLimit) {
 		return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
 	}
@@ -46,6 +46,8 @@ export const POST = async (req: Request) => {
 	const { name, email, title, message } = parsed.data;
 
 	const { CONTACT_TO_EMAIL: toEmail, CONTACT_FROM_EMAIL: fromEmail, CONTACT_REPLY_TO: replyTo } = env;
+
+	const resend = getResend();
 
 	const adminResult = await resend.emails.send({
 		from: `"Contact Form" <${fromEmail}>`,
