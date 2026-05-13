@@ -13,10 +13,10 @@ test.describe('landing page', () => {
 		}
 	});
 
-	test('Hero exposes the screen-reader title from i18n', async ({ page }) => {
+	test('Hero h1 renders the i18n heading (prefix + highlight + suffix)', async ({ page }) => {
 		const home = new HomePage(page);
 		await home.goto();
-		await expect(home.heroHeading).toHaveText(homeMessages.hero.srTitle);
+		await expect(home.heroHeading).toHaveText(`${homeMessages.hero.headingPrefix}${homeMessages.hero.headingHighlight}${homeMessages.hero.headingSuffix}`);
 	});
 
 	test('Experience section mounts the R3F particle <canvas>', async ({ page }, testInfo) => {
