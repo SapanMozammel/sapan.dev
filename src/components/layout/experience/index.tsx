@@ -12,7 +12,7 @@ const Experience = async () => {
 		<section id='experience' className='relative z-1 pb-16 sm:pb-24 lg:pb-32'>
 			<ParticleBackground />
 			<SectionSeparator lts rts lbs rbs tl bl ll rl>
-				<div className='container flex w-full grow flex-col items-center justify-start gap-4'>
+				<div className='container flex grow flex-col items-center justify-start gap-4'>
 					<SectionTitle subtitle={translate('subtitle')} title={translate('title')} watermark='Experience' />
 					<Timeline items={EXPERIENCE_DATA} />
 				</div>

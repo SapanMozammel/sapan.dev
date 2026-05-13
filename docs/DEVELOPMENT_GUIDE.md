@@ -306,11 +306,13 @@ Until the endpoint is decided, the scaffold ships inert — the runtime is wired
 ESLint uses **flat config** at the project root (`eslint.config.js`). Prettier config lives in `.formatter/`:
 
 ```
-eslint.config.js          # ESLint flat config (root)
+eslint.config.js          # ESLint flat config (root) — generated, do not edit
 .formatter/
 ├── .prettierrc.js        # Prettier config — used by all format scripts
-└── sync.js               # Import organizer script — run by imports:organize
+└── sync.js               # Template source for eslint.config.js, .prettierrc.js, .vscode/settings.json, etc. Run `pnpm run sync` after changes.
 ```
+
+**Tailwind diagnostics in CI parity with the IDE.** `eslint-plugin-better-tailwindcss` is wired into the TS layer with four rules — `enforce-consistent-important-position` (1a), `no-deprecated-classes` (1b), `enforce-canonical-classes` (1c), `no-conflicting-classes` (cssConflict). The `callees: ['cn','cva','tv','clsx']` option mirrors VS Code's `tailwindCSS.classFunctions`, and `entryPoint: 'src/styles/global.scss'` mirrors `tailwindCSS.experimental.configFile`. `pnpm run lint:fix` (which `format:all` invokes) auto-applies every canonical-class rewrite the v4 generator knows about. See [.claude/skills/workflow/tailwind-diagnostics.md](../.claude/skills/workflow/tailwind-diagnostics.md).
 
 ---
 

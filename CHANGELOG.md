@@ -5,6 +5,40 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.4] - 2026-05-13
+
+### Added
+
+- **Apollo Client 4.x foundation + GraphQL codegen** — `@apollo/client-integration-nextjs` wired for RSC + Client, `pnpm gql:codegen` generates typed operations from `.graphql` files, new `graphql-architect` agent + `/gql-add-query` / `/gql-codegen` slash commands, full architecture doc at `.claude/skills/architecture/data-graphql.md` (RSC-by-default rule, forces RSC when `GRAPHQL_AUTH_TOKEN` is required).
+- **Playwright + axe-core e2e infrastructure** — `e2e/` suite on dedicated port `8001`, 8-project matrix (chromium/firefox/webkit desktop + iPhone 15 + Pixel 7 + i18n-rtl + dark-mode + motion-on), reduced-motion default, mock-everything-external rule. New `e2e-spec-author` agent + `/e2e-add-spec` slash command. CI matrix runs all projects.
+- **Lighthouse CI** — `/lhci` slash command runs Lighthouse against `/` and `/articles` with budget verdict + score deltas vs. the previous run.
+- **Post-build Tailwind class mangler** — `scripts/mangle.mjs` rewrites Tailwind classes for production via `pnpm build:mangled` (Vercel default via `vercel.json`). New `tailwind-class-reviewer` agent flags mangle-incompatible patterns; `.claude/skills/workflow/tailwind-mangle.md` documents the contract (everything through `cn()`, no dynamic class strings).
+- **7 baseline security headers** — `Content-Security-Policy`, `Strict-Transport-Security`, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, `Cross-Origin-Opener-Policy` configured in `next.config.ts` with an e2e spec asserting each header on the home route.
+- **Accessibility wins on icon-only controls, form fields, and code blocks** — header icon-only controls (theme toggle, locale switcher, mobile menu) get `aria-label`; `FormField` wires `useId` + `aria-describedby` so every input has a programmatically associated label and error message; article `<pre>` blocks become keyboard-pannable scroll regions with `tabindex="0"` + `role="region"` + `aria-label` so horizontal overflow is reachable without a mouse.
+- **`/format` slash command + tailwind-v4-syntax skill** — runs organize-imports + Prettier + ESLint `--fix` and sweeps Tailwind v3 `!utility` patterns to v4 `utility!` form. Wired into `/commit`, `/push`, `/pr`, `/merge` quality gates.
+- **ESLint-driven Tailwind diagnostics (CLI parity with the IDE)** — `eslint-plugin-better-tailwindcss` wired through `.formatter/sync.js` adds four rules that mirror `bradlc.vscode-tailwindcss`: `enforce-consistent-important-position` (1a), `no-deprecated-classes` (1b — including `bg-gradient-to-*` → `bg-linear-to-*`), `enforce-canonical-classes` (1c + shorthand merges like `h-full w-full` → `size-full`), and `no-conflicting-classes` (cssConflict, report-only). All four read `src/styles/global.scss` `@theme`, so future v4 renames flow in via `pnpm update eslint-plugin-better-tailwindcss` — no hand-maintained mapping table. `/fix-tw-diagnostics` is now a thin wrapper around `pnpm run lint:fix` + a cssConflict report pass; the prior grep-based heuristics are retired.
+- **`/merge` slash command** — safe local-first branch merge with quality gate, smart squash-vs-no-ff default, refuses dirty trees and divergent targets, never pushes.
+- **`code-reviewer` + `test-writer` agents** — parallel-context review of the 6-priority checklist (Security/A11y, Hydration/RSC, Data Layer, Perf, Effects/State, Conventions) and Vitest+RTL test generation with sapan's `render` from `tests/test-utils.tsx`. 14 external framework skills indexed under `.claude/skills/external/{nextjs,react,typescript,testing,design,data,tooling}/`.
+
+### Changed
+
+- **All file and folder names migrated to kebab-case** — every `.ts` / `.tsx` / asset / folder under `src/` renamed (e.g. `HeroBackground.tsx` → `hero-background.tsx`, `layout/Header/` → `layout/header/`). React component identifiers remain PascalCase; locale folders (`pt-BR`, `zh-CN`) follow BCP-47 and are exempt. ESLint `unicorn/filename-case` enforces it going forward.
+- **Recruiter-focused copy rewrite across 16 locales** — landing hero, about panel, services, work history, testimonials, and contact section rephrased to lead with the user's outcomes and impact rather than feature inventories. Propagated to all 16 `home.json` / `common.json` bundles with locale-idiomatic phrasing preserved.
+- **Typed Redux dispatch + `@/` alias everywhere** — `useAppDispatch` / `useAppSelector` typed against `RootState` and `AppDispatch`, every relative import (`../../`) replaced with `@/`, the now-redundant `src/store/slices/index.ts` barrel deleted (direct imports only).
+- **`Button` component collapsed to single hybrid + `HtmlLocaleSync` deleted** — `Button` no longer ships two variants (button-styled vs. link-styled); a single component now resolves intent from props (`href`, `download`, `external`). `HtmlLocaleSync` removed — `lang` / `dir` are set in `[locale]/layout.tsx` per the next-intl canonical pattern.
+- **`DiamondGrid` legacy API dropped** — `items` + `renderFn` props removed; component now accepts `children` only (flexible-children pattern, simpler types, no per-call adapter).
+- **Hardcoded Tailwind classes in portfolio data replaced with typed `colorScheme` enum** — `PROJECTS_DATA` and `EXPERIENCE_DATA` no longer carry class strings; entries declare `colorScheme: 'primary' | 'success' | 'info' | 'danger'` and components map that to design-system tokens at render time.
+- **Drop zod-based env validation in favor of typed accessors** — replaces the Zod schema introduced earlier in this cycle with `@/lib/env` (public, `NEXT_PUBLIC_*`) and `@/lib/env.server` (server-only secrets) as the only env entry points. `next.config.ts` calls `validateServerEnv()` at build start to fail-fast on missing required vars.
+- **Build analyzer migrated to Turbopack-native `next experimental-analyze`** — replaces the `@next/bundle-analyzer` wrapper now that Turbopack ships first-class bundle analysis.
+- **TubeOnAI removed from work history** — entry dropped from `EXPERIENCE_DATA` and propagated through all 16 `home.json` blog-reference bundles.
+- **Dependencies bumped to latest stable** — three batched bumps across patches/minors (Next 16.x, React 19 patches, Tailwind v4.3, Apollo 4.x, Playwright 1.60, Vitest 4.1, Tabler icons 3.44, next-intl 4.12, react-email 6.1, etc.).
+- **~100 canonical-class rewrites applied via the new ESLint Tailwind rules** — `bg-gradient-to-*` → `bg-linear-to-*` (27 instances across CTA + headers + blog card), `h-full w-full` → `size-full` (4 components), `[animation:..]` → `animate-[..]` (CTA background rays — 23 instances), `[background-color:color-mix(..)]` → `bg-[color-mix(..)]` (Dialog overlay), `translate-x-[-50%] translate-y-[-50%]` → `-translate-1/2` (Dialog content + CTA), `border-1` → `border` (cursor-tooltip, project-card). All semantically equivalent v4 canonical forms; no visual diff.
+
+### Fixed
+
+- **Missing `codeBlock` translation key in 15 non-EN `blog.json` files** — code-block UI controls (copy button label, language tag) fell back to English in every non-default locale; key added across all 15.
+- **Hidden type errors in tests** — `tsconfig.test.json` was not part of CI; wiring it in surfaced 5 latent type errors in test fixtures, all fixed.
+
 ## [0.3.3] - 2026-04-27
 
 ### Added

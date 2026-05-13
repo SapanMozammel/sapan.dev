@@ -20,6 +20,7 @@ const requiredDeps = {
 	'eslint-config-prettier': ['eslint-config-prettier'],
 	'eslint-plugin-prettier': ['eslint-plugin-prettier'],
 	'eslint-config-next': ['eslint-config-next'],
+	'eslint-plugin-better-tailwindcss': ['eslint-plugin-better-tailwindcss'],
 	typescript: ['typescript'],
 	'@types/node': ['@types/node'],
 	'@types/react': ['@types/react'],
@@ -325,7 +326,19 @@ const unicornPlugin = require('eslint-plugin-unicorn').default ?? require('eslin
 // Prettier options from .formatter/.prettierrc.js (strip Prettier-only keys not valid in ESLint rule)
 const { plugins: _p, overrides: _o, ...prettierOptions } = require('./.formatter/.prettierrc.js');
 
-module.exports = [
+// Tailwind class options for eslint-plugin-better-tailwindcss — mirror VS Code's tailwindCSS.classFunctions
+// and tailwindCSS.experimental.configFile, so CLI lint surfaces the exact diagnostics the IDE shows.
+const tailwindClassOptions = {
+	callees: ['cn', 'cva', 'tv', 'clsx'],
+	attributes: ['className', 'class'],
+	entryPoint: 'src/styles/global.scss',
+};
+
+// Async IIFE: eslint-plugin-better-tailwindcss ships ESM-only, and Node 20 cannot \`require()\` ESM.
+module.exports = (async () => {
+	const betterTailwindcss = (await import('eslint-plugin-better-tailwindcss')).default;
+
+	return [
 	// Next.js core-web-vitals flat config (includes React, React Hooks, import, a11y, @next rules)
 	...Object.values(nextConfig),
 
@@ -335,6 +348,7 @@ module.exports = [
 		plugins: {
 			prettier: prettierPlugin,
 			unicorn: unicornPlugin,
+			'better-tailwindcss': betterTailwindcss,
 		},
 		languageOptions: {
 			parser: typescriptParser,
@@ -406,6 +420,17 @@ module.exports = [
 			// Filename casing — kebab-case for all .ts/.tsx files (sapan H2-B convention)
 			'unicorn/filename-case': ['error', { case: 'kebabCase' }],
 
+			// Tailwind diagnostics — parity with bradlc.vscode-tailwindcss IDE flags
+			// suggestCanonicalClasses (autofixable): three sub-cases
+			//   1a — !utility → utility! position fix
+			'better-tailwindcss/enforce-consistent-important-position': ['error', tailwindClassOptions],
+			//   1b — v3 aliases (flex-shrink, bg-gradient-to-*, *-opacity-N, etc.)
+			'better-tailwindcss/no-deprecated-classes': ['error', tailwindClassOptions],
+			//   1c — arbitrary-property hints + shorthand merges (h-full w-full → size-full, bg-[size:..] → bg-size-[..], etc.)
+			'better-tailwindcss/enforce-canonical-classes': ['error', tailwindClassOptions],
+			// cssConflict (report-only — intent inference required): duplicate-property utilities in one className
+			'better-tailwindcss/no-conflicting-classes': ['warn', tailwindClassOptions],
+
 			// Disable conflicting prettier rules
 			...prettierConfig.rules,
 		},
@@ -462,7 +487,8 @@ module.exports = [
 			'src/types/graphql/**',
 		],
 	},
-];`;
+];
+})();`;
 };
 
 // Generate EditorConfig
@@ -616,6 +642,12 @@ const generateVSCodeSettings = (config) => {
 		'tailwindCSS.includeLanguages': {
 			scss: 'css',
 		},
+		'tailwindCSS.classFunctions': ['cn', 'cva', 'tv', 'clsx'],
+		'tailwindCSS.classAttributes': ['class', 'className', 'ngClass', 'class:list'],
+
+		// Silence the built-in CSS/SCSS linter on Tailwind v4 directives (@theme, @apply, @source, @variant, @reference, @utility, etc.) — the Tailwind IntelliSense extension validates them with full v4 awareness.
+		'css.lint.unknownAtRules': 'ignore',
+		'scss.lint.unknownAtRules': 'ignore',
 	};
 
 	return JSON.stringify(settings, null, '\t');

@@ -1,8 +1,8 @@
 const StatsHalfCircle = () => {
 	return (
-		<div className='border-info/50 bg-light/70 font-hg pointer-events-none absolute top-[2.5em] -left-[7.5em] aspect-square h-[8.5em] rounded-full border-[0.05em] border-solid backdrop-blur select-none dark:bg-slate-900/70'>
+		<div className='border-info/50 bg-light/70 font-hg pointer-events-none absolute top-[2.5em] left-[-7.5em] aspect-square h-[8.5em] rounded-full border-[0.05em] border-solid backdrop-blur-sm select-none dark:bg-slate-900/70'>
 			<div className='absolute inset-[0.2em]'>
-				<svg viewBox='-4 -4 148 148' xmlns='http://www.w3.org/2000/svg' className='absolute -inset-[1.1em] fill-none'>
+				<svg viewBox='-4 -4 148 148' xmlns='http://www.w3.org/2000/svg' className='absolute inset-[-1.1em] fill-none'>
 					<g filter='url(#half-wave-wrapper)'>
 						<path
 							d='M70 140C88.5652 140 106.37 132.625 119.497 119.497C132.625 106.37 140 88.5652 140 70C140 51.4349 132.625 33.6301 119.497 20.5025C106.37 7.37499 88.5652 8.63117e-06 70 0'

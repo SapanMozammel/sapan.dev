@@ -35,7 +35,7 @@ const AboutSidebar = memo<AboutSidebarProps>(({ tabs, activeTabId, onSelect, pro
 					const isActive = tab.id === activeTabId;
 					const tabClasses = cn(
 						'group/tab flex w-full items-center gap-[0.75em] border-s-[0.25em] border-solid py-[0.75em] ps-[1em] pe-[0.6em] text-start uppercase cursor-pointer transition-colors focus-visible:outline-primary focus-visible:outline-[0.1em] focus-visible:outline-offset-[-0.1em] dark:focus-visible:outline-success',
-						isActive ? 'from-info/30 rtl:to-info/30 border-info/50 bg-gradient-to-r to-transparent rtl:from-transparent' : 'border-transparent bg-transparent hover:bg-info/10'
+						isActive ? 'from-info/30 rtl:to-info/30 border-info/50 bg-linear-to-r to-transparent rtl:from-transparent' : 'border-transparent bg-transparent hover:bg-info/10'
 					);
 					return (
 						<button

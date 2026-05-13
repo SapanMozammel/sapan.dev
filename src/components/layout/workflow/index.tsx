@@ -63,7 +63,7 @@ const Workflow = memo(() => {
 	return (
 		<section id='workflow' className='relative z-1 pb-16 sm:pb-20 lg:pb-24'>
 			<SectionSeparator lts rts lbs rbs tl bl ll rl>
-				<div className='container flex w-full grow flex-col items-center justify-start gap-8'>
+				<div className='container flex grow flex-col items-center justify-start gap-8'>
 					<SectionTitle subtitle={translate('subtitle')} title={translate('title')} watermark='Workflow' />
 					<div
 						onMouseEnter={() => setIsPaused(true)}
@@ -71,8 +71,8 @@ const Workflow = memo(() => {
 						className='border-secondary-200/50 dark:border-secondary-700/50 relative flex w-full max-w-5xl flex-col gap-6 self-center overflow-hidden rounded-2xl border bg-white p-6 shadow-lg shadow-black/5 transition-all duration-300 md:p-8 dark:bg-black dark:shadow-white/5'
 					>
 						<div className='pointer-events-none absolute inset-0 z-0 overflow-hidden'>
-							<div className='bg-info/10 absolute -top-[20%] -left-[10%] h-[70%] w-[70%] rounded-full blur-[130px]' />
-							<div className='bg-primary/10 absolute -right-[10%] -bottom-[20%] h-[70%] w-[70%] rounded-full blur-[130px]' />
+							<div className='bg-info/10 absolute top-[-20%] left-[-10%] size-[70%] rounded-full blur-[130px]' />
+							<div className='bg-primary/10 absolute right-[-10%] bottom-[-20%] size-[70%] rounded-full blur-[130px]' />
 						</div>
 						<WorkflowContent activeStep={activeStep} currentStep={currentStep} />
 						<WorkflowProgress activeStep={activeStep} stepProgress={stepProgress} isResetting={isResetting} activeColor={activeColor} inactiveColor={inactiveColor} onStepClick={handleStepClick} />

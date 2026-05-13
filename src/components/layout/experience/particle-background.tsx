@@ -52,7 +52,7 @@ const supportsHalfFloatFBO = (): boolean => {
 // reads as near-black on OLED panels and was the source of the "blank area"
 // symptom after the coarse-pointer gate stopped the scene from mounting.
 const ParticleFallback = memo(() => (
-	<div aria-hidden className='bg-primary/45 dark:bg-success/45 pointer-events-none absolute top-1/2 left-1/2 h-65 w-160 max-w-[90vw] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[5rem] select-none' />
+	<div aria-hidden className='bg-primary/45 dark:bg-success/45 pointer-events-none absolute top-1/2 left-1/2 h-65 w-160 max-w-[90vw] -translate-1/2 rounded-full blur-[5rem] select-none' />
 ));
 ParticleFallback.displayName = 'ParticleFallback';
 

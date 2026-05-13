@@ -2,3 +2,7 @@
 @use './themes.scss';
 @use './utilities.scss';
 @use './animations.scss';
+
+/* Skill/doc markdown contains illustrative bracket-form classes like bg-[url(...)] that v4 would otherwise compile and break Turbopack's CSS module resolution. */
+@source not '../../.claude';
+@source not '../../docs';

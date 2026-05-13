@@ -20,7 +20,7 @@ const Cta = async () => {
 					<div className='container'>
 						<div className='bg-dark border-success/15 relative z-10 mx-auto max-w-5xl overflow-hidden rounded-2xl border shadow-[0_8px_40px_-12px_color-mix(in_srgb,var(--color-primary)_25%,transparent),0_2px_12px_color-mix(in_srgb,var(--color-success)_15%,transparent)]'>
 							<CtaBackground />
-							<div aria-hidden className='pointer-events-none absolute inset-0 z-[5] flex items-center justify-center select-none lg:left-auto lg:justify-end'>
+							<div aria-hidden className='pointer-events-none absolute inset-0 z-5 flex items-center justify-center select-none lg:left-auto lg:justify-end'>
 								<div className='aspect-square h-[120%] max-h-120 opacity-30 lg:h-[130%] lg:max-h-none lg:translate-x-[27.5%] lg:opacity-70'>
 									<AnimatedSphere />
 								</div>

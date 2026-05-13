@@ -7,7 +7,7 @@ const AVATAR_SIZE = 96;
 const AVATAR_BLUR_PLACEHOLDER = getBlurDataURL(AVATAR_SIZE, AVATAR_SIZE);
 
 const TestimonialCard = memo(({ testimonial }: { testimonial: TestimonialData }) => (
-	<div className='mx-2 flex aspect-[100/40] w-100 shrink-0 items-center gap-4 rounded-3xl bg-white/50 px-6 py-2 backdrop-blur-xl sm:aspect-[100/45] sm:w-110 sm:gap-6 sm:px-8 md:mx-3 lg:mx-4 dark:bg-black/50'>
+	<div className='mx-2 flex aspect-100/40 w-100 shrink-0 items-center gap-4 rounded-3xl bg-white/50 px-6 py-2 backdrop-blur-xl sm:aspect-[100/45] sm:w-110 sm:gap-6 sm:px-8 md:mx-3 lg:mx-4 dark:bg-black/50'>
 		<div className='relative aspect-square w-20 shrink-0 overflow-hidden rounded-full sm:w-24'>
 			<Image
 				src={testimonial.avatar}

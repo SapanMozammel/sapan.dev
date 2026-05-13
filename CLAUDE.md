@@ -137,6 +137,7 @@ Project-level commands live in `.claude/commands/`. Each is invoked as `/<name> 
 | `/translate [locale?]` | i18n translation helper. |
 | `/new-component [Name]` | Scaffold a new component per sapan conventions. |
 | `/new-section [Name]` | Scaffold a new page section per sapan conventions. |
+| `/fix-tw-diagnostics [scope?]` | Sweep `suggestCanonicalClasses` (v3 alias names, prefix `!`, arbitrary-property hints) and `cssConflict` (duplicate-property utilities). Thin wrapper around `pnpm run lint:fix` — the four `better-tailwindcss/*` ESLint rules (wired via `.formatter/sync.js`) auto-fix every canonical migration; cssConflict findings are reported for manual resolution. See [.claude/skills/workflow/tailwind-diagnostics.md](.claude/skills/workflow/tailwind-diagnostics.md). |
 
 **Removed:** `/audit` (subsumed by `/review`). **Renamed:** `/audit-i18n` → `/review-i18n`. **Not adopted:** R&D's standalone `/feature` (merged into `/plan`).
 

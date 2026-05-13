@@ -40,7 +40,7 @@ const AboutTabs = memo<AboutTabsProps>(({ tabs, profileName }) => {
 	if (!activeTab) return null;
 
 	return (
-		<div className='font-dm flex h-full w-full overflow-hidden rounded-[0.6em] text-[0.8vw] tracking-widest'>
+		<div className='font-dm flex size-full overflow-hidden rounded-[0.6em] text-[0.8vw] tracking-widest'>
 			<AboutSidebar tabs={tabs} activeTabId={activeTabId} onSelect={setActiveTabId} profileName={profileName} onTabKeyDown={handleTabKeyDown} tabRefs={tabRefs} />
 			<div className='flex h-full grow flex-col'>
 				<div className='border-info/30 flex h-[3.5em] shrink-0 items-center border-b-[0.025em] border-solid px-[1.25em]'>

@@ -26,7 +26,7 @@ type TooltipContentProps = {
 };
 
 export const TooltipContent = memo<TooltipContentProps>(({ children, className }) => (
-	<div className={cn('bg-primary/80 border-primary dark:border-success dark:bg-success/80 dark:text-dark pointer-events-none rounded-2xl border-1 border-solid px-3 py-2 text-sm text-white', className)}>{children}</div>
+	<div className={cn('bg-primary/80 border-primary dark:border-success dark:bg-success/80 dark:text-dark pointer-events-none rounded-2xl border border-solid px-3 py-2 text-sm text-white', className)}>{children}</div>
 ));
 TooltipContent.displayName = 'TooltipContent';
 

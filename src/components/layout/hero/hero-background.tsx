@@ -12,7 +12,7 @@ const HeroBackground = ({ children, className, ...rest }: React.DetailedHTMLProp
 			<div className='absolute inset-0 flex items-center justify-center'>
 				<Pattern className='text-secondary-700 dark:text-secondary-300 h-full w-auto' />
 			</div>
-			<div className='from-info/50 via-info/15 absolute top-1/2 left-1/2 aspect-square w-256 max-w-full -translate-x-1/2 -translate-y-1/2 bg-radial via-40% to-transparent to-60%' />
+			<div className='from-info/50 via-info/15 absolute top-1/2 left-1/2 aspect-square w-256 max-w-full -translate-1/2 bg-radial via-40% to-transparent to-60%' />
 		</div>
 	</>
 );

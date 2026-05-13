@@ -44,7 +44,7 @@ const BlogCard = ({ post, className }: BlogCardProps) => {
 					loading='lazy'
 					quality={85}
 				/>
-				<div className='absolute inset-0 bg-gradient-to-t from-black/30 to-transparent' />
+				<div className='absolute inset-0 bg-linear-to-t from-black/30 to-transparent' />
 				<span className={cn('font-hg absolute bottom-3 left-3 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest uppercase backdrop-blur-sm', categoryColor)}>{post.category}</span>
 			</div>
 			<div className='flex grow flex-col gap-3 p-5'>

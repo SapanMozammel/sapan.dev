@@ -26,7 +26,7 @@ const ContactForm = memo<ContactFormProps>(({ form, errors, onChange, onSubmit, 
 			<FormField label={translateLabels('title')} name='title' value={form.title} error={errors.title} onChange={onChange} placeholder={translatePlaceholders('title')} />
 			<FormField label={translateLabels('message')} name='message' type='textarea' value={form.message} error={errors.message} onChange={onChange} placeholder={translatePlaceholders('message')} rows={3} />
 
-			<input type='text' name='website' value={form.website} onChange={onChange} tabIndex={-1} autoComplete='off' aria-hidden className='pointer-events-none absolute -left-[9999px] h-0 w-0 opacity-0' />
+			<input type='text' name='website' value={form.website} onChange={onChange} tabIndex={-1} autoComplete='off' aria-hidden className='pointer-events-none absolute left-[-9999px] h-0 w-0 opacity-0' />
 
 			<Turnstile siteKey={TURNSTILE_SITE_KEY} onSuccess={onTurnstileToken} options={{ appearance: 'interaction-only', theme: 'auto' }} />
 

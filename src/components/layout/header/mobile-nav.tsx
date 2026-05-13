@@ -126,12 +126,7 @@ const MobileNav = memo(() => {
 							open ? 'top-1/2 -translate-y-1/2 rotate-45' : 'top-2.75 rotate-0 sm:top-3.5'
 						)}
 					/>
-					<span
-						className={cn(
-							'absolute top-1/2 left-1/2 h-px w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black transition-all duration-300 dark:bg-white',
-							open ? 'invisible opacity-0' : 'visible opacity-100'
-						)}
-					/>
+					<span className={cn('absolute top-1/2 left-1/2 h-px w-4 -translate-1/2 rounded-full bg-black transition-all duration-300 dark:bg-white', open ? 'invisible opacity-0' : 'visible opacity-100')} />
 					<span
 						className={cn(
 							'absolute left-1/2 h-px w-4 -translate-x-1/2 rounded-full bg-black transition-all duration-300 dark:bg-white',
@@ -148,7 +143,7 @@ const MobileNav = memo(() => {
 				<div className='border-secondary-200 dark:border-secondary-700 flex items-center justify-between border-b px-5 py-4'>
 					<Link href='/' onClick={() => setOpen(false)} className='flex items-center gap-2'>
 						<Logo className='h-6' />
-						<span className='font-bungee from-primary to-info dark:from-success bg-gradient-to-r bg-clip-text text-base leading-none! font-normal text-transparent uppercase'>sapan.dev</span>
+						<span className='font-bungee from-primary to-info dark:from-success bg-linear-to-r bg-clip-text text-base leading-none! font-normal text-transparent uppercase'>sapan.dev</span>
 					</Link>
 					<SheetClose asChild>
 						<button
@@ -160,14 +155,14 @@ const MobileNav = memo(() => {
 					</SheetClose>
 				</div>
 
-				<nav className='scrollbar-none flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto px-3 py-4'>
+				<nav className='flex min-h-0 flex-1 scrollbar-none flex-col gap-1 overflow-y-auto px-3 py-4'>
 					{NAV_ITEMS.map((item) => {
 						const active = 'section' in item ? activeSection === item.section : pathname.startsWith(item.href);
 						const Icon = item.icon;
 						return (
 							<Link key={item.key} href={'section' in item ? '/' : item.href} onClick={'section' in item ? (e) => handleSectionClick(e, item.section) : () => setOpen(false)} className={itemClass(active)}>
 								<span className={iconWrap(active)}>
-									<Icon className='h-[18px] w-[18px]' stroke={1.5} />
+									<Icon className='size-[18px]' stroke={1.5} />
 								</span>
 								<span className='flex-1'>{translateNav(item.key)}</span>
 								<span
@@ -183,7 +178,7 @@ const MobileNav = memo(() => {
 				<div className='border-secondary-200 dark:border-secondary-700 mt-auto border-t p-3'>
 					<NextLink href='https://github.com/SapanMozammel' target='_blank' onClick={() => setOpen(false)} className={itemClass(false)}>
 						<span className={iconWrap(false)}>
-							<IconBrandGithub className='h-[18px] w-[18px]' stroke={1.5} />
+							<IconBrandGithub className='size-[18px]' stroke={1.5} />
 						</span>
 						<span className='flex-1'>GitHub</span>
 					</NextLink>

@@ -37,23 +37,18 @@ Same rule for `@apply` directives in SCSS:
 
 ## How to find them
 
-```bash
-# In TSX/TS classNames + cn() args
-grep -rEn "['\"\`][^'\"\`]*![a-z][a-z0-9-]+" src --include='*.tsx' --include='*.ts'
+Two sources of truth, kept in parity:
 
-# In SCSS @apply directives
-grep -nE "@apply[^;]*![a-z][a-z0-9-]+" src/styles/*.scss
-```
+- **IDE**: VS Code Tailwind CSS IntelliSense (`bradlc.vscode-tailwindcss`) flags every v3-form occurrence inline with diagnostic code `suggestCanonicalClasses`.
+- **CLI / CI**: `better-tailwindcss/enforce-consistent-important-position` (wired via `.formatter/sync.js`) reports the same set on `pnpm run lint`.
 
-Both regexes match the v3 form (`!utility`). The v4 form (`utility!`) needs `[a-z0-9-]+!\b` — different shape, no overlap.
-
-The VS Code Tailwind CSS IntelliSense extension also flags every v3-form occurrence with the diagnostic code `suggestCanonicalClasses` once `.vscode/settings.json` points it at sapan's CSS entry.
+A grep fallback if you need it without a tool: `grep -rEn "['\"\`][^'\"\`]*![a-z][a-z0-9-]+" src --include='*.tsx' --include='*.ts'` plus `grep -nE "@apply[^;]*![a-z][a-z0-9-]+" src/styles/*.scss`. The v4 form (`utility!`) is a different shape (`[a-z0-9-]+!\b`), so the two patterns don't overlap.
 
 ## How to fix
 
 **Single utility:** move the `!` to the end of the base class, leaving any variant prefix in place.
 
-**Whole codebase, focused sweep:** invoke `/format` — it runs `pnpm run format:all`, scans for `!utility` patterns in TSX/TS classNames + SCSS `@apply` directives, applies the v4 rewrite per this skill, then re-runs `format:all` so Prettier's class sorter settles, and finally gates with `lint` + `type:check`.
+**Whole codebase:** run `pnpm run lint:fix` (or `/format`, which wraps it). The `better-tailwindcss/enforce-consistent-important-position` rule is autofixable and rewrites every `!utility` to `utility!` in one pass — TSX/TS classNames AND SCSS `@apply` directives. `/fix-tw-diagnostics` is the broader entry point that also handles the rest of `suggestCanonicalClasses` (v3 aliases, arbitrary-property hints) and reports `cssConflict`.
 
 **Full v3 → v4 migration (config + tokens + syntax):** the upstream codemod handles every case but is broader scope:
 
@@ -61,7 +56,7 @@ The VS Code Tailwind CSS IntelliSense extension also flags every v3-form occurre
 pnpm dlx @tailwindcss/upgrade
 ```
 
-Use the codemod when also migrating `tailwind.config.ts` shape, theme tokens, etc. For a `!utility` syntax-only sweep, `/format` is the right tool — it's scoped, idempotent, and won't touch your token files.
+Use the codemod when also migrating `tailwind.config.ts` shape, theme tokens, etc. For an in-file syntax-only sweep, `pnpm run lint:fix` is the right tool — it's scoped, idempotent, and won't touch your token files.
 
 ## What NOT to change
 
@@ -70,5 +65,6 @@ Use the codemod when also migrating `tailwind.config.ts` shape, theme tokens, et
 
 ## See also
 
+- [`tailwind-diagnostics`](./tailwind-diagnostics.md) — broader sweep covering both the `!important` migration (sub-case 1a of `suggestCanonicalClasses`) and `cssConflict` reporting. Use via `/fix-tw-diagnostics` when scoping wider than just the `!utility` form.
 - [`design-system/colors.md`](../design-system/colors.md), [`design-system/typography.md`](../design-system/typography.md), [`design-system/spacing.md`](../design-system/spacing.md) — sapan token rules that complement this v4-syntax rule
 - [`architecture/component-patterns.md`](../architecture/component-patterns.md) — `cn()` mandate for className composition

@@ -5,7 +5,7 @@ const ExperienceCircle = () => {
 	const rotatingText = `EXPERIENCE · YEARS · `.repeat(6);
 
 	return (
-		<div className='border-info/50 bg-light/70 font-hg pointer-events-none absolute top-[12.5em] -right-[4em] aspect-square size-[12em] translate-x-1/2 rounded-full border-[0.05em] border-solid backdrop-blur select-none dark:bg-slate-900/70'>
+		<div className='border-info/50 bg-light/70 font-hg pointer-events-none absolute top-[12.5em] right-[-4em] aspect-square size-[12em] translate-x-1/2 rounded-full border-[0.05em] border-solid backdrop-blur-sm select-none dark:bg-slate-900/70'>
 			<div className='absolute inset-[0.2em]'>
 				<svg className='absolute inset-[1.3em] fill-none' viewBox='-3.5 -3 112 112'>
 					<path

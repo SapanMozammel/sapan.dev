@@ -100,3 +100,4 @@ Before running `pnpm build:mangled`, invoke the `tailwind-class-reviewer` agent 
 - `architecture/component-patterns.md` — the `cn()` mandate sapan-wide.
 - `design-system/typography.md` — custom `@utility` classes (`text-heading-xlarge`, `font-cg`) get mangled in prod.
 - `workflow/tailwind-v4-syntax.md` — important modifier `h-9!` (suffix) interacts cleanly with mangling.
+- `workflow/tailwind-diagnostics.md` — v3 alias names (`flex-shrink-0`, `bg-opacity-*`, etc.) are NOT emitted by v4's generator and therefore silently drop out of the mangler. Run `/fix-tw-diagnostics` before `pnpm build:mangled` to ensure every class in source has a canonical CSS counterpart.

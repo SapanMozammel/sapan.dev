@@ -29,7 +29,7 @@ const COLOR_SCHEME_CLASSES: Record<ColorScheme, string> = {
 };
 
 const TOOLTIP_CONTENT = (
-	<span className='bg-primary/80 border-primary dark:border-success dark:bg-success/80 dark:text-dark pointer-events-none inline-flex rounded-2xl border-1 border-solid px-3 py-2 text-sm text-white'>
+	<span className='bg-primary/80 border-primary dark:border-success dark:bg-success/80 dark:text-dark pointer-events-none inline-flex rounded-2xl border border-solid px-3 py-2 text-sm text-white'>
 		<IconArrowUpRight className='h-6 w-6' stroke={2.5} />
 	</span>
 );
@@ -67,7 +67,7 @@ const ProjectCard = memo<ProjectCardProps>(({ project }) => {
 				</Link>
 			</div>
 			<div className='h-52 w-full px-4 pb-4 sm:h-80 sm:px-6 sm:pb-6 lg:h-full lg:pt-6'>
-				<CursorTooltip content={TOOLTIP_CONTENT} className='relative h-full w-full cursor-pointer overflow-hidden rounded-xl shadow-lg shadow-black/5 dark:shadow-white/5' onClick={handleClick}>
+				<CursorTooltip content={TOOLTIP_CONTENT} className='relative size-full cursor-pointer overflow-hidden rounded-xl shadow-lg shadow-black/5 dark:shadow-white/5' onClick={handleClick}>
 					<Image
 						src={project.image}
 						alt={`${project.title?.replace(/ /g, '-') || 'project'}-image`}

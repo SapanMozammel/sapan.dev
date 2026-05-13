@@ -12,7 +12,7 @@ const SectionTitle = ({ title, subtitle, watermark, className }: SectionTitleTyp
 		{watermark && (
 			<span
 				aria-hidden='true'
-				className='font-cg text-secondary-100/50 dark:text-secondary-800/50 pointer-events-none absolute top-1/2 left-1/2 -z-1 -translate-x-1/2 -translate-y-1/2 text-[12vw] leading-none font-medium select-none sm:text-[10vw]'
+				className='font-cg text-secondary-100/50 dark:text-secondary-800/50 pointer-events-none absolute top-1/2 left-1/2 -z-1 -translate-1/2 text-[12vw] leading-none font-medium select-none sm:text-[10vw]'
 			>
 				{watermark}
 			</span>

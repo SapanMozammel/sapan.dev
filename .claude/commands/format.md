@@ -1,61 +1,45 @@
 ---
-description: Run sapan's formatter (organize-imports + Prettier + ESLint --fix) and sweep Tailwind v3 `!utility` patterns to v4 `utility!` form.
-allowed-tools: Bash(pnpm run format:all*), Bash(pnpm run lint*), Bash(pnpm run type:check*), Bash(grep:*), Bash(git status:*), Bash(git diff:*), Read, Edit, Glob
+description: Run sapan's formatter — organize-imports + Prettier + ESLint --fix. Tailwind canonical-class rewrites (including `!utility` → `utility!`) ride along via the wired ESLint rules.
+allowed-tools: Bash(pnpm run format:all*), Bash(pnpm run lint*), Bash(pnpm run type:check*), Bash(git status:*), Bash(git diff:*), Read, Edit, Glob
 ---
 
 # Format
 
 ## Skills to load FIRST
 
-- `tailwind-v4-syntax` (sapan workflow) — the canonical reference for `!utility` → `utility!` migration. Load this before scanning so you suggest the correct rewrite for each finding (variant prefix preserved, base class gets the trailing `!`).
+- `tailwind-v4-syntax` (sapan workflow) — reference for the `!utility` → `utility!` syntax. The autofix is performed by `better-tailwindcss/enforce-consistent-important-position`; load the skill to explain a finding to the user if they ask.
+- `tailwind-diagnostics` (sapan workflow) — overview of the four ESLint Tailwind rules that run inside `format:all`.
 
 ## Process
 
-1. **Run the formatter pipeline.** This handles organize-imports, Prettier (with `prettier-plugin-tailwindcss` class sorting), and ESLint `--fix` in the right order:
+1. **Run the formatter pipeline.** Handles organize-imports, Prettier (with `prettier-plugin-tailwindcss` class sorting), and ESLint `--fix` in order. ESLint `--fix` invokes the four `better-tailwindcss/*` rules — so `!utility` → `utility!`, v3-alias → v4-canonical rewrites (e.g. `bg-gradient-to-*` → `bg-linear-to-*`), and arbitrary-property-hint → named-utility rewrites all land in this single step.
+
    ```bash
    pnpm run format:all
    ```
+
    If it errors on any file, fix the underlying issue and rerun.
 
-2. **Sweep Tailwind v3 `!utility` patterns** that Prettier's class sorter does NOT rewrite (only the v3 form's `!` position is wrong; the order is fine):
-   ```bash
-   # TSX/TS classNames + cn() args
-   grep -rEn "['\"\`][^'\"\`]*![a-z][a-z0-9-]+" src --include='*.tsx' --include='*.ts'
+2. **Final gate** — verify nothing regressed.
 
-   # SCSS @apply directives
-   grep -nE "@apply[^;]*![a-z][a-z0-9-]+" src/styles/*.scss
-   ```
-
-3. **For each finding, apply the rewrite per the `tailwind-v4-syntax` skill:**
-   - `!h-9` → `h-9!`
-   - `sm:!h-11` → `sm:h-11!` (variant stays in front, `!` to the very end)
-   - `dark:!bg-success` → `dark:bg-success!`
-   - Same rule inside `@apply`: `@apply font-hg !leading-tight` → `@apply font-hg leading-tight!`
-
-   Do NOT touch JS negation (`!ctx`, `!body.contains(...)`) — those are JavaScript, not Tailwind. The grep above stays inside quoted strings to avoid them.
-
-4. **Re-run the formatter pipeline** so Prettier's class sorter and ESLint can settle the rewritten lines (the `!` move can shift class ordering):
-   ```bash
-   pnpm run format:all
-   ```
-
-5. **Final gate** — verify the sweep didn't break anything:
    ```bash
    pnpm run type:check
    pnpm run lint
    ```
 
+   The lint pass will surface any `better-tailwindcss/no-conflicting-classes` warnings (report-only — intent inference required); flag those to the user but do not auto-resolve.
+
 ## Output
 
 Report what landed:
-- `pnpm run format:all` — summary line (pass/fail; how many files prettier/ESLint touched)
-- Tailwind v3 → v4 sweep — count of files changed + per-file list of `original → suggested` rewrites
-- Final gate verdict (lint + type-check)
+- `pnpm run format:all` — summary line (pass/fail; how many files prettier/ESLint touched).
+- Tailwind canonical-class rewrites — count per rule if any landed (`no-deprecated-classes`, `enforce-canonical-classes`, `enforce-consistent-important-position`).
+- Final gate verdict (lint + type-check).
 
-If nothing was found in Step 2, say so plainly — no need to invent work.
+If nothing was rewritten, say so plainly — no need to invent work.
 
 ## Rules
 
-- Do NOT run `pnpm dlx @tailwindcss/upgrade` here. That codemod also rewrites configs and tokens; this command is scoped to the `!utility` syntax sweep only. Use the codemod separately if a full v3→v4 migration is needed.
-- Use the **Edit** tool for surgical rewrites (one `old_string` / `new_string` per finding); never Write to whole files for a 2-character syntax change.
-- Skip files in `.claude/skills/external/` and `node_modules/` — the grep paths above already exclude them by scoping to `src/` and `src/styles/`.
+- Do NOT add grep-based sweeps for `!utility` patterns or v3 aliases. The ESLint rules cover every case the IDE flags, and they read the project's Tailwind v4 entry CSS — far more exhaustive than a hand-maintained regex. If the user wants a wider sweep (scope, file-list, etc.), invoke `/fix-tw-diagnostics`.
+- Do NOT run `pnpm dlx @tailwindcss/upgrade` here — that codemod also rewrites configs and tokens; this command is scoped to in-file class rewrites.
+- Use the **Edit** tool only for autofix-incompatible findings reported in Step 1's remaining errors; never Write to whole files for what the lint rule could have rewritten.

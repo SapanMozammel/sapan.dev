@@ -19,14 +19,14 @@ const Technologies = memo(() => {
 	return (
 		<section id='technologies' className='relative z-1 pt-[20vw] pb-16 sm:pb-20 lg:pb-24'>
 			<SectionSeparator lts rts lbs rbs bl ll rl>
-				<div className='container flex w-full grow flex-col items-center justify-start gap-4 text-center'>
+				<div className='container flex grow flex-col items-center justify-start gap-4 text-center'>
 					<SectionTitle subtitle={translate('subtitle')} title={translate('title')} watermark='Technologies' />
 					<DiamondGrid>
 						{TECH_STACK.map((item, index) => (
 							<CursorTooltip
 								key={`${item.name}-${index}`}
 								content={item.name}
-								className='from-secondary-200/50 dark:from-secondary-700/50 dark:to-secondary-900/50 to-secondary/50 flex aspect-video w-full items-center justify-center rounded-[2.25vw] bg-gradient-to-b text-sm text-white transition-shadow duration-300 select-none md:rounded-[1.25vw]'
+								className='from-secondary-200/50 dark:from-secondary-700/50 dark:to-secondary-900/50 to-secondary/50 flex aspect-video w-full items-center justify-center rounded-[2.25vw] bg-linear-to-b text-sm text-white transition-shadow duration-300 select-none md:rounded-[1.25vw]'
 							>
 								{item.logo ? (
 									<span className='relative h-1/2 w-full'>

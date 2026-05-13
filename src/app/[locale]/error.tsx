@@ -22,7 +22,7 @@ const Error = memo(({ error, reset }: ErrorProps) => {
 
 	return (
 		<div className='relative flex min-h-dvh flex-col items-center justify-center overflow-hidden px-4'>
-			<div className='glow-blob-danger pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full' />
+			<div className='glow-blob-danger pointer-events-none absolute top-1/2 left-1/2 -translate-1/2 rounded-full' />
 			<div className='relative z-10 text-center'>
 				<p className='text-danger text-heading-xsmall tracking-[0.3em] uppercase'>{translateError('label')}</p>
 				<h1 className='font-cg text-dark mt-2 text-3xl leading-none font-medium sm:text-5xl dark:text-white'>{translateError('title')}</h1>

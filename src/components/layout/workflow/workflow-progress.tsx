@@ -33,7 +33,7 @@ const WorkflowProgress = memo(({ activeStep, stepProgress, isResetting, activeCo
 	return (
 		<div className='relative z-30 mt-4 pb-10 md:mt-6 md:pb-12'>
 			<div className='relative h-0.5 w-full'>
-				<div className='bg-secondary-200 dark:bg-secondary-700 absolute inset-0 h-full w-full' />
+				<div className='bg-secondary-200 dark:bg-secondary-700 absolute inset-0 size-full' />
 				<motion.div
 					initial={false}
 					animate={{ width: `${currentProgressPercent}%` }}
@@ -52,7 +52,7 @@ const WorkflowProgress = memo(({ activeStep, stepProgress, isResetting, activeCo
 							}}
 							onClick={() => onStepClick(index)}
 						>
-							<div className='absolute h-full w-full scale-0 rounded-full bg-white/5 opacity-0 transition-all group-hover:scale-110 group-hover:opacity-100' />
+							<div className='absolute size-full scale-0 rounded-full bg-white/5 opacity-0 transition-all group-hover:scale-110 group-hover:opacity-100' />
 							<motion.div
 								animate={{
 									color: !isResetting && activeStep >= index ? activeColor : inactiveColor,

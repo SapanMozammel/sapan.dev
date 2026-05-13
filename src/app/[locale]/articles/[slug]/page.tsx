@@ -66,7 +66,7 @@ const BlogDetailPage = async ({ params }: Props) => {
 	return (
 		<section className='relative z-1 pt-14 pb-16 sm:pt-20 sm:pb-24 lg:pb-32'>
 			<SectionSeparator lts rts lbs rbs tl bl ll rl>
-				<div className='container flex w-full grow flex-col items-center justify-start gap-4 sm:gap-5'>
+				<div className='container flex grow flex-col items-center justify-start gap-4 sm:gap-5'>
 					{/* Back navigation */}
 					<div className='w-full pt-6 sm:pt-10'>
 						<Link
@@ -80,7 +80,7 @@ const BlogDetailPage = async ({ params }: Props) => {
 					<div className='border-secondary-200/50 dark:border-secondary-700/50 relative w-full overflow-hidden rounded-2xl border bg-white shadow-lg shadow-black/5 dark:bg-black dark:shadow-white/5'>
 						<div className='relative h-56 w-full overflow-hidden sm:h-72 lg:h-96'>
 							<Image src={post.thumbnail} alt={post.title} fill sizes='(max-width: 768px) 100vw, 1200px' className='object-cover' placeholder='blur' blurDataURL={BLUR_PLACEHOLDER} priority quality={90} />
-							<div className='absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent' />
+							<div className='absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent' />
 							<span className={cn('font-hg absolute bottom-4 left-4 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest uppercase backdrop-blur-sm', categoryColor)}>{post.category}</span>
 						</div>
 						<div className='flex flex-col gap-5 p-6 sm:p-8 lg:p-10'>

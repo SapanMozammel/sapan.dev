@@ -118,11 +118,11 @@ const TestimonialBackground = memo<React.DetailedHTMLProps<React.AllHTMLAttribut
 	return (
 		<React.Fragment>
 			<div ref={containerRef} className={cn('section-separator pointer-events-none select-none', className)}>
-				<IconPlus stroke={6} className={cn(STAR_CLASSES, 'absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2')} />
+				<IconPlus stroke={6} className={cn(STAR_CLASSES, 'absolute top-0 left-0 -translate-1/2')} />
 				<IconPlus stroke={6} className={cn(STAR_CLASSES, 'absolute top-0 right-0 translate-x-1/2 -translate-y-1/2')} />
 				<IconPlus stroke={6} className={cn(STAR_CLASSES, 'absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/2')} />
-				<IconPlus stroke={6} className={cn(STAR_CLASSES, 'absolute right-0 bottom-0 translate-x-1/2 translate-y-1/2')} />
-				<div className='flex h-full w-full justify-between'>
+				<IconPlus stroke={6} className={cn(STAR_CLASSES, 'absolute right-0 bottom-0 translate-1/2')} />
+				<div className='flex size-full justify-between'>
 					{opacityValues.map((mv, i) => (
 						<div key={i} className={cn('group/line relative h-full w-px first:-translate-x-1/2 last:translate-x-1/2', 'text-secondary-400 dark:text-secondary-600')}>
 							<svg className='pointer-events-none absolute top-0 left-0 h-full w-px overflow-visible'>

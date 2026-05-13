@@ -34,7 +34,7 @@ const TooltipContent = React.memo<React.ComponentProps<typeof TooltipPrimitive.C
 				{...props}
 			>
 				{children}
-				<TooltipPrimitive.Arrow className='bg-primary dark:bg-success fill-primary dark:fill-success z-15 size-2.5 translate-y-[calc(-50%_-_2px)] rotate-45 rounded-[2px]' />
+				<TooltipPrimitive.Arrow className='bg-primary dark:bg-success fill-primary dark:fill-success z-15 size-2.5 translate-y-[calc(-50%-2px)] rotate-45 rounded-[2px]' />
 			</TooltipPrimitive.Content>
 		</TooltipPrimitive.Portal>
 	);
