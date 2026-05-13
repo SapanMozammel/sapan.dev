@@ -3,8 +3,6 @@ name: CI
 on:
   pull_request:
     branches: [main, dev]
-  push:
-    branches: [dev]
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -165,7 +163,6 @@ jobs:
     name: Mangled Build
     needs: build
     runs-on: ubuntu-latest
-    continue-on-error: true # Informational for the first 2 weeks; promote to blocking once stable
     steps:
       - uses: actions/checkout@v4
 
@@ -258,7 +255,6 @@ jobs:
     name: Lighthouse CI
     needs: build
     runs-on: ubuntu-latest
-    continue-on-error: true # Informational for the first 2 weeks; promote to blocking once stable
     steps:
       - uses: actions/checkout@v4
 

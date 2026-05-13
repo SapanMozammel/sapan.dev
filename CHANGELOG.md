@@ -5,7 +5,7 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.3.4] - 2026-05-13
+## [0.3.4] - 2026-05-14
 
 ### Added
 
@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **TubeOnAI removed from work history** — entry dropped from `EXPERIENCE_DATA` and propagated through all 16 `home.json` blog-reference bundles.
 - **Dependencies bumped to latest stable** — three batched bumps across patches/minors (Next 16.x, React 19 patches, Tailwind v4.3, Apollo 4.x, Playwright 1.60, Vitest 4.1, Tabler icons 3.44, next-intl 4.12, react-email 6.1, etc.).
 - **~100 canonical-class rewrites applied via the new ESLint Tailwind rules** — `bg-gradient-to-*` → `bg-linear-to-*` (27 instances across CTA + headers + blog card), `h-full w-full` → `size-full` (4 components), `[animation:..]` → `animate-[..]` (CTA background rays — 23 instances), `[background-color:color-mix(..)]` → `bg-[color-mix(..)]` (Dialog overlay), `translate-x-[-50%] translate-y-[-50%]` → `-translate-1/2` (Dialog content + CTA), `border-1` → `border` (cursor-tooltip, project-card). All semantically equivalent v4 canonical forms; no visual diff.
+- **CI auto-triggers trimmed to PR-only + advisory jobs promoted to blocking** — `.github/workflows/ci.yml` no longer fires on every push to `dev` (runs on PR open/update only, to fit the private-repo free Actions tier — full pipeline is ~31 Linux-min/run). `mangled-build` and `lighthouse` dropped their `continue-on-error: true` advisory flag and now block CI status on failure. Vercel deploys remain gated by `pnpm build:mangled` (per `vercel.json`'s build command), so a mangler regression can't reach production even via a manual merge of a red PR.
 
 ### Fixed
 
