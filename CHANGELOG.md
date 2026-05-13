@@ -39,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Missing `codeBlock` translation key in 15 non-EN `blog.json` files** — code-block UI controls (copy button label, language tag) fell back to English in every non-default locale; key added across all 15.
 - **Hidden type errors in tests** — `tsconfig.test.json` was not part of CI; wiring it in surfaced 5 latent type errors in test fixtures, all fixed.
+- **`pnpm run type:check` now validates all three tsconfigs** (`tsconfig.json` + `tsconfig.test.json` + `tsconfig.e2e.json`) — previously only validated the main config, so test- or e2e-only type regressions slipped through local `/push` / `/pr` quality gates and only surfaced in CI. The CI `typecheck` job collapses from 3 steps to 1 since the script now covers everything.
 
 ## [0.3.3] - 2026-04-27
 
