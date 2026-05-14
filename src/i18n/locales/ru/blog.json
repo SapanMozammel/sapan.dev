@@ -5,5 +5,11 @@
 		"page": "Страница {page}"
 	},
 	"backToList": "Все статьи",
-	"moreIn": "Ещё в категории {category}"
+	"moreIn": "Ещё в категории {category}",
+	"codeBlock": "Блок кода",
+	"callout": {
+		"info": "Инфо",
+		"warning": "Внимание",
+		"tip": "Совет"
+	}
 }

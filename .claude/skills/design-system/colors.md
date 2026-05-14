@@ -221,3 +221,11 @@ Stops: `--color-info` → `--color-success`
 | `fill-secondary-100/50` | `dark:fill-secondary-800/50` | World map background (Hero) |
 | `fill-info/80` | — | Performance circle text (both modes) |
 | `stroke-info` | — | Performance circle ring (both modes) |
+
+---
+
+## See also (external reference)
+
+Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
+
+- [`external/design/web-design-guidelines/`](../external/design/web-design-guidelines/) — a11y contrast standards (WCAG 2.1 AA), color-only state communication rules. Load before judging Priority 1 (a11y) findings on token-related changes.

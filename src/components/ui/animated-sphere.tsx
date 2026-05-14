@@ -136,7 +136,7 @@ const AnimatedSphere = memo(() => {
 		};
 	}, []);
 
-	return <canvas ref={canvasRef} aria-hidden className='block h-full w-full' />;
+	return <canvas ref={canvasRef} aria-hidden className='block size-full' />;
 });
 
 AnimatedSphere.displayName = 'AnimatedSphere';

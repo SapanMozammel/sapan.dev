@@ -78,3 +78,11 @@ What this feature does and why it's needed.
 - [⬜] pnpm run type:check
 - [⬜] pnpm run test (if logic/utilities were added or changed)
 ```
+
+---
+
+## See also (external reference)
+
+Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
+
+- [`external/nextjs/next-best-practices/`](../external/nextjs/next-best-practices/) — Next.js conventions, RSC boundaries, data patterns, route handlers, image/font optimization. Loaded automatically by `/plan` for any feature that touches Next.js routes or layouts.

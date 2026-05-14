@@ -1,8 +1,9 @@
 import { fontList } from '@/app/fonts';
-import HtmlLocaleSync from '@/components/layout/common/HtmlLocaleSync';
-import Footer from '@/components/layout/Footer';
-import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/footer';
+import Header from '@/components/layout/header';
 import { routing, RTL_LOCALES } from '@/i18n/routing';
+import ApolloWrapper from '@/lib/apollo/provider';
+import { cn } from '@/lib/utils';
 import Providers from '@/providers';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 		template: '%s | Sapan Mozammel',
 		default: 'Sapan Mozammel — Frontend Developer',
 	},
-	description: 'Frontend developer building digital experiences that matter — crafting modern, performant web applications with React, Next.js, TypeScript, and Node.js.',
+	description: 'Frontend Developer focused on React, Next.js, and TypeScript — building admin dashboards, SaaS FrontEnd, and WordPress plugin UIs with strict typing, accessibility, and Core Web Vitals as defaults.',
 	keywords: ['Sapan Mozammel', 'Frontend Developer', 'React Developer', 'Next.js Developer', 'TypeScript', 'Node.js', 'Tailwind CSS', 'GraphQL', 'MongoDB', 'WordPress', 'Web Development', 'Portfolio', 'Bangladesh'],
 	authors: [{ name: 'Sapan Mozammel', url: 'https://sapan-dev.vercel.app' }],
 	creator: 'Sapan Mozammel',
@@ -44,7 +45,8 @@ export const metadata: Metadata = {
 		siteName: 'Sapan Mozammel',
 		url: 'https://sapan-dev.vercel.app',
 		title: 'Sapan Mozammel — Frontend Developer',
-		description: 'Frontend developer building digital experiences that matter — crafting modern, performant web applications with React, Next.js, TypeScript, and Node.js.',
+		description:
+			'Frontend Developer focused on React, Next.js, and TypeScript — building admin dashboards, SaaS FrontEnd, and WordPress plugin UIs with strict typing, accessibility, and Core Web Vitals as defaults.',
 		images: [
 			{
 				url: '/og-image.png',
@@ -59,7 +61,8 @@ export const metadata: Metadata = {
 		site: '@sapan_mozammel',
 		creator: '@sapan_mozammel',
 		title: 'Sapan Mozammel — Frontend Developer',
-		description: 'Frontend developer building digital experiences that matter — crafting modern, performant web applications with React, Next.js, TypeScript, and Node.js.',
+		description:
+			'Frontend Developer focused on React, Next.js, and TypeScript — building admin dashboards, SaaS FrontEnd, and WordPress plugin UIs with strict typing, accessibility, and Core Web Vitals as defaults.',
 		images: ['/og-image.png'],
 	},
 };
@@ -101,18 +104,19 @@ const LocaleLayout = async ({ children, params }: LocaleLayoutProps) => {
 
 	return (
 		<html lang={locale} dir={isRTL ? 'rtl' : 'ltr'} suppressHydrationWarning className='relative'>
-			<body className={`${fontList} ${isRTL ? 'font-arabic' : 'font-dm'}`} suppressHydrationWarning>
+			<body className={cn(fontList, isRTL ? 'font-arabic' : 'font-dm')} suppressHydrationWarning>
 				<script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }} />
 				<Providers>
 					<NextIntlClientProvider messages={messages}>
-						<link rel='preconnect' href='https://challenges.cloudflare.com' />
-						<HtmlLocaleSync />
-						<div className='text-dark relative bg-white dark:bg-black dark:text-white'>
-							<Header />
-							<main className='relative -my-2.5 overflow-x-clip py-2.5'>{children}</main>
-							<Footer />
-							<div className="animate-noise pointer-events-none absolute inset-0 z-20 hidden bg-[url('/noise.png')] bg-repeat opacity-5 select-none lg:block dark:opacity-15" />
-						</div>
+						<ApolloWrapper>
+							<link rel='preconnect' href='https://challenges.cloudflare.com' />
+							<div className='text-dark relative bg-white dark:bg-black dark:text-white'>
+								<Header />
+								<main className='relative -my-2.5 overflow-x-clip py-2.5'>{children}</main>
+								<Footer />
+								<div className="animate-noise pointer-events-none absolute inset-0 z-20 hidden bg-[url('/noise.png')] bg-repeat opacity-5 select-none lg:block dark:opacity-15" />
+							</div>
+						</ApolloWrapper>
 					</NextIntlClientProvider>
 				</Providers>
 			</body>

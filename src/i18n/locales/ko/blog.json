@@ -5,5 +5,11 @@
 		"page": "{page} 페이지"
 	},
 	"backToList": "모든 게시물",
-	"moreIn": "{category}의 다른 글"
+	"moreIn": "{category}의 다른 글",
+	"codeBlock": "코드 블록",
+	"callout": {
+		"info": "정보",
+		"warning": "경고",
+		"tip": "팁"
+	}
 }

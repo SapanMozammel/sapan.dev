@@ -5,5 +5,11 @@
 		"page": "Sayfa {page}"
 	},
 	"backToList": "Tüm Makaleler",
-	"moreIn": "{category} kategorisinde daha fazlası"
+	"moreIn": "{category} kategorisinde daha fazlası",
+	"codeBlock": "Kod bloğu",
+	"callout": {
+		"info": "Bilgi",
+		"warning": "Uyarı",
+		"tip": "İpucu"
+	}
 }

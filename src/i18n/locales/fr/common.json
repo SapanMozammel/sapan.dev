@@ -37,6 +37,10 @@
 				"title": "Sujet",
 				"message": "Message"
 			},
+			"placeholders": {
+				"title": "par ex. refonte d'une landing page",
+				"message": "Parlez-moi de votre projet…"
+			},
 			"submit": "Envoyer le message"
 		},
 		"status": {

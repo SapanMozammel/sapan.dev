@@ -5,5 +5,11 @@
 		"page": "Side {page}"
 	},
 	"backToList": "Alle artikler",
-	"moreIn": "Mer i {category}"
+	"moreIn": "Mer i {category}",
+	"codeBlock": "Kodeblokk",
+	"callout": {
+		"info": "Info",
+		"warning": "Advarsel",
+		"tip": "Tips"
+	}
 }

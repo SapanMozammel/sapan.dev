@@ -1,7 +1,7 @@
 'use client';
 
-import SectionSeparator from '@/components/layout/common/SectionSeparator';
-import SectionTitle from '@/components/layout/common/SectionTitle';
+import SectionSeparator from '@/components/layout/common/section-separator';
+import SectionTitle from '@/components/layout/common/section-title';
 import BlogCard from '@/components/ui/blog-card';
 import { BLOG_POSTS, BLOGS_PER_PAGE } from '@/data/content/blogs';
 import { cn } from '@/lib/utils';
@@ -30,7 +30,7 @@ const BlogPage = memo(() => {
 	return (
 		<section className='relative z-1 pt-14 pb-16 sm:pt-20 sm:pb-24 lg:pb-32'>
 			<SectionSeparator lts rts lbs rbs tl bl ll rl>
-				<div className='container flex w-full grow flex-col items-center justify-start gap-4'>
+				<div className='container flex grow flex-col items-center justify-start gap-4'>
 					<SectionTitle subtitle={translate('subtitle')} title={translate('title')} watermark='Articles' />
 					<div className='mb-4 flex w-full flex-wrap justify-center gap-2'>
 						{ALL_CATEGORIES.map((cat) => (
@@ -44,7 +44,7 @@ const BlogPage = memo(() => {
 										: 'border-secondary-300 text-secondary-600 dark:text-secondary-400 hover:border-secondary-400 dark:border-secondary-700 dark:hover:border-secondary-600 hover:text-dark dark:hover:text-white'
 								)}
 							>
-								{cat}
+								{cat === 'All' ? translate('allCategories') : cat}
 							</button>
 						))}
 					</div>

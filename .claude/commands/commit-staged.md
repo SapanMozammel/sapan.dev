@@ -19,7 +19,7 @@ Steps Claude must follow:
 
 <optional body — what changed and why>
 
-Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 ```
 
 **Types:** `feat` (new feature), `fix` (bug fix), `refactor`, `chore`, `docs`, `test`, `style`

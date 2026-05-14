@@ -1,34 +1,73 @@
-# /commit [message?]
+---
+description: Smart commit assistant — drafts a focused message and commits staged + relevant unstaged changes
+allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git add:*), Bash(git commit:*), Bash(git rev-parse:*), Read, Grep, Glob
+---
 
-**Purpose:** Stage all changes and create a commit.
+# Commit
 
-Steps Claude must follow:
-1. Run `git status` to see all modified and untracked files
-2. Run `git diff` to review unstaged changes
-3. Run `git log --oneline -5` to match the repo's commit message style
-4. Analyze all changes — do NOT commit files that likely contain secrets (`.env`, credentials, etc.)
-5. Stage relevant files with `git add` — prefer specific file names over `git add -A`
-6. If `$ARGUMENTS` is provided, use it as the commit message
-7. If `$ARGUMENTS` is empty, draft a concise commit message (1-2 sentences) focusing on the "why" not the "what"
-8. Create the commit using a HEREDOC format, appending the co-author trailer
-9. Run `git status` after commit to verify success
-10. Report: commit hash, files committed, branch name
+## Input
 
-**Commit message format:**
-```
-<type>: <short description>
+Optional message hint: `$ARGUMENTS`
 
-<optional body — what changed and why>
+## Process
 
-Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>
-```
+1. **Run these in parallel:**
+   - `git status` (NEVER use `-uall` — large repos OOM)
+   - `git diff` (unstaged) and `git diff --staged` (staged)
+   - `git log -5 --oneline` to match the repo's commit-message voice
 
-**Types:** `feat` (new feature), `fix` (bug fix), `refactor`, `chore`, `docs`, `test`, `style`
+2. **Classify the change.** Pick ONE prefix:
+   - `feat:` — new user-facing capability
+   - `fix:` — bug fix
+   - `refactor:` — no behavior change
+   - `chore:` — deps, config, tooling, releases
+   - `docs:` — README / docs/ / CLAUDE.md / `.claude/plans/*/prd.md`
+   - `test:` — test-only changes
+   - `style:` — formatting only (rare; Prettier hook usually catches it before commit)
 
-**Rules:**
-- Never use `git add -A` or `git add .` — stage specific files
-- Never amend previous commits unless explicitly asked
-- Never skip hooks (`--no-verify`)
-- Never push unless explicitly asked
-- If pre-commit hook fails, fix the issue and create a NEW commit
-- Warn if staging files that may contain secrets
+3. **Draft a 1–2 sentence message that explains WHY, not WHAT.** The diff already shows what.
+   - Bad: `update Hero component`
+   - Good: `fix(hero): mount canvas on iPad Safari by deferring R3F initialization to a useLayoutEffect post-mount guard`
+
+4. **Stage only files that belong to this logical change — by name.** NEVER `git add -A` or `git add .`.
+   - Group related files. If the diff spans unrelated changes, **stop and ask** whether to split into multiple commits.
+
+5. **Before staging, scan for secrets.** Refuse and STOP if any of these are about to be committed:
+   - `.env`, `.env.*` (except `.env.example`)
+   - `*credentials*`, `*.pem`, `*.key`, `*.p12`
+   - Any file containing `BEGIN RSA PRIVATE KEY`, `aws_secret_access_key`, `STRIPE_SECRET`, `JWT_SECRET`, `RESEND_API_KEY`, `TURNSTILE_SECRET_KEY`, `UPSTASH_REDIS_REST_TOKEN`, or any sapan env var that's NOT prefixed with `NEXT_PUBLIC_`
+   - If the user explicitly asks to commit one of these, **ask once more** with the file list spelled out before proceeding.
+
+6. **Commit with a HEREDOC** so the body formats correctly:
+
+   ```bash
+   git commit -m "$(cat <<'EOF'
+   <type>(<scope>): <short subject under 72 chars>
+
+   <optional 1-2 sentence body explaining the WHY>
+
+   Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+   EOF
+   )"
+   ```
+
+7. **Run `git status` after the commit** to confirm the working tree state.
+
+8. **Report:** commit hash, files committed, branch name.
+
+## Hard rules — DO NOT BREAK
+
+- **Never `--no-verify`.** If a pre-commit / Husky / lint-staged / Prettier hook fails, the commit did NOT happen. Fix the underlying issue, re-stage, and create a NEW commit. **Do not `--amend`** — there is nothing to amend onto for a failed commit, and you'd silently mutate the previous commit instead.
+- **Never `--no-gpg-sign` / `-c commit.gpgsign=false`** unless the user explicitly asks for it.
+- **Never edit `git config`** — global or local.
+- **Never commit secrets** (see step 5). Stop and ask.
+- **Never use `git add -A` / `git add .`** — always name files explicitly so unrelated work-in-progress files don't sneak in.
+- If there is nothing to commit (no staged changes and no untracked files relevant to the hint), say so and stop. Do not create empty commits.
+
+## Notes
+
+- **Co-author trailer:** `Claude Opus 4.7 (1M context) <noreply@anthropic.com>` — current sapan convention. The trailer is always appended; never replace it.
+- This project uses **pnpm**. Hooks (Prettier via PostToolUse in `.claude/settings.json`, lint-staged when introduced) run via pnpm — never substitute npm/npx.
+- **Sapan scope conventions** (use as the `<scope>` in `<type>(<scope>):`): `hero`, `header`, `footer`, `portfolio`, `experience`, `testimonials`, `workflow`, `blog`, `faq`, `articles`, `contact`, `i18n`, `theme`, `seo`, `a11y`, `animation`, `tokens`, `redux`, `data`, `routing`, `tests`, `docs`, `deps`, `tooling`, `release`. Match an existing one when the change fits; introduce a new one only when none apply.
+- If `$ARGUMENTS` is provided, treat it as a hint for the subject line — but still rewrite to focus on WHY and conform to the prefix conventions above.
+- Scope is optional — `feat: ship Hashnode-driven blog feed` is fine when the change is broad enough that a single scope would mislead.

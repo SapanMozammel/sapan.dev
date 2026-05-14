@@ -1,10 +1,13 @@
 'use client';
 
 import { store } from '@/store';
-import type { ProvidersProps } from '@/types/providers';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { memo } from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
+
+type ProvidersProps = {
+	children: React.ReactNode;
+};
 
 // Move static theme provider props outside component to prevent recreation
 const THEME_PROVIDER_PROPS = {

@@ -1,9 +1,9 @@
 {
 	"hero": {
-		"srTitle": "你好，我是 Sapan Mozammel，一名全栈前端开发工程师。",
-		"headingPrefix": "用每一行",
-		"headingSuffix": "，塑造 Web 开发的未来。",
-		"description": "凭借 6 年以上使用 React、Redux、GraphQL、Next.js、Three.js、Node.js 等技术构建应用程序的丰富经验，我始终遵循工程最佳实践，以编写整洁、可维护的代码为荣。"
+		"headingPrefix": "前端工程师，专注于使用 React、",
+		"headingHighlight": "Next.js",
+		"headingSuffix": " 与 TypeScript 构建可扩展、高性能的 Web 应用程序。",
+		"description": "使用 React、Next.js 和 TypeScript 构建可扩展的管理后台、SaaS 前端和插件 UI —— 专注于性能和整洁、可维护的架构，背后是 6 年以上的前端经验。开放远程职位。"
 	},
 	"technologies": {
 		"subtitle": "技术栈",
@@ -32,13 +32,14 @@
 	"blog": {
 		"subtitle": "博客",
 		"title": "前端开发随笔",
-		"viewAll": "查看所有文章"
+		"viewAll": "查看所有文章",
+		"allCategories": "全部"
 	},
 	"cta": {
-		"heading": "有项目想法吗？",
-		"headingAccent": "让我们一起来实现它。",
-		"description": "无论您需要完整的产品、落地页，还是想探索新想法 —— 我都乐于协作。",
-		"availability": "随时为您的下一个项目待命",
-		"location": "坐标孟加拉国达卡，服务全球。"
+		"heading": "在招聘，还是在打造产品？",
+		"headingAccent": "两种合作我都欢迎。",
+		"description": "欢迎全职远程岗位、合同制项目以及短期合作。给我留言 —— 我会尽快回复。",
+		"availability": "欢迎远程合作机会",
+		"location": "坐标孟加拉国达卡 · UTC+6"
 	}
 }

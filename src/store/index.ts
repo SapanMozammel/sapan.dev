@@ -1,9 +1,10 @@
 import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit';
-import { LOCALE_STORAGE_KEY, localeReducer, uiReducer } from './slices';
-import { setLocale } from './slices/localeSlice';
+import localeReducer, { LOCALE_STORAGE_KEY, setLocale } from './slices/locale-slice';
+import uiReducer from './slices/ui-slice';
 
 const listenerMiddleware = createListenerMiddleware();
 
+// Persist locale to localStorage on setLocale dispatch — middleware (not store.subscribe()) so it runs once per action and stays out of the render path.
 listenerMiddleware.startListening({
 	actionCreator: setLocale,
 	effect: (action) => {

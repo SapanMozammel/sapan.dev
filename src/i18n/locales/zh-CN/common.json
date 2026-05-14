@@ -37,6 +37,10 @@
 				"title": "标题",
 				"message": "留言"
 			},
+			"placeholders": {
+				"title": "例如：着陆页重新设计",
+				"message": "告诉我关于您的项目..."
+			},
 			"submit": "发送消息"
 		},
 		"status": {

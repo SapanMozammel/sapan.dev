@@ -5,5 +5,11 @@
 		"page": "صفحة {page}"
 	},
 	"backToList": "جميع المقالات",
-	"moreIn": "المزيد في {category}"
+	"moreIn": "المزيد في {category}",
+	"codeBlock": "كتلة برمجية",
+	"callout": {
+		"info": "معلومة",
+		"warning": "تحذير",
+		"tip": "نصيحة"
+	}
 }

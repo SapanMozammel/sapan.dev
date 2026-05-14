@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Guide for running translation-coverage audits. Used by `/audit-i18n` and referenced whenever the codebase grows new user-facing strings.
+Guide for running translation-coverage audits. Used by `/review-i18n` and referenced whenever the codebase grows new user-facing strings.
 
 ## Stack + layout
 
@@ -224,7 +224,15 @@ Each PRD follows the workflow convention:
 
 ## Related commands
 
-- `/audit-i18n` — this audit
+- `/review-i18n` — this audit
 - `/translate [locale?]` — propagate English changes to other locales
 - `/implement missing-translations-audit` — apply PRD 1 fixes
-- `/audit [file?]` — generic design system / architecture audit (not i18n)
+- `/review [file?]` — generic design system / architecture review (not i18n)
+
+---
+
+## See also (external reference)
+
+Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
+
+- [`external/testing/playwright-best-practices/`](../external/testing/playwright-best-practices/) — i18n + locale testing patterns (browser-level Playwright tests). Sapan's `/review-i18n` runs translation-parity audits via Vitest + Node scripts; Playwright `e2e/i18n.spec.ts` adds the runtime-rendered locale verification.

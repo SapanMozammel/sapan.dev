@@ -217,16 +217,18 @@ Full-page status/error pages use a centered radial glow blob for visual depth. N
 
 | What | Where |
 |---|---|
-| Page sections | `src/components/layout/{SectionName}/index.tsx` |
-| Sub-components | `src/components/layout/{SectionName}/{SubComponent}.tsx` |
+| Page sections | `src/components/layout/{section-name}/index.tsx` |
+| Sub-components | `src/components/layout/{section-name}/{sub-component}.tsx` |
 | Shared layout pieces | `src/components/layout/common/` |
 | Base UI (shadcn + custom) | `src/components/ui/` |
-| Custom icons | `src/components/icons/` |
+| Custom icons | `src/components/icons/` (`projects/<brand>/logo.tsx` for project logos) |
 | Static content | `src/data/content/` |
 | App config | `src/data/config/` |
 | Type definitions | `src/types/` |
 | Utilities | `src/lib/utils/` |
 | Styles | `src/styles/` |
+
+**Filename casing.** Every file and folder name is **kebab-case** (`hero-background.tsx`, `cta-logo.tsx`, `notification-x/logo.tsx`, `use-contact-form.ts`, `locale-slice.ts`). React component identifiers (the exported symbol) stay PascalCase. `index.tsx` is the entry file inside any folder unit. Locale folders (`pt-BR`, `zh-CN`) follow BCP-47 and are exempt; Next.js route segments (`[locale]`, `[slug]`, `(landing)`) follow App Router syntax and are exempt.
 
 ---
 
@@ -245,3 +247,18 @@ Before writing or modifying any component:
 - [ ] `type Props = { ... }` — never `interface`
 - [ ] No `any` types
 - [ ] `export default ComponentName` at the bottom — never both `export const` and `export default` for the same component
+
+---
+
+## See also
+
+For e2e enforcement of server/client boundaries (reduced-motion default, RSC routes don't await client JS for first paint), see [`../workflow/e2e.md`](../workflow/e2e.md).
+
+### External reference
+
+Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
+
+- [`workflow/no-use-effect.md`](../workflow/no-use-effect.md) — strict no-direct-`useEffect` rule (ALWAYS ACTIVE; sapan-canonical, the 6-rule guide for derived state, event handlers, `useMemo`, `useSyncExternalStore`, key-based reset, `useMountEffect`)
+- [`workflow/tailwind-mangle.md`](../workflow/tailwind-mangle.md) — production class mangling. The `cn()` mandate above is what makes this safe: any non-`cn()` className composition (template literal, string concat, runtime-computed) silently breaks the prod build. Auto-detects runtime `classList.*` reservations.
+- [`external/react/react-best-practices/`](../external/react/react-best-practices/) — TSX quality checklist (component structure, hooks, a11y, perf, TS)
+- [`external/nextjs/nextjs-app-router-patterns/`](../external/nextjs/nextjs-app-router-patterns/) — advanced patterns (Server Components, streaming, parallel routes)

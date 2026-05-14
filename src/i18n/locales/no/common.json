@@ -37,6 +37,10 @@
 				"title": "Tittel",
 				"message": "Melding"
 			},
+			"placeholders": {
+				"title": "F.eks. redesign av landingsside",
+				"message": "Fortell meg om prosjektet ditt …"
+			},
 			"submit": "Send melding"
 		},
 		"status": {

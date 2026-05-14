@@ -1,8 +1,8 @@
 import type { AboutData } from '@/types/about';
 
 export const ABOUT_DATA: AboutData = {
-	bio: 'Product-minded frontend developer shipping React, Next.js, and TypeScript applications for SaaS, AI, and developer-tool companies. Experienced designing v1 frontend foundations, re-architecting complex admin panels, and integrating REST/GraphQL APIs with strict typing, accessibility, and performance discipline.',
-	availability: 'Available · Full-time Remote · EOR / Contractor-friendly · 30-day notice',
+	bio: 'Frontend Developer working in React, Next.js, and TypeScript. I build admin dashboards, SaaS Frontend, and WordPress plugin UIs — including v1 frontend foundations and re-architectures of complex admin panels across products used by 6M+ users in 180+ countries. Strict typing, accessibility (WCAG, ARIA, RTL), and Core Web Vitals are standard expectations, not extras.',
+	availability: 'Open to full-time remote · EOR or contractor · 30-day notice',
 	quickFacts: [
 		{ id: 'legalName', label: 'Legal name', value: 'Mozammel Ali' },
 		{ id: 'location', label: 'Location', value: 'Dhaka, Bangladesh' },
@@ -13,11 +13,11 @@ export const ABOUT_DATA: AboutData = {
 	industries: ['SaaS', 'AI', 'Developer Tools', 'WordPress', 'Cloud Hosting', 'Recruiting'],
 	strengths: [
 		'Frontend architecture & design systems',
+		'Production-grade TypeScript',
 		'Performance & Core Web Vitals',
 		'Accessibility (WCAG, ARIA, RTL)',
-		'Figma → code with pixel fidelity',
+		'Pixel-perfect design implementation',
 		'Async remote collaboration',
-		'Clean, typed, maintainable code',
 	],
 	socials: [
 		{ id: 'email', label: 'Email', href: 'mailto:sapanmozammel@gmail.com' },
@@ -28,28 +28,28 @@ export const ABOUT_DATA: AboutData = {
 	skillGroups: [
 		{
 			id: 'core',
-			label: 'Core',
-			items: ['React 19', 'Next.js 16', 'TypeScript', 'Vue.js', 'Redux Toolkit', 'React Query'],
+			label: 'Core Frontend',
+			items: ['React 19', 'Next.js 16', 'TypeScript', 'Vue.js'],
 		},
 		{
 			id: 'apis',
-			label: 'APIs & Data',
-			items: ['GraphQL', 'REST APIs', 'Zod', 'React Hook Form', 'Prisma', 'Firebase'],
+			label: 'State & Data',
+			items: ['Redux Toolkit', 'React Query', 'GraphQL', 'REST APIs', 'Zod', 'React Hook Form', 'Prisma', 'Firebase'],
 		},
 		{
 			id: 'styling',
-			label: 'Styling & UI',
+			label: 'UI & Styling',
 			items: ['Tailwind CSS', 'SCSS', 'shadcn/ui', 'Framer Motion', 'GSAP', 'Three.js'],
 		},
 		{
 			id: 'ops',
-			label: 'Testing & Ops',
-			items: ['Jest', 'Playwright', 'Vitest', 'Vercel', 'Docker', 'CI/CD'],
+			label: 'Testing & Tooling',
+			items: ['Vitest', 'Playwright', 'Jest', 'Vercel', 'Docker', 'CI/CD'],
 		},
 		{
 			id: 'practice',
-			label: 'Practice',
-			items: ['Accessibility (WCAG, ARIA, RTL)', 'i18n', 'Core Web Vitals', 'Design systems'],
+			label: 'Engineering Practice',
+			items: ['Accessibility (WCAG, ARIA, RTL)', 'Performance & Core Web Vitals', 'Design systems', 'i18n'],
 		},
 	],
 	languages: [

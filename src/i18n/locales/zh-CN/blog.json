@@ -5,5 +5,11 @@
 		"page": "第 {page} 页"
 	},
 	"backToList": "全部文章",
-	"moreIn": "{category}的更多内容"
+	"moreIn": "{category}的更多内容",
+	"codeBlock": "代码块",
+	"callout": {
+		"info": "信息",
+		"warning": "警告",
+		"tip": "提示"
+	}
 }

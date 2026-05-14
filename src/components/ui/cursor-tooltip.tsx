@@ -1,13 +1,32 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import type { CursorTooltipProps, Position, TooltipContentProps } from '@/types/cursor-tooltip';
 import { AnimatePresence, motion, useSpring } from 'framer-motion';
 import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
+type CursorTooltipProps = {
+	children: React.ReactNode;
+	content: React.ReactNode;
+	className?: string;
+	offset?: { x: number; y: number };
+	/** Custom class for tooltip content when content is a string */
+	contentClassName?: string;
+	onClick?: () => void;
+};
+
+type Position = {
+	x: number;
+	y: number;
+};
+
+type TooltipContentProps = {
+	children: React.ReactNode;
+	className?: string;
+};
+
 export const TooltipContent = memo<TooltipContentProps>(({ children, className }) => (
-	<div className={cn('bg-primary/80 border-primary dark:border-success dark:bg-success/80 dark:text-dark pointer-events-none rounded-2xl border-1 border-solid px-3 py-2 text-sm text-white', className)}>{children}</div>
+	<div className={cn('bg-primary/80 border-primary dark:border-success dark:bg-success/80 dark:text-dark pointer-events-none rounded-2xl border border-solid px-3 py-2 text-sm text-white', className)}>{children}</div>
 ));
 TooltipContent.displayName = 'TooltipContent';
 

@@ -1,9 +1,9 @@
 {
 	"hero": {
-		"srTitle": "Bonjour, je suis Sapan Mozammel, développeur frontend fullstack.",
-		"headingPrefix": "Avec chaque ligne de",
-		"headingSuffix": ", je façonne l'avenir du développement web.",
-		"description": "Avec plus de 6 ans d'expérience dynamique dans la création d'applications avec React, Redux, GraphQL, Next.js, Three.js, Node.js et bien d'autres, je suis fier d'écrire un code propre et maintenable, en respectant les meilleures pratiques d'ingénierie."
+		"headingPrefix": "Développeur frontend spécialisé dans la création d'applications web performantes et évolutives avec React, ",
+		"headingHighlight": "Next.js",
+		"headingSuffix": " et TypeScript",
+		"description": "Création de tableaux de bord d'administration évolutifs, de frontends SaaS et d'interfaces de plugins avec React, Next.js et TypeScript — axé sur la performance et une architecture propre et maintenable, fort de plus de 6 ans d'expérience frontend. Disponible pour des postes en télétravail."
 	},
 	"technologies": {
 		"subtitle": "Technologies",
@@ -32,13 +32,14 @@
 	"blog": {
 		"subtitle": "Blog",
 		"title": "Réflexions sur le frontend",
-		"viewAll": "Voir tous les articles"
+		"viewAll": "Voir tous les articles",
+		"allCategories": "Toutes"
 	},
 	"cta": {
-		"heading": "Un projet en tête ?",
-		"headingAccent": "Construisons-le ensemble.",
-		"description": "Que vous ayez besoin d'un produit complet, d'une landing page ou simplement d'explorer des idées — je suis là pour collaborer.",
-		"availability": "Disponible pour votre prochain projet",
-		"location": "Basé à Dhaka, Bangladesh. Livraison mondiale."
+		"heading": "Vous recrutez ou vous construisez quelque chose ?",
+		"headingAccent": "Je suis disponible pour les deux.",
+		"description": "Ouvert aux postes à temps plein en télétravail, aux missions et aux engagements courts. Envoyez-moi un message — je vous répondrai dans les plus brefs délais.",
+		"availability": "Ouvert aux postes en télétravail",
+		"location": "Basé à Dhaka, Bangladesh · UTC+6"
 	}
 }

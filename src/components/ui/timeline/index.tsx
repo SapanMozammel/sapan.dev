@@ -5,8 +5,8 @@ import type { TimelineProps } from '@/types/experience';
 import { useScroll } from 'framer-motion';
 import { memo, useEffect, useRef, useState } from 'react';
 
-import TimelineItem from './TimelineItem';
-import TimelineProgressBar from './TimelineProgressBar';
+import TimelineItem from './timeline-item';
+import TimelineProgressBar from './timeline-progress-bar';
 
 const Timeline = memo<TimelineProps>(({ items, className }) => {
 	const timelineRef = useRef<HTMLDivElement>(null);

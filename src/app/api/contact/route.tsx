@@ -1,9 +1,10 @@
-import ContactAdminEmail from '@/emails/ContactAdminEmail';
-import ContactAutoReply from '@/emails/ContactAutoReply';
-import { ratelimit } from '@/lib/contact/ratelimit';
-import { resend } from '@/lib/contact/resend';
+import ContactAdminEmail from '@/emails/contact-admin-email';
+import ContactAutoReply from '@/emails/contact-auto-reply';
+import { getRatelimit } from '@/lib/contact/ratelimit';
+import { getResend } from '@/lib/contact/resend';
 import { contactSchema } from '@/lib/contact/schema';
 import { verifyTurnstile } from '@/lib/contact/turnstile';
+import { env } from '@/lib/env.server';
 import { NextResponse } from 'next/server';
 
 export const runtime = 'nodejs';
@@ -27,7 +28,7 @@ export const POST = async (req: Request) => {
 
 	const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || req.headers.get('x-real-ip') || 'anonymous';
 
-	const { success: withinLimit } = await ratelimit.limit(ip);
+	const { success: withinLimit } = await getRatelimit().limit(ip);
 	if (!withinLimit) {
 		return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
 	}
@@ -44,9 +45,9 @@ export const POST = async (req: Request) => {
 	}
 	const { name, email, title, message } = parsed.data;
 
-	const toEmail = process.env.CONTACT_TO_EMAIL!;
-	const fromEmail = process.env.CONTACT_FROM_EMAIL!;
-	const replyTo = process.env.CONTACT_REPLY_TO!;
+	const { CONTACT_TO_EMAIL: toEmail, CONTACT_FROM_EMAIL: fromEmail, CONTACT_REPLY_TO: replyTo } = env;
+
+	const resend = getResend();
 
 	const adminResult = await resend.emails.send({
 		from: `"Contact Form" <${fromEmail}>`,

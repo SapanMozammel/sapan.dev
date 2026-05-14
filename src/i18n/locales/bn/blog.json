@@ -5,5 +5,11 @@
 		"page": "পৃষ্ঠা {page}"
 	},
 	"backToList": "সব নিবন্ধ",
-	"moreIn": "{category}-এ আরও"
+	"moreIn": "{category}-এ আরও",
+	"codeBlock": "কোড ব্লক",
+	"callout": {
+		"info": "তথ্য",
+		"warning": "সতর্কতা",
+		"tip": "টিপ"
+	}
 }

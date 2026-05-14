@@ -5,5 +5,11 @@
 		"page": "{page} ページ"
 	},
 	"backToList": "すべての記事",
-	"moreIn": "{category}の他の記事"
+	"moreIn": "{category}の他の記事",
+	"codeBlock": "コードブロック",
+	"callout": {
+		"info": "情報",
+		"warning": "警告",
+		"tip": "ヒント"
+	}
 }

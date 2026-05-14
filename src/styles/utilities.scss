@@ -12,40 +12,40 @@
 
 // ── Typography Utilities ───────────────────────────────────────
 @utility text-heading-xlarge {
-	@apply font-hg text-3xl !leading-tight font-bold sm:text-4xl lg:text-5xl;
+	@apply font-hg text-3xl leading-tight! font-bold sm:text-4xl lg:text-5xl;
 }
 
 @utility text-heading-large {
-	@apply font-cg text-2xl !leading-tight font-medium sm:text-3xl lg:text-5xl;
+	@apply font-cg text-2xl leading-tight! font-medium sm:text-3xl lg:text-5xl;
 }
 
 @utility text-heading-medium {
-	@apply font-cg text-2xl !leading-tight font-medium sm:text-3xl lg:text-4xl;
+	@apply font-cg text-2xl leading-tight! font-medium sm:text-3xl lg:text-4xl;
 }
 
 @utility text-heading-medium-alt {
-	@apply font-hg text-xl !leading-tight font-medium sm:text-2xl lg:text-3xl;
+	@apply font-hg text-xl leading-tight! font-medium sm:text-2xl lg:text-3xl;
 }
 
 @utility text-heading-small {
-	@apply font-hg text-base !leading-snug font-medium sm:text-lg;
+	@apply font-hg text-base leading-snug! font-medium sm:text-lg;
 }
 
 @utility text-heading-small-alt {
-	@apply font-hg text-sm !leading-snug font-medium sm:text-base;
+	@apply font-hg text-sm leading-snug! font-medium sm:text-base;
 }
 
 @utility text-heading-xsmall {
-	@apply font-hg text-xs !leading-none font-bold sm:text-sm;
+	@apply font-hg text-xs leading-none! font-bold sm:text-sm;
 }
 
 // Body
 @utility text-paragraph-medium {
-	@apply font-dm text-sm !leading-relaxed font-normal sm:text-base;
+	@apply font-dm text-sm leading-relaxed! font-normal sm:text-base;
 }
 
 @utility text-paragraph-small {
-	@apply font-dm text-xs !leading-relaxed font-normal sm:text-sm;
+	@apply font-dm text-xs leading-relaxed! font-normal sm:text-sm;
 }
 
 // ── Glow Blob Utilities ────────────────────────────────────────

@@ -5,5 +5,11 @@
 		"page": "पृष्ठ {page}"
 	},
 	"backToList": "सभी लेख",
-	"moreIn": "{category} में और"
+	"moreIn": "{category} में और",
+	"codeBlock": "कोड ब्लॉक",
+	"callout": {
+		"info": "जानकारी",
+		"warning": "चेतावनी",
+		"tip": "सुझाव"
+	}
 }

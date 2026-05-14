@@ -69,3 +69,15 @@ Custom `@utility` blocks in `src/styles/utilities.scss` bundle font family + siz
 | Watermarks | `text-5xl sm:text-7xl` |
 
 Always use mobile-first breakpoints (`sm:`, `md:`, `lg:`) — no bare large sizes without a smaller default.
+
+---
+
+## See also
+
+- [`workflow/tailwind-mangle.md`](../workflow/tailwind-mangle.md) — sapan's custom `@utility` classes (`text-heading-xlarge`, `text-paragraph-medium`, `font-cg`, etc.) get mangled to `tw-X` in production. The mangler auto-discovers them from emitted CSS — no special registration. Note: `font-dm` and `font-arabic` are runtime-toggled on `<body>` via `classList.toggle`, so they are auto-reserved by the mangler and keep their original names.
+
+## See also (external reference)
+
+Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
+
+- [`external/design/frontend-design/`](../external/design/frontend-design/) — production-grade visual quality, anti-generic-AI aesthetics, type-pairing patterns. Sapan's font registry (`font-dm`/`font-hg`/`font-cg`/`font-bungee`/`font-arabic`) is closed; load this skill for general typography principles, not for adding fonts.

@@ -15,7 +15,7 @@ const AccordionItem = memo<AccordionItemProps>(({ question, answer, isOpen, onTo
 			<div
 				aria-hidden
 				className={cn(
-					'animate-faq-border-shift pointer-events-none absolute -inset-px rounded-[calc(theme(borderRadius.2xl)+theme(spacing.px))] bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-success)_35%,var(--color-primary)_65%,var(--color-success)_100%)] [background-size:300%_300%] opacity-0 transition-opacity duration-500',
+					'animate-faq-border-shift pointer-events-none absolute -inset-px rounded-[calc(theme(borderRadius.2xl)+theme(spacing.px))] bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-success)_35%,var(--color-primary)_65%,var(--color-success)_100%)] bg-size-[300%_300%] opacity-0 transition-opacity duration-500',
 					isOpen && 'opacity-100'
 				)}
 			/>
@@ -33,8 +33,8 @@ const AccordionItem = memo<AccordionItemProps>(({ question, answer, isOpen, onTo
 					<span
 						className={cn(
 							'relative inline-flex aspect-square h-6 shrink-0 items-center justify-center',
-							'before:bg-primary dark:before:bg-success before:absolute before:top-1/2 before:left-1/2 before:inline-flex before:h-0.5 before:w-4 before:origin-center before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full before:transition before:duration-300',
-							'after:bg-primary dark:after:bg-success after:absolute after:top-1/2 after:left-1/2 after:inline-flex after:h-0.5 after:w-4 after:origin-center after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-full after:transition after:duration-300',
+							'before:bg-primary dark:before:bg-success before:absolute before:top-1/2 before:left-1/2 before:inline-flex before:h-0.5 before:w-4 before:origin-center before:-translate-1/2 before:rounded-full before:transition before:duration-300',
+							'after:bg-primary dark:after:bg-success after:absolute after:top-1/2 after:left-1/2 after:inline-flex after:h-0.5 after:w-4 after:origin-center after:-translate-1/2 after:rounded-full after:transition after:duration-300',
 							isOpen ? 'before:rotate-0 after:rotate-0' : 'before:-rotate-180 after:-rotate-90'
 						)}
 					/>

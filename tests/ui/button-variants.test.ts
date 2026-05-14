@@ -1,4 +1,4 @@
-import { getVariantConfig } from '@/components/layout/common/Button/variants';
+import { getVariantConfig } from '@/components/layout/common/button/variants';
 import { describe, expect, it } from 'vitest';
 
 describe('getVariantConfig', () => {

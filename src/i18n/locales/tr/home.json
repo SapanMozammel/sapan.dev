@@ -1,9 +1,9 @@
 {
 	"hero": {
-		"srTitle": "Merhaba, ben Sapan Mozammel, fullstack frontend geliştiricisiyim.",
-		"headingPrefix": "Her satır",
-		"headingSuffix": " ile web geliştirmenin geleceğini şekillendiriyorum.",
-		"description": "React, Redux, GraphQL, Next.js, Three.js, Node.js ve daha pek çok teknolojiyle uygulamalar geliştirdiğim 6+ yıllık dinamik deneyimimle, mühendislik en iyi uygulamalarına bağlı kalarak temiz ve sürdürülebilir kod yazmaktan gurur duyuyorum."
+		"headingPrefix": "React, ",
+		"headingHighlight": "Next.js",
+		"headingSuffix": " ve TypeScript ile ölçeklenebilir, yüksek performanslı web uygulamaları geliştirmeye odaklanan Frontend Mühendisi",
+		"description": "React, Next.js ve TypeScript ile ölçeklenebilir yönetim panelleri, SaaS frontend'leri ve plugin UI'ları geliştiriyorum — performans ve temiz, sürdürülebilir mimariye odaklanarak; 6+ yıllık frontend deneyimine dayanarak. Uzaktan çalışmaya açığım."
 	},
 	"technologies": {
 		"subtitle": "Teknolojiler",
@@ -32,13 +32,14 @@
 	"blog": {
 		"subtitle": "Blog",
 		"title": "Frontend Üzerine Düşünceler",
-		"viewAll": "Tüm makaleleri görüntüle"
+		"viewAll": "Tüm makaleleri görüntüle",
+		"allCategories": "Tümü"
 	},
 	"cta": {
-		"heading": "Aklınızda bir proje mi var?",
-		"headingAccent": "Hadi birlikte hayata geçirelim.",
-		"description": "İster tam bir ürün, ister bir açılış sayfası, ister yalnızca fikir alışverişi — iş birliği için buradayım.",
-		"availability": "Bir sonraki projeniz için hazırım",
-		"location": "Dakka, Bangladeş merkezli. Dünya çapında hizmet veriyorum."
+		"heading": "İşe alıyor musunuz veya bir şey mi geliştiriyorsunuz?",
+		"headingAccent": "Her ikisi için de müsaitim.",
+		"description": "Tam zamanlı uzaktan rollere, sözleşmeli işlere ve kısa süreli görevlere açığım. Bir mesaj bırakın — en kısa sürede yanıt vereceğim.",
+		"availability": "Uzaktan çalışma rollerine açığım",
+		"location": "Dakka, Bangladeş merkezli · UTC+6"
 	}
 }

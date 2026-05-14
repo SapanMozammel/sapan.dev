@@ -37,6 +37,10 @@
 				"title": "Titel",
 				"message": "Bericht"
 			},
+			"placeholders": {
+				"title": "Bijv. landing page redesign",
+				"message": "Vertel me over je project..."
+			},
 			"submit": "Bericht verzenden"
 		},
 		"status": {

@@ -67,3 +67,16 @@ import { render } from '../test-utils'
 - Never mock internal utilities — mock only at system boundaries (fetch, localStorage, router)
 - Fix the real issue — do not delete or skip failing tests
 - Do not widen types to silence errors
+
+---
+
+## See also
+
+For Playwright e2e conventions, see [`e2e.md`](./e2e.md) — sapan-canonical project matrix, fixture catalog, wait strategy, and mock-everything-external rule. Vitest+RTL conventions in this file remain authoritative for unit/component tests.
+
+### External reference
+
+Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
+
+- [`external/testing/playwright-best-practices/`](../external/testing/playwright-best-practices/) — Playwright fundamentals (POM, fixtures, mocking via `page.route()`, axe-core a11y, visual regression, console-error monitoring). **Load only when writing Playwright e2e specs.** Cited from `workflow/e2e.md`.
+- [`external/testing/e2e-testing-patterns/`](../external/testing/e2e-testing-patterns/) — patterns reference (selector strategy, fixture composition, parallelism, flake mitigation). Pair with `playwright-best-practices`.

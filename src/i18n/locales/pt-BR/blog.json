@@ -5,5 +5,11 @@
 		"page": "Página {page}"
 	},
 	"backToList": "Todos os artigos",
-	"moreIn": "Mais em {category}"
+	"moreIn": "Mais em {category}",
+	"codeBlock": "Bloco de código",
+	"callout": {
+		"info": "Info",
+		"warning": "Atenção",
+		"tip": "Dica"
+	}
 }

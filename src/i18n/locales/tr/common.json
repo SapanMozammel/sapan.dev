@@ -37,6 +37,10 @@
 				"title": "Başlık",
 				"message": "Mesaj"
 			},
+			"placeholders": {
+				"title": "Örn. Landing page yeniden tasarımı",
+				"message": "Projeniz hakkında bilgi verin..."
+			},
 			"submit": "Mesaj Gönder"
 		},
 		"status": {

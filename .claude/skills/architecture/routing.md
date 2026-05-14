@@ -107,3 +107,15 @@ All routes use `generateStaticParams()` to pre-render all locale variants at bui
 export const generateStaticParams = () =>
   locales.map((locale) => ({ locale }))
 ```
+
+---
+
+## See also
+
+For locale-aware spec patterns (sample-locale parameterization, `<html lang>` / `<html dir>` assertions, switcher persistence), see [`../workflow/e2e.md`](../workflow/e2e.md).
+
+### External reference
+
+Sapan rules in this file are authoritative; external references are framework-level guidance — load when sapan rules don't cover the case.
+
+- [`external/nextjs/nextjs-app-router-patterns/`](../external/nextjs/nextjs-app-router-patterns/) — advanced patterns (parallel routes, intercepting routes, advanced data fetching)
