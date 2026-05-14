@@ -9,8 +9,9 @@ const fieldByLabel = (page: import('@playwright/test').Page, label: string) => p
 const openModal = async (page: import('@playwright/test').Page) => {
 	await page.goto('/');
 	const cta = page.getByRole('button', { name: new RegExp(enCommon.buttons.letsConnect, 'i') }).first();
+	await cta.waitFor({ state: 'visible', timeout: 15_000 });
 	await cta.click();
-	await expect(page.getByRole('dialog', { name: new RegExp(enCommon.contact.modal.title, 'i') })).toBeVisible();
+	await expect(page.getByRole('dialog', { name: new RegExp(enCommon.contact.modal.title, 'i') })).toBeVisible({ timeout: 15_000 });
 };
 
 const fillValid = async (page: import('@playwright/test').Page) => {

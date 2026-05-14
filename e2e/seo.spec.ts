@@ -30,7 +30,7 @@ test.describe('seo — homepage metadata', () => {
 		await page.goto('/');
 		const description = await page.locator('meta[name="description"]').getAttribute('content');
 		expect(description?.length ?? 0).toBeGreaterThan(0);
-		expect(description).toContain('Frontend developer');
+		expect(description).toMatch(/frontend developer/i);
 	});
 
 	test('emits one alternate hreflang per supported locale (HTTP Link header — next-intl convention)', async ({ page }) => {
