@@ -54,17 +54,6 @@ EXPERIENCE = [
         ],
     },
     {
-        "role": "Frontend Developer, TubeOnAI",
-        "date": "Nov 2023 — May 2024",
-        "location": "Wyoming, USA · Remote, Part-time",
-        "bullets": [
-            "Owned the <strong>Next.js + TypeScript</strong> web app for an AI content-repurposing platform (videos, podcasts, PDFs, articles → structured summaries).",
-            "Introduced a <strong>React Query</strong> caching strategy that measurably reduced API load and improved perceived performance.",
-            "Unblocked a stalled audio-player integration using React Modern Audio Player — shipped a long-delayed feature.",
-            "Built type-safe forms with <strong>React Hook Form + Zod</strong>, wired Firebase auth, and instrumented Sentry for error monitoring.",
-        ],
-    },
-    {
         "role": "Frontend Developer, WPDeveloper",
         "date": "Nov 2020 — May 2024",
         "location": "Dhaka, Bangladesh · Full-time",

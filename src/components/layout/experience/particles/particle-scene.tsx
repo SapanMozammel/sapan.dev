@@ -7,6 +7,16 @@ import * as THREE from 'three';
 import Particles from './particles';
 import { VignetteShader } from './shaders/vignette-shader';
 
+// THREE.Clock was deprecated in r183; R3F 9.x still instantiates it internally.
+// Filter this one message until R3F v10 migrates to THREE.Timer.
+if (typeof window !== 'undefined') {
+	const _warn = console.warn.bind(console);
+	console.warn = (...args: Parameters<typeof console.warn>) => {
+		if (typeof args[0] === 'string' && args[0].includes('THREE.Clock:')) return;
+		_warn(...args);
+	};
+}
+
 // Parallax rig — listens to window pointermove so both desktop cursor hover and
 // mobile touch-drag drive the rotation (mousemove never fires from a finger on iOS/Android).
 const ParallaxRig = memo<{ children: React.ReactNode }>(({ children }) => {
