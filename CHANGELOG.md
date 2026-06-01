@@ -5,6 +5,22 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.5] - 2026-06-01
+
+### Changed
+
+- **Resume — TubeOnAI removed from experience** — entry dropped from `content.py`; spacing and font sizes in `resume.html` adjusted (body 10px → 10.5px, section/entry margins, bullet line-height) to fill the page after the removal. TubeOnAI stays in the Featured Projects section.
+- **Dependencies bumped to latest stable** — `@apollo/client` 4.1.9 → 4.2.0, `sass` 1.99 → 1.100, `ws` 8.20.0 → 8.20.1, `next-intl` 4.12 → 4.13, `resend` 6.12.3 → 6.12.4, `@graphql-codegen/cli` 7.0 → 7.1.1, `@graphql-codegen/client-preset` 6.0.0 → 6.0.1, `@typescript-eslint/{plugin,parser}` 8.59 → 8.60, `react-email` 6.3 → 6.5, `eslint-plugin-prettier` 5.5.5 → 5.5.6, `@types/node` 25.7 → 25.9.1, `@types/react` 19.2.14 → 19.2.15. `eslint` 9 → 10 and deprecated `@react-email/components` skipped intentionally.
+- **`pnpm-workspace.yaml` added** — `allowBuilds` config for native modules (`@parcel/watcher`, `@swc/core`, `esbuild`, `sharp`, `unrs-resolver`).
+
+### Fixed
+
+- **`THREE.Clock` deprecation warning** — Three.js r183 deprecated `THREE.Clock` in favour of `THREE.Timer`; `@react-three/fiber` 9.x still instantiates a Clock internally, emitting a console warning on every page load. Suppressed with a targeted `console.warn` filter in `particle-scene.tsx` (only intercepts the exact `THREE.Clock:` message). Remove when upgrading to `@react-three/fiber` v10.
+
+### Docs
+
+- **`DEVELOPMENT_GUIDE.md` — troubleshooting entry** for the `THREE.Clock` deprecation warning with root cause and removal trigger.
+
 ## [0.3.4] - 2026-05-14
 
 ### Added
@@ -182,5 +198,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial launch of sapan.dev — full portfolio v1. Full scope (sections, infra, tooling, design system, i18n, testing, Claude Code config) is captured in the git tag and commit log.
 
-[0.2.0]: https://github.com/sapan-dev/sapan.dev/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/sapan-dev/sapan.dev/releases/tag/v0.1.0
+[0.3.5]: https://github.com/SapanMozammel/sapan.dev/compare/v0.3.4...v0.3.5
+[0.3.4]: https://github.com/SapanMozammel/sapan.dev/compare/v0.3.3...v0.3.4
+[0.3.3]: https://github.com/SapanMozammel/sapan.dev/compare/v0.3.2...v0.3.3
+[0.3.2]: https://github.com/SapanMozammel/sapan.dev/compare/v0.3.1...v0.3.2
+[0.3.1]: https://github.com/SapanMozammel/sapan.dev/compare/v0.3.0...v0.3.1
+[0.3.0]: https://github.com/SapanMozammel/sapan.dev/compare/v0.2.0...v0.3.0
+[0.2.0]: https://github.com/SapanMozammel/sapan.dev/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/SapanMozammel/sapan.dev/releases/tag/v0.1.0

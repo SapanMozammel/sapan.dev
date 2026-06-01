@@ -340,6 +340,9 @@ pnpm run format:all    # organize imports + prettier + eslint fix
 ### Tests failing after dependency update
 Check `tests/setup.tsx` — mocks for `framer-motion`, `gsap`, `@react-three/fiber` may need updating if the package API changed.
 
+### `THREE.Clock: This module has been deprecated` console warning
+Three.js deprecated `THREE.Clock` in r183 in favour of `THREE.Timer`. `@react-three/fiber` 9.x still instantiates a Clock internally — the warning is suppressed in `particle-scene.tsx` via a targeted `console.warn` filter. Remove the patch once `@react-three/fiber` upgrades to v10.
+
 ### Playwright `webServer` boot timeout
 Turbopack cold compile + Three.js hydration can exceed the default 60s. `playwright.config.ts` sets `webServer.timeout: 180_000`; the per-test timeout is 90s. If you see `page.goto: Test timeout` repeatedly, drop `workers` from 2 to 1 — parallel workers all hitting `/` simultaneously can saturate Turbopack's compile queue and back up the first hits.
 
