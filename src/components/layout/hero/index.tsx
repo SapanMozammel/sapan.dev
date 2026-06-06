@@ -20,9 +20,9 @@ const Hero = async () => {
 							</h1>
 							<p className='text-secondary-600 dark:text-secondary-400 text-paragraph-medium inline-flex max-w-[90ch] tracking-wider'>{translate('description')}</p>
 							<DownloadResumeButton className='mt-0 sm:mt-4' />
-							<div className='mt-4 mb-[-20vw] w-3/4 sm:mt-10 lg:mt-14'>
-								<AboutScreen />
-							</div>
+						</div>
+						<div className='mx-auto mt-4 mb-[-20vw] w-2/3 sm:mt-10 lg:mt-14'>
+							<AboutScreen />
 						</div>
 					</SectionSeparator>
 				</HeroBackground>

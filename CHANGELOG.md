@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.6] - 2026-06-06
+
+### Fixed
+
+- **Hero — `AboutScreen` centered independently of text column** — lifted the screen-mockup wrapper out of the hero text `div` into its own sibling container (`mx-auto`, `w-2/3`) so it centres correctly instead of inheriting the flex-column's constraints.
+
 ## [0.3.5] - 2026-06-01
 
 ### Changed

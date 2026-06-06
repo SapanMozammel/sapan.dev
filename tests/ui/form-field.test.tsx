@@ -44,4 +44,19 @@ describe('FormField', () => {
 		expect(errorEl).not.toBeNull();
 		expect(errorEl).toHaveTextContent('Name is required');
 	});
+
+	it('sets aria-invalid="true" on the input when an error is present', () => {
+		render(<FormField label='Email' name='email' type='email' value='' error='Invalid email' onChange={noopChange} />);
+		expect(screen.getByLabelText('Email')).toHaveAttribute('aria-invalid', 'true');
+	});
+
+	it('omits aria-invalid when no error is set', () => {
+		render(<FormField label='Email' name='email' type='email' value='' onChange={noopChange} />);
+		expect(screen.getByLabelText('Email')).not.toHaveAttribute('aria-invalid');
+	});
+
+	it('sets aria-invalid="true" on the textarea when an error is present', () => {
+		render(<FormField label='Message' name='message' type='textarea' value='' error='Message is required' onChange={noopChange} />);
+		expect(screen.getByLabelText('Message')).toHaveAttribute('aria-invalid', 'true');
+	});
 });
