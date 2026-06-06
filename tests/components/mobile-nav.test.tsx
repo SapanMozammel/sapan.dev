@@ -72,4 +72,22 @@ describe('MobileNav', () => {
 
 		expect(screen.getByRole('button', { name: /close menu/i })).toBeInTheDocument();
 	});
+
+	it('Escape key closes the sheet dialog', async () => {
+		const user = userEvent.setup();
+		render(<MobileNav />);
+		await user.click(screen.getByRole('button', { name: /toggle menu/i }));
+		expect(screen.getByRole('dialog')).toBeInTheDocument();
+
+		await user.keyboard('{Escape}');
+		expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+	});
+
+	it('close button dismisses the sheet dialog', async () => {
+		const user = userEvent.setup();
+		render(<MobileNav />);
+		await user.click(screen.getByRole('button', { name: /toggle menu/i }));
+		await user.click(screen.getByRole('button', { name: /close menu/i }));
+		expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+	});
 });

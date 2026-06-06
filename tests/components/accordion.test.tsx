@@ -62,4 +62,37 @@ describe('Accordion', () => {
 		render(<Accordion items={mockItems} />);
 		expect(screen.getByText('Answer 1')).toBeInTheDocument();
 	});
+
+	it('toggles item via Enter key', async () => {
+		const user = userEvent.setup();
+		render(<Accordion items={mockItems} />);
+		const buttons = screen.getAllByRole('button');
+
+		buttons[1].focus();
+		await user.keyboard('{Enter}');
+		expect(buttons[1]).toHaveAttribute('aria-expanded', 'true');
+		expect(buttons[0]).toHaveAttribute('aria-expanded', 'false');
+	});
+
+	it('toggles item via Space key', async () => {
+		const user = userEvent.setup();
+		render(<Accordion items={mockItems} />);
+		const buttons = screen.getAllByRole('button');
+
+		buttons[2].focus();
+		await user.keyboard(' ');
+		expect(buttons[2]).toHaveAttribute('aria-expanded', 'true');
+	});
+
+	it('Tab key moves focus between accordion buttons', async () => {
+		const user = userEvent.setup();
+		render(<Accordion items={mockItems} />);
+		const buttons = screen.getAllByRole('button');
+
+		buttons[0].focus();
+		await user.tab();
+		expect(buttons[1]).toHaveFocus();
+		await user.tab();
+		expect(buttons[2]).toHaveFocus();
+	});
 });

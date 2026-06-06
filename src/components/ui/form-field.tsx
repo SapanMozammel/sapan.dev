@@ -26,6 +26,7 @@ const FormField = memo<FormFieldProps>(({ label, name, value, error, onChange, t
 	const errorId = `${inputId}-error`;
 	const borderClass = error ? INPUT_ERROR : INPUT_BORDER;
 	const describedBy = error ? { 'aria-describedby': errorId } : {};
+	const ariaInvalid = error ? { 'aria-invalid': true as const } : {};
 
 	return (
 		<fieldset className={cn('flex flex-col gap-2', className)}>
@@ -33,9 +34,20 @@ const FormField = memo<FormFieldProps>(({ label, name, value, error, onChange, t
 				{label}
 			</label>
 			{type === 'textarea' ? (
-				<textarea id={inputId} name={name} value={value} onChange={onChange} placeholder={placeholder} rows={rows} className={cn(INPUT_BASE, 'leading-relaxed', borderClass)} {...describedBy} />
+				<textarea id={inputId} name={name} value={value} onChange={onChange} placeholder={placeholder} rows={rows} className={cn(INPUT_BASE, 'leading-relaxed', borderClass)} {...describedBy} {...ariaInvalid} />
 			) : (
-				<input id={inputId} type={type} name={name} value={value} onChange={onChange} placeholder={placeholder} autoComplete={autoComplete} className={cn(INPUT_BASE, borderClass)} {...describedBy} />
+				<input
+					id={inputId}
+					type={type}
+					name={name}
+					value={value}
+					onChange={onChange}
+					placeholder={placeholder}
+					autoComplete={autoComplete}
+					className={cn(INPUT_BASE, borderClass)}
+					{...describedBy}
+					{...ariaInvalid}
+				/>
 			)}
 			{error ? (
 				<p id={errorId} className='font-dm text-danger text-xs leading-none'>
