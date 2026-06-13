@@ -14,7 +14,7 @@ const PORTFOLIO_DISPLAY_TITLES = ['react-render-kit', 'TubeOnAI', 'Templately', 
 
 export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 	{
-		colorScheme: 'rose',
+		colorScheme: 'sky',
 		title: 'react-render-kit',
 		description: `Open-source React component toolkit for conditional rendering, list rendering, and common UI composition patterns. Built to eliminate boilerplate across React applications with a clean, type-safe API surface.`,
 		role: 'Author & Maintainer',
@@ -24,7 +24,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: '/images/portfolio/react-render-kit.png',
 	},
 	{
-		colorScheme: 'sky',
+		colorScheme: 'cyan',
 		title: 'TubeOnAI',
 		description: `AI platform that summarizes videos, podcasts, PDFs, and articles into actionable content. Owned the Next.js web app — UI system, React Query data layer, audio player integration, and Zod-validated form flows across the full product surface.`,
 		role: 'Frontend Developer',
@@ -54,7 +54,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: '/images/portfolio/xcloud.png',
 	},
 	{
-		colorScheme: 'green',
+		colorScheme: 'emerald',
 		title: 'Betterdocs',
 		description: `WordPress documentation and knowledge-base plugin used by support and product teams to ship self-serve help. Re-architected the admin panel, built the ApexCharts analytics dashboard, and shipped the FAQ Builder — UI redesign measurably reduced weekly support ticket volume.`,
 		role: 'Plugin Developer',
@@ -74,7 +74,7 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: '/images/portfolio/wpdeveloper-store.png',
 	},
 	{
-		colorScheme: 'teal',
+		colorScheme: 'fuchsia',
 		title: 'NotificationX',
 		description: `WordPress marketing and social-proof plugin showing real-time alerts for sales, reviews, and signups across millions of sites. Refined the admin UX, modernised feature-integration flows, and rebuilt notification authoring with QuickBuilder for less friction in the editor.`,
 		role: 'Plugin Developer',
