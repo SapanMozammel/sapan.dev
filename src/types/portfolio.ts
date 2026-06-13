@@ -1,4 +1,4 @@
-export type ColorScheme = 'sky' | 'indigo' | 'blue' | 'green' | 'cyan' | 'teal' | 'violet' | 'emerald' | 'fuchsia';
+export type ColorScheme = 'sky' | 'indigo' | 'blue' | 'green' | 'cyan' | 'teal' | 'violet' | 'emerald' | 'fuchsia' | 'rose';
 
 export type PortfolioProject = {
 	colorScheme: ColorScheme;

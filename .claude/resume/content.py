@@ -83,9 +83,15 @@ EXPERIENCE = [
 
 PROJECTS = [
     {
+        "name": "react-render-kit",
+        "url": "https://github.com/SapanMozammel/react-render-kit",
+        "stack": "— TypeScript · React.js · npm",
+        "desc": "Open-source React utility library for conditional and list rendering.",
+    },
+    {
         "name": "sapan-dev.vercel.app",
         "url": "https://sapan-dev.vercel.app",
-        "stack": "— Next.js · React 19 · Three.js",
+        "stack": "— Next.js · Redux.js · Three.js",
         "desc": "Portfolio, 16 locales incl. RTL Arabic, server-component-first.",
     },
     {
@@ -109,9 +115,14 @@ PROJECTS = [
         "desc": "Re-architected admin panel, analytics dashboard, FAQ Builder.",
     },
     {
+        "name": "Easy.Jobs",
+        "stack": "— Vue.js · Bootstrap · Laravel",
+        "desc": "First frontend dev — shipped v1 of an AI recruiting SaaS.",
+    },
+    {
         "name": "+ 4 More",
         "stack": "— React · Redux · WordPress",
-        "desc": "NotificationX, BetterLinks, SchedulePress, WPDeveloper Store, Easy.Jobs.",
+        "desc": "NotificationX, BetterLinks, SchedulePress, WPDeveloper Store.",
     },
 ]
 

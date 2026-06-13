@@ -26,6 +26,7 @@ const COLOR_SCHEME_CLASSES: Record<ColorScheme, string> = {
 	violet: 'border-violet-100 bg-violet-25/90 dark:border-violet-900 dark:bg-violet-a100/90',
 	emerald: 'border-emerald-100 bg-emerald-25/90 dark:border-emerald-900 dark:bg-emerald-a100/90',
 	fuchsia: 'border-fuchsia-100 bg-fuchsia-25/90 dark:border-fuchsia-900 dark:bg-fuchsia-a100/90',
+	rose: 'border-rose-100 bg-rose-25/90 dark:border-rose-900 dark:bg-rose-a100/90',
 };
 
 const TOOLTIP_CONTENT = (

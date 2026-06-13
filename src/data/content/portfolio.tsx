@@ -2,6 +2,7 @@ import BetterLinksLogo from '@/components/icons/projects/better-links/logo';
 import BetterdocsLogo from '@/components/icons/projects/betterdocs/logo';
 import EasyJobsLogo from '@/components/icons/projects/easy-jobs/logo';
 import NotificationXLogo from '@/components/icons/projects/notification-x/logo';
+import ReactRenderKitLogo from '@/components/icons/projects/react-render-kit/logo';
 import SchedulePressLogo from '@/components/icons/projects/schedule-press/logo';
 import TemplatelyLogo from '@/components/icons/projects/templately/logo';
 import TubeOnAILogo from '@/components/icons/projects/tube-on-ai/logo';
@@ -9,7 +10,19 @@ import WpDeveloperStoreLogo from '@/components/icons/projects/wp-developer-store
 import XCloudLogo from '@/components/icons/projects/x-cloud/logo';
 import type { PortfolioProject } from '@/types/portfolio';
 
+const PORTFOLIO_DISPLAY_TITLES = ['react-render-kit', 'TubeOnAI', 'Templately', 'xCloud', 'Betterdocs', 'NotificationX', 'Easy.Jobs'] as const;
+
 export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
+	{
+		colorScheme: 'rose',
+		title: 'react-render-kit',
+		description: `Open-source React component toolkit for conditional rendering, list rendering, and common UI composition patterns. Built to eliminate boilerplate across React applications with a clean, type-safe API surface.`,
+		role: 'Author & Maintainer',
+		technologies: ['TypeScript', 'React.js', 'Rollup', 'Vitest', 'npm'],
+		link: 'https://react-render-kit.vercel.app/',
+		icon: <ReactRenderKitLogo className='h-full w-auto' />,
+		image: '/images/portfolio/react-render-kit.png',
+	},
 	{
 		colorScheme: 'sky',
 		title: 'TubeOnAI',
@@ -101,3 +114,5 @@ export const PORTFOLIO_PROJECTS: PortfolioProject[] = [
 		image: '/images/portfolio/betterlinks.png',
 	},
 ];
+
+export const PORTFOLIO_DISPLAY_PROJECTS = PORTFOLIO_DISPLAY_TITLES.map((title) => PORTFOLIO_PROJECTS.find((p) => p.title === title)).filter((p): p is PortfolioProject => Boolean(p));
