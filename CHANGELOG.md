@@ -5,6 +5,19 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.7] - 2026-06-13
+
+### Added
+
+- **react-render-kit — new featured project** — open-source React utility library added as the lead entry in the portfolio section, resume featured-projects grid, and skills-panel. Includes a custom SVG logo component (`src/components/icons/projects/react-render-kit/logo.tsx`) and a `rose` color scheme token wired through `ColorScheme` type and `COLOR_SCHEME_CLASSES` map.
+
+### Changed
+
+- **Portfolio section curated to 7 projects** — introduced `PORTFOLIO_DISPLAY_PROJECTS` (a filtered export from `portfolio.tsx`) so the stacking-card section shows exactly react-render-kit, TubeOnAI, Templately, xCloud, Betterdocs, NotificationX, and Easy.Jobs. WpDeveloper Store, SchedulePress, and BetterLinks remain in `PORTFOLIO_PROJECTS` for the skills panel.
+- **Skills panel now shows all 10 projects as featured** — `FEATURED_PROJECT_TITLES` in `skills-panel.tsx` expanded from 6 to 10 entries, adding react-render-kit, WpDeveloper Store, SchedulePress, and BetterLinks.
+- **Resume — featured projects updated** — react-render-kit added at the top of the Featured Projects grid; Easy.Jobs promoted from the "+ more" card to a full featured entry; sapan-dev.vercel.app stack corrected from "React 19" to "Redux.js"; "+ 4 More" card updated to list NotificationX, BetterLinks, SchedulePress, WPDeveloper Store only.
+- **Resume — spacing tuned for 8-project layout** — container padding reduced (`9mm 11mm 7mm` → `8mm 11mm 5mm`), body `line-height` tightened (`1.45` → `1.4`), bullet `line-height` (`1.35` → `1.3`), section `margin-top` (`2px` → `1px`), and entry `margin-bottom` (`4px` → `3px`) so the expanded projects grid fills the page without overflow.
+
 ## [0.3.6] - 2026-06-06
 
 ### Fixed
