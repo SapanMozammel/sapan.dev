@@ -2,7 +2,7 @@ import { ABOUT_DATA } from '@/data/content/about';
 import { PORTFOLIO_PROJECTS } from '@/data/content/portfolio';
 import { IconArrowUpRight } from '@tabler/icons-react';
 
-const FEATURED_PROJECT_TITLES = ['TubeOnAI', 'Templately', 'xCloud', 'Betterdocs', 'NotificationX', 'Easy.Jobs'] as const;
+const FEATURED_PROJECT_TITLES = ['react-render-kit', 'TubeOnAI', 'Templately', 'xCloud', 'Betterdocs', 'WpDeveloper Store', 'NotificationX', 'Easy.Jobs', 'SchedulePress', 'BetterLinks'] as const;
 
 const MAX_PROJECT_TECH_CHIPS = 3;
 
