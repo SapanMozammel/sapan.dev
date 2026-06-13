@@ -1,5 +1,5 @@
 import Portfolio from '@/components/layout/portfolio';
-import { PORTFOLIO_PROJECTS } from '@/data/content/portfolio';
+import { PORTFOLIO_DISPLAY_PROJECTS } from '@/data/content/portfolio';
 import { describe, expect, it } from 'vitest';
 import { render, screen } from '../test-utils';
 
@@ -15,22 +15,22 @@ describe('Portfolio', () => {
 		expect(screen.getByText('My Recent Works')).toBeInTheDocument();
 	});
 
-	it('renders all project descriptions', () => {
+	it('renders all displayed project descriptions', () => {
 		render(<Portfolio />);
-		PORTFOLIO_PROJECTS.forEach((project) => {
+		PORTFOLIO_DISPLAY_PROJECTS.forEach((project) => {
 			expect(screen.getByText(project.description)).toBeInTheDocument();
 		});
 	});
 
-	it('renders one project image alt per project', () => {
+	it('renders one project image alt per displayed project', () => {
 		const { container } = render(<Portfolio />);
 		const images = container.querySelectorAll('img[alt$="-image"]');
-		expect(images.length).toBe(PORTFOLIO_PROJECTS.length);
+		expect(images.length).toBe(PORTFOLIO_DISPLAY_PROJECTS.length);
 	});
 
-	it('renders Learn More CTAs for each project', () => {
+	it('renders Learn More CTAs for each displayed project', () => {
 		render(<Portfolio />);
 		const learnMoreLinks = screen.getAllByText('Learn More');
-		expect(learnMoreLinks.length).toBe(PORTFOLIO_PROJECTS.length);
+		expect(learnMoreLinks.length).toBe(PORTFOLIO_DISPLAY_PROJECTS.length);
 	});
 });
