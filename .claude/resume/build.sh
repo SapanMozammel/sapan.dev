@@ -7,7 +7,7 @@ set -e
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 RESUME_DIR="$ROOT/.claude/resume"
 IMG="$ROOT/public/images/me/sapan-headshot.jpg"
-OUT_PDF="$ROOT/public/resume/Sapan-Mozammel-Frontend-Developer-resume-3.pdf"
+OUT_PDF="$ROOT/public/resume/Sapan-Mozammel-Frontend-Developer.pdf"
 
 echo "→ rendering template with content.py + base64 headshot..."
 IMG_B64=$(base64 -i "$IMG" | tr -d '\n')

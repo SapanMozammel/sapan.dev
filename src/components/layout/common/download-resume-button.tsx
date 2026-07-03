@@ -5,7 +5,7 @@ import { ConnectButtonProps } from '@/types/button';
 import { useTranslations } from 'next-intl';
 import { memo } from 'react';
 
-const RESUME_PATH = '/resume/Sapan-Mozammel-Frontend-Developer-resume-3.pdf';
+const RESUME_PATH = '/resume/Sapan-Mozammel-Frontend-Developer.pdf';
 const RESUME_FILENAME = 'Sapan-Mozammel-Frontend-Developer.pdf';
 
 const DownloadResumeButton = memo<ConnectButtonProps>(({ className, gradient = false, fill = true }) => {
