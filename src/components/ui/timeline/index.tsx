@@ -133,7 +133,7 @@ const Timeline = memo<TimelineProps>(({ items, className }) => {
 
 			<div ref={timelineRef} className='relative z-10 mx-auto w-full'>
 				{items.map((item, index) => (
-					<TimelineItem key={item.id} item={item} index={index} isLast={index === items.length - 1} />
+					<TimelineItem key={`${item.company}-${item.startDate}`} item={item} index={index} isLast={index === items.length - 1} />
 				))}
 			</div>
 		</div>
