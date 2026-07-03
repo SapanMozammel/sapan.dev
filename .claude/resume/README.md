@@ -15,7 +15,7 @@ content file and an HTML template.
 
 Generated on build:
 
-- `public/resume/Sapan-Mozammel-Frontend-Developer-resume-3.pdf` — final PDF, served by the website's download button (committed). Overwritten on each build — the v3 slot is the canonical "current resume" for this template. v1 and v2 archives in the same folder use older templates and stay untouched.
+- `public/resume/Sapan-Mozammel-Frontend-Developer.pdf` — final PDF, served by the website's download button (committed). Overwritten on each build.
 - `.claude/resume/resume-built.html` — intermediate HTML with headshot inlined (gitignored)
 
 ## Build
@@ -118,7 +118,7 @@ Verify page count after any change:
 ```bash
 python3 -c "
 import re
-with open('public/resume/Sapan-Mozammel-Frontend-Developer-resume-3.pdf','rb') as f:
+with open('public/resume/Sapan-Mozammel-Frontend-Developer.pdf','rb') as f:
     print('Pages:', len(re.findall(rb'/Type\s*/Page[^s]', f.read())))
 "
 ```

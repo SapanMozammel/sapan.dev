@@ -2,10 +2,10 @@ import type { ExperienceItem } from '@/types/experience';
 
 export const EXPERIENCE_DATA: ExperienceItem[] = [
 	{
-		id: '1',
 		company: 'Startise',
 		position: 'Frontend Developer',
 		startDate: '2024-06',
+		endDate: '2026-05',
 		location: 'Mirpur DOHS, Dhaka 1206, Bangladesh',
 		type: 'Full-time',
 		tags: ['v1 Architect'],
@@ -27,18 +27,16 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
 		],
 	},
 	{
-		id: '3',
 		company: 'WPDeveloper',
 		position: 'Frontend Developer',
-		startDate: '2020-11',
+		startDate: '2022-04',
 		endDate: '2024-05',
 		location: 'Mirpur DOHS, Dhaka 1206, Bangladesh',
 		type: 'Full-time',
-		tags: ['Re-architect', '6M+ Users'],
+		tags: ['Promoted', 'Re-architect', '6M+ Users'],
 		description: 'WPDeveloper is WordPress-based product company. With 6 million+ happy users from 180+ countries, the company is powering up WordPress web building experience.',
 		responsibilities: [
 			'Developed and maintained admin interfaces for multiple WordPress plugins including BetterDocs, NotificationX, SchedulePress, and BetterLinks',
-			'Built interactive dashboards and analytics visualizations using React.js and ApexCharts',
 			'Re-architected complex admin panels and implemented structured UI workflows',
 			'Developed rich text editing and content-building features using Draft.js and internal builders',
 			'Integrated REST APIs and optimized data handling using React Query, Axios, and Redux',
@@ -46,7 +44,7 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
 		],
 		technologies: ['React.js', 'Next.js', 'Redux.js', 'JavaScript', 'TypeScript', 'MySQL', 'PHP', 'GraphQL', 'Wordpress', 'Webpack'],
 		achievements: [
-			'Contributed to several widely used WordPress plugins across documentation, marketing, scheduling, and link management',
+			'Promoted from Junior Frontend Developer to Frontend Developer',
 			'Re-architected the BetterDocs admin panel and built its analytics dashboard and FAQ Builder',
 			'Established the frontend foundation for BetterLinks and implemented analytics views',
 			'Improved admin usability and workflows across multiple plugin interfaces',
@@ -54,7 +52,24 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
 		],
 	},
 	{
-		id: '4',
+		company: 'WPDeveloper',
+		position: 'Junior Frontend Developer',
+		startDate: '2020-11',
+		endDate: '2022-03',
+		location: 'Mirpur DOHS, Dhaka 1206, Bangladesh',
+		type: 'Full-time',
+		tags: ['First WordPress Role'],
+		description: 'WPDeveloper is WordPress-based product company. With 6 million+ happy users from 180+ countries, the company is powering up WordPress web building experience.',
+		responsibilities: [
+			'Developed and maintained admin interfaces for WordPress plugins including BetterDocs, NotificationX, and SchedulePress',
+			'Built interactive dashboards and analytics visualizations using React.js and ApexCharts',
+			'Contributed to rich text editing and content-building features using Draft.js',
+			'Integrated REST APIs and optimized data handling using Axios',
+		],
+		technologies: ['React.js', 'JavaScript', 'MySQL', 'PHP', 'Wordpress', 'Webpack'],
+		achievements: ['Contributed to several widely used WordPress plugins across documentation, marketing, and scheduling', 'Built interactive dashboards and analytics visualizations for admin panels'],
+	},
+	{
 		company: 'Easy.Jobs',
 		position: 'Junior Frontend Developer',
 		startDate: '2020-02',

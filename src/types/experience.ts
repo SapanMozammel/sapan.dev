@@ -1,7 +1,6 @@
 export type ExperienceType = 'Full-time' | 'Part-time' | 'Freelance' | 'Internship' | 'Learning';
 
 export type ExperienceItem = {
-	id: string;
 	company: string;
 	position: string;
 	startDate?: string;

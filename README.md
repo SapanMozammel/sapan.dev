@@ -196,7 +196,7 @@ The downloadable resume PDF is generated from a content/template split at [.clau
 bash .claude/resume/build.sh
 ```
 
-Output overwrites `public/resume/Sapan-Mozammel-Frontend-Developer-resume-3.pdf` in place. v1 and v2 archives in the same folder use older templates and stay untouched. Full pipeline notes in [.claude/resume/README.md](.claude/resume/README.md).
+Output overwrites `public/resume/Sapan-Mozammel-Frontend-Developer.pdf` in place. Full pipeline notes in [.claude/resume/README.md](.claude/resume/README.md).
 
 ---
 

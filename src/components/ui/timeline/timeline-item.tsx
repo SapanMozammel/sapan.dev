@@ -4,6 +4,7 @@ import Badge from '@/components/ui/badge';
 import BulletList from '@/components/ui/bullet-list';
 import { cn } from '@/lib/utils';
 import type { TimelineItemProps } from '@/types/experience';
+import { IconTrendingUp } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { memo, useMemo, useRef } from 'react';
 
@@ -83,7 +84,15 @@ const TimelineItem = memo<TimelineItemProps & { index: number }>(({ item: job, i
 				>
 					<div className='flex flex-col'>
 						<h3 className='text-heading-medium-alt text-dark tracking-wide dark:text-white'>{job.company}</h3>
-						<h4 className='text-heading-small text-secondary-700 dark:text-secondary-300 tracking-wide'>{job.position}</h4>
+						<div className='flex flex-wrap items-center gap-2'>
+							<h4 className='text-heading-small text-secondary-700 dark:text-secondary-300 tracking-wide'>{job.position}</h4>
+							{job.tags?.includes('Promoted') && (
+								<span className='bg-primary/10 text-primary dark:bg-success/10 dark:text-success font-hg inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-bold tracking-wider uppercase'>
+									<IconTrendingUp className='size-3' stroke={2.5} aria-hidden='true' />
+									{translateLabels('promoted')}
+								</span>
+							)}
+						</div>
 					</div>
 					{job.technologies && job.technologies.length > 0 && (
 						<div className='flex flex-wrap gap-1.5'>

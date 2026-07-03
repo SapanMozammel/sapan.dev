@@ -32,8 +32,8 @@ SUMMARY = (
     "companies serving <strong>6M+ users across 180+ countries</strong>. "
     "Experienced designing v1 frontend foundations, re-architecting complex admin "
     "panels, and integrating REST/GraphQL APIs with strict typing, accessibility, "
-    "and performance discipline. Available for full-time remote; EOR / "
-    "contractor-friendly; 30-day notice."
+    "and performance discipline. Immediately available for full-time remote; "
+    "EOR / contractor-friendly."
 )
 
 # --------------------------------------------------------------------------
@@ -44,24 +44,31 @@ SUMMARY = (
 EXPERIENCE = [
     {
         "role": "Frontend Developer, Startise",
-        "date": "Jun 2024 — Present",
+        "date": "Jun 2024 — May 2026",
         "location": "Dhaka, Bangladesh · Full-time",
         "bullets": [
             "Architected and shipped the <strong>v1 frontend for xCloud</strong>, a cloud hosting platform — designed component structure, state model, and API integration patterns that scale with the team.",
             "Delivered <strong>Templately</strong> across the admin SPA, Next.js marketing site, and WordPress plugin — three React surfaces against a shared GraphQL API.",
             "Built typed, reusable UI primitives in <strong>React 19 + TypeScript + Tailwind CSS</strong>, reducing duplicate component code across products.",
-            "Translated Figma specs with pixel-level fidelity including hover and transition intent; collaborated daily with backend, design, and product teams.",
         ],
     },
     {
         "role": "Frontend Developer, WPDeveloper",
-        "date": "Nov 2020 — May 2024",
+        "date": "Apr 2022 — May 2024",
         "location": "Dhaka, Bangladesh · Full-time",
         "bullets": [
-            "Delivered admin frontends for <strong>BetterDocs, NotificationX, SchedulePress, BetterLinks</strong>, and WPDeveloper Store — a plugin suite with <strong>6M+ active installations across 180+ countries</strong>.",
-            "<strong>Re-architected the BetterDocs admin panel</strong> and built its analytics dashboard + FAQ Builder; UX improvements measurably reduced support-ticket volume.",
-            "<strong>Established the frontend foundation for BetterLinks</strong> as the first frontend developer on the project.",
-            "Built rich content editors (Draft.js, QuickBuilder), analytics dashboards (ApexCharts), and complex admin workflows across React + Redux + WordPress REST APIs.",
+            "<strong>Promoted from Junior Frontend Developer</strong> for consistent delivery and increasing ownership.",
+            "<strong>Re-architected the BetterDocs admin panel</strong> and built its analytics dashboard + FAQ Builder, measurably reducing support-ticket volume.",
+            "<strong>Established the frontend foundation for BetterLinks</strong> as first frontend dev on the project, part of a suite with <strong>6M+ installs across 180+ countries</strong>.",
+        ],
+    },
+    {
+        "role": "Junior Frontend Developer, WPDeveloper",
+        "date": "Nov 2020 — Mar 2022",
+        "location": "Dhaka, Bangladesh · Full-time",
+        "bullets": [
+            "Delivered admin frontends for <strong>BetterDocs, NotificationX, and SchedulePress</strong>, and built analytics dashboards with ApexCharts.",
+            "Built rich content editors (Draft.js) and integrated WordPress REST APIs across React + Redux admin workflows.",
         ],
     },
     {
@@ -71,7 +78,6 @@ EXPERIENCE = [
         "bullets": [
             "<strong>First frontend developer</strong> on an AI recruiting SaaS — scaffolded the Vue.js + Laravel frontend that the team still extends today.",
             "Built public career-site interfaces and interactive recruiter dashboards with ApexCharts.",
-            "Defined reusable Vue component patterns that accelerated feature delivery for follow-on engineers.",
         ],
     },
 ]

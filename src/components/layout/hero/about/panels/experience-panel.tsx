@@ -1,6 +1,6 @@
 import { EXPERIENCE_DATA } from '@/data/content/experience';
 import { getRoleDuration } from '@/lib/utils/experience';
-import { IconRosetteDiscountCheckFilled } from '@tabler/icons-react';
+import { IconRosetteDiscountCheckFilled, IconTrendingUp } from '@tabler/icons-react';
 
 const MONTH_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] as const;
 
@@ -28,10 +28,16 @@ const ExperiencePanel = () => {
 				const topTech = item.technologies?.slice(0, MAX_TECH_CHIPS) ?? [];
 				const extraTechCount = (item.technologies?.length ?? 0) - topTech.length;
 				return (
-					<article key={item.id} className='border-info/30 flex flex-col gap-[0.5em] rounded-[0.5em] border-[0.025em] border-solid bg-white/30 p-[0.85em] dark:bg-black/30'>
+					<article key={`${item.company}-${item.startDate}`} className='border-info/30 flex flex-col gap-[0.5em] rounded-[0.5em] border-[0.025em] border-solid bg-white/30 p-[0.85em] dark:bg-black/30'>
 						<div className='flex items-baseline justify-between gap-[0.5em]'>
 							<div className='flex items-baseline gap-[0.5em]'>
 								<h3 className='text-[0.85em] leading-tight font-bold'>{item.position}</h3>
+								{item.tags?.includes('Promoted') && (
+									<span className='bg-primary/10 text-primary dark:bg-success/10 dark:text-success inline-flex items-center gap-[0.2em] rounded-[0.3em] px-[0.5em] py-[0.15em] text-[0.7em] font-bold tracking-wide uppercase'>
+										<IconTrendingUp aria-hidden='true' className='size-[0.9em]' stroke={2.5} />
+										Promoted
+									</span>
+								)}
 								{duration && (
 									<span className='border-info/30 text-secondary-500 dark:text-secondary-500 rounded-[0.3em] border-[0.025em] border-solid px-[0.5em] py-[0.15em] text-[0.7em] tracking-wide uppercase'>
 										{duration}
