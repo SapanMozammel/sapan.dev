@@ -5,6 +5,24 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.8] - 2026-07-03
+
+### Added
+
+- **Career promotion tracking** — `EXPERIENCE_DATA`'s WPDeveloper entry split into a Junior Frontend Developer role (Nov 2020 – Mar 2022) and a promoted Frontend Developer role (Apr 2022 – May 2024), each flagged with a translated "Promoted" badge (`IconTrendingUp`, `common.labels.promoted`) in both the experience timeline and the hero about panel, across all 16 locales.
+
+### Changed
+
+- **Startise marked as completed** — `endDate: '2026-05'` added to `EXPERIENCE_DATA`; resume summary's availability line updated from "30-day notice" to "Immediately available" to match.
+- **`ExperienceItem.id` removed** — unused field dropped from the type and every `EXPERIENCE_DATA` entry; timeline and about-panel React keys now derive from `company` + `startDate` instead.
+- **Resume synced with role changes** — `content.py` updated to mirror the WPDeveloper promotion and Startise end date; `Sapan-Mozammel-Frontend-Developer.pdf` regenerated.
+- **Resume archives cleaned up** — dropped `resume-1.pdf` / `resume-2.pdf`; renamed `resume-3.pdf` → the canonical `Sapan-Mozammel-Frontend-Developer.pdf` (download button, its test, `build.sh`, and both resume READMEs updated to match).
+- **Hero headline retitled to "Frontend Developer"** — 13 of 16 locales still read "Frontend Engineer" (or the local equivalent) in the hero heading; brought in line with `EXPERIENCE_DATA`, the resume, and the SEO/JSON-LD metadata in `layout.tsx`, which already said "Developer".
+
+### Fixed
+
+- **Role-duration mismatch between hero panel and timeline** — `getRoleDuration()` counted months exclusively while `TimelineItem`'s inline calculation counted inclusively, so the two surfaces showed different durations for the same role (e.g. 8m vs 9m for Easy.Jobs). The shared helper now counts inclusively to match.
+
 ## [0.3.7] - 2026-06-13
 
 ### Added
